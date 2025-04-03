@@ -80,5 +80,15 @@
     "components": [
       "tab"
     ]
+  },
+  {
+    "id": "tech-note-container",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title",
+      "tech-note"
+    ]
   }
 ]
