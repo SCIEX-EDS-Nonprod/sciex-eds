@@ -10,13 +10,14 @@ export default async function decorate(block) {
   headingDiv.append(heading);
   blockDiv.append(headingDiv);
 
-  [...block.children].slice(1, 4).forEach((row) => {
+  [...block.children].slice(1, 5).forEach((row) => {
     const columns = [...row.children];
 
     if (columns.length >= 3) {
       const title = columns[0]?.textContent.trim();
       const linkText = columns[1]?.textContent.trim();
       const linkUrl = columns[2]?.querySelector('a')?.href;
+      const linkTarget = columns[3]?.textContent.trim() || '_self';
 
       if (title && linkText && linkUrl) {
         const resourceDiv = document.createElement('div');
@@ -30,6 +31,7 @@ export default async function decorate(block) {
         linkElement.href = linkUrl;
         linkElement.textContent = linkText;
         linkElement.classList.add('link-Element');
+        linkElement.target = linkTarget;
 
         resourceDiv.appendChild(titleElement);
         resourceDiv.appendChild(linkElement);
