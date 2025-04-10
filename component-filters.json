@@ -32,7 +32,8 @@
       "tech-note",
       "tabs-container",
       "customer-document",
-      "survey-script"
+      "survey-script",
+      "tabs"
     ]
   },
   {
@@ -89,6 +90,12 @@
     "id": "tabs-nav",
     "components": [
       "tab"
+    ]
+  },
+  {
+    "id": "tabs",
+    "components": [
+      "item"
     ]
   }
 ]
