@@ -841,17 +841,17 @@
     "id": "item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "component": "text",
+        "name": "tabName",
+        "value": "",
+        "label": "Tab Name",
+        "valueType": "string"
       },
       {
-        "component": "richtext",
-        "name": "text",
+        "component": "text",
+        "name": "tabId",
         "value": "",
-        "label": "Text",
+        "label": "Id",
         "valueType": "string"
       }
     ]

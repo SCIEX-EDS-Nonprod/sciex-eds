@@ -3,22 +3,17 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   /* change to ul, li */
-  const ul = document.createElement('ul');
+ 
+  const blockDiv = document.createElement('div');
   [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    moveInstrumentation(row, li);
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'tabs';
-      else div.className = 'tabs';
-    });
-    ul.append(li);
+    const tabDIv = document.createElement('div');
+    tabDIv.id = row.children[1].textContent;
+    tabDIv.classList.add('tab-section');
+    tabDIv.textContent = row.children[0].textContent;
+    blockDiv.append(tabDIv);
+    
   });
-  ul.querySelectorAll('picture > img').forEach((img) => {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    moveInstrumentation(img, optimizedPic.querySelector('img'));
-    img.closest('picture').replaceWith(optimizedPic);
-  });
+ 
   block.textContent = '';
-  block.append(ul);
+  block.append(blockDiv);
 }
