@@ -1,19 +1,15 @@
 export default async function decorate(block) {
-  // Hide the original content visually but keep it in the DOM
   block.style.display = 'none';
 
-  // Create main container div
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('related-resources');
 
-  // Get heading from the original content
   const heading = block.children[0].textContent;
   const headingDiv = document.createElement('div');
   headingDiv.classList.add('heading');
   headingDiv.append(heading);
   blockDiv.append(headingDiv);
 
-  // Process the resource links
   [...block.children].slice(1, 4).forEach((row) => {
     const columns = [...row.children];
 
