@@ -360,8 +360,6 @@ function renderSearchFacets(facetController, facetItemsContainer, facetElement, 
 }
 
 export function renderCourseCatalogFacet() {
-  const facets = document.querySelector('#facets');
-  facets.innerHTML = '';
   const facetController = allFacetController;
   const facetsId = {
     isnewcourse: '',
@@ -383,6 +381,12 @@ export function renderCourseCatalogFacet() {
 
   for (const item in facetsId) {
     const val = facetController.get(item);
+    if (val.state.values.length === 0) {
+      const elementToRemove = document.querySelector(`#${val.state.facetId}-facet`);
+      if (elementToRemove) {
+        elementToRemove.remove();
+      }
+    }
     if (val.state.values.length) {
       createFacetRender(val, item, facetsId[item]);
     }
