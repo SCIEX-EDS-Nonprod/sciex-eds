@@ -14,6 +14,5 @@ export default function decorate(block) {
     }
     blockDiv.append(tabDIv);
   });
-  block.textContent = '';
   block.append(blockDiv);
 }
