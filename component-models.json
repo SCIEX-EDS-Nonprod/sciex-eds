@@ -566,46 +566,6 @@
     ]
   },
   {
-    "id": "related-resources",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Heading",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "resource",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "subheading",
-        "label": "SubHeading",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "label": "Link Text"
-      },
-      {
-        "component": "aem-content",
-        "name": "linkUrl",
-        "label": "Link URL"
-      },
-      {
-        "component": "text",
-        "name": "openInNewtab",
-        "label": "Open in a new tab",
-        "value": "false"
-      }
-    ]
-  },
-  {
     "id": "sciex-footer-new",
     "fields": [
       {
@@ -737,6 +697,46 @@
         "value": "",
         "label": "Link Url",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "sciex-resources",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "resource-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subheading",
+        "label": "SubHeading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "linkUrl",
+        "label": "Link URL"
+      },
+      {
+        "component": "text",
+        "name": "openInNewtab",
+        "label": "Open in a new tab",
+        "value": "false"
       }
     ]
   },
