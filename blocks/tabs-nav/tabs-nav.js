@@ -41,7 +41,7 @@ export default async function decorate(block) {
     });
   });
   // block.textContent = '';
-  // block.append(blockDiv);
-  // block.append(tabData);
-  block.replaceChildren(blockDiv, tabData);
+  block.removeChildren();
+  block.append(blockDiv);
+  block.append(tabData);
 }
