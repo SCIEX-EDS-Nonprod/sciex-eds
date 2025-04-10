@@ -9,10 +9,8 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const tabDIv = document.createElement('div');
     if (row.children.length === 2) {
-      console.log('inside');
       tabDIv.classList.add('tab-section');
       tabDIv.textContent = row.children[0].textContent;
-      console.log('end');
     }
     blockDiv.append(tabDIv);
   });
