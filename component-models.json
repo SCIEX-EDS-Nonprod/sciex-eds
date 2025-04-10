@@ -708,6 +708,56 @@
     ]
   },
   {
+    "id": "sciex-related-resource",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": "Related Resources"
+      }
+    ]
+  },
+  {
+    "id": "resource-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subheading",
+        "label": "SubHeading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "linkUrl",
+        "label": "Link URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Select below options to open link in new tab?",
+        "name": "selectbelowoption",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "sciex-title",
     "fields": [
       {

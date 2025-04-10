@@ -29,7 +29,8 @@
       "sciex-title",
       "tech-note",
       "customer-document",
-      "survey-script"
+      "survey-script",
+      "sciex-related-resource"
     ]
   },
   {
@@ -67,6 +68,12 @@
       "image",
       "icon",
       "links"
+    ]
+  },
+  {
+    "id": "sciex-related-resource",
+    "components": [
+      "resource-item"
     ]
   },
   {
