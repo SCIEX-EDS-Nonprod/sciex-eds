@@ -1,50 +1,53 @@
-export default function decorate(block) {
-  const resourceDiv = document.createElement('div');
-  resourceDiv.className = 'sciex-related-resource';
+export default async function decorate(block) {
+  // Create main container div
+  const blockDiv = document.createElement('div');
+  blockDiv.classList.add('related-resources');
 
-  const rows = [...block.children];
-
-  // Extract heading from the first row (assuming it's in a <p>)
-  const firstRow = rows[0];
-  let headingDiv;
-  if (firstRow) {
-    const heading = firstRow.querySelector('p');
-    if (heading) {
-      headingDiv = document.createElement('div');
-      headingDiv.classList.add('heading');
-      headingDiv.append(heading);
-    }
+  // Clone heading DOM node safely
+  const headingNode = block.children[0]?.querySelector('p');
+  if (headingNode) {
+    const headingDiv = document.createElement('div');
+    headingDiv.classList.add('heading');
+    headingDiv.append(headingNode.cloneNode(true)); // preserve markup inside heading
+    blockDiv.appendChild(headingDiv);
   }
 
-  rows.forEach((row, index) => {
+  // Loop over resource rows
+  [...block.children].forEach((row, index) => {
     if (index < 1 || index > 4) return;
 
     const columns = [...row.children];
 
     if (columns.length >= 3) {
-      const title = columns[0]?.textContent?.trim();
-      const linkText = columns[1]?.textContent?.trim();
+      const title = columns[0]?.textContent.trim();
+      const linkText = columns[1]?.textContent.trim();
       const linkUrl = columns[2]?.querySelector('a')?.href;
 
       if (title && linkText && linkUrl) {
-        const linksContainer = document.createElement('div');
-        linksContainer.classList.add('links-container');
+        const resourceDiv = document.createElement('div');
+        resourceDiv.classList.add('links-container');
 
         const titleElement = document.createElement('strong');
-        titleElement.textContent = title;
-        titleElement.classList.add('title-element');
+        titleElement.textContent = `${title} `;
+        titleElement.classList.add('title-Element');
 
         const linkElement = document.createElement('a');
         linkElement.href = linkUrl;
         linkElement.textContent = linkText;
-        linkElement.classList.add('link-element');
+        linkElement.classList.add('link-Element');
 
-        linksContainer.appendChild(titleElement);
-        linksContainer.appendChild(linkElement);
-        resourceDiv.appendChild(linksContainer);
+        resourceDiv.appendChild(titleElement);
+        resourceDiv.appendChild(linkElement);
+        blockDiv.appendChild(resourceDiv);
       }
     }
   });
-  if (headingDiv) block.append(headingDiv);
-  block.append(resourceDiv);
+
+  // Safe cleanup of original block content
+  while (block.firstChild) {
+    block.removeChild(block.firstChild);
+  }
+
+  // Append the decorated content
+  block.append(blockDiv);
 }
