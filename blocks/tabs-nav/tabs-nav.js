@@ -40,7 +40,8 @@ export default async function decorate(block) {
       showActiveTab();
     });
   });
-  //block.textContent = '';
-  block.append(blockDiv);
-  block.append(tabData);
+  // block.textContent = '';
+  // block.append(blockDiv);
+  // block.append(tabData);
+  block.replaceChildren(blockDiv, tabData);
 }
