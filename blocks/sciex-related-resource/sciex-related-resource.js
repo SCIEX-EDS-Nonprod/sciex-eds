@@ -43,10 +43,7 @@ export default async function decorate(block) {
     }
   });
 
-  // Safe cleanup of original block content
-  while (block.firstChild) {
-    block.removeChild(block.firstChild);
-  }
+
 
   // Append the decorated content
   block.append(blockDiv);
