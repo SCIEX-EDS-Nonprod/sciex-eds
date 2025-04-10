@@ -1,21 +1,20 @@
 export default async function decorate(block) {
+  // Hide the original content visually but keep it in the DOM
+  block.style.display = 'none';
+
   // Create main container div
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('related-resources');
 
-  // Clone heading DOM node safely
-  const headingNode = block.children[0]?.querySelector('p');
-  if (headingNode) {
-    const headingDiv = document.createElement('div');
-    headingDiv.classList.add('heading');
-    headingDiv.append(headingNode.cloneNode(true)); // preserve markup inside heading
-    blockDiv.appendChild(headingDiv);
-  }
+  // Get heading from the original content
+  const heading = block.children[0].textContent;
+  const headingDiv = document.createElement('div');
+  headingDiv.classList.add('heading');
+  headingDiv.append(heading);
+  blockDiv.append(headingDiv);
 
-  // Loop over resource rows
-  [...block.children].forEach((row, index) => {
-    if (index < 1 || index > 4) return;
-
+  // Process the resource links
+  [...block.children].slice(1, 4).forEach((row) => {
     const columns = [...row.children];
 
     if (columns.length >= 3) {
@@ -43,8 +42,5 @@ export default async function decorate(block) {
     }
   });
 
-
-
-  // Append the decorated content
-  block.append(blockDiv);
+  block.parentNode.insertBefore(blockDiv, block.nextSibling);
 }
