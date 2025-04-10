@@ -10,7 +10,6 @@ export default function decorate(block) {
     const tabDIv = document.createElement('div');
     if (row.children.length === 2) {
       console.log('inside');
-      tabDIv.id = row.children[1].textContent;
       tabDIv.classList.add('tab-section');
       tabDIv.textContent = row.children[0].textContent;
       console.log('end');
