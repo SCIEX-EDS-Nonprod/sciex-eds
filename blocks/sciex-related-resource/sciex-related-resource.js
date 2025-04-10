@@ -45,8 +45,6 @@ export default function decorate(block) {
       }
     }
   });
-
-  block.textContent = '';
   if (headingDiv) block.append(headingDiv);
   block.append(resourceDiv);
 }
