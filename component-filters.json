@@ -29,8 +29,7 @@
       "sciex-title",
       "tech-note",
       "customer-document",
-      "survey-script",
-      "related-resources"
+      "survey-script"
     ]
   },
   {
@@ -58,12 +57,6 @@
     "id": "header",
     "components": [
       "headerItem"
-    ]
-  },
-  {
-    "id": "related-resources",
-    "components": [
-      "resource"
     ]
   },
   {
