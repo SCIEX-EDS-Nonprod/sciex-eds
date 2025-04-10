@@ -467,10 +467,16 @@ function createGlobalSearch() {
 
   const searchBox = document.createElement('input');
   searchBox.type = 'text';
-  searchBox.placeholder = 'Search';
+  searchBox.placeholder = 'Search within max 20 characters';
   searchBox.className = 'standalone-search-box';
   searchBox.id = 'standalone-search-box';
   searchBox.maxLength = 20;
+
+  const tooltip = document.createElement('div');
+  tooltip.id = 'char-limit-tooltip';
+  tooltip.className = 'char-limit-tooltip';
+  tooltip.textContent = 'Input exceeds the limit. Please search within 20 characters';
+  tooltip.style.display = 'none';
 
   const dropdown = document.createElement('div');
   dropdown.className = 'dropdown';
@@ -513,6 +519,7 @@ function createGlobalSearch() {
   dropdown.appendChild(dropbtn);
   dropdown.appendChild(dropdownContent);
   searchContainer.appendChild(searchBox);
+  searchContainer.appendChild(tooltip);
   searchContainer.appendChild(dropdown);
 
   const searchBtn = document.createElement('button');
@@ -562,6 +569,21 @@ function createGlobalSearch() {
       standaloneSearchBoxController.submit();
     }
   });
+
+  searchBox.addEventListener('input', () => {
+    if (searchBox.value.length >= 20) {
+      tooltip.style.display = 'block';
+      searchContainer.classList.add('char-limit-reached');
+    } else {
+      tooltip.style.display = 'none';
+      searchContainer.classList.remove('char-limit-reached');
+    }
+  });
+
+  searchBox.addEventListener('blur', () => {
+    tooltip.style.display = 'none';
+  });
+
   return searchContainer;
 }
 

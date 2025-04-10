@@ -47,6 +47,12 @@ header nav ul li picture:hover {
     padding-right: 10px;
     height: 60px;
     width: 35%;
+    position: relative;
+}
+
+.standalone-search-container.char-limit-reached {
+    border: 1px solid #B12A28;
+    border-radius: 0;
 }
 
 .standalone-search-box {
@@ -173,6 +179,21 @@ header nav ul li picture:hover {
     justify-content: flex-start !important;
     gap: 24px;
     height: 60px;
+}
+
+.char-limit-tooltip {
+    position: absolute;
+    background-color: #f8d7da;
+    color: #B12A28;
+    border: 1px solid #f5c6cb;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 4px;
+    z-index: 1000;
+    white-space: nowrap;
+    left: 0; /* Aligns tooltip under the input */
+    top: 100%; /* Places it directly below the input */
 }
 
 /***   Mobile Css  */

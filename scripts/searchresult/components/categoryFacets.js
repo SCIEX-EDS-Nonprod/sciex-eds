@@ -237,7 +237,7 @@ function clearFacetFilter(facetElement,facetController){
         const focusedElementId = sessionStorage.getItem('focusedElement');
         if(focusedElementId){
           const focusElement = document.getElementById(focusedElementId);
-          focusElement.value = '';
+          focusElement ? focusElement.value = '' : '';
           sessionStorage.removeItem('focusedElement');
         }
         facetController.deselectAll();
@@ -461,7 +461,13 @@ export function callCreateFacet(){
 
   for (let item in facetsId) {
     const val = facetController.get(item);
-    if(val){
+    if (val.state.values.length === 0) {
+      const elementToRemove = document.querySelector(`#${val.state.facetId}-facet`);
+      if (elementToRemove) {
+        elementToRemove.remove();
+      }
+    }
+    if(val.state.values.length){
       createFacetRender(val,item,facetsId[item]);
     }
   };
