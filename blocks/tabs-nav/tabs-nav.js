@@ -39,10 +39,11 @@ export default async function decorate(block) {
       showTabContent(this.id);
       showActiveTab();
     });
-    row.remove();
+    
   });
   // block.textContent = '';
-
+  const html =block.querySelector('.tabs-nav');
+  block.innerHTML='';
   block.append(blockDiv);
   block.append(tabData);
 }
