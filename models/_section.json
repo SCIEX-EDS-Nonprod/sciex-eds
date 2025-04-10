@@ -58,7 +58,8 @@
         "sciex-title",
         "tech-note",
         "customer-document",
-        "survey-script"
+        "survey-script",
+        "sciex-related-resource"
       ]
     }
   ]
