@@ -152,7 +152,14 @@
               "name": "enableSurveyScript",
               "label": "Enable Survey Script",
               "value": "false"
-            }               
+            },
+            {
+              "component": "text",
+              "valueType": "number",
+              "name": "pageTrackingID",
+              "label": "Page Tracking ID",
+              "value": ""
+            }         
           ]
         }
       ]
