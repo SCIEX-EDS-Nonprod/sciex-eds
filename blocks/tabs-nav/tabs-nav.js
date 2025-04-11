@@ -1,4 +1,5 @@
 import {} from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 function showTabContent(tabId) {
   const section = document.getElementById(`${tabId}-content`);
@@ -34,6 +35,7 @@ export default async function decorate(block) {
     tabDIv.id = row.children[1].textContent;
     tabDIv.classList.add('tab-section');
     tabDIv.textContent = row.children[0].textContent;
+    moveInstrumentation(row,tabDIv);
     blockDiv.append(tabDIv);
     tabDIv.addEventListener('click', function () {
       showTabContent(this.id);
@@ -41,9 +43,7 @@ export default async function decorate(block) {
     });
     
   });
-  // block.textContent = '';
-  const html =block.querySelector('.tabs-nav');
-  block.innerHTML='';
+  block.textContent = '';
   block.append(blockDiv);
   block.append(tabData);
 }
