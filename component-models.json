@@ -542,6 +542,25 @@
     ]
   },
   {
+    "id": "header",
+    "fields": [
+      {
+        "component": "text",
+        "name": "coveoSearchEngineOrganizationIdForHeader",
+        "value": "",
+        "label": "Coveo Search Engine OrganizationId For Header",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "coveoSearchEngineAccessTokenForHeader",
+        "value": "",
+        "label": "Coveo Search Engine Access Token For Header",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "headerItem",
     "fields": [
       {
