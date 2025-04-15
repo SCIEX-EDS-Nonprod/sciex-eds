@@ -571,34 +571,6 @@ main .section.highlight {
   height: 100px;
 }
 
-.banner-description {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  flex: 1 0 0;
-}
-
-.banner-description p {
-  color: #000;
-  font-family: "Geogrotesque Sharp VF";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 330;
-  line-height: 24px;
-  letter-spacing: 0.08px;
-}
-
-.banner-description p:first-of-type {
-  color: #000;
-  font-family: "Geogrotesque Sharp VF", sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 370;
-  line-height: 24px;
-  letter-spacing: 0.1px;
-}
-
 .banner-details {
   display: flex;
   align-items: center;

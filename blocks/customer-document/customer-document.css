@@ -21,6 +21,26 @@
     max-width: 90pc !important;
 }
 
+.banner-description {
+    color: #000 !important;
+    font-family: "Geogrotesque Sharp VF" !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 530 !important;
+    line-height: 24px !important; /* 150% */
+    letter-spacing: 0.08px !important;
+  }
+  
+.banner-description a {
+    color: var(--Blue-700, #0068FA);
+    font-family: "Geogrotesque Sharp VF" !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 530 !important;
+    line-height: 24px !important; /* 150% */
+    letter-spacing: 0.08px !important;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) { 
 
