@@ -81,7 +81,7 @@
   {
     "id": "tabs-container",
     "components": [
-      "title",
+      "text",
       "tech-note"
     ]
   },
