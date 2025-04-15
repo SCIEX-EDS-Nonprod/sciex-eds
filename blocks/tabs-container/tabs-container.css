@@ -42,7 +42,7 @@
   height: auto;  
 }
 .tabs-container-wrapper .block {
-  padding: 20px 64px 0px;
+  padding: 20px 120px 0px;
   border-bottom: 1px solid var(--Grey-100, #ECECEC);
   background: var(--White-0, #FFF);
 }
