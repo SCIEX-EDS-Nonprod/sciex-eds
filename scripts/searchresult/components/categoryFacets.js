@@ -301,7 +301,6 @@ function renderSearchFacets(facetController, facetItemsContainer,facetElement,se
   
     requestAnimationFrame(() => {
       const facetChildren = Array.from(facetElement.children);
-      console.log("facetChildren after rendering:", facetChildren);
   
       if (facetChildren.length === 0) {
         console.warn("No facet children found after render. Check if facets are rendered correctly.");
