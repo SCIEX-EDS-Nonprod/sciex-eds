@@ -16,7 +16,7 @@ import renderCommonSearchResultList from '../../scripts/common-components/common
 import renderCommonQuerySummary from '../../scripts/common-components/commonQuerySummary.js';
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
 import { renderCommonFacet } from '../../scripts/common-components/commonFacets.js';
-import { renderCommonFacetBreadcurm } from '../../scripts/common-components/commonFacetBreadcurm.js';
+import renderCommonFacetBreadcurm from '../../scripts/common-components/commonFacetBreadcurm.js';
 
 async function readBlockProperties(block) {
   // Create no results section

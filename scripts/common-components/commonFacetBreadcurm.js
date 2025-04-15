@@ -5,7 +5,8 @@ function canMobileActions() {
   }
   return true;
 }
-export const renderCommonFacetBreadcurm = (facetBreadcrumbsController) => {
+
+const renderCommonFacetBreadcurm = (facetBreadcrumbsController) => {
   const facetBreadcrumbElement = document.getElementById('facet-readcrumb');
   facetBreadcrumbElement.innerHTML = '';
 
@@ -190,7 +191,6 @@ export const renderCommonFacetBreadcurm = (facetBreadcrumbsController) => {
     facetBreadcrumbElement.style.display = 'none';
   }
 
-
   const mobileFilterClearAll = document.getElementById('mobile-filter-footer-clear-all');
   mobileFilterClearAll.addEventListener('click', () => {
     facetBreadcrumbsController.deselectAll();
@@ -198,3 +198,5 @@ export const renderCommonFacetBreadcurm = (facetBreadcrumbsController) => {
 
   facetBreadcrumbElement.appendChild(breadcrumbContainer);
 };
+
+export default renderCommonFacetBreadcurm;
