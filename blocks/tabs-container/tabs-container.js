@@ -22,11 +22,11 @@ export default async function decorate(block) {
             inputDiv.innerHTML = ele ? ele.innerHTML : '';
             div.append(inputDiv);
           } else if (colIndex === 2) {
-            if(col.textContent!=''){
+            if(col.textContent!==''){
             div.style.backgroundColor = col.textContent.trim().replace(/\s+/g, ' ');
             }
           } else if (colIndex === 3){
-            if(col.textContent!=''){
+            if(col.textContent!==''){
               const imagePos = col.textContent.trim().replace(/\s+/g, '-');
               console.log('imagePos>'+col.textContent);
               div.classList.add(imagePos);
