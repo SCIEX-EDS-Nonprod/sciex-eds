@@ -35,13 +35,12 @@ export default async function decorate(block) {
     tabDIv.id = row.children[1].textContent;
     tabDIv.classList.add('tab-section');
     tabDIv.textContent = row.children[0].textContent;
-    moveInstrumentation(row,tabDIv);
+    moveInstrumentation(row, tabDIv);
     blockDiv.append(tabDIv);
     tabDIv.addEventListener('click', function () {
       showTabContent(this.id);
       showActiveTab();
     });
-    
   });
   block.textContent = '';
   block.append(blockDiv);

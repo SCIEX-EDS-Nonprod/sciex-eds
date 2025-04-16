@@ -82,7 +82,7 @@
   {
     "id": "tabs-container",
     "components": [
-      "text",
+      "sciex-text",
       "tech-note"
     ]
   },
