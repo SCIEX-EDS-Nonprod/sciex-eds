@@ -6,7 +6,7 @@ export default async function decorate(block) {
   blockDiv.classList.add('technotes-main');
 
   [...block.children].forEach((row, rowIndex) => {
-    console.log(`Processing row index: ${rowIndex}`);
+    console.log(`Processing row index: ${rowIndex}>>>>${row.innerHTML}`);
     if (rowIndex === 0) {
       block.id = `${row.textContent.trim().replace(/\s+/g, '-')}-content`;
     } else {
@@ -22,10 +22,16 @@ export default async function decorate(block) {
             inputDiv.innerHTML = ele ? ele.innerHTML : '';
             div.append(inputDiv);
           } else if (colIndex === 2) {
+            if(col.textContent!==''){
             div.style.backgroundColor = col.textContent.trim().replace(/\s+/g, ' ');
-          } else {
-            const imagePos = col.textContent.trim().replace(/\s+/g, '-');
-            div.classList.add(imagePos);
+            }
+          } else if (colIndex === 3){
+            if(col.textContent!==''){
+              const imagePos = col.textContent.trim().replace(/\s+/g, '-');
+              console.log('imagePos>'+col.textContent);
+              div.classList.add(imagePos);
+            }
+           
           }
           moveInstrumentation(row, div);
           blockDiv.append(div);
