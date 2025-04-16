@@ -1,2 +1,8 @@
-
-
+.sciex-text p {
+    font-size: 18px;
+    letter-spacing: 0.25px;
+    color: #707070;
+    line-height: 28px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

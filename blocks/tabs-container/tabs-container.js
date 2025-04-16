@@ -1,5 +1,6 @@
 import {} from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default async function decorate(block) {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('technotes-main');
@@ -26,14 +27,14 @@ export default async function decorate(block) {
             const imagePos = col.textContent.trim().replace(/\s+/g, '-');
             div.classList.add(imagePos);
           }
-          moveInstrumentation(row,div);
+          moveInstrumentation(row, div);
           blockDiv.append(div);
         });
       } else {
         const contentDiv = document.createElement('div');
         contentDiv.classList.add('other-content');
         contentDiv.innerHTML = row.innerHTML;
-        moveInstrumentation(row,contentDiv);
+        moveInstrumentation(row, contentDiv);
         blockDiv.append(contentDiv);
       }
     }
