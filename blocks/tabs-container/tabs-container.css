@@ -58,3 +58,28 @@
   line-height: 24px; /* 150% */
   letter-spacing: 0.08px;
 }
+
+.tabs-container p {
+  color: var(--Neutrals-500, #707070);
+  font-family: "Geogrotesque Sharp VF" !important;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: 0.045px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.tabs-container h3 {
+  color: var(--Neutrals-900, #141414);
+  font-family: "Geogrotesque Sharp VF" !important;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 32px; /* 133.333% */
+}
+
+.tabs-container strong {
+  font-weight: 530;
+}
