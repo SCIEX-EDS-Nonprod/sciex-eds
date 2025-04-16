@@ -61,7 +61,8 @@
         "survey-script",
         "sciex-related-resource",
         "tabs-nav",
-        "tabs-container"
+        "tabs-container",
+        "sciex-text"
       ]
     }
   ]

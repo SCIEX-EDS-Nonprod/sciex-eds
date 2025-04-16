@@ -758,6 +758,17 @@
     ]
   },
   {
+    "id": "sciex-text",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text"
+      }
+    ]
+  },
+  {
     "id": "sciex-title",
     "fields": [
       {
