@@ -17,6 +17,7 @@ export default async function decorate(block) {
       const imagePos = row.textContent.trim().replace(/\s+/g, ' ');
       div.classList.add(imagePos);
     }
+    moveInstrumentation(row,div);
     blockDiv.append(div);
   });
   block.textContent = '';
