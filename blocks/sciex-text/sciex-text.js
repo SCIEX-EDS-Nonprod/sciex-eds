@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   // Create main container div
