@@ -20,7 +20,7 @@ export const customerDocSearchEngine = buildSearchEngine({
     organizationId: organizationId,
     accessToken: accessToken,
     search: {
-      searchHub: 'SCIEXCourseListing',
+      searchHub: 'SCIEXCustomerDocumentsListing',
     },
     analytics: {
       analyticsMode: 'next',
