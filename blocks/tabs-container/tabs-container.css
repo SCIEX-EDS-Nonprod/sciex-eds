@@ -43,7 +43,6 @@
 }
 .tabs-container-wrapper .block {
   padding: 20px 120px 0px;
-  border-bottom: 1px solid var(--Grey-100, #ECECEC);
   background: var(--White-0, #FFF);
 }
 
@@ -68,7 +67,6 @@
   line-height: 26px; /* 144.444% */
   letter-spacing: 0.045px;
   padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 .tabs-container h3 {
@@ -78,8 +76,81 @@
   font-style: normal;
   font-weight: 330;
   line-height: 32px; /* 133.333% */
+  padding-top: 20px;
 }
 
 .tabs-container strong {
   font-weight: 530;
+}
+
+.tabs-container ul {
+  list-style-type: inherit;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.tabs-container ul li::marker {
+  font-size: 0.6em; /* Smaller dot */
+}
+
+.tabs-container ol {
+  list-style-type: decimal;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.tabs-container ul li {
+  color: var(--Neutrals-500, #707070);
+  /* Desktop/text-lg/regular */
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: 0.045px;
+}
+
+.tabs-container ul li a {
+  color: var(--Neutrals-500, #707070);
+  /* Desktop/text-base/regular */
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px;
+  letter-spacing: 0.045px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.tabs-container ol li {
+  color: var(--Neutrals-500, #707070);
+  /* Desktop/text-base/regular */
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.08px;
+}
+
+.tabs-container ol li a {
+  color: var(--Neutrals-500, #707070);
+  /* Desktop/text-base/regular */
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
 }
