@@ -1125,3 +1125,16 @@ flex-direction: column;
         flex: 1;
         }
 }
+
+@media (max-width: 768px)  {
+    .paragraph-container {
+        display: block;
+    }
+
+    .paragraph-container img {
+        width: 15%;
+        margin-left: 5%;
+        padding-top: 25px;
+    }
+}
+
