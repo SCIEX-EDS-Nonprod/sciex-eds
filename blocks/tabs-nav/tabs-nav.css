@@ -20,7 +20,7 @@ html {
 }
 
 .tabs-nav-wrapper .block {
-  padding: 20px 152px 0px;
+  padding: 20px 0 0 0;
   border-bottom: 1px solid var(--Grey-100, #ECECEC);
   background: var(--White-0, #FFF);
 }
@@ -41,8 +41,8 @@ html {
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding: 0 !important;
-  max-width: 90pc !important;
+  padding: 0;
+  max-width: 90pc;
 }
 
 

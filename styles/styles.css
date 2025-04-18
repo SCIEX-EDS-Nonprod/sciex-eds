@@ -1239,3 +1239,14 @@ main .section.highlight {
       padding-right: 16px;
   }
 }
+
+@media (min-width: 1440px) {
+  .sciex-title-wrapper, 
+  .tabs-nav-wrapper,
+  .tabs-container-wrapper,
+  .sciex-related-resource-wrapper,
+  .featured-products-wrapper {
+    max-width: 90pc !important;
+    padding: 0 64px !important;
+  }
+}
