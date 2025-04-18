@@ -444,12 +444,12 @@ main .section.highlight {
 
 .facet-item label {
   color: var(--Grey-700, #434343);
+  font-family: "Geogrotesque Sharp VF";
   font-size: 16px;
   font-style: normal;
   font-weight: 330;
   line-height: 24px; /* 150% */
   letter-spacing: 0.08px;
-  cursor: pointer;
 }
 
 .facet-item input[type="checkbox"] {
@@ -648,6 +648,7 @@ main .section.highlight {
 }
 
 .result-item a {
+  font-family: "Geogrotesque Sharp VF";
   font-size: 16px;
   color: #fff !important;
   font-weight: 530;
@@ -682,6 +683,7 @@ main .section.highlight {
 }
 
 .result-item h3 {
+  font-family: "Geogrotesque Sharp VF";
   font-size: 18px !important;
   color: #000;
   margin-top: 10px !important;
@@ -689,6 +691,26 @@ main .section.highlight {
   font-weight: 530 !important;
   line-height: 26px !important;
   letter-spacing: 0.045px;
+}
+
+.facet-header {
+  color: var(--Grey-900, #141414) !important;
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px !important;
+  font-style: normal;
+  font-weight: 530 !important;
+  line-height: 26px !important; /* 144.444% */
+  letter-spacing: 0.045px !important;
+}
+
+#query-summary div {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.08px;
 }
 
 .result-item p {
