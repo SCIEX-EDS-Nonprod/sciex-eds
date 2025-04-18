@@ -524,7 +524,6 @@ main .section.highlight {
 }
 #coveo-life-sciences div {
   max-width: 80pc;
-  margin: 0 auto;
   color: var(--Grey-900, #141414);
   font-size: 20px;
   font-family: "Geogrotesque MD";
