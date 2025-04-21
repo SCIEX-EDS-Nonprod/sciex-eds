@@ -3,14 +3,22 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 function showTabContent(tabId) {
   const section = document.getElementById(`${tabId}-content`);
+  const headerOffset = 80;
+
   if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
+    const elementPosition = section.getBoundingClientRect().top;
+    const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   }
 }
 
 function showActiveTab() {
   const tabs = document.querySelectorAll('.tab-section');
-  const tabContents = document.querySelectorAll('.tech-note-wrapper');
+  const tabContents = document.querySelectorAll('.tabs-container-wrapper');
 
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', function () {
@@ -20,9 +28,39 @@ function showActiveTab() {
       tabContents[index].classList.add('active');
     });
   });
+}
+function toggleVisibility() {
+  const tabsNav = document.querySelector('.tabs-nav .tab-buttons');
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    tabsNav.classList.add('tw-hidden');
+  } else {
+    tabsNav.classList.remove('tw-hidden');
+  }
+}
+function onload() {
+  const tabs = document.querySelectorAll('.tab-section');
+  const tabContents = document.querySelectorAll('.tabs-container-wrapper');
+  if (tabs !== null) {
+    tabs[0].classList.add('active');
+  }
+  if (tabContents !== null) {
+    tabContents[0].classList.add('active');
+  }
+}
+function handleMobileTabs() {
+  const mobileIcon = document.querySelector('#display-icon');
+  const tabsNav = document.querySelector('.tabs-nav .tab-buttons');
+  const tabsNavWrapper = document.querySelector('.tabs-nav-wrapper');
 
-  tabs[0].classList.add('active');
-  tabContents[0].classList.add('active');
+  if (tabsNavWrapper.classList.contains('mobile-tabs-section')) {
+    tabsNavWrapper.classList.remove('mobile-tabs-section');
+    tabsNav.classList.add('tw-hidden');
+    mobileIcon.innerHTML = '<svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6L8 10L12 6" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else {
+    tabsNavWrapper.classList.add('mobile-tabs-section');
+    tabsNav.classList.remove('tw-hidden');
+    mobileIcon.innerHTML = '<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 13.5L3.0001 3.5001" stroke="#141414"/><path d="M13 3.5L3.0001 13.4999" stroke="#141414"/></svg>';
+  }
 }
 
 export default async function decorate(block) {
@@ -43,6 +81,56 @@ export default async function decorate(block) {
     });
   });
   block.textContent = '';
+  block.classList.add('tw');
+  const buttons = document.createElement('div');
+  buttons.classList.add('tabs-right');
+
+  const featurebutton = document.createElement('div');
+  featurebutton.classList.add('feature-products-button');
+  featurebutton.textContent = 'Featured Products';
+  buttons.append(featurebutton);
+  featurebutton.addEventListener('click', () => {
+    const section = document.getElementsByClassName('featured-products-wrapper');
+    if (section[0]) {
+      section[0].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  const relatedresources = document.createElement('div');
+  relatedresources.classList.add('related-resource-button');
+  relatedresources.textContent = 'Related Resources';
+  buttons.append(relatedresources);
+  relatedresources.addEventListener('click', () => {
+    const section = document.getElementsByClassName('sciex-related-resource-wrapper');
+    if (section[0]) {
+      section[0].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  const mobileTabsNav = document.createElement('div');
+  mobileTabsNav.id = 'mobile-tabs-nav';
+  mobileTabsNav.classList.add(
+    'tw-hidden',
+    'tw-flex',
+    'tw-justify-between',
+    'tw-border-b-2',
+    'tw-border-gray-500',
+    'tw-bg-white',
+  );
+  const mobileTabsNavText = document.createElement('span');
+  mobileTabsNavText.textContent = 'Jump In';
+  const mobileTabsNavIcon = document.createElement('span');
+  mobileTabsNavIcon.id = 'display-icon';
+  mobileTabsNavIcon.innerHTML = '<svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6L8 10L12 6" stroke="#141414" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  mobileTabsNav.append(mobileTabsNavText);
+  mobileTabsNav.append(mobileTabsNavIcon);
+  mobileTabsNav.addEventListener('click', handleMobileTabs);
+
+  blockDiv.append(buttons);
+  block.append(mobileTabsNav);
   block.append(blockDiv);
   block.append(tabData);
+
+  window.addEventListener('resize', toggleVisibility);
+  window.addEventListener('load', onload);
 }

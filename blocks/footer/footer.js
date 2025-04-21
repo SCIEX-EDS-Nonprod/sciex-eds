@@ -198,7 +198,6 @@ function handleBlockSection(child, block, iteration) {
   block.append(wrapperDiv);
 }
 
-
 function handleLogoSection(child, block, iteration) {
   const pictures = child.querySelectorAll('picture');
   const links = child.querySelectorAll('a');
