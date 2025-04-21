@@ -6,7 +6,6 @@ export default async function decorate(block) {
   blockDiv.classList.add('technotes-main');
 
   [...block.children].forEach((row, rowIndex) => {
-    console.log(`Processing row index: ${rowIndex}>>>>${row.innerHTML}`);
     if (rowIndex === 0) {
       block.id = `${row.textContent.trim().replace(/\s+/g, '-')}-content`;
     } else {
@@ -16,22 +15,19 @@ export default async function decorate(block) {
       if (pic) {
         [...row.children].forEach((col, colIndex) => {
           const inputDiv = document.createElement('div');
-          console.log(`Processing column index: ${colIndex}>>>>${col.innerHTML}`);
           if (colIndex === 0 || colIndex === 1) {
             const ele = col;
             inputDiv.innerHTML = ele ? ele.innerHTML : '';
             div.append(inputDiv);
           } else if (colIndex === 2) {
-            if(col.textContent!==''){
-            div.style.backgroundColor = col.textContent.trim().replace(/\s+/g, ' ');
+            if (col.textContent !== '') {
+              div.style.backgroundColor = col.textContent.trim().replace(/\s+/g, ' ');
             }
-          } else if (colIndex === 3){
-            if(col.textContent!==''){
+          } else if (colIndex === 3) {
+            if (col.textContent !== '') {
               const imagePos = col.textContent.trim().replace(/\s+/g, '-');
-              console.log('imagePos>'+col.textContent);
               div.classList.add(imagePos);
             }
-           
           }
           moveInstrumentation(row, div);
           blockDiv.append(div);
