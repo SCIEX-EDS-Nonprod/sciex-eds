@@ -1,33 +1,47 @@
 import {} from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-function showTabContent(tabId) {
-  const section = document.getElementById(`${tabId}-content`);
-  const headerOffset = 80;
+function easeInOutQuad(time, begin, change, duration) {
+  const t = time / (duration / 2);
+  if (t < 1) return (change / 2) * t * t + begin;
 
-  if (section) {
-    const elementPosition = section.getBoundingClientRect().top;
-    const offsetPosition = window.pageYOffset + elementPosition - headerOffset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth',
-    });
-  }
+  const adjustedTime = t - 1;
+  return (-change / 2) * (adjustedTime * (adjustedTime - 2) - 1) + begin;
 }
 
-function showActiveTab() {
+function smoothScrollTo(element, initialOffset = 80, duration = 800) {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const offset = isMobile ? 800 : initialOffset;
+  const targetPosition = element.offsetTop - offset;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  let startTime = null;
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const ease = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, ease);
+    if (timeElapsed < duration) {
+      requestAnimationFrame(animation);
+    }
+  }
+  requestAnimationFrame(animation);
+}
+function showTabContent(tabId) {
+  const section = document.getElementById(`${tabId}-content`);
+  if (section) {
+    smoothScrollTo(section, 80, 1000);
+  }
+}
+function showActiveTab(tabId) {
+  const tab = document.getElementById(`${tabId}`);
+  const tabContent = document.getElementById(`${tabId}-content`);
   const tabs = document.querySelectorAll('.tab-section');
   const tabContents = document.querySelectorAll('.tabs-container-wrapper');
-
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', function () {
-      tabs.forEach((t) => t.classList.remove('active'));
-      tabContents.forEach((content) => content.classList.remove('active'));
-      this.classList.add('active');
-      tabContents[index].classList.add('active');
-    });
-  });
+  tabs.forEach((t) => t.classList.remove('active'));
+  tabContents.forEach((content) => content.classList.remove('active'));
+  tab.classList.add('active');
+  tabContent.classList.add('active');
 }
 function toggleVisibility() {
   const tabsNav = document.querySelector('.tabs-nav .tab-buttons');
@@ -40,12 +54,13 @@ function toggleVisibility() {
 function onload() {
   const tabs = document.querySelectorAll('.tab-section');
   const tabContents = document.querySelectorAll('.tabs-container-wrapper');
-  if (tabs !== null) {
+  if (tabs.length > 0) {
     tabs[0].classList.add('active');
   }
-  if (tabContents !== null) {
+  if (tabContents.length > 0) {
     tabContents[0].classList.add('active');
   }
+  toggleVisibility();
 }
 function handleMobileTabs() {
   const mobileIcon = document.querySelector('#display-icon');
@@ -77,7 +92,10 @@ export default async function decorate(block) {
     blockDiv.append(tabDIv);
     tabDIv.addEventListener('click', function () {
       showTabContent(this.id);
-      showActiveTab();
+      showActiveTab(this.id);
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        handleMobileTabs();
+      }
     });
   });
   block.textContent = '';
@@ -92,7 +110,10 @@ export default async function decorate(block) {
   featurebutton.addEventListener('click', () => {
     const section = document.getElementsByClassName('featured-products-wrapper');
     if (section[0]) {
-      section[0].scrollIntoView({ behavior: 'smooth' });
+      smoothScrollTo(section[0], 80, 1000);
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        handleMobileTabs();
+      }
     }
   });
 
@@ -103,7 +124,10 @@ export default async function decorate(block) {
   relatedresources.addEventListener('click', () => {
     const section = document.getElementsByClassName('sciex-related-resource-wrapper');
     if (section[0]) {
-      section[0].scrollIntoView({ behavior: 'smooth' });
+      smoothScrollTo(section[0], 80, 1000);
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        handleMobileTabs();
+      }
     }
   });
 
@@ -132,5 +156,5 @@ export default async function decorate(block) {
   block.append(tabData);
 
   window.addEventListener('resize', toggleVisibility);
-  window.addEventListener('load', onload);
+  onload();
 }
