@@ -289,7 +289,7 @@
         "component": "richtext",
         "valueType": "string",
         "name": "linkText",
-        "label": "Text"
+        "label": "Primary Text"
       },
       {
         "component": "text",
@@ -320,9 +320,10 @@
         ]
       },
       {
-        "component": "text",
-        "name": "buttonTextHow",
-        "label": "Secondary Button Text"
+        "component": "richtext",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Secondary Text"
       },
       {
         "component": "aem-content",
