@@ -17,3 +17,14 @@
     line-height: 75px; /* 125% */
 }
 
+@media (max-width: 768px) {
+    .hero-title {
+        padding-top: 0px;
+    }
+    .hero-heading {
+        font-size: 34px;
+        font-weight: 330;
+        line-height: 42px;
+    }
+}
+
