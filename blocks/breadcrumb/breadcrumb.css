@@ -17,16 +17,17 @@ main > .section > div {
 .breadcrumb-wrapper nav {
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Allow breadcrumbs to wrap */
-  row-gap: 0.5rem; /* Optional spacing between rows */
-  overflow-wrap: anywhere; /* Helps with long paths */
+  flex-wrap: wrap; /* Allow wrapping */
+  row-gap: 0.5rem; /* Optional: spacing between wrapped lines */
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .breadcrumb-wrapper nav a,
 .breadcrumb-wrapper nav span {
   color: var(--Grey-500, #707070) !important;
 
-  /* Desktop/text-sm/regular */
+  /* Typography */
   font-family: "Geogrotesque";
   font-size: 14px !important;
   font-style: normal !important;
@@ -35,7 +36,7 @@ main > .section > div {
   letter-spacing: 0.07px !important;
 
   word-break: break-word;
-  white-space: nowrap;
+  white-space: normal; /* Allow wrapping within items */
 }
 
 .breadcrumb > nav a {
@@ -54,10 +55,18 @@ main > .section > div {
   color: black;
 }
 
-/* Mobile Wrapping Fixes */
+/* Wrapping behavior for smaller screens */
 @media (max-width: 767px) {
+  .breadcrumb-wrapper {
+    padding: 16px 15px;
+  }
+
+  .breadcrumb-wrapper nav {
+    justify-content: flex-start;
+  }
+
   .breadcrumb-wrapper nav a {
-    white-space: normal; /* Allow link text to wrap */
+    white-space: normal;
   }
 }
 
