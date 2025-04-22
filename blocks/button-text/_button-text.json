@@ -57,10 +57,10 @@
           ]
         },
         {
-          "component": "richtext",
-           "valueType": "string",
-           "name": "linkTextSecondary",
-           "label": "Secondary Text"
+          "component": "text",
+          "name": "buttonTextSecondary",
+          "label": "Secondary Button Text",
+          "value": ""
         },
         {
           "component": "aem-content",
