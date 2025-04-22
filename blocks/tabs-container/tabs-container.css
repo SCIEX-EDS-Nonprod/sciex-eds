@@ -68,6 +68,12 @@
   padding-top: 20px;
 }
 
+.tabs-container .tech-note p {
+  font-size: 14px;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: 0.07px;
+}
+
 .tabs-container h3 {
   color: var(--Neutrals-900, #141414);
   font-family: "Geogrotesque Sharp VF" !important;
@@ -140,4 +146,18 @@
   text-decoration-skip-ink: none;
   text-underline-offset: auto;
   text-underline-position: from-font;
+}
+
+/* Image border css*/
+.tech-note {
+  display: flex;
+  padding: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0px;
+  align-self: stretch;
+}
+
+.tabs-container .technotes-main .other-content {
+  padding-block-end: 20px;
 }
