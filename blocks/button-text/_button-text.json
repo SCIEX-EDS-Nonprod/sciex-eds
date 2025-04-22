@@ -59,7 +59,7 @@
         {
           "component": "richtext",
            "valueType": "string",
-           "name": "linkText",
+           "name": "linkTextSecondary",
            "label": "Secondary Text"
         },
         {
