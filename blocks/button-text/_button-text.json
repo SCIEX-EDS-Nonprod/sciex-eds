@@ -25,7 +25,7 @@
           "valueType": "string",
           "name": "buttonId",
           "label": "Button Id",
-          "value": "button-text"
+          "value": ""
         },
         {
          "component": "richtext",
@@ -37,13 +37,13 @@
           "component": "text",
           "name": "buttonText",
           "label": "Primary Button Text",
-          "value": "Download PDF"
+          "value": ""
         },
         {
           "component": "aem-content",
           "name": "buttonUrl",
           "label": "primary Button Url",
-          "value": "#"
+          "value": ""
 
         },
         {
