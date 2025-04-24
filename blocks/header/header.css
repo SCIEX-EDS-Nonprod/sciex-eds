@@ -396,6 +396,10 @@ header nav ul li picture:hover {
     }
 
     .mobile-header .topbar-menu {
+        margin-top: 190px;
+    }
+
+    .standalone-search-container {
         display: none;
     }
 }

@@ -3,10 +3,14 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 function smoothScrollTo(element, initialOffset = 80) {
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const isTablet = window.matchMedia('(max-width: 1162px)').matches;
   let offset = isMobile ? 800 : initialOffset;
-  if (!isMobile) {
+  if (isTablet) {
+    offset += 10;
+  } else {
     offset -= 50;
   }
+
   const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
 
   window.scrollTo({
@@ -66,6 +70,24 @@ function handleMobileTabs() {
   }
 }
 
+function hideIfEmpty(selector, buttonSelector) {
+  const container = document.querySelector(selector);
+  if (!container) return;
+
+  const hasText = container.textContent.trim() !== '';
+  const hasVisibleContent = container.querySelector('img, video, iframe, input, button');
+
+  const hasDataAttribute = Array.from(container.querySelectorAll('*')).some((el) => Array.from(el.attributes).some((attr) => attr.name.startsWith('data-')));
+
+  if (!hasText && !hasVisibleContent && !hasDataAttribute) {
+    container.style.display = 'none';
+    const button = document.querySelector(buttonSelector);
+    if (button) {
+      button.style.display = 'none';
+    }
+  }
+}
+
 export default async function decorate(block) {
   const blockDiv = document.createElement('div');
   blockDiv.classList.add('tw', 'tabs-nav', 'tab-buttons', 'tw-bg-white');
@@ -79,6 +101,8 @@ export default async function decorate(block) {
     moveInstrumentation(row, tabDIv);
     blockDiv.append(tabDIv);
     tabDIv.addEventListener('click', function () {
+      tabDIv.click();
+      tabDIv.click();
       showTabContent(this.id);
       showActiveTab(this.id);
       if (window.matchMedia('(max-width: 768px)').matches) {
@@ -145,4 +169,7 @@ export default async function decorate(block) {
 
   window.addEventListener('resize', toggleVisibility);
   onload();
+
+  hideIfEmpty('.featured-products', '.feature-products-button');
+  hideIfEmpty('.sciex-related-resource', '.related-resource-button');
 }
