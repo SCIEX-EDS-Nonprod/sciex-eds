@@ -28,13 +28,6 @@
             "multi": false
           },
           {
-            "component": "text",
-            "valueType": "string",
-            "name": "alt",
-            "label": "image alt",
-            "value": ""
-          },
-          {
           "component": "richtext",
            "valueType": "string",
            "name": "technoteCaption",
