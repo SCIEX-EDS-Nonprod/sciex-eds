@@ -120,20 +120,6 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "gtmSiteVerif",
-            "label": "GTM: Google Site Verification",
-            "value": "default Google Site Verification"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "gtmTrackingScript",
-            "label": "GTM: Tracking Script",
-            "value": "default Tracking Script"
-          },
-          {
-            "component": "text",
-            "valueType": "string",
             "name": "fathomScript",
             "label": "Fathom Script",
             "value": "default Fathom Script"
