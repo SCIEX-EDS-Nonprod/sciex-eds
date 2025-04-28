@@ -40,7 +40,7 @@ export default async function decorate(block) {
     block.appendChild(dynamicElement);
     if (picture) {
       const img = picture.querySelector('img');
-      img.title = alt;
+      img.alt = alt;
       block.appendChild(picture);
     }
   } catch (error) {
