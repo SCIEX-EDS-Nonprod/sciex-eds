@@ -31,6 +31,7 @@ export default async function decorate(block) {
 
       anchor.href = value && value.trim() !== '' ? `${value}.html` : '#';
       anchor.textContent = key;
+      anchor.title = key.toLowerCase();
       anchor.target = '_blank';
 
       listItem.appendChild(anchor);
