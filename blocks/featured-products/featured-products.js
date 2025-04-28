@@ -5,6 +5,9 @@ export default async function decorate(block) {
   const path = window.location.pathname;
   const trimmedPath = path.replace(/\.html$/, '');
   let response;
+  const alt = block.children[2] && block.children[2].textContent ? block.children[2].textContent.trim() : 'Promotional image';
+
+  block.textContent = '';
   try {
     if (getCookie('cq-authoring-mode') === 'TOUCH') {
       const queryPath = trimmedPath.replace(/^\/content\/sciex-eds/, '');
@@ -12,9 +15,7 @@ export default async function decorate(block) {
     } else {
       response = await fetch(`/content/sciex-eds${trimmedPath}/jcr:content.sciex.json`);
     }
-
     const data = await response.json();
-    block.textContent = '';
 
     block.classList.add('featured-products');
     const dynamicElement = document.createElement('div');
@@ -38,6 +39,8 @@ export default async function decorate(block) {
     dynamicElement.appendChild(listContainer);
     block.appendChild(dynamicElement);
     if (picture) {
+      const img = picture.querySelector('img');
+      img.title = alt;
       block.appendChild(picture);
     }
   } catch (error) {
