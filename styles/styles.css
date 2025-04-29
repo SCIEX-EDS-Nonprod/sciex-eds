@@ -116,7 +116,7 @@ h5,
 h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
-  font-family: "Geogrotesque MD";
+  font-family: "Geogrotesque MD", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 1.25;
   scroll-margin: 40px;
@@ -310,7 +310,7 @@ main .section.highlight {
 
 .search-term-validation {
   color: var(--Grey-500, #707070);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 330;
@@ -323,7 +323,7 @@ main .section.highlight {
 .search-validation-error {
   display: none;
   color: var(--Validation-Error-900, #B12A28);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 330;
@@ -444,7 +444,7 @@ main .section.highlight {
 
 .facet-item label {
   color: var(--Grey-700, #434343);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 330;
@@ -467,7 +467,7 @@ main .section.highlight {
   font-style: normal;
   font-weight: 330;
   align-items: center;
-  font-family: "Geogrotesque MD";
+  font-family: "Geogrotesque MD", Helvetica, Arial, sans-serif;
   gap: 10px;
   line-height: 24px;
   padding-left: 24px;
@@ -487,7 +487,7 @@ main .section.highlight {
   display: flex;
   align-items: center;
   flex-direction: column;
-  font-family: "Geogrotesque MD";
+  font-family: "Geogrotesque MD", Helvetica, Arial, sans-serif;
 }
 #coveo-no-results #noresults-text1 {
   color: #000;
@@ -526,7 +526,7 @@ main .section.highlight {
   max-width: 80pc;
   color: var(--Grey-900, #141414);
   font-size: 20px;
-  font-family: "Geogrotesque MD";
+  font-family: "Geogrotesque MD", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 530;
   line-height: 24px; /* 120% */
@@ -554,7 +554,7 @@ main .section.highlight {
   border-radius: 4px;
   background: var(--Blue-700, #0068FA);
   color: var(--White-0, #FFF) !important;
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -582,7 +582,7 @@ main .section.highlight {
 }
 
 .banner-description p a {
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px !important;
 }
 
@@ -608,7 +608,7 @@ main .section.highlight {
 
 .show-more-btn-des {
   color: var(--Blue-700, #0068FA) !important;
-  font-family: "Geogrotesque Sharp VF" !important;
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif !important;
   font-size: 16px !important;
   font-style: normal;
   font-weight: 530 !important;
@@ -647,7 +647,7 @@ main .section.highlight {
 }
 
 .result-item a {
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px;
   color: #fff !important;
   font-weight: 530;
@@ -682,7 +682,7 @@ main .section.highlight {
 }
 
 .result-item h3 {
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 18px !important;
   color: #000;
   margin-top: 10px !important;
@@ -694,7 +694,7 @@ main .section.highlight {
 
 .facet-header {
   color: var(--Grey-900, #141414) !important;
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 18px !important;
   font-style: normal;
   font-weight: 530 !important;
@@ -704,7 +704,7 @@ main .section.highlight {
 
 #query-summary div {
   color: var(--Grey-900, #141414);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -737,7 +737,7 @@ main .section.highlight {
   color: #000;
   justify-content: center;
   align-items: center;
-  font-family: "Geogrotesque";
+  font-family: "Geogrotesque", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 330;
@@ -827,7 +827,7 @@ main .section.highlight {
 
 .search-term-label {
   color: #707070;
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -837,7 +837,7 @@ main .section.highlight {
 
 .search-term-value {
   color: #141414;
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 530;
@@ -847,7 +847,7 @@ main .section.highlight {
 
 .clear-filter-btn {
   color: var(--Blue-700, #0068FA);
-  font-family: "Geogrotesque Sharp VF" !important;
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -857,7 +857,7 @@ main .section.highlight {
 
 .clear-filter-btn button {
   border-bottom: 1px solid;
-  font-family: "Geogrotesque Sharp VF" !important;
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif !important;
   border-radius: 1px;
 }
 
@@ -933,7 +933,7 @@ main .section.highlight {
   align-content: center;
   padding-right: 20px;
   color: var(--Grey-700, #434343);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -1129,7 +1129,7 @@ main .section.highlight {
   #coveo-no-results #noresults-text1 {
       color: #000;
       text-align: center;
-      font-family: "Geogrotesque Sharp VF";
+      font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-style: normal;
       font-weight: 530;
@@ -1140,7 +1140,7 @@ main .section.highlight {
   #coveo-no-results .noresults-text2 {
       color: var(--Grey-700, #434343);
       text-align: center;
-      font-family: "Geogrotesque Sharp VF";
+      font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
       font-size: 15px;
       font-style: normal;
       font-weight: 330;
@@ -1182,7 +1182,7 @@ main .section.highlight {
   #banner-read-more {
       display: block;
       color: var(--Blue-700, #0068FA);
-      font-family: "Geogrotesque Sharp VF";
+      font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
       font-size: 14px;
       font-style: normal;
       font-weight: 530;
@@ -1198,7 +1198,7 @@ main .section.highlight {
 
   .banner-description p a {
       color: var(--Blue-700, #0068FA) !important;
-      font-family: "Geogrotesque Sharp VF";
+      font-family: "Geogrotesque Sharp VF", Helvetica, Arial, sans-serif;
       font-size: 16px !important;
   }
   
