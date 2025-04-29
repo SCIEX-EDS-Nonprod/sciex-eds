@@ -36,7 +36,7 @@ html {
   cursor: pointer;
   padding-bottom: 14px;
   color: var(--Grey-900, #141414);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -62,7 +62,7 @@ html {
   font-weight: bold;
   border-bottom: 2px solid #007bff;
   color: var(--Blue-700, #0068FA);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -88,7 +88,7 @@ html {
   /* Desktop/text-base/bolder */
   padding:5px;
   margin-top: -15px;
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -134,7 +134,7 @@ color: var(--Grey-900, #141414);
       color: var(--Grey-900, #141414);
 
       /* Desktop/text-base/bolder */
-      font-family: "Geogrotesque Sharp VF";
+      font-family: "Geogrotesque Sharp VF", sans-serif, sans-serif;
       font-size: 16px;
       font-style: normal;
       font-weight: 530;

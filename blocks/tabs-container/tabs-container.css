@@ -49,7 +49,7 @@
   cursor: pointer;
   padding-bottom: 14px;
   color: var(--Grey-900, #141414);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 530;
@@ -59,7 +59,7 @@
 
 .tabs-container p {
   color: var(--Neutrals-500, #707070);
-  font-family: "Geogrotesque Sharp VF" !important;
+  font-family: "Geogrotesque Sharp VF", sans-serif !important;
   font-size: 18px;
   font-style: normal;
   font-weight: 330;
@@ -76,7 +76,7 @@
 
 .tabs-container h3 {
   color: var(--Neutrals-900, #141414);
-  font-family: "Geogrotesque Sharp VF" !important;
+  font-family: "Geogrotesque Sharp VF", sans-serif !important;
   font-size: 24px;
   font-style: normal;
   font-weight: 330;
@@ -109,7 +109,7 @@
 .tabs-container ol li,
 .tabs-container ol li a {
   color: var(--Neutrals-500, #707070);
-  font-family: "Geogrotesque Sharp VF";
+  font-family: "Geogrotesque Sharp VF", sans-serif;
   font-style: normal;
   font-weight: 330;
 }
