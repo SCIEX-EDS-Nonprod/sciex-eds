@@ -403,3 +403,6 @@ header nav ul li picture:hover {
         display: none;
     }
 }
+.header-wrapper{
+    min-height:132.5px !important;
+}
