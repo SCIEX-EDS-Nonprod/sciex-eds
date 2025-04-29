@@ -98,6 +98,7 @@ body.appear {
 
 header {
   height: var(--nav-height);
+  min-height: 132.5px;
 }
 
 header .header,
