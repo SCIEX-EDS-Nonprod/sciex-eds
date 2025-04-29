@@ -74,7 +74,7 @@ html {
     -webkit-font-feature-settings: normal;
     font-feature-settings: normal;
     -webkit-tap-highlight-color: transparent;
-    font-family: Geogrotesque;
+    font-family: "Geogrotesque", sans-serif;
     font-variation-settings: normal;
     line-height: 1.5;
     -moz-tab-size: 4;
@@ -2953,7 +2953,7 @@ nav a[aria-label="Go to Sciex homepage"] {
 }
 
 .tw .tw-font-sans {
-    font-family: Geogrotesque
+    font-family: 'Geogrotesque', sans-serif;
 }
 
 .tw .tw-text-\[12px\] {

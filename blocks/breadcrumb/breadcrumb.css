@@ -28,7 +28,7 @@ main > .section > div {
   color: var(--Grey-500, #707070) !important;
 
   /* Typography */
-  font-family: "Geogrotesque";
+  font-family: "Geogrotesque", sans-serif;
   font-size: 14px !important;
   font-style: normal !important;
   font-weight: 330 !important;
