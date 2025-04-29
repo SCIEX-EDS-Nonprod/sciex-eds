@@ -36,6 +36,10 @@ main {
     min-height: 600px;
 }
 
+.appear {
+    min-height: 600px;
+}
+
 hr {
     border-top-width: 1px;
     color: inherit;
