@@ -32,6 +32,10 @@ body {
     margin: 0
 }
 
+main {
+    min-height: 600px;
+}
+
 hr {
     border-top-width: 1px;
     color: inherit;
