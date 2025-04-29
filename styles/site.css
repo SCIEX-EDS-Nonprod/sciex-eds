@@ -1,60 +1,5 @@
 @charset "UTF-8";
-/*
-@font-face {
-    font-display: swap;
-    font-family: Geogrotesque;
-    font-style: normal;
-    font-weight: 300;
-    src: url(../resources/fonts/Geogrotesque_Sharp_VF.woff2) format("woff2"), url(../resources/fonts/Geogrotesque-Lt.woff) format("woff");
-    unicode-range: U+0020-007e, U+00a0-00ff, U+0100-024f, U+1e??, U+2000-206f, U+20a0-20cf, U+2100-214f, U+2150-218f, U+2190-21ff, U+23??, U+fb00-fb06, U+fb50-fdff, U+2264, U+2265, U+2260, U+03bc, U+02bc
-}
 
-@font-face {
-    font-display: swap;
-    font-family: Geogrotesque;
-    font-style: normal;
-    font-weight: 450;
-    src: url(../resources/fonts/Geogrotesque_Sharp_VF.woff2) format("woff2"), url(../resources/fonts/Geogrotesque_Sharp_VF.woff) format("woff");
-    unicode-range: U+0020-007e, U+00a0-00ff, U+0100-024f, U+1e??, U+2000-206f, U+20a0-20cf, U+2100-214f, U+2150-218f, U+2190-21ff, U+23??, U+fb00-fb06, U+fb50-fdff, U+2264, U+2265, U+2260, U+03bc, U+02bc
-}
-
-@font-face {
-    font-display: swap;
-    font-family: Geogrotesque;
-    font-style: normal;
-    font-weight: 530;
-    src: url(../resources/fonts/Geogrotesque_Sharp_VF.woff2) format("woff2"), url(../resources/fonts/Geogrotesque_Sharp_VF.woff) format("woff");
-    unicode-range: U+0020-007e, U+00a0-00ff, U+0100-024f, U+1e??, U+2000-206f, U+20a0-20cf, U+2100-214f, U+2150-218f, U+2190-21ff, U+23??, U+fb00-fb06, U+fb50-fdff, U+2264, U+2265, U+2260, U+03bc, U+02bc
-}
-
-@font-face {
-    font-display: swap;
-    font-family: Geogrotesque;
-    font-style: normal;
-    font-weight: 330;
-    src: url(../resources/fonts/Geogrotesque_Sharp_VF.woff2) format("woff2"), url(../resources/fonts/Geogrotesque_Sharp_VF.woff) format("woff");
-    unicode-range: U+0020-007e, U+00a0-00ff, U+0100-024f, U+1e??, U+2000-206f, U+20a0-20cf, U+2100-214f, U+2150-218f, U+2190-21ff, U+23??, U+fb00-fb06, U+fb50-fdff, U+2264, U+2265, U+2260, U+03bc, U+02bc
-}
-
-@font-face {
-    font-display: swap;
-    font-family: Geogrotesque;
-    font-style: normal;
-    font-weight: 270;
-    src: url(../resources/fonts/Geogrotesque_Sharp_VF.woff2) format("woff2"), url(../resources/fonts/Geogrotesque_Sharp_VF.woff) format("woff");
-    unicode-range: U+0020-007e, U+00a0-00ff, U+0100-024f, U+1e??, U+2000-206f, U+20a0-20cf, U+2100-214f, U+2150-218f, U+2190-21ff, U+23??, U+fb00-fb06, U+fb50-fdff, U+2264, U+2265, U+2260, U+03bc, U+02bc
-}
-
-@font-face {
-    font-display: swap;
-    font-family: Geogrotesque;
-    font-style: normal;
-    font-weight: 200;
-    src: url(../resources/fonts/Geogrotesque-UltLt.woff2) format("woff2"), url(../resources/fonts/Geogrotesque-UltLt.woff) format("woff");
-    unicode-range: U+0020-007e, U+00a0-00ff, U+0100-024f, U+1e??, U+2000-206f, U+20a0-20cf, U+2100-214f, U+2150-218f, U+2190-21ff, U+23??, U+fb00-fb06, U+fb50-fdff, U+2264, U+2265, U+2260, U+03bc, U+02bc
-}
-
-*/
 *,
 ::after,
 ::before {
@@ -3676,6 +3621,16 @@ nav a[aria-label="Go to Sciex homepage"] {
     color: #fff;
     color: rgb(255 255 255 / var(--tw-text-opacity))
 }
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+.tw a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 
 @media (min-width:640px) {
     .tw .sm\:tw-mt-0 {
