@@ -17,6 +17,8 @@
     line-height: 75px; /* 125% */
     min-height: 75px; /* Reserved height for the text */
     /* Ensure the element has a minimum height so layout doesn't shift */
+    font-display: swap;
+    font-family: "Geogrotesque Sharp VF";
 }
 
 @media (max-width: 768px) {
