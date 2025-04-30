@@ -402,6 +402,10 @@ header nav ul li picture:hover {
     .standalone-search-container {
         display: none;
     }
+    
+    .header-wrapper{
+        min-height:65px !important;
+    }
 }
 .header-wrapper{
     min-height:132.5px !important;
