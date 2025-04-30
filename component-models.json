@@ -694,6 +694,27 @@
     ]
   },
   {
+    "id": "sciex-products-technologies",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "componentId",
+        "label": "Component Id"
+      },
+      {
+        "component": "aem-experience-fragment",
+        "valueType": "string",
+        "name": "experience-fragment",
+        "label": "experience-fragment",
+        "variationName": "experienceFragmentVariation",
+        "validation": {
+          "rootPath": "/content/experience-fragments"
+        }
+      }
+    ]
+  },
+  {
     "id": "sciex-related-resource",
     "fields": [
       {
