@@ -723,12 +723,6 @@
     "id": "products-technologies-card",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "componentId",
-        "label": "Component Id"
-      },
-      {
         "component": "aem-experience-fragment",
         "valueType": "string",
         "name": "experience-fragment",

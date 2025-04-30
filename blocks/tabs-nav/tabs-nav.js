@@ -73,7 +73,7 @@ function handleMobileTabs() {
 function hideIfEmpty(selector, buttonSelector) {
   const container = document.querySelector(selector);
   const button = document.querySelector(buttonSelector);
-  if (null == container) {
+  if (container == null) {
     if (button) {
       button.style.display = 'none';
     }
@@ -167,5 +167,4 @@ export default async function decorate(block) {
 
   hideIfEmpty('.sciex-related-resource', '.related-resource-button');
   hideIfEmpty('.featured-products', '.feature-products-button');
-  
 }
