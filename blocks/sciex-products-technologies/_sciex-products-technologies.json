@@ -14,30 +14,53 @@
             }
           }
         }
+      },
+      {
+        "title": "Products Technologies Card",
+        "id": "products-technologies-card",
+        "plugins": {
+          "xwalk": {
+            "page": {
+              "resourceType": "core/franklin/components/block/v1/block/item",
+              "template": {
+                "name": "products-technologies-card",
+                "model": "products-technologies-card"
+              }
+            }
+          }
+        }
       }
     ],
     "models": [
       {
-      "id": "sciex-products-technologies",
-      "fields": [
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "componentId",
-          "label": "Component Id"
-        },
-        {
-            "component": "aem-experience-fragment",
+        "id": "products-technologies-card",
+        "fields": [
+          {
+            "component": "text",
             "valueType": "string",
-            "name": "experience-fragment",
-            "label": "experience-fragment",
-            "variationName": "experienceFragmentVariation",
-            "validation": {
-                "rootPath": "/content/experience-fragments"
-            }
-        }     
-      ]
-    }
-  ],
-    "filters": []
+            "name": "componentId",
+            "label": "Component Id"
+          },
+          {
+              "component": "aem-experience-fragment",
+              "valueType": "string",
+              "name": "experience-fragment",
+              "label": "experience-fragment",
+              "variationName": "experienceFragmentVariation",
+              "validation": {
+                  "rootPath": "/content/experience-fragments"
+              }
+          }     
+        ]
+      }
+    ],
+    "filters": [
+      {
+        "id": "sciex-products-technologies",
+        "components": [
+          "products-technologies-card"
+        ]
+      }
+    ]
   }
+  
