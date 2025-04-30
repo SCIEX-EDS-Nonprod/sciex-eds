@@ -63,7 +63,8 @@
         "tabs-nav",
         "tabs-container",
         "sciex-text",
-        "sciex-products-technologies"
+        "sciex-products-technologies",
+        "events"
       ]
     }
   ]
