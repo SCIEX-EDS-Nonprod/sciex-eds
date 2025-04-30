@@ -76,6 +76,12 @@
     ]
   },
   {
+    "id": "sciex-products-technologies",
+    "components": [
+      "products-technologies-card"
+    ]
+  },
+  {
     "id": "sciex-related-resource",
     "components": [
       "resource-item"
