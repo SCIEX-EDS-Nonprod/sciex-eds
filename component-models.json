@@ -494,6 +494,32 @@
     ]
   },
   {
+    "id": "events",
+    "fields": [
+      {
+        "component": "text",
+        "name": "eventsId",
+        "value": "",
+        "label": "Events Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "coveoSearchEngineOrganizationId",
+        "value": "",
+        "label": "Coveo Search Engine OrganizationId",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "coveoSearchEngineAccessToken",
+        "value": "",
+        "label": "Coveo Search Engine Access Token",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "featured-products",
     "fields": [
       {
