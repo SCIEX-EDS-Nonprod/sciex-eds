@@ -573,6 +573,62 @@
     ]
   },
   {
+    "id": "hero-banner",
+    "fields": [
+      {
+        "component": "text",
+        "name": "heroId",
+        "value": "",
+        "label": "Hero Banner Id",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "eyebrow",
+        "value": "",
+        "label": "Eyebrow",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text1",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "varientColour",
+        "label": "Varient Colour",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Black",
+            "value": "#000"
+          },
+          {
+            "name": "Grey",
+            "value": "#C6C6C6"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "login-sso",
     "fields": [
       {

@@ -1,0 +1,10 @@
+.hero-banner{
+    color: currentcolor;
+    text-decoration: none;
+    display: flex;
+    width: 1440px;
+    height: 181px;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
