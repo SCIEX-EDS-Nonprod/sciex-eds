@@ -34,7 +34,6 @@
       "tabs-nav",
       "tabs-container",
       "sciex-text",
-      "sciex-products-technologies",
       "events"
     ]
   },
@@ -73,12 +72,6 @@
       "image",
       "icon",
       "links"
-    ]
-  },
-  {
-    "id": "sciex-products-technologies",
-    "components": [
-      "products-technologies-card"
     ]
   },
   {

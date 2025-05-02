@@ -1,3 +1,11 @@
+.cards-wrapper {
+  padding-top: 35px;
+}
+
+main > .section > div {
+  padding: 0;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -8,12 +16,32 @@
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
   background-color: var(--background-color);
+}
+
+.cards-wrapper h5 {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: normal;
+  letter-spacing: 0.045px;
 }
 
 .cards .cards-card-body {
   margin: 16px;
+}
+
+.cards .cards-card-body p {
+  padding-top: 15px;
+  color: var(--Grey-600, #5B5B5B);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: 0.045px;
 }
 
 .cards .cards-card-image {
@@ -24,4 +52,47 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.cards a.button:any-link {
+  background-color: transparent;
+  color: var(--Blue-700, #0068FA);
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+  text-decoration: underline;
+}
+
+.cards .cards-card-body .icon-right-arrow img {
+  width: 29px;
+  height: 10px;
+  padding-left: 10px;
+}
+
+.button-container a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: currentColor;
+  transition: text-decoration-color 0.3s ease;
+}
+
+.button-container a:hover {
+  text-decoration: none;
+  text-decoration-color: transparent;
+}
+
+.cards .cards-heading {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 52px; /* 130% */
+  margin-bottom: 32px;
 }
