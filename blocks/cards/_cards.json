@@ -45,7 +45,7 @@
           },
           {
             "component": "radio-group",
-            "label": "option To Select primary button url",
+            "label": "option To Select anchor url",
             "name": "OpentionToSelectPrimary",
             "valueType": "string",
             "options": [
