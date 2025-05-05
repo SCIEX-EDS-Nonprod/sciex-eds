@@ -55,8 +55,8 @@
               "value": ""
             },
             {
-              "component": "date",
-              "valueType": "date",
+              "component": "date-time",
+              "valueType": "date-time",
               "name": "eventDate",
               "label": "Event Date",
               "displayFormat": "YYYY-MM-DD",
