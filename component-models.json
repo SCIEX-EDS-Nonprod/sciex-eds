@@ -336,22 +336,22 @@
         "name": "heading",
         "label": "Heading",
         "value": ""
-      }
-    ]
-  },
-  {
-    "component": "radio-group",
-    "label": "option To Select primary button url",
-    "name": "OpentionToSelectPrimary",
-    "valueType": "string",
-    "options": [
-      {
-        "name": "Open In Same Tab",
-        "value": "_self"
       },
       {
-        "name": "Open In New Tab",
-        "value": "_blank"
+        "component": "radio-group",
+        "label": "option To Select primary button url",
+        "name": "OpentionToSelectPrimary",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
       }
     ]
   },
