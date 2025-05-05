@@ -24,13 +24,13 @@ main > .section > div {
   font-family: "Geogrotesque Sharp VF";
   font-size: 18px;
   font-style: normal;
-  font-weight: 530;
+  font-weight: 400;
   line-height: normal;
   letter-spacing: 0.045px;
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: 20px 0px;
 }
 
 .cards .cards-card-body p {
@@ -83,9 +83,12 @@ main > .section > div {
 }
 
 .button-container a:hover {
-  text-decoration: none;
+  /* Keep the underline */
+  text-decoration: underline;
+  /* Fade the underline color */
   text-decoration-color: transparent;
 }
+
 
 .cards .cards-heading {
   color: var(--Grey-900, #141414);
