@@ -1,9 +1,6 @@
-.cards-wrapper {
-  padding-top: 35px;
-}
-
-main > .section > div {
+.cards-container {
   padding: 0;
+  padding-top: 35px;
 }
 
 .cards > ul {
@@ -30,8 +27,21 @@ main > .section > div {
 }
 
 .cards .cards-card-body {
-  margin: 20px 0px;
+  margin: 20px 20px;
 }
+
+@media (min-width: 1024px) {
+  .cards .cards-card-body {
+    margin: 20px 0px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cards .cards-card-body {
+    margin: 20px 20px; 
+  }
+}
+
 
 .cards .cards-card-body p {
   padding-top: 15px;
@@ -40,7 +50,7 @@ main > .section > div {
   font-size: 18px;
   font-style: normal;
   font-weight: 330;
-  line-height: 26px; /* 144.444% */
+  line-height: 26px;
   letter-spacing: 0.045px;
 }
 
@@ -63,27 +73,31 @@ main > .section > div {
   font-family: "Geogrotesque Sharp VF";
   font-size: 16px;
   font-style: normal;
-  font-weight: 530;
+  font-weight: 350;
   line-height: 24px;
   letter-spacing: 0.08px;
-  text-decoration: underline;
 }
 
 .cards .cards-card-body .icon-right-arrow img {
   width: 29px;
   height: 10px;
   padding-left: 10px;
+  transition: transform 0.3s ease;
 }
 
-.button-container a {
+.cards .cards-card-body .icon-right-arrow img:hover {
+  transform: scale(1.1);
+}
+
+.cards .button-container a {
   text-decoration: underline;
   text-underline-offset: 4px;
+  font-weight: 100;
   text-decoration-color: currentColor;
-  transition: text-decoration-color 0.3s ease;
+  transition: text-decoration-color 0.3s ease; 
 }
 
-.button-container a:hover {
-  /* Keep the underline */
+.cards .button-container a:hover {
   text-decoration: underline;
   /* Fade the underline color */
   text-decoration-color: transparent;

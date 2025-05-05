@@ -5,11 +5,20 @@ import { span } from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   const ul = document.createElement('ul');
   let headingText = '';
+  let target = '_blank';
 
   [...block.children].forEach((row, index) => {
     if (index === 0) {
-      headingText = row.textContent.trim(); // 🎯 Capture heading text
-      return; // ⛔ Skip rendering this row
+      headingText = row.textContent.trim();
+      return;
+    }
+
+    if (
+      index === 1 &&
+      row.querySelector('div > div > p')
+    ) {
+      target = row.textContent.trim();
+      return;
     }
 
     const li = document.createElement('li');
@@ -27,6 +36,7 @@ export default function decorate(block) {
 
     const anchor = li.querySelector('a');
     if (anchor) {
+      anchor.setAttribute('target', target);
       anchor.appendChild(span({ class: 'icon icon-right-arrow' }));
     }
 
