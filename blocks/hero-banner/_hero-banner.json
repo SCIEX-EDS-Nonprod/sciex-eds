@@ -71,6 +71,15 @@
                 "value": "#C6C6C6"
               }
             ]
+          },
+          {
+            "component": "date-time",
+            "valueType": "date-time",
+            "name": "publishDate",
+            "label": "Publish Date",
+            "placeholder": "YYYY-MM-DD",
+            "displayFormat": null,
+            "valueFormat": null
           }
         ]
       }
