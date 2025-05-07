@@ -1,0 +1,9 @@
+.event-container{
+
+    width: 100px;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    align-self: stretch;
+}
