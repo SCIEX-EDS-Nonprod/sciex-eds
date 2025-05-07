@@ -39,7 +39,8 @@
       "events-container",
       "event-register",
       "session-timeline",
-      "events-details"
+      "events-details",
+      "speakers"
     ]
   },
   {
@@ -92,6 +93,12 @@
     "id": "sciex-related-resource",
     "components": [
       "resource-item"
+    ]
+  },
+  {
+    "id": "speakers",
+    "components": [
+      "speaker"
     ]
   },
   {

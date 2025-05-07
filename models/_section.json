@@ -68,8 +68,8 @@
         "events-container",
         "event-register",
         "session-timeline",
-        "events-details"
-        
+        "events-details",
+        "speakers"
       ]
     }
   ]
