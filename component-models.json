@@ -531,6 +531,122 @@
     ]
   },
   {
+    "id": "events-container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "containerId",
+        "value": "",
+        "label": "Container Id",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "view",
+        "label": "View",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Horizontal",
+            "value": "horizontal"
+          },
+          {
+            "name": "Vertical",
+            "value": "vertical"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "events-details",
+    "fields": [
+      {
+        "component": "text",
+        "name": "eventId",
+        "value": "",
+        "label": "Event Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "date-time",
+        "valueType": "date-time",
+        "name": "eventDate",
+        "label": "Eent Date",
+        "placeholder": "YYYY-MM-DD",
+        "displayFormat": null,
+        "valueFormat": null,
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "location",
+        "label": "Location",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "primarytext",
+        "label": "Primary Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "primaryUrl",
+        "label": "Primary Button URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Select below options to open link in new tab?",
+        "name": "selectbelowoption",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "secondarytext",
+        "label": "Secondary Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "secondaryUrl",
+        "label": "Secondary Button URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Select below options to open link in new tab?",
+        "name": "selectbelowoption",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "events",
     "fields": [
       {
@@ -943,6 +1059,31 @@
         "value": "",
         "label": "Coveo Search Engine Access Token",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "session-timeline",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sessionTimeLineId",
+        "value": "",
+        "label": "Session Timeline Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Details"
       }
     ]
   },

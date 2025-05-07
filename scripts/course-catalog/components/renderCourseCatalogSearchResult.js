@@ -145,7 +145,6 @@ const renderCourseCatalogSearchResults = () => {
           const isExpanded = descriptionElement.style.maxHeight === 'none';
           descriptionElement.style.maxHeight = isExpanded ? '3em' : 'none';
           descriptionElement.style.webkitLineClamp = isExpanded ? '3' : 'none';
-          descriptionElement.style.maxHeight = isExpanded ? '3em' : 'none';
           showMoreBtn.innerHTML = isExpanded
             ? `<span class="show-more-text">Read More</span>${showMoreIcon}`
             : '<span class="show-more-text">Read Less</span> ' + `        

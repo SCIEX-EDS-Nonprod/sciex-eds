@@ -36,6 +36,10 @@
       "sciex-text",
       "events",
       "hero-banner",
+      "events-container",
+      "event-register",
+      "session-timeline",
+      "events-details",
       "speakers"
     ]
   },
@@ -58,6 +62,15 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "events-container",
+    "components": [
+      "sciex-text",
+      "session-timeline",
+      "events-details",
+      "event-register"
     ]
   },
   {
