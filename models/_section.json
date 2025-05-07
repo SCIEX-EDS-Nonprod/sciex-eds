@@ -64,7 +64,12 @@
         "tabs-container",
         "sciex-text",
         "events",
-        "hero-banner"
+        "hero-banner",
+        "events-container",
+        "event-register",
+        "session-timeline",
+        "events-details"
+        
       ]
     }
   ]

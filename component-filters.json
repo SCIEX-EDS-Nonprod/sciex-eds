@@ -35,7 +35,11 @@
       "tabs-container",
       "sciex-text",
       "events",
-      "hero-banner"
+      "hero-banner",
+      "events-container",
+      "event-register",
+      "session-timeline",
+      "events-details"
     ]
   },
   {
@@ -57,6 +61,15 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "events-container",
+    "components": [
+      "sciex-text",
+      "session-timeline",
+      "events-details",
+      "event-register"
     ]
   },
   {
