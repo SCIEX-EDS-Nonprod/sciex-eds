@@ -218,13 +218,13 @@ a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  /*background-color: var(--link-hover-color);*/
   cursor: pointer;
 }
 
 button:disabled,
 button:disabled:hover {
-  background-color: var(--light-color);
+  /*background-color: var(--light-color);*/
   cursor: unset;
 }
 

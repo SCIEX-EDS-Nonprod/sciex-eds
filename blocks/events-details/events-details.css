@@ -1,0 +1,34 @@
+.events-details{
+    display: flex;
+    width: 416px;
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    border-radius: 6px;
+    background: var(--Grey-50, #F5F5F5);
+    
+}
+.event-details .text{
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px; /* 100% */
+    letter-spacing: 0.12px;
+}
+.event-details .primary-button{
+    display: flex;
+    padding: 12px 20px;
+    align-items: center;
+    gap: 16px;
+    border-radius: 4px;
+    background: var(--Blue-700, #0068FA);
+}
+.event-details  .secondary-button{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
