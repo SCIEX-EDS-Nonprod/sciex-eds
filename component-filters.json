@@ -35,7 +35,8 @@
       "tabs-container",
       "sciex-text",
       "events",
-      "hero-banner"
+      "hero-banner",
+      "speakers"
     ]
   },
   {
@@ -79,6 +80,12 @@
     "id": "sciex-related-resource",
     "components": [
       "resource-item"
+    ]
+  },
+  {
+    "id": "speakers",
+    "components": [
+      "speaker"
     ]
   },
   {
