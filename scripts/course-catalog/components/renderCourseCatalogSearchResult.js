@@ -75,9 +75,9 @@ const renderCourseCatalogSearchResults = () => {
       courseInfo.appendChild(ratingContainer);
       const stars = ratingContainer.querySelectorAll('.star');
 
-      Array.from(stars).slice(0, result.raw.rating).forEach((star) => star.classList.add('filled'));
+      const rating = result?.raw?.rating ?? 0;
+      Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
 
-      // <span class="tag premium">Premium</span>
       const resultMarkup = `
         <div class="item-details"> 
           ${ result.raw.isnewcourse || result.raw.coursetypecategories ?  
