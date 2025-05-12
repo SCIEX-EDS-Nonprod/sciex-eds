@@ -69,7 +69,8 @@
         "event-register",
         "session-timeline",
         "events-details",
-        "speakers"
+        "speakers",
+        "events-register-form"
       ]
     }
   ]
