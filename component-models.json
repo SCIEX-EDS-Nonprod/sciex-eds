@@ -647,6 +647,24 @@
     ]
   },
   {
+    "id": "button-text",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eventId",
+        "label": "From Block Id",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "Text",
+        "label": "Form Heading"
+      }
+    ]
+  },
+  {
     "id": "events",
     "fields": [
       {
