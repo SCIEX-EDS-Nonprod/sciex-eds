@@ -113,3 +113,7 @@
   line-height: 52px; /* 130% */
   margin-bottom: 32px;
 }
+
+.fragment-wrapper {
+  max-width: 1400px !important;
+}
