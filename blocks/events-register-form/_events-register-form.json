@@ -17,7 +17,7 @@
     ],
     "models": [
       {
-        "id": "button-text",
+        "id": "event-register",
         "fields": [
           {
             "component": "text",
