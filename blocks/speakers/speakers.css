@@ -1,1 +1,60 @@
+.speakers .heading {
+    color: var(--Neutrals-900, #141414);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 40px; /* 125% */
+    padding-top: 15px;
+}
+
+.speaker-container .speaker-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 3px;
+    align-self: stretch;
+    padding-top: 30px;
+}
+
+.speaker-container .speaker-image {
+    width: 100%;
+    height: auto;
+}
+
+.speaker-content h4 {
+    color: var(--Grey-900, #141414);
+    /* Desktop/text-lg/bolder */
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 26px; /* 144.444% */
+    letter-spacing: 0.045px;
+}
+.speaker-content p {
+    color: var(--Grey-600, #5B5B5B);
+
+    /* Desktop/text-lg/regular */
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 26px; /* 144.444% */
+    letter-spacing: 0.045px;
+    padding-top: 5px;
+}
+
+.speaker-content ul {
+    list-style-type: inherit;
+    padding-left: 30px;
+    padding-top: 10px;
+}
+.speaker-content ul li {
+    color: var(--Grey-600, #5B5B5B);
+
+    /* Desktop/text-base/regular */
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.08px;
+}
+
 
