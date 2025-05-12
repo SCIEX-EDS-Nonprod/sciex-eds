@@ -14,8 +14,8 @@ export default function decorate(block) {
     }
 
     if (
-      index === 1 &&
-      row.querySelector('div > div > p')
+      index === 1
+      && row.querySelector('div > div > p')
     ) {
       target = row.textContent.trim();
       return;
