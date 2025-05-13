@@ -36,20 +36,42 @@ export default function decorate(block) {
         // 🎥 Handle embedded video with optional thumbnail
         const videoSrc = videoAnchor.href;
         const thumbnailSrc = videoAnchor.dataset.thumbnail || videoSrc.replace('.mp4', '.jpg');
-    
+      
+        const videoWrapper = document.createElement('div');
+        videoWrapper.className = 'video-wrapper';
+      
         const video = document.createElement('video');
         video.src = videoSrc;
-        video.controls = true;
-        video.width = 560;
-        video.height = 315;
+        video.poster =  "/icons/poster.jpg";
         video.setAttribute('title', 'Embedded Video');
         video.setAttribute('loading', 'lazy');
-        video.setAttribute('poster', thumbnailSrc); // 🔽 Add thumbnail
-    
+        video.setAttribute('playsinline', '');
+        video.setAttribute('preload', 'metadata');
+      
+        // Remove native controls
+        // video.controls = true; // ← removed
+      
+        // Create play button
+        const playBtn = document.createElement('button');
+        playBtn.className = 'custom-play-button';
+        playBtn.innerHTML = '<span class="icon icon-play"></span>'; // Assume CSS adds play icon
+      
+        // Play on click
+        playBtn.addEventListener('click', () => {
+          video.play();
+          playBtn.style.display = 'none';
+        });
+      
+        // Move any tracking
         moveInstrumentation(videoAnchor, video);
-        videoAnchor.replaceWith(video);
-    
-        div.className = 'cards-card-image';
+      
+        // Replace anchor with video
+        videoWrapper.appendChild(video);
+        videoWrapper.appendChild(playBtn);
+        div.innerHTML = ''; // Clear the old anchor
+        div.appendChild(videoWrapper);
+      
+        div.className = 'cards-card-image';      
       } else {
         div.className = 'cards-card-body';
       }
