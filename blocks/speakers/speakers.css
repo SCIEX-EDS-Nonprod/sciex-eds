@@ -1,9 +1,10 @@
 .speakers .heading {
     color: var(--Neutrals-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
     font-size: 32px;
     font-style: normal;
     font-weight: 330;
-    line-height: 40px; /* 125% */
+    line-height: 40px;
     padding-top: 15px;
 }
 
@@ -22,21 +23,19 @@
 
 .speaker-content h4 {
     color: var(--Grey-900, #141414);
-    /* Desktop/text-lg/bolder */
+    font-family: "Geogrotesque Sharp VF";
     font-size: 20px;
     font-style: normal;
     font-weight: 530;
-    line-height: 26px; /* 144.444% */
+    line-height: 26px;
     letter-spacing: 0.045px;
 }
 .speaker-content p {
     color: var(--Grey-600, #5B5B5B);
-
-    /* Desktop/text-lg/regular */
     font-size: 18px;
     font-style: normal;
     font-weight: 330;
-    line-height: 26px; /* 144.444% */
+    line-height: 26px;
     letter-spacing: 0.045px;
     padding-top: 5px;
 }
@@ -48,13 +47,9 @@
 }
 .speaker-content ul li {
     color: var(--Grey-600, #5B5B5B);
-
-    /* Desktop/text-base/regular */
     font-size: 18px;
     font-style: normal;
     font-weight: 330;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: 0.08px;
 }
-
-
