@@ -117,3 +117,15 @@
 .fragment-wrapper {
   max-width: 1400px !important;
 }
+
+
+.cards .cards-card-image video {
+  width: 100%;
+  height: 229.125px;
+  align-self: stretch;
+  aspect-ratio: 305.50 / 229.13;
+  object-fit: cover;
+  display: block;
+}
+
+

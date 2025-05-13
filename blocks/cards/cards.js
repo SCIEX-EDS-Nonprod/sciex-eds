@@ -14,8 +14,8 @@ export default function decorate(block) {
     }
 
     if (
-      index === 1
-      && row.querySelector('div > div > p')
+      index === 1 &&
+      row.querySelector('div > div > p')
     ) {
       target = row.textContent.trim();
       return;
@@ -27,7 +27,28 @@ export default function decorate(block) {
     while (row.firstElementChild) li.append(row.firstElementChild);
 
     [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) {
+      const picture = div.querySelector('picture');
+      const videoAnchor = div.querySelector('a[href$=".mp4"]');
+
+      if (picture) {
+        div.className = 'cards-card-image';
+      } else if (videoAnchor) {
+        // 🎥 Handle embedded video with optional thumbnail
+        const videoSrc = videoAnchor.href;
+        const thumbnailSrc = videoAnchor.dataset.thumbnail || videoSrc.replace('.mp4', '.jpg');
+    
+        const video = document.createElement('video');
+        video.src = videoSrc;
+        video.controls = true;
+        video.width = 560;
+        video.height = 315;
+        video.setAttribute('title', 'Embedded Video');
+        video.setAttribute('loading', 'lazy');
+        video.setAttribute('poster', thumbnailSrc); // 🔽 Add thumbnail
+    
+        moveInstrumentation(videoAnchor, video);
+        videoAnchor.replaceWith(video);
+    
         div.className = 'cards-card-image';
       } else {
         div.className = 'cards-card-body';
@@ -44,18 +65,19 @@ export default function decorate(block) {
     decorateIcons(li);
   });
 
+  // Optimize images
   ul.querySelectorAll('picture > img').forEach((img) => {
     const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
     moveInstrumentation(img, optimizedPic.querySelector('img'));
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  // 🎨 Create and style heading element
+  // Heading
   const headingEl = document.createElement('h2');
   headingEl.textContent = headingText;
-  headingEl.className = 'cards-heading'; // Add class for styling
+  headingEl.className = 'cards-heading';
 
   block.textContent = '';
-  block.append(headingEl); // 🔼 Add heading before list
+  block.append(headingEl);
   block.append(ul);
 }
