@@ -35,23 +35,21 @@ export default function decorate(block) {
       } else if (videoAnchor) {
         // 🎥 Handle embedded video with optional thumbnail
         const videoSrc = videoAnchor.href;
-        // const thumbnailSrc = videoAnchor.dataset.thumbnail || videoSrc.replace('.mp4', '.jpg');
-
+        const thumbnailSrc = videoSrc
+          ? `${videoSrc}/jcr:content/renditions/cq5dam.web.1280.1280.jpeg`
+          : 'icons/poster.jpg';
+        
         const videoWrapper = document.createElement('div');
         videoWrapper.className = 'video-wrapper';
 
         const video = document.createElement('video');
         video.src = videoSrc;
-        video.poster = '/icons/poster.jpg';
+        video.poster = thumbnailSrc;
         video.setAttribute('title', 'Embedded Video');
         video.setAttribute('loading', 'lazy');
         video.setAttribute('playsinline', '');
         video.setAttribute('preload', 'metadata');
 
-        // Remove native controls
-        // video.controls = true; // ← removed
-
-        // Create play button
         const playBtn = document.createElement('button');
         playBtn.className = 'custom-play-button';
         playBtn.innerHTML = '<span class="icon icon-play"></span>'; // Assume CSS adds play icon
