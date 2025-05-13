@@ -28,10 +28,9 @@ export default async function decorate(block) {
     parentDiv.append(speakerDiv);
   });
 
-  // 🎨 Create and style heading element
   const headingEl = document.createElement('h2');
   headingEl.textContent = headingText;
-  headingEl.className = 'heading'; // Add class for styling
+  headingEl.className = 'heading';
 
   block.textContent = '';
   block.append(headingEl);
