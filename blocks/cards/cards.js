@@ -14,8 +14,8 @@ export default function decorate(block) {
     }
 
     if (
-      index === 1
-      && row.querySelector('div > div > p')
+      index === 1 &&
+      row.querySelector('div > div > p')
     ) {
       target = row.textContent.trim();
       return;
@@ -26,50 +26,57 @@ export default function decorate(block) {
 
     while (row.firstElementChild) li.append(row.firstElementChild);
 
-    [...li.children].forEach((div) => {
-      const picture = div.querySelector('picture');
-      const videoAnchor = div.querySelector('a[href$=".mp4"]');
+    let videoThumbnailImg;
 
-      if (picture) {
-        div.className = 'cards-card-image';
-      } else if (videoAnchor) {
-        // 🎥 Handle embedded video with optional thumbnail
-        const videoSrc = videoAnchor.href;
-        const thumbnailSrc = videoSrc
-          ? `${videoSrc}/jcr:content/renditions/cq5dam.web.1280.1280.jpeg`
-          : 'icons/poster.jpg';
-        
-        const videoWrapper = document.createElement('div');
-        videoWrapper.className = 'video-wrapper';
+    [...li.children].forEach((div, divIndex) => {
+      const firstDiv = li.children[0];
 
-        const video = document.createElement('video');
-        video.src = videoSrc;
-        video.poster = thumbnailSrc;
-        video.setAttribute('title', 'Embedded Video');
-        video.setAttribute('loading', 'lazy');
-        video.setAttribute('playsinline', '');
-        video.setAttribute('preload', 'metadata');
+      if (divIndex !== 0 && div.querySelector('picture')) {
+        // Save the picture from non-first divs for use as video thumbnail
+        const pictureImg = div.querySelector('picture img');
+        if (pictureImg) videoThumbnailImg = pictureImg;
+        div.innerHTML = '';
+      }
 
-        const playBtn = document.createElement('button');
-        playBtn.className = 'custom-play-button';
-        playBtn.innerHTML = '<span class="icon icon-play"></span>'; // Assume CSS adds play icon
+      if (divIndex === 0 && firstDiv) {
+        const picture = firstDiv.querySelector('picture');
+        const videoAnchor = firstDiv.querySelector('a[href$=".mp4"]');
 
-        // Play on click
-        playBtn.addEventListener('click', () => {
-          video.play();
-          playBtn.style.display = 'none';
-        });
+        if (picture) {
+          firstDiv.className = 'cards-card-image';
+        } else if (videoAnchor) {
+          const videoSrc = videoAnchor.href;
+          const thumbnailSrc = videoThumbnailImg || `${videoSrc}/jcr:content/renditions/cq5dam.web.1280.1280.jpeg`;
 
-        // Move any tracking
-        moveInstrumentation(videoAnchor, video);
+          const videoWrapper = document.createElement('div');
+          videoWrapper.className = 'video-wrapper';
 
-        // Replace anchor with video
-        videoWrapper.appendChild(video);
-        videoWrapper.appendChild(playBtn);
-        div.innerHTML = ''; // Clear the old anchor
-        div.appendChild(videoWrapper);
+          const video = document.createElement('video');
+          video.src = videoSrc;
+          video.poster = thumbnailSrc;
+          video.setAttribute('title', 'Embedded Video');
+          video.setAttribute('loading', 'lazy');
+          video.setAttribute('playsinline', '');
+          video.setAttribute('preload', 'metadata');
 
-        div.className = 'cards-card-image';
+          const playBtn = document.createElement('button');
+          playBtn.className = 'custom-play-button';
+          playBtn.innerHTML = '<span class="icon icon-play"></span>';
+
+          playBtn.addEventListener('click', () => {
+            video.play();
+            playBtn.style.display = 'none';
+          });
+
+          moveInstrumentation(videoAnchor, video);
+
+          videoWrapper.appendChild(video);
+          videoWrapper.appendChild(playBtn);
+          firstDiv.innerHTML = '';
+          firstDiv.appendChild(videoWrapper);
+
+          firstDiv.className = 'cards-card-image';
+        }
       } else {
         div.className = 'cards-card-body';
       }
