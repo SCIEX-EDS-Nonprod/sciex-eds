@@ -13,10 +13,7 @@ export default function decorate(block) {
       return;
     }
 
-    if (
-      index === 1 &&
-      row.querySelector('div > div > p')
-    ) {
+    if (index === 1 && row.querySelector('div > div > p')) {
       target = row.textContent.trim();
       return;
     }
@@ -32,9 +29,8 @@ export default function decorate(block) {
       const firstDiv = li.children[0];
 
       if (divIndex !== 0 && div.querySelector('picture')) {
-        // Save the picture from non-first divs for use as video thumbnail
         const pictureImg = div.querySelector('picture img');
-        if (pictureImg) videoThumbnailImg = pictureImg;
+        if (pictureImg) videoThumbnailImg = pictureImg.src; // ✅ Save .src instead of image element
         div.innerHTML = '';
       }
 
@@ -86,6 +82,13 @@ export default function decorate(block) {
     if (anchor) {
       anchor.setAttribute('target', target);
       anchor.appendChild(span({ class: 'icon icon-right-arrow' }));
+    }
+
+    // ✅ Assign poster to all videos inside this card
+    if (videoThumbnailImg) {
+      li.querySelectorAll('video').forEach((video) => {
+        video.setAttribute('poster', videoThumbnailImg);
+      });
     }
 
     ul.append(li);
