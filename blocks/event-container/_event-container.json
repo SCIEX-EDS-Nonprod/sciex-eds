@@ -24,6 +24,7 @@
         {
           "component": "text",
           "name": "containerId",
+          "id": "event-container-id",
           "value": "",
           "label": "Container Id",
           "valueType": "string"

@@ -43,25 +43,24 @@ export default async function decorate(block) {
         div.className = 'speaker-content';
         if (canMobileActions()) {
           if (div.querySelector('ul')) {
-            const target =  div.querySelector('ul');
+            const target = div.querySelector('ul');
             target.className = 'content-hidden';
             div.insertBefore(showMoreButton, div.querySelector('ul'));
             div.insertBefore(showLessButton, div.querySelector('ul').nextSibling);
           }
         }
       }
-      showMoreButton.addEventListener('click', function showContent(event) {
+      showMoreButton.addEventListener('click', (event) => {
         event.target.classList.add('content-hidden');
         event.target.parentElement.querySelector('ul').classList.remove('content-hidden');
         event.target.parentElement.querySelector('.show-less').classList.remove('content-hidden');
       });
 
-      showLessButton.addEventListener('click', function showContent(event) {
+      showLessButton.addEventListener('click', (event) => {
         event.target.classList.add('content-hidden');
         event.target.parentElement.querySelector('ul').classList.add('content-hidden');
         event.target.parentElement.querySelector('.show-more').classList.remove('content-hidden');
       });
-
     });
 
     parentDiv.appendChild(speakerDiv);
