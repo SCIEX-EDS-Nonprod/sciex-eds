@@ -53,3 +53,42 @@
     line-height: 24px;
     letter-spacing: 0.08px;
 }
+
+.content-hidden {
+    display: none;
+}
+
+.content-block {
+    display: block
+}
+
+.speaker-content .show-more,
+.speaker-content .show-less {
+    padding-top: 10px;
+    color: var(--Blue-700, #0068FA);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+@media (max-width: 768px) {
+    .speaker-container {
+        padding-top: 30px;
+    }
+    .speaker-container .speaker-card {
+        padding-bottom: 30px;
+        border-top-width: 1px;
+        display: block;
+    }
+    .speaker-container .speaker-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+    }
+}
