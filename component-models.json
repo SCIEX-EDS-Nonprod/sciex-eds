@@ -371,7 +371,7 @@
         "component": "reference",
         "valueType": "string",
         "name": "image",
-        "label": "Image",
+        "label": "Image/Video",
         "multi": false
       },
       {
@@ -380,6 +380,13 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "videoThumbnail",
+        "label": "Video Thumbnail Picker",
+        "multi": false
       }
     ]
   },
