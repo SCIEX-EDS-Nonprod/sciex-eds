@@ -30,6 +30,21 @@
           }
         }
       }
+    },
+    {
+      "title": "Youtube",
+      "id": "youtube-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Youtube",
+              "model": "youtube-item"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -80,13 +95,26 @@
           "multi": false
         }
       ]
+    },
+    {
+      "id": "youtube-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "youtube-link",
+          "label": "Youtube Link",
+          "value": ""
+      }
+      ]
     }
   ],
   "filters": [
     {
       "id": "cards",
       "components": [
-        "card"
+        "card",
+        "youtube-item"
       ]
     }
   ]

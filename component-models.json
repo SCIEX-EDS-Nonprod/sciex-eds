@@ -391,6 +391,18 @@
     ]
   },
   {
+    "id": "youtube-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "youtube-link",
+        "label": "Youtube Link",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {

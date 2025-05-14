@@ -144,6 +144,21 @@
           }
         },
         {
+          "title": "Youtube",
+          "id": "youtube-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Youtube",
+                  "model": "youtube-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "plugins": {

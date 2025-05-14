@@ -61,6 +61,7 @@ export default function decorate(block) {
 
           playBtn.addEventListener('click', () => {
             video.play();
+            video.controls = true;
             playBtn.style.display = 'none';
           });
 
