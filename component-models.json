@@ -399,6 +399,13 @@
         "name": "youtube-link",
         "label": "Youtube Link",
         "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
       }
     ]
   },
