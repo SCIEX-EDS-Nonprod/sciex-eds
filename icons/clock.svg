@@ -1,6 +1,6 @@
-<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="16/clock">
-<path id="Vector 165" d="M12 8.50001L8 8.50001L8 3.5" stroke="white"/>
-<circle id="Ellipse 102" cx="8" cy="8.5" r="7" stroke="white"/>
+<path id="Vector 165" d="M12 8.00001L8 8.00001L8 3" stroke="#141414"/>
+<circle id="Ellipse 102" cx="8" cy="8" r="7" stroke="#141414"/>
 </g>
 </svg>

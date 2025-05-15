@@ -1,0 +1,267 @@
+.events-container {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 50px;
+    align-self: stretch;
+    color: #000;
+    font-family: "Geogrotesque Sharp VF";
+    font-style: normal;
+    font-weight: 530;
+    line-height: 32px;
+}
+
+.events-container-wrapper {
+    max-width: 100%;
+    flex-wrap: wrap;
+    margin: auto;
+
+}
+
+h2 {
+    color: #000;
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 32px;
+}
+
+p {
+    color: var(--Grey-600, #5B5B5B);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+main>.section>div {
+    max-width: 1314px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+#clock {
+    content: url("/icons/clock.svg");
+}
+
+.time-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.event-organizer {
+    color: var(--Grey-600, #5B5B5B);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.session-title {
+    color: var(--Grey-600, #5B5B5B);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 26px;
+    letter-spacing: 0.045px;
+    margin-left: 24px;
+}
+
+/* Mobile View Adjustment */
+@media (max-width: 768px) {
+    .time-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #clock {
+        margin-top: 8px;
+    }
+
+    strong {
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    .event-organizer {
+        font-size: 14px;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+}
+
+.session-timeline {
+    font-family: "Geogrotesque Sharp VF";
+    font-style: normal;
+}
+
+.session-timeline-text {
+    color: var(--Grey-900, #141414);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px;
+    letter-spacing: 0.12px;
+    margin: 20px 0;
+}
+
+.events-details {
+    max-width: 416px;
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    border-radius: 6px;
+    background: var(--Grey-50, #ECECEC);
+    flex-direction: column;
+}
+
+.events-details-text {
+
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px;
+    letter-spacing: 0.09px;
+    margin: 10px 0;
+
+}
+
+.events-icontext {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.column-left {
+    width: 60%;
+    flex: 0 0 60%;
+}
+
+.column-right {
+    width: 40%;
+    flex: 0 0 40%;
+}
+.two-column-layout.vertical-layout .column-left {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+@media (max-width: 768px) {
+
+    .two-column-layout .column-left,
+    .two-column-layout .column-right {
+        flex: 0 0 100%;
+    }
+}
+
+.primary-button {
+    padding: 12px 20px;
+    align-items: center;
+    gap: 16px;
+    border-radius: 4px;
+    background: var(--Blue-700, #0068FA);
+    justify-content: center;
+}
+
+.secondary-button {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid var(--Blue-700, #0068FA);
+    padding: 12px 20px;
+    align-items: center;
+    gap: 16px;
+}
+
+.event-details-heading {
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px;
+    letter-spacing: 0.12px;
+    margin: 20px 0;
+}
+
+.button-row {
+    display: block;
+    margin-top: 16px;
+}
+
+.button-row a {
+    display: block;
+    margin-bottom: 12px;
+    text-decoration: none;
+}
+
+.button-row a:last-child {
+    margin-bottom: 0;
+}
+
+#blueClock {
+    content: url("/icons/blue-clock.svg");
+    margin-right: 4px;
+}
+
+#calender {
+    content: url("/icons/calender.svg");
+
+}
+
+#location {
+    content: url("/icons/Frame.svg");
+}
+
+@media (max-width: 768px) {
+    .events-container {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .column-left,
+    .column-right {
+        width: 100%;
+    }
+
+    .column-right {
+        order: -1;
+    }
+
+    .column-left {
+        order: 1;
+    }
+}
+.iframe-form-container{
+    width :95%;
+    height: 900px !important;
+
+}
+.form-heading{
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 40px;
+}
+.form-sub-heading{
+    color: var(--Grey-600, #5B5B5B);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px; 
+    letter-spacing: 0.08px;
+}

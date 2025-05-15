@@ -562,6 +562,7 @@
       {
         "component": "text",
         "name": "containerId",
+        "id": "event-container-id",
         "value": "",
         "label": "Container Id",
         "valueType": "string"
@@ -570,6 +571,7 @@
         "component": "select",
         "name": "view",
         "label": "View",
+        "value": "vertical",
         "valueType": "string",
         "options": [
           {
@@ -677,16 +679,31 @@
     "fields": [
       {
         "component": "text",
-        "valueType": "string",
-        "name": "eventId",
-        "label": "From Block Id",
-        "value": ""
+        "name": "registerId",
+        "value": "",
+        "label": "register Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "Text",
-        "label": "Form Heading"
+        "name": "subtitle",
+        "value": "",
+        "label": "Sub Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "formUrl",
+        "value": "",
+        "label": "Form URL",
+        "valueType": "string"
       }
     ]
   },
