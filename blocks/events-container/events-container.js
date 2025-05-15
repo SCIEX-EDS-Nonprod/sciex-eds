@@ -10,7 +10,7 @@ export default function decorate(block) {
   leftCol.classList.add('column-left');
   rightCol.classList.add('column-right');
   block.classList.add('two-column-layout');
-
+  let isVerticalLayout = false;
   rows.forEach((row) => {
     const type = row.querySelector('p')?.textContent?.toLowerCase()?.trim();
     switch (type) {
@@ -19,21 +19,22 @@ export default function decorate(block) {
         break;
       case 'vertical':
         block.classList.add('vertical-layout');
+        isVerticalLayout = true;
         break;
       case 'horizontal':
         block.classList.add('horizontal-layout');
         break;
       case 'sessiontimeline':
         decorateSessionTimeline(row);
-        leftCol.appendChild(row);
+        (isVerticalLayout ? leftCol : leftCol).appendChild(row);
         break;
       case 'details':
         decorateEventDetails(row);
-        rightCol.appendChild(row);
+        (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
       case 'registerform':
         decorateRegisterForm(row);
-        rightCol.appendChild(row);
+        (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
       default:
         leftCol.appendChild(row);
@@ -42,5 +43,9 @@ export default function decorate(block) {
   });
 
   block.innerHTML = '';
-  block.append(leftCol, rightCol);
+  if (isVerticalLayout) {
+    block.appendChild(leftCol);
+  } else {
+    block.append(leftCol, rightCol);
+  }
 }

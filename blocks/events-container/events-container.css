@@ -152,6 +152,10 @@ main>.section>div {
     width: 40%;
     flex: 0 0 40%;
 }
+.two-column-layout.vertical-layout .column-left {
+    width: 100%;
+    flex: 0 0 100%;
+  }
 
 @media (max-width: 768px) {
 
@@ -240,7 +244,24 @@ main>.section>div {
     }
 }
 .iframe-form-container{
-    width :100%;
-    height: 900;
+    width :95%;
+    height: 900px !important;
 
+}
+.form-heading{
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 40px;
+}
+.form-sub-heading{
+    color: var(--Grey-600, #5B5B5B);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px; 
+    letter-spacing: 0.08px;
 }

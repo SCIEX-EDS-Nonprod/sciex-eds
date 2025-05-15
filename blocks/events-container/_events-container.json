@@ -32,6 +32,7 @@
             "component": "select",
             "name": "view",
             "label": "View",
+            "value": "vertical",
             "valueType": "string",
             "options": [
               
