@@ -129,15 +129,15 @@
           }
         },
         {
-          "title": "Card",
-          "id": "card",
+          "title": "Image/Video",
+          "id": "image-video",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Card",
-                  "model": "card"
+                  "name": "Image/Video",
+                  "model": "image-video"
                 }
               }
             }

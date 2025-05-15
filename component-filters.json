@@ -47,7 +47,7 @@
   {
     "id": "cards",
     "components": [
-      "card",
+      "image-video",
       "youtube-item"
     ]
   },

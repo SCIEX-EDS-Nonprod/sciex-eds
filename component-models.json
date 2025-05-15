@@ -365,7 +365,7 @@
     ]
   },
   {
-    "id": "card",
+    "id": "image-video",
     "fields": [
       {
         "component": "reference",
