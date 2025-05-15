@@ -129,15 +129,30 @@
           }
         },
         {
-          "title": "Card",
-          "id": "card",
+          "title": "Image/Video",
+          "id": "image-video",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Card",
-                  "model": "card"
+                  "name": "Image/Video",
+                  "model": "image-video"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Youtube",
+          "id": "youtube-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Youtube",
+                  "model": "youtube-item"
                 }
               }
             }

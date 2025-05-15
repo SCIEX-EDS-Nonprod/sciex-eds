@@ -42,12 +42,12 @@ export default async function decorate(block) {
       } else {
         div.className = 'speaker-content';
         if (canMobileActions()) {
-          if (div.querySelector('ul')) {
-            const target = div.querySelector('ul');
-            target.className = 'content-hidden';
-            div.insertBefore(showMoreButton, div.querySelector('ul'));
-            div.insertBefore(showLessButton, div.querySelector('ul').nextSibling);
+          const target = div.querySelector('ul');
+          if (target) {
+            target.insertAdjacentElement('beforebegin', showMoreButton);
+            target.insertAdjacentElement('afterend', showLessButton);
           }
+          target.className = 'content-hidden';
         }
       }
       showMoreButton.addEventListener('click', (event) => {

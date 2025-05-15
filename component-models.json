@@ -365,7 +365,7 @@
     ]
   },
   {
-    "id": "card",
+    "id": "image-video",
     "fields": [
       {
         "component": "reference",
@@ -387,6 +387,25 @@
         "name": "videoThumbnail",
         "label": "Video Thumbnail Picker",
         "multi": false
+      }
+    ]
+  },
+  {
+    "id": "youtube-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "youtube-link",
+        "label": "Youtube Link",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
       }
     ]
   },
