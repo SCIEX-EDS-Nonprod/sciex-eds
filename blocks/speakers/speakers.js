@@ -43,10 +43,11 @@ export default async function decorate(block) {
         div.className = 'speaker-content';
         if (canMobileActions()) {
           const target = div.querySelector('ul');
+          console.log(`target::::${target}`);
           if (target) {
-            target.className = 'content-hidden';
             div.insertBefore(showMoreButton, target);
             div.insertBefore(showLessButton, target.nextSibling);
+            target.className = 'content-hidden';
           }
         }
       }
