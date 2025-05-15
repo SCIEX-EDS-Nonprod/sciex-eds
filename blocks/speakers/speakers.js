@@ -43,17 +43,18 @@ export default async function decorate(block) {
         div.className = 'speaker-content';
         if (canMobileActions()) {
           const target = div.querySelector('ul');
-          console.log(`target::::${target}`);
-          if (target && div.contains(target)) {
-            div.insertBefore(showMoreButton, target);
-            const sibling = target.nextSibling;
-            if (sibling && div.contains(sibling)) {
-              div.insertBefore(showLessButton, sibling);
-            } else {
-              div.appendChild(showLessButton);
+          setTimeout(() => {
+            if (target && div.contains(target)) {
+              div.insertBefore(showMoreButton, target);
+              const sibling = target.nextSibling;
+              if (sibling && div.contains(sibling)) {
+                div.insertBefore(showLessButton, sibling);
+              } else {
+                div.appendChild(showLessButton);
+              }
+              target.className = 'content-hidden';
             }
-            target.className = 'content-hidden';
-          }
+          }, 500);
         }
       }
       showMoreButton.addEventListener('click', (event) => {
