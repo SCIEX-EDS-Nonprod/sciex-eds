@@ -44,9 +44,14 @@ export default async function decorate(block) {
         if (canMobileActions()) {
           const target = div.querySelector('ul');
           console.log(`target::::${target}`);
-          if (target) {
+          if (target && div.contains(target)) {
             div.insertBefore(showMoreButton, target);
-            div.insertBefore(showLessButton, target.nextSibling);
+            const sibling = target.nextSibling;
+            if (sibling && div.contains(sibling)) {
+              div.insertBefore(showLessButton, sibling);
+            } else {
+              div.appendChild(showLessButton);
+            }
             target.className = 'content-hidden';
           }
         }
