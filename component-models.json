@@ -675,7 +675,7 @@
     ]
   },
   {
-    "id": "event-register",
+    "id": "events-register-form",
     "fields": [
       {
         "component": "text",
