@@ -681,7 +681,7 @@
         "component": "text",
         "name": "registerId",
         "value": "",
-        "label": "register Id",
+        "label": "Register ID",
         "valueType": "string"
       },
       {
