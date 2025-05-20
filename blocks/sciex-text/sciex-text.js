@@ -14,7 +14,8 @@ export default async function decorate(block) {
     alignment = 'text-left';
   }
   const content = block.children[2];
-  content.id = blockId;
+  block.id = `${blockId}-content`;
+  block.parentElement.classList.add('tabs-container-wrapper');
   content.className = alignment;
 
   block.textContent = '';
