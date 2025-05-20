@@ -1,27 +1,12 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 text-left {
+.text-left {
     text-align: left;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 text-right {
+.text-right {
     text-align: right;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 text-center {
+.text-center {
     text-align: center;
 }
 
