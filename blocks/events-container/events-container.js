@@ -1,6 +1,7 @@
 import decorateSessionTimeline from '../session-timeline/session-timeline.js';
 import decorateEventDetails from '../events-details/events-details.js';
 import decorateRegisterForm from '../events-register-form/events-register-form.js';
+import decorateSciexText from '../sciex-text/sciex-text.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
@@ -9,14 +10,16 @@ export default function decorate(block) {
 
   leftCol.classList.add('column-left');
   rightCol.classList.add('column-right');
+  block.parentElement.classList.add('tabs-container-wrapper');
   block.classList.add('two-column-layout');
   let isVerticalLayout = false;
-  rows.forEach((row) => {
+  rows.forEach((row,index) => {
+    if(index === 0){
+        block.id = row.textContent.trim() + '-content';
+    }
     const type = row.querySelector('p')?.textContent?.toLowerCase()?.trim();
+    console.log('type>'+type);
     switch (type) {
-      case 'eventcontainer':
-        block.id = row.textContent;
-        break;
       case 'vertical':
         block.classList.add('vertical-layout');
         isVerticalLayout = true;
@@ -32,9 +35,13 @@ export default function decorate(block) {
         decorateEventDetails(row);
         (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
-      case 'registerform':
+     case 'registerform':
         decorateRegisterForm(row);
         (isVerticalLayout ? leftCol : rightCol).appendChild(row);
+        break;
+     case 'sciexText':
+        decorateSciexText(row);
+        leftCol.appendChild(row);
         break;
       default:
         leftCol.appendChild(row);
@@ -43,8 +50,8 @@ export default function decorate(block) {
   });
 
   block.innerHTML = '';
-  if (isVerticalLayout) {
-    block.appendChild(leftCol);
+ if (isVerticalLayout) {
+    block.appendChild(leftCol); 
   } else {
     block.append(leftCol, rightCol);
   }

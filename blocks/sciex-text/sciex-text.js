@@ -1,6 +1,6 @@
 import { } from '../../scripts/aem.js';
 
-export default async function decorate(block) {
+export default function decorate(block) {
   let blockId = block.children[0].textContent;
   if (blockId && blockId.trim() !== '') {
     blockId = blockId.trim();

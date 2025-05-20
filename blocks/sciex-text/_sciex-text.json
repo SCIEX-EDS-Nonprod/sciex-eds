@@ -23,6 +23,7 @@
         {
           "component": "text",
           "valueType": "string",
+          "value": "sciexText",
           "name": "id",
           "label": "Id"
         },
