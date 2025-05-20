@@ -2,15 +2,16 @@ export default function decorate(block) {
   const rows = Array.from(block.children);
   const values = rows.map(row => row.querySelector('p')?.textContent?.trim());
 
-  // Extract fields in order
   const [
     alignment = 'left',
     showPrimaryRaw = 'false',
     primaryText = 'Primary Button',
     primaryLink = '#',
+    primarySvg = '', // New SVG field
     showSecondaryRaw = 'false',
     secondaryText = 'Secondary Button',
     secondaryLink = '#',
+    secondarySvg = '' // New SVG field
   ] = values;
 
   const showPrimary = showPrimaryRaw.toLowerCase() === 'true';
@@ -25,6 +26,10 @@ export default function decorate(block) {
     primary.href = primaryLink;
     primary.className = 'button primary';
     primary.textContent = primaryText;
+    const span = document.createElement('span');
+    span.className = 'button-icon'
+    span.innerHTML = primarySvg
+    primary.append(span)
     block.append(primary);
   }
 
@@ -33,6 +38,10 @@ export default function decorate(block) {
     secondary.href = secondaryLink;
     secondary.className = 'button secondary';
     secondary.textContent = secondaryText;
+    const span = document.createElement('span');
+    span.className = 'button-icon'
+    span.innerHTML = secondarySvg
+    secondary.append(span)
     block.append(secondary);
   }
 }
