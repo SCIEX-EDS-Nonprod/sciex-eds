@@ -1,29 +1,51 @@
 export default function decorate(block) {
-  const config = block.dataset;
+  // Extract text content from each row of the block
+  const values = Array.from(block.querySelectorAll('div')).map((div) => div.textContent.trim());
 
-  const alignment = config.alignment || 'left';
-  const showPrimary = config.showprimary === 'true';
-  const showSecondary = config.showsecondary === 'true';
-  const primaryText = config.primarytext || 'Primary Button';
-  const primaryLink = config.primarylink || '#';
-  const secondaryText = config.secondarytext || 'Secondary Button';
-  const secondaryLink = config.secondarylink || '#';
+  const [
+    alignment = 'left',
+    showPrimaryRaw = 'false',
+    primaryText = 'Primary Button',
+    primaryLink = '#',
+    primarySvg = '',
+    showSecondaryRaw = 'false',
+    secondaryText = 'Secondary Button',
+    secondaryLink = '#',
+    secondarySvg = '',
+  ] = values;
 
+  const showPrimary = showPrimaryRaw.toLowerCase() === 'true';
+  const showSecondary = showSecondaryRaw.toLowerCase() === 'true';
+
+  // Clear the block before appending new content
+  block.textContent = '';
   block.classList.add('button-block', `align-${alignment}`);
 
+  function createButton(className, text, link, svgMarkup) {
+    const button = document.createElement('a');
+    button.href = link;
+    button.className = `button ${className}`;
+    button.textContent = text;
+
+    if (svgMarkup) {
+      try {
+        const svgElement = new DOMParser().parseFromString(svgMarkup, 'image/svg+xml').documentElement;
+        button.append(svgElement);
+      } catch (e) {
+        console.warn('Invalid SVG provided:', svgMarkup);
+      }
+    }
+
+    return button;
+  }
+
   if (showPrimary) {
-    const primary = document.createElement('a');
-    primary.href = primaryLink;
-    primary.className = 'button primary';
-    primary.textContent = primaryText;
-    block.append(primary);
+    const primaryButton = createButton('primary', primaryText, primaryLink, primarySvg);
+    block.append(primaryButton);
   }
 
   if (showSecondary) {
-    const secondary = document.createElement('a');
-    secondary.href = secondaryLink;
-    secondary.className = 'button secondary';
-    secondary.textContent = secondaryText;
-    block.append(secondary);
+    const secondaryButton = createButton('secondary', secondaryText, secondaryLink, secondarySvg);
+    block.append(secondaryButton);
   }
 }
