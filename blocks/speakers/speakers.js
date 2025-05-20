@@ -16,6 +16,11 @@ export default async function decorate(block) {
 
   [...block.children].forEach((row, index) => {
     if (index === 0) {
+      block.id = `${row.textContent.trim()}-content`;
+      block.parentElement.classList.add('tabs-container-wrapper');
+      return;
+    }
+    if (index === 1) {
       headingText = row.textContent.trim();
       return;
     }
