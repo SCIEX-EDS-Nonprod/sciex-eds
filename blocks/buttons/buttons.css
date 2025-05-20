@@ -1,0 +1,54 @@
+.button-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+/* Alignment options */
+.button-block.align-left {
+    justify-content: flex-start;
+}
+.button-block.align-center {
+    justify-content: center;
+}
+.button-block.align-right {
+    justify-content: flex-end;
+}
+
+/* Base button styling */
+.button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.08px;
+}
+
+/* Primary Button */
+.button.primary {
+    background-color: #0068FA;
+    color: #FFF;
+    border: none;
+}
+.button.primary:hover {
+    background-color: #0068FA;
+}
+
+/* Secondary Button */
+.button.secondary {
+    background-color: #f3f3f3;
+    color: #333;
+    border: 1px solid #dcdcdc;
+}
+.button.secondary:hover {
+    background-color: #e6e6e6;
+}

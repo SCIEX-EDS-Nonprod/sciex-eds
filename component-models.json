@@ -337,6 +337,67 @@
     ]
   },
   {
+    "id": "buttons",
+    "fields": [
+      {
+        "component": "select",
+        "name": "alignment",
+        "label": "Button Alignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "component": "toggle",
+        "name": "showPrimary",
+        "label": "Show Primary Button",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "primaryText",
+        "label": "Primary Button Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "primaryLink",
+        "label": "Primary Button Link",
+        "valueType": "string"
+      },
+      {
+        "component": "toggle",
+        "name": "showSecondary",
+        "label": "Show Secondary Button",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "secondaryText",
+        "label": "Secondary Button Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "secondaryLink",
+        "label": "Secondary Button Link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "cards",
     "fields": [
       {
