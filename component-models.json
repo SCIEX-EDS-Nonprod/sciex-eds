@@ -1169,6 +1169,12 @@
     "id": "sciex-text",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "id",
+        "label": "Id"
+      },
+      {
         "component": "select",
         "name": "textAlignment",
         "label": "Text alignment",
