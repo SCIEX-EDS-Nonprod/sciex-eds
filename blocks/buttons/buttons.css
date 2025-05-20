@@ -56,3 +56,7 @@
     background-color: transparent !important;
 }
 
+.button.secondary svg path{
+    stroke: #141414;
+}
+

@@ -1,6 +1,6 @@
 export default function decorate(block) {
   const rows = Array.from(block.children);
-  const values = rows.map(row => row.querySelector('p')?.textContent?.trim());
+  const values = rows.map((row) => row.querySelector('p')?.textContent?.trim());
 
   const [
     alignment = 'left',
@@ -9,13 +9,13 @@ export default function decorate(block) {
     primaryLink = '#',
     showPrimarySvgRaw = 'false',
     primarySvg = '',
-    primaryOptionToSelect = '_self', // Primary button target
+    primaryOptionToSelect = '_self',
     showSecondaryRaw = 'false',
     secondaryText = 'Secondary Button',
     secondaryLink = '#',
     showSecondarySvgRaw = 'false',
     secondarySvg = '',
-    secondaryOptionToSelect = '_self' // Secondary button target
+    secondaryOptionToSelect = '_self',
   ] = values;
 
   const showPrimary = showPrimaryRaw.toLowerCase() === 'true';
@@ -26,10 +26,12 @@ export default function decorate(block) {
   block.textContent = '';
   block.classList.add('button-block', `align-${alignment}`);
 
-  function createButton({ text, link, className, svg, showSvg, target }) {
+  function createButton({
+    text, link, className, svg, showSvg, target,
+  }) {
     const button = document.createElement('a');
     button.href = link;
-    button.target = target; // Set target for primary/secondary button
+    button.target = target;
     button.className = `button ${className}`;
     button.appendChild(document.createTextNode(text));
 
@@ -54,8 +56,8 @@ export default function decorate(block) {
         className: 'primary',
         svg: primarySvg,
         showSvg: showPrimarySvg,
-        target: primaryOptionToSelect // Set target from the primary button option
-      })
+        target: primaryOptionToSelect,
+      }),
     );
   }
 
@@ -67,8 +69,8 @@ export default function decorate(block) {
         className: 'secondary',
         svg: secondarySvg,
         showSvg: showSecondarySvg,
-        target: secondaryOptionToSelect // Set target from the secondary button option
-      })
+        target: secondaryOptionToSelect,
+      }),
     );
   }
 }
