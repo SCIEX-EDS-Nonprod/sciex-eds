@@ -709,7 +709,7 @@
       {
         "component": "text",
         "name": "eventId",
-        "value": "",
+        "value": "details",
         "label": "Event Id",
         "valueType": "string"
       },
@@ -797,7 +797,7 @@
       {
         "component": "text",
         "name": "registerId",
-        "value": "",
+        "value": "registerform",
         "label": "Register ID",
         "valueType": "string"
       },
@@ -1171,6 +1171,7 @@
       {
         "component": "text",
         "valueType": "string",
+        "value": "sciexText",
         "name": "id",
         "label": "Id"
       },
@@ -1272,7 +1273,7 @@
       {
         "component": "text",
         "name": "sessionTimeLineId",
-        "value": "",
+        "value": "sessiontimeline",
         "label": "Session Timeline Id",
         "valueType": "string"
       },

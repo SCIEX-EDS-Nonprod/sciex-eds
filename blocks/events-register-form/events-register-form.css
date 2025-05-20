@@ -3,8 +3,9 @@
 }
 
 .iframe-form-container{
-    width :95%;
+    width :50%;
     height: 900px !important;
+    
 
 }
 .form-heading{
@@ -23,4 +24,15 @@
     font-weight: 530;
     line-height: 45px; 
     letter-spacing: 0.08px;
+}
+.frameDiv{
+    width :100%;
+    display:flex;
+    justify-content: center;
+}  
+@media (max-width: 768px) {
+    .iframe-form-container{
+        width :100%;
+        height: 900px !important;
+    }
 }

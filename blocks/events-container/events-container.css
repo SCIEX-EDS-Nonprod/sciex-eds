@@ -1,3 +1,5 @@
+
+
 .events-container-wrapper {
     max-width: 1365px !important;
 }
@@ -76,9 +78,59 @@ main>.section>div {
     letter-spacing: 0.045px;
     margin-left: 26px;
 }
-
+.time-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px; /* optional spacing */
+  }
+  
+  .time-row #clock,
+  .time-row strong,
+  .time-row .event-organizer {
+    display: inline-block;
+  }
+  .time-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  /* Mobile view (adjust max-width as needed) */
+  @media (max-width: 768px) {
+    .time-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    #clock {
+        margin-top: 0px;
+    }
+    .time-row #clock,
+    .time-row strong {
+      order: 1;
+    }
+    strong {
+        font-size: 15px;
+    }
+    .time-row .event-organizer {
+      order: 2;
+      font-size: 15px;
+      white-space: normal;
+      overflow-wrap: break-word;
+      margin-left:25px;
+    }
+    .session-title {
+        font-size: 15px;
+        margin-left: 0px;
+        white-space: normal;
+        overflow-wrap: break-word;
+        margin-left:25px;
+    }
+    
+  }
+  
 /* Mobile View Adjustment */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     .time-row {
         flex-direction: row;
         align-items: flex-start;
@@ -100,6 +152,7 @@ main>.section>div {
         overflow-wrap: break-word;
     }
 }
+*/
 
 .session-timeline {
     font-family: "Geogrotesque Sharp VF";
@@ -278,4 +331,40 @@ main>.section>div {
     font-weight: 530;
     line-height: 24px; 
     letter-spacing: 0.08px;
+}
+@media (max-width: 768px) {
+    .iframe-form-container{
+        width :100%;
+        height: 900px !important;
+    }
+}
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+h1 {
+font-size: 45px;
+}
+h2 {
+font-size: 40px;
+}
+h3 {
+font-size: 30px;
+}
+h4 {
+font-size: 24px;
+}
+h5 {
+font-size: 20px;
+}
+h6 {
+font-size: 18px;
 }
