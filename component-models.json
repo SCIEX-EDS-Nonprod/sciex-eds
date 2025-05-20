@@ -379,6 +379,18 @@
       },
       {
         "component": "boolean",
+        "name": "showPrimarySvg",
+        "label": "Show Primary SVG",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "primarySvg",
+        "label": "Primary Button SVG",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
         "name": "showSecondary",
         "label": "Show Secondary Button",
         "valueType": "boolean"
@@ -393,6 +405,18 @@
         "component": "text",
         "name": "secondaryLink",
         "label": "Secondary Button Link",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "name": "showSecondarySvg",
+        "label": "Show Secondary SVG",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "secondarySvg",
+        "label": "Secondary Button SVG",
         "valueType": "string"
       }
     ]
