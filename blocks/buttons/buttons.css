@@ -33,6 +33,7 @@
     letter-spacing: 0.08px;
     display: flex !important;
     gap: 16px;
+    align-items: center;
 }
 
 /* Primary Button */
@@ -53,9 +54,5 @@
 }
 .button.secondary:hover {
     background-color: transparent !important;
-}
-
-.button-icon {
-    display: flex !important;
 }
 

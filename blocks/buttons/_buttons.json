@@ -50,16 +50,26 @@
           "valueType": "string"
         },
         {
-          "component": "boolean",
-          "name": "showPrimarySvg",
-          "label": "Show Primary SVG",
-          "valueType": "boolean"
-        },
-        {
           "component": "text",
           "name": "primarySvg",
           "label": "Primary Button SVG",
           "valueType": "string"
+        },
+        {
+          "component": "radio-group",
+          "label": "Option to Select Primary Button URL Target",
+          "name": "primaryOptionToSelect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Open In Same Tab",
+              "value": "_self"
+            },
+            {
+              "name": "Open In New Tab",
+              "value": "_blank"
+            }
+          ]
         },
         {
           "component": "boolean",
@@ -80,16 +90,26 @@
           "valueType": "string"
         },
         {
-          "component": "boolean",
-          "name": "showSecondarySvg",
-          "label": "Show Secondary SVG",
-          "valueType": "boolean"
-        },
-        {
           "component": "text",
           "name": "secondarySvg",
           "label": "Secondary Button SVG",
           "valueType": "string"
+        },
+        {
+          "component": "radio-group",
+          "label": "Option to Select Secondary Button URL Target",
+          "name": "secondaryOptionToSelect",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Open In Same Tab",
+              "value": "_self"
+            },
+            {
+              "name": "Open In New Tab",
+              "value": "_blank"
+            }
+          ]
         }
       ]
     }
