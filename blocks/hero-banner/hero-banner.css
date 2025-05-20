@@ -24,7 +24,7 @@
 .event-content {
     width: 40%;
     height: 100%;
-    padding: 24px 24px 24px 65px;
+    padding: 24px 24px 24px 75px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,6 +142,24 @@ letter-spacing: 0.07px;
       object-fit: cover;
     }
   }
+
+  .event-content.light-theme {
+    background-color: #C6C6C6;
+    color: #000;
+  }
+  
+  .event-content.dark-theme {
+    background-color: #141414;
+    color: #fff;
+  }
+  
+  .event-content.dark-theme * {
+    color: #fff !important;
+  }
+  .event-content.light-theme * {
+    color: #000 !important;
+  }
+  
   
   
   

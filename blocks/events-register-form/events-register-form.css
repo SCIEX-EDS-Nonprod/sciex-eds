@@ -1,3 +1,7 @@
+.events-register-form-wrapper {
+    max-width: 1365px !important;
+}
+
 .iframe-form-container{
     width :95%;
     height: 900px !important;
@@ -9,7 +13,7 @@
     font-size: 32px;
     font-style: normal;
     font-weight: 330;
-    line-height: 40px;
+    line-height: 65px;
 }
 .form-sub-heading{
     color: var(--Grey-600, #5B5B5B);
@@ -17,6 +21,6 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 530;
-    line-height: 24px; 
+    line-height: 45px; 
     letter-spacing: 0.08px;
 }

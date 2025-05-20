@@ -52,9 +52,10 @@ export default async function decorate(block) {
   contentContainer.classList.add('event-content');
 
   if (buttonText) {
-    contentContainer.style.backgroundColor = buttonText;
-    contentContainer.style.color = isLightBackground(buttonText) ? '#000' : '#fff';
+    const isLight = isLightBackground(buttonText);
+    contentContainer.classList.add(isLight ? 'light-theme' : 'dark-theme');
   }
+  
 
   // Eyebrow
   if (eyeBrow) {

@@ -1,3 +1,7 @@
+.speakers-wrapper {
+    max-width: 1365px !important;
+}
+
 .speakers .heading {
     color: var(--Neutrals-900, #141414);
     font-family: "Geogrotesque Sharp VF";
