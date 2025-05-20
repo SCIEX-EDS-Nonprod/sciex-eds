@@ -378,6 +378,12 @@
         "valueType": "string"
       },
       {
+        "component": "boolean",
+        "name": "showPrimarySvg",
+        "label": "Show Primary SVG",
+        "valueType": "boolean"
+      },
+      {
         "component": "text",
         "name": "primarySvg",
         "label": "Primary Button SVG",
@@ -416,6 +422,12 @@
         "name": "secondaryLink",
         "label": "Secondary Button Link",
         "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "name": "showSecondarySvg",
+        "label": "Show Secondary SVG",
+        "valueType": "boolean"
       },
       {
         "component": "text",
