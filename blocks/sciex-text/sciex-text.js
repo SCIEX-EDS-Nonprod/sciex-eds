@@ -5,7 +5,7 @@ export default async function decorate(block) {
   if (blockId && blockId.trim() !== '') {
     blockId = blockId.trim();
   } else {
-    blockId = 'abstract';
+    blockId = 'sciex-text';
   }
   let alignment = block.children[1].textContent;
   if (alignment && alignment.trim() !== '') {
