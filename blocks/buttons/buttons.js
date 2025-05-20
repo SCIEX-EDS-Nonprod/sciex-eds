@@ -1,6 +1,6 @@
 export default function decorate(block) {
   const rows = Array.from(block.children);
-  const values = rows.map((row) => row.querySelector('p')?.textContent?.trim());
+  const values = rows.map(row => row.querySelector('p')?.textContent?.trim());
 
   const [
     alignment = 'left',
@@ -9,11 +9,13 @@ export default function decorate(block) {
     primaryLink = '#',
     showPrimarySvgRaw = 'false',
     primarySvg = '',
+    primaryOptionToSelect = '_self', // Primary button target
     showSecondaryRaw = 'false',
     secondaryText = 'Secondary Button',
     secondaryLink = '#',
     showSecondarySvgRaw = 'false',
     secondarySvg = '',
+    secondaryOptionToSelect = '_self' // Secondary button target
   ] = values;
 
   const showPrimary = showPrimaryRaw.toLowerCase() === 'true';
@@ -24,37 +26,49 @@ export default function decorate(block) {
   block.textContent = '';
   block.classList.add('button-block', `align-${alignment}`);
 
-  // Create and append primary button
-  if (showPrimary) {
-    const primary = document.createElement('a');
-    primary.href = primaryLink;
-    primary.className = 'button primary';
-    primary.textContent = primaryText;
+  function createButton({ text, link, className, svg, showSvg, target }) {
+    const button = document.createElement('a');
+    button.href = link;
+    button.target = target; // Set target for primary/secondary button
+    button.className = `button ${className}`;
+    button.appendChild(document.createTextNode(text));
 
-    if (showPrimarySvg && primarySvg) {
-      const span = document.createElement('span');
-      span.className = 'button-icon';
-      span.innerHTML = primarySvg;
-      primary.append(span);
+    if (showSvg && svg) {
+      const cleanSvg = svg.trim().replace(/^`+|`+$/g, '').replace(/^'+|'+$/g, '').replace(/^"+|"+$/g, '');
+      const parsedSvgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
+      const parsedSvg = parsedSvgDoc.querySelector('svg');
+      if (parsedSvg) {
+        parsedSvg.classList.add('inline-icon');
+        button.append(parsedSvg);
+      }
     }
 
-    block.append(primary);
+    return button;
   }
 
-  // Create and append secondary button
+  if (showPrimary) {
+    block.append(
+      createButton({
+        text: primaryText,
+        link: primaryLink,
+        className: 'primary',
+        svg: primarySvg,
+        showSvg: showPrimarySvg,
+        target: primaryOptionToSelect // Set target from the primary button option
+      })
+    );
+  }
+
   if (showSecondary) {
-    const secondary = document.createElement('a');
-    secondary.href = secondaryLink;
-    secondary.className = 'button secondary';
-    secondary.textContent = secondaryText;
-
-    if (showSecondarySvg && secondarySvg) {
-      const span = document.createElement('span');
-      span.className = 'button-icon';
-      span.innerHTML = secondarySvg;
-      secondary.append(span);
-    }
-
-    block.append(secondary);
+    block.append(
+      createButton({
+        text: secondaryText,
+        link: secondaryLink,
+        className: 'secondary',
+        svg: secondarySvg,
+        showSvg: showSecondarySvg,
+        target: secondaryOptionToSelect // Set target from the secondary button option
+      })
+    );
   }
 }
