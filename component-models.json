@@ -360,7 +360,7 @@
         ]
       },
       {
-        "component": "toggle",
+        "component": "boolean",
         "name": "showPrimary",
         "label": "Show Primary Button",
         "valueType": "boolean"
@@ -378,7 +378,7 @@
         "valueType": "string"
       },
       {
-        "component": "toggle",
+        "component": "boolean",
         "name": "showSecondary",
         "label": "Show Secondary Button",
         "valueType": "boolean"
