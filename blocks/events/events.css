@@ -53,7 +53,7 @@
   display: flex;
   width: 428px;
   height: 48px;
-  padding: 15px 16px;
+  padding: 15px 30px;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -359,6 +359,18 @@ select {
 
 .search-term-value {
   font-size: 18px;
+}
+.event-search-box {
+  display: flex;
+  position: relative;
+}
+#search-icon {
+  position: absolute;
+  top: 55%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
