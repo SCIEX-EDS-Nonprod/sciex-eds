@@ -1,3 +1,6 @@
+.events-container-wrapper {
+    max-width: 1365px !important;
+}
 .events-container {
     display: flex;
     width: 100%;
@@ -44,6 +47,7 @@ main>.section>div {
 
 #clock {
     content: url("/icons/clock.svg");
+    filter: invert(1);
 }
 
 .time-row {
