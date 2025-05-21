@@ -38,7 +38,7 @@ export default function decorate(block) {
     wrapper.classList.add(`button-wrapper-${type}`);
     wrapper.appendChild(button);
   
-    block.innerHTML = '';
+    // block.innerHTML = '';
     block.appendChild(wrapper);
   });
 }
