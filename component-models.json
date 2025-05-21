@@ -922,14 +922,14 @@
       {
         "component": "boolean",
         "name": "showSvg",
-        "label": "Show SVG",
+        "label": "Hide/Show Icon",
         "valueType": "boolean"
       },
       {
         "component": "reference",
         "valueType": "string",
         "name": "icon",
-        "label": "Show Icon",
+        "label": "Button Icon",
         "multi": false
       },
       {
