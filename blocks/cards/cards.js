@@ -18,8 +18,8 @@ function embedYoutube(url, autoplay, background) {
       .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
       .join('&')}`;
   }
-
   let vid = '';
+
   if (url.hostname.includes('youtu.be')) {
     [, vid] = url.pathname.split('/');
   } else if (url.searchParams.has('v')) {
@@ -55,7 +55,6 @@ export default function decorate(block) {
       id = row.textContent.trim();
       return;
     }
-
     if (index === 1) {
       headingText = row.textContent.trim();
       return;
@@ -180,19 +179,14 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
+  console.log(id);
+  
   // Heading
   const headingEl = document.createElement('h2');
   headingEl.textContent = headingText;
   headingEl.className = 'cards-heading';
 
-  // Clear block and wrap final content
   block.textContent = '';
-
-  const wrapper = document.createElement('div');
-  wrapper.id = id;
-  wrapper.className = 'cards-wrapper';
-  wrapper.appendChild(headingEl);
-  wrapper.appendChild(ul);
-
-  block.appendChild(wrapper);
+  block.append(headingEl);
+  block.append(ul);
 }
