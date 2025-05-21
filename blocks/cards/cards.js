@@ -18,8 +18,8 @@ function embedYoutube(url, autoplay, background) {
       .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
       .join('&')}`;
   }
-
   let vid = '';
+
   if (url.hostname.includes('youtu.be')) {
     [, vid] = url.pathname.split('/');
   } else if (url.searchParams.has('v')) {
@@ -51,11 +51,10 @@ export default function decorate(block) {
   let id = '';
 
   [...block.children].forEach((row, index) => {
-    if (index === 0) {
+    if (inedx == 0) {
       id = row.textContent.trim();
       return;
     }
-
     if (index === 1) {
       headingText = row.textContent.trim();
       return;
@@ -185,14 +184,7 @@ export default function decorate(block) {
   headingEl.textContent = headingText;
   headingEl.className = 'cards-heading';
 
-  // Clear block and wrap final content
   block.textContent = '';
-
-  const wrapper = document.createElement('div');
-  wrapper.id = id;
-  wrapper.className = 'cards-wrapper';
-  wrapper.appendChild(headingEl);
-  wrapper.appendChild(ul);
-
-  block.appendChild(wrapper);
+  block.append(headingEl);
+  block.append(ul);
 }
