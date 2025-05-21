@@ -1,3 +1,4 @@
+import { } from '../../scripts/aem.js';
 export default async function decorate(block) {
   const rows = Array.from(block.children);
   const alignment = rows[0]?.querySelector('p')?.textContent?.trim() || 'left';
