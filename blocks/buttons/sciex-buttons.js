@@ -1,10 +1,10 @@
 export default function decorate(block) {
   const rows = Array.from(block.children);
   const alignment = rows[0]?.textContent?.trim() || 'left';
-  block.classList.add('button-block', `align-${alignment}`);
-  block.textContent = '';
 
-  // Remaining rows represent buttons
+  block.textContent = '';
+  block.classList.add('button-block', `align-${alignment}`);
+
   rows.slice(1).forEach((row) => {
     const values = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
 
