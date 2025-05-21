@@ -1,76 +1,40 @@
 export default function decorate(block) {
   const rows = Array.from(block.children);
-  const values = rows.map((row) => row.querySelector('p')?.textContent?.trim());
-
-  const [
-    alignment = 'left',
-    showPrimaryRaw = 'false',
-    primaryText = 'Primary Button',
-    primaryLink = '#',
-    showPrimarySvgRaw = 'false',
-    primarySvg = '',
-    primaryOptionToSelect = '_self',
-    showSecondaryRaw = 'false',
-    secondaryText = 'Secondary Button',
-    secondaryLink = '#',
-    showSecondarySvgRaw = 'false',
-    secondarySvg = '',
-    secondaryOptionToSelect = '_self',
-  ] = values;
-
-  const showPrimary = showPrimaryRaw.toLowerCase() === 'true';
-  const showPrimarySvg = showPrimarySvgRaw.toLowerCase() === 'true';
-  const showSecondary = showSecondaryRaw.toLowerCase() === 'true';
-  const showSecondarySvg = showSecondarySvgRaw.toLowerCase() === 'true';
-
-  block.textContent = '';
+  const alignment = rows[0]?.textContent?.trim() || 'left';
   block.classList.add('button-block', `align-${alignment}`);
+  block.textContent = '';
 
-  function createButton({
-    text, link, className, svg, showSvg, target,
-  }) {
+  // Remaining rows represent buttons
+  rows.slice(1).forEach((row) => {
+    const values = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
+
+    const [
+      type = 'primary',
+      text = 'Button',
+      link = '#',
+      showSvgRaw = 'false',
+      svg = '',
+      target = '_self',
+    ] = values;
+
+    const showSvg = showSvgRaw.toLowerCase() === 'true';
+
     const button = document.createElement('a');
     button.href = link;
     button.target = target;
-    button.className = `button ${className}`;
-    button.appendChild(document.createTextNode(text));
+    button.className = `button ${type}`;
+    button.textContent = text;
 
     if (showSvg && svg) {
-      const cleanSvg = svg.trim().replace(/^`+|`+$/g, '').replace(/^'+|'+$/g, '').replace(/^"+|"+$/g, '');
-      const parsedSvgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
-      const parsedSvg = parsedSvgDoc.querySelector('svg');
-      if (parsedSvg) {
-        parsedSvg.classList.add('inline-icon');
-        button.append(parsedSvg);
+      const cleanSvg = svg.trim().replace(/^["'`]+|["'`]+$/g, '');
+      const svgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
+      const svgElement = svgDoc.querySelector('svg');
+      if (svgElement) {
+        svgElement.classList.add('inline-icon');
+        button.appendChild(svgElement);
       }
     }
 
-    return button;
-  }
-
-  if (showPrimary) {
-    block.append(
-      createButton({
-        text: primaryText,
-        link: primaryLink,
-        className: 'primary',
-        svg: primarySvg,
-        showSvg: showPrimarySvg,
-        target: primaryOptionToSelect,
-      }),
-    );
-  }
-
-  if (showSecondary) {
-    block.append(
-      createButton({
-        text: secondaryText,
-        link: secondaryLink,
-        className: 'secondary',
-        svg: secondarySvg,
-        showSvg: showSecondarySvg,
-        target: secondaryOptionToSelect,
-      }),
-    );
-  }
+    block.appendChild(button);
+  });
 }

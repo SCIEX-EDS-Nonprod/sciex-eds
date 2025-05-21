@@ -129,21 +129,6 @@
           }
         },
         {
-          "title": "Sciex Button",
-          "id": "sciex-button",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Sciex Button",
-                  "model": "sciex-button"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Cards",
           "id": "cards",
           "plugins": {

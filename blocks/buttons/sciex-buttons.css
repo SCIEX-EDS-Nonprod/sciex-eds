@@ -3,60 +3,56 @@
     flex-wrap: wrap;
     gap: 1rem;
     margin: 1.5rem 0;
-}
-
-/* Alignment options */
-.button-block.align-left {
+  }
+  
+  /* Alignment */
+  .button-block.align-left {
     justify-content: flex-start;
-}
-.button-block.align-center {
+  }
+  .button-block.align-center {
     justify-content: center;
-}
-.button-block.align-right {
+  }
+  .button-block.align-right {
     justify-content: flex-end;
-}
-
-/* Base button styling */
-.button {
-    display: inline-block !important;
+  }
+  
+  /* Base button */
+  .button {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 16px;
     padding: 12px 20px !important;
-    text-align: center;
     text-decoration: none;
     border-radius: 4px !important;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
     font-family: "Geogrotesque Sharp VF" !important;
     font-size: 16px !important;
-    font-style: normal;
     font-weight: 530 !important;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
     letter-spacing: 0.08px;
-    display: flex !important;
-    gap: 16px;
-    align-items: center;
-}
-
-/* Primary Button */
-.button.primary {
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+  }
+  
+  /* Primary */
+  .button.primary {
     background-color: #0068FA !important;
     color: #FFF !important;
     border: none !important;
-}
-.button.primary:hover {
-    background-color: #0068FA;
-}
-
-/* Secondary Button */
-.button.secondary {
+  }
+  .button.primary:hover {
+    background-color: #0058d0;
+  }
+  
+  /* Secondary */
+  .button.secondary {
     background-color: transparent !important;
     color: #141414 !important;
     border: 1px solid #0068FA !important;
-}
-.button.secondary:hover {
-    background-color: transparent !important;
-}
-
-.button.secondary svg path{
+  }
+  .button.secondary:hover {
+    background-color: #f0f8ff;
+  }
+  .button.secondary svg path {
     stroke: #141414;
-}
-
+  }
+  
