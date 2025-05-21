@@ -1147,7 +1147,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "value": "sciexText",
+        "value": "",
         "name": "id",
         "label": "Id"
       },
