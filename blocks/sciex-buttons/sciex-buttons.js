@@ -4,6 +4,8 @@ export default function decorate(block) {
 
   block.classList.add('button-block', `align-${alignment}`);
 
+  const fragment = document.createDocumentFragment();
+
   rows.slice(1).forEach((row) => {
     const cells = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
 
@@ -34,11 +36,10 @@ export default function decorate(block) {
       }
     }
 
-    const wrapper = document.createElement('div');
-    wrapper.classList.add(`button-wrapper-${type}`);
-    wrapper.appendChild(button);
-  
-    // block.innerHTML = '';
-    block.appendChild(wrapper);
+    fragment.appendChild(button);
   });
+
+  block.innerHTML = '';
+  block.appendChild(fragment);
+
 }
