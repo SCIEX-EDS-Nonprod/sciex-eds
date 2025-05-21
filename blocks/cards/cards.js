@@ -185,7 +185,8 @@ export default function decorate(block) {
   headingEl.className = 'cards-heading';
 
   block.textContent = '';
-  block.id = id;
+  block.id = id + '-content';
+  block.parentElement.classList.add('tabs-container-wrapper');
   block.append(headingEl);
   block.append(ul);
 }
