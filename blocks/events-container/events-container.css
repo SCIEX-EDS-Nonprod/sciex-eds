@@ -14,6 +14,7 @@
     font-style: normal;
     font-weight: 530;
     line-height: 32px;
+    padding-top: 10px;
 }
 
 .events-container-wrapper {
@@ -41,6 +42,10 @@ p {
     letter-spacing: 0.08px;
 }
 
+.events-container ul li {
+    padding: 7px 0px;
+}
+
 main>.section>div {
     max-width: 1314px;
     margin: auto;
@@ -54,7 +59,7 @@ main>.section>div {
 
 .time-row {
     display: flex;
-    align-items: center;
+    align-items: initial;
     gap: 8px;
 }
 
