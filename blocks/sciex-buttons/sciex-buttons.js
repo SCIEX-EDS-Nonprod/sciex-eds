@@ -44,6 +44,8 @@ export default async function decorate(block) {
 
   fragment.appendChild(wrapper);
 
-  block.style.display = 'none';
-  block.parentNode.insertBefore(fragment, block.nextSibling);
+  block.textContent = '';
+  block.append(fragment)
+
+  // block.parentNode.insertBefore(fragment, block.nextSibling);
 }
