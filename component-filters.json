@@ -45,9 +45,9 @@
     ]
   },
   {
-    "id": "speakers",
+    "id": "buttons",
     "components": [
-      "speaker"
+      "button"
     ]
   },
   {
