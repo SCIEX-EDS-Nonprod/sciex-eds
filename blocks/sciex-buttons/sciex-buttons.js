@@ -1,11 +1,14 @@
 import { } from '../../scripts/aem.js';
+
 export default async function decorate(block) {
   const rows = Array.from(block.children);
   const alignment = rows[0]?.querySelector('p')?.textContent?.trim() || 'left';
 
-  block.classList.add('button-block', `align-${alignment}`);
-
   const fragment = document.createDocumentFragment();
+
+  // Create a container for the decorated buttons
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('button-block', `align-${alignment}`);
 
   rows.slice(1).forEach((row) => {
     const cells = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
@@ -37,9 +40,11 @@ export default async function decorate(block) {
       }
     }
 
-    fragment.appendChild(button);
+    wrapper.appendChild(button);
   });
 
-  block.textContent = '';
-  block.appendChild(fragment);
+  fragment.appendChild(wrapper);
+
+  block.style.display = 'none';
+  block.parentNode.insertBefore(fragment, block.nextSibling);
 }
