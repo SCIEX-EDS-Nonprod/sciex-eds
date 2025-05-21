@@ -41,7 +41,7 @@
       "events-details",
       "speakers",
       "events-register-form",
-      "buttons"
+      "sciex-buttons"
     ]
   },
   {
@@ -79,6 +79,12 @@
     "id": "header",
     "components": [
       "headerItem"
+    ]
+  },
+  {
+    "id": "sciex-buttons",
+    "components": [
+      "sciex-button"
     ]
   },
   {

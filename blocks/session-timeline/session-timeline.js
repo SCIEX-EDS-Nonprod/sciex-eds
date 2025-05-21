@@ -41,10 +41,12 @@ export default function decorate(block) {
             const sessionInfo = document.createElement('span');
             sessionInfo.className = 'event-organizer';
             sessionInfo.textContent = sessionText.trim();
-
+            const timemain = document.createElement('div');
+            timemain.className = 'time-main';
             // Assemble time-row
-            timeRow.appendChild(clock);
-            timeRow.appendChild(strong);
+            timemain.appendChild(clock);
+            timemain.appendChild(strong);
+            timeRow.appendChild(timemain);
             timeRow.appendChild(sessionInfo);
 
             li.insertBefore(timeRow, li.firstChild);

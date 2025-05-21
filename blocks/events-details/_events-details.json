@@ -24,7 +24,7 @@
           {
             "component": "text",
             "name": "eventId",
-            "value": "",
+            "value": "details",
             "label": "Event Id",
             "valueType": "string"
           },
