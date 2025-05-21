@@ -337,92 +337,6 @@
     ]
   },
   {
-    "id": "sciex-buttons",
-    "fields": [
-      {
-        "component": "select",
-        "name": "alignment",
-        "label": "Button Alignment",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Left",
-            "value": "left"
-          },
-          {
-            "name": "Center",
-            "value": "center"
-          },
-          {
-            "name": "Right",
-            "value": "right"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "sciex-button",
-    "fields": [
-      {
-        "component": "select",
-        "name": "type",
-        "label": "Button Type",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Primary",
-            "value": "primary"
-          },
-          {
-            "name": "Secondary",
-            "value": "secondary"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "name": "text",
-        "label": "Button Text",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "link",
-        "label": "Button Link",
-        "valueType": "string"
-      },
-      {
-        "component": "boolean",
-        "name": "showSvg",
-        "label": "Show SVG",
-        "valueType": "boolean"
-      },
-      {
-        "component": "text",
-        "name": "svg",
-        "label": "SVG Code",
-        "valueType": "string"
-      },
-      {
-        "component": "radio-group",
-        "name": "target",
-        "label": "Link Target",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Same Tab",
-            "value": "_self"
-          },
-          {
-            "name": "New Tab",
-            "value": "_blank"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "cards",
     "fields": [
       {
@@ -953,6 +867,92 @@
         "name": "login-sso",
         "value": "",
         "label": "login"
+      }
+    ]
+  },
+  {
+    "id": "sciex-buttons",
+    "fields": [
+      {
+        "component": "select",
+        "name": "alignment",
+        "label": "Button Alignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Center",
+            "value": "center"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sciex-button",
+    "fields": [
+      {
+        "component": "select",
+        "name": "type",
+        "label": "Button Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Primary",
+            "value": "primary"
+          },
+          {
+            "name": "Secondary",
+            "value": "secondary"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "text",
+        "label": "Button Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "link",
+        "label": "Button Link",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "name": "showSvg",
+        "label": "Show SVG",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "svg",
+        "label": "SVG Code",
+        "valueType": "string"
+      },
+      {
+        "component": "radio-group",
+        "name": "target",
+        "label": "Link Target",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "New Tab",
+            "value": "_blank"
+          }
+        ]
       }
     ]
   },
