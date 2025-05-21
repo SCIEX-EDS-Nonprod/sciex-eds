@@ -1,4 +1,4 @@
-
+@import url('../sciex-text/sciex-text.css');
 
 .events-container-wrapper {
     max-width: 1365px !important;
@@ -44,6 +44,13 @@ p {
 
 .events-container ul li {
     padding: 7px 0px;
+}
+
+.events-container ol,
+.events-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0
 }
 
 main>.section>div {
@@ -343,33 +350,4 @@ main>.section>div {
         height: 900px !important;
     }
 }
-.text-left {
-    text-align: left;
-}
 
-.text-right {
-    text-align: right;
-}
-
-.text-center {
-    text-align: center;
-}
-
-h1 {
-font-size: 45px;
-}
-h2 {
-font-size: 40px;
-}
-h3 {
-font-size: 30px;
-}
-h4 {
-font-size: 24px;
-}
-h5 {
-font-size: 20px;
-}
-h6 {
-font-size: 18px;
-}
