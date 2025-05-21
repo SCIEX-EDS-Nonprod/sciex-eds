@@ -13,12 +13,12 @@ export default function decorate(block) {
   block.parentElement.classList.add('tabs-container-wrapper');
   block.classList.add('two-column-layout');
   let isVerticalLayout = false;
-  rows.forEach((row,index) => {
-    if(index === 0){
-        block.id = row.textContent.trim() + '-content';
+  rows.forEach((row, index) => {
+    if (index === 0) {
+      block.id = `${row.textContent.trim()}-content`;
     }
     const type = row.querySelector('p')?.textContent?.toLowerCase()?.trim();
-    console.log('type>'+type);
+    console.log(`type>${type}`);
     switch (type) {
       case 'vertical':
         block.classList.add('vertical-layout');
@@ -35,11 +35,11 @@ export default function decorate(block) {
         decorateEventDetails(row);
         (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
-     case 'registerform':
+      case 'registerform':
         decorateRegisterForm(row);
         (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
-     case 'sciexText':
+      case 'sciextext':
         decorateSciexText(row);
         leftCol.appendChild(row);
         break;
@@ -50,8 +50,8 @@ export default function decorate(block) {
   });
 
   block.innerHTML = '';
- if (isVerticalLayout) {
-    block.appendChild(leftCol); 
+  if (isVerticalLayout) {
+    block.appendChild(leftCol);
   } else {
     block.append(leftCol, rightCol);
   }
