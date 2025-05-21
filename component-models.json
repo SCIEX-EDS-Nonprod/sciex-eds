@@ -358,76 +358,28 @@
             "value": "right"
           }
         ]
-      },
-      {
-        "component": "container",
-        "name": "buttons",
-        "label": "Buttons",
-        "valueType": "array",
-        "fields": [
-          {
-            "component": "select",
-            "name": "type",
-            "label": "Button Type",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Primary",
-                "value": "primary"
-              },
-              {
-                "name": "Secondary",
-                "value": "secondary"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "name": "text",
-            "label": "Button Text",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "link",
-            "label": "Button Link",
-            "valueType": "string"
-          },
-          {
-            "component": "boolean",
-            "name": "showSvg",
-            "label": "Show SVG",
-            "valueType": "boolean"
-          },
-          {
-            "component": "text",
-            "name": "svg",
-            "label": "SVG Code",
-            "valueType": "string"
-          },
-          {
-            "component": "radio-group",
-            "name": "target",
-            "label": "Link Target",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Same Tab",
-                "value": "_self"
-              },
-              {
-                "name": "New Tab",
-                "value": "_blank"
-              }
-            ]
-          }
-        ]
       }
     ]
   },
   {
     "id": "sciex-button",
     "fields": [
+      {
+        "component": "select",
+        "name": "type",
+        "label": "Button Type",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Primary",
+            "value": "primary"
+          },
+          {
+            "name": "Secondary",
+            "value": "secondary"
+          }
+        ]
+      },
       {
         "component": "text",
         "name": "text",
