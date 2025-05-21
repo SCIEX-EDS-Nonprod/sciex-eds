@@ -18,8 +18,8 @@ function embedYoutube(url, autoplay, background) {
       .map(([k, v]) => `${k}=${encodeURIComponent(v)}`)
       .join('&')}`;
   }
-  let vid = '';
 
+  let vid = '';
   if (url.hostname.includes('youtu.be')) {
     [, vid] = url.pathname.split('/');
   } else if (url.searchParams.has('v')) {
@@ -48,14 +48,20 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   let headingText = '';
   let target = '_blank';
+  let id = '';
 
   [...block.children].forEach((row, index) => {
     if (index === 0) {
+      id = row.textContent.trim();
+      return;
+    }
+
+    if (index === 1) {
       headingText = row.textContent.trim();
       return;
     }
 
-    if (index === 1 && row.querySelector('div > div > p')) {
+    if (index === 2 && row.querySelector('div > div > p')) {
       target = row.textContent.trim();
       return;
     }
@@ -179,7 +185,14 @@ export default function decorate(block) {
   headingEl.textContent = headingText;
   headingEl.className = 'cards-heading';
 
+  // Clear block and wrap final content
   block.textContent = '';
-  block.append(headingEl);
-  block.append(ul);
+
+  const wrapper = document.createElement('div');
+  wrapper.id = id;
+  wrapper.className = 'cards-wrapper';
+  wrapper.appendChild(headingEl);
+  wrapper.appendChild(ul);
+
+  block.appendChild(wrapper);
 }

@@ -464,6 +464,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "cardsId",
+        "label": "Cards Id",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "heading",
         "label": "Heading",
         "value": ""
