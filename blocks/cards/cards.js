@@ -51,7 +51,7 @@ export default function decorate(block) {
   let id = '';
 
   [...block.children].forEach((row, index) => {
-    if (index == 0) {
+    if (index === 0) {
       id = row.textContent.trim();
       return;
     }
@@ -179,6 +179,8 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
+  console.log(id);
+  
   // Heading
   const headingEl = document.createElement('h2');
   headingEl.textContent = headingText;
