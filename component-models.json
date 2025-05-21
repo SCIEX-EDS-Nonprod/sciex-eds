@@ -360,10 +360,10 @@
         ]
       },
       {
-        "component": "multifield",
+        "component": "container",
         "name": "buttons",
         "label": "Buttons",
-        "valueType": "object",
+        "valueType": "array",
         "fields": [
           {
             "component": "select",
@@ -407,8 +407,8 @@
           },
           {
             "component": "radio-group",
-            "label": "Link Target",
             "name": "target",
+            "label": "Link Target",
             "valueType": "string",
             "options": [
               {
