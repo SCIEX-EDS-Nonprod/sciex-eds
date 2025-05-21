@@ -39,7 +39,7 @@ export default function decorate(block) {
     fragment.appendChild(button);
   });
 
-  block.innerHTML = '';
+  block.textContent = '';
   block.appendChild(fragment);
 
 }
