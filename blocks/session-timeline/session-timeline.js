@@ -1,4 +1,5 @@
-import { } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
+import { span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const div = document.createElement('div');
@@ -19,7 +20,8 @@ export default function decorate(block) {
       if (ul) {
         [...ul.children].forEach((li) => {
           const clock = document.createElement('div');
-          clock.id = 'clock';
+          clock.appendChild(span({ class: `icon icon-clock` }));
+         
 
           const strong = li.querySelector('strong');
           if (strong) {
@@ -52,6 +54,7 @@ export default function decorate(block) {
           }
         });
       }
+      decorateIcons(ul);
       div.append(ul);
     }
   });
