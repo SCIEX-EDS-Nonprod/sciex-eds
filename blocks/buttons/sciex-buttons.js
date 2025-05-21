@@ -1,21 +1,21 @@
 export default function decorate(block) {
   const rows = Array.from(block.children);
-  const alignment = rows[0]?.textContent?.trim() || 'left';
+  const alignment = rows[0]?.querySelector('p')?.textContent?.trim() || 'left';
 
-  block.textContent = '';
+  block.innerHTML = '';
   block.classList.add('button-block', `align-${alignment}`);
 
   rows.slice(1).forEach((row) => {
-    const values = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
+    const cells = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
 
     const [
       type = 'primary',
-      text = 'Button',
+      text = '',
       link = '#',
       showSvgRaw = 'false',
       svg = '',
-      target = '_self',
-    ] = values;
+      target = '_self'
+    ] = cells;
 
     const showSvg = showSvgRaw.toLowerCase() === 'true';
 
@@ -27,11 +27,11 @@ export default function decorate(block) {
 
     if (showSvg && svg) {
       const cleanSvg = svg.trim().replace(/^["'`]+|["'`]+$/g, '');
-      const svgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
-      const svgElement = svgDoc.querySelector('svg');
-      if (svgElement) {
-        svgElement.classList.add('inline-icon');
-        button.appendChild(svgElement);
+      const parsedSvgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
+      const parsedSvg = parsedSvgDoc.querySelector('svg');
+      if (parsedSvg) {
+        parsedSvg.classList.add('inline-icon');
+        button.appendChild(parsedSvg);
       }
     }
 
