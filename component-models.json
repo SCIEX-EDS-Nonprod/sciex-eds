@@ -364,7 +364,6 @@
         "name": "buttons",
         "label": "Buttons",
         "valueType": "array",
-        "collapsible": true,
         "fields": [
           {
             "component": "select",
@@ -397,7 +396,7 @@
           {
             "component": "boolean",
             "name": "showSvg",
-            "label": "Show SVG Icon",
+            "label": "Show SVG",
             "valueType": "boolean"
           },
           {
@@ -413,14 +412,59 @@
             "valueType": "string",
             "options": [
               {
-                "name": "Open in same tab",
+                "name": "Same Tab",
                 "value": "_self"
               },
               {
-                "name": "Open in new tab",
+                "name": "New Tab",
                 "value": "_blank"
               }
             ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sciex-button",
+    "fields": [
+      {
+        "component": "text",
+        "name": "text",
+        "label": "Button Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "link",
+        "label": "Button Link",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "name": "showSvg",
+        "label": "Show SVG",
+        "valueType": "boolean"
+      },
+      {
+        "component": "text",
+        "name": "svg",
+        "label": "SVG Code",
+        "valueType": "string"
+      },
+      {
+        "component": "radio-group",
+        "name": "target",
+        "label": "Link Target",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "New Tab",
+            "value": "_blank"
           }
         ]
       }

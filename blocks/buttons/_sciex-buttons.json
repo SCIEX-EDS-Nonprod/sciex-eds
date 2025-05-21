@@ -15,6 +15,21 @@
           }
         }
       }
+    },
+    {
+      "title": "Sciex Button",
+      "id": "sciex-button",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Sciex Button",
+              "model": "sciex-button"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -37,7 +52,6 @@
           "name": "buttons",
           "label": "Buttons",
           "valueType": "array",
-          "collapsible": true,
           "fields": [
             {
               "component": "select",
@@ -64,7 +78,7 @@
             {
               "component": "boolean",
               "name": "showSvg",
-              "label": "Show SVG Icon",
+              "label": "Show SVG",
               "valueType": "boolean"
             },
             {
@@ -79,10 +93,49 @@
               "label": "Link Target",
               "valueType": "string",
               "options": [
-                { "name": "Open in same tab", "value": "_self" },
-                { "name": "Open in new tab", "value": "_blank" }
+                { "name": "Same Tab", "value": "_self" },
+                { "name": "New Tab", "value": "_blank" }
               ]
             }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sciex-button",
+      "fields": [
+        {
+          "component": "text",
+          "name": "text",
+          "label": "Button Text",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "link",
+          "label": "Button Link",
+          "valueType": "string"
+        },
+        {
+          "component": "boolean",
+          "name": "showSvg",
+          "label": "Show SVG",
+          "valueType": "boolean"
+        },
+        {
+          "component": "text",
+          "name": "svg",
+          "label": "SVG Code",
+          "valueType": "string"
+        },
+        {
+          "component": "radio-group",
+          "name": "target",
+          "label": "Link Target",
+          "valueType": "string",
+          "options": [
+            { "name": "Same Tab", "value": "_self" },
+            { "name": "New Tab", "value": "_blank" }
           ]
         }
       ]
@@ -91,7 +144,9 @@
   "filters": [
     {
       "id": "sciex-buttons",
-      "components": []
+      "components": [
+        "sciex-button"
+      ]
     }
   ]
 }
