@@ -45,6 +45,12 @@
     ]
   },
   {
+    "id": "speakers",
+    "components": [
+      "speaker"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "image-video",

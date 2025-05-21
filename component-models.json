@@ -358,7 +358,12 @@
             "value": "right"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "id": "button",
+    "fields": [
       {
         "component": "boolean",
         "name": "showPrimary",
