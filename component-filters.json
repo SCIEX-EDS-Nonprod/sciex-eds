@@ -45,12 +45,6 @@
     ]
   },
   {
-    "id": "sciex-buttons",
-    "components": [
-      "sciex-button"
-    ]
-  },
-  {
     "id": "cards",
     "components": [
       "image-video",
@@ -85,6 +79,12 @@
     "id": "header",
     "components": [
       "headerItem"
+    ]
+  },
+  {
+    "id": "sciex-buttons",
+    "components": [
+      "sciex-button"
     ]
   },
   {

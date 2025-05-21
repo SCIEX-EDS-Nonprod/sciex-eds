@@ -3,21 +3,21 @@
     flex-wrap: wrap;
     gap: 1rem;
     margin: 1.5rem 0;
-  }
-  
-  /* Alignment */
-  .button-block.align-left {
+}
+
+/* Alignment */
+.button-block.align-left {
     justify-content: flex-start;
-  }
-  .button-block.align-center {
+}
+.button-block.align-center {
     justify-content: center;
-  }
-  .button-block.align-right {
+}
+.button-block.align-right {
     justify-content: flex-end;
-  }
-  
-  /* Base button */
-  .button {
+}
+
+/* Base button */
+.button {
     display: inline-flex !important;
     align-items: center;
     gap: 16px;
@@ -31,28 +31,28 @@
     letter-spacing: 0.08px;
     transition: background-color 0.2s ease;
     cursor: pointer;
-  }
-  
-  /* Primary */
-  .button.primary {
-    background-color: #0068FA !important;
-    color: #FFF !important;
-    border: none !important;
-  }
-  .button.primary:hover {
+    box-sizing: border-box;
+}
+
+/* Primary */
+.button.primary {
+    background-color: #0068fa !important;
+    color: #fff !important;
+    border: 1px solid transparent !important;
+}
+.button.primary:hover {
     background-color: #0058d0;
-  }
-  
-  /* Secondary */
-  .button.secondary {
+}
+
+/* Secondary */
+.button.secondary {
     background-color: transparent !important;
     color: #141414 !important;
-    border: 1px solid #0068FA !important;
-  }
-  .button.secondary:hover {
+    border: 1px solid #0068fa !important;
+}
+.button.secondary:hover {
     background-color: #f0f8ff;
-  }
-  .button.secondary svg path {
+}
+.button.secondary svg path {
     stroke: #141414;
-  }
-  
+}
