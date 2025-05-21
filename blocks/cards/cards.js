@@ -179,14 +179,13 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  console.log(id);
-  
   // Heading
   const headingEl = document.createElement('h2');
   headingEl.textContent = headingText;
   headingEl.className = 'cards-heading';
 
   block.textContent = '';
+  block.id = id;
   block.append(headingEl);
   block.append(ul);
 }
