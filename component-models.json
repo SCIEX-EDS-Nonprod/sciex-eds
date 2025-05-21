@@ -364,6 +364,7 @@
         "name": "buttons",
         "label": "Buttons",
         "valueType": "array",
+        "collapsible": true,
         "fields": [
           {
             "component": "select",
@@ -396,7 +397,7 @@
           {
             "component": "boolean",
             "name": "showSvg",
-            "label": "Show SVG",
+            "label": "Show SVG Icon",
             "valueType": "boolean"
           },
           {
@@ -412,11 +413,11 @@
             "valueType": "string",
             "options": [
               {
-                "name": "Same Tab",
+                "name": "Open in same tab",
                 "value": "_self"
               },
               {
-                "name": "New Tab",
+                "name": "Open in new tab",
                 "value": "_blank"
               }
             ]
