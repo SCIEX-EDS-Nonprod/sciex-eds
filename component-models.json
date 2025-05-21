@@ -926,10 +926,11 @@
         "valueType": "boolean"
       },
       {
-        "component": "text",
-        "name": "svg",
-        "label": "SVG Code",
-        "valueType": "string"
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Show Icon",
+        "multi": false
       },
       {
         "component": "radio-group",
