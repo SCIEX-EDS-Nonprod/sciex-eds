@@ -12,6 +12,7 @@
     font-style: normal;
     font-weight: 530;
     line-height: 32px;
+    padding-top: 10px;
 }
 
 .events-container-wrapper {
@@ -37,6 +38,10 @@ p {
     font-weight: 330;
     line-height: 24px;
     letter-spacing: 0.08px;
+}
+
+.events-container ul li {
+    padding: 7px 0px;
 }
 
 main>.section>div {

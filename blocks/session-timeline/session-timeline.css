@@ -35,6 +35,10 @@
     letter-spacing: 0.045px;
     margin-left: 26px;
 }
+
+.session-timeline ul li {
+    padding: 7px 0px;
+}
 /*.event-line {
     display: inline-block;   
     white-space: normal;     
