@@ -30,7 +30,8 @@ export default async function decorate(block) {
     button.className = `button ${type}`;
     button.textContent = text;
 
-    if (showSvg && svg && svg !== "''") {
+    if (showSvg && svg) {
+      console.log("iconPath", svg)
       const cleanSvg = svg.replace(/^["'`]+|["'`]+$/g, '');
       const parsedSvgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
       const parsedSvg = parsedSvgDoc.querySelector('svg');
