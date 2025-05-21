@@ -12,13 +12,14 @@ export default async function decorate(block) {
 
   rows.slice(1).forEach((row) => {
     const cells = Array.from(row.querySelectorAll('p')).map((p) => p.textContent.trim());
+    console.log("cells", cells);
 
     const [
       type = 'primary',
       text = '',
       link = '#',
       showSvgRaw = 'false',
-      svg = '',
+      icon = '',
       target = '_self',
     ] = cells;
 
@@ -30,11 +31,13 @@ export default async function decorate(block) {
     button.className = `button ${type}`;
     button.textContent = text;
 
-    if (showSvg && svg) {
-      console.log("iconPath", svg)
-      const cleanSvg = svg.replace(/^["'`]+|["'`]+$/g, '');
-      const parsedSvgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
-      const parsedSvg = parsedSvgDoc.querySelector('svg');
+    if (showSvg && icon) {
+      console.log("iconPath", icon)
+      // const cleanSvg = icon.replace(/^["'`]+|["'`]+$/g, '');
+      // const parsedSvgDoc = new DOMParser().parseFromString(cleanSvg, 'image/svg+xml');
+      const parsedSvg =  document.createElement('img');
+      parsedSvg.src = icon;
+      parsedSvg.alt = 'icon';
       if (parsedSvg) {
         parsedSvg.classList.add('inline-icon');
         button.appendChild(parsedSvg);
