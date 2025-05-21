@@ -45,9 +45,9 @@
     ]
   },
   {
-    "id": "buttons",
+    "id": "sciex-buttons",
     "components": [
-      "button"
+      "sciex-button"
     ]
   },
   {

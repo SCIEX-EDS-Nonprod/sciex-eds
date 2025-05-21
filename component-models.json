@@ -337,7 +337,7 @@
     ]
   },
   {
-    "id": "buttons",
+    "id": "sciex-buttons",
     "fields": [
       {
         "component": "select",
@@ -362,7 +362,7 @@
     ]
   },
   {
-    "id": "button",
+    "id": "sciex-button",
     "fields": [
       {
         "component": "boolean",
