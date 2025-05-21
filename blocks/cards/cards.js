@@ -51,7 +51,7 @@ export default function decorate(block) {
   let id = '';
 
   [...block.children].forEach((row, index) => {
-    if (inedx == 0) {
+    if (index == 0) {
       id = row.textContent.trim();
       return;
     }
