@@ -83,7 +83,7 @@
         {
           "component": "reference",
           "valueType": "string",
-          "name": "image",
+          "name": "icon",
           "label": "Show Icon",
           "multi": false
         },
