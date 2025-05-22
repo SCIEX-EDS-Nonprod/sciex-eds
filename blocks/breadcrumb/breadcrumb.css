@@ -58,7 +58,7 @@ main > .section > div {
 .breadcrumb-wrapper {
   max-width: 90pc !important;
   padding: 20px 64px !important;
-  margin: 0 !important;
+  margin: auto;
 }
 
 /* Wrapping behavior for smaller screens */
@@ -79,25 +79,25 @@ main > .section > div {
 @media (min-width: 375px) {
   .breadcrumb-wrapper {
     padding: 16px 15px !important;
-    max-width: 40pc !important;
+    max-width: 40pc;
   }
 }
 
 @media (min-width: 640px) {
   .breadcrumb-wrapper {
-    max-width: 40pc !important;
+    max-width: 40pc;
   }
 }
 
 @media (min-width: 768px) {
   .breadcrumb-wrapper {
-    max-width: 8in !important;
+    max-width: 8in;
   }
 }
 
 @media (min-width: 1024px) {
   .breadcrumb-wrapper {
-    max-width: 63pc !important;
+    max-width: 63pc;
     padding-left: 55px !important;
     padding-right: 55px !important;
   }
@@ -105,7 +105,7 @@ main > .section > div {
 
 @media (min-width: 1280px) {
   .breadcrumb-wrapper {
-    max-width: 79pc !important;
+    max-width: 79pc;
     padding-left: 55px !important;
     padding-right: 55px !important;
   }
@@ -113,7 +113,7 @@ main > .section > div {
 
 @media (min-width: 1366px) {
   .breadcrumb-wrapper {
-    max-width: 84pc !important;
+    max-width: 84pc;
     padding-left: 55px !important;
     padding-right: 55px !important;
   }
@@ -121,12 +121,12 @@ main > .section > div {
 
 @media (min-width: 1440px) {
   .breadcrumb-wrapper {
-    max-width: 89pc !important;
+    max-width: 89pc;
   }
 }
 
 @media (min-width: 1536px) {
   .breadcrumb-wrapper {
-    max-width: 95pc !important;
+    max-width: 95pc;
   }
 }

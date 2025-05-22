@@ -1,7 +1,7 @@
 .speakers-wrapper {
     max-width: 90pc !important;
     padding: 0 64px !important;
-    margin: 0 !important;
+    margin: auto;
 }
 
 .speakers .heading {

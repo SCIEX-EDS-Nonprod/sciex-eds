@@ -442,9 +442,9 @@ button.active {
 
 @media (min-width:1280px) {
     .tw-container {
-        max-width: 86pc;
+        max-width: 90pc;
         padding: 0 64px !important;
-        margin: 0 !important;
+        margin: auto;
     }
 }
 
@@ -456,8 +456,8 @@ button.active {
 
 @media (min-width:1536px) {
     .tw-container {
-        max-width: 96pc;
-        margin: 0 !important;
+        max-width: 90pc;
+        margin: auto;
     }
 }
 
