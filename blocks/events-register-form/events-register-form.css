@@ -5,10 +5,14 @@
 }
 
 .iframe-form-container{
-    width :50%;
     height: 900px !important;
-    
-
+}
+.iframe-form-container .one-column .v3-form-grid {
+    width: 50%;
+    grid-template-columns: 1fr;
+}
+.iframe-form-container .two-column .v3-form-grid {
+    grid-template-columns: 1fr 1fr !important;
 }
 .form-heading{
     color: var(--Grey-900, #141414);
