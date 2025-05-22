@@ -17,7 +17,7 @@
 }
 
 /* Base button */
-.button {
+.button-block  .button {
     display: inline-flex !important;
     align-items: center;
     gap: 16px;
@@ -35,42 +35,43 @@
     margin: 0 !important;
 }
 
-.inline-icon {
+.button-block  .inline-icon {
     display: flex;
 }
 
 /* Primary */
-.button.primary {
+.button-block  .button.primary {
     background-color: #0068fa !important;
     color: #fff !important;
     border: 1px solid transparent !important;
 }
-.button.primary:hover {
+.button-block  .button.primary:hover {
     background-color: #0058d0;
 }
 
 /* Secondary */
-.button.secondary {
+.button-block  .button.secondary {
     background-color: transparent !important;
     color: #141414 !important;
     border: 1px solid #0068fa !important;
 }
-.button.secondary:hover {
+.button-block  .button.secondary:hover {
     background-color: #f0f8ff;
 }
-.button.secondary svg path {
+.button-block  .button.secondary svg path {
     stroke: #141414;
 }
 
 /* Links */
-.button.link {
+.button-block  .button.link {
     background-color: transparent !important;
     color: #0068FA !important;
     text-decoration: underline !important;
     text-underline-offset: 10px;
     text-decoration-thickness: 1px !important;
+    gap: 8px;
 }
 
-.button.link:hover {
+.button-block  .button.link:hover {
     background-color: transparent !important;
 }
