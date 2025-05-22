@@ -1,8 +1,8 @@
 .button-block {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1.5rem 0;
+    gap: 20px;
+    margin: 20px 0;
 }
 
 /* Alignment */
@@ -32,6 +32,11 @@
     transition: background-color 0.2s ease;
     cursor: pointer;
     box-sizing: border-box;
+    margin: 0 !important;
+}
+
+.inline-icon {
+    display: flex;
 }
 
 /* Primary */
@@ -61,8 +66,9 @@
 .button.link {
     background-color: transparent !important;
     color: #0068FA !important;
-    border: none !important;
-    text-decoration: underline;
+    text-decoration: underline !important;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 1px !important;
 }
 
 .button.link:hover {
