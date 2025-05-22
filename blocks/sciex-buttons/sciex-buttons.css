@@ -56,3 +56,15 @@
 .button.secondary svg path {
     stroke: #141414;
 }
+
+/* Links */
+.button.link {
+    background-color: transparent !important;
+    color: #0068FA !important;
+    border: none !important;
+    text-decoration: underline;
+}
+
+.button.link:hover {
+    background-color: transparent !important;
+}
