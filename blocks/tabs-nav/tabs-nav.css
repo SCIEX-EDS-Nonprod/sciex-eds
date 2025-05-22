@@ -50,6 +50,7 @@ html {
   z-index: 1000;
   max-width: 90pc !important;
   padding: 0 64px!important;
+  margin: auto;
 }
 
 

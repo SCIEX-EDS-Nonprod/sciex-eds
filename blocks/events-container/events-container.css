@@ -4,7 +4,7 @@
 .events-container-wrapper {
     max-width: 90pc !important;
     padding: 0 64px !important;
-    margin: 0 !important;
+    margin: auto;
 }
 
 .events-container-wrapper {
@@ -154,7 +154,7 @@ main>.section>div {
 
     .events-container-wrapper {
         padding: 0 24px !important;
-        margin: 0 !important;
+        margin: auto;
     }
 }
 
