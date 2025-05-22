@@ -61,6 +61,7 @@ export default async function decorate(block) {
 
   localStorage.removeItem('searchTerm');
 
+  block.textContent = '';
   block.append(eventsDiv);
 
   try {
