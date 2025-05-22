@@ -1,4 +1,4 @@
-import { decorateIcons } from '../../scripts/aem.js';
+import { } from '../../scripts/aem.js';
 import { span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
