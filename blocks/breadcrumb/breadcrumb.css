@@ -55,10 +55,16 @@ main > .section > div {
   color: black;
 }
 
+.breadcrumb-wrapper {
+  max-width: 90pc !important;
+  padding: 20px 64px !important;
+  margin: 0 !important;
+}
+
 /* Wrapping behavior for smaller screens */
 @media (max-width: 767px) {
   .breadcrumb-wrapper {
-    padding: 16px 15px;
+    padding: 16px 15px !important;
   }
 
   .breadcrumb-wrapper nav {
@@ -72,7 +78,7 @@ main > .section > div {
 
 @media (min-width: 375px) {
   .breadcrumb-wrapper {
-    padding: 16px 15px;
+    padding: 16px 15px !important;
     max-width: 40pc !important;
   }
 }

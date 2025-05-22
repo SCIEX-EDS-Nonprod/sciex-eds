@@ -417,7 +417,7 @@ button.active {
     margin-right: auto;
     padding-left: 24px;
     padding-right: 24px;
-    width: 100%
+    width: 100%;
 }
 
 @media (min-width:640px) {
@@ -443,20 +443,21 @@ button.active {
 @media (min-width:1280px) {
     .tw-container {
         max-width: 86pc;
-        padding-left: 4pc;
-        padding-right: 4pc
+        padding: 0 64px !important;
+        margin: 0 !important;
     }
 }
 
 @media (min-width:1440px) {
     .tw-container {
-        max-width: 90pc
+        max-width: 90pc;
     }
 }
 
 @media (min-width:1536px) {
     .tw-container {
-        max-width: 96pc
+        max-width: 96pc;
+        margin: 0 !important;
     }
 }
 

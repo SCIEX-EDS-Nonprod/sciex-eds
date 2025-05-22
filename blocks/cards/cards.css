@@ -115,7 +115,9 @@
 }
 
 .fragment-wrapper {
-  max-width: 1365px !important;
+  max-width: 90pc !important;
+  padding: 0 64px !important;
+  margin: 0 !important;
 }
 
 
@@ -152,6 +154,12 @@
   height: 24px;
   background: url('/icons/play.svg') no-repeat center center;
   background-size: contain;
+}
+
+@media (max-width: 768px) { 
+  .fragment-wrapper {
+    padding: 0 24px !important;
+  }
 }
 
 

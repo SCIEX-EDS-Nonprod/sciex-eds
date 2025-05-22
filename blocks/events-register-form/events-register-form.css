@@ -1,5 +1,7 @@
 .events-register-form-wrapper {
-    max-width: 1365px !important;
+    max-width: 90pc !important;
+    padding: 0 64px !important;
+    margin: 0 !important;
 }
 
 .iframe-form-container{
@@ -34,5 +36,9 @@
     .iframe-form-container{
         width :100%;
         height: 900px !important;
+    }
+
+    .events-register-form-wrapper {
+        padding: 0 24px !important;
     }
 }

@@ -1,13 +1,25 @@
 @import url('../sciex-text/sciex-text.css');
 
+/* Wrapper */
 .events-container-wrapper {
-    max-width: 1365px !important;
+    max-width: 90pc !important;
+    padding: 0 64px !important;
+    margin: 0 !important;
 }
+
+.events-container-wrapper {
+    max-width: 100%;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+/* Flex container */
 .events-container {
     display: flex;
+    justify-content: space-between; /* ✅ Added */
     width: 100%;
     align-items: flex-start;
-    gap: 50px;
+    gap: 0; /* ✅ Removed gap when using space-between */
     align-self: stretch;
     color: #000;
     font-family: "Geogrotesque Sharp VF";
@@ -15,12 +27,7 @@
     font-weight: 530;
     line-height: 32px;
     padding-top: 10px;
-}
-
-.events-container-wrapper {
-    max-width: 100%;
-    flex-wrap: wrap;
-    margin: auto;
+    box-sizing: border-box;
 }
 
 h2 {
@@ -50,7 +57,7 @@ p {
 .events-container ul {
     list-style: none;
     margin: 0;
-    padding: 0
+    padding: 0;
 }
 
 main>.section>div {
@@ -90,81 +97,66 @@ main>.section>div {
     letter-spacing: 0.045px;
     margin-left: 26px;
 }
+
 .time-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px; /* optional spacing */
-  }
-  
-  .time-row #clock,
-  .time-row strong,
-  .time-row .event-organizer {
+    gap: 8px;
+}
+
+.time-row #clock,
+.time-row strong,
+.time-row .event-organizer {
     display: inline-block;
-  }
-  .time-main {
+}
+
+.time-main {
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-  /* Mobile view (adjust max-width as needed) */
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .time-row {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    #clock {
-        margin-top: 0px;
-    }
-    .time-row #clock,
-    .time-row strong {
-      order: 1;
-    }
-    strong {
-        font-size: 15px;
-    }
-    .time-row .event-organizer {
-      order: 2;
-      font-size: 15px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      margin-left:25px;
-    }
-    .session-title {
-        font-size: 15px;
-        margin-left: 0px;
-        white-space: normal;
-        overflow-wrap: break-word;
-        margin-left:25px;
-    }
-    
-  }
-  
-/* Mobile View Adjustment */
-/*@media (max-width: 768px) {
-    .time-row {
-        flex-direction: row;
+        flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
     #clock {
-        margin-top: 8px;
+        margin-top: 0px;
+    }
+
+    .time-row #clock,
+    .time-row strong {
+        order: 1;
     }
 
     strong {
-        font-size: 16px;
-        white-space: nowrap;
+        font-size: 15px;
     }
 
-    .event-organizer {
-        font-size: 14px;
+    .time-row .event-organizer {
+        order: 2;
+        font-size: 15px;
+        white-space: normal;
+        overflow-wrap: break-word;
+        margin-left: 25px;
+    }
+
+    .session-title {
+        font-size: 15px;
+        margin-left: 25px;
         white-space: normal;
         overflow-wrap: break-word;
     }
+
+    .events-container-wrapper {
+        padding: 0 24px !important;
+        margin: 0 !important;
+    }
 }
-*/
 
 .session-timeline {
     font-family: "Geogrotesque Sharp VF";
@@ -191,20 +183,8 @@ main>.section>div {
     background: var(--Grey-50, #ECECEC);
     flex-direction: column;
 }
-/*.event-line {
-    display: inline-block;   
-    white-space: normal;     
-    width: 100%;             
-    line-height: 1.5;
-  }
-  
-  .event-line strong,
-  .event-line .event-organizer {
-    display: inline;
-    white-space: normal;
-  }*/
-.events-details-text {
 
+.events-details-text {
     color: var(--Grey-900, #141414);
     font-family: "Geogrotesque Sharp VF";
     font-size: 18px;
@@ -213,7 +193,6 @@ main>.section>div {
     line-height: 24px;
     letter-spacing: 0.09px;
     margin: 10px 0;
-
 }
 
 .events-icontext {
@@ -222,22 +201,24 @@ main>.section>div {
     align-items: center;
 }
 
+/* Updated widths for spacing */
 .column-left {
-    width: 60%;
-    flex: 0 0 60%;
+    width: 58%;
+    flex: 0 0 58%;
 }
 
 .column-right {
-    width: 40%;
-    flex: 0 0 40%;
+    width: 32%;
+    flex: 0 0 32%;
 }
+
+/* Vertical layout variant */
 .two-column-layout.vertical-layout .column-left {
     width: 100%;
     flex: 0 0 100%;
-  }
+}
 
 @media (max-width: 768px) {
-
     .two-column-layout .column-left,
     .two-column-layout .column-right {
         flex: 0 0 100%;
@@ -296,7 +277,6 @@ main>.section>div {
 
 #calender {
     content: url("/icons/calender.svg");
-
 }
 
 #location {
@@ -322,12 +302,13 @@ main>.section>div {
         order: 1;
     }
 }
-.iframe-form-container{
-    width :95%;
-    height: 900px !important;
 
+.iframe-form-container {
+    width: 95%;
+    height: 900px !important;
 }
-.form-heading{
+
+.form-heading {
     color: var(--Grey-900, #141414);
     font-family: "Geogrotesque Sharp VF";
     font-size: 32px;
@@ -335,19 +316,20 @@ main>.section>div {
     font-weight: 330;
     line-height: 40px;
 }
-.form-sub-heading{
+
+.form-sub-heading {
     color: var(--Grey-600, #5B5B5B);
     font-family: "Geogrotesque Sharp VF";
     font-size: 16px;
     font-style: normal;
     font-weight: 530;
-    line-height: 24px; 
+    line-height: 24px;
     letter-spacing: 0.08px;
 }
+
 @media (max-width: 768px) {
-    .iframe-form-container{
-        width :100%;
+    .iframe-form-container {
+        width: 100%;
         height: 900px !important;
     }
 }
-

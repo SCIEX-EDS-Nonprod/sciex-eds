@@ -1,5 +1,7 @@
 .speakers-wrapper {
-    max-width: 1365px !important;
+    max-width: 90pc !important;
+    padding: 0 64px !important;
+    margin: 0 !important;
 }
 
 .speakers .heading {
@@ -78,6 +80,10 @@
     letter-spacing: 0.08px;
 }
 
+.speaker-content {
+    text-align: justify;
+}
+
 @media (max-width: 768px) {
     .speaker-container {
         padding-top: 30px;
@@ -94,5 +100,8 @@
         align-items: center;
         gap: 10px;
         align-self: stretch;
+    }
+    .speakers-wrapper {
+        padding: 0 24px !important;
     }
 }
