@@ -15,6 +15,7 @@ export default function decorate(block) {
   }
   const content = block.children[2];
   block.id = `${blockId}-content`;
+  block.className = 'sciex-text';
   block.parentElement.classList.add('tabs-container-wrapper');
   content.className = alignment;
 
