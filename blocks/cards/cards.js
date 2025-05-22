@@ -19,7 +19,6 @@ function embedYoutube(url, autoplay, background) {
       .join('&')}`;
   }
   let vid = '';
-
   if (url.hostname.includes('youtu.be')) {
     [, vid] = url.pathname.split('/');
   } else if (url.searchParams.has('v')) {
@@ -36,6 +35,7 @@ function embedYoutube(url, autoplay, background) {
         style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
         allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope"
         allowfullscreen
+        allow="fullscreen"
         scrolling="no"
         title="Content from Youtube"
         loading="lazy">
@@ -102,6 +102,19 @@ export default function decorate(block) {
             video.setAttribute('playsinline', '');
             video.setAttribute('preload', 'metadata');
 
+          video.addEventListener('click', () => {
+          if (ul.children.length >= 3) {
+            if (video.requestFullscreen) {
+              video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+              video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+              video.msRequestFullscreen();
+            }
+          }
+        });
+
+          
             const playBtn = document.createElement('button');
             playBtn.className = 'custom-play-button';
             playBtn.innerHTML = '<span class="icon icon-play"></span>';
@@ -110,6 +123,16 @@ export default function decorate(block) {
               video.play();
               video.controls = true;
               playBtn.style.display = 'none';
+
+              if (ul.children.length >= 3) {
+                if (video.requestFullscreen) {
+                  video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                  video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                  video.msRequestFullscreen();
+                }
+              }
             });
 
             moveInstrumentation(videoAnchor, video);
