@@ -1,4 +1,5 @@
 import { } from '../../scripts/aem.js';
+import { span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const div = document.createElement('div');
@@ -28,7 +29,7 @@ export default function decorate(block) {
         dateDiv.textContent = formattedDate;
 
         const calendarIcon = document.createElement('img');
-        calendarIcon.id = 'calender';
+        calendarIcon.appendChild(span({ class: `icon icon-clock` }));
         calendarIcon.alt = 'Calendar Icon';
 
         dateDiv.insertBefore(calendarIcon, dateDiv.firstChild);
