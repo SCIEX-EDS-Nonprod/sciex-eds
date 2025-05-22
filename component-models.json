@@ -911,6 +911,10 @@
           {
             "name": "Secondary",
             "value": "secondary"
+          },
+          {
+            "name": "Link",
+            "value": "link"
           }
         ]
       },
