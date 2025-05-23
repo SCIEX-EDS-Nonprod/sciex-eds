@@ -12,7 +12,7 @@
     width: 50%;
     grid-template-columns: 1fr !important;
 }
-.two-column .v3-form-grid {
+.two-column{
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr !important;
