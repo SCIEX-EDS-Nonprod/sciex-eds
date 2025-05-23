@@ -30,11 +30,11 @@
 }
 
 .sciex-text h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.sciex-text h2,
+.sciex-text h3,
+.sciex-text h4,
+.sciex-text h5,
+.sciex-text h6 {
     color: var(--Neutrals-900, #141414);
     font-family: "Geogrotesque Sharp VF", sans-serif !important;
     font-style: normal;
@@ -53,19 +53,19 @@ h6 {
 }
 
 .sciex-text ul {
-    list-style-type: inherit;
-    padding-left: 30px;
-    padding-top: 20px;
+    list-style-type: inherit !important;
+    padding-left: 30px !important;
+    padding-top: 20px !important;
 }
 
 .sciex-text ul li::marker {
     font-size: 0.6em;
 }
 
-.sciex-text .ol {
-    list-style-type: decimal;
-    padding-left: 30px;
-    padding-top: 20px;
+.sciex-text ol {
+    list-style-type: decimal !important;
+    padding-left: 30px !important;
+    padding-top: 20px !important;
 }
 
 .sciex-text ul li,
@@ -79,9 +79,9 @@ h6 {
 }
 
 .sciex-text ul li {
-    font-size: 18px;
-    line-height: 26px;
-    letter-spacing: 0.045px;
+    font-size: 18px !important;
+    line-height: 26px !important;
+    letter-spacing: 0.045px !important;
 }
 
 .sciex-text ul li a {
