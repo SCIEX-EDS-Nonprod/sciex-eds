@@ -85,45 +85,27 @@ function createMonthHeading(monthKey) {
 }
 
 function renderGroupedEvents(groupedEvents, container) {
-  Object.entries(groupedEvents).forEach(([monthKey, events]) => {
-    container.appendChild(createMonthHeading(monthKey));
-
-    events.forEach((event, idx) => {
-      const card = createEventCard(event);
-      if (idx === events.length - 1) {
-        card.classList.add('last-in-group');
-      }
-      container.appendChild(card);
-    });
-  });
-}
-
-function renderOndemandGroupedEvents(groupedEvents, container) {
-  Object.entries(groupedEvents).forEach(([monthKey, events]) => {
-    events.forEach((event, idx) => {
-      if (event.raw.eventtype[0] === 'On-demand content') {
-        container.appendChild(createMonthHeading(monthKey));
+  Object.entries(groupedEvents)
+    .sort(([a], [b]) => new Date(`1 ${a}`) - new Date(`1 ${b}`)) // Sort by date
+    .forEach(([monthKey, events]) => {
+      container.appendChild(createMonthHeading(monthKey));
+      events.forEach((event, idx) => {
         const card = createEventCard(event);
         if (idx === events.length - 1) {
           card.classList.add('last-in-group');
         }
         container.appendChild(card);
-      }
+      });
     });
-  });
 }
 
-export default function renderEventList(eventResultsListController, eventTag) {
+export default function renderEventList(eventResultsListController) {
   const eventList = createElement('div', 'event-list');
 
   const events = eventResultsListController.state.results;
 
   const groupedEvents = groupEventsByMonth(events);
 
-  if (eventTag === 'upcoming') {
-    renderGroupedEvents(groupedEvents, eventList);
-  } else {
-    renderOndemandGroupedEvents(groupedEvents, eventList);
-  }
+  renderGroupedEvents(groupedEvents, eventList);
   return eventList;
 }

@@ -3,8 +3,20 @@ import fetchMoreEvents from './renderMoreEvents.js';
 import renderEventFacets from './renderEventFacets.js';
 import renderEventList from './renderEventList.js';
 
-export default function renderUpcoming() {
+function getActiveTabName() {
+  const activeTab = document.querySelector('.tab-nav .tab.active');
+  const tabId = activeTab ? activeTab.dataset.tab : null;
+  if (tabId === 'upcoming') {
+    return 'Upcoming events';
+  } if (tabId === 'on-demand') {
+    return 'On-demand';
+  }
+  return '';
+}
+
+export default function renderEvents() {
   const querySummaryState = eventQuerySummary.state;
+
   const section = document.createElement('section');
   section.className = 'event-details active';
   section.id = 'upcoming';
@@ -15,7 +27,7 @@ export default function renderUpcoming() {
 
   const title = document.createElement('div');
   title.className = 'event-title';
-  title.textContent = 'Upcoming events';
+  title.textContent = getActiveTabName();
   title.id = 'eventTitle';
 
   const searchTermContainer = document.createElement('div');
@@ -60,7 +72,7 @@ export default function renderUpcoming() {
   section.append(
     eventHeader,
     wrapper,
-    renderEventList(eventResultsListController, 'upcoming'),
+    renderEventList(eventResultsListController),
     fetchMoreEvents(eventResultsListController),
   );
 

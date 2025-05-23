@@ -1,8 +1,8 @@
 import { } from '../../scripts/aem.js'; // Leave if needed for AEM-specific setup
-import renderUpcoming from '../../scripts/events-page/components/upcoming-event.js';
-import renderOnDemand from '../../scripts/events-page/components/on-demand-event.js';
+import renderEvents from '../../scripts/events-page/components/initialize-event.js';
 import renderEventSearchBox from '../../scripts/events-page/components/renderEventSeachBox.js';
 import { eventSearchEngine } from '../../scripts/events-page/event-engine.js';
+import { tabController } from '../../scripts/events-page/controller/event-page-controllers.js';
 
 export default async function decorate(block) {
   const eventsDiv = document.createElement('div');
@@ -40,11 +40,9 @@ export default async function decorate(block) {
   eventsDiv.appendChild(nav);
 
   // Render and store references to section containers
-  let upcomingSection = renderUpcoming();
-  let onDemandSection = renderOnDemand();
+  let upcomingSection = renderEvents();
 
   eventsDiv.appendChild(upcomingSection);
-  eventsDiv.appendChild(onDemandSection);
 
   // Tab switching logic
   eventsDiv.querySelectorAll('.tab').forEach((tab) => {
@@ -54,6 +52,11 @@ export default async function decorate(block) {
 
       tab.classList.add('active');
       const tabName = tab.dataset.tab;
+      if (tabName === 'upcoming') {
+        tabController('@eventdate>=today', 'Upcoming');
+      } else {
+        tabController('@eventtype=="On-demand content"', 'OnDemand');
+      }
       const target = eventsDiv.querySelector(`#${tabName}`);
       if (target) target.classList.add('active');
     });
@@ -66,16 +69,13 @@ export default async function decorate(block) {
 
   try {
     eventSearchEngine.executeFirstSearch();
+    tabController('@eventdate>=today', 'Upcoming');
     eventSearchEngine.subscribe(() => {
-      const newUpcoming = renderUpcoming();
-      const newOnDemand = renderOnDemand();
-      // renderEventSearchBox();
+      const newUpcoming = renderEvents();
 
       eventsDiv.replaceChild(newUpcoming, upcomingSection);
-      eventsDiv.replaceChild(newOnDemand, onDemandSection);
 
       upcomingSection = newUpcoming;
-      onDemandSection = newOnDemand;
     });
   } catch (error) {
     eventSearchEngine.executeFirstSearch();
