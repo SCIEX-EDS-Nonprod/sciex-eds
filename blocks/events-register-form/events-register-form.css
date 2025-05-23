@@ -7,11 +7,11 @@
 .iframe-form-container{
     height: 900px !important;
 }
-.one-column .v3-form-grid {
+.one-column {
     width: 50%;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
 }
-.two-column .v3-form-grid {
+.two-column {
     grid-template-columns: 1fr 1fr !important;
 }
 .form-heading{
