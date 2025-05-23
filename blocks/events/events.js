@@ -52,7 +52,7 @@ export default async function decorate(block) {
 
       tab.classList.add('active');
       const tabName = tab.dataset.tab;
-      if (tabName == 'upcoming') {
+      if (tabName === 'upcoming') {
         tabController('@eventdate>=today', 'Upcoming');
       } else {
         tabController('@eventtype=="On-demand content"', 'OnDemand');
