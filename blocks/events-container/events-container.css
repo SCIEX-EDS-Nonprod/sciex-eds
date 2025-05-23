@@ -332,3 +332,22 @@ main>.section>div {
         height: 900px !important;
     }
 }
+.events-register-form-wrapper {
+    max-width: 90pc !important;
+    padding: 0 64px !important;
+    margin: auto;
+}
+
+.iframe-form-container{
+    height: 900px !important;
+}
+.one-column{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr !important;
+}
+.two-column{
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr !important;
+}
