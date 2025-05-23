@@ -5,7 +5,8 @@ import {
     buildResultList,
     buildPager,
     buildQuerySummary,
-    buildContext
+    buildContext,
+    buildTab
 } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 import { eventSearchEngine }  from '../event-engine.js';
 
@@ -30,6 +31,16 @@ export const eventResultsListController = buildResultList(eventSearchEngine, {
     fieldsToInclude: ['eventyear', 'eventmonth', 'eventtype', 'eventdate']
   },
 });
+
+export const tabController = (expression, id) => {
+  const tab = buildTab(eventSearchEngine, {
+    options: {
+      expression,
+      id,
+    },
+  });
+  tab.select();
+};
 
 export const eventQuerySummary = buildQuerySummary(eventSearchEngine);
 
