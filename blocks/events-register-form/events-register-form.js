@@ -19,13 +19,15 @@ export default function decorate(block) {
   iframe.id = 'events-register-form';
   iframe.src = block.children[3].textContent;// 'https://info.sciex.com/LP=4907';
   
-  let alignment = 'one-column';
-  if (alignment && alignment.trim() !== '') {
-    alignment = alignment.trim();
+  let alignment;
+  if (block.children[4] && block.children[4].textContent) {
+    alignment = block.children[4].textContent.trim();
+    if (alignment === '') {
+      alignment = 'one-column';
+    }
   } else {
     alignment = 'one-column';
   }
-
   iframe.className = 'iframe-form-container ' + alignment;
   iframeDiv.append(iframe);
   block.innerHTML = '';

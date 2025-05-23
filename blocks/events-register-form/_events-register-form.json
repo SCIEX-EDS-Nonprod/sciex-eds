@@ -52,6 +52,7 @@
           "component": "select",
           "name": "alignment",
           "label": "Form Alignment",
+          "value": "one-column",
           "valueType": "string",
           "options": [
             { "name": "One Column", "value": "one-column" },
