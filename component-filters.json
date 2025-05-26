@@ -110,6 +110,13 @@
     ]
   },
   {
+    "id": "split-video-text",
+    "components": [
+      "video-text",
+      "youtube-video-text"
+    ]
+  },
+  {
     "id": "tabs-container",
     "components": [
       "sciex-text",
