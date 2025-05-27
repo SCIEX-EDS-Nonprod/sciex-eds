@@ -50,7 +50,7 @@ export const i18n = {
     showLess: 'Show Less',
     filter: 'Filter',
   },
-  zh: {
+  'zh-CN': {
     contentType: '内容类别',
     productsAndServices: '产品及服务',
     applications: '应用',
