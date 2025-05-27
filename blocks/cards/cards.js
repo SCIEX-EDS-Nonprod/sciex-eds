@@ -224,7 +224,6 @@ export default function decorate(block) {
               }
 
               modal.classList.remove('hidden');
-              playBtn.style.display = 'none';
             });
 
             if (videoAnchor) {
