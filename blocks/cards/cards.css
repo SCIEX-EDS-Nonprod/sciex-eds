@@ -296,6 +296,9 @@
   /* NEW: fill remaining space under header */
   flex-grow: 1;
   position: relative;
+}
+
+#video-modal-container video {
   height: 100%;
   width: 100%;
 }
