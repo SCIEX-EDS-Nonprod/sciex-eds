@@ -1,6 +1,6 @@
 import initializeSerachInterface from '../../scripts/common-components/renderUI.js';
 import { customerDocSearchEngine } from '../../scripts/customer-documents/customerDocEngine.js';
-import renderCourseCatalogSearchBox from '../../scripts/common-components/commonRenderSearchBox.js';
+import renderCommonSearchBox from '../../scripts/common-components/commonRenderSearchBox.js';
 import {
   customerDocSearchBoxController,
   customerDocSortController,
@@ -110,7 +110,7 @@ export default async function decorate(block) {
   try {
     await readBlockProperties(block);
     await initializeSerachInterface(block, 'customer-document-search');
-    renderCourseCatalogSearchBox(customerDocSearchBoxController);
+    renderCommonSearchBox(customerDocSearchBoxController);
     renderCommonSorting(customerDocSortController);
     customerDocSearchEngine.executeFirstSearch();
     customerDocSearchEngine.subscribe(() => {

@@ -130,7 +130,7 @@ function renderFacet(facetElementId, facetController, headerText) {
       'tw-mt-2',
       'facet-search-box',
     );
-    facetInput.placeholder = 'Search....';
+    facetInput.placeholder = 'Search';
 
     facetInput.addEventListener('input', (event) => {
       const query = event.target.value.toLowerCase();

@@ -50,6 +50,17 @@
     letter-spacing: 0.08px;
 }
 
+.regulatory-info {
+    color: var(--Grey-400, #8A8A8A);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 20px;
+    letter-spacing: 0.07px;
+    padding-bottom: 5px;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) { 
 
@@ -127,4 +138,8 @@
     #coveo-life-sciences div {
         max-width: 88pc !important;
     }
+}
+
+#coveo-life-sciences {
+    display: none;
 }
