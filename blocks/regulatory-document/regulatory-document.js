@@ -1,18 +1,18 @@
 import initializeSerachInterface from '../../scripts/common-components/renderUI.js';
-import { customerDocSearchEngine } from '../../scripts/customer-documents/customerDocEngine.js';
-import renderCourseCatalogSearchBox from '../../scripts/common-components/commonRenderSearchBox.js';
+import { regulatoryDocSearchEngine } from '../../scripts/regulatory-document/regulatoryDocEngine.js';
+import renderCommonSearchBox from '../../scripts/common-components/commonRenderSearchBox.js';
 import {
-  customerDocSearchBoxController,
-  customerDocSortController,
-  customerDocResultsList,
-  customerDocResultClick,
-  customerDocQuerySummary,
-  customerDocPaginationController,
+  regulatoryDocSearchBoxController,
+  regulatoryDocSortController,
+  regulatoryDocResultsList,
+  regulatoryDocResultClick,
+  regulatoryDocQuerySummary,
+  regulatoryDocPaginationController,
   allFacetController,
-  customerDocFacetBreadcrumb,
-} from '../../scripts/customer-documents/customer-document-controller/customerDocControllers.js';
+  regulatoryDocFacetBreadcrumb,
+} from '../../scripts/regulatory-document/regulatory-document-controller/regulatoryDocControllers.js';
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
-import renderCommonSearchResultList from '../../scripts/common-components/commonSearchResultList.js';
+import renderRegulatorySearchResultList from '../../scripts/regulatory-document/component/renderRegulatorySearchResult.js';
 import renderCommonQuerySummary from '../../scripts/common-components/commonQuerySummary.js';
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
 import { renderCommonFacet } from '../../scripts/common-components/commonFacets.js';
@@ -85,42 +85,34 @@ export default async function decorate(block) {
   document.body.appendChild(suggestionPopupDiv);
 
   const facetsId = {
-    assettypes: 'Asset type',
+    technicaldocuments: 'Technical documents',
+    instrumentfamily: 'Instrument family',
+    languagecountry: 'Language country',
     year: 'Year',
-    language: 'Language',
-    massspectrometerscategories: 'Mass spectrometry',
-    capillaryelectrophoresiscategories: 'Capillary electrophoresis',
-    hplcandceproductscategories: 'Liquid chromoatography',
-    integratedsolutionscategories: 'Integrated solutions',
-    softwarecategories: 'Software',
   };
 
   const desiredOrder = [
-    'assettypes-facet',
+    'technicaldocuments-facet',
+    'instrumentfamily-facet',
+    'languagecountry-facet',
     'year-facet',
-    'language-facet',
-    'massspectrometerscategories-facet',
-    'capillaryelectrophoresiscategories-facet',
-    'hplcandceproductscategories-facet',
-    'integratedsolutionscategories-facet',
-    'softwarecategories-facet',
   ];
 
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
     await initializeSerachInterface(block, 'regulatory-document-search');
-    renderCourseCatalogSearchBox(customerDocSearchBoxController);
-    renderCommonSorting(customerDocSortController);
-    customerDocSearchEngine.executeFirstSearch();
-    customerDocSearchEngine.subscribe(() => {
-      renderCommonSearchResultList(customerDocResultsList, customerDocResultClick);
-      renderCommonQuerySummary(customerDocQuerySummary);
-      renderCommonPagination(customerDocPaginationController);
+    renderCommonSearchBox(regulatoryDocSearchBoxController);
+    renderCommonSorting(regulatoryDocSortController);
+    regulatoryDocSearchEngine.executeFirstSearch();
+    regulatoryDocSearchEngine.subscribe(() => {
+      renderRegulatorySearchResultList(regulatoryDocResultsList, regulatoryDocResultClick);
+      renderCommonQuerySummary(regulatoryDocQuerySummary);
+      renderCommonPagination(regulatoryDocPaginationController);
       renderCommonFacet(allFacetController, facetsId, desiredOrder);
-      renderCommonFacetBreadcurm(customerDocFacetBreadcrumb);
+      renderCommonFacetBreadcurm(regulatoryDocFacetBreadcrumb);
     });
   } catch (error) {
-    customerDocSearchEngine.executeFirstSearch();
+    regulatoryDocSearchEngine.executeFirstSearch();
   }
 }
