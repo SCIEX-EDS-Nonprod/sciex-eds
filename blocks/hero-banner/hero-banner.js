@@ -55,7 +55,6 @@ export default async function decorate(block) {
     const isLight = isLightBackground(buttonText);
     contentContainer.classList.add(isLight ? 'light-theme' : 'dark-theme');
   }
-  
 
   // Eyebrow
   if (eyeBrow) {

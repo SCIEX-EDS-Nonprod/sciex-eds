@@ -125,10 +125,10 @@ async function decorateTemplates(main) {
  */
 async function loadEager(doc) {
   const domain = window.location.hostname;
-  const lang= "en";
-  if(domain === "devcs.sciex.com.cn"){
+  let lang = 'en';
+  if (domain === 'devcs.sciex.com.cn') {
     lang = 'zh-cn';
-  }else if(domain === "devcs.sciex.jp"){
+  } else if (domain === 'devcs.sciex.jp') {
     lang = 'ja';
   }
   document.documentElement.lang = lang;

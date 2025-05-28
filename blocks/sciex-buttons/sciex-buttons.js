@@ -13,35 +13,33 @@ export default async function decorate(block) {
   rows.slice(1).forEach((row) => {
     const paragraphs = Array.from(row.querySelectorAll('p'));
     const picture = row.querySelector('picture');
-  
+
     const cells = paragraphs.map((p) => p.textContent.trim());
-  
+
     const [
       type = 'primary',
       text = '',
       link = '#',
-      showSvgRaw = 'false',
-      ,
+      showSvgRaw = 'false',,
       target = '_self',
     ] = cells;
-  
+
     const showSvg = showSvgRaw.toLowerCase() === 'true';
-  
+
     const button = document.createElement('a');
     button.href = link;
     button.target = target;
     button.className = `button ${type}`;
     button.textContent = text;
-  
+
     if (showSvg && picture) {
       const clonedPicture = picture.cloneNode(true);
       clonedPicture.classList.add('inline-icon');
       button.appendChild(clonedPicture);
     }
-  
+
     wrapper.appendChild(button);
   });
-  
 
   fragment.appendChild(wrapper);
 
