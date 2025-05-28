@@ -29,7 +29,7 @@ export default function decorate(block) {
         dateDiv.textContent = formattedDate;
 
         const calendarIcon = document.createElement('img');
-        calendarIcon.appendChild(span({ class: `icon icon-clock` }));
+        calendarIcon.appendChild(span({ class: 'icon icon-clock' }));
         calendarIcon.alt = 'Calendar Icon';
 
         dateDiv.insertBefore(calendarIcon, dateDiv.firstChild);

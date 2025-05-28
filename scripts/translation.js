@@ -1,6 +1,6 @@
 /* eslint-disable */
 export const i18n = {
-  en: {
+  "en": {
     contentType: 'Content type',
     productsAndServices: 'Products and services',
     applications: 'Applications',
@@ -50,7 +50,7 @@ export const i18n = {
     showLess: 'Show Less',
     filter: 'Filter',
   },
-  'zh-CN': {
+  "zh-cn": {
     contentType: '内容类别',
     productsAndServices: '产品及服务',
     applications: '应用',
@@ -100,7 +100,7 @@ export const i18n = {
     showLess: '显示较少',
     filter: '筛选',
   },
-  ja: {
+  "ja": {
     contentType: 'コンテンツタイプ',
     productsAndServices: '製品とサービス',
     applications: 'アプリケーション',

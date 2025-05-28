@@ -124,7 +124,14 @@ async function decorateTemplates(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  const domain = window.location.hostname;
+  let lang = 'en';
+  if (domain === 'devcs.sciex.com.cn') {
+    lang = 'zh-cn';
+  } else if (domain === 'devcs.sciex.jp') {
+    lang = 'ja';
+  }
+  document.documentElement.lang = lang;
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
