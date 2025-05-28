@@ -100,7 +100,7 @@ export const i18n = {
     showLess: '显示较少',
     filter: '筛选',
   },
-  "ja": {
+  "ja-jp": {
     contentType: 'コンテンツタイプ',
     productsAndServices: '製品とサービス',
     applications: 'アプリケーション',
