@@ -59,7 +59,7 @@
           "value": ""
         },
         {
-            "component": "text",
+            "component": "richtext",
             "valueType": "string",
             "name": "heading",
             "label": "Heading",
