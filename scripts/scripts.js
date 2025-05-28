@@ -129,7 +129,7 @@ async function loadEager(doc) {
   if (domain === 'devcs.sciex.com.cn') {
     lang = 'zh-cn';
   } else if (domain === 'devcs.sciex.jp') {
-    lang = 'ja';
+    lang = 'ja-jp';
   }
   document.documentElement.lang = lang;
   decorateTemplateAndTheme();
