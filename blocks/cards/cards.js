@@ -128,6 +128,7 @@ export default function decorate(block) {
   let headingText = '';
   let target = '_blank';
   let id = '';
+  let gridValue = '';
 
   [...block.children].forEach((row, index) => {
     if (index === 0) {
@@ -142,6 +143,13 @@ export default function decorate(block) {
       target = row.textContent.trim();
       return;
     }
+
+    if (index === 3) {
+      gridValue = row.textContent.trim();
+      return;
+    }
+
+    console.log("gridValue", gridValue);
 
     const li = document.createElement('li');
     moveInstrumentation(row, li);

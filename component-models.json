@@ -368,6 +368,31 @@
             "value": "_blank"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "grid",
+        "label": "Select how many columns in a row",
+        "value": "grid-template-columns: repeat(4, 1fr)",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "grid-template-columns: repeat(4, 1fr)"
+          },
+          {
+            "name": "3-columns",
+            "value": "grid-template-columns: repeat(3, 1fr)"
+          },
+          {
+            "name": "2-columns",
+            "value": "grid-template-columns: repeat(2, 1fr)"
+          },
+          {
+            "name": "1-columns",
+            "value": "grid-template-columns: 1fr"
+          }
+        ]
       }
     ]
   },
