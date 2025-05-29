@@ -373,24 +373,24 @@
         "component": "select",
         "name": "grid",
         "label": "Select how many columns in a row",
-        "value": "grid-template-columns: repeat(4, 1fr)",
+        "value": "",
         "valueType": "string",
         "options": [
           {
             "name": "Default",
-            "value": "grid-template-columns: repeat(4, 1fr)"
+            "value": "4"
           },
           {
             "name": "3-columns",
-            "value": "grid-template-columns: repeat(3, 1fr)"
+            "value": "3"
           },
           {
             "name": "2-columns",
-            "value": "grid-template-columns: repeat(2, 1fr)"
+            "value": "2"
           },
           {
             "name": "1-columns",
-            "value": "grid-template-columns: 1fr"
+            "value": "1"
           }
         ]
       }
