@@ -144,12 +144,18 @@ export default function decorate(block) {
       return;
     }
 
-    if (index === 3) {
+    if (index === 3 && row.querySelector('div > div > p')) {
       gridValue = row.textContent.trim();
       return;
     }
 
-    console.log("gridValue", gridValue);
+    if (gridValue) {
+      const gridClass = `grid-${gridValue}`;
+      ul.classList.add(gridClass);
+    } else {
+      // Default to grid-4 if no gridValue is specified
+      ul.classList.add('grid-4');
+    }
 
     const li = document.createElement('li');
     moveInstrumentation(row, li);
