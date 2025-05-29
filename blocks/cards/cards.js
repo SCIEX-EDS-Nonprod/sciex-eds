@@ -144,17 +144,12 @@ export default function decorate(block) {
       return;
     }
 
-    if (index === 3 && row.querySelector('div > div > p')) {
+    if (
+      index === 3
+      && /^[1-4]$/.test(row.textContent.trim())
+    ) {
       gridValue = row.textContent.trim();
       return;
-    }
-
-    if (gridValue) {
-      const gridClass = `grid-${gridValue}`;
-      ul.classList.add(gridClass);
-    } else {
-      // Default to grid-4 if no gridValue is specified
-      ul.classList.add('grid-4');
     }
 
     const li = document.createElement('li');
@@ -214,7 +209,8 @@ export default function decorate(block) {
 
               modalContainer.innerHTML = '';
               const modalTitle = document.getElementById('modal-header-title');
-              modalTitle.textContent = li.querySelector('li h5')?.textContent.trim();
+              const heading = li.querySelector('h5');
+              modalTitle.textContent = heading ? heading.textContent.trim() : '';
 
               const youtubeWrapper = video.closest('.cards-card-image')?.querySelector('div[data-youtube-url]');
               const youtubeUrl = youtubeWrapper?.getAttribute('data-youtube-url');
@@ -306,7 +302,10 @@ export default function decorate(block) {
 
             const modalTitle = document.getElementById('modal-header-title');
             modalTitle.innerHTML = '';
-            modalTitle.textContent = li.querySelector('li h5')?.textContent.trim();
+            const heading = li.querySelector('h5');
+            if (modalTitle && heading) {
+              modalTitle.textContent = heading.textContent.trim();
+            }
 
             const iframe = document.createElement('iframe');
             iframe.src = `https://www.youtube.com/embed/${vid}?autoplay=1&controls=1&rel=0`;
@@ -333,6 +332,14 @@ export default function decorate(block) {
       decorateIcons(li);
     }
   });
+
+  if (gridValue) {
+    const gridClass = `grid-${gridValue}`;
+    ul.classList.add(gridClass);
+  } else {
+    // Default to grid-4 if no gridValue is specified
+    ul.classList.add('grid-4');
+  }
 
   ul.querySelectorAll('picture > img').forEach((img) => {
     const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
