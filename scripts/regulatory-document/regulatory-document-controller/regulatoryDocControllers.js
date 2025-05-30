@@ -30,7 +30,7 @@ export const regulatoryDocSearchBoxController = buildSearchBox(regulatoryDocSear
 
 export const regulatoryDocResultsList = buildResultList(regulatoryDocSearchEngine, {
   options: {
-    fieldsToInclude: ['description', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse'],
+    fieldsToInclude: ['productpartnumber', 'lotnumber', 'kitpartnumber', 'description'],
   },
 });
 

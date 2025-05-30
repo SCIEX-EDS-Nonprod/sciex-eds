@@ -60,9 +60,9 @@ const renderRegulatorySearchResultList = (customerDocResultsList, customerDocRes
 
         const regulatoryInfo = document.createElement('div');
         regulatoryInfo.className = 'regulatory-info';
-        let partNumber = `Part Number : 477628 | `;
-        let lotNumber = `Lot Number : M001182 | `;
-        let componentLotNumber = `Component Lot Number : P040823-003 `;
+        let partNumber = result.raw.productpartnumber ? `Part Number : ${result.raw.productpartnumber } | `: '';
+        let lotNumber = result.raw.lotnumber ? `Lot Number : ${result.raw.lotnumber } | `: '';
+        let componentLotNumber = result.raw.kitpartnumber ?`Kit Number : ${result.raw.kitpartnumber } `: '';
 
         regulatoryInfo.innerHTML = `${partNumber}  ${lotNumber}  ${componentLotNumber}`;
   
