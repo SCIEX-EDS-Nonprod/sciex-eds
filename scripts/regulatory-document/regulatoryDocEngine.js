@@ -20,7 +20,7 @@ export const regulatoryDocSearchEngine = buildSearchEngine({
     organizationId: organizationId,
     accessToken: accessToken,
     search: {
-      searchHub: 'SCIEXMainSearch',
+      searchHub: 'SCIEXRegulatoryDocumentsListing',
     },
     analytics: {
       analyticsMode: 'next',
