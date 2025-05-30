@@ -115,6 +115,7 @@
 }
 
 .tabs-container ul li {
+  padding-top: 15px;
   font-size: 18px;
   line-height: 26px; /* 144.444% */
   letter-spacing: 0.045px;
