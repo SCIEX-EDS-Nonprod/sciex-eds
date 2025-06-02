@@ -346,6 +346,8 @@ export default async function decorate(block) {
     });
   }
 
+  const translation = await fetch(`/content/sciex-eds/translation.html`);
+  console.log("translation", translation);
   // Create pagination div
   const paginationDiv = document.createElement('div');
   paginationDiv.id = 'pagination';
