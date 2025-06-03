@@ -1,6 +1,10 @@
-.sciex-title-wrapper{
-    min-height: 100px;
+/* Font face definition — preload this in HTML <head> */
+@font-face {
+    font-family: "Geogrotesque Sharp VF";
+    src: url("/fonts/Geogrotesque_Sharp_VF.woff2") format("woff2");
+    font-display: swap;
 }
+
 .hero-title {
     display: flex;
     flex-direction: column;
@@ -11,31 +15,25 @@
 }
 
 .hero-heading {
-    align-self: stretch;
-    color: var(--Grey-900, #141414);
-    /* Desktop/text-alfa */
+    font-family: "Geogrotesque Sharp VF", system-ui, sans-serif;
     font-size: 60px;
     font-style: normal;
     font-weight: 270;
-    line-height: 75px; /* 125% */
-    min-height: 75px; /* Reserved height for the text */
-    /* Ensure the element has a minimum height so layout doesn't shift */
-    font-family: "Geogrotesque Sharp VF";
+    line-height: 75px;
+    color: #141414;
     min-height: 100px;
+    text-rendering: optimizeLegibility;
 }
 
 @media (max-width: 768px) {
-    .sciex-title-wrapper{
-        min-height: 42px;
-    }
     .hero-title {
-        padding-top: 0px;
+        padding-top: 0;
     }
+
     .hero-heading {
         font-size: 34px;
         font-weight: 330;
         line-height: 42px;
-        min-height: 42px; /* Adjust height for mobile */
+        min-height: 42px;
     }
 }
-
