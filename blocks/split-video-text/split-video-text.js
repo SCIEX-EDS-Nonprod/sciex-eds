@@ -127,7 +127,7 @@ export default function decorate(block) {
   const parentDiv = document.createElement('div');
   parentDiv.className = 'video-text-container';
   const videoTextDiv = document.createElement('div');
-  videoTextDiv.className = 'video-text-container';
+  videoTextDiv.className = 'video-text-container ';
   let id = '';
   let headingText = '';
   let target = '_blank';
@@ -155,8 +155,9 @@ export default function decorate(block) {
       if (row.textContent.trim() !== '') {
         textAlignment = row.textContent.trim();
       } else {
-        textAlignment = ' text-right';
+        textAlignment = 'text-right';
       }
+      videoTextDiv.classList.add(textAlignment);
       return;
     }
     if (index === 3) {
@@ -169,9 +170,7 @@ export default function decorate(block) {
     }
 
     moveInstrumentation(row, videoTextDiv);
-
     while (row.firstElementChild) videoTextDiv.append(row.firstElementChild);
-
     let videoThumbnailImg;
 
     [...videoTextDiv.children].forEach((div, divIndex) => {
@@ -186,7 +185,15 @@ export default function decorate(block) {
           anchor.setAttribute('target', target);
           anchor.appendChild(span({ class: 'icon icon-arrow' }));
         }
-        div.className = `content-wrapper ${textAlignment}`;
+        const clock = document.createElement('div');
+        clock.appendChild(span({ class: 'icon icon-clock' }));
+        const ul = div.querySelector('div > ul');
+        if (ul) {
+          [...ul.children].forEach((li) => {
+            li.prepend(span({ class: 'icon icon-clock' }));
+          });
+        }
+        div.className = `content-wrapper`;
       }
       decorateIcons(div);
       if (divIndex === 1) {
@@ -216,10 +223,6 @@ export default function decorate(block) {
             if (!modal || !modalContainer) return;
 
             modalContainer.innerHTML = '';
-            // const modalTitle = document.getElementById('modal-header-title');
-            // const heading = li.querySelector('h5');
-            // modalTitle.textContent = heading ? heading.textContent.trim() : '';
-
             const youtubeWrapper = video.closest('.cards-card-image')?.querySelector('div[data-youtube-url]');
             const youtubeUrl = youtubeWrapper?.getAttribute('data-youtube-url');
 
@@ -246,8 +249,6 @@ export default function decorate(block) {
 
           moveInstrumentation(videoAnchor, video);
 
-          // videoWrapper.appendChild(video);
-          // videoWrapper.appendChild(playBtn);
           div.innerHTML = '';
           div.appendChild(video);
           div.appendChild(playBtn);
@@ -262,11 +263,6 @@ export default function decorate(block) {
           }
 
           const thumbnailSrc = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
-
-          const videoWrapper = document.createElement('div');
-          videoWrapper.className = 'video-wrapper';
-          videoWrapper.style.border = '1px solid #ddd';
-
           const thumbnail = document.createElement('img');
           thumbnail.src = thumbnailSrc;
           thumbnail.alt = 'YouTube Video Thumbnail';
@@ -285,7 +281,6 @@ export default function decorate(block) {
             }
 
             modalContainer.innerHTML = '';
-
             const modalTitle = document.getElementById('modal-header-title');
             modalTitle.innerHTML = '';
 
@@ -300,15 +295,10 @@ export default function decorate(block) {
             modalContainer.appendChild(iframe);
             modal.classList.remove('hidden');
           });
-
-          videoWrapper.appendChild(thumbnail);
-          videoWrapper.appendChild(playBtn);
           div.innerHTML = '';
-          div.appendChild(videoWrapper);
+          div.appendChild(thumbnail);
+          div.appendChild(playBtn);
           div.className = 'video-wrapper';
-          // firstDiv.innerHTML = '';
-          // firstDiv.appendChild(videoWrapper);
-          // firstDiv.className = 'cards-card-image';
         }
       }
 
@@ -319,10 +309,8 @@ export default function decorate(block) {
         video.setAttribute('poster', videoThumbnailImg);
       });
     }
-    // parentDiv.appendChild(videoTextDiv);
   });
 
-  // Heading
   const headingEl = document.createElement('div');
   headingEl.className = 'heading-wrapper';
   headingEl.appendChild(headingText);
@@ -334,5 +322,4 @@ export default function decorate(block) {
     block.append(headingEl);
   }
   block.append(videoTextDiv);
-  // decorateIcons(block);
 }
