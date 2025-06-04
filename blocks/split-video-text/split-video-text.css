@@ -63,6 +63,7 @@
   }
 
   .content-wrapper .icon-clock img {
+    filter: invert(1);
     width: 30px;
     height: 15px;
   }
