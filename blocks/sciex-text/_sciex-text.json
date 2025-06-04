@@ -25,7 +25,7 @@
           "valueType": "string",
           "value": "",
           "name": "id",
-          "label": "Id"
+          "label": "Id(sciextext)"
         },
         {
           "component": "select",
