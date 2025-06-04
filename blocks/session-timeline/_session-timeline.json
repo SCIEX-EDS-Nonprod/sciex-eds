@@ -24,8 +24,8 @@
           {
             "component": "text",
             "name": "sessionTimeLineId",
-            "value": "sessiontimeline",
-            "label": "Session Timeline Id",
+            "value": "",
+            "label": "Session Timeline Id(sessiontimeline)",
             "valueType": "string"
           },
           {
