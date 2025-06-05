@@ -193,7 +193,7 @@ export default function decorate(block) {
             li.prepend(span({ class: 'icon icon-clock' }));
           });
         }
-        div.className = `content-wrapper`;
+        div.className = 'content-wrapper';
       }
       decorateIcons(div);
       if (divIndex === 1) {
