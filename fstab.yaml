@@ -3,3 +3,5 @@ mountpoints:
     url: "https://author-p93412-e854706.adobeaemcloud.com/bin/franklin.delivery/SCIEX-EDS-Nonprod/sciex-eds/main"
     type: "markup"
     suffix: ".html"
+folders:
+  /search-results/: /zh-cn/search-results
