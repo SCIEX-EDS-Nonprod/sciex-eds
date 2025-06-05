@@ -639,7 +639,7 @@
         "component": "date-time",
         "valueType": "date-time",
         "name": "eventDate",
-        "label": "Eent Date",
+        "label": "Event Date",
         "placeholder": "YYYY-MM-DD",
         "displayFormat": null,
         "valueFormat": null,
