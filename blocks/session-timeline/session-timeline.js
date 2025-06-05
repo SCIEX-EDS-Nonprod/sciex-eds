@@ -21,6 +21,7 @@ export default function decorate(block) {
         [...ul.children].forEach((li) => {
           const clock = document.createElement('div');
           clock.appendChild(span({ class: 'icon icon-clock' }));
+          clock.style.filter = 'invert(1)';
 
           const strong = li.querySelector('strong');
           if (strong) {
