@@ -301,8 +301,6 @@ export default function decorate(block) {
           div.className = 'video-wrapper';
         }
       }
-
-      console.log(`div:::::${div}`);
     });
     if (videoThumbnailImg) {
       videoTextDiv.querySelectorAll('video').forEach((video) => {
