@@ -658,13 +658,13 @@ function decorateBlocks(main) {
 
 async function loadHeader(header) {
   const lang = document.documentElement.lang;
-  let path = `/${lang}/header`;
+  let path = `/${lang}/nav`;
   if(lang=== 'en'){
    path = `/header`;
   }else if(lang === 'ja'){
-    path = `/ja-jp/header`;
+    path = `/ja-jp/nav`;
   }else if(lang === 'zh-cn'){
-    path = `/zh-cn/header`;
+    path = `/zh-cn/nav`;
   }
   const headerBlock = buildBlock('header', '');
   header.append(headerBlock);
