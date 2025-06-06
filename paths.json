@@ -4,7 +4,11 @@
     "/content/sciex-eds/configuration:/.helix/config.json",
     "/content/sciex-eds/metadata:/metadata.json",
     "/content/sciex-eds/zh-cn/search-results:/search-results",
-    "/content/sciex-eds/ja-jp/search-results:/search-results"
+    "/content/sciex-eds/ja-jp/search-results:/search-results",
+    "/content/sciex-eds/ja-jp/nav:/nav",
+    "/content/sciex-eds/zh-cn/nav:/nav",
+    "/content/sciex-eds/ja-jp/footer:/footer",
+    "/content/sciex-eds/zh-cn/footer:/footer"
   ],
   "includes": [
     "/content/sciex-eds/"
