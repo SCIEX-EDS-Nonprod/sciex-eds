@@ -649,12 +649,32 @@ function decorateBlocks(main) {
  * @param {Element} header header element
  * @returns {Promise}
  */
-async function loadHeader(header) {
+/*async function loadHeader(header) {
   const headerBlock = buildBlock('header', '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
   return loadBlock(headerBlock);
+}*/
+
+async function loadHeader(header) {
+  const lang = document.documentElement.lang;
+  let path = `/${lang}/header`;
+  if(lang=== 'en'){
+   path = `/header`;
+  }else if(lang === 'ja'){
+    path = `/ja-jp/header`;
+  }else if(lang === 'zh-cn'){
+    path = `/zh-cn/header`;
+  }
+  const headerBlock = buildBlock('header', '');
+  header.append(headerBlock);
+  headerBlock.dataset.lang = lang;
+  headerBlock.dataset.blockName = 'header';
+  headerBlock.dataset.blockSrc = path; 
+  decorateBlock(headerBlock);
+  return loadBlock(headerBlock);
 }
+
 
 /**
  * Loads a block named 'footer' into footer
