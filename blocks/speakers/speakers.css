@@ -17,14 +17,20 @@
 .speaker-container .speaker-card {
     display: flex;
     align-items: flex-start;
-    gap: 3px;
+    gap: 30px;
     align-self: stretch;
     padding-top: 30px;
 }
 
 .speaker-container .speaker-image {
-    width: 100%;
     height: auto;
+}
+
+.speaker-image img {
+    width: 252px !important;
+    height: 189px !important;
+    object-fit: contain !important;
+    max-width: none !important;
 }
 
 .speaker-content h4 {

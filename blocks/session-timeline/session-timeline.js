@@ -20,7 +20,7 @@ export default function decorate(block) {
       if (ul) {
         [...ul.children].forEach((li) => {
           const clock = document.createElement('div');
-          clock.appendChild(span({ class: 'icon icon-clock' }));
+          clock.appendChild(span({ class: 'icon icon-blackclock' }));
 
           const strong = li.querySelector('strong');
           if (strong) {
