@@ -16,6 +16,7 @@ export default function decorate(block) {
   rows.forEach((row, index) => {
     if (index === 0) {
       block.id = `${row.textContent.trim()}-content`;
+      return;
     }
     const type = row.querySelector('p')?.textContent?.toLowerCase()?.trim();
     console.log(`type>${type}`);

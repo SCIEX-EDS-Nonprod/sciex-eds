@@ -624,8 +624,8 @@
       {
         "component": "text",
         "name": "eventId",
-        "value": "details",
-        "label": "Event Id",
+        "value": "",
+        "label": "Event Id(details)",
         "valueType": "string"
       },
       {
@@ -712,8 +712,8 @@
       {
         "component": "text",
         "name": "registerId",
-        "value": "registerform",
-        "label": "Register ID",
+        "value": "",
+        "label": "Register ID(registerform)",
         "valueType": "string"
       },
       {
@@ -1260,7 +1260,7 @@
         "valueType": "string",
         "value": "",
         "name": "id",
-        "label": "Id"
+        "label": "Id(sciextext)"
       },
       {
         "component": "select",
@@ -1360,8 +1360,8 @@
       {
         "component": "text",
         "name": "sessionTimeLineId",
-        "value": "sessiontimeline",
-        "label": "Session Timeline Id",
+        "value": "",
+        "label": "Session Timeline Id(sessiontimeline)",
         "valueType": "string"
       },
       {
