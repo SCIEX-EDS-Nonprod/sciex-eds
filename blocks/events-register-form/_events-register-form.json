@@ -23,8 +23,8 @@
         {
           "component": "text",
           "name": "registerId",
-          "value": "",
-          "label": "Register ID(registerform)",
+          "value": "registerform",
+          "label": "Register ID",
           "valueType": "string"
         },
         {

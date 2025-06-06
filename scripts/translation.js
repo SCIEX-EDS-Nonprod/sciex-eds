@@ -13,6 +13,7 @@ export const i18n = {
     searchTerm: 'Search term',
     result: 'Results',
     of: 'of',
+    querySummary: 'Results 1-10 of 1201',
     sortBy: 'Sort By',
     relevancy: 'Relevancy',
     title: 'Title',
@@ -28,7 +29,6 @@ export const i18n = {
     assetType: 'Asset type',
     language: 'Language',
     courseType: 'Course type',
-    courseLevel: 'Course level',
     trainingTopic: 'Training topic',
     techniques: 'Techniques',
     trainingType: 'Training type',
@@ -49,9 +49,6 @@ export const i18n = {
     showMore: 'Show More',
     showLess: 'Show Less',
     filter: 'Filter',
-    partNumber: 'Part Number',
-    lotNumber: 'Lot Number',
-    kitNumber: 'Kit Number'
   },
   "zh-cn": {
     contentType: '内容类别',
@@ -66,6 +63,7 @@ export const i18n = {
     searchTerm: '搜索关键词',
     result: '结果数',
     of: '总数',
+    querySummary: '结果数1-10，总数1201',
     sortBy: '排序方式',
     relevancy: '相关性',
     title: '标题',
@@ -81,7 +79,6 @@ export const i18n = {
     assetType: '内容类别',
     language: '语言',
     courseType: '课程目录',
-    courseLevel: '课程级别',
     trainingTopic: '培训主题',
     techniques: '技术',
     trainingType: '培训类别',
@@ -102,9 +99,6 @@ export const i18n = {
     showMore: '显示更多',
     showLess: '显示较少',
     filter: '筛选',
-    partNumber: '零件编号',
-    lotNumber: '批号',
-    kitNumber: '套件编号'
   },
   "ja": {
     contentType: 'コンテンツタイプ',
@@ -119,6 +113,7 @@ export const i18n = {
     searchTerm: '検索語',
     result: '検索結果',
     of: 'of',
+    querySummary: 'Results 1-10 of 1201',
     sortBy: '並べ替え',
     relevancy: '関連性',
     title: 'タイトル',
@@ -134,7 +129,6 @@ export const i18n = {
     assetType: 'アセットタイプ',
     language: '言語',
     courseType: 'コースタイプ',
-    courseLevel: 'コースレベル',
     trainingTopic: 'トレーニングトピック',
     techniques: '技術',
     trainingType: 'トレーニングタイプ',
@@ -155,8 +149,5 @@ export const i18n = {
     showMore: 'もっと見る',
     showLess: '表示を減らす',
     filter: 'フィルター',
-    partNumber: '部品番号',
-    lotNumber: 'ロット番号',
-    kitNumber: 'キット番号'
   },
 };

@@ -59,8 +59,6 @@ export const regulatoryDocFacetBreadcrumb = buildBreadcrumbManager(regulatoryDoc
 // Context variable controller
 const context = buildContext(regulatoryDocSearchEngine)
 context.add('host', window.location.origin);
-let lang = document.documentElement.lang
-context.add('locale', lang || 'en');
 
 export const allFacetController = createFacetController();
 

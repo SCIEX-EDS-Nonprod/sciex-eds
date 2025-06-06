@@ -48,6 +48,7 @@
   }
   .time-main {
     display: flex;
+    align-items: center;
     gap: 8px;
   }
   /* Mobile view (adjust max-width as needed) */

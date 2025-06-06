@@ -1,8 +1,4 @@
 // sorting-utils.js
-import { i18n } from '../translation.js';
-
-const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
 
 export const createSortHandler = (sortController) => ({
   sortBy: (criterion) => {
@@ -17,7 +13,7 @@ export const renderSortingDropdown = ({
   containerId,
   sortOptions,
   sortController,
-  labelText = `${strings.sortBy}:`,
+  labelText = 'Sort By:',
   selectId = 'sort-element',
   selectClass =
   'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm',

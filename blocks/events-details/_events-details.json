@@ -24,8 +24,8 @@
           {
             "component": "text",
             "name": "eventId",
-            "value": "",
-            "label": "Event Id(details)",
+            "value": "details",
+            "label": "Event Id",
             "valueType": "string"
           },
           {
@@ -39,7 +39,7 @@
             "component": "date-time",
             "valueType": "date-time",
             "name": "eventDate",
-            "label": "Event Date",
+            "label": "Eent Date",
             "placeholder": "YYYY-MM-DD",
             "displayFormat": null,
             "valueFormat": null,
