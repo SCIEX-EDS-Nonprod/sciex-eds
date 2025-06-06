@@ -3,8 +3,7 @@
     "/content/sciex-eds/:/",
     "/content/sciex-eds/configuration:/.helix/config.json",
     "/content/sciex-eds/metadata:/metadata.json",
-    "/content/sciex-eds.resource/query-index.json:/query-index.json",
-    "/content/sciex-eds.resource/search-index.json:/search-index.json"
+    "/content/sciex-eds/zh-cn/search-results:/search-results"
   ],
   "includes": [
     "/content/sciex-eds/"
