@@ -70,18 +70,6 @@
     margin-bottom: 0;
 }
 
-#blueClock {
-    content: url("/icons/blue-clock.svg");
-}
-
-#calender {
-    content: url("/icons/calander.svg");
-}
-
-#location {
-    content: url("/icons/Frame.svg");
-}
-
 .events-icontext {
     gap: 8px;
     display: flex;
