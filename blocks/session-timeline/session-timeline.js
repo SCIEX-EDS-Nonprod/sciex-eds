@@ -8,15 +8,17 @@ export default function decorate(block) {
   const rows = [...block.children];
   rows.forEach((row, index) => {
     if (index === 0) {
-      div.id = row.children[0].textContent;
+      const idText = row.querySelector('p')?.textContent?.trim();
+      if (idText) {
+        div.id = idText;
+      }
     } else if (index === 1) {
       const title = document.createElement('div');
       title.classList.add('session-timeline-text');
-      title.textContent = row.children[0].textContent;
+      title.textContent = row.querySelector('p')?.textContent?.trim() || '';
       div.appendChild(title);
     } else {
       const ul = row.querySelector('div > ul');
-
       if (ul) {
         [...ul.children].forEach((li) => {
           const clock = document.createElement('div');
@@ -40,6 +42,7 @@ export default function decorate(block) {
             const sessionInfo = document.createElement('span');
             sessionInfo.className = 'event-organizer';
             sessionInfo.textContent = sessionText.trim();
+
             const timemain = document.createElement('div');
             timemain.className = 'time-main';
             // Assemble time-row
@@ -49,16 +52,22 @@ export default function decorate(block) {
             timeRow.appendChild(sessionInfo);
 
             li.insertBefore(timeRow, li.firstChild);
-            const title = li.querySelector('ul > li');
-            title.classList.add('session-title');
+
+            const sessionTitle = li.querySelector('ul > li');
+            if (sessionTitle) {
+              sessionTitle.classList.add('session-title');
+            }
+
             console.log('li >', li.outerHTML);
           }
         });
+
+        decorateIcons(ul);
+        div.append(ul);
       }
-      decorateIcons(ul);
-      div.append(ul);
     }
   });
+
   block.classList.add('session-timeline');
   block.textContent = '';
   block.append(div);
