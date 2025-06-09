@@ -17,6 +17,7 @@ import renderCommonQuerySummary from '../../scripts/common-components/commonQuer
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
 import { renderCommonFacet } from '../../scripts/common-components/commonFacets.js';
 import renderCommonFacetBreadcurm from '../../scripts/common-components/commonFacetBreadcurm.js';
+import { i18n } from '../../scripts/translation.js';
 
 async function readBlockProperties(block) {
   // Create no results section
@@ -79,20 +80,22 @@ async function readBlockProperties(block) {
 }
 
 export default async function decorate(block) {
+  const lang = document.documentElement.lang || 'en';
+  const strings = i18n[lang] || i18n.en;
   // Create suggestion popup div
   const suggestionPopupDiv = document.createElement('div');
   suggestionPopupDiv.id = 'suggestion-popup';
   document.body.appendChild(suggestionPopupDiv);
 
   const facetsId = {
-    assettypes: 'Asset type',
-    year: 'Year',
-    language: 'Language',
-    massspectrometerscategories: 'Mass spectrometry',
-    capillaryelectrophoresiscategories: 'Capillary electrophoresis',
-    hplcandceproductscategories: 'Liquid chromoatography',
-    integratedsolutionscategories: 'Integrated solutions',
-    softwarecategories: 'Software',
+    assettypes: strings.assetType,
+    year: strings.year,
+    language: strings.language,
+    massspectrometerscategories: strings.massSpectrometry,
+    capillaryelectrophoresiscategories: strings.capillaryElectrophoresis,
+    hplcandceproductscategories: strings.liquidChromoatography,
+    integratedsolutionscategories: strings.integratedSolutions,
+    softwarecategories: strings.software,
   };
 
   const desiredOrder = [
