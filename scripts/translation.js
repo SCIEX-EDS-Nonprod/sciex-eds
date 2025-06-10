@@ -51,7 +51,8 @@ export const i18n = {
     filter: 'Filter',
     partNumber: 'Part Number',
     lotNumber: 'Lot Number',
-    kitNumber: 'Kit Number'
+    kitNumber: 'Kit Number',
+    products: 'Products'
   },
   "zh-cn": {
     contentType: '内容类别',
@@ -104,7 +105,8 @@ export const i18n = {
     filter: '筛选',
     partNumber: '零件编号',
     lotNumber: '批号',
-    kitNumber: '套件编号'
+    kitNumber: '套件编号',
+    products: '产品'
   },
   "ja": {
     contentType: 'コンテンツタイプ',
@@ -157,6 +159,7 @@ export const i18n = {
     filter: 'フィルター',
     partNumber: '部品番号',
     lotNumber: 'ロット番号',
-    kitNumber: 'キット番号'
+    kitNumber: 'キット番号',
+    products: '製品'
   },
 };
