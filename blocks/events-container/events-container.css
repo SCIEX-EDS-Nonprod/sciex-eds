@@ -313,6 +313,7 @@ main>.section>div {
     font-style: normal;
     font-weight: 330;
     line-height: 40px;
+    padding-top: 15px ;
 }
 
 .form-sub-heading {
@@ -323,6 +324,7 @@ main>.section>div {
     font-weight: 530;
     line-height: 24px;
     letter-spacing: 0.08px;
+    padding: 10px 0px;
 }
 
 @media (max-width: 768px) {
