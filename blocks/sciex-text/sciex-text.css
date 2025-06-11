@@ -55,7 +55,7 @@
 .sciex-text ul {
     list-style-type: inherit !important;
     padding-left: 30px !important;
-    padding-top: 20px !important;
+    /* padding-top: 20px !important; */
 }
 
 .sciex-text ul li::marker {
@@ -65,7 +65,7 @@
 .sciex-text ol {
     list-style-type: decimal !important;
     padding-left: 30px !important;
-    padding-top: 20px !important;
+    /* padding-top: 20px !important; */
 }
 
 .sciex-text ul li,

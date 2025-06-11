@@ -49,8 +49,14 @@ p {
     letter-spacing: 0.08px;
 }
 
-.events-container ul li {
-    padding: 7px 0px;
+.events-container .sciex-text ul li{
+    /* padding: 7px 0px; */
+    color: var(--Grey-600, #5B5B5B);
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px !important; /* 150% */
+    letter-spacing: 0.08px !important;
 }
 
 .events-container ol,
@@ -77,14 +83,22 @@ main>.section>div {
     gap: 8px;
 }
 
+.time-row strong {
+    color: var(--Grey-900, #141414);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 530;
+    letter-spacing: 0.045px;
+}
+
 .event-organizer {
     color: var(--Grey-600, #5B5B5B);
     font-family: "Geogrotesque Sharp VF";
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 330;
-    line-height: 24px;
-    letter-spacing: 0.08px;
+    line-height: 26px;
+    letter-spacing: 0.045px;
 }
 
 .session-title {
@@ -169,7 +183,13 @@ main>.section>div {
     font-weight: 530;
     line-height: 24px;
     letter-spacing: 0.12px;
-    margin: 20px 0;
+    margin: 53px 0 30px;
+}
+
+.session-timeline ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .events-details {
