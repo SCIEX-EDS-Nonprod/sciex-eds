@@ -304,6 +304,7 @@ main>.section>div {
 
 .iframe-form-container {
     height: 900px !important;
+    width: 100%;
 }
 
 .form-heading {

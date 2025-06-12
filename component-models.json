@@ -753,6 +753,13 @@
             "value": "two-column"
           }
         ]
+      },
+      {
+        "component": "text",
+        "name": "width",
+        "value": "",
+        "label": "Enter the width of form",
+        "valueType": "string"
       }
     ]
   },
