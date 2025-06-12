@@ -4,9 +4,6 @@
     margin: auto;
 }
 
-.iframe-form-container{
-    height: 900px !important;
-}
 .one-column{
     display: grid;
     width: 50%;
