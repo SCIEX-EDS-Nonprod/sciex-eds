@@ -60,7 +60,7 @@
 .tabs-container p {
   color: var(--Neutrals-500, #707070);
   font-family: "Geogrotesque Sharp VF", sans-serif !important;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 330;
   line-height: 26px; /* 144.444% */
@@ -69,12 +69,12 @@
 }
 
 .tabs-container .tech-note p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px; /* 142.857% */
   letter-spacing: 0.07px;
 }
 
-.tabs-container h3 {
+.tabs-container h4 {
   color: var(--Neutrals-900, #141414);
   font-family: "Geogrotesque Sharp VF", sans-serif !important;
   font-size: 24px;
@@ -115,13 +115,13 @@
 }
 
 .tabs-container ul li {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 26px; /* 144.444% */
   letter-spacing: 0.045px;
 }
 
 .tabs-container ul li a {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 26px;
   letter-spacing: 0.045px;
   text-decoration: underline;

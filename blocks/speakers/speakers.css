@@ -1,13 +1,13 @@
 .speakers-wrapper {
     max-width: 90pc !important;
-    padding: 0 64px !important;
+    padding: 40px 64px !important;
     margin: auto;
 }
 
 .speakers .heading {
     color: var(--Neutrals-900, #141414);
     font-family: "Geogrotesque Sharp VF";
-    font-size: 32px;
+    font-size: 40px;
     font-style: normal;
     font-weight: 330;
     line-height: 40px;
@@ -36,7 +36,7 @@
 .speaker-content h4 {
     color: var(--Grey-900, #141414);
     font-family: "Geogrotesque Sharp VF";
-    font-size: 20px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 530;
     line-height: 26px;
@@ -44,7 +44,7 @@
 }
 .speaker-content p {
     color: var(--Grey-600, #5B5B5B);
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 330;
     line-height: 26px;
@@ -59,7 +59,7 @@
 }
 .speaker-content ul li {
     color: var(--Grey-600, #5B5B5B);
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 330;
     line-height: 24px;
