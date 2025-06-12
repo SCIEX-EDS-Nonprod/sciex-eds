@@ -758,7 +758,7 @@
         "component": "text",
         "name": "width",
         "value": "",
-        "label": "Enter the width of form",
+        "label": "Enter the height of form in pixcel",
         "valueType": "string"
       }
     ]
