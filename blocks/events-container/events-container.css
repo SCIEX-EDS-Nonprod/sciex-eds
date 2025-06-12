@@ -33,7 +33,7 @@
 h2 {
     color: #000;
     font-family: "Geogrotesque Sharp VF";
-    font-size: 24px;
+    font-size: 40px;
     font-style: normal;
     font-weight: 530;
     line-height: 32px;
@@ -85,7 +85,7 @@ main>.section>div {
 
 .time-row strong {
     color: var(--Grey-900, #141414);
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 530;
     letter-spacing: 0.045px;
@@ -94,7 +94,7 @@ main>.section>div {
 .event-organizer {
     color: var(--Grey-600, #5B5B5B);
     font-family: "Geogrotesque Sharp VF";
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 330;
     line-height: 26px;
@@ -104,7 +104,7 @@ main>.section>div {
 .session-title {
     color: var(--Grey-600, #5B5B5B);
     font-family: "Geogrotesque Sharp VF";
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 330;
     line-height: 26px;
@@ -206,7 +206,7 @@ main>.section>div {
 .events-details-text {
     color: var(--Grey-900, #141414);
     font-family: "Geogrotesque Sharp VF";
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 330;
     line-height: 24px;

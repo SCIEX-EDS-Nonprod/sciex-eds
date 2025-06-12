@@ -11,22 +11,22 @@
 }
 
 .sciex-text h1 {
-    font-size: 45px;
+    font-size: 52px;
 }
 .sciex-text h2 {
     font-size: 40px;
 }
 .sciex-text h3 {
-    font-size: 30px;
+    font-size: 32px;
 }
 .sciex-text h4 {
     font-size: 24px;
 }
 .sciex-text h5 {
-    font-size: 20px;
+    font-size: 18px;
 }
 .sciex-text h6 {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .sciex-text h1,
@@ -79,13 +79,13 @@
 }
 
 .sciex-text ul li {
-    font-size: 18px !important;
+    font-size: 16px !important;
     line-height: 26px !important;
     letter-spacing: 0.045px !important;
 }
 
 .sciex-text ul li a {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 26px;
     letter-spacing: 0.045px;
     text-decoration: underline;
