@@ -19,7 +19,7 @@ export default function decorate(block) {
   iframe.id = 'events-register-form';
   iframe.src = block.children[3].textContent;// 'https://info.sciex.com/LP=4907';
 
-  const height = block.children[5]?.textContent?.trim() || '900px !important';
+  const height = block.children[5]?.textContent?.trim() || '900px';
 
   let alignment;
   if (block.children[4] && block.children[4].textContent) {
