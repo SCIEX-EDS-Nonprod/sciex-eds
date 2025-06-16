@@ -914,6 +914,17 @@ main .section.highlight {
   margin-right: 10px;
 }
 
+.history-item {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.history-item svg {
+  margin-right: 10px;
+}
+
 #suggestion-popup {
   position: absolute;
   top: 296px;
