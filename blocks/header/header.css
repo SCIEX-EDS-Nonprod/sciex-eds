@@ -145,8 +145,7 @@ header nav ul li picture:hover {
     position: absolute;
     top: 296px;
     left: 488px;
-    width: -webkit-fill-available;
-    max-height: 200px;
+    width: 32%;
     overflow-y: auto;
     z-index: 10;
     display: block;
