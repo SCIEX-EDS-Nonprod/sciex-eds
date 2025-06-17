@@ -577,7 +577,7 @@ function createGlobalSearch() {
   });
 
   searchBox.addEventListener('focus', () => {
-    showSuggestions('default', true);
+    showSuggestions(selectedContentType, true);
   });
 
   searchBox.addEventListener('blur', () => {
