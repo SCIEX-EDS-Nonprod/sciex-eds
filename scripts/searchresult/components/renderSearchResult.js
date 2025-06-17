@@ -48,21 +48,20 @@ const renderSearchResults = () => {
       querySortSection.removeAttribute('style');
     }
     sortedResults.forEach((result) => {
-
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
-      let partNumber = result.raw.productpartnumber ? `${strings.partNumber} : ${result.raw.productpartnumber } | `: '';
-      let lotNumber = result.raw.lotnumber ? `${strings.lotNumber} : ${result.raw.lotnumber } | `: '';
-      let componentLotNumber = result.raw.kitpartnumber ?`${strings.kitNumber} : ${result.raw.kitpartnumber } `: '';
+      const partNumber = result.raw.productpartnumber ? `${strings.partNumber} : ${result.raw.productpartnumber} | ` : '';
+      const lotNumber = result.raw.lotnumber ? `${strings.lotNumber} : ${result.raw.lotnumber} | ` : '';
+      const componentLotNumber = result.raw.kitpartnumber ? `${strings.kitNumber} : ${result.raw.kitpartnumber} ` : '';
 
       regulatoryInfo.innerHTML = `${partNumber}  ${lotNumber}  ${componentLotNumber}`;
 
       const courseInfo = document.createElement('div');
       courseInfo.className = 'course-info';
-      let duration = result.raw.duration ? `Duration : ${result.raw.duration} | ` : '';
-      let language = result.raw.language ? `Language : ${result.raw.language} | ` : '';
-      let courseType = result.raw.coursetypecategories ? `Type : ${result.raw.coursetypecategories} | ` : '';
-      let courseLevel = result.raw.levelcategories ? `Course Level : ${result.raw.levelcategories} | ` : '';
+      const duration = result.raw.duration ? `Duration : ${result.raw.duration} | ` : '';
+      const language = result.raw.language ? `Language : ${result.raw.language} | ` : '';
+      const courseType = result.raw.coursetypecategories ? `Type : ${result.raw.coursetypecategories} | ` : '';
+      const courseLevel = result.raw.levelcategories ? `Course Level : ${result.raw.levelcategories} | ` : '';
       courseInfo.innerHTML = `${duration}  ${language}  ${courseType}  ${courseLevel}  Rating : `;
 
       const ratingContainer = document.createElement('span');
@@ -86,12 +85,12 @@ const renderSearchResults = () => {
       resultItem.className = 'result-item';
       resultItem.innerHTML = `
           <div class="item-details"> 
-            ${ result.raw.isnewcourse || result.raw.coursetypecategories ?  
-              `<div class="tag-container">
-                ${ result.raw.coursetypecategories.toString() === 'Premium online' ? `<span class="tag premium">Premium</span>` : ''}
-                ${ result.raw.isnewcourse ? `<span class="tag new">New</span>` : ''}
+            ${result.raw.isnewcourse || result.raw.coursetypecategories
+    ? `<div class="tag-container">
+                ${result.raw.coursetypecategories.toString() === 'Premium online' ? '<span class="tag premium">Premium</span>' : ''}
+                ${result.raw.isnewcourse ? '<span class="tag new">New</span>' : ''}
               </div> ` : ''
-            }
+}
             <h3>${result.title || 'No Title Available'}</h3>
             ${
   result.raw.description
@@ -117,8 +116,8 @@ const renderSearchResults = () => {
       if (duration || courseType || courseLevel) {
         heading.insertAdjacentElement('afterend', courseInfo);
       }
-      
-      if ( partNumber || lotNumber || componentLotNumber){
+
+      if (partNumber || lotNumber || componentLotNumber) {
         heading.insertAdjacentElement('afterend', regulatoryInfo);
       }
 
