@@ -525,13 +525,13 @@ function processFragment(block, fragment) {
 }
 
 export default async function decorate(block) {
-  const lang = document.documentElement.lang;
+  const { lang } = document.documentElement;
   let path = '/footer';
-  if(lang=== 'en'){
-   path = '/footer';
-  }else if(lang === 'ja'){
+  if (lang === 'en') {
+    path = '/footer';
+  } else if (lang === 'ja') {
     path = '/ja-jp/footer';
-  }else if(lang === 'zh-cn'){
+  } else if (lang === 'zh-cn') {
     path = '/zh-cn/footer';
   }
   const footerMeta = getMetadata('footer');
