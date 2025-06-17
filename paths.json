@@ -4,8 +4,12 @@
     "/content/sciex-eds/configuration:/.helix/config.json",
     "/content/sciex-eds/metadata:/metadata.json",
     "/content/sciex-eds/zh-cn/search-results:/search-results",
-    "/content/sciex-eds/ja-jp/search-results:/search-results"
-
+    "/content/sciex-eds/ja-jp/search-results:/search-results",
+    "/content/sciex-eds/zh-cn/support/tech-regulatory:/support/tech-regulatory",
+    "/content/sciex-eds/ja-jp/support/tech-regulatory:/support/tech-regulatory",
+    "/content/sciex-eds/zh-cn/support/customer-documents:/support/customer-documents",
+    "/content/sciex-eds/ja-jp/support/customer-documents:/support/customer-documents"
+    
   ],
   "includes": [
     "/content/sciex-eds/"
