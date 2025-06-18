@@ -11,11 +11,8 @@ export default async function decorate(block) {
     block.id = titleId.trim();
   }
   headingDiv.classList.add('hero-heading');
-  const pageTitle = getMetadata('og:title');
   if (heading && heading.trim() !== '') {
     headingDiv.append(heading.trim());
-  } else {
-    headingDiv.append(pageTitle);
   }
   blockDiv.append(headingDiv);
 
