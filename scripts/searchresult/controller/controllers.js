@@ -44,6 +44,15 @@ export const contentTypeFacetController = buildFacet(searchEngine, {
   },
 });
 
+// Language facets controller
+export const languageFacetController = buildFacet(searchEngine, {
+  options: { 
+    numberOfValues: 10,
+    field: 'language',
+    facetId: 'language'
+  },
+});
+
 // pagination controller
 export const paginationController = buildPager(searchEngine);
 
@@ -82,6 +91,7 @@ export  function handleResultClick(results) {
 export const allFacetController = createFacetController();
 
 function createFacetController() {
+  let lang = document.documentElement.lang;
   const facetsId = [
     'coursetypecategories',
     'capillaryelectrophoresiscategories',
@@ -98,13 +108,17 @@ function createFacetController() {
     'assettypes',
     'instrumentfamily',
     'languagecountry',
-    'language',
     'year',
     'location',
     'applications',
     'technicaldocuments',
     'productcategories'
   ];
+
+  if (lang !== 'ja' && lang !== 'zh-cn') {
+    facetsId.push('language');
+  }
+
   const controllerMap = new Map();
   facetsId.forEach((item) => {
    const controller = buildFacet(searchEngine, {
