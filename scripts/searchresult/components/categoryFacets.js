@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {contentTypeFacetController, allFacetController, facetBreadcrumb } from "../controller/controllers.js";
+import {contentTypeFacetController, allFacetController, facetBreadcrumb, languageFacetController } from "../controller/controllers.js";
 import { i18n } from "../../translation.js";
 
 const lang = document.documentElement.lang || 'en';
@@ -468,9 +468,16 @@ function createFacetDiv(id) {
   } 
 }
 
-export function callCreateFacet(){
+export function callCreateFacet() {
   createFacetRender(contentTypeFacetController, "contenttype", strings.contentType);
+
+  let lang = document.documentElement.lang;
+
+  if (lang === 'ja' || lang === 'zh-cn') {
+    createFacetRender(languageFacetController, "language", strings.language);
+  }
   const facetController = allFacetController;
+
   const facetsId = {
     'coursetypecategories': strings.courseType,
     'certificatetypecategories': strings.certificateType,
@@ -486,7 +493,6 @@ export function callCreateFacet(){
     'trainingtypecategories': strings.trainingType,
     'assettypes': strings.assetType,
     'languagecountry': strings.languageCountry,
-    'language' : strings.language,
     'year': strings.year,
     'location': strings.trainingLocation,
     'applications': strings.applications,
@@ -494,6 +500,10 @@ export function callCreateFacet(){
     'instrumentfamily': strings.instrumentFamily,
     'productcategories': strings.products
   };
+
+  if (lang !== 'ja' && lang !== 'zh-cn') {
+    facetsId['language'] = strings.language;
+  }
 
   for (let item in facetsId) {
     const val = facetController.get(item);
@@ -503,10 +513,10 @@ export function callCreateFacet(){
         elementToRemove.remove();
       }
     }
-    if(val.state.values.length){
-      createFacetRender(val,item,facetsId[item]);
+    if (val.state.values.length) {
+      createFacetRender(val, item, facetsId[item]);
     }
-  };
+  }
 }
 
 export const handleMobileFilters = () => {
