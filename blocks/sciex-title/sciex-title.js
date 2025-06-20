@@ -1,4 +1,4 @@
-import { } from '../../scripts/aem.js';
+import { getMetadata } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   // Create main container div
@@ -11,8 +11,11 @@ export default async function decorate(block) {
     block.id = titleId.trim();
   }
   headingDiv.classList.add('hero-heading');
+  const pageTitle = getMetadata('og:title');
   if (heading && heading.trim() !== '') {
     headingDiv.append(heading.trim());
+  } else {
+    headingDiv.append(pageTitle);
   }
   blockDiv.append(headingDiv);
 
