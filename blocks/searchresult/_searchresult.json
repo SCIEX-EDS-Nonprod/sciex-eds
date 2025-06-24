@@ -36,6 +36,13 @@
         },
         {
           "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
+        },
+        {
+          "component": "text",
           "name": "text1",
           "value": "",
           "label": "No results text1",
