@@ -197,7 +197,10 @@ export default function decorate(block) {
       }
       decorateIcons(div);
       if (divIndex === 1) {
-        const youtubeLink = div.querySelector('a').textContent.trim();
+        let youtubeLink;
+        if(div.querySelector('a')) {
+          youtubeLink = div.querySelector('a').textContent.trim();
+        }
         const videoAnchor = div.querySelector('a[href$=".mp4"]');
         if (videoAnchor) {
           const videoSrc = videoAnchor.href;

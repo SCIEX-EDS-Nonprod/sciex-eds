@@ -329,8 +329,8 @@ export default async function decorate(block) {
         lifeSciencesDiv.appendChild(section.querySelector('div'));
         block.append(lifeSciencesDiv);
       } else if (iteration === 2) {
-        if (main.querySelector('picture')) {
-          coveoNoResultsDiv.appendChild(main.querySelector('picture'));
+        if (section.querySelector('picture')) {
+          coveoNoResultsDiv.appendChild(section.querySelector('picture'));
         }
       } else if (iteration === 3) {
         const noResultsText1 = section.querySelector('div');
