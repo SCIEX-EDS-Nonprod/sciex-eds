@@ -172,7 +172,7 @@ export default function decorate(block) {
     moveInstrumentation(row, videoTextDiv);
     while (row.firstElementChild) videoTextDiv.append(row.firstElementChild);
     let videoThumbnailImg;
-
+    let videoALtText = '';
     [...videoTextDiv.children].forEach((div, divIndex) => {
       if (divIndex !== 0 && div.querySelector('picture')) {
         const pictureImg = div.querySelector('picture img');
@@ -198,7 +198,7 @@ export default function decorate(block) {
       decorateIcons(div);
       if (divIndex === 1) {
         let youtubeLink;
-        if(div.querySelector('a')) {
+        if (div.querySelector('a')) {
           youtubeLink = div.querySelector('a').textContent.trim();
         }
         const videoAnchor = div.querySelector('a[href$=".mp4"]');
@@ -304,10 +304,17 @@ export default function decorate(block) {
           div.className = 'video-wrapper';
         }
       }
+      if (divIndex === 3) {
+        if (div.querySelector('p')) {
+          videoALtText = div.querySelector('p').textContent.trim();
+          div.innerHTML = '';
+        }
+      }
     });
     if (videoThumbnailImg) {
       videoTextDiv.querySelectorAll('video').forEach((video) => {
         video.setAttribute('poster', videoThumbnailImg);
+        video.setAttribute('alt', videoALtText);
       });
     }
   });
