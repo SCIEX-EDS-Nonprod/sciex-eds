@@ -1348,8 +1348,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
+        "name": "imageAltText",
+        "label": "Image Alt text",
         "value": ""
       },
       {
@@ -1529,7 +1529,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "videoAlt",
+        "name": "videoAltText",
         "label": "Video Alt Text",
         "value": ""
       }

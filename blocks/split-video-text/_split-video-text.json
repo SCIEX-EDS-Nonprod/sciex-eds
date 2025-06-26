@@ -114,7 +114,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "videoAlt",
+          "name": "videoAltText",
           "label": "Video Alt Text",
           "value": ""
         }
