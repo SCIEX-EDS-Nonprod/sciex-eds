@@ -26,6 +26,13 @@
           "name": "login-sso",
           "value": "",
           "label": "login"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
         }
       ]
     }
