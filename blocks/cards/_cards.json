@@ -126,6 +126,11 @@
           "name": "videoThumbnail",
           "label": "Video Thumbnail Picker",
           "multi": false
+        },
+        {
+          "component": "text",
+          "name": "imageAlt",
+          "label": "Alt Text"
         }
       ]
     },
@@ -145,6 +150,11 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
       }
       ]
     }
