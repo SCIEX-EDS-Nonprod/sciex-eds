@@ -333,12 +333,19 @@ export default async function decorate(block) {
           coveoNoResultsDiv.appendChild(section.querySelector('picture'));
         }
       } else if (iteration === 3) {
+        if (section.querySelector('div')) {
+          const altText = section.querySelector('div').textContent.trim();
+          if (coveoNoResultsDiv.querySelector('img')) {
+            coveoNoResultsDiv.querySelector('img').setAttribute('alt', altText);
+          }
+        }
+      } else if (iteration === 4) {
         const noResultsText1 = section.querySelector('div');
         noResultsText1.id = 'noresults-text1';
         noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
         noResultsText.appendChild(noResultsText1);
         coveoNoResultsDiv.appendChild(noResultsText);
-      } else if (iteration === 4) {
+      } else if (iteration === 5) {
         const noResultsText2 = section.querySelector('div');
         noResultsText2.classList = 'noresults-text2';
         noResultsText.appendChild(noResultsText2);
