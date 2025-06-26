@@ -130,8 +130,8 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "imageAlt",
-          "label": "Alt",
+          "name": "imageAltText",
+          "label": "Alt text",
           "value": ""
         }
       ]
@@ -152,13 +152,6 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
       }
       ]
     }
