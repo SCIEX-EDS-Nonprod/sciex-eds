@@ -37,8 +37,8 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "imageAlt",
-          "label": "Alt",
+          "name": "imageAltText",
+          "label": "Image Alt text",
           "value": ""
         },
         {
