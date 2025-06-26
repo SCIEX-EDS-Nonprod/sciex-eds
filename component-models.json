@@ -664,8 +664,8 @@
       },
       {
         "component": "radio-group",
-        "label": "Select below options to open link in new tab?",
-        "name": "selectbelowoption",
+        "label": "Select below options to open a link",
+        "name": "OpentionToSelectPrimary",
         "valueType": "string",
         "options": [
           {
@@ -690,8 +690,8 @@
       },
       {
         "component": "radio-group",
-        "label": "Select below options to open link in new tab?",
-        "name": "selectbelowoption",
+        "label": "Select below options to open a link",
+        "name": "OpentionToSelectSecondary",
         "valueType": "string",
         "options": [
           {
