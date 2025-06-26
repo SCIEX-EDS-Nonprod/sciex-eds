@@ -1506,13 +1506,6 @@
         "multi": false
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "videoAlt",
-        "label": "Video Alt Text",
-        "value": ""
-      },
-      {
         "component": "reference",
         "valueType": "string",
         "name": "videoThumbnail",
@@ -1522,8 +1515,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "videoThumbnailAlt",
-        "label": "Video Thumbnail Alt Text",
+        "name": "videoAlt",
+        "label": "Video Alt Text",
         "value": ""
       }
     ]
