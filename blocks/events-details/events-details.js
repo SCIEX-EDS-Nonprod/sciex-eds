@@ -93,36 +93,58 @@ export default function decorate(block) {
     } else if (index === 4) {
       const buttonrow = document.createElement('div');
       buttonrow.classList.add('button-row');
-
-      const button = document.createElement('button');
-      button.classList.add('primary-button');
-      button.appendChild(document.createTextNode(row.children[0].textContent));
-
-      const anchor = document.createElement('a');
-      // anchor.href = href;
-      // anchor.title = title;
-      // anchor.target = target;
-      anchor.rel = 'noopener noreferrer';
-      // anchor.classList.add('button-link');
-      anchor.appendChild(button);
-      buttonrow.appendChild(anchor);
+      if (row.children[0]) {
+        const button = document.createElement('button');
+        button.classList.add('primary-button');
+        button.appendChild(document.createTextNode(row.children[0].textContent));
+        const anchor = document.createElement('a');
+        anchor.classList.add('button1-link');
+        anchor.appendChild(button);
+        buttonrow.appendChild(anchor);
+      }
       div.appendChild(buttonrow);
+    } else if (index === 5) {
+      let href = '#';
+      if (row.children[0]) {
+        href = row.children[0].textContent;
+      }
+      if (div.querySelector('.button1-link')) {
+        div.querySelector('.button1-link').setAttribute('href', href);
+      }
+    } else if (index === 6) {
+      let target = '_blank';
+      if (row.children[0]) {
+        target = row.children[0].textContent;
+      }
+      if (div.querySelector('.button1-link')) {
+        div.querySelector('.button1-link').setAttribute('target', target);
+      }
     } else if (index === 7) {
       const buttonrow = div.querySelector('.button-row');
-      if (buttonrow) {
+      if (buttonrow && row.children[0]) {
         const button = document.createElement('button');
         button.classList.add('secondary-button');
         button.appendChild(document.createTextNode(row.children[0].textContent));
-        // button.appendChild(span({ class: `icon icon-${icon}` }));
-
         const anchor = document.createElement('a');
-        // anchor.href = href;
-        // anchor.title = title;
-        // anchor.target = target;
-        anchor.rel = 'noopener noreferrer';
-        // anchor.classList.add('button-link');
+        anchor.classList.add('button2-link');
         anchor.appendChild(button);
         buttonrow.appendChild(anchor);
+      }
+    } else if (index === 8) {
+      let href = '#';
+      if (row.children[0]) {
+        href = row.children[0].textContent;
+      }
+      if (div.querySelector('.button2-link')) {
+        div.querySelector('.button2-link').setAttribute('href', href);
+      }
+    } else if (index === 9) {
+      let target = '_blank';
+      if (row.children[0]) {
+        target = row.children[0].textContent;
+      }
+      if (div.querySelector('.button2-link')) {
+        div.querySelector('.button2-link').setAttribute('target', target);
       }
     }
   });
