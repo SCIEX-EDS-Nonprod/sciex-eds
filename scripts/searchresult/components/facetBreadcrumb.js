@@ -113,6 +113,7 @@ export const renderFacetBreadcurm = () => {
     location: strings.trainingLocation,
     applications: strings.applications,
     technicaldocuments: strings.technicalDocuments,
+    productcategories: 'Product',
   };
 
   facetBreadcrumb.state.facetBreadcrumbs.forEach((value) => {
@@ -123,6 +124,14 @@ export const renderFacetBreadcurm = () => {
       } else {
         fieldName = facetsId[value.field];
       }
+
+      let displayText;
+      if (item.value.value === 'binarydata') {
+        displayText = 'eCommerce';
+      } else {
+        displayText = item.value.value;
+      }
+
       const gridContainer = document.createElement('div');
       gridContainer.classList.add('facet-breadcrumb');
       gridContainer.addEventListener('click', () => item.deselect());
@@ -130,7 +139,7 @@ export const renderFacetBreadcurm = () => {
       const gridItem1 = document.createElement('div');
       gridItem1.classList.add('grid-item');
       const box1 = document.createElement('div');
-      box1.textContent = `${fieldName} : ${item.value.value}`;
+      box1.textContent = `${fieldName} : ${displayText}`;
       gridItem1.appendChild(box1);
 
       const gridItem2 = document.createElement('div');
