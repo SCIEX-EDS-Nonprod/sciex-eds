@@ -81,7 +81,7 @@ async function initializeSerachInterface(block, blockName) {
     type: 'text',
     id: 'coveo-query',
     placeholder: strings.search,
-    maxLength: 20,
+    maxLength: 200,
     classList: ['search-box', 'tw-w-full', 'tw-py-3', 'tw-px-4', 'tw-border', 'tw-border-gray-300', 'tw-rounded-md'],
   });
 

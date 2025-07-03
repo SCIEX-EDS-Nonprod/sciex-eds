@@ -217,7 +217,7 @@ export default async function decorate(block) {
   searchInput.type = 'text';
   searchInput.id = 'coveo-query';
   searchInput.placeholder = strings.search;
-  searchInput.maxLength = 20;
+  searchInput.maxLength = 200;
   searchInput.classList.add(
     'search-box',
     'tw-w-full',
