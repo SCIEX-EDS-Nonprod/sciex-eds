@@ -93,7 +93,7 @@ const renderCommonSearchBox = (searchBoxController) => {
     searchBoxController.submit();
     clearSearch.style.display = 'none';
     searchTermValidation.style.display = 'flex';
-    charCountDisplay.textContent = `${0} / 20`;
+    charCountDisplay.textContent = `${0} / 200`;
     validationError.style.display = 'none';
     validationText.style.display = 'block';
     queryInput.style.border = '1px solid #C6C6C6';
@@ -101,8 +101,8 @@ const renderCommonSearchBox = (searchBoxController) => {
 
   queryInput.addEventListener('input', () => {
     const charCount = queryInput.value.length;
-    charCountDisplay.textContent = `${charCount} / 20`;
-    if (charCount === 20) {
+    charCountDisplay.textContent = `${charCount} / 200`;
+    if (charCount === 200) {
       validationError.style.display = 'block';
       validationText.style.display = 'none';
       suggestionPopup.style.display = 'none';
