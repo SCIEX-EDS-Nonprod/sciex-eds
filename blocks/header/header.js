@@ -1047,7 +1047,9 @@ function createSubMenuItems(section, containerDiv, firstpartdiv) {
         });
       });
       firstpartdiv.append(ulTag);
-      firstpartdiv.append(anchorTag);
+      if(anchorTag && anchorTag.href !== '') {
+        firstpartdiv.append(anchorTag);
+      }
     }
   }
 }
@@ -1402,7 +1404,9 @@ function createMegaMenuThirdLevel(child) {
     });
   }
   secondPartdiv.append(wrapdiv);
-  secondPartdiv.appendChild(viewAllTag);
+  if(viewAllTag && viewAllTag.href !== '') {
+    secondPartdiv.appendChild(viewAllTag);
+  }
   if (isSubItems) {
     containerDiv.appendChild(firstpartdiv);
   }
