@@ -1234,6 +1234,9 @@ function createMegaMenuThirdLevel(child) {
                   'icon icon-chevron-right tw-ml-8 tw-duration-500 group-hover:tw-pl-2',
               });
               spanTag.append(chevronRight);
+              if(thirdPartdiv.querySelector('img')) {
+                thirdPartdiv.querySelector('img').alt = anchTag.text;
+              }
               anchTag.text = '';
               anchTag.append(spanTag);
               const pTag = section.nextElementSibling;
