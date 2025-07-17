@@ -158,15 +158,26 @@ header nav ul li picture:hover {
     display: none;
 }
 
-.suggestion-item {
+.global-suggestion-item {
     padding: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
 }
 
-.suggestion-item svg {
+.global-suggestion-item svg {
     margin-right: 10px;
+}
+
+.global-history-item {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.global-history-item svg {
+  margin-right: 10px;
 }
 
 .desktop-links {
