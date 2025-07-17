@@ -19,11 +19,11 @@ export const searchBoxController = buildSearchBox(searchEngine, {
     highlightOptions: {
       notMatchDelimiters: {
         open: '<strong>',
-        close: '</strong>',
+        close: '</strong> &nbsp;',
       },
       correctionDelimiters: {
         open: '<i>',
-        close: '</i>',
+        close: '</i> &nbsp;',
       },
     },
   },

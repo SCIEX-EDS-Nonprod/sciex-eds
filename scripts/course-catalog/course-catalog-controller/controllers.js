@@ -18,11 +18,11 @@ export const courseCatalogSearchBoxController = buildSearchBox(courseCatalogSear
     highlightOptions: {
       notMatchDelimiters: {
         open: '<strong>',
-        close: '</strong>',
+        close: '</strong>&nbsp;',
       },
       correctionDelimiters: {
         open: '<i>',
-        close: '</i>',
+        close: '</i>&nbsp;',
       },
     },
   },
