@@ -108,15 +108,17 @@ if (document.readyState === 'loading') {
 
 function extractYouTubeID(url) {
   try {
-    const parsed = new URL(url);
-    if (parsed.hostname === 'youtu.be') {
-      return parsed.pathname.slice(1);
+    if(url && url.includes("youtube")) {
+      const parsed = new URL(url);
+      if (parsed.hostname === 'youtu.be') {
+        return parsed.pathname.slice(1);
+      }
+      if (parsed.searchParams.has('v')) {
+        return parsed.searchParams.get('v');
+      }
+      const match = parsed.pathname.match(/\/embed\/([a-zA-Z0-9_-]+)/);
+      if (match) return match[1];
     }
-    if (parsed.searchParams.has('v')) {
-      return parsed.searchParams.get('v');
-    }
-    const match = parsed.pathname.match(/\/embed\/([a-zA-Z0-9_-]+)/);
-    if (match) return match[1];
   } catch (e) {
     console.error('Invalid URL in extractYouTubeID:', url, e);
   }
@@ -166,6 +168,10 @@ export default function decorate(block) {
       } else {
         target = '_blank';
       }
+      return;
+    }
+
+    if (index >= 5) {
       return;
     }
 
