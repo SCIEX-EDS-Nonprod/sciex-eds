@@ -30,22 +30,22 @@ export default function decorate(block) {
       && singleChild.querySelector('p')
     ) {
       blockId = text || 'sciex-text';
-    }else{
+    } else {
       content = singleChild;
     }
   }
 
   block.id = `${blockId}-content`;
   block.className = 'sciex-text';
-//  block.parentElement.classList.add('tabs-container-wrapper');
-  if(!content){
-    if(!alignment){
-      content.className = alignment ;
-    }else{
+  //  block.parentElement.classList.add('tabs-container-wrapper');
+  if (!content) {
+    if (!alignment) {
+      content.className = alignment;
+    } else {
       content.className = 'text-left';
     }
   }
-  
+
   block.textContent = '';
   block.append(content);
 }
