@@ -12,7 +12,7 @@ export default async function decorate(block) {
     } else {
       const pic = row.querySelector('picture');
       const div = document.createElement('div');
-      div.classList.add('tech-note');
+
       if (pic) {
         [...row.children].forEach((col, colIndex) => {
           const inputDiv = document.createElement('div');
@@ -30,6 +30,7 @@ export default async function decorate(block) {
               div.classList.add(imagePos);
             }
           }
+          div.classList.add('tech-note');
           moveInstrumentation(row, div);
           blockDiv.append(div);
         });
