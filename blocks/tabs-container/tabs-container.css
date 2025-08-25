@@ -153,6 +153,7 @@
 .tech-note {
   display: flex;
   padding: 30px;
+  margin-top: 1rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 0px;
