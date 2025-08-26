@@ -1489,7 +1489,6 @@ function processHtml(block, main) {
 export default async function decorate(block) {
   // load nav as fragment
   const { lang } = document.documentElement;
-  console.log(`lang>${lang}`);
   let path = '/nav.plain.html';
   if (lang === 'en') {
     path = '/nav.plain.html';
@@ -1498,9 +1497,7 @@ export default async function decorate(block) {
   } else if (lang === 'zh-cn') {
     path = '/zh-cn/nav.plain.html';
   }
-  console.log(`path>${path}`);
   const resp = await fetch(path);
-  console.log(`resp>${resp}`);
   const suggestionPopupDiv = document.createElement('div');
   suggestionPopupDiv.id = 'global-suggestion-popup';
 
