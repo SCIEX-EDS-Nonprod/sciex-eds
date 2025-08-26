@@ -38,14 +38,13 @@ export default function decorate(block) {
   block.id = `${blockId}-content`;
   block.className = 'sciex-text';
   //  block.parentElement.classList.add('tabs-container-wrapper');
-  if (!content) {
-    if (!alignment) {
+  if (content) {
+    if (alignment) {
       content.className = alignment;
     } else {
       content.className = 'text-left';
     }
+    block.textContent = '';
+    block.append(content);
   }
-
-  block.textContent = '';
-  block.append(content);
 }

@@ -12,8 +12,9 @@ export default async function decorate(block) {
     } else {
       const pic = row.querySelector('picture');
       const div = document.createElement('div');
+      const button = row.querySelector('.button-container');
 
-      if (pic) {
+      if (pic || button) {
         [...row.children].forEach((col, colIndex) => {
           const inputDiv = document.createElement('div');
           if (colIndex === 0 || colIndex === 1) {
