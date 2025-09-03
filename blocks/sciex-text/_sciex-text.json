@@ -51,7 +51,17 @@
           "component": "richtext",
           "valueType": "string",
           "name": "text",
-          "label": "Text"
+          "label": "Text",
+          "allowedFormats": [
+              "bold",
+              "italic",
+              "link",
+              "heading",
+              "ul",
+              "ol",
+              "paragraph",
+              "table"
+          ]
         }
       ]
     }
