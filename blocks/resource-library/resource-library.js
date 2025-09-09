@@ -86,21 +86,25 @@ export default async function decorate(block) {
 
   const facetsId = {
     assettypes: 'Asset type',
+    applications : 'Applications',
     massspectrometerscategories: 'Mass spectrometry',
     capillaryelectrophoresiscategories: 'Capillary electrophoresis',
     hplcandceproductscategories: 'Liquid chromoatography',
     integratedsolutionscategories: 'Integrated solutions',
     softwarecategories: 'Software',
+    standardsandreagentscategories : 'Standards and Reagents',
     language : "Language"
   };
 
   const desiredOrder = [
     'assettypes-facet',
+    'applications-facet',
     'massspectrometerscategories-facet',
     'capillaryelectrophoresiscategories-facet',
     'hplcandceproductscategories-facet',
     'integratedsolutionscategories-facet',
     'softwarecategories-facet',
+    'standardsandreagentscategories-facet',
     'language-facet'
   ];
 

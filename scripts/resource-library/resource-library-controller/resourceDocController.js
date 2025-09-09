@@ -67,11 +67,13 @@ import {
   function createFacetController() {
     const facetsId = [
       'assettypes',
+      'applications',
       'massspectrometerscategories',
       'capillaryelectrophoresiscategories',
       'hplcandceproductscategories',
       'integratedsolutionscategories',
       'softwarecategories',
+      'standardsandreagentscategories',
       'language'
     ];
     const controllerMap = new Map();
