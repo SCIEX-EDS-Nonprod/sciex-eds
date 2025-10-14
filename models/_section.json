@@ -72,7 +72,9 @@
         "events-register-form",
         "sciex-buttons",
         "split-video-text",
-        "regulatory-document"
+        "regulatory-document",
+        "resource-library",
+        "hero-small"
       ]
     }
   ]

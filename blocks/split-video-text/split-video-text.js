@@ -108,7 +108,7 @@ if (document.readyState === 'loading') {
 
 function extractYouTubeID(url) {
   try {
-    if(url && url.includes("youtube")) {
+    if (url && url.includes('youtube')) {
       const parsed = new URL(url);
       if (parsed.hostname === 'youtu.be') {
         return parsed.pathname.slice(1);
