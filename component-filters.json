@@ -45,7 +45,8 @@
       "split-video-text",
       "regulatory-document",
       "resource-library",
-      "hero-small"
+      "hero-small",
+      "switch-tabs"
     ]
   },
   {
@@ -126,6 +127,12 @@
     "components": [
       "video-text",
       "youtube-video-text"
+    ]
+  },
+  {
+    "id": "switch-tabs",
+    "components": [
+      "tab"
     ]
   },
   {
