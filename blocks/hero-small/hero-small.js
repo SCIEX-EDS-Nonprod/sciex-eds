@@ -1,60 +1,69 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
- * Extracts all required data (text, images, buttons, etc.) from original DOM
+ * Extracts all required data (text, images, buttons, etc.)
  */
 function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
+  const clonedCells = cells.map((cell) => cell.cloneNode(true));
 
   const data = {
-    heading: cells[1]?.innerText.trim(),
-    description: cells[2]?.innerText.trim(),
-    tagline: cells[12]?.innerText.trim(),
-    badgePicture: cells[13]?.querySelector('picture'),
-    mainPicture: cells[14]?.querySelector('picture'),
-    videoAnchor: cells[14]?.querySelector('.button-container a'),
-    mediaDivChildren: cells[14]?.querySelectorAll(':scope > div') || [],
+    heading: clonedCells[1]?.innerText.trim(),
+    description: clonedCells[2]?.innerText.trim(),
+    tagline: clonedCells[12]?.innerText.trim(),
+    badgePicture: clonedCells[13]?.querySelector('picture'),
+    mainPicture: clonedCells[14]?.querySelector('picture'),
+    videoAnchor: clonedCells[14]?.querySelector('.button-container a'),
+    mediaDivChildren: clonedCells[14]?.querySelectorAll(':scope > div') || [],
     buttonDataList: [],
-    originalCells: cells, // keep original references for instrumentation
   };
 
   // Extract button data
   for (let i = 3; i < 12; i += 3) {
-    const label = cells[i]?.innerText.trim();
-    const link = cells[i + 1]?.querySelector('a')?.getAttribute('href');
-    const target = cells[i + 2]?.innerText.trim() || '_self';
+    const label = clonedCells[i]?.innerText.trim();
+    const link = clonedCells[i + 1]?.querySelector('a')?.getAttribute('href');
+    const target = clonedCells[i + 2]?.innerText.trim() || '_self';
     if (label && link) data.buttonDataList.push({ label, link, target });
   }
 
   // Detect colourPic (3 div children pattern)
   if (data.mediaDivChildren.length === 3) {
-    data.colourPicture = cells[14]?.querySelector('picture');
-    data.colourPictureBg = cells[14]?.querySelector('.button-container a');
+    data.colourPicture = clonedCells[14]?.querySelector('picture');
+    data.colourPictureBg = clonedCells[14]?.querySelector('.button-container a');
   }
 
   return data;
 }
 
 /**
- * Builds hero content section and applies instrumentation
+ * Hides the authoring DOM safely
  */
-function buildHeroContent(data, block) {
+function preserveOriginalAuthoring(block) {
+  const originalWrapper = document.createElement('div');
+  originalWrapper.className = 'hero-original';
+  originalWrapper.style.display = 'none';
+  while (block.firstChild) {
+    originalWrapper.appendChild(block.firstChild);
+  }
+  block.appendChild(originalWrapper);
+}
+
+/**
+ * Builds the hero content section (heading, description, buttons, etc.)
+ */
+function buildHeroContent(data) {
   const content = document.createElement('div');
   content.className = 'hero-content';
-  moveInstrumentation(block, content);
 
   // Tagline + badge
   if (data.tagline) {
     const taglineWrap = document.createElement('div');
     taglineWrap.className = 'hero-tagline-wrap';
-    moveInstrumentation(data.originalCells[12], taglineWrap);
 
     if (data.badgePicture) {
       const badgeWrap = document.createElement('div');
       badgeWrap.className = 'hero-badge';
-      moveInstrumentation(data.originalCells[13], badgeWrap);
       badgeWrap.append(data.badgePicture);
       taglineWrap.append(badgeWrap);
     }
@@ -62,7 +71,6 @@ function buildHeroContent(data, block) {
     const tagline = document.createElement('p');
     tagline.className = 'hero-tagline';
     tagline.textContent = data.tagline;
-    moveInstrumentation(data.originalCells[12], tagline);
     taglineWrap.append(tagline);
     content.append(taglineWrap);
   }
@@ -72,7 +80,6 @@ function buildHeroContent(data, block) {
     const heading = document.createElement('h2');
     heading.className = 'hero-heading-hero';
     heading.textContent = data.heading;
-    moveInstrumentation(data.originalCells[1], heading);
     content.append(heading);
   }
 
@@ -81,7 +88,6 @@ function buildHeroContent(data, block) {
     const desc = document.createElement('p');
     desc.className = 'hero-description';
     desc.textContent = data.description;
-    moveInstrumentation(data.originalCells[2], desc);
     content.append(desc);
   }
 
@@ -89,7 +95,6 @@ function buildHeroContent(data, block) {
   if (data.buttonDataList.length) {
     const buttons = document.createElement('div');
     buttons.className = 'hero-buttons';
-    moveInstrumentation(block, buttons);
 
     const buttonClasses = ['button primary', 'button secondary', 'button link'];
 
@@ -98,7 +103,6 @@ function buildHeroContent(data, block) {
       buttonEl.href = btn.link;
       buttonEl.target = btn.target;
       buttonEl.className = buttonClasses[index] || 'button link';
-      moveInstrumentation(data.originalCells[3 + index * 3], buttonEl);
 
       const labelSpan = document.createElement('span');
       labelSpan.textContent = btn.label;
@@ -116,9 +120,9 @@ function buildHeroContent(data, block) {
 }
 
 /**
- * Applies layout and background logic (image, video, colourPic)
+ * Applies layout and background logic (image, video, colorPic)
  */
-function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent, block) {
+function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent) {
   if (data.colourPicture) {
     const imgSrc = data.colourPicture.querySelector('img')?.src;
     const bgColor = data.colourPictureBg?.textContent?.trim();
@@ -128,8 +132,6 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent,
     if (imgSrc) {
       const sideImage = document.createElement('div');
       sideImage.className = 'hero-side-image';
-      moveInstrumentation(data.originalCells[14], sideImage);
-
       const img = document.createElement('img');
       img.src = imgSrc;
       img.alt = 'hero-side-image';
@@ -137,7 +139,6 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent,
 
       const wrapper = document.createElement('div');
       wrapper.className = 'hero-content-wrapper';
-      moveInstrumentation(block, wrapper);
       wrapper.append(heroContent);
       wrapper.append(sideImage);
       heroWrapper.append(wrapper);
@@ -154,7 +155,6 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent,
       video.loop = true;
       video.playsInline = true;
       video.className = 'hero-bg-video';
-      moveInstrumentation(data.originalCells[14], video);
       heroContainer.append(video);
       heroContainer.classList.add('hero-has-bg');
     }
@@ -164,7 +164,6 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent,
     if (imgSrc) {
       heroContainer.style.backgroundImage = `url('${imgSrc}')`;
       heroContainer.classList.add('hero-has-bg');
-      moveInstrumentation(data.originalCells[14], heroContainer);
     }
     heroWrapper.append(heroContent);
   } else {
@@ -177,22 +176,19 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent,
  */
 export default function decorate(block) {
   const data = extractBlockData(block);
+  preserveOriginalAuthoring(block);
 
   const fragment = document.createDocumentFragment();
   const heroContainer = document.createElement('div');
   heroContainer.classList.add('herosmallclass');
-  moveInstrumentation(block, heroContainer);
 
   const heroWrapper = document.createElement('div');
   heroWrapper.className = 'hero-wrapper';
-  moveInstrumentation(block, heroWrapper);
 
-  const heroContent = buildHeroContent(data, block);
-  applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent, block);
+  const heroContent = buildHeroContent(data);
+  applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent);
 
   heroContainer.append(heroWrapper);
   fragment.append(heroContainer);
-
-  block.textContent = '';
   block.append(fragment);
 }
