@@ -1,5 +1,6 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * Extracts all required data (text, images, buttons, etc.)
@@ -17,6 +18,7 @@ function extractBlockData(block) {
     videoAnchor: clonedCells[14]?.querySelector('.button-container a'),
     mediaDivChildren: clonedCells[14]?.querySelectorAll(':scope > div') || [],
     buttonDataList: [],
+    originalCells: cells, // Keep reference for instrumentation mapping
   };
 
   // Extract button data
@@ -37,33 +39,23 @@ function extractBlockData(block) {
 }
 
 /**
- * Hides the authoring DOM safely
- */
-function preserveOriginalAuthoring(block) {
-  const originalWrapper = document.createElement('div');
-  originalWrapper.className = 'hero-original';
-  originalWrapper.style.display = 'none';
-  while (block.firstChild) {
-    originalWrapper.appendChild(block.firstChild);
-  }
-  block.appendChild(originalWrapper);
-}
-
-/**
  * Builds the hero content section (heading, description, buttons, etc.)
  */
-function buildHeroContent(data) {
+function buildHeroContent(data, block) {
   const content = document.createElement('div');
   content.className = 'hero-content';
+  moveInstrumentation(block, content);
 
   // Tagline + badge
   if (data.tagline) {
     const taglineWrap = document.createElement('div');
     taglineWrap.className = 'hero-tagline-wrap';
+    moveInstrumentation(data.originalCells[12], taglineWrap);
 
     if (data.badgePicture) {
       const badgeWrap = document.createElement('div');
       badgeWrap.className = 'hero-badge';
+      moveInstrumentation(data.originalCells[13], badgeWrap);
       badgeWrap.append(data.badgePicture);
       taglineWrap.append(badgeWrap);
     }
@@ -71,6 +63,7 @@ function buildHeroContent(data) {
     const tagline = document.createElement('p');
     tagline.className = 'hero-tagline';
     tagline.textContent = data.tagline;
+    moveInstrumentation(data.originalCells[12], tagline);
     taglineWrap.append(tagline);
     content.append(taglineWrap);
   }
@@ -80,6 +73,7 @@ function buildHeroContent(data) {
     const heading = document.createElement('h2');
     heading.className = 'hero-heading-hero';
     heading.textContent = data.heading;
+    moveInstrumentation(data.originalCells[1], heading);
     content.append(heading);
   }
 
@@ -88,6 +82,7 @@ function buildHeroContent(data) {
     const desc = document.createElement('p');
     desc.className = 'hero-description';
     desc.textContent = data.description;
+    moveInstrumentation(data.originalCells[2], desc);
     content.append(desc);
   }
 
@@ -95,6 +90,7 @@ function buildHeroContent(data) {
   if (data.buttonDataList.length) {
     const buttons = document.createElement('div');
     buttons.className = 'hero-buttons';
+    moveInstrumentation(block, buttons);
 
     const buttonClasses = ['button primary', 'button secondary', 'button link'];
 
@@ -103,6 +99,7 @@ function buildHeroContent(data) {
       buttonEl.href = btn.link;
       buttonEl.target = btn.target;
       buttonEl.className = buttonClasses[index] || 'button link';
+      moveInstrumentation(data.originalCells[3 + index * 3], buttonEl);
 
       const labelSpan = document.createElement('span');
       labelSpan.textContent = btn.label;
@@ -122,7 +119,7 @@ function buildHeroContent(data) {
 /**
  * Applies layout and background logic (image, video, colorPic)
  */
-function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent) {
+function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent, block) {
   if (data.colourPicture) {
     const imgSrc = data.colourPicture.querySelector('img')?.src;
     const bgColor = data.colourPictureBg?.textContent?.trim();
@@ -132,6 +129,8 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
     if (imgSrc) {
       const sideImage = document.createElement('div');
       sideImage.className = 'hero-side-image';
+      moveInstrumentation(data.originalCells[14], sideImage);
+
       const img = document.createElement('img');
       img.src = imgSrc;
       img.alt = 'hero-side-image';
@@ -139,6 +138,7 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
 
       const wrapper = document.createElement('div');
       wrapper.className = 'hero-content-wrapper';
+      moveInstrumentation(block, wrapper);
       wrapper.append(heroContent);
       wrapper.append(sideImage);
       heroWrapper.append(wrapper);
@@ -155,6 +155,7 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
       video.loop = true;
       video.playsInline = true;
       video.className = 'hero-bg-video';
+      moveInstrumentation(data.originalCells[14], video);
       heroContainer.append(video);
       heroContainer.classList.add('hero-has-bg');
     }
@@ -164,6 +165,7 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
     if (imgSrc) {
       heroContainer.style.backgroundImage = `url('${imgSrc}')`;
       heroContainer.classList.add('hero-has-bg');
+      moveInstrumentation(data.originalCells[14], heroContainer);
     }
     heroWrapper.append(heroContent);
   } else {
@@ -176,19 +178,22 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
  */
 export default function decorate(block) {
   const data = extractBlockData(block);
-  preserveOriginalAuthoring(block);
 
   const fragment = document.createDocumentFragment();
   const heroContainer = document.createElement('div');
   heroContainer.classList.add('herosmallclass');
+  moveInstrumentation(block, heroContainer);
 
   const heroWrapper = document.createElement('div');
   heroWrapper.className = 'hero-wrapper';
+  moveInstrumentation(block, heroWrapper);
 
-  const heroContent = buildHeroContent(data);
-  applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent);
+  const heroContent = buildHeroContent(data, block);
+  applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent, block);
 
   heroContainer.append(heroWrapper);
   fragment.append(heroContainer);
+
+  block.textContent = '';
   block.append(fragment);
 }
