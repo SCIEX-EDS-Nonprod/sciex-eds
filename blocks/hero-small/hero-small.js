@@ -2,42 +2,50 @@ import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+/**
+ * Extracts all required data (text, images, buttons, etc.) from original DOM
+ */
 function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
-  const clonedCells = cells.map((cell) => cell.cloneNode(true));
 
   const data = {
-    heading: clonedCells[1]?.innerText.trim(),
-    description: clonedCells[2]?.innerText.trim(),
-    tagline: clonedCells[12]?.innerText.trim(),
-    badgePicture: clonedCells[13]?.querySelector('picture'),
-    mainPicture: clonedCells[14]?.querySelector('picture'),
-    videoAnchor: clonedCells[14]?.querySelector('.button-container a'),
-    mediaDivChildren: clonedCells[14]?.querySelectorAll(':scope > div') || [],
+    heading: cells[1]?.innerText.trim(),
+    description: cells[2]?.innerText.trim(),
+    tagline: cells[12]?.innerText.trim(),
+    badgePicture: cells[13]?.querySelector('picture'),
+    mainPicture: cells[14]?.querySelector('picture'),
+    videoAnchor: cells[14]?.querySelector('.button-container a'),
+    mediaDivChildren: cells[14]?.querySelectorAll(':scope > div') || [],
     buttonDataList: [],
-    originalCells: cells, // Keep reference for instrumentation mapping
+    originalCells: cells, // keep original references for instrumentation
   };
 
+  // Extract button data
   for (let i = 3; i < 12; i += 3) {
-    const label = clonedCells[i]?.innerText.trim();
-    const link = clonedCells[i + 1]?.querySelector('a')?.getAttribute('href');
-    const target = clonedCells[i + 2]?.innerText.trim() || '_self';
+    const label = cells[i]?.innerText.trim();
+    const link = cells[i + 1]?.querySelector('a')?.getAttribute('href');
+    const target = cells[i + 2]?.innerText.trim() || '_self';
     if (label && link) data.buttonDataList.push({ label, link, target });
   }
 
+  // Detect colourPic (3 div children pattern)
   if (data.mediaDivChildren.length === 3) {
-    data.colourPicture = clonedCells[14]?.querySelector('picture');
-    data.colourPictureBg = clonedCells[14]?.querySelector('.button-container a');
+    data.colourPicture = cells[14]?.querySelector('picture');
+    data.colourPictureBg = cells[14]?.querySelector('.button-container a');
   }
 
   return data;
 }
 
+/**
+ * Builds hero content section and applies instrumentation
+ */
 function buildHeroContent(data, block) {
   const content = document.createElement('div');
   content.className = 'hero-content';
   moveInstrumentation(block, content);
 
+  // Tagline + badge
   if (data.tagline) {
     const taglineWrap = document.createElement('div');
     taglineWrap.className = 'hero-tagline-wrap';
@@ -59,6 +67,7 @@ function buildHeroContent(data, block) {
     content.append(taglineWrap);
   }
 
+  // Heading
   if (data.heading) {
     const heading = document.createElement('h2');
     heading.className = 'hero-heading-hero';
@@ -67,6 +76,7 @@ function buildHeroContent(data, block) {
     content.append(heading);
   }
 
+  // Description
   if (data.description) {
     const desc = document.createElement('p');
     desc.className = 'hero-description';
@@ -75,12 +85,14 @@ function buildHeroContent(data, block) {
     content.append(desc);
   }
 
+  // Buttons
   if (data.buttonDataList.length) {
     const buttons = document.createElement('div');
     buttons.className = 'hero-buttons';
     moveInstrumentation(block, buttons);
 
     const buttonClasses = ['button primary', 'button secondary', 'button link'];
+
     data.buttonDataList.forEach((btn, index) => {
       const buttonEl = document.createElement('a');
       buttonEl.href = btn.link;
@@ -103,6 +115,9 @@ function buildHeroContent(data, block) {
   return content;
 }
 
+/**
+ * Applies layout and background logic (image, video, colourPic)
+ */
 function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent, block) {
   if (data.colourPicture) {
     const imgSrc = data.colourPicture.querySelector('img')?.src;
@@ -157,6 +172,9 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent,
   }
 }
 
+/**
+ * Main decorate function
+ */
 export default function decorate(block) {
   const data = extractBlockData(block);
 
