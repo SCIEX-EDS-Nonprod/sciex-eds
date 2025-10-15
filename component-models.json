@@ -1845,7 +1845,7 @@
     ]
   },
   {
-    "id": "tab",
+    "id": "tab-item",
     "fields": [
       {
         "component": "text",

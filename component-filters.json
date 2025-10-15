@@ -132,7 +132,7 @@
   {
     "id": "switch-tabs",
     "components": [
-      "tab"
+      "tab-item"
     ]
   },
   {

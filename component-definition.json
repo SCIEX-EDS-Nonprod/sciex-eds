@@ -781,14 +781,14 @@
           }
         },
         {
-          "title": "Tab",
-          "id": "tab",
+          "title": "Tab-item",
+          "id": "tab-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Tab",
+                  "name": "Tab item",
                   "model": "tab"
                 }
               }
