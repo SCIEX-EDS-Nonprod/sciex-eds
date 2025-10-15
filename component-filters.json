@@ -140,5 +140,11 @@
     "components": [
       "tab"
     ]
+  },
+  {
+    "id": "textContainer",
+    "components": [
+      "column-text"
+    ]
   }
 ]
