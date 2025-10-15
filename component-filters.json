@@ -43,7 +43,9 @@
       "events-register-form",
       "sciex-buttons",
       "split-video-text",
-      "regulatory-document"
+      "regulatory-document",
+      "resource-library",
+      "hero-small"
     ]
   },
   {
@@ -81,6 +83,14 @@
     "id": "header",
     "components": [
       "headerItem"
+    ]
+  },
+  {
+    "id": "hero-small",
+    "components": [
+      "hero-image",
+      "colour",
+      "video"
     ]
   },
   {
