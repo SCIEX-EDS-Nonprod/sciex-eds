@@ -1851,7 +1851,7 @@
         "component": "text",
         "valueType": "string",
         "name": "tabLabel",
-        "label": "Tab label",
+        "label": "Tab Label",
         "value": ""
       },
       {
@@ -1865,7 +1865,7 @@
         "component": "text",
         "valueType": "string",
         "name": "imageAltText",
-        "label": "Alt text",
+        "label": "Alt Text",
         "value": ""
       },
       {
@@ -1878,25 +1878,25 @@
       {
         "component": "richtext",
         "name": "textArea",
-        "value": "",
         "label": "Text Area",
+        "value": "",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "tabtextLinkLabel",
-        "label": "Tab Text link label",
+        "name": "tabTextLinkLabel",
+        "label": "Tab Text Link Label",
         "value": ""
       },
       {
         "component": "aem-content",
-        "name": "tabtextLinkUrl",
-        "label": "Tab Text link label Url"
+        "name": "tabTextLinkUrl",
+        "label": "Tab Text Link URL"
       },
       {
         "component": "radio-group",
-        "label": "option To Select text Link url",
-        "name": "OpentionToSelectTextLink",
+        "label": "Option to Select Text Link Target",
+        "name": "optionToSelectTextLink",
         "valueType": "string",
         "options": [
           {
