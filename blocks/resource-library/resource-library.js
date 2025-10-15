@@ -86,14 +86,14 @@ export default async function decorate(block) {
 
   const facetsId = {
     assettypes: 'Asset type',
-    applications : 'Applications',
+    applications: 'Applications',
     massspectrometerscategories: 'Mass spectrometry',
     capillaryelectrophoresiscategories: 'Capillary electrophoresis',
     hplcandceproductscategories: 'Liquid chromoatography',
     integratedsolutionscategories: 'Integrated solutions',
     softwarecategories: 'Software',
-    standardsandreagentscategories : 'Standards and Reagents',
-    language : "Language"
+    standardsandreagentscategories: 'Standards and Reagents',
+    language: 'Language',
   };
 
   const desiredOrder = [
@@ -105,7 +105,7 @@ export default async function decorate(block) {
     'integratedsolutionscategories-facet',
     'softwarecategories-facet',
     'standardsandreagentscategories-facet',
-    'language-facet'
+    'language-facet',
   ];
 
   // Initialize course catalog components

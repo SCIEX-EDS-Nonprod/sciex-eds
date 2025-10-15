@@ -43,8 +43,7 @@
       "events-register-form",
       "sciex-buttons",
       "split-video-text",
-      "regulatory-document",
-      "resource-library"
+      "regulatory-document"
     ]
   },
   {
@@ -130,6 +129,12 @@
     "id": "tabs-nav",
     "components": [
       "tab"
+    ]
+  },
+  {
+    "id": "textContainer",
+    "components": [
+      "column-text"
     ]
   }
 ]
