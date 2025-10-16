@@ -174,53 +174,53 @@
 }
 
 
- .text-xlDisplay {
+ .text-xldisplay {
     font-size: 4pc;
     font-weight: 270;
     line-height: 72px
 }
 
 @media (min-width:768px) {
-    .text-xlDisplay {
+    .text-xldisplay {
         font-size: 4pc;
         letter-spacing: -1.4px;
         line-height: 1
     }
 
     @media (min-width:600px) {
-        .text-xlDisplay {
+        .text-xldisplay {
             font-size: calc(-3.05882px + 11.17647vw)
         }
     }
 
     @media (min-width:1280px) {
-        .text-xlDisplay {
+        .text-xldisplay {
             font-size: 140px
         }
     }
 }
 
- .text-lDisplay {
+ .text-ldisplay {
     font-size: 3pc;
     font-weight: 270;
     line-height: 56px
 }
 
 @media (min-width:768px) {
-    .text-lDisplay {
+    .text-ldisplay {
         font-size: 3pc;
         letter-spacing: -.8px;
         line-height: 1.2
     }
 
     @media (min-width:600px) {
-        .text-lDisplay {
+        .text-ldisplay {
             font-size: calc(19.76471px + 4.70588vw)
         }
     }
 
     @media (min-width:1280px) {
-        .text-lDisplay {
+        .text-ldisplay {
             font-size: 5pc
         }
     }
