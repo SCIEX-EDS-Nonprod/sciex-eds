@@ -46,7 +46,7 @@
       "regulatory-document",
       "resource-library",
       "hero-small",
-      "switch-tabs"
+      "text-container"
     ]
   },
   {
@@ -146,6 +146,12 @@
     "id": "tabs-nav",
     "components": [
       "tab"
+    ]
+  },
+  {
+    "id": "text-container",
+    "components": [
+      "column-text"
     ]
   }
 ]
