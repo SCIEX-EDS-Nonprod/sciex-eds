@@ -15,7 +15,7 @@ export default function decorate(block) {
   const columnsWrapper = document.createElement('div');
   columnsWrapper.className = 'text-container-columns';
 
-  columnData.forEach((col, index) => {
+  columnData.forEach((col) => {
     const children = [...col.children];
 
     const column = document.createElement('div');
@@ -44,7 +44,6 @@ export default function decorate(block) {
     buttonGroup.className = 'button-block';
 
     for (let i = 2; i + 3 < children.length; i += 4) {
-        
       const label = children[i]?.textContent?.trim();
       const alt = children[i + 1]?.textContent?.trim();
       const link = children[i + 2]?.querySelector('a');
@@ -56,12 +55,12 @@ export default function decorate(block) {
         a.textContent = label;
         a.title = alt || label;
         a.className = 'button-block';
-        if(i === 2){
-            a.className='button primary';
-        }else if(i === 6){
-            a.className=' button secondary';
-        }else if(i === 10){
-            a.className=' button link';
+        if (i === 2) {
+          a.className = 'button primary';
+        } else if (i === 6) {
+          a.className = ' button secondary';
+        } else if (i === 10) {
+          a.className = ' button link';
         }
         if (target) a.setAttribute('target', target);
 
