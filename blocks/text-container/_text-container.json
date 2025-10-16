@@ -73,11 +73,75 @@
           "value": ""
         },
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "heading",
+          "label": "Sub Heading",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "headingsize",
+          "label": "Select heading size",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "XL",
+              "value": "text-xlDisplay"
+            },
+            {
+              "name": "L",
+              "value": "text-lDisplay"
+            },
+            {
+              "name": "Alpha",
+              "value": "text-alfa"
+            },
+            {
+              "name": "Bravo",
+              "value": "text-bravo"
+            },
+            {
+              "name": "Charlie",
+              "value": "text-charlie"
+            },
+            {
+              "name": "Delta",
+              "value": "text-delta"
+            },{
+              "name": "Echo",
+              "value": "text-echo"
+            }
+          ]
+        },
+        {
           "component": "richtext",
           "name": "text",
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "descriptionsize",
+          "label": "Select description size",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Base",
+              "value": "text-base"
+            },
+            {
+              "name": "Large",
+              "value": "text-lg"
+            },
+            {
+              "name": "Small",
+              "value": "text-sm"
+            }
+          ]
         },
         {
           "component": "text",
