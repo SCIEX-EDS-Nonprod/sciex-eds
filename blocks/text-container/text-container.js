@@ -15,7 +15,12 @@ export default function decorate(block) {
   const columnsWrapper = document.createElement('div');
   columnsWrapper.className = 'text-container-columns';
 
-  columnData.forEach((col) => {
+  columnData.forEach((col, index) => {
+    console.log(col +" :"+ index);
+    if (index === 0) {
+      // First column is metadata, skip it
+      return;
+    }
     const children = [...col.children];
 
     const column = document.createElement('div');
@@ -40,7 +45,7 @@ export default function decorate(block) {
     }
 
     // Buttons (from index 2 onward, every 4 items)
-    const buttonGroup = document.createElement('div');
+    /* const buttonGroup = document.createElement('div');
     buttonGroup.className = 'button-block';
 
     for (let i = 2; i + 3 < children.length; i += 4) {
@@ -74,7 +79,7 @@ export default function decorate(block) {
 
     if (buttonGroup.children.length > 0) {
       column.appendChild(buttonGroup);
-    }
+    } */
 
     columnsWrapper.appendChild(column);
   });
