@@ -1,6 +1,9 @@
 .sciex-text .text-left {
     text-align: left;
 }
+.events-container .sciex-text .text-left {
+    padding-left: 50px;
+}
 
 .sciex-text .text-right {
     text-align: right;
@@ -110,4 +113,10 @@
     text-decoration-skip-ink: none;
     text-underline-offset: auto;
     text-underline-position: from-font;
+}
+
+@media (max-width: 767px) {
+    .events-container .sciex-text .text-left {
+      padding-left: 0 !important;
+    }
 }
