@@ -75,7 +75,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "heading",
+          "name": "subheading",
           "label": "Sub Heading",
           "value": ""
         },
@@ -88,11 +88,11 @@
           "options": [
             {
               "name": "XL",
-              "value": "text-xlDisplay"
+              "value": "text-xldisplay"
             },
             {
               "name": "L",
-              "value": "text-lDisplay"
+              "value": "text-ldisplay"
             },
             {
               "name": "Alpha",
