@@ -1,8 +1,10 @@
-@import url('../sciex-buttons/sciex-buttons.css');
+
 .text-container-columns {
   display: flex !important;
   flex: 1 1 50% !important;
   gap: 20px !important;
+  padding-top:1%;
+  padding-bottom:1%;
 }
 
 .text-container-column {
@@ -113,7 +115,7 @@
     background-color: transparent !important;
 }
 
-/*
+
  .text-xldisplay {
     font-size: 4pc;
     font-weight: 270;
@@ -429,5 +431,5 @@
         line-height: 20px
     }
 }
-*/
+
 
