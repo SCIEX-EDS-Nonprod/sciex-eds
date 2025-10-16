@@ -73,6 +73,13 @@
           "value": ""
         },
         {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        },
+        {
           "component": "text",
           "name": "primarytext",
           "label": "Primary Button Text"
