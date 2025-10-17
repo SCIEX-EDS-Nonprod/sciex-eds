@@ -77,6 +77,13 @@
           "multi": false
         },
         {
+          "component": "richtext",
+          "name": "imagetextArea",
+          "label": "Image Text Area",
+          "value": "",
+          "valueType": "string"
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "imageAltText",
