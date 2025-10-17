@@ -4,6 +4,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 export default function decorate(block) {
   const switchTabContainer = document.createElement('div');
   switchTabContainer.className = 'switch-tabs-container';
+  moveInstrumentation(block, switchTabContainer);
 
   const rows = [...block.children];
   let id = '';
@@ -22,84 +23,97 @@ export default function decorate(block) {
   const headingEl = document.createElement('h2');
   headingEl.className = 'switch-tabs-heading';
   headingEl.textContent = headingText;
+  moveInstrumentation(rows[1], headingEl);
 
   const descEl = document.createElement('p');
   descEl.className = 'switch-tabs-description';
   descEl.textContent = descriptionText;
+  moveInstrumentation(rows[2], descEl);
 
   switchTabContainer.append(headingEl, descEl);
 
   const tabHeader = document.createElement('div');
   tabHeader.className = 'tab-header';
+  moveInstrumentation(block, tabHeader);
 
   const tabContent = document.createElement('div');
   tabContent.className = 'tab-content';
+  moveInstrumentation(block, tabContent);
 
   // Build tabs
-  for (let i = 3; i < rows.length; i++) {
+  for (let i = 3; i < rows.length; i += 1) {
     const tabRows = [...rows[i].children];
-    if (!tabRows.length) continue;
+    if (tabRows.length === 0) {
+    // Skip empty rows without using 'continue'
+    } else {
+      const tabName = tabRows[0]?.textContent.trim() || '';
+      const tabPicture = tabRows[1]?.querySelector('picture');
+      const altText = tabRows[2]?.textContent.trim() || '';
+      const tabHeading = tabRows[3]?.textContent.trim() || '';
+      const tabDescription = tabRows[4]?.innerHTML || '';
+      const tabLinkLabel = tabRows[5]?.textContent.trim() || '';
+      const tabLinkAnchor = tabRows[6]?.querySelector('a');
+      const tabTarget = tabRows[7]?.textContent.trim() || '_self';
 
-    const tabName = tabRows[0]?.textContent.trim() || '';
-    const tabPicture = tabRows[1]?.querySelector('picture');
-    const altText = tabRows[2]?.textContent.trim() || '';
-    const tabHeading = tabRows[3]?.textContent.trim() || '';
-    const tabDescription = tabRows[4]?.innerHTML || '';
-    const tabLinkLabel = tabRows[5]?.textContent.trim() || '';
-    const tabLinkAnchor = tabRows[6]?.querySelector('a');
-    const tabTarget = tabRows[7]?.textContent.trim() || '_self';
+      // --- Header Button ---
+      const tabButton = document.createElement('button');
+      tabButton.className = 'tab-title';
+      tabButton.textContent = tabName;
+      if (i === 3) tabButton.classList.add('active');
+      moveInstrumentation(tabRows[0], tabButton);
+      tabHeader.append(tabButton);
 
-    // --- Header Button ---
-    const tabButton = document.createElement('button');
-    tabButton.className = 'tab-title';
-    tabButton.textContent = tabName;
-    if (i === 3) tabButton.classList.add('active');
-    tabHeader.append(tabButton);
-
-    // --- Content Panel ---
-    const tabPanel = document.createElement('div');
-    tabPanel.className = 'tab-panel';
+      // --- Content Panel ---
+      const tabPanel = document.createElement('div');
+      tabPanel.className = 'tab-panel';
       if (i === 3) tabPanel.classList.add('active');
-      
-    // Add text content
-    const tabBody = document.createElement('div');
-    tabBody.className = 'tab-body';
+      moveInstrumentation(rows[i], tabPanel);
 
-    if (tabHeading) {
-      const h2 = document.createElement('h2');
-      h2.textContent = tabHeading;
-      tabBody.append(h2);
+      // Add text content
+      const tabBody = document.createElement('div');
+      tabBody.className = 'tab-body';
+      moveInstrumentation(rows[i], tabBody);
+
+      if (tabHeading) {
+        const h2 = document.createElement('h2');
+        h2.textContent = tabHeading;
+        moveInstrumentation(tabRows[3], h2);
+        tabBody.append(h2);
+      }
+
+      if (tabDescription) {
+        const descWrap = document.createElement('div');
+        descWrap.className = 'tab-description';
+        descWrap.innerHTML = tabDescription;
+        moveInstrumentation(tabRows[4], descWrap);
+        tabBody.append(descWrap);
+      }
+
+      if (tabLinkAnchor) {
+        const a = document.createElement('a');
+        a.href = tabLinkAnchor.href;
+        a.target = tabTarget;
+        a.textContent = tabLinkLabel || 'Learn more >';
+        a.className = 'tab-link';
+        moveInstrumentation(tabLinkAnchor, a);
+        tabBody.append(a);
+      }
+
+      tabPanel.append(tabBody);
+
+      // Add picture
+      if (tabPicture) {
+        const img = tabPicture.querySelector('img');
+        if (img) {
+          const optimizedPic = createOptimizedPicture(img.src, altText || img.alt, false, [{ width: '750' }]);
+          moveInstrumentation(img, optimizedPic.querySelector('img'));
+          tabPanel.append(optimizedPic);
+        }
+      }
+
+      tabContent.append(tabPanel);
     }
-
-    if (tabDescription) {
-      const descWrap = document.createElement('div');
-      descWrap.className = 'tab-description';
-      descWrap.innerHTML = tabDescription;
-      tabBody.append(descWrap);
-    }
-
-    if (tabLinkAnchor) {
-      const a = document.createElement('a');
-      a.href = tabLinkAnchor.href;
-      a.target = tabTarget;
-      a.textContent = tabLinkLabel || 'Learn more >';
-      a.className = 'tab-link';
-      tabBody.append(a);
-    }
-
-    tabPanel.append(tabBody);
-
-    // Add picture
-    if (tabPicture) {
-      const img = tabPicture.querySelector('img');
-      const optimizedPic = createOptimizedPicture(img.src, altText || img.alt, false, [{ width: '750' }]);
-      moveInstrumentation(img, optimizedPic.querySelector('img'));
-      tabPanel.append(optimizedPic);
-    }
-
-    tabContent.append(tabPanel);
   }
-
   // --- Switching logic ---
   const tabButtons = tabHeader.querySelectorAll('.tab-title');
   const tabPanels = tabContent.querySelectorAll('.tab-panel');
