@@ -3,7 +3,6 @@ import {} from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
-
   [...block.children].forEach((row, index) => {
     const li = document.createElement('li');
     if (index === 1 && row.textContent.includes('2')) {
@@ -60,7 +59,11 @@ export default function decorate(block) {
           } else if (i === 9) {
             a.className = ' button secondary';
           } else if (i === 13) {
-            a.className = ' button link';
+            a.className = ' link';
+            const span = document.createElement('span');
+            span.id = 'right-arrow';
+            span.className = 'icon';
+            a.appendChild(span);
           }
           if (target) a.setAttribute('target', target);
 
