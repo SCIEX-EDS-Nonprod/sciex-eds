@@ -1115,21 +1115,21 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "heading",
-        "label": "Heading",
+        "name": "iconCardheading",
+        "label": "Icon card Heading",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "description",
-        "label": "Description",
+        "name": "iconCarddescription",
+        "label": "Icon card Description",
         "value": ""
       },
       {
         "component": "select",
-        "name": "iconCard_parent_grid",
-        "label": "Select how many cards in a row",
+        "name": "grid",
+        "label": "Icon Card Select how many cards in a column",
         "value": "",
         "valueType": "string",
         "options": [
@@ -1138,15 +1138,15 @@
             "value": "4"
           },
           {
-            "name": "3 Columns",
+            "name": "3-columns",
             "value": "3"
           },
           {
-            "name": "2 Columns",
+            "name": "2-columns",
             "value": "2"
           },
           {
-            "name": "1 Column",
+            "name": "1-columns",
             "value": "1"
           }
         ]
@@ -1159,40 +1159,39 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "iconCard_item_icon",
+        "name": "iconCardItemIcon",
         "label": "Icon of the card",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "iconCard_item_heading",
+        "name": "iconCardItemHeading",
         "label": "Heading",
         "value": ""
       },
       {
         "component": "richtext",
-        "name": "iconCard_item_text",
+        "name": "iconCardItemText",
         "value": "",
         "label": "Text",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "iconCard_item_textLinkLabel",
+        "name": "iconCardItemTextLinkLabel",
         "label": "Icon Card Text Link Label",
         "value": ""
       },
       {
         "component": "aem-content",
-        "name": "iconCard_item_textLinkUrl",
-        "label": "Icon Card Text Link URL",
-        "valueType": "string"
+        "name": "iconCardItemTextLinkUrl",
+        "label": "Icon Card Text Link URL"
       },
       {
         "component": "radio-group",
         "label": "Text Link Target",
-        "name": "iconCard_item_linkTarget",
+        "name": "iconCardItemLinkTarget",
         "valueType": "string",
         "options": [
           {
