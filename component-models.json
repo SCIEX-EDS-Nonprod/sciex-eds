@@ -1138,15 +1138,15 @@
             "value": "4"
           },
           {
-            "name": "3-columns",
+            "name": "3 Columns",
             "value": "3"
           },
           {
-            "name": "2-columns",
+            "name": "2 Columns",
             "value": "2"
           },
           {
-            "name": "1-columns",
+            "name": "1 Column",
             "value": "1"
           }
         ]
@@ -1159,8 +1159,8 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "Icon",
-        "label": "icon of the card",
+        "name": "icon",
+        "label": "Icon of the card",
         "multi": false
       },
       {
@@ -1186,12 +1186,12 @@
       {
         "component": "aem-content",
         "name": "iconCardTextLinkUrl",
-        "label": "IconCard Text Link URL"
+        "label": "Icon Card Text Link URL"
       },
       {
         "component": "radio-group",
-        "label": "Option to Select Text Link Target",
-        "name": "optionToSelectTextLink",
+        "label": "Text Link Target",
+        "name": "linkTarget",
         "valueType": "string",
         "options": [
           {
