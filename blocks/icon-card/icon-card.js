@@ -4,8 +4,7 @@ export default function decorate(block) {
   
     // Get the first child text content (if it exists)
     const id = block.querySelector(':scope > div')?.textContent?.trim() || '';
-  
-    block.innerHTML = '';
+
     iconCardContainer.id = id;
   
     block.append(iconCardContainer);
