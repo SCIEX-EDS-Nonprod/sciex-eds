@@ -34,7 +34,7 @@
     ],
     "models": [
       {
-        "id": "icon-card-item",
+        "id": "icon-card",
         "fields": [
             {
               "component": "text",
