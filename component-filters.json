@@ -47,7 +47,8 @@
       "resource-library",
       "hero-small",
       "text-container",
-      "switch-tabs"
+      "switch-tabs",
+      "icon-card"
     ]
   },
   {
@@ -93,6 +94,12 @@
       "hero-image",
       "colour",
       "video"
+    ]
+  },
+  {
+    "id": "icon-card",
+    "components": [
+      "icon-card-item"
     ]
   },
   {
