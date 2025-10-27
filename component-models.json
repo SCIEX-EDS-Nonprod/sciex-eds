@@ -1108,21 +1108,21 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "iconCard_parent_id",
+        "name": "iconCardId",
         "label": "Icon Card Id",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "iconCard_parent_heading",
+        "name": "heading",
         "label": "Heading",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "iconCard_parent_description",
+        "name": "description",
         "label": "Description",
         "value": ""
       },
