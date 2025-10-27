@@ -75,7 +75,8 @@
         "regulatory-document",
         "resource-library",
         "hero-small",
-        "text-container"
+        "text-container",
+        "switch-tabs"
       ]
     }
   ]

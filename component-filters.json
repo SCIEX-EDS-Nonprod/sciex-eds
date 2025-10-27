@@ -46,7 +46,8 @@
       "regulatory-document",
       "resource-library",
       "hero-small",
-      "text-container"
+      "text-container",
+      "switch-tabs"
     ]
   },
   {
@@ -127,6 +128,12 @@
     "components": [
       "video-text",
       "youtube-video-text"
+    ]
+  },
+  {
+    "id": "switch-tabs",
+    "components": [
+      "tab-item"
     ]
   },
   {
