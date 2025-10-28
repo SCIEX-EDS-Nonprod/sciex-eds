@@ -5,13 +5,13 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row, index) => {
     const li = document.createElement('li');
-    if (index === 1 && row.textContent.includes('2')) {
+    /*if (index === 1 && row.textContent.includes('2')) {
       console.log('1');
       ul.classList.add('text-container-header', 'text-container-columns');
     } else if (index === 1 && row.textContent.includes('1')) {
       console.log('2');
       ul.classList.remove('text-container-header', 'text-container-columns');
-    } else if (index > 1) {
+    } else */if (index > 1) {
       console.log('3');
       const children = [...row.children];
 
@@ -47,7 +47,7 @@ export default function decorate(block) {
       console.log('7');
       const buttonGroup = document.createElement('div');
       buttonGroup.className = 'button-block';
-      /*for (let i = 5; i + 3 < children.length; i += 4) {
+      for (let i = 5; i + 3 < children.length; i += 4) {
         const label = children[i]?.textContent?.trim();
         const alt = children[i + 1]?.textContent?.trim();
         const link = children[i + 2]?.querySelector('a');
@@ -79,7 +79,7 @@ export default function decorate(block) {
 
           buttonGroup.appendChild(wrapper);
         }
-      }*/
+      }
       console.log('10');
       if (buttonGroup.children.length > 0) {
         column.appendChild(buttonGroup);
