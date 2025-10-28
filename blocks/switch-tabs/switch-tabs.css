@@ -1,8 +1,7 @@
-.switch-tabs-container {
+.switch-tabs-container-block {
   width: 100%;
-  max-width: 1220px;
+  padding: 2rem 0px;
   margin: 0 auto;
-  padding: 2rem 1rem;
   text-align: center;
   display: flex;
   flex-direction: column;
