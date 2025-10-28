@@ -47,7 +47,7 @@ export default function decorate(block) {
       console.log('7');
       const buttonGroup = document.createElement('div');
       buttonGroup.className = 'button-block';
-      for (let i = 5; i + 3 < children.length; i += 4) {
+      /*for (let i = 5; i + 3 < children.length; i += 4) {
         const label = children[i]?.textContent?.trim();
         const alt = children[i + 1]?.textContent?.trim();
         const link = children[i + 2]?.querySelector('a');
@@ -79,7 +79,7 @@ export default function decorate(block) {
 
           buttonGroup.appendChild(wrapper);
         }
-      }
+      }*/
       console.log('10');
       if (buttonGroup.children.length > 0) {
         column.appendChild(buttonGroup);
