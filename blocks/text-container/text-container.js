@@ -12,14 +12,14 @@ export default function decorate(block) {
       console.log('2');
       ul.classList.remove('text-container-header', 'text-container-columns');
     } else if (index > 1) {
-      /*console.log('3');
+      console.log('3');
       const children = [...row.children];
 
       const column = document.createElement('div');
       column.className = 'text-container-column';
       console.log('4');
       // Title
-      const title = children[0]?.textContent?.trim();
+      /* const title = children[0]?.textContent?.trim();
       if (title) {
         const h2 = document.createElement('h2');
         h2.className = `text-container-heading ${children[2]?.textContent?.trim()}`;
@@ -43,7 +43,7 @@ export default function decorate(block) {
         p.className = `text-container-description ${children[4]?.textContent?.trim()}`;
         p.textContent = desc;
         column.appendChild(p);
-      }*/
+      } */
       console.log('7');
       const buttonGroup = document.createElement('div');
       buttonGroup.className = 'button-block';
