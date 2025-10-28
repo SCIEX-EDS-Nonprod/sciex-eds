@@ -1,5 +1,5 @@
 import {} from '../../scripts/aem.js';
-import {} from '../../scripts/scripts.js';
+import {moveInstrumentation} from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
@@ -85,6 +85,7 @@ export default function decorate(block) {
         column.appendChild(buttonGroup);
       }
       li.append(column);
+       moveInstrumentation(row, li);
       ul.append(li);
     }
   });
