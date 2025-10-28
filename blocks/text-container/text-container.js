@@ -5,14 +5,14 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row, index) => {
     const li = document.createElement('li');
-    /*if (index === 1 && row.textContent.includes('2')) {
+    if (index === 1 && row.textContent.includes('2')) {
       console.log('1');
       ul.classList.add('text-container-header', 'text-container-columns');
     } else if (index === 1 && row.textContent.includes('1')) {
       console.log('2');
       ul.classList.remove('text-container-header', 'text-container-columns');
-    } else */if (index > 1) {
-      console.log('3');
+    } else if (index > 1) {
+      /*console.log('3');
       const children = [...row.children];
 
       const column = document.createElement('div');
@@ -43,7 +43,7 @@ export default function decorate(block) {
         p.className = `text-container-description ${children[4]?.textContent?.trim()}`;
         p.textContent = desc;
         column.appendChild(p);
-      }
+      }*/
       console.log('7');
       const buttonGroup = document.createElement('div');
       buttonGroup.className = 'button-block';
