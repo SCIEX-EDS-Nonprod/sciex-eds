@@ -4,7 +4,7 @@ import { span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const switchTabContainer = document.createElement('div');
-  switchTabContainer.className = 'switch-tabs-container';
+  switchTabContainer.className = 'switch-tabs-container-block';
   moveInstrumentation(block, switchTabContainer);
 
   const rows = [...block.children];
