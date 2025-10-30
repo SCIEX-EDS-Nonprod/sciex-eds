@@ -31,21 +31,6 @@
           }
         }
       }
-    },
-    {
-      "title": "Table Cell",
-      "id": "data-table-cell",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Table Cell",
-              "model": "data-table-cell"
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
@@ -119,30 +104,6 @@
               "value": "compact"
             }
           ]
-        },
-        {
-          "component": "select",
-          "name": "topPadding",
-          "label": "Top padding",
-          "value": "",
-          "valueType": "string",
-          "description": "Controls the space above the component"
-        },
-        {
-          "component": "select",
-          "name": "bottomPadding",
-          "label": "Bottom padding",
-          "value": "",
-          "valueType": "string",
-          "description": "Controls the space below the component"
-        },
-        {
-          "component": "text",
-          "name": "id",
-          "label": "HTML ID",
-          "value": "",
-          "valueType": "string",
-          "description": "HTML ID attribute to apply to the component"
         }
       ]
     },
@@ -155,81 +116,6 @@
           "label": "Row ID",
           "value": "",
           "valueType": "string"
-        },
-        {
-          "component": "select",
-          "name": "rowType",
-          "label": "Row Type",
-          "value": "body",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Header Row",
-              "value": "header"
-            },
-            {
-              "name": "Body Row",
-              "value": "body"
-            },
-            {
-              "name": "Footer Row",
-              "value": "footer"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "data-table-cell",
-      "fields": [
-        {
-          "component": "richtext",
-          "name": "content",
-          "label": "Cell Content",
-          "value": "",
-          "valueType": "string"
-        },
-        {
-          "component": "select",
-          "name": "align",
-          "label": "Horizontal Alignment",
-          "value": "left",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Left",
-              "value": "left"
-            },
-            {
-              "name": "Center",
-              "value": "center"
-            },
-            {
-              "name": "Right",
-              "value": "right"
-            }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "valign",
-          "label": "Vertical Alignment",
-          "value": "top",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "Top",
-              "value": "top"
-            },
-            {
-              "name": "Middle",
-              "value": "middle"
-            },
-            {
-              "name": "Bottom",
-              "value": "bottom"
-            }
-          ]
         },
         {
           "component": "number",
@@ -246,6 +132,32 @@
           "value": 1,
           "valueType": "number",
           "description": "Number of rows this cell spans"
+        },
+        {
+          "id": "container",
+          "fields": [
+            {
+              "component": "container",
+              "label": "Container",
+              "name": "container",
+              "valueType": "string",
+              "collapsible": true,
+              "fields": [
+                {
+                  "component": "text-input",
+                  "label": "Simple Text 1",
+                  "name": "text",
+                  "valueType": "string"
+                },
+                {
+                  "component": "text-input",
+                  "label": "Simple Text 2",
+                  "name": "text2",
+                  "valueType": "string"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -255,12 +167,6 @@
       "id": "data-table",
       "components": [
         "data-table-row"
-      ]
-    },
-    {
-      "id": "data-table-row",
-      "components": [
-        "data-table-cell"
       ]
     }
   ]

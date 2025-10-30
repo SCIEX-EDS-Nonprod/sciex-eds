@@ -236,21 +236,6 @@
           }
         },
         {
-          "title": "Table Cell",
-          "id": "data-table-cell",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Table Cell",
-                  "model": "data-table-cell"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Events Container",
           "id": "events-container",
           "plugins": {
