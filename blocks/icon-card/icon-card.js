@@ -5,89 +5,107 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 export default function decorate(block) {
   const iconCardContainer = document.createElement('div');
   iconCardContainer.className = 'icon-card-container-text';
-
   moveInstrumentation(block, iconCardContainer);
 
   const rows = [...block.children];
   let id = '';
   let heading = '';
   let description = '';
-  let columns = 2; // default value
+  let columns = 2;
 
-  // Extract basic info
   rows.forEach((row, index) => {
     const text = row.textContent.trim();
     if (index === 0) id = text;
-    if (index === 1) heading = text;
-    if (index === 2) description = text;
-    if (index === 3) columns = parseInt(text, 10) || 2;
+    else if (index === 1) heading = text;
+    else if (index === 2) description = text;
+    else if (index === 3) columns = parseInt(text, 10) || 2;
   });
 
   if (id) iconCardContainer.classList.add(id);
 
-  // Create heading
   if (heading) {
-    const iconCardHeading = document.createElement('h2');
-    iconCardHeading.className = 'icon-card-heading';
-    iconCardHeading.textContent = heading;
-    iconCardContainer.append(iconCardHeading);
+    const h2 = document.createElement('h2');
+    h2.className = 'icon-card-heading';
+    h2.textContent = heading;
+    iconCardContainer.append(h2);
   }
 
-  // Create description
   if (description) {
-    const iconCardDescription = document.createElement('p');
-    iconCardDescription.className = 'icon-card-description';
-    iconCardDescription.textContent = description;
-    iconCardContainer.append(iconCardDescription);
+    const desc = document.createElement('p');
+    desc.className = 'icon-card-description';
+    desc.textContent = description;
+    iconCardContainer.append(desc);
   }
 
-  // Create grid container based on column value
   const gridContainer = document.createElement('div');
   gridContainer.className = `icon-card-grid columns-${columns}`;
   iconCardContainer.append(gridContainer);
 
-  // Build each card
   rows.slice(4).forEach((row) => {
     const cells = [...row.children];
     if (!cells.length) return;
 
-    const icon = cells[0]?.innerHTML.trim() || '';
-    const cardHeading = cells[1]?.textContent.trim() || '';
-    const cardDescription = cells[2]?.textContent.trim() || '';
-    const linkLabel = cells[3]?.textContent.trim() || '';
-    const cardLink = cells[4]?.textContent.trim() || '#';
-    const cardLinkTarget = cells[5]?.textContent.trim() || '_self';
+    const iconHTML = cells[0]?.innerHTML?.trim() || '';
+    const headingHTML = cells[1]?.innerHTML?.trim() || '';
+    const descriptionHTML = cells[2]?.innerHTML?.trim() || '';
+    const linkLabel = cells[3]?.textContent?.trim() || '';
+    const linkHref = cells[4]?.textContent?.trim() || '';
+    const linkTarget = cells[5]?.textContent?.trim() || '_self';
 
     const card = document.createElement('div');
     card.className = 'icon-card-sub-container';
-
     moveInstrumentation(row, card);
 
-    card.innerHTML = `
-      <div class="icon-card-image">${icon}</div>
-      <div class="icon-card-content">
-        <h3 class="icon-card-title">${cardHeading}</h3>
-        <p class="icon-card-text">${cardDescription}</p>
-      </div>
-    `;
+    if (iconHTML) {
+      const iconWrap = document.createElement('div');
+      iconWrap.className = 'icon-card-image';
+      iconWrap.innerHTML = iconHTML;
+      card.append(iconWrap);
+    }
 
-    // Create link
-    const link = document.createElement('a');
-    link.className = 'icon-card-link';
-    link.href = cardLink;
-    link.target = cardLinkTarget;
-    link.textContent = linkLabel;
+    const contentWrap = document.createElement('div');
+    contentWrap.className = 'icon-card-content';
 
-    // ✅ Append span icon to the link label
-    const iconSpan = span({ class: 'icon icon-arrow-blue' }); // example icon name
-    link.append(iconSpan);
+    if (headingHTML) {
+      const h3 = document.createElement('h3');
+      h3.className = 'icon-card-title';
+      h3.innerHTML = headingHTML;
+      contentWrap.append(h3);
+    }
 
-    // Append link to the content
-    card.querySelector('.icon-card-content').append(link);
+    if (descriptionHTML) {
+      const p = document.createElement('p');
+      p.className = 'icon-card-text';
+      p.innerHTML = descriptionHTML;
+      contentWrap.append(p);
+    }
+
+    // 3) Link (only if href present)
+    if (linkHref && linkLabel) {
+      const link = document.createElement('a');
+      link.className = 'icon-card-link';
+      link.href = linkHref;
+      link.target = linkTarget;
+      link.textContent = linkLabel;
+
+      // Append arrow icon span
+      const iconSpan = span({ class: 'icon icon-arrow-blue' });
+      link.append(iconSpan);
+
+      contentWrap.append(link);
+    }
+
+    // Append content only if it has children (prevents empty wrapper)
+    if (contentWrap.childElementCount) {
+      card.append(contentWrap);
+    }
 
     gridContainer.append(card);
   });
+
   decorateIcons(iconCardContainer);
+
+  // Replace block content
   block.innerHTML = '';
   block.append(iconCardContainer);
 }

@@ -61,7 +61,7 @@
   justify-content: space-between;
   border-top: 1px solid #eee;
   padding-top: 1.5rem;
-  min-height: 220px;
+  min-height: auto;
   }
 
   .icon-card-content {
