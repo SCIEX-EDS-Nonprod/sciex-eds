@@ -1,9 +1,8 @@
 import {} from '../../scripts/aem.js';
-import {} from '../../scripts/scripts.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
-
   [...block.children].forEach((row, index) => {
     const li = document.createElement('li');
     if (index === 1 && row.textContent.includes('2')) {
@@ -15,7 +14,6 @@ export default function decorate(block) {
 
       const column = document.createElement('div');
       column.className = 'text-container-column';
-
       // Title
       const title = children[0]?.textContent?.trim();
       if (title) {
@@ -32,7 +30,6 @@ export default function decorate(block) {
         p.textContent = subheading;
         column.appendChild(p);
       }
-
       // Description
       const desc = children[3]?.textContent?.trim();
       if (desc) {
@@ -48,7 +45,6 @@ export default function decorate(block) {
         const alt = children[i + 1]?.textContent?.trim();
         const link = children[i + 2]?.querySelector('a');
         const target = children[i + 3]?.textContent?.trim();
-
         if (link && label) {
           const a = document.createElement('a');
           a.href = link.getAttribute('href') || '#';
@@ -60,7 +56,11 @@ export default function decorate(block) {
           } else if (i === 9) {
             a.className = ' button secondary';
           } else if (i === 13) {
-            a.className = ' button link';
+            a.className = ' link';
+            const span = document.createElement('span');
+            span.id = 'right-arrow';
+            span.className = 'icon';
+            a.appendChild(span);
           }
           if (target) a.setAttribute('target', target);
 
@@ -71,14 +71,14 @@ export default function decorate(block) {
           buttonGroup.appendChild(wrapper);
         }
       }
-
       if (buttonGroup.children.length > 0) {
         column.appendChild(buttonGroup);
       }
       li.append(column);
+      moveInstrumentation(row, li);
       ul.append(li);
     }
   });
-  block.innerHTML = '';
+  block.textContent = '';
   block.append(ul);
 }
