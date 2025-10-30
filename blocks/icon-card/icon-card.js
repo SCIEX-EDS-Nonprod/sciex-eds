@@ -1,9 +1,12 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const iconCardContainer = document.createElement('div');
   iconCardContainer.className = 'icon-card-container-text';
+
+  moveInstrumentation(block, iconCardContainer);
 
   const rows = [...block.children];
   let id = '';
@@ -57,6 +60,8 @@ export default function decorate(block) {
 
     const card = document.createElement('div');
     card.className = 'icon-card-sub-container';
+
+    moveInstrumentation(row, card);
 
     card.innerHTML = `
       <div class="icon-card-image">${icon}</div>
