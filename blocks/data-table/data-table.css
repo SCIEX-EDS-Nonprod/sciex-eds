@@ -1,0 +1,8 @@
+
+.data-table {
+  display: flex !important;
+  flex: 1 1 50% !important;
+  gap: 20px !important;
+  padding-top:1%;
+  padding-bottom:1%;
+}

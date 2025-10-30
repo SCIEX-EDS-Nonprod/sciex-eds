@@ -73,6 +73,18 @@
     ]
   },
   {
+    "id": "data-table",
+    "components": [
+      "data-table-row"
+    ]
+  },
+  {
+    "id": "data-table-row",
+    "components": [
+      "data-table-cell"
+    ]
+  },
+  {
     "id": "events-container",
     "components": [
       "sciex-text",

@@ -1,0 +1,267 @@
+{
+  "definitions": [
+    {
+      "title": "Data Table",
+      "id": "data-table",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "data-table",
+              "model": "data-table",
+              "filter": "data-table"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Table Row",
+      "id": "data-table-row",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Table Row",
+              "model": "data-table-row",
+              "filter": "data-table-row"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Table Cell",
+      "id": "data-table-cell",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Table Cell",
+              "model": "data-table-cell"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "data-table",
+      "fields": [
+        {
+          "component": "checkbox",
+          "name": "showTopBorder",
+          "label": "Show top border",
+          "value": false,
+          "valueType": "boolean",
+          "description": "Adds a border to the top of the component"
+        },
+        {
+          "component": "text",
+          "name": "heading",
+          "label": "Heading",
+          "value": "",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "headingSize",
+          "label": "Heading size",
+          "value": "text-delta",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Delta",
+              "value": "text-delta"
+            },
+            {
+              "name": "Charlie",
+              "value": "text-charlie"
+            }
+          ]
+        },
+        {
+          "component": "textarea",
+          "name": "textArea",
+          "label": "Text area",
+          "value": "",
+          "valueType": "string"
+        },
+        {
+          "component": "checkbox",
+          "name": "hasHeaderRow",
+          "label": "Include Header Row",
+          "value": true,
+          "valueType": "boolean",
+          "description": "If enabled, the first row will render as a table header"
+        },
+        {
+          "component": "select",
+          "name": "tableStyle",
+          "label": "Table Style",
+          "value": "default",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Default",
+              "value": "default"
+            },
+            {
+              "name": "No Header",
+              "value": "no-header"
+            },
+            {
+              "name": "Compact",
+              "value": "compact"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "topPadding",
+          "label": "Top padding",
+          "value": "",
+          "valueType": "string",
+          "description": "Controls the space above the component"
+        },
+        {
+          "component": "select",
+          "name": "bottomPadding",
+          "label": "Bottom padding",
+          "value": "",
+          "valueType": "string",
+          "description": "Controls the space below the component"
+        },
+        {
+          "component": "text",
+          "name": "id",
+          "label": "HTML ID",
+          "value": "",
+          "valueType": "string",
+          "description": "HTML ID attribute to apply to the component"
+        }
+      ]
+    },
+    {
+      "id": "data-table-row",
+      "fields": [
+        {
+          "component": "text",
+          "name": "rowId",
+          "label": "Row ID",
+          "value": "",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "rowType",
+          "label": "Row Type",
+          "value": "body",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Header Row",
+              "value": "header"
+            },
+            {
+              "name": "Body Row",
+              "value": "body"
+            },
+            {
+              "name": "Footer Row",
+              "value": "footer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data-table-cell",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "content",
+          "label": "Cell Content",
+          "value": "",
+          "valueType": "string"
+        },
+        {
+          "component": "select",
+          "name": "align",
+          "label": "Horizontal Alignment",
+          "value": "left",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Left",
+              "value": "left"
+            },
+            {
+              "name": "Center",
+              "value": "center"
+            },
+            {
+              "name": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "valign",
+          "label": "Vertical Alignment",
+          "value": "top",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Top",
+              "value": "top"
+            },
+            {
+              "name": "Middle",
+              "value": "middle"
+            },
+            {
+              "name": "Bottom",
+              "value": "bottom"
+            }
+          ]
+        },
+        {
+          "component": "number",
+          "name": "colspan",
+          "label": "Column Span",
+          "value": 1,
+          "valueType": "number",
+          "description": "Number of columns this cell spans"
+        },
+        {
+          "component": "number",
+          "name": "rowspan",
+          "label": "Row Span",
+          "value": 1,
+          "valueType": "number",
+          "description": "Number of rows this cell spans"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "data-table",
+      "components": [
+        "data-table-row"
+      ]
+    },
+    {
+      "id": "data-table-row",
+      "components": [
+        "data-table-cell"
+      ]
+    }
+  ]
+}
