@@ -76,7 +76,8 @@
         "resource-library",
         "hero-small",
         "text-container",
-        "switch-tabs"
+        "switch-tabs",
+        "data-table"
       ]
     }
   ]
