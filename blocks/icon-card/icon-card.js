@@ -20,6 +20,8 @@ export default function decorate(block) {
     if (index === 3) columns = parseInt(text, 10) || 2;
   });
 
+  if (id) iconCardContainer.classList.add(id);
+
   // Create heading
   if (heading) {
     const iconCardHeading = document.createElement('h2');
@@ -64,19 +66,19 @@ export default function decorate(block) {
       </div>
     `;
 
-     // Create link
-     const link = document.createElement('a');
-     link.className = 'icon-card-link';
-     link.href = cardLink;
-     link.target = cardLinkTarget;
-     link.textContent = linkLabel;
- 
-     // ✅ Append span icon to the link label
-     const iconSpan = span({ class: 'icon icon-arrow-blue' }); // example icon name
-     link.append(iconSpan);
- 
-     // Append link to the content
-     card.querySelector('.icon-card-content').append(link);
+    // Create link
+    const link = document.createElement('a');
+    link.className = 'icon-card-link';
+    link.href = cardLink;
+    link.target = cardLinkTarget;
+    link.textContent = linkLabel;
+
+    // ✅ Append span icon to the link label
+    const iconSpan = span({ class: 'icon icon-arrow-blue' }); // example icon name
+    link.append(iconSpan);
+
+    // Append link to the content
+    card.querySelector('.icon-card-content').append(link);
 
     gridContainer.append(card);
   });
