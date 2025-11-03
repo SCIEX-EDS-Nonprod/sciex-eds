@@ -77,7 +77,8 @@
         "hero-small",
         "text-container",
         "switch-tabs",
-        "data-table"
+        "data-table",
+        "icon-card"
       ]
     }
   ]

@@ -48,7 +48,8 @@
       "hero-small",
       "text-container",
       "switch-tabs",
-      "data-table"
+      "data-table",
+      "icon-card"
     ]
   },
   {
@@ -100,6 +101,12 @@
       "hero-image",
       "colour",
       "video"
+    ]
+  },
+  {
+    "id": "icon-card",
+    "components": [
+      "icon-card-item"
     ]
   },
   {
