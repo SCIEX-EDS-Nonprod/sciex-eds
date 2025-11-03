@@ -36,10 +36,10 @@ export default function decorate(block) {
       tdEl.innerHTML = cell.innerHTML;
 
       // Check if cell contains highlighted content (numbers, special formatting)
-      const cellText = cell.textContent.trim();
-    //  if (/^\d+$/.test(cellText) && parseInt(cellText) > 1000) {
-        tdEl.classList.add('table-highlight-cell');
-     // }
+      // const cellText = cell.textContent.trim();
+      //  if (/^\d+$/.test(cellText) && parseInt(cellText) > 1000) {
+      tdEl.classList.add('table-highlight-cell');
+      // }
 
       bodyRow.appendChild(tdEl);
     });
