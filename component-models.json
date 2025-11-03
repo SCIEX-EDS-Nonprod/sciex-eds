@@ -1103,6 +1103,110 @@
     ]
   },
   {
+    "id": "icon-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconCardId",
+        "label": "Icon Card Id",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconCardheading",
+        "label": "Icon card Heading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconCarddescription",
+        "label": "Icon card Description",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "name": "grid",
+        "label": "Icon Card Select how many cards in a column",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "4"
+          },
+          {
+            "name": "3-columns",
+            "value": "3"
+          },
+          {
+            "name": "2-columns",
+            "value": "2"
+          },
+          {
+            "name": "1-columns",
+            "value": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "icon-card-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "iconCardItemIcon",
+        "label": "Icon of the card",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "iconCardItemHeading",
+        "label": "Heading",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "iconCardItemText",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "iconCardItemTextLinkLabel",
+        "label": "Icon Card Text Link Label",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "iconCardItemTextLinkUrl",
+        "label": "Icon Card Text Link URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Text Link Target",
+        "name": "iconCardItemLinkTarget",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "login-sso",
     "fields": [
       {

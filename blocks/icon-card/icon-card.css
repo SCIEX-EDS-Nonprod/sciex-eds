@@ -1,0 +1,146 @@
+.icon-card-wrapper {
+  margin: 45px !important;
+  max-width: 90pc !important;
+}
+
+.icon-card-container-text {
+    text-align: left;
+    padding: 2rem 0;
+  }
+  
+  .icon-card-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 52px; /* 130% */
+  }
+  
+  .icon-card-description {
+    color: var(--Grey-500, #707070);
+/* Desktop/text-lg/regular */
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 26px; /* 144.444% */
+    letter-spacing: 0.045px;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+  
+  .icon-card-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  
+  .icon-card-grid.columns-1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .icon-card-grid.columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .icon-card-grid.columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .icon-card-grid.columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .icon-card-sub-container {
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+  min-height: auto;
+  }
+
+  .icon-card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* ✅ allows text area to expand */
+  }
+
+  .icon-card-image {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content:flex-start;
+  }
+  
+  .icon-card-title {
+    color: var(--Grey-900, #141414);
+
+/* Desktop/text-lg/bolder */
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: 0.045px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .icon-card-text {
+    color: var(--Grey-500, #707070);
+    /* Desktop/text-base/regular */
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.08px;
+    margin: 0.5rem 0 1rem 0;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: auto;
+    padding-bottom: 16px;
+  }
+
+  .icon-card-link .icon img {
+    width: auto !important;
+    height: 12px !important;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  
+  .icon-card-link {
+    color: var(--Blue-700, #0068FA);
+    /* Desktop/text-base/bolder */
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.08px;
+    align-self: flex-start;
+    text-decoration: underline !important;
+    text-underline-offset: 5px;
+  }
+  
+  .icon-card-link:hover {
+    text-decoration: none !important;
+  }
+
+  @media (max-width: 768px) {
+
+    .icon-card-wrapper {
+      margin: 0px !important;
+    }
+    .icon-card-grid.columns-1,
+    .icon-card-grid.columns-2,
+    .icon-card-grid.columns-3 {
+      grid-template-columns: 1fr;
+    }
+  }
