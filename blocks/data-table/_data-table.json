@@ -93,8 +93,7 @@
           "component": "container",
           "label": "Column Headers",
           "name": "columns",
-          "valueType": "string",
-          "collapsible": true,
+          "multi": true,
           "fields": [
             {
               "component": "text-input",
@@ -113,8 +112,7 @@
           "component": "container",
           "label": "Row Values",
           "name": "row",
-          "valueType": "string",
-          "collapsible": true,
+          "multi": true,
           "fields": [
             {
               "component": "text-input",
