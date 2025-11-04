@@ -83,3 +83,7 @@
     }
     
   }
+  
+.tabs-container-wrapper {
+  min-height: 200px; 
+}
