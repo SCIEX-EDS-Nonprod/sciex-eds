@@ -1,18 +1,14 @@
-import {
-  table, thead, tbody, tr, th, td,
-} from '../../scripts/dom-builder.js';
+import {} from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  // Convert block div structure to proper HTML table
+  console.log(`Data Table block ${block.outerHTML}`);
+  /*
   const rows = [...block.children];
   if (rows.length === 0) return;
-
-  // Create table structure
   const tableEl = table({ class: 'eds-table' });
   const theadEl = thead();
   const tbodyEl = tbody();
 
-  // First row becomes the header
   if (rows[0]) {
     const headerRow = tr({ class: 'table-header-row' });
     const headerCells = [...rows[0].children];
@@ -26,7 +22,6 @@ export default function decorate(block) {
     theadEl.appendChild(headerRow);
   }
 
-  // Remaining rows become body rows
   rows.slice(1).forEach((row, rowIndex) => {
     const bodyRow = tr({ class: `table-body-row row-${rowIndex + 1}` });
     const cells = [...row.children];
@@ -34,12 +29,7 @@ export default function decorate(block) {
     cells.forEach((cell, cellIndex) => {
       const tdEl = td({ class: `table-body-cell col-${cellIndex + 1}` });
       tdEl.innerHTML = cell.innerHTML;
-
-      // Check if cell contains highlighted content (numbers, special formatting)
-      // const cellText = cell.textContent.trim();
-      //  if (/^\d+$/.test(cellText) && parseInt(cellText) > 1000) {
       tdEl.classList.add('table-highlight-cell');
-      // }
 
       bodyRow.appendChild(tdEl);
     });
@@ -50,11 +40,9 @@ export default function decorate(block) {
   tableEl.appendChild(theadEl);
   tableEl.appendChild(tbodyEl);
 
-  // Replace block content with table
   block.innerHTML = '';
   block.appendChild(tableEl);
 
-  // Add responsive classes
   const colCount = rows[0] ? rows[0].children.length : 0;
-  block.classList.add(`table-${colCount}-cols`);
+  block.classList.add(`table-${colCount}-cols`); */
 }

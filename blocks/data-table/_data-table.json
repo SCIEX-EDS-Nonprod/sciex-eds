@@ -70,21 +70,6 @@
           ]
         },
         {
-          "component": "textarea",
-          "name": "textArea",
-          "label": "Text area",
-          "value": "",
-          "valueType": "string"
-        },
-        {
-          "component": "checkbox",
-          "name": "hasHeaderRow",
-          "label": "Include Header Row",
-          "value": true,
-          "valueType": "boolean",
-          "description": "If enabled, the first row will render as a table header"
-        },
-        {
           "component": "select",
           "name": "tableStyle",
           "label": "Table Style",
@@ -104,6 +89,20 @@
               "value": "compact"
             }
           ]
+        },{
+          "component": "container",
+          "label": "Column Headers",
+          "name": "columns",
+          "valueType": "string",
+          "collapsible": true,
+          "fields": [
+            {
+              "component": "text-input",
+              "label": "Column Header Text",
+              "name": "text",
+              "valueType": "string"
+            }
+          ] 
         }
       ]
     },
@@ -111,70 +110,19 @@
       "id": "data-table-row",
       "fields": [
         {
-          "component": "text",
-          "name": "rowId",
-          "label": "Row ID",
-          "value": "",
-          "valueType": "string"
-        },
-        {
-          "component": "number",
-          "name": "colspan",
-          "label": "Column Span",
-          "value": 1,
-          "valueType": "number",
-          "description": "Number of columns this cell spans"
-        },
-        {
-          "component": "number",
-          "name": "rowspan",
-          "label": "Row Span",
-          "value": 1,
-          "valueType": "number",
-          "description": "Number of rows this cell spans"
-        },
-        {
           "component": "container",
-          "label": "Container",
-          "name": "container",
+          "label": "Row Values",
+          "name": "row",
           "valueType": "string",
           "collapsible": true,
           "fields": [
             {
               "component": "text-input",
-              "label": "Simple Text 1",
+              "label": "Row Text",
               "name": "text",
-              "valueType": "string"
-            },
-            {
-              "component": "text-input",
-              "label": "Simple Text 2",
-              "name": "text2",
               "valueType": "string"
             }
           ] 
-        },
-        {
-          "component": "container",
-          "name": "test",
-          "label": "Multi Text",
-          "multi": true,
-          "fields": [
-            {
-              "component": "reference",
-              "name": "image",
-              "value": "",
-              "label": "Sample Image",
-              "valueType": "string"
-            },
-            {
-              "component": "text",
-              "name": "alt",
-              "value": "",
-              "label": "Alt Text",
-              "valueType": "string"
-            }
-          ]
         }
 
       ]
