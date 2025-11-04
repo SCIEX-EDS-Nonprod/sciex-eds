@@ -106,7 +106,7 @@
           "component": "richtext",
           "name": "iconCardItemText",
           "value": "",
-          "label": "Text",
+          "label": "Icon card text Area",
           "valueType": "string"
         },
         {
