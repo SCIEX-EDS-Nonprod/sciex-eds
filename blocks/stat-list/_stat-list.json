@@ -42,21 +42,21 @@
             "multi": true,
             "fields": [
             {
-            "component": "text",
-            "valueType": "string",
-            "name": "statListSubheading",
-            "label": "Stat List item Heading",
-            "value": ""
+            "component": "reference",
+            "name": "image",
+            "value": "",
+            "label": "Sample Image",
+            "valueType": "string"
             },
             {
-            "component": "richtext",
-            "name": "itemDescription",
-            "label": "Item Description",
+            "component": "text",
+            "name": "alt",
             "value": "",
+            "label": "Alt Text",
             "valueType": "string"
             }
             ]
-          }
+            }
         ]
       }
     ],
