@@ -656,6 +656,7 @@
         "label": "Column Headers",
         "name": "columns",
         "multi": true,
+        "expose": true,
         "fields": [
           {
             "component": "text-input",
@@ -675,6 +676,7 @@
         "label": "Row Values",
         "name": "row",
         "multi": true,
+        "expose": true,
         "fields": [
           {
             "component": "text-input",
