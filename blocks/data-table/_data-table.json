@@ -36,21 +36,18 @@
   "models": [
     {
       "id": "data-table",
-      "modelFields": ["columns", "showTopBorder", "heading", "headingSize", "tableStyle","columntext"],
+      "modelFields": ["columns", "showTopBorder", "heading", "headingSize", "tableStyle"],
       "fields": [
         {
           "component": "checkbox",
           "name": "showTopBorder",
           "label": "Show top border",
-          "value": false,
-          "valueType": "boolean",
-          "description": "Adds a border to the top of the component"
+          "valueType": "boolean"
         },
         {
           "component": "text",
           "name": "heading",
           "label": "Heading",
-          "value": "",
           "valueType": "string"
         },
         {
@@ -60,14 +57,8 @@
           "value": "text-delta",
           "valueType": "string",
           "options": [
-            {
-              "name": "Delta",
-              "value": "text-delta"
-            },
-            {
-              "name": "Charlie",
-              "value": "text-charlie"
-            }
+            { "name": "Delta", "value": "text-delta" },
+            { "name": "Charlie", "value": "text-charlie" }
           ]
         },
         {
@@ -77,21 +68,13 @@
           "value": "default",
           "valueType": "string",
           "options": [
-            {
-              "name": "Default",
-              "value": "default"
-            },
-            {
-              "name": "No Header",
-              "value": "no-header"
-            },
-            {
-              "name": "Compact",
-              "value": "compact"
-            }
+            { "name": "Default", "value": "default" },
+            { "name": "No Header", "value": "no-header" },
+            { "name": "Compact", "value": "compact" }
           ]
-        },{ 
-          "component": "container",
+        },
+        {
+          "component": "multifield",
           "label": "Column Headers",
           "name": "columns",
           "valueType": "object",
@@ -104,7 +87,7 @@
               "name": "columntext",
               "valueType": "string"
             }
-          ] 
+          ]
         }
       ]
     },
@@ -113,12 +96,12 @@
       "modelFields": ["row"],
       "fields": [
         {
-          "component": "container",
+          "component": "multifield",
           "label": "Row Values",
           "name": "row",
-          "valueType": "object",
           "multi": true,
-          "expose": true,  
+          "expose": true,
+          "valueType": "object",
           "fields": [
             {
               "component": "text-input",
@@ -126,18 +109,15 @@
               "name": "rowtext",
               "valueType": "string"
             }
-          ] 
+          ]
         }
-
       ]
     }
   ],
   "filters": [
     {
       "id": "data-table",
-      "components": [
-        "data-table-row"
-      ]
+      "components": ["data-table-row"]
     }
   ]
 }

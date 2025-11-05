@@ -602,23 +602,19 @@
       "showTopBorder",
       "heading",
       "headingSize",
-      "tableStyle",
-      "columntext"
+      "tableStyle"
     ],
     "fields": [
       {
         "component": "checkbox",
         "name": "showTopBorder",
         "label": "Show top border",
-        "value": false,
-        "valueType": "boolean",
-        "description": "Adds a border to the top of the component"
+        "valueType": "boolean"
       },
       {
         "component": "text",
         "name": "heading",
         "label": "Heading",
-        "value": "",
         "valueType": "string"
       },
       {
@@ -660,7 +656,7 @@
         ]
       },
       {
-        "component": "container",
+        "component": "multifield",
         "label": "Column Headers",
         "name": "columns",
         "valueType": "object",
@@ -684,12 +680,12 @@
     ],
     "fields": [
       {
-        "component": "container",
+        "component": "multifield",
         "label": "Row Values",
         "name": "row",
-        "valueType": "object",
         "multi": true,
         "expose": true,
+        "valueType": "object",
         "fields": [
           {
             "component": "text-input",
