@@ -89,12 +89,13 @@
               "value": "compact"
             }
           ]
-        },{
-          "component": "container",
+        },{ 
+          "component": "multifield",
           "label": "Column Headers",
           "name": "columns",
+          "valueType": "object",
           "multi": true,
-          "expose": true,  
+          "expose": true,
           "fields": [
             {
               "component": "text-input",
@@ -110,9 +111,10 @@
       "id": "data-table-row",
       "fields": [
         {
-          "component": "container",
+          "component": "multifield",
           "label": "Row Values",
           "name": "row",
+          "valueType": "object",
           "multi": true,
           "expose": true,  
           "fields": [
