@@ -36,6 +36,7 @@
   "models": [
     {
       "id": "data-table",
+      "modelFields": ["columns", "showTopBorder", "heading", "headingSize", "tableStyle","columntext"],
       "fields": [
         {
           "component": "checkbox",
@@ -100,7 +101,7 @@
             {
               "component": "text-input",
               "label": "Column Header Text",
-              "name": "text",
+              "name": "columntext",
               "valueType": "string"
             }
           ] 
@@ -109,6 +110,7 @@
     },
     {
       "id": "data-table-row",
+      "modelFields": ["row"],
       "fields": [
         {
           "component": "container",
@@ -121,7 +123,7 @@
             {
               "component": "text-input",
               "label": "Row Text",
-              "name": "text",
+              "name": "rowtext",
               "valueType": "string"
             }
           ] 
