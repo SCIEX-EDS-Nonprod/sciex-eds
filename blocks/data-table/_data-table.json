@@ -90,7 +90,7 @@
             }
           ]
         },{ 
-          "component": "multifield",
+          "component": "container",
           "label": "Column Headers",
           "name": "columns",
           "valueType": "object",
@@ -111,7 +111,7 @@
       "id": "data-table-row",
       "fields": [
         {
-          "component": "multifield",
+          "component": "container",
           "label": "Row Values",
           "name": "row",
           "valueType": "object",
