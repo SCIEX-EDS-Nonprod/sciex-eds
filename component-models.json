@@ -2019,28 +2019,25 @@
         "name": "statListheading",
         "label": "Stat List Heading",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stat-list-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "statListItemHeading",
+        "label": "Heading",
+        "value": ""
       },
       {
-        "component": "container",
-        "name": "test",
-        "label": "Multi Text",
-        "multi": true,
-        "fields": [
-          {
-            "component": "reference",
-            "name": "image",
-            "value": "",
-            "label": "Sample Image",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "alt",
-            "value": "",
-            "label": "Alt Text",
-            "valueType": "string"
-          }
-        ]
+        "component": "richtext",
+        "name": "statListItemText",
+        "value": "",
+        "label": "Stat List text Area",
+        "valueType": "string"
       }
     ]
   },

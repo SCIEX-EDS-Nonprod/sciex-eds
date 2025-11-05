@@ -15,6 +15,21 @@
             }
           }
         }
+      },
+      {
+        "title": "Stat List Item",
+        "id": "stat-list-item",
+        "plugins": {
+          "xwalk": {
+            "page": {
+              "resourceType": "core/franklin/components/block/v1/block/item",
+              "template": {
+                "name": "statListItem",
+                "model": "stat-list-item"
+              }
+            }
+          }
+        }
       }
     ],
     "models": [
@@ -34,32 +49,34 @@
             "name": "statListheading",
             "label": "Stat List Heading",
             "value": ""
+          }
+        ]
+      },
+      {
+        "id": "stat-list-item",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "statListItemHeading",
+            "label": "Heading",
+            "value": ""
           },
           {
-            "component": "container",
-            "name": "test",
-            "label": "Multi Text",
-            "multi": true,
-            "fields": [
-            {
-            "component": "reference",
-            "name": "image",
+            "component": "richtext",
+            "name": "statListItemText",
             "value": "",
-            "label": "Sample Image",
+            "label": "Stat List text Area",
             "valueType": "string"
-            },
-            {
-            "component": "text",
-            "name": "alt",
-            "value": "",
-            "label": "Alt Text",
-            "valueType": "string"
-            }
-            ]
-            }
+          }
         ]
       }
     ],
-    "filters": []
+    "filters": [
+      {
+        "id": "stat-list",
+        "components": ["stat-list-item"]
+      }
+    ]
   }
   

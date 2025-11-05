@@ -829,6 +829,21 @@
           }
         },
         {
+          "title": "Stat List Item",
+          "id": "stat-list-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "statListItem",
+                  "model": "stat-list-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Survey script",
           "id": "survey-script",
           "plugins": {
