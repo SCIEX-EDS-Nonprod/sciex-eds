@@ -1,8 +1,8 @@
-import {} from '../../scripts/dom-builder.js';
+import {
+  table, thead, tbody, tr, th, td,
+} from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
-  console.log(`Data Table block ${block.outerHTML}`);
-  /*
   const rows = [...block.children];
   if (rows.length === 0) return;
   const tableEl = table({ class: 'eds-table' });
@@ -44,5 +44,5 @@ export default function decorate(block) {
   block.appendChild(tableEl);
 
   const colCount = rows[0] ? rows[0].children.length : 0;
-  block.classList.add(`table-${colCount}-cols`); */
+  block.classList.add(`table-${colCount}-cols`);
 }
