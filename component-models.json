@@ -1290,6 +1290,70 @@
     ]
   },
   {
+    "id": "resource-library",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "unified-search-text",
+        "value": "",
+        "label": "Sciex Unified Search text"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "No results Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "text1",
+        "value": "",
+        "label": "No results text1",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "text2",
+        "value": "",
+        "label": "No results text2",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "coveoSearchEngineOrganizationId",
+        "value": "",
+        "label": "Coveo Search Engine OrganizationId",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "coveoSearchEngineAccessToken",
+        "value": "",
+        "label": "Coveo Search Engine Access Token",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "buttonText",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "buttonUrl",
+        "label": "Button URL"
+      }
+    ]
+  },
+  {
     "id": "resources-grid",
     "fields": [
       {
@@ -1477,12 +1541,9 @@
         "value": ""
       },
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "aem-content",
         "name": "textLinkDestination",
-        "label": "Link destination",
-        "description": "Pick a destination within /content",
-        "multi": false
+        "label": "Link destination"
       },
       {
         "component": "radio-group",
@@ -1500,70 +1561,6 @@
             "value": "_blank"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "resource-library",
-    "fields": [
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "unified-search-text",
-        "value": "",
-        "label": "Sciex Unified Search text"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "No results Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "text1",
-        "value": "",
-        "label": "No results text1",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "text2",
-        "value": "",
-        "label": "No results text2",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "coveoSearchEngineOrganizationId",
-        "value": "",
-        "label": "Coveo Search Engine OrganizationId",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "coveoSearchEngineAccessToken",
-        "value": "",
-        "label": "Coveo Search Engine Access Token",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "icon",
-        "label": "Icon",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "buttonText",
-        "label": "Button Text"
-      },
-      {
-        "component": "aem-content",
-        "name": "buttonUrl",
-        "label": "Button URL"
       }
     ]
   },

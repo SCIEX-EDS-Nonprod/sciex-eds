@@ -128,12 +128,9 @@
           "value": ""
         },
         {
-          "component": "reference",
-          "valueType": "string",
+          "component": "aem-content",
           "name": "textLinkDestination",
-          "label": "Link destination",
-          "description": "Pick a destination within /content",
-          "multi": false
+          "label": "Link destination"
         },
         {
           "component": "radio-group",
