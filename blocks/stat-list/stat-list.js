@@ -1,15 +1,12 @@
 export default function decorate(block) {
-  // Create the main container
   const statListContainer = document.createElement('div');
   statListContainer.className = 'stat-list-container-text';
 
-  // Get data from the block dataset
   const rows = block.querySelectorAll(':scope > div');
 
-  // The first div = container id (ignore or use as needed)
   const containerId = rows[0]?.textContent.trim();
+  if (containerId) statListContainer.id = containerId;
 
-  // The second div = main heading (e.g. "Benefits")
   const headingDiv = rows[1];
   const heading = headingDiv ? headingDiv.textContent.trim() : '';
   if (heading) {
@@ -18,11 +15,9 @@ export default function decorate(block) {
     statListContainer.append(h2);
   }
 
-  // Create a wrapper for the benefit cards
   const benefitsWrapper = document.createElement('div');
   benefitsWrapper.className = 'benefits-wrapper';
 
-  // From the third div onwards → iterate to create benefit items
   rows.forEach((row, index) => {
     if (index < 2) return; // skip first two (id + heading)
 
@@ -47,7 +42,7 @@ export default function decorate(block) {
   });
 
   statListContainer.append(benefitsWrapper);
-    // Clear existing content inside the block
-    block.textContent = '';
+  // Clear existing content inside the block
+  block.textContent = '';
   block.append(statListContainer);
 }
