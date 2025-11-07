@@ -78,7 +78,8 @@
         "text-container",
         "switch-tabs",
         "table",
-        "icon-card"
+        "icon-card",
+        "resources-grid"
       ]
     }
   ]

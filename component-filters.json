@@ -49,7 +49,8 @@
       "text-container",
       "switch-tabs",
       "table",
-      "icon-card"
+      "icon-card",
+      "resources-grid"
     ]
   },
   {
@@ -101,6 +102,12 @@
     "id": "icon-card",
     "components": [
       "icon-card-item"
+    ]
+  },
+  {
+    "id": "resources-grid",
+    "components": [
+      "resources-grid-item"
     ]
   },
   {
