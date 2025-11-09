@@ -1174,7 +1174,7 @@
         "component": "richtext",
         "name": "iconCardItemText",
         "value": "",
-        "label": "Text",
+        "label": "Icon card text Area",
         "valueType": "string"
       },
       {
@@ -2118,6 +2118,44 @@
         "name": "youtube-link",
         "label": "Youtube Link",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stat-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "statListId",
+        "label": "Stat list Id",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "statListheading",
+        "label": "Stat List Heading",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "stat-list-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "statListItemHeading",
+        "label": "Heading",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "statListItemText",
+        "value": "",
+        "label": "Stat List text Area",
+        "valueType": "string"
       }
     ]
   },

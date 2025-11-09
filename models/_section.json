@@ -79,7 +79,8 @@
         "switch-tabs",
         "table",
         "icon-card",
-        "resources-grid"
+        "resources-grid",
+        "stat-list"
       ]
     }
   ]

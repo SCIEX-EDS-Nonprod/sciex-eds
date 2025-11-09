@@ -50,7 +50,8 @@
       "switch-tabs",
       "table",
       "icon-card",
-      "resources-grid"
+      "resources-grid",
+      "stat-list"
     ]
   },
   {
@@ -143,6 +144,12 @@
     "components": [
       "video-text",
       "youtube-video-text"
+    ]
+  },
+  {
+    "id": "stat-list",
+    "components": [
+      "stat-list-item"
     ]
   },
   {
