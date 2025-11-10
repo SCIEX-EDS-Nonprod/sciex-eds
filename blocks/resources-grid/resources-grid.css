@@ -4,4 +4,17 @@
   gap: 2rem;
   font-family: Arial, sans-serif;
 }
+.text-delta{
+   font-size: 32px;
+  line-height: 40px;
+}
+.text-charlie{
+
+  font-size: 40px;
+  line-height: 52px;
+  
+}
+@media (min-width: 768px) {
+  
+}
 
