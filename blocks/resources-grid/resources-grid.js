@@ -1,6 +1,5 @@
-import {
-  div, h3,
-} from '../../scripts/dom-builder.js';
+import {} from '../../scripts/aem.js';
+import {} from '../../scripts/scripts.js';
 
 /*
 
@@ -65,20 +64,23 @@ export default function decorate(block) {
   const rows = [...block.children];
   if (rows.length === 0) return;
 
-  const wrapper = div({ class: 'resources-grid-wrapper' });
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('resources-grid-wrapper');
 
   // Heading (first row)
   const headingRow = rows[0];
   if (headingRow) {
     const headingText = headingRow.querySelector('p')?.textContent || '';
     if (headingText) {
-      const heading = h3({ class: 'resources-grid-heading' }, headingText);
+      const heading = document.createElement('h3');
+      heading.classList.add('resources-grid-heading');
+      heading.textContent = headingText;
       wrapper.append(heading);
     }
   }
 
-  // Build grid container
-  const grid = div({ class: 'resources-grid' });
+  const grid = document.createElement('div');
+  grid.classList.add('resources-grid');
 
   // Each subsequent row = one card
   /* rows.slice(1).forEach((row) => {
