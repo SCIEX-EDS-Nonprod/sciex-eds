@@ -1376,6 +1376,13 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "resourceGridId",
+        "label": "Resource Grid Id",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "heading",
         "label": "Heading",
         "value": ""
