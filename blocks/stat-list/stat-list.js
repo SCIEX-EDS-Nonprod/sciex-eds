@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default function decorate(block) {
   const statListContainer = document.createElement('div');
   statListContainer.className = 'stat-list-container-text';
@@ -36,6 +38,8 @@ export default function decorate(block) {
 
     const p = document.createElement('p');
     p.textContent = description;
+    
+    moveInstrumentation(row, card);
 
     card.append(h3, p);
     benefitsWrapper.append(card);
