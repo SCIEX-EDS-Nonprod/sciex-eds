@@ -4,9 +4,8 @@ import {} from '../../scripts/scripts.js';
 export default function decorate(block) {
   const rows = [...block.children];
   if (rows.length === 0) return;
-
   const wrapper = document.createElement('div');
-  wrapper.classList.add('resources-grid-wrapper');
+  /* wrapper.classList.add('resources-grid-wrapper');
   const headingRow = rows[0];
   if (headingRow) {
     const headingText = headingRow.querySelector('p')?.textContent || '';
@@ -19,7 +18,7 @@ export default function decorate(block) {
   }
   const grid = document.createElement('div');
   grid.classList.add('resources-grid');
-  wrapper.append(grid);
-  // block.textContent = '';
+  wrapper.append(grid); */
+  block.textContent = '';
   block.append(wrapper);
 }
