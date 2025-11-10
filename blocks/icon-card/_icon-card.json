@@ -82,6 +82,24 @@
               "value": "1"
             }
           ]
+        },
+        {
+          "component": "select",
+          "name": "iconCardType",
+          "label": "Select type of Icon Card",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            
+            {
+              "name": "iconType",
+              "value": "icon-type"
+            },
+            {
+              "name": "imageType",
+              "value": "image-type"
+            }
+          ]
         }
       ]
     },

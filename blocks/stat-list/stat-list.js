@@ -38,7 +38,7 @@ export default function decorate(block) {
 
     const p = document.createElement('p');
     p.textContent = description;
-    
+
     moveInstrumentation(row, card);
 
     card.append(h3, p);
