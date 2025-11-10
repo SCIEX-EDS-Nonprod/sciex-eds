@@ -64,6 +64,17 @@
   min-height: auto;
   }
 
+  .icon-type .icon-card-sub-container {
+    flex-direction: column;
+  }
+  
+  .image-type .icon-card-sub-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+  
+
   .icon-card-content {
     display: flex;
     flex-direction: column;
