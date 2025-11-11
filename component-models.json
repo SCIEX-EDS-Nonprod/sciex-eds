@@ -1601,15 +1601,15 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "heading",
-        "label": "Heading",
+        "name": "accordionHeading",
+        "label": "Accordion-Heading",
         "value": ""
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "description",
-        "label": "Description",
+        "name": "accordionDescription",
+        "label": "Accordion-Description",
         "value": ""
       }
     ]
@@ -1620,27 +1620,27 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "accordionheading",
-        "label": "Accordion Heading",
+        "name": "accordionSubHeading",
+        "label": "Accordion Sub Heading",
         "value": ""
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionDescription",
-        "label": "Accordion Description",
-        "value": ""
+        "component": "richtext",
+        "name": "accordionTextArea",
+        "label": "Accordion Sub Description",
+        "value": "",
+        "valueType": "string"
       },
       {
         "component": "text",
         "name": "accordionTextLinkLabel",
-        "label": "Accordion Text Link Label",
+        "label": "accordion Text Link Label",
         "value": ""
       },
       {
         "component": "aem-content",
         "name": "accordionTextLinkUrl",
-        "label": "Accordion Text Link URL"
+        "label": "accordion Text Link URL"
       },
       {
         "component": "radio-group",
