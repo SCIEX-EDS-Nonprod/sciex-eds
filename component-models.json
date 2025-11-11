@@ -264,78 +264,6 @@
     ]
   },
   {
-    "id": "accordion",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionId",
-        "label": "Accordion ID",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "heading",
-        "label": "Heading",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "description",
-        "label": "Description",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "accordion-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionheading",
-        "label": "Accordion Heading",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionDescription",
-        "label": "Accordion Description",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "name": "accordionTextLinkLabel",
-        "label": "Accordion Text Link Label",
-        "value": ""
-      },
-      {
-        "component": "aem-content",
-        "name": "accordionTextLinkUrl",
-        "label": "Accordion Text Link URL"
-      },
-      {
-        "component": "radio-group",
-        "label": "Option to Select Text Link Target",
-        "name": "optionToSelectTextLink",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Open In Same Tab",
-            "value": "_self"
-          },
-          {
-            "name": "Open In New Tab",
-            "value": "_blank"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "button-text",
     "fields": [
       {
@@ -1654,6 +1582,78 @@
           },
           {
             "name": "New tab",
+            "value": "_blank"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sciex-accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordionId",
+        "label": "Accordion ID",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordionheading",
+        "label": "Accordion Heading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordionDescription",
+        "label": "Accordion Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "accordionTextLinkLabel",
+        "label": "Accordion Text Link Label",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "accordionTextLinkUrl",
+        "label": "Accordion Text Link URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Option to Select Text Link Target",
+        "name": "optionToSelectTextLink",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
             "value": "_blank"
           }
         ]

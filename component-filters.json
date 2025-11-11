@@ -52,13 +52,7 @@
       "icon-card",
       "resources-grid",
       "stat-list",
-      "accordion"
-    ]
-  },
-  {
-    "id": "accordion",
-    "components": [
-      "accordion-item"
+      "sciex-accordion"
     ]
   },
   {
@@ -116,6 +110,12 @@
     "id": "resources-grid",
     "components": [
       "resources-grid-item"
+    ]
+  },
+  {
+    "id": "sciex-accordion",
+    "components": [
+      "accordion-item"
     ]
   },
   {
