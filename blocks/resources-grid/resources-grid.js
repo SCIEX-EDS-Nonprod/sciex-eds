@@ -1,6 +1,6 @@
 import {} from '../../scripts/aem.js';
 import { } from '../../scripts/dom-builder.js';
-import {} from '../../scripts/scripts.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
@@ -154,6 +154,7 @@ export default function decorate(block) {
       });
 
       ul.appendChild(li);
+      moveInstrumentation(row, li);
     }
   });
   block.textContent = '';
