@@ -33,7 +33,6 @@ function extractBlockData(block) {
   return data;
 }
 
-
 function preserveOriginalAuthoring(block) {
   const originalWrapper = document.createElement('div');
   originalWrapper.className = 'hero-original';

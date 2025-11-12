@@ -52,13 +52,7 @@
       "icon-card",
       "resources-grid",
       "stat-list",
-      "accordion"
-    ]
-  },
-  {
-    "id": "accordion",
-    "components": [
-      "accordion-item"
+      "testing-block"
     ]
   },
   {
@@ -224,6 +218,12 @@
     "id": "tabs-nav",
     "components": [
       "tab"
+    ]
+  },
+  {
+    "id": "testing-block",
+    "components": [
+      "testing-block-item"
     ]
   },
   {
