@@ -221,12 +221,6 @@
     ]
   },
   {
-    "id": "testing-block",
-    "components": [
-      "testing-block-item"
-    ]
-  },
-  {
     "id": "text-container",
     "components": [
       "column-text"

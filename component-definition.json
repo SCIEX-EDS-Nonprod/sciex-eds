@@ -1130,23 +1130,7 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "name": "Testing block",
-                  "model": "testing-block",
-                  "filter": "testing-block"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Testing-block-item",
-          "id": "testing-block-item",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Testing block item",
-                  "model": "testing-block-item"
+                  "model": "testing-block"
                 }
               }
             }
