@@ -67,6 +67,26 @@
           "name": "textArea",
           "label": "Text area",
           "value": ""
+        },{
+          "component": "select",
+          "valueType": "string",
+          "name": "typeofView",
+          "label": "View type",
+          "value": "small",
+          "options": [
+            { "name": "Small", "value": "small" },
+            { "name": "Grid", "value": "grid" }
+          ]
+        },{
+          "component": "radio-group",
+          "valueType": "string",
+          "name": "showFilter",
+          "label": "Show Filter",
+          "value": "show",
+          "options": [
+            { "name": "Show Filter", "value": "show" }
+           
+          ]
         }
       ]
     },
@@ -91,33 +111,33 @@
           "label": "Resource type",
           "description": "Pick the resource type",
           "options": [
-              { "name": "Technical note", "value": "techDoc" },
-              { "name": "Webinar", "value": "webpage" },
-              { "name": "Document", "value": "customerDoc" },
-              { "name": "Video", "value": "play" },
-              { "name": "PDF", "value": "courseCatalog" },
-              { "name": "Q&A blog", "value": "webpage2" },
-              { "name": "Blog", "value": "webpage3" },
-              { "name": "Solution guide", "value": "customerDoc2" },
-              { "name": "Brochure", "value": "resourceLibrary" },
-              { "name": "Flyer", "value": "resourceLibrary2" },
-              { "name": "Expert brief", "value": "resourceLibrary3" },
-              { "name": "Poster", "value": "resourceLibrary4" },
-              { "name": "Publication", "value": "customerDoc3" },
-              { "name": "Podcast", "value": "play2" },
-              { "name": "Vodcast", "value": "play3" },
-              { "name": "Article", "value": "webpage4" },
-              { "name": "Infographic", "value": "resourceLibrary5" },
-              { "name": "Compendium", "value": "courseCatalog2" },
-              { "name": "Press release", "value": "resourceLibrary6" },
-              { "name": "Executive summary", "value": "resourceLibrary7" },
-              { "name": "User guide", "value": "customerDoc4" },
-              { "name": "Application guide", "value": "customerDoc5" },
-              { "name": "Manual", "value": "customerDoc6" },
-              { "name": "Release notes", "value": "customerDoc7" },
-              { "name": "Specification sheet", "value": "customerDoc8" },
-              { "name": "Hub", "value": "webpage5" },
-              { "name": "Spectral library", "value": "resourceLibrary8" }
+              { "name": "Technical note", "value": "Technical note" },
+              { "name": "Webinar", "value": "Webinar" },
+              { "name": "Document", "value": "Document" },
+              { "name": "Video", "value": "Video" },
+              { "name": "PDF", "value": "PDF" },
+              { "name": "Q&A blog", "value": "Q&A blog" },
+              { "name": "Blog", "value": "Blog" },
+              { "name": "Solution guide", "value": "Solution guide" },
+              { "name": "Brochure", "value": "Brochure" },
+              { "name": "Flyer", "value": "Flyer" },
+              { "name": "Expert brief", "value": "Expert brief" },
+              { "name": "Poster", "value": "Poster" },
+              { "name": "Publication", "value": "Publication" },
+              { "name": "Podcast", "value": "Podcast" },
+              { "name": "Vodcast", "value": "Vodcast" },
+              { "name": "Article", "value": "Article" },
+              { "name": "Infographic", "value": "Infographic" },
+              { "name": "Compendium", "value": "Compendium" },
+              { "name": "Press release", "value": "Press release" },
+              { "name": "Executive summary", "value": "Executive summary" },
+              { "name": "User guide", "value": "User guide" },
+              { "name": "Application guide", "value": "Application guide" },
+              { "name": "Manual", "value": "Manual" },
+              { "name": "Release notes", "value": "Release notes" },
+              { "name": "Specification sheet", "value": "Specification sheet" },
+              { "name": "Hub", "value": "Hub" },
+              { "name": "Spectral library", "value": "Spectral library" }
             ]
         },
         {

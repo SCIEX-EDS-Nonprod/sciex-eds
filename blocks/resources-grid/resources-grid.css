@@ -5,16 +5,94 @@
   font-family: Arial, sans-serif;
 }
 .text-delta{
-   font-size: 32px;
-  line-height: 40px;
+   /*font-size: 32px;
+  line-height: 40px;*/
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 40px; 
 }
 .text-charlie{
 
+  /*font-size: 40px;
+  line-height: 52px;*/
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
   font-size: 40px;
-  line-height: 52px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 52px; 
+}
+.resources-grid-description {
+ color: var(--Grey-500, #707070);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px; 
+  letter-spacing: 0.045px;
+}
+.resource-grid-ul{
+ display: grid;
+ grid-template-columns: repeat(4, minmax(0, 1fr));
+
+
+
+  /*flex-direction: column;
+  align-items: flex-start;*/
+}
+.resource-grid-li {
+  display: flex;
+  width: 280px;
+  height: 384px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
   
 }
-@media (min-width: 768px) {
-  
+.resource-grid-li-title {
+ height: 104px;
+  align-self: stretch;
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 26px; 
+  letter-spacing: 0.045px;
 }
+.resource-grid-li-description {
+  color: var(--Grey-500, #707070);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px; 
+  letter-spacing: 0.08px;
+  align-self: stretch;
+}
+.resource-grid-toptext{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+.resource-grid-topDiv{
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+}
+.resource-grid-li-background-grey{
+ background: var(--Grey-50, #F5F5F5);
+}
+.resource-grid-li-background-white{
+ background: #FFFFFF;
+}
+
 
