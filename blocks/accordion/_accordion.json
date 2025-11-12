@@ -17,7 +17,7 @@
       }
     },
     {
-      "title": "ccordion Item",
+      "title": "Accordion Item",
       "id": "accordion-item",
       "plugins": {
         "xwalk": {
