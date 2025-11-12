@@ -52,7 +52,13 @@
       "icon-card",
       "resources-grid",
       "stat-list",
-      "testing-block"
+      "accordion"
+    ]
+  },
+  {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
     ]
   },
   {
