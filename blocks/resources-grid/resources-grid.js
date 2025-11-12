@@ -45,7 +45,7 @@ export default function decorate(block) {
       description = row.textContent.trim();
       const descriptionDiv = document.createElement('div');
       descriptionDiv.textContent = description;
-      descriptionDiv.classList = 'resources-grid-description';
+      descriptionDiv.classList.add('resources-grid-description');
 
       sectionDiv.appendChild(descriptionDiv);
       return;
