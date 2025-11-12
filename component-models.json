@@ -264,6 +264,51 @@
     ]
   },
   {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_id",
+        "value": "",
+        "label": "Accordion Id"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_title",
+        "value": "",
+        "label": "Accordion Title"
+      },
+      {
+        "component": "richtext",
+        "name": "accordion_description",
+        "value": "",
+        "label": "Accordion Description",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "accordion_subtitle",
+        "value": "",
+        "label": "Accordion Sub Title"
+      },
+      {
+        "component": "richtext",
+        "name": "accordion_subdescription",
+        "value": "",
+        "label": "Accordion item Description",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "button-text",
     "fields": [
       {
@@ -1585,62 +1630,6 @@
             "value": "_blank"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "sciex-accordion",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionId",
-        "label": "Accordion ID",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionHeading",
-        "label": "Accordion-Heading",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionDescription",
-        "label": "Accordion-Description",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "accordion-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "accordionSubHeading",
-        "label": "Accordion Sub Heading",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "name": "accordionTextArea",
-        "label": "Accordion Sub Description",
-        "value": "",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "accordionTextLinkLabel",
-        "label": "accordion Text Link Label",
-        "value": ""
-      },
-      {
-        "component": "aem-content",
-        "name": "accordionTextLinkUrl",
-        "label": "accordion Text Link URL"
       }
     ]
   },
