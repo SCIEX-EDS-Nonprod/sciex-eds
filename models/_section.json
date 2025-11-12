@@ -80,7 +80,8 @@
         "table",
         "icon-card",
         "resources-grid",
-        "stat-list"
+        "stat-list",
+        "accordion"
       ]
     }
   ]
