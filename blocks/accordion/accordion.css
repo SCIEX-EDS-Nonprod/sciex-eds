@@ -80,7 +80,7 @@
   min-width: 24px;
 }
 
-.accordion-item.open .accordion-toggle .icon-accordion-down {
+.accordion-item.open .accordion-toggle .icon-accordion-up {
   transform: rotate(180deg);
 }
 
