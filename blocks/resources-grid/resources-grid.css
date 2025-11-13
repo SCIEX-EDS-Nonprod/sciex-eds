@@ -95,4 +95,26 @@
  background: #FFFFFF;
 }
 
-
+.resource-grid-filter-label{
+  color: var(--Grey-500, #707070);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px; 
+  letter-spacing: 0.08px;
+  --tw-border-opacity: 1; 
+    border-color: #0068fa; 
+    border-color: rgba(0, 104, 250, var(--tw-border-opacity));
+	border-width: 1px;
+}
+.resource-grid-filter-label:hover{
+      --tw-bg-opacity: 1;
+    background-color: #0068fa;
+    background-color: rgba(0, 104, 250, var(--tw-bg-opacity));
+    color: #fff;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+.resource-grid-filter-input{
+  display: none;
+}

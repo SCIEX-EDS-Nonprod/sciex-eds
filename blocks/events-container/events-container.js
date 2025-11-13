@@ -2,6 +2,7 @@ import decorateSessionTimeline from '../session-timeline/session-timeline.js';
 import decorateEventDetails from '../events-details/events-details.js';
 import decorateRegisterForm from '../events-register-form/events-register-form.js';
 import decorateSciexText from '../sciex-text/sciex-text.js';
+import decorateSpeakers from '../speakers/speakers.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
@@ -30,6 +31,10 @@ export default function decorate(block) {
         break;
       case 'sessiontimeline':
         decorateSessionTimeline(row);
+        (isVerticalLayout ? leftCol : leftCol).appendChild(row);
+        break;
+      case 'speakers':
+        decorateSpeakers(row);
         (isVerticalLayout ? leftCol : leftCol).appendChild(row);
         break;
       case 'details':

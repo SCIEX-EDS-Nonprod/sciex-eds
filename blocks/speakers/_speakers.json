@@ -40,7 +40,7 @@
           "component": "text",
           "valueType": "string",
           "name": "id",
-          "label": "Id"
+          "label": "Id(speakers)"
         },
         {
           "component": "text",
