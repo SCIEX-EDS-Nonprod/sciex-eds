@@ -50,8 +50,13 @@ export default function decorate(block) {
       sectionDiv.appendChild(descriptionDiv);
       return;
     }
-
-    if (index >= 4 && row.children.length > 0) {
+    if (index === 4) {
+      console.log(`index 4>${row.textContent.trim()}`);
+    }
+    if (index === 5) {
+      console.log(`index 5>${row.textContent.trim()}`);
+    }
+    if (index >= 6 && row.children.length > 0) {
       const li = document.createElement('li');
       li.className = 'resource-grid-li';
       let colour = 'grey';

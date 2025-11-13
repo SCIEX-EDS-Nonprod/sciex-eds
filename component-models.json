@@ -1510,6 +1510,10 @@
           {
             "name": "Show Filter",
             "value": "show"
+          },
+          {
+            "name": "Hide Filter",
+            "value": "hide"
           }
         ]
       }

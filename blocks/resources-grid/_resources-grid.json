@@ -84,7 +84,8 @@
           "label": "Show Filter",
           "value": "show",
           "options": [
-            { "name": "Show Filter", "value": "show" }
+            { "name": "Show Filter", "value": "show" },
+            { "name": "Hide Filter", "value": "hide" }
            
           ]
         }
