@@ -12,6 +12,7 @@ export default function decorate(block) {
   let heading = '';
   let description = '';
   let columns = 2;
+  let typeOfCard = '';
 
   rows.forEach((row, index) => {
     const text = row.textContent.trim();
@@ -19,6 +20,7 @@ export default function decorate(block) {
     else if (index === 1) heading = text;
     else if (index === 2) description = text;
     else if (index === 3) columns = parseInt(text, 10) || 2;
+    else if (index === 4) typeOfCard = text;
   });
 
   if (id) iconCardContainer.classList.add(id);
@@ -41,7 +43,7 @@ export default function decorate(block) {
   gridContainer.className = `icon-card-grid columns-${columns}`;
   iconCardContainer.append(gridContainer);
 
-  rows.slice(4).forEach((row) => {
+  rows.slice(5).forEach((row) => {
     const cells = [...row.children];
     if (!cells.length) return;
 
@@ -55,6 +57,8 @@ export default function decorate(block) {
     const card = document.createElement('div');
     card.className = 'icon-card-sub-container';
     moveInstrumentation(row, card);
+
+    if (typeOfCard) iconCardContainer.classList.add(typeOfCard);
 
     if (iconHTML) {
       const iconWrap = document.createElement('div');
