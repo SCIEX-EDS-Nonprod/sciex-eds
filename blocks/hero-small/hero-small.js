@@ -1,9 +1,6 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 
-/**
- * Extracts all required data (text, images, buttons, etc.)
- */
 function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
   const clonedCells = cells.map((cell) => cell.cloneNode(true));
@@ -36,9 +33,6 @@ function extractBlockData(block) {
   return data;
 }
 
-/**
- * Hides the authoring DOM safely
- */
 function preserveOriginalAuthoring(block) {
   const originalWrapper = document.createElement('div');
   originalWrapper.className = 'hero-original';
@@ -49,9 +43,6 @@ function preserveOriginalAuthoring(block) {
   block.appendChild(originalWrapper);
 }
 
-/**
- * Builds the hero content section (heading, description, buttons, etc.)
- */
 function buildHeroContent(data) {
   const content = document.createElement('div');
   content.className = 'hero-content';
@@ -119,9 +110,6 @@ function buildHeroContent(data) {
   return content;
 }
 
-/**
- * Applies layout and background logic (image, video, colorPic)
- */
 function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent) {
   if (data.colourPicture) {
     const imgSrc = data.colourPicture.querySelector('img')?.src;
@@ -171,9 +159,6 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
   }
 }
 
-/**
- * Main decorate function
- */
 export default function decorate(block) {
   const data = extractBlockData(block);
   preserveOriginalAuthoring(block);
