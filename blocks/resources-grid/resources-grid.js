@@ -53,9 +53,55 @@ export default function decorate(block) {
     if (index === 4) {
       console.log(`index 4>${row.textContent.trim()}`);
     }
+    /** */
     if (index === 5) {
       console.log(`index 5>${row.textContent.trim()}`);
+      const filterValue = row.textContent.trim();
+
+      if (filterValue === 'show') {
+        const filterWrapper = document.createElement('div');
+        filterWrapper.className = '';
+
+        // Create Filter label
+        const filterLabel = document.createElement('span');
+        filterLabel.className = '';
+        filterLabel.textContent = 'Filter:';
+        filterWrapper.appendChild(filterLabel);
+
+        // Define filter buttons data
+        const filters = [
+          { id: 'all-1', label: 'All', value: 'all' },
+          { id: 'play-1', label: 'Video', value: 'play' },
+          { id: 'courseCatalog-1', label: 'PDF', value: 'courseCatalog' },
+          { id: 'techDoc-1', label: 'Technical note', value: 'techDoc' },
+        ];
+
+        // Build each filter button dynamically
+        filters.forEach((f) => {
+          const div = document.createElement('div');
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.className = '';
+          input.id = f.id;
+          input.name = 'resourceFilter';
+          input.value = f.value;
+
+          const label = document.createElement('label');
+          label.htmlFor = f.id;
+          label.textContent = f.label;
+          label.className = 'resource-grid-filter-label';
+
+          div.appendChild(input);
+          div.appendChild(label);
+          filterWrapper.appendChild(div);
+        });
+
+        // Append to section
+        sectionDiv.appendChild(filterWrapper);
+      }
     }
+    /** */
     if (index >= 6 && row.children.length > 0) {
       const li = document.createElement('li');
       li.className = 'resource-grid-li';
