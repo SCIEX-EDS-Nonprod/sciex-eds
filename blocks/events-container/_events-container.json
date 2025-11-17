@@ -15,7 +15,22 @@
             }
           }
         }
+      },
+      {
+      "title": "Speaker",
+      "id": "speaker",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Speaker",
+              "model": "speaker"
+            }
+          }
+        }
       }
+    }
     ],
     "models": [
       {
@@ -47,7 +62,32 @@
             ]
           }
         ]
-      }
+      },{
+      "id": "speaker",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    }
     ],
     "filters": [
       {
@@ -55,7 +95,7 @@
         "components": [
           "sciex-text",
           "session-timeline",
-          "speakers",
+          "speaker",
           "events-details",
           "events-register-form"
 
