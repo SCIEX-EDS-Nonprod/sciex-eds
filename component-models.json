@@ -2108,6 +2108,12 @@
     "id": "speaker",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "id",
+        "label": "Id(speakers)"
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",

@@ -3,7 +3,7 @@ import decorateEventDetails from '../events-details/events-details.js';
 import decorateRegisterForm from '../events-register-form/events-register-form.js';
 import decorateSciexText from '../sciex-text/sciex-text.js';
 import { } from '../../scripts/scripts.js';
-import { decorateSpeaker } from '../speaker/speaker.js';
+import decorateSpeaker from '../speaker/speaker.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
@@ -38,8 +38,7 @@ export default function decorate(block) {
         break;
       }
       case 'speakers': {
-        const parentDiv = decorateSpeaker(row);
-        console.log('parentDiv>>', parentDiv);
+        decorateSpeaker(row);
         (isVerticalLayout ? leftCol : leftCol).appendChild(row);
         break;
       }
@@ -59,6 +58,7 @@ export default function decorate(block) {
         break;
       }
       default: {
+        decorateSpeaker(row);
         leftCol.appendChild(row);
         break;
       }
