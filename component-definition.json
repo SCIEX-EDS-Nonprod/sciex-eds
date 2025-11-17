@@ -251,6 +251,21 @@
           }
         },
         {
+          "title": "Speaker",
+          "id": "speaker",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Speaker",
+                  "model": "speaker"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Events Details",
           "id": "events-details",
           "plugins": {
