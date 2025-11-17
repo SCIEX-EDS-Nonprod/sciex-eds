@@ -2,7 +2,8 @@ import decorateSessionTimeline from '../session-timeline/session-timeline.js';
 import decorateEventDetails from '../events-details/events-details.js';
 import decorateRegisterForm from '../events-register-form/events-register-form.js';
 import decorateSciexText from '../sciex-text/sciex-text.js';
-import decorateSpeakers from '../speakers/speakers.js';
+import { } from '../../scripts/scripts.js';
+import { decorateSpeaker } from '../speakers/speakers.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
@@ -22,36 +23,45 @@ export default function decorate(block) {
     const type = row.querySelector('p')?.textContent?.toLowerCase()?.trim();
     console.log(`type>${type}`);
     switch (type) {
-      case 'vertical':
+      case 'vertical': {
         block.classList.add('vertical-layout');
         isVerticalLayout = true;
         break;
-      case 'horizontal':
+      }
+      case 'horizontal': {
         block.classList.add('horizontal-layout');
         break;
-      case 'sessiontimeline':
+      }
+      case 'sessiontimeline': {
         decorateSessionTimeline(row);
         (isVerticalLayout ? leftCol : leftCol).appendChild(row);
         break;
-      case 'speakers':
-        decorateSpeakers(row);
+      }
+      case 'speakers': {
+        const parentDiv = decorateSpeaker(row);
+        console.log('parentDiv>>', parentDiv);
         (isVerticalLayout ? leftCol : leftCol).appendChild(row);
         break;
-      case 'details':
+      }
+      case 'details': {
         decorateEventDetails(row);
         (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
-      case 'registerform':
+      }
+      case 'registerform': {
         decorateRegisterForm(row);
         (isVerticalLayout ? leftCol : rightCol).appendChild(row);
         break;
-      case 'sciextext':
+      }
+      case 'sciextext': {
         decorateSciexText(row);
         leftCol.appendChild(row);
         break;
-      default:
+      }
+      default: {
         leftCol.appendChild(row);
         break;
+      }
     }
   });
 
