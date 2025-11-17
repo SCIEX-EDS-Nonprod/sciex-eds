@@ -2143,7 +2143,7 @@
         "component": "text",
         "valueType": "string",
         "name": "id",
-        "label": "Id(speakers)"
+        "label": "Id"
       },
       {
         "component": "text",
