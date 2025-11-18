@@ -3,7 +3,7 @@ import decorateEventDetails from '../events-details/events-details.js';
 import decorateRegisterForm from '../events-register-form/events-register-form.js';
 import decorateSciexText from '../sciex-text/sciex-text.js';
 import { } from '../../scripts/scripts.js';
-import decorateSpeaker from '../speaker/speaker.js';
+import decorateSpeaker from '../speaker-details/speaker-details.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
