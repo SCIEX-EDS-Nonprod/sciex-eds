@@ -69,5 +69,5 @@ function decorateButtonTabs(block) {
 }
 
 export default async function decorate(block) {
-  if (block.classList.contains('button-tabs')) decorateButtonTabs(block);
+  if (block.classList.contains('sciex-tabs')) decorateButtonTabs(block);
 }
