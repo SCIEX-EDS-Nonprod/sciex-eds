@@ -260,6 +260,14 @@
             "value": "highlight"
           }
         ]
+      },
+      {
+        "component": "text",
+        "name": "tabName",
+        "value": "",
+        "label": "Provide Tab Name",
+        "description": "Provide a name for the tab (Applicable only when Tabs block is added)",
+        "valueType": "string"
       }
     ]
   },
@@ -1971,13 +1979,13 @@
     ]
   },
   {
-    "id": "sciex-tab",
+    "id": "sciex-tabs",
     "fields": [
       {
         "component": "text",
-        "name": "containerId",
+        "name": "sciexContainerId",
         "value": "",
-        "label": "Container Id",
+        "label": "Sciex Container Id",
         "valueType": "string"
       }
     ]
