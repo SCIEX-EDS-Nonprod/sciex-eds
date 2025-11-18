@@ -1,6 +1,4 @@
-import { getProductResponse } from '../../scripts/search.js';
 import { div, button } from '../../scripts/dom-builder.js';
-import { toolTip } from '../../scripts/scripts.js';
 
 /* eslint-disable no-unused-expressions */
 function toggleTabs(tabId, mmgTabs, tabType, tabs) {
@@ -73,4 +71,3 @@ function decorateButtonTabs(block) {
 export default async function decorate(block) {
   if (block.classList.contains('button-tabs')) decorateButtonTabs(block);
 }
-
