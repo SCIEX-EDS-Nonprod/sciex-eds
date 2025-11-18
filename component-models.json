@@ -1971,6 +1971,18 @@
     ]
   },
   {
+    "id": "sciex-tab",
+    "fields": [
+      {
+        "component": "text",
+        "name": "containerId",
+        "value": "",
+        "label": "Container Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "sciex-text",
     "fields": [
       {

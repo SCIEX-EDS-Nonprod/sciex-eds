@@ -706,6 +706,22 @@
           }
         },
         {
+          "title": "Sciex Tab",
+          "id": "sciex-tab",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/section/v1/section",
+                "template": {
+                  "name": "Sciex Tab",
+                  "model": "sciex-tab",
+                  "filter": "section"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Sciex Text",
           "id": "sciex-text",
           "plugins": {
