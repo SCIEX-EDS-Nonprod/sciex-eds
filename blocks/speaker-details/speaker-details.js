@@ -39,10 +39,14 @@ export function waitForImagesToDecode(root) {
 export default async function decorate(block) {
   const parentDiv = document.createElement('div');
   parentDiv.className = 'speaker-container';
+  const speakerDiv = document.createElement('div');
+  speakerDiv.className = 'speaker-card';
   const rows = Array.from(block.children);
 
   for (let index = 0; index < rows.length; index += 1) {
     const row = rows[index];
+
+    moveInstrumentation(row, speakerDiv);
     if (index === 0) {
       block.id = `${row.textContent.trim()}-content`;
       if (block.parentElement) {
@@ -50,18 +54,11 @@ export default async function decorate(block) {
       }
     } else {
       const clonedRow = row.cloneNode(true);
-
       setImgsEager(clonedRow);
       waitForImagesToDecode(clonedRow);
-
-      const speakerDiv = document.createElement('div');
-      speakerDiv.className = 'speaker-card';
-      moveInstrumentation(row, speakerDiv);
-
       while (clonedRow.firstElementChild) {
         speakerDiv.append(clonedRow.firstElementChild);
       }
-
       const showMoreButton = document.createElement('div');
       showMoreButton.className = 'show-more';
       const showMoreSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
@@ -73,11 +70,10 @@ export default async function decorate(block) {
       showLessButton.innerHTML = `${showLessSvg} Show Less`;
 
       Array.from(speakerDiv.children).forEach((div) => {
-        if (div.querySelector('picture')) {
+        if (div.matches('picture')) {
           div.className = 'speaker-image';
         } else {
           div.className = 'speaker-content';
-
           if (canMobileActions()) {
             const target = div.querySelector('ul');
             if (target) {
