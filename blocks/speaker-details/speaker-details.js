@@ -37,76 +37,81 @@ export function waitForImagesToDecode(root) {
 }
 
 export default async function decorate(block) {
-  console.log('speaker block >>', block.outerHTML);
   const parentDiv = document.createElement('div');
   parentDiv.className = 'speaker-container';
   const rows = Array.from(block.children);
 
   for (let index = 0; index < rows.length; index += 1) {
     const row = rows[index];
+    if (index === 0) {
+      block.id = `${row.textContent.trim()}-content`;
+      if (block.parentElement) {
+        block.parentElement.classList.add('tabs-container-wrapper');
+      }
+    } else {
+      const clonedRow = row.cloneNode(true);
 
-    const clonedRow = row.cloneNode(true);
+      setImgsEager(clonedRow);
+      waitForImagesToDecode(clonedRow);
 
-    setImgsEager(clonedRow);
-    waitForImagesToDecode(clonedRow);
+      const speakerDiv = document.createElement('div');
+      speakerDiv.className = 'speaker-card';
+      moveInstrumentation(row, speakerDiv);
 
-    const speakerDiv = document.createElement('div');
-    speakerDiv.className = 'speaker-card';
-    moveInstrumentation(row, speakerDiv);
+      while (clonedRow.firstElementChild) {
+        speakerDiv.append(clonedRow.firstElementChild);
+      }
 
-    while (clonedRow.firstElementChild) {
-      speakerDiv.append(clonedRow.firstElementChild);
-    }
+      const showMoreButton = document.createElement('div');
+      showMoreButton.className = 'show-more';
+      const showMoreSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
+      showMoreButton.innerHTML = `${showMoreSvg} Show More`;
 
-    const showMoreButton = document.createElement('div');
-    showMoreButton.className = 'show-more';
-    const showMoreSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
-    showMoreButton.innerHTML = `${showMoreSvg} Show More`;
+      const showLessButton = document.createElement('div');
+      showLessButton.className = 'show-less content-hidden';
+      const showLessSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
+      showLessButton.innerHTML = `${showLessSvg} Show Less`;
 
-    const showLessButton = document.createElement('div');
-    showLessButton.className = 'show-less content-hidden';
-    const showLessSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
-    showLessButton.innerHTML = `${showLessSvg} Show Less`;
+      Array.from(speakerDiv.children).forEach((div) => {
+        if (div.querySelector('picture')) {
+          div.className = 'speaker-image';
+        } else {
+          div.className = 'speaker-content';
 
-    Array.from(speakerDiv.children).forEach((div) => {
-      if (div.querySelector('picture')) {
-        div.className = 'speaker-image';
-      } else {
-        div.className = 'speaker-content';
-
-        if (canMobileActions()) {
-          const target = div.querySelector('ul');
-          if (target) {
-            target.insertAdjacentElement('beforebegin', showMoreButton);
-            target.insertAdjacentElement('afterend', showLessButton);
-            target.classList.add('content-hidden');
+          if (canMobileActions()) {
+            const target = div.querySelector('ul');
+            if (target) {
+              target.insertAdjacentElement('beforebegin', showMoreButton);
+              target.insertAdjacentElement('afterend', showLessButton);
+              target.classList.add('content-hidden');
+            }
           }
         }
-      }
-    });
+      });
 
-    showMoreButton.addEventListener('click', (event) => {
-      const btn = event.currentTarget;
-      btn.classList.add('content-hidden');
-      const parent = btn.parentElement;
-      const ul = parent?.querySelector('ul');
-      const showLess = parent?.querySelector('.show-less');
-      if (ul) ul.classList.remove('content-hidden');
-      if (showLess) showLess.classList.remove('content-hidden');
-    });
+      showMoreButton.addEventListener('click', (event) => {
+        const btn = event.currentTarget;
+        btn.classList.add('content-hidden');
+        const parent = btn.parentElement;
+        const ul = parent?.querySelector('ul');
+        const showLess = parent?.querySelector('.show-less');
+        if (ul) ul.classList.remove('content-hidden');
+        if (showLess) showLess.classList.remove('content-hidden');
+      });
 
-    showLessButton.addEventListener('click', (event) => {
-      const btn = event.currentTarget;
-      btn.classList.add('content-hidden');
-      const parent = btn.parentElement;
-      const ul = parent?.querySelector('ul');
-      const showMore = parent?.querySelector('.show-more');
-      if (ul) ul.classList.add('content-hidden');
-      if (showMore) showMore.classList.remove('content-hidden');
-    });
+      showLessButton.addEventListener('click', (event) => {
+        const btn = event.currentTarget;
+        btn.classList.add('content-hidden');
+        const parent = btn.parentElement;
+        const ul = parent?.querySelector('ul');
+        const showMore = parent?.querySelector('.show-more');
+        if (ul) ul.classList.add('content-hidden');
+        if (showMore) showMore.classList.remove('content-hidden');
+      });
 
-    parentDiv.appendChild(speakerDiv);
+      parentDiv.appendChild(speakerDiv);
+    }
+    block.textContent = '';
+    block.append(parentDiv);
   }
-  block.textContent = '';
-  block.append(parentDiv);
 }

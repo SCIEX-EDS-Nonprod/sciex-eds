@@ -57,8 +57,6 @@ export default function decorate(block) {
             if (sessionTitle) {
               sessionTitle.classList.add('session-title');
             }
-
-            console.log('li >', li.outerHTML);
           }
         });
 
