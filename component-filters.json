@@ -90,7 +90,7 @@
     "components": [
       "sciex-text",
       "session-timeline",
-      "speaker",
+      "speaker-details",
       "events-details",
       "events-register-form"
     ]
