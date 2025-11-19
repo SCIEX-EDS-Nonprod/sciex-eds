@@ -21,7 +21,6 @@ export default function decorate(block) {
       return;
     }
     const type = row.querySelector('p')?.textContent?.toLowerCase()?.trim();
-    console.log(`type>${type}`);
     switch (type) {
       case 'vertical': {
         block.classList.add('vertical-layout');
@@ -38,6 +37,7 @@ export default function decorate(block) {
         break;
       }
       case 'speakers': {
+        console.log('decorate speakers>>');
         decorateSpeaker(row);
         (isVerticalLayout ? leftCol : leftCol).appendChild(row);
         break;
@@ -58,7 +58,6 @@ export default function decorate(block) {
         break;
       }
       default: {
-        decorateSpeaker(row);
         leftCol.appendChild(row);
         break;
       }
