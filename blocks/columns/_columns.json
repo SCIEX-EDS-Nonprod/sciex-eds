@@ -52,7 +52,10 @@
         "button",
         "title",
         "accordion",
-        "cards"
+        "cards",
+        "sciex-text",
+        "breadcrumb",
+        "sciex-title"
       ]
     }
   ]
