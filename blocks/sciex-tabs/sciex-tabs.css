@@ -1,193 +1,130 @@
-.tabs-wrapper :is(.order-1) {
-    order: 1
-  }
-  
-  .tabs-wrapper :is(.mr-8) {
-    margin-right: 2rem
-  }
-  
-  .tabs-wrapper :is(.block) {
-    display: block
-  }
-  
-  .tabs-wrapper :is(.flex) {
-    display: flex
-  }
-  
-  .tabs-wrapper :is(.w-fit) {
-    width: -moz-fit-content;
-    width: fit-content
-  }
-  
-  .tabs-wrapper :is(.flex-col) {
-    flex-direction: column
-  }
-  
-  .tabs-wrapper :is(.flex-wrap) {
-    flex-wrap: wrap
-  }
-  
-  .tabs-wrapper :is(.gap-6) {
-    gap: 1.5rem
-  }
-  
-  .tabs-wrapper :is(.rounded-full) {
-    border-radius: 9999px
-  }
-  
-  .tabs-wrapper :is(.border) {
-    border-width: 1px
-  }
-  
-  .tabs-wrapper :is(.border-b) {
-    border-bottom-width: 1px
-  }
-  
-  .tabs-wrapper :is(.border-b-4) {
-    border-bottom-width: 4px
-  }
-  
-  .tabs-wrapper :is(.border-b-8) {
-    border-bottom-width: 8px
-  }
-  
-  .tabs-wrapper :is(.border-solid) {
-    border-style: solid
-  }
-  
-  .tabs-wrapper :is(.border-\[\#ff7223\]) {
-    --tw-border-opacity: 1;
-    border-color: rgb(255 114 35 / var(--tw-border-opacity))
-  }
-  
-  .tabs-wrapper :is(.border-black) {
-    --tw-border-opacity: 1;
-    border-color: rgb(0 0 0 / var(--tw-border-opacity))
-  }
-  
-  .tabs-wrapper :is(.bg-black) {
-    --tw-bg-opacity: 1;
-    background-color: rgb(0 0 0 / var(--tw-bg-opacity))
-  }
-  
-  .tabs-wrapper :is(.bg-white) {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity))
-  }
-  
-  .tabs-wrapper :is(.px-6) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem
-  }
-  
-  .tabs-wrapper :is(.py-2) {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem
-  }
-  
-  .tabs-wrapper :is(.pb-4) {
-    padding-bottom: 1rem
-  }
-  
-  .tabs-wrapper :is(.text-base) {
-    font-size: 1rem;
-    line-height: 1.5rem
-  }
-  
-  .tabs-wrapper :is(.text-xl) {
-    font-size: 1.25rem;
-    line-height: 1.75rem
-  }
-  
-  .tabs-wrapper :is(.font-bold) {
-    font-weight: 700
-  }
-  
-  .tabs-wrapper :is(.font-semibold) {
-    font-weight: 600
-  }
-  
-  .tabs-wrapper :is(.capitalize) {
-    text-transform: capitalize
-  }
-  
-  .tabs-wrapper :is(.text-\[\#65797C\]) {
-    --tw-text-opacity: 1;
-    color: rgb(101 121 124 / var(--tw-text-opacity))
-  }
-  
-  .tabs-wrapper :is(.text-black) {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity))
-  }
-  
-  .tabs-wrapper :is(.text-white) {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity))
-  }
-  
-  .tabs-wrapper :is(.hover\:border-b-4:hover) {
-    border-bottom-width: 4px
-  }
-  
-  @media (min-width: 640px) {
-    .tabs-wrapper :is(.sm\:border-b) {
-      border-bottom-width: 1px
+/* Wrapper */
+.sciex-tabs-wrapper {
+    margin: 0px 40px !important;
+    padding: 0px 35px !important;
+    width: 100%;
+    position: relative;
+}
+
+.custom-sciex-tabs {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 0;
+    position: relative;
+}
+
+.custom-sciex-tabs .tab {
+    background: none;
+    border: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #000;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.custom-sciex-tabs .tab:hover,
+.custom-sciex-tabs .tab.active {
+    color: #0068fa;
+}
+
+.custom-sciex-tabs .tab.active::after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -1px;
+    height: 3px;
+    background-color: #0068fa;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.hide-section {
+    display: none !important;
+}
+
+.sciex-tabs-dropdown {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+    font-family: inherit;
+}
+
+.sciex-tabs-dropdown .dropdown-selected {
+    border: 1.5px solid #006CFF;
+    color: #006CFF;
+    font-weight: 600;
+    padding: 0.9rem 1.2rem;
+    cursor: pointer;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sciex-tabs-dropdown .dropdown-selected::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%230068fa' d='M6 8L0 0h12z'/%3E%3C/svg%3E") no-repeat center;
+    transition: 0.3s ease;
+}
+
+.sciex-tabs-dropdown.open .dropdown-selected::after {
+    transform: rotate(180deg);
+}
+
+.sciex-tabs-dropdown .dropdown-list {
+    display: none;
+    border: 1.5px solid #006CFF;
+    border-top: none;
+    background: white;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    z-index: 20;
+}
+
+.sciex-tabs-dropdown.open .dropdown-list {
+    display: flex;
+}
+
+.dropdown-item {
+    padding: 0.9rem 1.2rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 104, 250, 0.08);
+}
+
+.dropdown-item.active {
+    background: rgba(0, 104, 250, 0.12);
+    color: #006CFF;
+}
+
+@media (max-width: 768px) {
+    .sciex-tabs-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
     }
-  
-    .tabs-wrapper :is(.sm\:border-none) {
-      border-style: none
+
+    .custom-sciex-tabs {
+        display: none;
     }
-  }
-  
-  @media (min-width: 768px) {
-    .tabs-wrapper :is(.md\:absolute) {
-      position: absolute
+
+    .sciex-tabs-dropdown {
+        display: block;
     }
-  
-    .tabs-wrapper :is(.md\:relative) {
-      position: relative
-    }
-  
-    .tabs-wrapper :is(.md\:right-0) {
-      right: 0px
-    }
-  
-    .tabs-wrapper :is(.md\:top-\[-15px\]) {
-      top: -15px
-    }
-  
-    .tabs-wrapper :is(.md\:block) {
-      display: block
-    }
-  
-    .tabs-wrapper :is(.md\:flex-col) {
-      flex-direction: column
-    }
-  
-    .tabs-wrapper :is(.md\:border-b) {
-      border-bottom-width: 1px
-    }
-  
-    .tabs-wrapper :is(.md\:border-none) {
-      border-style: none
-    }
-  
-    .tabs-wrapper :is(.md\:py-1) {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem
-    }
-  
-    .tabs-wrapper :is(.md\:py-1\.5) {
-      padding-top: 0.375rem;
-      padding-bottom: 0.375rem
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .tabs-wrapper :is(.lg\:mx-8) {
-      margin-left: 2rem;
-      margin-right: 2rem
-    }
-  }
-  
+}

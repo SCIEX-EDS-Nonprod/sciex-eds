@@ -1,8 +1,19 @@
 import { div, button } from '../../scripts/dom-builder.js';
 
-/* eslint-disable no-unused-expressions */
-function toggleTabs(tabId, mmgTabs, tabType, tabs) {
+function getContainerId(block) {
+  const firstChild = block.firstElementChild;
+
+  if (!firstChild) return null;
+
+  const containerId = firstChild.textContent.trim();
+  firstChild.remove();
+
+  return containerId || null;
+}
+
+function toggleTabs(tabId, mmgTabs, tabs) {
   const contentSections = document.querySelectorAll('[data-tabname]');
+
   contentSections.forEach((section) => {
     if (section.dataset.tabname === tabId) {
       section.classList.remove('hide-section');
@@ -10,64 +21,116 @@ function toggleTabs(tabId, mmgTabs, tabType, tabs) {
       section.classList.add('hide-section');
     }
   });
-  const tabss = mmgTabs.querySelectorAll('.tab');
-  tabss.forEach((tab) => {
+
+  const allTabs = mmgTabs.querySelectorAll('.tab');
+  allTabs.forEach((tab) => {
     if (tab.id === tabId) {
-      if (tabType === 'product-tabs') {
-        tab.classList.add('active', 'border-b-8', 'border-[#ff7223]');
-      } else if (tabType === 'content-tabs') {
-        tab.classList.add('active', 'border-b-4', 'border-[#ff7223]');
-      } else {
-        tab.classList.add('bg-black', 'text-white');
-      }
-      tab.classList.remove('bg-white', 'text-black');
+      tab.classList.add('active');
     } else {
-      if (tabType === 'product-tabs') {
-        tab.classList.remove('active', 'border-b-8', 'border-[#ff7223]');
-      } else if (tabType === 'content-tabs') {
-        tab.classList.remove('active', 'border-b-4', 'border-[#ff7223]');
-      } else {
-        tab.classList.remove('bg-black', 'text-white');
-      }
-      tab.classList.add('bg-white', 'text-black');
+      tab.classList.remove('active');
     }
   });
+
+  const dropdown = document.querySelector('.sciex-tabs-dropdown');
+  if (dropdown) {
+    dropdown.querySelector('.dropdown-selected span').textContent = tabId;
+    dropdown.querySelectorAll('.dropdown-item').forEach((item) => {
+      if (item.dataset.value === tabId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
 }
 
 function getTabName(block) {
   const tabName = new Set();
   const parentEl = block.parentElement.parentElement;
   let sectionEl = parentEl.nextElementSibling;
-  while (sectionEl && sectionEl !== undefined) {
+
+  while (sectionEl) {
+    if (!sectionEl.dataset.tabname) break;
+    tabName.add(sectionEl.dataset.tabname);
     sectionEl = sectionEl.nextElementSibling;
-    if (sectionEl && sectionEl.dataset.tabname === undefined) {
-      break;
-    } else {
-      const tabSection = sectionEl?.dataset;
-      if (tabSection && tabSection.tabname !== undefined) tabName.add(tabSection.tabname);
-    }
   }
+
   return [...tabName];
 }
 
-function decorateButtonTabs(block) {
-  const mmgTabs = div({ class: 'button-tabs flex flex-wrap gap-6' });
-  const tabs = getTabName(block);
+function buildDesktopTabs(block, tabs, containerId) {
+  const mmgTabs = div({
+    class: 'custom-sciex-tabs',
+    ...(containerId ? { id: `${containerId}-tabs` } : {}),
+  });
+
   tabs.forEach((tab) => {
-    const buttonTab = button({
-      class: 'tab px-6 py-2 border border-black border-solid bg-white text-black font-bold rounded-full',
-      id: tab,
-    }, tab);
+    const buttonTab = button({ class: 'tab', id: tab }, tab);
+
     mmgTabs.appendChild(buttonTab);
+
     buttonTab.addEventListener('click', () => {
-      toggleTabs(tab, mmgTabs, 'button-tabs', tabs);
+      toggleTabs(tab, mmgTabs, tabs);
     });
   });
-  block.innerHTML = '';
+
   block.appendChild(mmgTabs);
-  toggleTabs(tabs[0], mmgTabs, 'button-tabs', tabs);
+  return mmgTabs;
 }
 
-export default async function decorate(block) {
-  if (block.classList.contains('button-tabs')) decorateButtonTabs(block);
+function buildMobileDropdown(tabs, containerId) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'sciex-tabs-dropdown';
+
+  if (containerId) wrapper.id = `${containerId}-dropdown`;
+
+  wrapper.innerHTML = `
+    <div class="dropdown-selected">
+      <span>${tabs[0]}</span>
+    </div>
+    <div class="dropdown-list">
+      ${tabs
+    .map(
+      (tab) => `<div class="dropdown-item" data-value="${tab}">${tab}</div>`,
+    )
+    .join('')}
+    </div>
+  `;
+
+  document.querySelector('.sciex-tabs-wrapper')?.prepend(wrapper);
+
+  const selected = wrapper.querySelector('.dropdown-selected');
+
+  selected.addEventListener('click', () => {
+    wrapper.classList.toggle('open');
+  });
+
+  wrapper.querySelectorAll('.dropdown-item').forEach((item) => {
+    item.addEventListener('click', () => {
+      const { value } = item.dataset;
+
+      wrapper.classList.remove('open');
+      selected.querySelector('span').textContent = value;
+
+      const desktopTabs = document.querySelector('.custom-sciex-tabs');
+      toggleTabs(value, desktopTabs, tabs);
+    });
+  });
+}
+
+function decorateButtonTabs(block) {
+  const containerId = getContainerId(block);
+
+  const tabs = getTabName(block);
+
+  block.innerHTML = '';
+
+  const desktopTabs = buildDesktopTabs(block, tabs, containerId);
+  buildMobileDropdown(tabs, containerId);
+
+  toggleTabs(tabs[0], desktopTabs, tabs);
+}
+
+export default function decorate(block) {
+  decorateButtonTabs(block);
 }
