@@ -54,13 +54,22 @@
       "stat-list",
       "accordion",
       "speaker",
-      "sciex-tabs"
+      "sciex-tabs",
+      "atomic-media"
     ]
   },
   {
     "id": "accordion",
     "components": [
       "accordion-item"
+    ]
+  },
+  {
+    "id": "atomic-media",
+    "components": [
+      "image-video",
+      "vimeo-item",
+      "youtube-item"
     ]
   },
   {
