@@ -1,0 +1,5 @@
+.atomic-media .atomic-media-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
