@@ -1,8 +1,8 @@
 {
     "definitions": [
       {
-        "title": "Columns",
-        "id": "columns",
+        "title": "Container",
+        "id": "container",
         "plugins": {
           "xwalk": {
             "page": {
@@ -17,16 +17,34 @@
       }
     ],
     "models": [
-      
+      {
+        "id": "container",
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "columns",
+            "value": "",
+            "label": "Columns"
+          },
+          {
+            "component": "text",
+            "valueType": "number",
+            "name": "rows",
+            "value": "",
+            "label": "Rows"
+          }
+        ]
+      }
     ],
     "filters": [
       {
-        "id": "columns",
+        "id": "container",
         "components": [
-         "breadcrumb",
-         "sciex-text",
-         "sciex-title",
-         "accordion"
+          "breadcrumb",
+          "sciex-text",
+          "sciex-title",
+          "accordion"
         ]
       }
     ]

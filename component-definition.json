@@ -281,8 +281,8 @@
           }
         },
         {
-          "title": "Columns",
-          "id": "columns",
+          "title": "Container",
+          "id": "container",
           "plugins": {
             "xwalk": {
               "page": {

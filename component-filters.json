@@ -98,7 +98,7 @@
     ]
   },
   {
-    "id": "columns",
+    "id": "container",
     "components": [
       "breadcrumb",
       "sciex-text",
