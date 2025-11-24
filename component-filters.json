@@ -55,7 +55,8 @@
       "accordion",
       "speaker",
       "sciex-tabs",
-      "atomic-media"
+      "atomic-media",
+      "container"
     ]
   },
   {
@@ -94,6 +95,15 @@
       "title",
       "accordion",
       "cards"
+    ]
+  },
+  {
+    "id": "columns",
+    "components": [
+      "breadcrumb",
+      "sciex-text",
+      "sciex-title",
+      "accordion"
     ]
   },
   {

@@ -92,7 +92,8 @@
         "accordion",
         "speaker",
         "sciex-tabs",
-        "atomic-media"
+        "atomic-media",
+        "container"
       ]
     }
   ]
