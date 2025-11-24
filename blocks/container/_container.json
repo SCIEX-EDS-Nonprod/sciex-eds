@@ -6,11 +6,7 @@
         "plugins": {
           "xwalk": {
             "page": {
-              "resourceType": "core/franklin/components/columns/v1/columns",
-              "template": {
-                "columns": "2",
-                "rows": "1"
-              }
+              "resourceType": "core/franklin/components/columns/v1/columns"
             }
           }
         }
@@ -23,16 +19,9 @@
           {
             "component": "text",
             "valueType": "number",
-            "name": "columns",
+            "name": "id",
             "value": "",
-            "label": "Columns"
-          },
-          {
-            "component": "text",
-            "valueType": "number",
-            "name": "rows",
-            "value": "",
-            "label": "Rows"
+            "label": "id"
           }
         ]
       }
