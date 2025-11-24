@@ -4,7 +4,6 @@ import { } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
-
   let id = '';
   console.log('atomic media block', block.outerHTML);
   [...block.children].forEach((row, index) => {
@@ -15,9 +14,6 @@ export default function decorate(block) {
     }
   });
 
-  block.textContent = '';
-
-  // block.parentElement.classList.add('tabs-container-wrapper');
-  // block.append(headingEl);
+  // block.textContent = '';
   block.append(ul);
 }
