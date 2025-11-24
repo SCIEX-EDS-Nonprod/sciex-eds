@@ -1,16 +1,19 @@
 {
     "definitions": [
-      {
-        "title": "Container",
-        "id": "container",
-        "plugins": {
-          "xwalk": {
-            "page": {
-              "resourceType": "core/franklin/components/columns/v1/columns"
+        {
+            "title": "Container",
+            "id": "container",
+            "plugins": {
+              "xwalk": {
+                "page": {
+                  "resourceType": "core/franklin/components/section/v1/section",
+                  "template": {
+                    "model": "container"
+                  }
+                }
+              }
             }
           }
-        }
-      }
     ],
     "models": [
       {
@@ -27,14 +30,59 @@
       }
     ],
     "filters": [
-      {
-        "id": "container",
-        "components": [
-          "breadcrumb",
-          "sciex-text",
-          "sciex-title",
-          "accordion"
-        ]
-      }
-    ]
+        {
+          "id": "container",
+          "components": [
+            "text",
+            "image",
+            "button",
+            "title",
+            "hero",
+            "cards",
+            "columns",
+            "fragment",
+            "hello",
+            "sciex-footer",
+            "header",
+            "footer-topBanner",
+            "searchresult",
+            "login-sso",
+            "breadcrumb",
+            "featured-products",
+            "coursecatalog",
+            "button-text",
+            "sciex-title",
+            "tech-note",
+            "customer-document",
+            "survey-script",
+            "sciex-related-resource",
+            "tabs-nav",
+            "tabs-container",
+            "sciex-text",
+            "events",
+            "hero-banner",
+            "events-container",
+            "session-timeline",
+            "events-details",
+            "speakers",
+            "events-register-form",
+            "sciex-buttons",
+            "split-video-text",
+            "regulatory-document",
+            "resource-library",
+            "hero-small",
+            "text-container",
+            "switch-tabs",
+            "table",
+            "icon-card",
+            "resources-grid",
+            "stat-list",
+            "accordion",
+            "speaker",
+            "sciex-tabs",
+            "atomic-media",
+            "container"
+          ]
+        }
+      ]
   }
