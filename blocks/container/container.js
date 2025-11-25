@@ -38,8 +38,6 @@ export default async function decorate(block) {
     const links = [...block.querySelectorAll('a')];
     if (links.length === 0) return;
   
-    moveInstrumentation(block);
-  
     block.innerHTML = '';
   
     const container = document.createElement('div');
