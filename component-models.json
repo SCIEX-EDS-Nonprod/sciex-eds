@@ -678,13 +678,13 @@
     "fields": [
       {
         "component": "text",
-        "name": "id",
+        "name": "containerId",
         "label": "Container ID",
         "valueType": "string"
       },
       {
         "component": "select",
-        "name": "grid",
+        "name": "containerGrid",
         "label": "Select Layout",
         "value": "",
         "valueType": "string",

@@ -53,10 +53,10 @@ export default async function decorate(block) {
       const wrapper = document.createElement('div');
       wrapper.classList.add('fragment-item');
         wrapper.append(...fragmentSection.childNodes);
-        moveInstrumentation(wrapper);
       container.appendChild(wrapper);
     }
   });
+  moveInstrumentation(container);
   block.innerHTML = '';
   block.appendChild(container);
 }
