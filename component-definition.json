@@ -281,36 +281,6 @@
           }
         },
         {
-          "title": "Container",
-          "id": "container",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
-                "template": {
-                  "name": "Container",
-                  "filter": "container"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Container Item",
-          "id": "container-item",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Container Item",
-                  "model": "container-item"
-                }
-              }
-            }
-          }
-        },
-        {
           "title": "Course Catalog",
           "id": "coursecatalog",
           "plugins": {
@@ -670,6 +640,36 @@
                 "template": {
                   "name": "Sciex Button",
                   "model": "sciex-button"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Sciex Container",
+          "id": "sciex-container",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Sciex Container",
+                  "filter": "sciex-container"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Container Item",
+          "id": "container-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Container Item",
+                  "model": "container-item"
                 }
               }
             }

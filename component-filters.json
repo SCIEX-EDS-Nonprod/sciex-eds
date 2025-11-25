@@ -56,7 +56,7 @@
       "speaker",
       "sciex-tabs",
       "atomic-media",
-      "container"
+      "sciex-container"
     ]
   },
   {
@@ -95,12 +95,6 @@
       "title",
       "accordion",
       "cards"
-    ]
-  },
-  {
-    "id": "container",
-    "components": [
-      "container-item"
     ]
   },
   {
@@ -143,6 +137,12 @@
     "id": "sciex-buttons",
     "components": [
       "sciex-button"
+    ]
+  },
+  {
+    "id": "sciex-container",
+    "components": [
+      "container-item"
     ]
   },
   {
