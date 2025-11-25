@@ -47,14 +47,9 @@
             "required": true
           },
           {
-            "id": "fragment",
-            "fields": [
-              {
-                "component": "aem-content",
-                "name": "reference",
-                "label": "Reference"
-              }
-            ]
+            "component": "aem-content",
+            "name": "reference",
+            "label": "Reference"
           }
         ]
       }
