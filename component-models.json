@@ -675,13 +675,27 @@
   },
   {
     "id": "container",
+    "fields": []
+  },
+  {
+    "id": "container-item",
     "fields": [
       {
         "component": "text",
-        "valueType": "number",
         "name": "id",
-        "value": "",
-        "label": "id"
+        "label": "ID",
+        "valueType": "string",
+        "required": true
+      },
+      {
+        "id": "fragment",
+        "fields": [
+          {
+            "component": "aem-content",
+            "name": "reference",
+            "label": "Reference"
+          }
+        ]
       }
     ]
   },
