@@ -1,5 +1,5 @@
 /* Container width control */
-.container-wrapper {
+.sciex-container-wrapper {
     max-width: 1364px !important;
     margin: 0 auto;
 }
