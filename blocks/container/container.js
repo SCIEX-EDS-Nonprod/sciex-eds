@@ -38,6 +38,8 @@ export default async function decorate(block) {
     const links = [...block.querySelectorAll('a')];
     if (links.length === 0) return;
   
+    moveInstrumentation(links);
+  
     block.innerHTML = '';
   
     const container = document.createElement('div');
@@ -58,6 +60,5 @@ export default async function decorate(block) {
         container.appendChild(wrapper);
       }
     });
-    moveInstrumentation(container);
     block.appendChild(container);
   }
