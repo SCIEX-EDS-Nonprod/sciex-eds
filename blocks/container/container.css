@@ -1,0 +1,26 @@
+/* Ensure proper containment */
+.container-wrapper {
+    max-width: 1364px !important; 
+}
+  
+  .fragment-multi-container .fragment-item {
+    overflow: hidden;
+    position: relative;
+  }
+  .fragment-multi-container .fragment-item * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .container-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  
+  .container-grid-1 {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 24px;
+  }
+

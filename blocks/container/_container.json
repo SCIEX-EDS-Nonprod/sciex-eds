@@ -34,18 +34,35 @@
     "models": [
       {
         "id": "container",
-        "fields": []
+        "fields": [
+            {
+                "component": "text",
+                "name": "id",
+                "label": "Container ID",
+                "valueType": "string"
+            },
+            {
+                "component": "select",
+                "name": "grid",
+                "label": "Select Layout",
+                "value": "",
+                "valueType": "string",
+                "options": [
+                  {
+                    "name": "2-columns",
+                    "value": "2"
+                  },
+                  {
+                    "name": "1-columns",
+                    "value": "1"
+                  }
+                ]
+            }
+        ]
       },
       {
         "id": "container-item",
         "fields": [
-          {
-            "component": "text",
-            "name": "id",
-            "label": "ID",
-            "valueType": "string",
-            "required": true
-          },
           {
             "component": "aem-content",
             "name": "reference",
