@@ -32,33 +32,34 @@ export async function loadFragment(rawPath) {
 }
 
 export default async function decorate(block) {
-    const columnSetting = Number(block.children[1]?.textContent?.trim());
-    const gridValueColumns = columnSetting > 0 ? columnSetting : 2;
-  
-    const links = [...block.querySelectorAll('a')];
-    if (links.length === 0) return;
-  
-    moveInstrumentation(block);
-  
-  
-    const container = document.createElement('div');
-    container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
-  
-    const fragmentPromises = links.map((link) => loadFragment(link.getAttribute('href')));
-    const fragments = await Promise.all(fragmentPromises);
-  
-    fragments.forEach((fragment) => {
-      if (!fragment) return;
-  
-      const fragmentSection = fragment.querySelector(':scope .section');
-      if (fragmentSection) {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('fragment-item');
+  const columnSetting = Number(block.children[1]?.textContent?.trim());
+  const gridValueColumns = columnSetting > 0 ? columnSetting : 2;
 
-        wrapper.append(...fragmentSection.childNodes);
-        container.appendChild(wrapper);
-      }
-    });
-    moveInstrumentation(container);
-    block.appendChild(container);
-  }
+  const links = [...block.querySelectorAll('a')];
+  if (links.length === 0) return;
+
+  links.forEach((link) => moveInstrumentation(link));
+
+  block.innerHTML = '';
+
+  const container = document.createElement('div');
+  container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
+
+  const fragmentPromises = links.map((link) => loadFragment(link.getAttribute('href')));
+  const fragments = await Promise.all(fragmentPromises);
+
+  fragments.forEach((fragment) => {
+    if (!fragment) return;
+
+    const fragmentSection = fragment.querySelector(':scope .section');
+    if (fragmentSection) {
+      const wrapper = document.createElement('div');
+        wrapper.classList.add('fragment-item');
+        
+      wrapper.append(...fragmentSection.childNodes);
+      container.appendChild(wrapper);
+    }
+  });
+  moveInstrumentation(container);
+  block.appendChild(container);
+}
