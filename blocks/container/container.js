@@ -56,8 +56,6 @@ export default async function decorate(block) {
       const wrapper = document.createElement('div');
         wrapper.classList.add('fragment-item');
         
-      moveInstrumentation(fragmentSection, wrapper);
-
       wrapper.append(...fragmentSection.childNodes);
       container.appendChild(wrapper);
     }
