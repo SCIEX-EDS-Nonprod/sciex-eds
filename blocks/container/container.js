@@ -38,8 +38,6 @@ export default async function decorate(block) {
   const links = [...block.querySelectorAll('a')];
   if (links.length === 0) return;
 
-  links.forEach((link) => moveInstrumentation(link));
-
   const container = document.createElement('div');
   container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
 
