@@ -57,6 +57,5 @@ export default async function decorate(block) {
     }
   });
   moveInstrumentation(container);
-  block.innerHTML = '';
   block.appendChild(container);
 }
