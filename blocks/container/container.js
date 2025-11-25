@@ -1,5 +1,6 @@
 import { decorateMain } from '../../scripts/scripts.js';
 import { loadSections } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export async function loadFragment(rawPath) {
   if (rawPath && rawPath.startsWith('/')) {
@@ -53,7 +54,8 @@ export default async function decorate(block) {
     if (fragmentSection) {
       const wrapper = document.createElement('div');
       wrapper.classList.add('fragment-item');
-      wrapper.append(...fragmentSection.childNodes);
+        wrapper.append(...fragmentSection.childNodes);
+        moveInstrumentation(wrapper);
       container.appendChild(wrapper);
     }
   });
