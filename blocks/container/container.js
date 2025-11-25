@@ -1,4 +1,4 @@
-import { decorateMain } from '../../scripts/scripts.js';
+import { decorateMain, moveInstrumentation } from '../../scripts/scripts.js';
 import { loadSections } from '../../scripts/aem.js';
 
 export async function loadFragment(rawPath) {
@@ -32,40 +32,33 @@ export async function loadFragment(rawPath) {
 }
 
 export default async function decorate(block) {
-  const columnSetting = Number(block.children[1]?.textContent?.trim());
-  const gridValueColumns = columnSetting > 0 ? columnSetting : 2;
+    const columnSetting = Number(block.children[1]?.textContent?.trim());
+    const gridValueColumns = columnSetting > 0 ? columnSetting : 2;
+  
+    const links = [...block.querySelectorAll('a')];
+    if (links.length === 0) return;
+  
+    moveInstrumentation(block);
+  
+  
+    const container = document.createElement('div');
+    container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
+  
+    const fragmentPromises = links.map((link) => loadFragment(link.getAttribute('href')));
+    const fragments = await Promise.all(fragmentPromises);
+  
+    fragments.forEach((fragment) => {
+      if (!fragment) return;
+  
+      const fragmentSection = fragment.querySelector(':scope .section');
+      if (fragmentSection) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('fragment-item');
 
-  const links = [...block.querySelectorAll('a')];
-  if (links.length === 0) return;
-
-  // 3) Prepare final wrapper container (this replaces the block content)
-  const container = document.createElement('div');
-  container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
-
-  // 4) Load fragments in parallel (Promise.all)
-  const fragmentPromises = links.map((link) => loadFragment(link.getAttribute('href')));
-  const fragments = await Promise.all(fragmentPromises);
-
-  // 5) Convert each fragment into DOM blocks and append
-  fragments.forEach((fragment) => {
-    if (!fragment) return;
-
-    const fragmentSection = fragment.querySelector(':scope .section');
-    if (fragmentSection) {
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('fragment-item');
-
-      // Same behavior as official block: take children of the fragment section
-      wrapper.append(...fragmentSection.childNodes);
-
-      // Add section-level classes to the item
-      wrapper.classList.add(...fragmentSection.classList);
-
-      container.appendChild(wrapper);
-    }
-  });
-
-  // 6) Replace block children like the official fragment does
-  block.classList.remove('section');
-  block.replaceChildren(container);
-}
+        wrapper.append(...fragmentSection.childNodes);
+        container.appendChild(wrapper);
+      }
+    });
+    moveInstrumentation(container);
+    block.appendChild(container);
+  }
