@@ -3251,5 +3251,15 @@
         ]
       }
     ]
+  },
+  {
+    "id": "fragment-item",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
+      }
+    ]
   }
 ]
