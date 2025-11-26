@@ -34,13 +34,11 @@ export async function loadFragment(rawPath) {
 
 /* ------------------ MAIN DECORATE ------------------ */
 export default async function decorate(block) {
-
   // ✅ CHECK: if 3rd child contains anchor, use FRAGMENT LOGIC
   const thirdChild = block.children[2];
   const hasAnchorInThird = thirdChild && thirdChild.querySelector('a');
-  
 
-  if (hasAnchorInThird & !thirdChild.children > 1) {
+  if (hasAnchorInThird && !(thirdChild.children.length > 1)) {
     const columnSetting = Number(block.children[1]?.textContent?.trim());
     const gridValueColumns = columnSetting > 0 ? columnSetting : 2;
 
@@ -50,9 +48,7 @@ export default async function decorate(block) {
     const container = document.createElement('div');
     container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
 
-    const fragmentPromises = links.map((link) =>
-      loadFragment(link.getAttribute('href'))
-    );
+    const fragmentPromises = links.map((link) => loadFragment(link.getAttribute('href')));
 
     const fragments = await Promise.all(fragmentPromises);
 
@@ -85,9 +81,7 @@ export default async function decorate(block) {
       ul.classList.add('text-container-header', 'text-container-columns');
     } else if (index === 1 && row.textContent.includes('1')) {
       ul.classList.remove('text-container-header', 'text-container-columns');
-    } 
-    else if (index > 1) {
-
+    } else if (index > 1) {
       const children = [...row.children];
       const column = document.createElement('div');
       column.className = 'text-container-column';
