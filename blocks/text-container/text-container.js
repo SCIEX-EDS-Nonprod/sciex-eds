@@ -65,7 +65,6 @@ export default async function decorate(block) {
     });
 
     moveInstrumentation(container);
-    block.textContent = '';
     block.appendChild(container);
     return;
   }
@@ -156,7 +155,5 @@ export default async function decorate(block) {
       ul.append(li);
     }
   });
-
-  block.textContent = '';
   block.append(ul);
 }

@@ -50,8 +50,8 @@ export default async function decorate(block) {
     const fragmentSection = fragment.querySelector(':scope .section');
     if (fragmentSection) {
       const wrapper = document.createElement('div');
-        wrapper.classList.add('fragment-item');
-        
+      wrapper.classList.add('fragment-item');
+
       wrapper.append(...fragmentSection.childNodes);
       container.appendChild(wrapper);
     }
