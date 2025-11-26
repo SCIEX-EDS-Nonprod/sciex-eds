@@ -6,46 +6,45 @@ export default function decorate(block) {
   const rows = [...block.children];
   const slides = [];
   let viewType = 'portrait';
-
   rows.forEach((row, index) => {
     const cells = [...row.children];
     if (!cells.length) return;
 
     if (index === 1) {
       viewType = row.textContent.trim().toLowerCase();
-    }
-
+    } else if (index > 1) {
     // ----- YouTube -----
-    const link = cells[0].querySelector('a');
-    if (link && link.href.includes('youtube')) {
-      const videoId = new URL(link.href).searchParams.get('v');
-      const iframe = document.createElement('iframe');
-      iframe.classList.add(viewType);
-      iframe.src = `https://www.youtube.com/embed/${videoId}`;
-      iframe.setAttribute('allowfullscreen', true);
+      const link = cells[0].querySelector('a');
+      if (link && link.href.includes('youtube')) {
+        const videoId = new URL(link.href).searchParams.get('v');
+        const iframe = document.createElement('iframe');
+        iframe.classList.add(viewType);
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+        iframe.setAttribute('allowfullscreen', true);
 
-      const caption = cells[1]?.textContent?.trim() || '';
-      slides.push({ media: iframe, caption });
-      return;
-    }
+        const caption = cells[1]?.textContent?.trim() || '';
+        slides.push({ media: iframe, caption });
+        return;
+      }
 
-    // ----- Image / Picture -----
-    const picture = cells[0].querySelector('picture');
-    picture.classList.add(viewType);
+      // ----- Image / Picture -----
+      const picture = cells[0].querySelector('picture');
+      picture.classList.add(viewType);
 
-    const img = cells[0].querySelector('img');
-    img.classList.add(viewType);
+      const img = cells[0].querySelector('img');
+      img.classList.add(viewType);
 
-    if (picture) {
-      slides.push({
-        media: picture.cloneNode(true),
-        caption: cells[1]?.textContent?.trim() || '',
-      });
-    } else if (img) {
-      slides.push({
-        media: img.cloneNode(true),
-        caption: cells[1]?.textContent?.trim() || '',
-      });
+      if (picture) {
+        slides.push({
+          media: picture.cloneNode(true),
+          caption: cells[1]?.textContent?.trim() || '',
+        });
+      } else if (img) {
+        slides.push({
+          media: img.cloneNode(true),
+          caption: cells[1]?.textContent?.trim() || '',
+        });
+      }
     }
   });
 
