@@ -30,21 +30,6 @@
           }
         }
       }
-    },
-    {
-      "title": "Fragment Item",
-      "id": "fragment-item",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Fragment Item",
-              "model": "fragment-item"
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
@@ -254,24 +239,13 @@
           ]
         }
       ]
-    },
-    {
-      "id": "fragment-item",
-      "fields": [
-        {
-          "component": "aem-content",
-          "name": "reference",
-          "label": "Reference"
-        }
-      ]
     }
   ],
   "filters": [
     {
       "id": "text-container",
       "components": [
-        "column-text",
-        "fragment-item"
+        "column-text"
       ]
     }
   ]

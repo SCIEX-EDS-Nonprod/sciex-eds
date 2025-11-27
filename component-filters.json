@@ -250,8 +250,7 @@
   {
     "id": "text-container",
     "components": [
-      "column-text",
-      "fragment-item"
+      "column-text"
     ]
   }
 ]

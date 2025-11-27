@@ -1304,21 +1304,6 @@
               }
             }
           }
-        },
-        {
-          "title": "Fragment Item",
-          "id": "fragment-item",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "name": "Fragment Item",
-                  "model": "fragment-item"
-                }
-              }
-            }
-          }
         }
       ]
     }
