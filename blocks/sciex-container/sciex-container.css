@@ -1,0 +1,36 @@
+/* Container width control */
+.sciex-container-wrapper {
+    max-width: 1364px !important;
+    margin: 0 auto;
+}
+
+/* Grid layouts */
+.container-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 85px;
+
+    /* Make all items same height */
+    align-items: stretch;
+}
+
+.container-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+/* Fragment item → equal-height boxes */
+.fragment-multi-container .fragment-item {
+    display: flex;               /* allows equal-height inner content */
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Content inside items */
+.fragment-multi-container .fragment-item * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
