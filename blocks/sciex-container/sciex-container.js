@@ -32,11 +32,21 @@ export async function loadFragment(rawPath) {
 }
 
 export default async function decorate(block) {
-  const columnSetting = Number(block.children[1]?.textContent?.trim());
+  const rawColumnText = block.children[1]?.textContent?.trim();
+  const columnSetting = Number(rawColumnText);
   const gridValueColumns = columnSetting > 0 ? columnSetting : 2;
 
-  const links = [...block.querySelectorAll('a')];
-  if (links.length === 0) return;
+  const firstChild = block.children[0] ?? null;
+  const secondChild = block.children[1] ?? null;
+  const links = Array.from(block.querySelectorAll('a'));
+
+  if (links.length === 0) {
+    return;
+  }
+  if (firstChild) firstChild.remove();
+  if (secondChild) secondChild.remove();
+
+  Array.from(block.querySelectorAll('a')).forEach((a) => a.remove());
 
   const container = document.createElement('div');
   container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
@@ -58,9 +68,7 @@ export default async function decorate(block) {
     }
   });
 
-  // ---- IMPORTANT FIX ----
-  // Append first, THEN apply instrumentation
-  block.innerHTML = '';
+  // Append container into block FIRST, then run instrumentation
   block.appendChild(container);
   moveInstrumentation(container);
 }
