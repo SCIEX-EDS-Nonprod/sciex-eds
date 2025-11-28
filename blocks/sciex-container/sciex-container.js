@@ -41,13 +41,14 @@ export default async function decorate(block) {
   const container = document.createElement('div');
   container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
 
-  const fragmentPromises = links.map((link) => loadFragment(link.getAttribute('href')));
-  const fragments = await Promise.all(fragmentPromises);
+  const fragments = await Promise.all(
+    links.map((link) => loadFragment(link.getAttribute('href')))
+  );
 
   fragments.forEach((fragment) => {
     if (!fragment) return;
-
     const fragmentSection = fragment.querySelector(':scope .section');
+
     if (fragmentSection) {
       const wrapper = document.createElement('div');
       wrapper.classList.add('fragment-item');
@@ -56,6 +57,10 @@ export default async function decorate(block) {
       container.appendChild(wrapper);
     }
   });
-  moveInstrumentation(container);
+
+  // ---- IMPORTANT FIX ----
+  // Append first, THEN apply instrumentation
+  block.innerHTML = '';
   block.appendChild(container);
+  moveInstrumentation(container);
 }
