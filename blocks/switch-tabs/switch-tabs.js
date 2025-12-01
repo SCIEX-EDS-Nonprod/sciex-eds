@@ -181,6 +181,6 @@ export default function decorate(block) {
   // Replace original block content
   block.textContent = '';
   block.id = `${id}-content`;
-  block.parentElement.classList.add('tabs-container-wrapper');
+  block.parentElement.classList.add('switch-tabs-container-wrapper');
   block.append(switchTabContainer);
 }

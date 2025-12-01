@@ -1,3 +1,20 @@
+.switch-tabs-wrapper {
+  max-width: 87pc !important;
+}
+
+/* Example: Targeting only <ul> and <ol> within a block-level container */
+.switch-tabs-wrapper div ul,
+section ul,
+article ul,
+div ol,
+section ol,
+article ol {
+  list-style: disc !important;
+  margin: 20px !important;
+  padding: 10px !important;
+}
+
+
 .switch-tabs-container-block {
   width: 100%;
   padding: 2rem 0px;
@@ -293,7 +310,7 @@
   }
 
   .switch-tabs-description {
-    padding-left: 0px 24px;
+    padding: 0px 24px;
   }
 
   .tab-header {

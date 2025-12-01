@@ -199,7 +199,8 @@
 
   .icon-card-grid.columns-1,
   .icon-card-grid.columns-2,
-  .icon-card-grid.columns-3 {
+  .icon-card-grid.columns-3,
+  .icon-card-grid.columns-4 {
     grid-template-columns: 1fr;
   }
 
