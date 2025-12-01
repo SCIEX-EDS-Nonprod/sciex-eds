@@ -2,6 +2,7 @@
 .sciex-tabs-wrapper {
     margin: 0px 40px !important;
     padding: 0px 35px !important;
+    max-width: 87pc !important;
     width: 100%;
     position: relative;
 }

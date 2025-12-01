@@ -1,3 +1,7 @@
+.sciex-text-wrapper {
+    max-width: 87pc !important;
+}
+
 .sciex-text .text-left {
     text-align: left;
 }
