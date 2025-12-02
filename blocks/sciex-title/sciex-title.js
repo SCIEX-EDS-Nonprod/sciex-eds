@@ -8,7 +8,7 @@ export default async function decorate(block) {
   const heading = block.children[1].textContent;
   const headingDiv = document.createElement('div');
   if (titleId && titleId.trim() !== '') {
-    block.id = titleId.trim();
+    block.id = `${titleId.trim()}-content`;
   }
   headingDiv.classList.add('hero-heading');
   const pageTitle = getMetadata('og:title');
