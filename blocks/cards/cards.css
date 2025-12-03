@@ -141,6 +141,16 @@
   margin-bottom: 32px;
 }
 
+.cards .cards-description {
+  color: rgb(112, 112, 112);
+  font-family: Geogrotesque, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px;
+  margin-bottom: 0px;
+}
+
 .fragment-wrapper {
   max-width: 90pc !important;
   padding: 0 64px !important;
