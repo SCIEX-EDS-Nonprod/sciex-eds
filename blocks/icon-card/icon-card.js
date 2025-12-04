@@ -6,7 +6,7 @@ export default function decorate(block) {
   const iconCardContainer = document.createElement('div');
   iconCardContainer.className = 'icon-card-container-text';
   moveInstrumentation(block, iconCardContainer);
- 
+
   const rows = [...block.children];
   let id = '';
   let heading = '';
@@ -112,7 +112,7 @@ export default function decorate(block) {
   // Replace block content
   block.innerHTML = '';
   block.append(iconCardContainer);
-  
+
   block.id = `${id.textContent.trim()}-content`;
   block.parentElement?.classList.add('tabs-container-wrapper');
 }

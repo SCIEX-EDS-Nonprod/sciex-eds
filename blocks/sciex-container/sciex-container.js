@@ -52,7 +52,7 @@ export default async function decorate(block) {
   container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
 
   const fragments = await Promise.all(
-    links.map((link) => loadFragment(link.getAttribute('href')))
+    links.map((link) => loadFragment(link.getAttribute('href'))),
   );
 
   fragments.forEach((fragment) => {
