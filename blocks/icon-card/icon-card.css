@@ -72,7 +72,6 @@
 /* ✅ IMAGE TYPE — new enhanced layout */
 .image-type .icon-card-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 per row like your screenshot */
   gap: 3rem 4rem;
 }
 
