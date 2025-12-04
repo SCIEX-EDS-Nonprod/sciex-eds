@@ -6,7 +6,7 @@ export default function decorate(block) {
   const iconCardContainer = document.createElement('div');
   iconCardContainer.className = 'icon-card-container-text';
   moveInstrumentation(block, iconCardContainer);
-
+ 
   const rows = [...block.children];
   let id = '';
   let heading = '';
@@ -23,7 +23,7 @@ export default function decorate(block) {
     else if (index === 4) typeOfCard = text;
   });
 
-  if (id) iconCardContainer.classList.add(id);
+  if (id) iconCardContainer.id = `${id}-content`;
 
   if (heading) {
     const h2 = document.createElement('h2');
@@ -112,4 +112,7 @@ export default function decorate(block) {
   // Replace block content
   block.innerHTML = '';
   block.append(iconCardContainer);
+  
+  block.id = `${id.textContent.trim()}-content`;
+  block.parentElement?.classList.add('tabs-container-wrapper');
 }

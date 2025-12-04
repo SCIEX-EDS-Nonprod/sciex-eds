@@ -1,3 +1,7 @@
+.sciex-buttons-wrapper {
+    max-width: 87pc !important;
+}
+
 .button-block {
     display: flex;
     flex-wrap: wrap;

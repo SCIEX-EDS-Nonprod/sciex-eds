@@ -560,6 +560,13 @@
         "value": ""
       },
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
         "component": "radio-group",
         "label": "option To Select anchor url",
         "name": "OpentionToSelectPrimary",
@@ -1916,6 +1923,44 @@
             "value": "_blank"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "sciex-container",
+    "fields": [
+      {
+        "component": "text",
+        "name": "containerId",
+        "label": "Container ID",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "containerGrid",
+        "label": "Select Layout",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "2-columns",
+            "value": "2"
+          },
+          {
+            "name": "1-columns",
+            "value": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "container-item",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
       }
     ]
   },

@@ -96,7 +96,7 @@
 
 .image-type .icon-card-image img {
   max-width: 100%;
-  height: 192px;
+  height: 165px;
   width: 192px;
 }
 
@@ -199,7 +199,8 @@
 
   .icon-card-grid.columns-1,
   .icon-card-grid.columns-2,
-  .icon-card-grid.columns-3 {
+  .icon-card-grid.columns-3,
+  .icon-card-grid.columns-4 {
     grid-template-columns: 1fr;
   }
 
