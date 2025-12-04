@@ -13,6 +13,14 @@ export default function decorate(block) {
   let textSize = 'text-delta';
   let description = '';
   const sectionDiv = document.createElement('div');
+  sectionDiv.className = 'resources-grid-text-hide';
+  const subDiv = document.createElement('div');
+  const filters = [
+    { id: 'all', label: 'All', value: 'all' },
+  ];
+  let viewType = 'small';
+  let filterWrapper = '';
+  let filterValue = '';
   // Create heading element
   const heading = document.createElement('div');
   [...block.children].forEach((row, index) => {
@@ -26,7 +34,7 @@ export default function decorate(block) {
 
       heading.id = 'headingDiv';
       heading.textContent = headingText;
-      sectionDiv.appendChild(heading);
+      subDiv.appendChild(heading);
       return;
     }
     if (index === 2) {
@@ -34,11 +42,9 @@ export default function decorate(block) {
       if (!['text-delta', 'text-charlie'].includes(textSize)) {
         textSize = 'text-delta';
       }
-      // const heading = document.querySelector('headingDiv');
       if (heading !== null) {
         heading.className = textSize;
       }
-
       return;
     }
     if (index === 3) {
@@ -46,75 +52,41 @@ export default function decorate(block) {
       const descriptionDiv = document.createElement('div');
       descriptionDiv.textContent = description;
       descriptionDiv.classList.add('resources-grid-description');
-
-      sectionDiv.appendChild(descriptionDiv);
+      subDiv.appendChild(descriptionDiv);
+      sectionDiv.appendChild(subDiv);
       return;
     }
     if (index === 4) {
-      console.log(`index 4>${row.textContent.trim()}`);
+      viewType = row.textContent.trim().toLowerCase();
     }
-    /** */
     if (index === 5) {
-      console.log(`index 5>${row.textContent.trim()}`);
-      const filterValue = row.textContent.trim();
-
+      filterValue = row.textContent.trim();
       if (filterValue === 'show') {
-        const filterWrapper = document.createElement('div');
-        filterWrapper.className = '';
-
-        // Create Filter label
-        const filterLabel = document.createElement('span');
-        filterLabel.className = '';
-        filterLabel.textContent = 'Filter:';
-        filterWrapper.appendChild(filterLabel);
-
-        // Define filter buttons data
-        const filters = [
-          { id: 'all-1', label: 'All', value: 'all' },
-          { id: 'play-1', label: 'Video', value: 'play' },
-          { id: 'courseCatalog-1', label: 'PDF', value: 'courseCatalog' },
-          { id: 'techDoc-1', label: 'Technical note', value: 'techDoc' },
-        ];
-
-        // Build each filter button dynamically
-        filters.forEach((f) => {
-          const div = document.createElement('div');
-
-          const input = document.createElement('input');
-          input.type = 'radio';
-          input.className = '';
-          input.id = f.id;
-          input.name = 'resourceFilter';
-          input.value = f.value;
-
-          const label = document.createElement('label');
-          label.htmlFor = f.id;
-          label.textContent = f.label;
-          label.className = 'resource-grid-filter-label';
-
-          div.appendChild(input);
-          div.appendChild(label);
-          filterWrapper.appendChild(div);
-        });
-
-        // Append to section
-        sectionDiv.appendChild(filterWrapper);
+        sectionDiv.className = 'resources-grid-text-show';
+        filterWrapper = document.createElement('div');
+        filterWrapper.className = 'resource-grid-filter-label';
+      } else {
+        sectionDiv.className = 'resources-grid-text-hide';
       }
     }
-    /** */
     if (index >= 6 && row.children.length > 0) {
       const li = document.createElement('li');
-      li.className = 'resource-grid-li';
+      if (viewType === 'small') {
+        li.className = 'resource-grid-li-small resource-grid-li';
+      } else {
+        li.className = 'resource-grid-li-grid resource-grid-li';
+      }
       let colour = 'grey';
       const a = document.createElement('a');
+      a.className = 'resource-grid-link';
       const topDiv = document.createElement('div');
       topDiv.className = 'resource-grid-topDiv';
       const middleDiv = document.createElement('div');
       const bottomDiv = document.createElement('div');
+      bottomDiv.className = 'resource-grid-bottomDiv';
       let pTag = '';
       [...row.children].forEach((column, colIndex) => {
         li.appendChild(a);
-
         if (colIndex === 0) {
           if (column.textContent !== '') {
             colour = column.textContent;
@@ -125,6 +97,11 @@ export default function decorate(block) {
           const tageName = document.createElement('p');
           tageName.textContent = column.textContent;
           topDiv.appendChild(tageName);
+          li.id = column.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+          if (filters.findIndex((f) => f.value === column.textContent) === -1) {
+            const tagName = column.textContent;
+            filters.push({ id: column.textContent.trim().toLowerCase().replace(/\s+/g, '-'), label: tagName, value: tagName });
+          }
         } else if (colIndex === 2) {
           const span = document.createElement('span');
           if (pTag === 'Technical note') {
@@ -137,7 +114,7 @@ export default function decorate(block) {
             </svg>`;
           } else if (pTag === 'Webinar' || pTag === 'Q&A blog' || pTag === 'Blog' || pTag === 'Article' || pTag === 'Hub') {
             span.innerHTML = `
-            <svg width="40" height="40" viewBox="0 0 40 40"
+            <svg width="24" height="24" viewBox="0 0 40 40"
               fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="3.75" y="3.75" width="32.5" height="32.5" stroke="#141414" />
               <path d="M3.75 12.5H36.25" stroke="#141414" />
@@ -183,31 +160,75 @@ export default function decorate(block) {
           }
 
           topDiv.appendChild(span);
-        } else if (colIndex === 3) {
           const title = document.createElement('p');
+          title.className = 'resource-grid-li-title';
           title.textContent = column.textContent;
           middleDiv.appendChild(title);
-        } else if (colIndex === 4) {
+        } else if (colIndex === 3) {
+          if (column.textContent.trim() === '') {
+            return;
+          }
           const desc = document.createElement('p');
+          desc.className = 'resource-grid-li-description';
           desc.textContent = column.textContent;
           middleDiv.appendChild(desc);
-        } else if (colIndex === 5) {
+        } else if (colIndex === 4) {
           bottomDiv.innerHTML = `
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 12L21 12" stroke="currentColor"></path>
-            <path d="M13.7998 4.79999L20.9998 12L13.7998 19.2" stroke="currentColor"></path>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-di-rand="1764659665921">
+              <path d="M3 12L21 12" stroke="#0068FA"></path>
+              <path d="M13.7998 4.79999L20.9998 12L13.7998 19.2" stroke="#0068FA"></path>
           </svg>`;
+          middleDiv.appendChild(bottomDiv);
+          const aTag = li.querySelector('a');
+          console.log(`Setting href for link${aTag}`);
+          aTag.setAttribute('href', column.textContent);
+          aTag.setAttribute('target', '_blank');
         }
         a.appendChild(topDiv);
         a.appendChild(middleDiv);
-        a.appendChild(bottomDiv);
       });
 
       ul.appendChild(li);
       moveInstrumentation(row, li);
     }
   });
+  if (filterValue === 'show') {
+    const filterLabel = document.createElement('span');
+    filterLabel.className = '';
+    filterLabel.textContent = 'Filter:';
+    filterWrapper.appendChild(filterLabel);
+    filters.forEach((f) => {
+      const div = document.createElement('div');
+      const label = document.createElement('label');
+      label.htmlFor = f.id;
+      label.textContent = f.label;
+      label.className = 'resource-grid-filter-input-white';
+      if (f.value === 'all') {
+        label.classList.add('active');
+      }
+      label.addEventListener('click', (e) => {
+        e.preventDefault();
+        filterValue = f.value;
+        document.querySelectorAll('.resource-grid-filter-input-white').forEach((lbl) => {
+          lbl.classList.remove('active');
+        });
+        label.classList.add('active');
+        const allItems = ul.querySelectorAll('.resource-grid-li');
+        allItems.forEach((item) => {
+          if (filterValue === 'all') {
+            item.style.display = '';
+          } else if (item.id === f.id) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+      div.appendChild(label);
+      filterWrapper.appendChild(div);
+    });
+    sectionDiv.appendChild(filterWrapper);
+  }
   block.textContent = '';
   block.appendChild(sectionDiv);
 
