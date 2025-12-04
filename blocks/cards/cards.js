@@ -252,7 +252,10 @@ export default function decorate(block) {
             firstDiv.className = 'cards-card-image';
           }
         } else {
-          div.className = 'cards-card-body';
+          const content = div.textContent.trim();
+          if (content !== '') {
+            div.className = 'cards-card-body';
+          }
         }
       });
 
