@@ -358,7 +358,7 @@ export default function decorate(block) {
 
   const descriptionEl = document.createElement('p');
   descriptionEl.textContent = description;
-  descriptionEl.className = "cards-description";
+  descriptionEl.className = 'cards-description';
 
   block.textContent = '';
   block.id = `${id}-content`;
