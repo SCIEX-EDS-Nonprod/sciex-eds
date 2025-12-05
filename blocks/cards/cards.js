@@ -156,18 +156,20 @@ export default function decorate(block) {
       gridValue = row.textContent.trim();
       return;
     }
-    
+
     const li = document.createElement('li');
     moveInstrumentation(row, li);
     while (row.firstElementChild) {
       const child = row.firstElementChild;
     
-      if (child.textContent.trim() === '' && child.children.length === 0) {
-        row.removeChild(child);
-        continue;
-      }
+      const isEmpty =
+        child.textContent.trim() === '' && child.children.length === 0;
     
-      li.append(child);
+      if (isEmpty) {
+        row.removeChild(child);
+      } else {
+        li.append(child);
+      }
     }
 
     const firstDiv = li.children[0];
