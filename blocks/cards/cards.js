@@ -159,7 +159,18 @@ export default function decorate(block) {
 
     const li = document.createElement('li');
     moveInstrumentation(row, li);
-    while (row.firstElementChild) li.append(row.firstElementChild);
+    while (row.firstElementChild) {
+      const child = row.firstElementChild;
+    
+      const isEmpty =
+        child.textContent.trim() === '' && child.children.length === 0;
+    
+      if (isEmpty) {
+        row.removeChild(child);
+      } else {
+        li.append(child);
+      }
+    }
 
     const firstDiv = li.children[0];
     const youtubeLink = firstDiv.textContent.trim();
