@@ -156,10 +156,19 @@ export default function decorate(block) {
       gridValue = row.textContent.trim();
       return;
     }
-
+    
     const li = document.createElement('li');
     moveInstrumentation(row, li);
-    while (row.firstElementChild) li.append(row.firstElementChild);
+    while (row.firstElementChild) {
+      const child = row.firstElementChild;
+    
+      if (child.textContent.trim() === '' && child.children.length === 0) {
+        row.removeChild(child);
+        continue;
+      }
+    
+      li.append(child);
+    }
 
     const firstDiv = li.children[0];
     const youtubeLink = firstDiv.textContent.trim();
