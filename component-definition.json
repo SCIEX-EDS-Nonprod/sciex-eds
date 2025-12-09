@@ -1058,7 +1058,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 1 Column",
           "id": "table-row",
           "plugins": {
             "xwalk": {
@@ -1074,7 +1074,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 2 Columns",
           "id": "table-col-2",
           "plugins": {
             "xwalk": {
@@ -1091,7 +1091,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 3 Columns",
           "id": "table-col-3",
           "plugins": {
             "xwalk": {
@@ -1109,7 +1109,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 4 Columns",
           "id": "table-col-4",
           "plugins": {
             "xwalk": {
@@ -1128,7 +1128,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 5 Columns",
           "id": "table-col-5",
           "plugins": {
             "xwalk": {
@@ -1148,7 +1148,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 6 Columns",
           "id": "table-col-6",
           "plugins": {
             "xwalk": {
@@ -1169,7 +1169,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 7 Columns",
           "id": "table-col-7",
           "plugins": {
             "xwalk": {
@@ -1191,7 +1191,7 @@
           }
         },
         {
-          "title": "Row",
+          "title": "Row - 8 Columns",
           "id": "table-col-8",
           "plugins": {
             "xwalk": {
