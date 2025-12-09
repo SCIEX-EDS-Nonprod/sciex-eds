@@ -2650,35 +2650,35 @@
         "options": [
           {
             "name": "1 Column",
-            "value": "table"
+            "value": "table-row"
           },
           {
             "name": "2 Columns",
-            "value": "table-2-columns"
+            "value": "table-col-2"
           },
           {
             "name": "3 Columns",
-            "value": "table-3-columns"
+            "value": "table-col-3"
           },
           {
             "name": "4 Columns",
-            "value": "table-4-columns"
+            "value": "table-col-4"
           },
           {
             "name": "5 Columns",
-            "value": "table-5-columns"
+            "value": "table-col-5"
           },
           {
             "name": "6 Columns",
-            "value": "table-6-columns"
+            "value": "table-col-6"
           },
           {
             "name": "7 Columns",
-            "value": "table-7-columns"
+            "value": "table-col-7"
           },
           {
             "name": "8 Columns",
-            "value": "table-8-columns"
+            "value": "table-col-8"
           }
         ]
       }
