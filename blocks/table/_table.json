@@ -327,12 +327,12 @@
 
   "filters": [
     { "id": "table", "components": ["table-row"] },
-    { "id": "table-2-columns", "components": ["table-col-2"] },
-    { "id": "table-3-columns", "components": ["table-col-3"] },
-    { "id": "table-4-columns", "components": ["table-col-4"] },
-    { "id": "table-5-columns", "components": ["table-col-5"] },
-    { "id": "table-6-columns", "components": ["table-col-6"] },
-    { "id": "table-7-columns", "components": ["table-col-7"] },
-    { "id": "table-8-columns", "components": ["table-col-8"] }
+    { "id": "table-col-2", "components": ["table-col-2"] },
+    { "id": "table-col-3", "components": ["table-col-3"] },
+    { "id": "table-col-4", "components": ["table-col-4"] },
+    { "id": "table-col-5", "components": ["table-col-5"] },
+    { "id": "table-col-6", "components": ["table-col-6"] },
+    { "id": "table-col-7", "components": ["table-col-7"] },
+    { "id": "table-col-8", "components": ["table-col-8"] }
   ]
 }
