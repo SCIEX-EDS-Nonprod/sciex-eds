@@ -189,49 +189,8 @@
   {
     "id": "table",
     "components": [
-      "table-row"
-    ]
-  },
-  {
-    "id": "table-col-2",
-    "components": [
+      "table-row",
       "table-col-2"
-    ]
-  },
-  {
-    "id": "table-col-3",
-    "components": [
-      "table-col-3"
-    ]
-  },
-  {
-    "id": "table-col-4",
-    "components": [
-      "table-col-4"
-    ]
-  },
-  {
-    "id": "table-col-5",
-    "components": [
-      "table-col-5"
-    ]
-  },
-  {
-    "id": "table-col-6",
-    "components": [
-      "table-col-6"
-    ]
-  },
-  {
-    "id": "table-col-7",
-    "components": [
-      "table-col-7"
-    ]
-  },
-  {
-    "id": "table-col-8",
-    "components": [
-      "table-col-8"
     ]
   },
   {
