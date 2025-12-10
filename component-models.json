@@ -2655,6 +2655,30 @@
           {
             "name": "2 Columns",
             "value": "table-col-2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "table-col-3"
+          },
+          {
+            "name": "4 Columns",
+            "value": "table-col-4"
+          },
+          {
+            "name": "5 Columns",
+            "value": "table-col-5"
+          },
+          {
+            "name": "6 Columns",
+            "value": "table-col-6"
+          },
+          {
+            "name": "7 Columns",
+            "value": "table-col-7"
+          },
+          {
+            "name": "8 Columns",
+            "value": "table-col-8"
           }
         ]
       }
@@ -2678,7 +2702,7 @@
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "column1text",
+        "name": "columntext",
         "label": "Column1",
         "value": ""
       },
