@@ -1083,7 +1083,7 @@
                 "template": {
                   "name": "Row",
                   "model": "table-col-2",
-                  "column1text": "Column1",
+                  "columntext": "Column1",
                   "column2text": "Column2"
                 }
               }

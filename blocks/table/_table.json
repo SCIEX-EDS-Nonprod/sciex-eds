@@ -16,7 +16,6 @@
         }
       }
     },
-
     {
       "title": "Row - 1 Column",
       "id": "table-row",
@@ -33,7 +32,6 @@
         }
       }
     },
-
     {
       "title": "Row - 2 Columns",
       "id": "table-col-2",
@@ -44,7 +42,7 @@
             "template": {
               "name": "Row",
               "model": "table-col-2",
-              "column1text": "Column1",
+              "columntext": "Column1",
               "column2text": "Column2"
             }
           }
@@ -52,7 +50,6 @@
       }
     }
   ],
-
   "models": [
     {
       "id": "table",
@@ -93,7 +90,13 @@
           "value": "table",
           "options": [
             { "name": "1 Column", "value": "table-row" },
-            { "name": "2 Columns", "value": "table-col-2" }
+            { "name": "2 Columns", "value": "table-col-2" },
+            { "name": "3 Columns", "value": "table-col-3" },
+            { "name": "4 Columns", "value": "table-col-4" },
+            { "name": "5 Columns", "value": "table-col-5" },
+            { "name": "6 Columns", "value": "table-col-6" },
+            { "name": "7 Columns", "value": "table-col-7" },
+            { "name": "8 Columns", "value": "table-col-8" }
           ]
         }
       ]
@@ -111,11 +114,10 @@
         }
       ]
     },
-
     {
       "id": "table-col-2",
       "fields": [
-        { "component": "richtext", "valueType": "string", "name": "column1text", "label": "Column1", "value": "" },
+        { "component": "richtext", "valueType": "string", "name": "columntext", "label": "Column1", "value": "" },
         { "component": "richtext", "valueType": "string", "name": "column2text", "label": "Column2", "value": "" }
       ]
     }
@@ -124,10 +126,10 @@
   "filters": [
     {
      "id": "table",
-     "components": [
+      "components": [
         "table-row",
         "table-col-2"
-      ]
+        ]
     }
   ]
 }
