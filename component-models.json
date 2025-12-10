@@ -2604,9 +2604,9 @@
       {
         "component": "multiselect",
         "name": "classes",
-        "value": "",
         "label": "Options",
         "valueType": "string",
+        "value": "",
         "options": [
           {
             "name": "Border",
@@ -2645,8 +2645,8 @@
         "component": "select",
         "name": "filter",
         "label": "Columns",
-        "valueType": "string",
         "value": "table",
+        "valueType": "string",
         "options": [
           {
             "name": "1 Column",
@@ -2689,9 +2689,9 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1",
+        "valueType": "string"
       }
     ]
   },
@@ -2700,15 +2700,13 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       }
     ]
   },
@@ -2717,21 +2715,18 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column3text",
-        "label": "Column3"
+        "label": "Column 3"
       }
     ]
   },
@@ -2740,27 +2735,23 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column3text",
-        "label": "Column3"
+        "label": "Column 3"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column4text",
-        "label": "Column4"
+        "label": "Column 4"
       }
     ]
   },
@@ -2769,33 +2760,28 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column3text",
-        "label": "Column3"
+        "label": "Column 3"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column4text",
-        "label": "Column4"
+        "label": "Column 4"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column5text",
-        "label": "Column5"
+        "label": "Column 5"
       }
     ]
   },
@@ -2804,39 +2790,33 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column3text",
-        "label": "Column3"
+        "label": "Column 3"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column4text",
-        "label": "Column4"
+        "label": "Column 4"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column5text",
-        "label": "Column5"
+        "label": "Column 5"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column6text",
-        "label": "Column6"
+        "label": "Column 6"
       }
     ]
   },
@@ -2845,45 +2825,38 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column3text",
-        "label": "Column3"
+        "label": "Column 3"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column4text",
-        "label": "Column4"
+        "label": "Column 4"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column5text",
-        "label": "Column5"
+        "label": "Column 5"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column6text",
-        "label": "Column6"
+        "label": "Column 6"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column7text",
-        "label": "Column7"
+        "label": "Column 7"
       }
     ]
   },
@@ -2892,51 +2865,43 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column1text",
-        "label": "Column1"
+        "label": "Column 1"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column2text",
-        "label": "Column2"
+        "label": "Column 2"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column3text",
-        "label": "Column3"
+        "label": "Column 3"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column4text",
-        "label": "Column4"
+        "label": "Column 4"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column5text",
-        "label": "Column5"
+        "label": "Column 5"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column6text",
-        "label": "Column6"
+        "label": "Column 6"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column7text",
-        "label": "Column7"
+        "label": "Column 7"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "column8text",
-        "label": "Column8"
+        "label": "Column 8"
       }
     ]
   },
