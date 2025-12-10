@@ -1,15 +1,15 @@
 import {
-  table,
+  table, thead, tbody, tr, th, td,
 } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
   if (rows.length === 0) return;
   const tableEl = table({ class: 'eds-table' });
-  /* const theadEl = thead();
+  const theadEl = thead();
   const tbodyEl = tbody();
 
-   if (rows[0]) {
+  if (rows[0]) {
     const headerRow = tr({ class: 'table-header-row' });
     const headerCells = [...rows[0].children];
 
@@ -38,7 +38,7 @@ export default function decorate(block) {
   });
 
   tableEl.appendChild(theadEl);
-  tableEl.appendChild(tbodyEl); */
+  tableEl.appendChild(tbodyEl);
 
   block.innerHTML = '';
   block.appendChild(tableEl);
