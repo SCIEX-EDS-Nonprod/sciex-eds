@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 2rem;
   font-family: Arial, sans-serif;
+  max-width: 86pc !important;
 }
 .resources-grid-text-show{
   display: grid;

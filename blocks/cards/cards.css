@@ -158,12 +158,6 @@
   max-width: 800px;
 }
 
-.fragment-wrapper {
-  max-width: 90pc !important;
-  padding: 0 64px !important;
-  margin: auto;
-}
-
 @media (max-width: 768px) {
   .fragment-wrapper {
     padding: 0 24px !important;
