@@ -55,7 +55,7 @@ export default async function decorate(block) {
       if (tabName === 'upcoming') {
         tabController('@eventdate>=today', 'Upcoming');
       } else {
-        tabController('@eventtype=="On-demand content"', 'OnDemand');
+        tabController('@eventtype==On-demand', 'OnDemand');
       }
       const target = eventsDiv.querySelector(`#${tabName}`);
       if (target) target.classList.add('active');
