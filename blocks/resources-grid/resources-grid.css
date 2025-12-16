@@ -42,57 +42,57 @@
  display: grid;
  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.resource-grid-li-small {
-  width: 305px;
-  height: 258px;
-  padding: 32px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
-  margin-top: 10px;  
-  
-}
+.resource-grid-li-small,
 .resource-grid-li-grid {
   width: 305px;
-  height: 384px;
   padding: 32px;
+  margin-top: 10px;
+
+  /* FIX */
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
-  margin-top: 10px;  
-  
+  position: relative;
 }
+
 .resource-grid-li-small:hover,
 .resource-grid-li-grid:hover {
     --tw-bg-opacity: 1;
     background-color: #ececec;
     background-color: rgba(236, 236, 236, var(--tw-bg-opacity));
 }
-.resource-grid-li  a{
+
+.resource-grid-li a {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: 48px;
+}
+
+.resource-grid-li a:hover {
   text-decoration: none;
 }
-.resource-grid-li-title {
-color: var(--Grey-900, #141414);
-font-family: "Geogrotesque Sharp VF";
-font-size: 18px;
-font-style: normal;
-font-weight: 530;
-line-height: 26px; 
-letter-spacing: 0.045px;
-height: 104px;
-align-self: stretch;
-}
-.resource-grid-li-description {
-color: var(--Grey-500, #707070);
-font-family: "Geogrotesque Sharp VF";
-font-size: 16px;
-font-style: normal;
-font-weight: 330;
-line-height: 24px; 
-letter-spacing: 0.08px;
-height: 120px;
-align-self: stretch;
 
+.resource-grid-li-title {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-weight: 530;
+  line-height: 26px;
+  letter-spacing: 0.045px;
+  height: auto;
+  margin-bottom: 8px;
+}
+
+.resource-grid-li-description {
+  color: var(--Grey-500, #707070);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-weight: 330;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+
+  /* FIX */
+  height: auto;
 }
 .resource-grid-toptext{
   display: flex;
@@ -196,8 +196,23 @@ align-self: stretch;
   background: var(--Blue-700, #0068FA);
 }
 .resource-grid-bottomDiv{
-  padding-top: 30px;
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
+
+.resource-grid-topDiv {
+  flex-shrink: 0;
+}
+
+.resource-grid-li-title,
+.resource-grid-li-description {
+  height: auto;
+}
+
 @media (max-width: 768px) {
   .resources-grid-text-show {
     display:inline-block;
@@ -214,7 +229,8 @@ align-self: stretch;
    display: grid;
    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  .resource-grid-li-small .resource-grid-li-grid {
+  .resource-grid-li-small,
+  .resource-grid-li-grid {
     width: 100%;
   }
  

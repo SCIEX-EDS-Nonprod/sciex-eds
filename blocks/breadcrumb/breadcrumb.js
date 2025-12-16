@@ -17,7 +17,6 @@ const getPageTitle = async (url) => {
     // Fetch the HTML content for the URL
     const response = await fetch(url);
     if (response.ok) {
-  
       const htmlContainer = document.createElement('div');
       htmlContainer.innerHTML = await response.text();
 
@@ -139,7 +138,7 @@ export default async function decorate(block) {
         <path d="M3.75 10.5L8.25 6L3.75 1.5" stroke="#707070"/>
       </svg>
     </span>`;
-  
+
   breadcrumbNav.innerHTML = breadcrumbHtmlParts.join(separatorHtml);
   block.append(breadcrumbNav);
 }

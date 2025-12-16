@@ -7,7 +7,7 @@ export default function decorate(block) {
   const rows = block.querySelectorAll(':scope > div');
 
   const containerId = rows[0]?.textContent.trim();
-  if (containerId) statListContainer.id = `${containerId}-content`
+  if (containerId) statListContainer.id = `${containerId}-content`;
 
   const headingDiv = rows[1];
   const heading = headingDiv ? headingDiv.textContent.trim() : '';
