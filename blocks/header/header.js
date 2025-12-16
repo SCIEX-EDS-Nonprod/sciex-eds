@@ -3,7 +3,7 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 import { standaloneSearchBoxController } from '../../scripts/header-search/headerSearchController.js';
-import { login, getUser } from '../../scripts/auth.js';
+import { login } from '../../scripts/auth.js';
 
 const menuLinks = {};
 function handleSignInClick(e) {
