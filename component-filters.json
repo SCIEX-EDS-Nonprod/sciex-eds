@@ -74,6 +74,10 @@
     ]
   },
   {
+    "id": "auth-callback",
+    "components": []
+  },
+  {
     "id": "cards",
     "components": [
       "image-video",

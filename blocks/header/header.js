@@ -3,8 +3,13 @@ import {
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 import { standaloneSearchBoxController } from '../../scripts/header-search/headerSearchController.js';
+import { login, getUser } from '../../scripts/auth.js';
 
 const menuLinks = {};
+function handleSignInClick(e) {
+  e.preventDefault();
+  login();
+}
 function createMainHeader(section) {
   const menuDiv = div({
     class:
@@ -179,6 +184,10 @@ function createMainHeader(section) {
         class:
           'tw-ml-16 tw-flex tw-items-center hover:tw-text-white tw-transition-colors',
       });
+      if (anchorTag.text === 'Login') {
+        anchorTag.addEventListener('click', handleSignInClick);
+      }
+      console.log(anchorTag.text);
       const liId = anchorTag.text;
       liTag.id = liId
         .replace(/ /g, '-')
