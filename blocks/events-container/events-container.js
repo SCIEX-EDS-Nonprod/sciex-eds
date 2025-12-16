@@ -1,4 +1,3 @@
-
 import decorateSessionTimeline from '../session-timeline/session-timeline.js';
 import decorateEventDetails from '../events-details/events-details.js';
 import decorateRegisterForm from '../events-register-form/events-register-form.js';

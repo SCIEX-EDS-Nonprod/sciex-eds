@@ -1,4 +1,3 @@
-
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/aem.js';
 import { span } from '../../scripts/dom-builder.js';
@@ -6,7 +5,7 @@ import { span } from '../../scripts/dom-builder.js';
 /**
  * Initializes and decorates an accordion block.
  * Expects the `block` DOM structure to contain:
- * - Row 0: Accordion ID 
+ * - Row 0: Accordion ID
  * - Row 1: Heading
  * - Row 2: Description
  * - Row 3+: Each accordion item with:

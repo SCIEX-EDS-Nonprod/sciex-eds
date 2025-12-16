@@ -161,10 +161,9 @@ export default function decorate(block) {
     moveInstrumentation(row, li);
     while (row.firstElementChild) {
       const child = row.firstElementChild;
-    
-      const isEmpty =
-        child.textContent.trim() === '' && child.children.length === 0;
-    
+
+      const isEmpty = child.textContent.trim() === '' && child.children.length === 0;
+
       if (isEmpty) {
         row.removeChild(child);
       } else {

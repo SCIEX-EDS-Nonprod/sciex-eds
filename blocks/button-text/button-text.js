@@ -1,4 +1,3 @@
-
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 
@@ -16,11 +15,9 @@ export default async function decorate(block) {
   const [
     ,
     labelEl,
-    primaryTextPara,
-    ,
+    primaryTextPara,,
     primaryTargetPara,
-    secondaryTextPara,
-    ,
+    secondaryTextPara,,
     secondaryTargetPara,
   ] = paragraphNodes;
 
@@ -108,4 +105,3 @@ export default async function decorate(block) {
 
   block.append(buttonWrapperEl);
 }
-``

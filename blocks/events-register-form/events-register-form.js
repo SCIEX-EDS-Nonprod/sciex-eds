@@ -1,6 +1,6 @@
 import { } from '../../scripts/aem.js';
 
-/** * Decorates a block to render a titled event registration form inside an iframe. 
+/** * Decorates a block to render a titled event registration form inside an iframe.
  * * * @param {HTMLElement} block - The container element to decorate. */
 export default function decorate(block) {
   block.id = `${block.children[0].textContent.trim()}-content`;
