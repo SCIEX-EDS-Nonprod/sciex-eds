@@ -34,7 +34,7 @@ export default function getEventIcon(eventType) {
           <path d="M42.4009 99.4674C46.6924 87.6277 59.1753 78.4717 72.5001 78.4717C85.8249 78.4717 98.3019 87.6277 102.599 99.4674" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
         </svg>
       `,
-    'On-demand content': `
+    'On-demand': `
         <svg xmlns="http://www.w3.org/2000/svg" width="145" height="109" viewBox="0 0 145 109" fill="none">
           <path d="M60.3389 70.1927C60.3389 70.2921 60.4441 70.3564 60.5377 70.3155L89.3389 55.9149C89.4383 55.8622 89.4383 55.7278 89.3389 55.6751L60.5377 41.2745C60.45 41.2278 60.3389 41.2921 60.3389 41.3973V70.1985V70.1927Z" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
           <path d="M118.614 19.2908H26.3867C24.882 19.2908 23.6621 20.5106 23.6621 22.0154V86.9847C23.6621 88.4895 24.882 89.7093 26.3867 89.7093H118.614C120.118 89.7093 121.338 88.4895 121.338 86.9847V22.0154C121.338 20.5106 120.118 19.2908 118.614 19.2908Z" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
