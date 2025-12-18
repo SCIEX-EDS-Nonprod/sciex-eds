@@ -1,6 +1,6 @@
 export default function getEventIcon(eventType) {
   const svgIcons = {
-    'Generic event': `
+    'Generic': `
         <svg xmlns="http://www.w3.org/2000/svg" width="145" height="109" viewBox="0 0 145 109" fill="none">
           <path d="M53.7613 44.6833C58.1141 44.6833 61.6428 41.1546 61.6428 36.8018C61.6428 32.449 58.1141 28.9203 53.7613 28.9203C49.4085 28.9203 45.8799 32.449 45.8799 36.8018C45.8799 41.1546 49.4085 44.6833 53.7613 44.6833Z" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
           <path d="M97.8399 44.6833C102.193 44.6833 105.721 41.1546 105.721 36.8018C105.721 32.449 102.193 28.9203 97.8399 28.9203C93.4871 28.9203 89.9585 32.449 89.9585 36.8018C89.9585 41.1546 93.4871 44.6833 97.8399 44.6833Z" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
@@ -18,7 +18,7 @@ export default function getEventIcon(eventType) {
           <path d="M78.2417 52.5998C82.2877 50.7405 86.7137 49.6823 91.2391 49.6823C104.564 49.6823 117.041 58.8383 121.338 70.678" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
         </svg>
       `,
-    'Live webinar event': `
+    'Live webinar': `
         <svg xmlns="http://www.w3.org/2000/svg" width="145" height="109" viewBox="0 0 145 109" fill="none">
           <path d="M39.8456 39.3393C36.6883 39.3393 34.104 36.8837 33.8994 33.779C33.8877 33.6504 33.8877 33.5159 33.8877 33.3814C33.8877 30.0897 36.5538 27.4236 39.8456 27.4236H48.3702C51.6619 27.4236 54.328 30.0897 54.328 33.3814C54.328 33.5159 54.328 33.6504 54.3163 33.779C54.1117 36.8895 51.5274 39.3393 48.3702 39.3393" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10"/>
           <path d="M48.6508 27.4177H48.3701" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10"/>
