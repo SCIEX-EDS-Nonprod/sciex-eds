@@ -72,8 +72,8 @@
           {
             "component": "text",
             "valueType": "string",
-            "name": "authorName",
-            "label": "Author Name",
+            "name": "eventName",
+            "label": "event Name",
             "value": ""
           },
           {
@@ -1437,25 +1437,6 @@
             "value": "_blank"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "login-sso",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "login-sso",
-        "value": "",
-        "label": "login"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
       }
     ]
   },

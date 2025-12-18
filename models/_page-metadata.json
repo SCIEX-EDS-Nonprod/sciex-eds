@@ -73,8 +73,8 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "authorName",
-              "label": "Author Name",
+              "name": "eventName",
+              "label": "event Name",
               "value": ""
             },
             {
