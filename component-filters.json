@@ -233,12 +233,6 @@
     ]
   },
   {
-    "id": "table-8-columns",
-    "components": [
-      "table-col-8"
-    ]
-  },
-  {
     "id": "tabs-container",
     "components": [
       "sciex-text",

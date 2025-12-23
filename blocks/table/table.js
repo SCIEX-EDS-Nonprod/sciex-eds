@@ -1,48 +1,71 @@
+import { applyClasses, moveInstrumentation } from '../../scripts/scripts.js';
 import {
-  table, thead, tbody, tr, th, td,
+  table, tbody, td, th, thead, tr, input, div, label,
 } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
-export default function decorate(block) {
-  const rows = [...block.children];
-  if (rows.length === 0) return;
-  const tableEl = table({ class: 'eds-table' });
-  const theadEl = thead();
-  const tbodyEl = tbody();
-
-  if (rows[0]) {
-    const headerRow = tr({ class: 'table-header-row' });
-    const headerCells = [...rows[0].children];
-
-    headerCells.forEach((cell, index) => {
-      const thEl = th({ class: `table-header-cell col-${index + 1}` });
-      thEl.innerHTML = cell.innerHTML;
-      headerRow.appendChild(thEl);
-    });
-
-    theadEl.appendChild(headerRow);
-  }
-
-  rows.slice(1).forEach((row, rowIndex) => {
-    const bodyRow = tr({ class: `table-body-row row-${rowIndex + 1}` });
-    const cells = [...row.children];
-
-    cells.forEach((cell, cellIndex) => {
-      const tdEl = td({ class: `table-body-cell col-${cellIndex + 1}` });
-      tdEl.innerHTML = cell.innerHTML;
-      tdEl.classList.add('table-highlight-cell');
-
-      bodyRow.appendChild(tdEl);
-    });
-
-    tbodyEl.appendChild(bodyRow);
+function handleSearch(event, tableEl) {
+  event.preventDefault();
+  let { value } = event.target;
+  value = value.trim();
+  const bodyEl = tableEl.querySelector('tbody');
+  const filter = value.toLowerCase();
+  [...bodyEl.children].forEach((row) => {
+    if (!row.textContent.toLowerCase().includes(filter) && value !== '') row.classList.add('hidden');
+    else {
+      row.classList.remove('hidden');
+    }
   });
+}
 
-  tableEl.appendChild(theadEl);
-  tableEl.appendChild(tbodyEl);
+/**
+ *
+ * @param {Element} block
+ */
+export default async function decorate(block) {
+  const tableEl = table({ class: 'table-auto w-full' });
+  const filterEl = input({
+    id: 'search-filter',
+    type: 'search',
+    name: 'modification',
+    placeholder: 'Search here...',
+    value: '',
+    onkeyup: (event) => handleSearch(event, tableEl),
+    onsearch: (event) => handleSearch(event, tableEl),
+    class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5',
+  });
+  const formEl = div(
+    { class: 'w-max md:2/5 lg:w-1/4 space-y-1 mb-2' },
+    label({ for: 'modification', class: 'text-sm font-semibold leading-5 text-slate-400' }, 'Enter modification'),
+    filterEl,
+  );
+  const tblHead = thead();
+  const tblBody = tbody();
+  const header = !block.classList.contains('no-header');
+  const searchFilter = block.classList.contains('search-filter');
 
-  block.innerHTML = '';
-  block.appendChild(tableEl);
+  [...block.children].forEach((row, i) => {
+    const tblRow = tr();
+    moveInstrumentation(row, tblRow);
 
-  const colCount = rows[0] ? rows[0].children.length : 0;
-  block.classList.add(`table-${colCount}-cols`);
+    [...row.children].forEach((cell) => {
+      const tblData = (i === 0 && header) ? th() : td();
+      applyClasses(tblData, 'p-4');
+      if (i === 0) tblData.setAttribute('scope', 'column');
+      tblData.innerHTML = cell.innerHTML;
+      applyClasses(tblData, 'border-t border-[#273F3F] border-opacity-25 text-left');
+      tblData.querySelectorAll('a').forEach((aEl) => {
+        applyClasses(aEl, 'text-[#378189] underline');
+      });
+      tblRow.append(tblData);
+    });
+    if (i === 0 && header) tblHead.append(tblRow);
+    else tblBody.append(tblRow);
+  });
+  tableEl.append(tblHead, tblBody);
+  if (searchFilter) block.parentElement.insertBefore(formEl, block);
+  block.replaceChildren(tableEl);
+  block.classList.remove('table');
+  block.classList.add(...'relative overflow-x-auto'.split(' '));
+  decorateIcons(block, 20, 20);
 }
