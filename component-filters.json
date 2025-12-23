@@ -56,7 +56,8 @@
       "speaker",
       "sciex-tabs",
       "atomic-media",
-      "sciex-container"
+      "sciex-container",
+      "sciex-table"
     ]
   },
   {
@@ -163,6 +164,48 @@
     "id": "sciex-related-resource",
     "components": [
       "resource-item"
+    ]
+  },
+  {
+    "id": "sciex-table",
+    "components": [
+      "table-row"
+    ]
+  },
+  {
+    "id": "table-2-columns",
+    "components": [
+      "table-col-2"
+    ]
+  },
+  {
+    "id": "table-3-columns",
+    "components": [
+      "table-col-3"
+    ]
+  },
+  {
+    "id": "table-4-columns",
+    "components": [
+      "table-col-4"
+    ]
+  },
+  {
+    "id": "table-5-columns",
+    "components": [
+      "table-col-5"
+    ]
+  },
+  {
+    "id": "table-6-columns",
+    "components": [
+      "table-col-6"
+    ]
+  },
+  {
+    "id": "table-7-columns",
+    "components": [
+      "table-col-7"
     ]
   },
   {
