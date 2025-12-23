@@ -1,6 +1,6 @@
 export default function getEventIcon(eventType) {
   const svgIcons = {
-    'Generic': `
+    Generic: `
         <svg xmlns="http://www.w3.org/2000/svg" width="145" height="109" viewBox="0 0 145 109" fill="none">
           <path d="M53.7613 44.6833C58.1141 44.6833 61.6428 41.1546 61.6428 36.8018C61.6428 32.449 58.1141 28.9203 53.7613 28.9203C49.4085 28.9203 45.8799 32.449 45.8799 36.8018C45.8799 41.1546 49.4085 44.6833 53.7613 44.6833Z" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
           <path d="M97.8399 44.6833C102.193 44.6833 105.721 41.1546 105.721 36.8018C105.721 32.449 102.193 28.9203 97.8399 28.9203C93.4871 28.9203 89.9585 32.449 89.9585 36.8018C89.9585 41.1546 93.4871 44.6833 97.8399 44.6833Z" stroke="#1A181B" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
