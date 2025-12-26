@@ -60,6 +60,8 @@ export function moveInstrumentation(from, to) {
   );
 }
 
+export const applyClasses = (element, classes) => element?.classList.add(...classes.split(' '));
+
 /* Start Search survey script */
 /* eslint-disable */
 export function setSearchSurveyCookie() {

@@ -22,10 +22,9 @@ function createDate(month = '', date = '') {
   return createElement(
     'div',
     'event-date',
-    `<span>${safeMonth}</span><strong>${safeDate}</strong>`
+    `<span>${safeMonth}</span><strong>${safeDate}</strong>`,
   );
 }
-
 
 function createInfo(eventType, description) {
   return createElement('div', 'event-info', `<span class="tag">${eventType}</span><p>${description}</p>`);
@@ -96,10 +95,9 @@ function createMonthHeading(monthKey = '') {
   return createElement(
     'div',
     'month-heading',
-    safeMonthKey
+    safeMonthKey,
   );
 }
-
 
 function renderGroupedEvents(groupedEvents, container) {
   Object.entries(groupedEvents)

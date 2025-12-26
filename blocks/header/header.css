@@ -420,3 +420,13 @@ header nav ul li picture:hover {
     }
 }
 
+@media only screen and (max-width: 1280px) {
+    .pg-btm.tw-flex {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+.pg-btm.tw-flex p img {
+    max-width: 75%;
+}
+

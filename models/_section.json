@@ -93,7 +93,9 @@
         "speaker",
         "sciex-tabs",
         "atomic-media",
-        "sciex-container"
+        "sciex-container",
+        "sciex-table",
+        "chat-bot"
       ]
     }
   ]
