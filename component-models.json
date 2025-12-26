@@ -666,6 +666,18 @@
     ]
   },
   {
+    "id": "chat-bot",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "id",
+        "label": "Id",
+        "value": "ZN_1o1ioypsMWWxBmB"
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {

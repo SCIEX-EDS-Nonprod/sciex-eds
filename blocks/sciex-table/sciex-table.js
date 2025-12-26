@@ -51,6 +51,10 @@ export default async function decorate(block) {
     [...row.children].forEach((cell) => {
       const tblData = (i === 0 && header) ? th() : td();
       applyClasses(tblData, 'p-4');
+      applyClasses(
+        tblData,
+        'border border-gray-300 border-opacity-25 text-left',
+      );
       if (i === 0) tblData.setAttribute('scope', 'column');
       tblData.innerHTML = cell.innerHTML;
       applyClasses(tblData, 'border-t border-[#273F3F] border-opacity-25 text-left');
