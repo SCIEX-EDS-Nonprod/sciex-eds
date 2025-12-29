@@ -96,45 +96,60 @@ function renderLoggedOut(container) {
 }
 
 function renderFavorites(container, items) {
-  const buckets = {};
-
-  CATEGORY_MAP.forEach((c) => (buckets[c.key] = []));
-
-  items.forEach(({ path }) => {
-    const category = CATEGORY_MAP.find((c) => c.match(path));
-    if (category) {
-      buckets[category.key].push(path);
-    }
-  });
-
-  const grid = document.createElement('div');
-  grid.className = 'favorites-grid';
-
-  CATEGORY_MAP.forEach(({ key, title }) => {
-    if (!buckets[key].length) return;
-
-    const section = document.createElement('section');
-    section.className = 'favorites-category';
-
-    const h3 = document.createElement('h3');
-    h3.textContent = title;
-
-    const ul = document.createElement('ul');
-    buckets[key].slice(0, 5).forEach((path) => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = path;
-      a.textContent = decodeTitleFromPath(path);
-      li.appendChild(a);
-      ul.appendChild(li);
+    const buckets = {};
+  
+    CATEGORY_MAP.forEach((c) => {
+      buckets[c.key] = [];
     });
-
-    section.append(h3, ul);
-    grid.append(section);
-  });
-
-  container.append(grid);
-}
+  
+    items.forEach(({ path }) => {
+      const category = CATEGORY_MAP.find((c) => c.match(path));
+      if (category) {
+        buckets[category.key].push(path);
+      }
+    });
+  
+    const grid = document.createElement('div');
+    grid.className = 'favorites-grid';
+  
+    CATEGORY_MAP.forEach(({ key, title }) => {
+      const section = document.createElement('section');
+      section.className = 'favorites-category';
+  
+      const h3 = document.createElement('h3');
+      h3.textContent = title;
+  
+      section.appendChild(h3);
+  
+      if (buckets[key].length) {
+        const ul = document.createElement('ul');
+  
+        buckets[key].slice(0, 5).forEach((path) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = path;
+          a.textContent = decodeTitleFromPath(path);
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+  
+        section.appendChild(ul);
+      } else {
+        // Empty-state card (matches screenshot behavior)
+        const empty = document.createElement('div');
+        empty.className = 'favorites-empty';
+        empty.innerHTML = `
+          <p>No ${title.toLowerCase()} saved</p>
+        `;
+        section.appendChild(empty);
+      }
+  
+      grid.appendChild(section);
+    });
+  
+    container.appendChild(grid);
+  }
+  
 
 function decodeTitleFromPath(path) {
   const last = path.split('/').pop();

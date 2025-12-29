@@ -131,7 +131,13 @@
     color: #0f766e;
     text-decoration: none;
   }
-  
+
+  .favorites-empty {
+    color: #6f6f6f;
+    font-size: 14px;
+    padding: 24px 0;
+  }
+    
   .favorites-category a:hover {
     text-decoration: underline;
   }
