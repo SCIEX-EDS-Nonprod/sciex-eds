@@ -55,6 +55,7 @@
   }
   
   .favorites-logged-out p {
+    text-align: center;
     font-size: 15px;
     line-height: 1.6;
     color: #334155;
@@ -62,9 +63,7 @@
   }
   
   .favorites-logged-out .cta-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    text-align: center;
   }
   .favorites-logged-out .btn {
     display: inline-flex;

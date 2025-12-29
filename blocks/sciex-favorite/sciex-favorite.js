@@ -47,7 +47,7 @@ export default async function decorate(block) {
   section.id = id;
   section.className = 'favorites-accordion';
 
-  const header = document.createElement('header');
+  const header = document.createElement('sciex-header');
   header.className = 'accordion-header';
   header.innerHTML = `<h2>${title}</h2><button class="accordion-toggle"></button>`;
 
