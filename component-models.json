@@ -1962,6 +1962,32 @@
     ]
   },
   {
+    "id": "sciex-favorite",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sciexFavoriteId",
+        "value": "",
+        "label": "Sciex Favorite Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "sciexFavoriteTitle",
+        "value": "",
+        "label": "Sciex Favorite Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "logoutText",
+        "value": "",
+        "label": "Logout Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "sciex-footer-new",
     "fields": [
       {
