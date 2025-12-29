@@ -1,42 +1,48 @@
 /* eslint-disable */
-import { getMetadata } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
 const FAVORITES_API = '/bin/sciex/get-favorite-content';
 
 const CATEGORY_MAP = [
-  {
-    key: 'knowledge',
-    title: 'Knowledge base articles',
-    match: (p) => p.includes('/support/knowledge-base-articles/'),
-  },
-  {
-    key: 'self-paced',
-    title: 'Self paced learning',
-    match: (p) => p.includes('/sciexhow/') || p.includes('/Hidden/sciexhow/'),
-  },
-  {
-    key: 'tech-notes',
-    title: 'Tech notes',
-    match: (p) => p.includes('/tech-notes/'),
-  },
-  {
-    key: 'user-guides',
-    title: 'User guides',
-    match: (p) => p.includes('/user-guide'),
-  },
-  {
-    key: 'regulatory',
-    title: 'Regulatory documents',
-    match: (p) => p.includes('/regulatory'),
-  },
-  {
-    key: 'instructor',
-    title: 'Instructor led training',
-    match: (p) => p.includes('/instructor'),
-  },
-];
-
+    {
+      key: 'knowledge',
+      title: 'Knowledge base articles',
+      icon: 'knowledge',
+      match: (p) => p.includes('/support/knowledge-base-articles/'),
+    },
+    {
+      key: 'self-paced',
+      title: 'Self paced learning',
+      icon: 'self-paced',
+      match: (p) => p.includes('/sciexhow/') || p.includes('/Hidden/sciexhow/'),
+    },
+    {
+      key: 'instructor',
+      title: 'Instructor led training',
+      icon: 'instructor',
+      match: (p) => p.includes('/instructor'),
+    },
+    {
+      key: 'tech-notes',
+      title: 'Tech notes',
+      icon: 'tech-notes',
+      match: (p) => p.includes('/tech-notes/'),
+    },
+    {
+      key: 'regulatory',
+      title: 'Regulatory documents',
+      icon: 'regulatory',
+      match: (p) => p.includes('/regulatory'),
+    },
+    {
+      key: 'user-guides',
+      title: 'User guides',
+      icon: 'user-guides',
+      match: (p) => p.includes('/user-guide'),
+    },
+  ];
+  
 export default async function decorate(block) {
   const id = block.children[0]?.textContent?.trim() || 'my-favorites';
   const title = block.children[1]?.textContent?.trim() || 'My favorite resources';
@@ -112,13 +118,22 @@ function renderFavorites(container, items) {
     const grid = document.createElement('div');
     grid.className = 'favorites-grid';
   
-    CATEGORY_MAP.forEach(({ key, title }) => {
+    CATEGORY_MAP.forEach(({ key, title, icon }) => {
       const section = document.createElement('section');
       section.className = 'favorites-category';
   
       const h3 = document.createElement('h3');
-      h3.textContent = title;
+      h3.className = 'favorites-category-title';
   
+      // Icon span (resolved later by decorateIcons)
+      const iconSpan = document.createElement('span');
+      iconSpan.className = `icon icon-${icon}`;
+      iconSpan.setAttribute('aria-hidden', 'true');
+  
+      const textSpan = document.createElement('span');
+      textSpan.textContent = title;
+  
+      h3.append(iconSpan, textSpan);
       section.appendChild(h3);
   
       if (buckets[key].length) {
@@ -135,12 +150,9 @@ function renderFavorites(container, items) {
   
         section.appendChild(ul);
       } else {
-        // Empty-state card (matches screenshot behavior)
         const empty = document.createElement('div');
         empty.className = 'favorites-empty';
-        empty.innerHTML = `
-          <p>No ${title.toLowerCase()} saved</p>
-        `;
+        empty.innerHTML = `<p>No ${title.toLowerCase()} saved</p>`;
         section.appendChild(empty);
       }
   
@@ -148,8 +160,10 @@ function renderFavorites(container, items) {
     });
   
     container.appendChild(grid);
-  }
   
+    // Resolve all icons in one pass (important)
+    decorateIcons(container);
+  }
 
 function decodeTitleFromPath(path) {
   const last = path.split('/').pop();
