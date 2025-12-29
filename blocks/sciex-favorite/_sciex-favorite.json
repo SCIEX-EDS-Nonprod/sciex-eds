@@ -40,7 +40,15 @@
                 "value": "",
                 "label": "Logout Text",
                 "valueType": "string"
-            }
+            },
+            {
+                "component": "reference",
+                "valueType": "string",
+                "name": "viewAllResources",
+                "label": "View All Resources",
+                "multi": false,
+                "value": ""
+              }
         ]
       }
     ],
