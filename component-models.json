@@ -2499,6 +2499,9 @@
     ]
   },
   {
+    "id": "search-new"
+  },
+  {
     "id": "searchresult",
     "fields": [
       {

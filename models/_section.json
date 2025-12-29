@@ -95,7 +95,8 @@
         "atomic-media",
         "sciex-container",
         "sciex-table",
-        "chat-bot"
+        "chat-bot",
+        "search-new"
       ]
     }
   ]
