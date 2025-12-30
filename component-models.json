@@ -1962,6 +1962,68 @@
     ]
   },
   {
+    "id": "sciex-favorite",
+    "fields": [
+      {
+        "component": "text",
+        "name": "sciexFavoriteId",
+        "value": "",
+        "label": "Sciex Favorite Id",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "sciexFavoriteTitle",
+        "value": "",
+        "label": "Sciex Favorite Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "logoutText",
+        "value": "",
+        "label": "Logout Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "loginUrl",
+        "label": "Login URL"
+      },
+      {
+        "component": "aem-content",
+        "name": "createAccountUrl",
+        "label": "Create Account URL"
+      },
+      {
+        "component": "text",
+        "name": "userApi",
+        "value": "",
+        "label": "USER API End Point",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "favoriteResourceApiEndPoint",
+        "value": "",
+        "label": "FAVORITES Resource API Endpoint",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "viewAllResourcesButtonText",
+        "value": "",
+        "label": "View All Resources Button Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "viewAllResources",
+        "label": "View All Resources Link"
+      }
+    ]
+  },
+  {
     "id": "sciex-footer-new",
     "fields": [
       {
