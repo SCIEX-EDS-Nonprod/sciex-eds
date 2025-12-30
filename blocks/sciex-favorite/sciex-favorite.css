@@ -11,7 +11,6 @@
   
 .favorites-accordion {
     border-top: 1px solid #e5e7eb;
-    padding: 24px 0;
   }
   
   .accordion-header {
@@ -59,6 +58,7 @@
     max-height: 2000px; /* safe large value */
     background: var(--White-0, #FFF);
     padding: 24px;
+    margin: 0px 40px;
   }
   .favorites-logged-out {
     margin-top: 24px;
@@ -181,6 +181,52 @@
   .favorites-category a:hover {
     text-decoration: underline;
   }
+
+  /* View all resources wrapper */
+.favorites-view-all {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Button base */
+  .favorites-view-all .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 28px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  /* Secondary style (matches logged-out CTA) */
+  .favorites-view-all .btn.secondary {
+    border: 1px solid #0f766e;
+    color: #0f766e;
+    background-color: #ffffff;
+  }
+  
+  /* Hover / focus */
+  .favorites-view-all .btn.secondary:hover,
+  .favorites-view-all .btn.secondary:focus {
+    background-color: #ecfeff;
+    border-color: #0f766e;
+    color: #0f766e;
+    text-decoration: none;
+  }
+  
+  /* Active */
+  .favorites-view-all .btn.secondary:active {
+    background-color: #ccfbf1;
+  }
+  
+ 
   @media (max-width: 768px) {
     
     .accordion-header h2 {
@@ -191,5 +237,14 @@
     grid-template-columns: repeat(1, 1fr);
       gap: 16px;
     }
+
+    .favorites-view-all {
+        margin-top: 24px;
+      }
+    
+      .favorites-view-all .btn {
+        width: 100%;
+        max-width: 320px;
+      }
   }
                   
