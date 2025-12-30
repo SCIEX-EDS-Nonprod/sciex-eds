@@ -1,3 +1,14 @@
+/* Wrapper for the accordion header area */
+.sciex-favorite-wrapper {
+    background: var(--Grey-50, #F5F5F5);
+    max-width: none !important;
+  }
+  
+  /* Header spacing inside grey bar */
+  .sciex-favorite-wrapper .accordion-header {
+    padding: 20px 40px;
+  }
+  
 .favorites-accordion {
     border-top: 1px solid #e5e7eb;
     padding: 24px 0;
@@ -46,11 +57,12 @@
   
   .accordion-content.open {
     max-height: 2000px; /* safe large value */
+    background: var(--White-0, #FFF);
+    padding: 24px;
   }
   .favorites-logged-out {
     margin-top: 24px;
     padding: 24px;
-    background-color: #f8fafc;
     border-radius: 6px;
   }
   
@@ -79,7 +91,8 @@
   }
   
   .favorites-logged-out .btn.primary {
-    background-color: #0f766e;
+    border-radius: 4px;
+    background: var(--Blue-700, #0068FA);
     color: #ffffff;
   }
   
@@ -88,8 +101,8 @@
   }
   
   .favorites-logged-out .btn.secondary {
-    border: 1px solid #0f766e;
-    color: #0f766e;
+    border-radius: 4px;
+    border: 1px solid var(--Blue-700, #0068FA);
     background-color: transparent;
   }
   
@@ -131,12 +144,27 @@
     color: #0f766e;
     text-decoration: none;
   }
-
   .favorites-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
     text-align: center;
-    color: #6f6f6f;
+    color: #6b7280; /* gray-500 */
+  }
+
+  .favorites-empty .icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+
+  .favorites-empty p {
     font-size: 14px;
-    padding: 24px 0;
+    line-height: 1.4;
+    margin: 0;
   }
 
   .favorites-category-title {

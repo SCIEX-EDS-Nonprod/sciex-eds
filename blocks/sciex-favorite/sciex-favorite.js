@@ -51,7 +51,10 @@ export default async function decorate(block) {
 
   const section = document.createElement('section');
   section.id = id;
-  section.className = 'favorites-accordion';
+    section.className = 'favorites-accordion';
+    
+    const headerWrapper = document.createElement('div');
+headerWrapper.className = 'sciex-favorite-wrapper';
 
   const header = document.createElement('sciex-header');
   header.className = 'accordion-header';
@@ -60,7 +63,8 @@ export default async function decorate(block) {
   const content = document.createElement('div');
   content.className = 'accordion-content';
 
-  section.append(header, content);
+  headerWrapper.appendChild(header);
+section.append(headerWrapper, content);
   block.append(section);
 
   header.addEventListener('click', () => {
@@ -102,6 +106,7 @@ function renderLoggedOut(container) {
 }
 
 function renderFavorites(container, items) {
+    const allowedTypes = getAllowedTypesFromURL();
     const buckets = {};
   
     CATEGORY_MAP.forEach((c) => {
@@ -118,7 +123,12 @@ function renderFavorites(container, items) {
     const grid = document.createElement('div');
     grid.className = 'favorites-grid';
   
-    CATEGORY_MAP.forEach(({ key, title, icon }) => {
+    CATEGORY_MAP
+        .filter(({ key }) => {
+            if (!allowedTypes) return true;
+            return allowedTypes.includes(key);
+        })
+           .forEach(({ key, title, icon }) => {
       const section = document.createElement('section');
       section.className = 'favorites-category';
   
@@ -152,9 +162,18 @@ function renderFavorites(container, items) {
       } else {
         const empty = document.createElement('div');
         empty.className = 'favorites-empty';
-        empty.innerHTML = `<p>No ${title.toLowerCase()} saved</p>`;
+      
+        const iconSpanEmpty = document.createElement('span');
+        iconSpanEmpty.className = 'icon icon-empty';
+        iconSpanEmpty.setAttribute('aria-hidden', 'true');
+      
+        const text = document.createElement('p');
+        text.textContent = `No ${title.toLowerCase()} saved`;
+      
+        empty.append(iconSpanEmpty, text);
         section.appendChild(empty);
       }
+      
   
       grid.appendChild(section);
     });
@@ -171,3 +190,18 @@ function decodeTitleFromPath(path) {
     last.replace(/[_-]/g, ' ').replace(/\.(html)?$/, '')
   );
 }
+
+function getAllowedTypesFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const typeParam = params.get('type');
+  
+    if (!typeParam) {
+      return null;
+    }
+  
+    return typeParam
+      .split(',')
+      .map((t) => t.trim().toLowerCase())
+      .filter(Boolean);
+  }
+  
