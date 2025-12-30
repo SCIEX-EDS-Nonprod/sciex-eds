@@ -54,11 +54,11 @@ export default async function decorate(block) {
 
   const USER_API =
     block.children[5]?.textContent?.trim() ||
-    '/bin/sciex/currentuserdetails';
+    '';
 
   const FAVORITES_API =
     block.children[6]?.textContent?.trim() ||
-      '/bin/sciex/get-favorite-content';
+      '';
     
   const viewAllUrlText = block.children[7]?.textContent?.trim() || "View all resources";
 
@@ -88,19 +88,28 @@ export default async function decorate(block) {
     content.classList.toggle('open');
     header.classList.toggle('open');
   });
+    
+  if (!USER_API || !FAVORITES_API) {
+    console.error('Favorites block: Missing API endpoints');
+    return;
+  }
 
   try {
     const userResp = await fetch(USER_API, { credentials: 'include' });
     const user = await userResp.json();
 
-    if (!user.loggedIn) {
-      renderLoggedOut(content, logoutText, loginUrl, createAccountUrl);
-      return;
-    }
-
+    if (!user || user.loggedIn !== true) {
+        renderLoggedOut(content, logoutText, loginUrl, createAccountUrl);
+        return;
+      }
+      
     const favResp = await fetch(FAVORITES_API, { credentials: 'include' });
     const favorites = await favResp.json();
-
+    if (!Array.isArray(favorites)) {
+      console.error('Favorites block: Invalid favorites response', favorites);
+      return;
+    }
+    
     renderFavorites(content, favorites, viewAllUrl, viewAllUrlText);
   } catch (e) {
     console.error('Favorites block error', e);

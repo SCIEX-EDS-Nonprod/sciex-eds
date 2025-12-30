@@ -47,7 +47,6 @@
   .accordion-content {
     max-height: 0;
     overflow: hidden;
-    padding: 24px;
     margin: 0 40px;
     opacity: 0;
     transition: max-height 0.35s ease, opacity 0.2s ease;
