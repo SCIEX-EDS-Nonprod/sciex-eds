@@ -133,92 +133,115 @@ function renderLoggedOut(container, text, loginUrl, createUrl) {
 /* ================= Favorites ================= */
 
 function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
-  const allowedTypes = getAllowedTypesFromURL();
-  const buckets = {};
-
-  CATEGORY_MAP.forEach((c) => {
-    buckets[c.key] = [];
-  });
-
-  items.forEach(({ path }) => {
-    const category = CATEGORY_MAP.find((c) => c.match(path));
-    if (category) {
-      buckets[category.key].push(path);
+    const allowedTypes = getAllowedTypesFromURL();
+    const buckets = {};
+  
+    // Initialize known categories
+    CATEGORY_MAP.forEach((c) => {
+      buckets[c.key] = [];
+    });
+  
+    // Bucket favorites by CATEGORY_MAP
+    items.forEach(({ path }) => {
+      const category = CATEGORY_MAP.find((c) => c.match(path));
+      if (category) {
+        buckets[category.key].push(path);
+      }
+    });
+  
+    const grid = document.createElement('div');
+    grid.className = 'favorites-grid';
+  
+    // Types to render: from URL OR all categories
+    const typesToRender = allowedTypes || CATEGORY_MAP.map((c) => c.key);
+  
+    typesToRender.forEach((typeKey) => {
+      const categoryConfig = CATEGORY_MAP.find((c) => c.key === typeKey);
+  
+      let title;
+      let icon;
+      let paths = [];
+  
+      if (categoryConfig) {
+        // Known category
+        title = categoryConfig.title;
+        icon = categoryConfig.icon;
+        paths = buckets[typeKey] || [];
+      } else {
+        // Unknown category → infer from favorites JSON
+        title = humanizeType(typeKey);
+        icon = 'empty'; // fallback icon
+  
+        paths = items
+          .map(({ path }) => path)
+          .filter((p) => p.includes(`/${typeKey}/`));
+      }
+  
+      // Always render the card
+      const section = document.createElement('section');
+      section.className = 'favorites-category';
+  
+      const h3 = document.createElement('h3');
+      h3.className = 'favorites-category-title';
+  
+      const iconSpan = document.createElement('span');
+      iconSpan.className = `icon icon-${icon}`;
+      iconSpan.setAttribute('aria-hidden', 'true');
+  
+      const textSpan = document.createElement('span');
+      textSpan.textContent = title;
+  
+      h3.append(iconSpan, textSpan);
+      section.appendChild(h3);
+  
+      if (paths.length) {
+        const ul = document.createElement('ul');
+  
+        paths.slice(0, 5).forEach((path) => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = path;
+          a.textContent = decodeTitleFromPath(path);
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+  
+        section.appendChild(ul);
+      } else {
+        // Empty card
+        const empty = document.createElement('div');
+        empty.className = 'favorites-empty';
+  
+        const emptyIcon = document.createElement('span');
+        emptyIcon.className = 'icon icon-empty';
+        emptyIcon.setAttribute('aria-hidden', 'true');
+  
+        const emptyText = document.createElement('p');
+        emptyText.textContent = `No ${title.toLowerCase()} saved`;
+  
+        empty.append(emptyIcon, emptyText);
+        section.appendChild(empty);
+      }
+  
+      grid.appendChild(section);
+    });
+  
+    container.appendChild(grid);
+  
+    if (viewAllUrl) {
+      const viewAllWrapper = document.createElement('div');
+      viewAllWrapper.className = 'favorites-view-all';
+      viewAllWrapper.innerHTML = `
+        <a class="btn secondary" href="${viewAllUrl}">
+          ${viewAllUrlText}
+        </a>
+      `;
+      container.appendChild(viewAllWrapper);
     }
-  });
-
-  const grid = document.createElement('div');
-  grid.className = 'favorites-grid';
-
-  CATEGORY_MAP.filter(({ key }) => {
-    if (!allowedTypes) return true;
-    return allowedTypes.includes(key);
-  }).forEach(({ key, title, icon }) => {
-    const section = document.createElement('section');
-    section.className = 'favorites-category';
-
-    const h3 = document.createElement('h3');
-    h3.className = 'favorites-category-title';
-
-    const iconSpan = document.createElement('span');
-    iconSpan.className = `icon icon-${icon}`;
-    iconSpan.setAttribute('aria-hidden', 'true');
-
-    const textSpan = document.createElement('span');
-    textSpan.textContent = title;
-
-    h3.append(iconSpan, textSpan);
-    section.appendChild(h3);
-
-    if (buckets[key].length) {
-      const ul = document.createElement('ul');
-
-      buckets[key].slice(0, 5).forEach((path) => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = path;
-        a.textContent = decodeTitleFromPath(path);
-        li.appendChild(a);
-        ul.appendChild(li);
-      });
-
-      section.appendChild(ul);
-    } else {
-      const empty = document.createElement('div');
-      empty.className = 'favorites-empty';
-
-      const iconEmpty = document.createElement('span');
-      iconEmpty.className = 'icon icon-empty';
-      iconEmpty.setAttribute('aria-hidden', 'true');
-
-      const text = document.createElement('p');
-      text.textContent = `No ${title.toLowerCase()} saved`;
-
-      empty.append(iconEmpty, text);
-      section.appendChild(empty);
-    }
-
-    grid.appendChild(section);
-  });
-
-  container.appendChild(grid);
-
-  if (viewAllUrl) {
-    const viewAllWrapper = document.createElement('div');
-    viewAllWrapper.className = 'favorites-view-all';
-
-    viewAllWrapper.innerHTML = `
-      <a class="btn secondary" href="${viewAllUrl}">
-        ${viewAllUrlText}
-      </a>
-    `;
-
-    container.appendChild(viewAllWrapper);
+  
+    decorateIcons(container);
   }
-
-  decorateIcons(container);
-}
-
+  
 /* ================= Utils ================= */
 
 function decodeTitleFromPath(path) {
@@ -239,3 +262,10 @@ function getAllowedTypesFromURL() {
     .map((t) => t.trim().toLowerCase())
     .filter(Boolean);
 }
+
+function humanizeType(type) {
+    return type
+      .replace(/[-_]/g, ' ')
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+  }
+  

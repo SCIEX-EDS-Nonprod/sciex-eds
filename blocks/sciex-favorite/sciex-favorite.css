@@ -54,7 +54,6 @@
   
   .accordion-content.open {
     max-height: 2000px; /* safe large value */
-    background: var(--White-0, #FFF);
     padding: 24px;
     margin: 0px 40px;
     opacity: 1;
