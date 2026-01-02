@@ -95,14 +95,27 @@ export default async function decorate(block) {
   }
 
   try {
-    const userResp = await fetch(USER_API, { credentials: 'include' });
-    const user = await userResp.json();
+    let isLoggedIn = false;
 
-    if (!user || user.loggedIn !== true) {
-        renderLoggedOut(content, logoutText, loginUrl, createAccountUrl);
-        return;
+    try {
+      const userResp = await fetch(USER_API, { credentials: 'include' });
+    
+      if (!userResp.ok) {
+        throw new Error(`User API failed: ${userResp.status}`);
       }
-      
+    
+      const user = await userResp.json();
+      isLoggedIn = user?.loggedIn === true;
+    } catch (e) {
+      console.warn('Favorites block: treating user as logged out', e);
+      isLoggedIn = false;
+    }
+    
+    if (!isLoggedIn) {
+      renderLoggedOut(content, logoutText, loginUrl, createAccountUrl);
+      return;
+    }
+          
     const favResp = await fetch(FAVORITES_API, { credentials: 'include' });
     const favorites = await favResp.json();
     if (!Array.isArray(favorites)) {
