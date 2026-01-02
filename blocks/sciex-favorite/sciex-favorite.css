@@ -8,11 +8,7 @@
   .sciex-favorite-wrapper .accordion-header {
     padding: 20px 40px;
   }
-  
-.favorites-accordion {
-    border-top: 1px solid #e5e7eb;
-  }
-  
+    
   .accordion-header {
     display: flex;
     justify-content: space-between;
@@ -51,14 +47,16 @@
   .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s ease;
+    margin: 0 40px;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.2s ease;
   }
   
   .accordion-content.open {
     max-height: 2000px; /* safe large value */
-    background: var(--White-0, #FFF);
     padding: 24px;
     margin: 0px 40px;
+    opacity: 1;
   }
   .favorites-logged-out {
     margin-top: 24px;
@@ -228,6 +226,10 @@
   
  
   @media (max-width: 768px) {
+
+    .accordion-content {
+        margin: 0;
+      }
     
     .accordion-header h2 {
       font-size: 20px;
@@ -245,6 +247,14 @@
       .favorites-view-all .btn {
         width: 100%;
         max-width: 320px;
+      }
+
+      .sciex-favorite-wrapper .accordion-header {
+        padding: 20px 10px;
+      }
+
+      .accordion-content.open {
+        margin: 0px;
       }
   }
                   
