@@ -42,12 +42,18 @@ header nav ul li picture:hover {
     align-items: center;
     background: #fff;
     border-radius: 5px;
-    background: var(--Grey-50, #F5F5F5);
     gap: 8px;
     padding-right: 10px;
     height: 60px;
     width: 35%;
     position: relative;
+
+
+   
+flex: 1 0 0;
+margin-top: 5px;
+border: 1px solid var(--Grey-700, #434343);
+background: var(--White-0, #FFF);
 }
 
 .standalone-search-container.char-limit-reached {
@@ -67,7 +73,21 @@ header nav ul li picture:hover {
     gap: 4px;
     flex: 1 0 0;
     align-self: stretch;
-    background: var(--Grey-50, #F5F5F5);
+   /* background: var(--Grey-50, #F5F5F5);*/
+    display: flex;
+        border-radius: 5px;
+
+    /*color: var(--Grey-400, #8A8A8A);*/
+
+/* Desktop/text-base/regular */
+font-family: "Geogrotesque Sharp VF";
+font-size: 16px;
+font-style: normal;
+font-weight: 330;
+line-height: 24px; /* 150% */
+letter-spacing: 0.08px;
+flex: 1 0 0;
+    
 }
 
 .standalone-search-box::placeholder {
@@ -205,7 +225,87 @@ header nav ul li picture:hover {
     left: 0; /* Aligns tooltip under the input */
     top: 100%; /* Places it directly below the input */
 }
+#request-a-quote{
+    display: flex;
+padding: 20px 32px;
+align-items: center;
+background: var(--Grey-50, #F5F5F5);
+color: var(--Blue-700, #0068FA);
 
+/* Desktop/text-base/bolder */
+font-family: "Geogrotesque Sharp VF";
+font-size: 16px;
+font-style: normal;
+font-weight: 530;
+line-height: 24px; /* 150% */
+letter-spacing: 0.08px;
+}
+.container {
+   
+    
+   gap: 50px;
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+   padding-left: 64px !important;
+   padding-right: 0px !important;
+
+}
+.create-account-btn{
+    display: flex;
+    width: 207px;
+    padding: 12px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 4px;
+    background: var(--Blue-700, #0068FA);
+}
+.login-dropdown a{
+   display: flex;
+    width: 240px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 4px;
+    background: var(--White-0, #FFF);
+
+    /* Dropdown */
+    box-shadow: -2px 3px 18.4px 0 rgba(19, 19, 19, 0.15);
+}
+.myprofile-div {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+}
+.myprofile-icon{
+    
+    width: 18px;
+    height: 18px;
+    aspect-ratio: 1/1;
+}
+.sign-in-now-link{
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    color: var(--Blue-700, #0068FA) !important;
+
+/* Desktop/text-base/bolder */
+font-family: "Geogrotesque Sharp VF";
+font-size: 16px;
+font-style: normal;
+font-weight: 530;
+line-height: 24px;
+letter-spacing: 0.08px;
+text-decoration-line: underline;
+text-decoration-style: solid;
+text-decoration-skip-ink: none;
+text-decoration-thickness: auto;
+text-underline-offset: auto;
+text-underline-position: from-font;
+}
 /***   Mobile Css  */
 @media (max-width: 1023.9px) {
     .wrapper-4.black-section-logo
