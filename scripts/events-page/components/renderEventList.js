@@ -68,6 +68,8 @@ function createEventCard(event) {
     infoAction.append(info, action);
 
     eventCard.append(iconDate, infoAction);
+  } else if (eventType === 'On-demand') {
+    eventCard.append(icon, info, action);
   } else {
     eventCard.append(icon, dateEl, info, action);
   }
