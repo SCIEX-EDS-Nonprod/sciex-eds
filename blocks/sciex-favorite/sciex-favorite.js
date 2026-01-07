@@ -52,17 +52,12 @@ export default async function decorate(block) {
   const createAccountUrl =
     block.children[4]?.textContent?.trim() || '/create-account';
 
-  const USER_API =
-    block.children[5]?.textContent?.trim() ||
-    '';
-
-  const FAVORITES_API =
-    block.children[6]?.textContent?.trim() ||
-      '';
+  const USER_API = '/bin/sciex/currentuserdetails';
+  const FAVORITES_API = '/bin/sciex/get-favorite-content';
     
-  const viewAllUrlText = block.children[7]?.textContent?.trim() || "View all resources";
+  const viewAllUrlText = block.children[5]?.textContent?.trim() || "View all resources";
 
-  const viewAllUrl = block.children[8]?.textContent?.trim() || '#';
+  const viewAllUrl = block.children[6]?.textContent?.trim() || '#';
 
   block.textContent = '';
 
