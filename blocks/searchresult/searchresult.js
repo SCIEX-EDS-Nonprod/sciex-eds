@@ -403,6 +403,8 @@ export default async function decorate(block) {
       const params = new URLSearchParams(pageUrl.search);
       query = params.get('term');
       const contentType = params.get('contentType');
+      const facetId=params.get('facetId');
+      const value=params.get('value');
       const { updateQuery } = loadQueryActions(searchEngine);
       const { toggleSelectFacetValue } = loadFacetSetActions(searchEngine);
       searchEngine.dispatch(updateQuery({
@@ -412,6 +414,10 @@ export default async function decorate(block) {
         searchEngine.dispatch(toggleSelectFacetValue({
           facetId: 'contenttype',
           selection: { value: contentType, state: 'selected' },
+        }));
+         searchEngine.dispatch(toggleSelectFacetValue({
+          facetId: facetId,
+          selection: { value: value, state: 'selected' },
         }));
         contentTypeFacetController.showMoreValues();
       }
