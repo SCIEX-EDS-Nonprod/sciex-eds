@@ -33,6 +33,24 @@
   ],
   "models": [
     {
+      "id": "header",
+      "fields": [
+        {
+          "component": "text",
+          "name": "text",
+          "value": "",
+          "label": "My Profile Page Path",
+          "valueType": "string"
+        },{
+          "component": "text",
+          "name": "text",
+          "value": "",
+          "label": "My Favourite Page Path",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
       "id": "headerItem",
       "fields": [
         {

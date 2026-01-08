@@ -12,7 +12,23 @@ const dropdownMap = new WeakMap();
   e.preventDefault();
   login();
 } */
-
+async function getUserDetails() {
+  try {
+    const response = await fetch('/bin/sciex/currentuserdetails', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    return null;
+  }
+}
 const HISTORY_KEY = 'searchHistory';
 function getSearchHistory() {
   return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
@@ -475,7 +491,7 @@ function createMainHeader(section) {
         Object.keys(menuItems).forEach((key) => {
           const value = menuItems[key];
           let anchorElement = document.createElement('a');
-          if (key === 'Button') {
+          if (key === 'Button' && anchorTag.text === 'Login') {
             anchorElement = document.createElement('div');
             anchorElement.innerHTML = '<a href="/support/create-account"><button class=" create-account-btn">Create an account</button></a>';
           } else {
@@ -534,6 +550,10 @@ function createMainHeader(section) {
               anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
               anchorElement.innerHTML = `${value}`;
               // anchorElement.classList.add('myprofile-div');
+              const userData = getUserDetails();
+              if (userData && userData.loggedIn) {
+                console.log(`User already logged in${userData.username}`);
+              }
             }
             // close dropdown on item click
             anchorElement.addEventListener('click', () => {
@@ -1653,7 +1673,7 @@ export default async function decorate(block) {
     processHtml(block, main);
   }
   decorateIcons(block);
-  if (document.getElementById('logout')) {
+  /* if (document.getElementById('logout')) {
     document.getElementById('logout').addEventListener('click', () => {
       const redirectUrl = encodeURIComponent(window.location.href);
       fetch('/bin/sciex/logout')
@@ -1663,25 +1683,8 @@ export default async function decorate(block) {
           document.location = `https://sso.sciex.cloud/auth/realms/sciex/protocol/openid-connect/logout?redirect_uri=${redirectUrl}`;
         });
     });
-  }
+  } */
   // logout listener added above
-  async function getUserDetails() {
-    try {
-      const response = await fetch('/bin/sciex/currentuserdetails', {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Accept: 'application/json',
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      return null;
-    }
-  }
 
   // Conditionally shwoing the login/logout links
   const userData = await getUserDetails();
