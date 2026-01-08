@@ -70,8 +70,13 @@ export default async function decorate(block) {
 
   const header = document.createElement('sciex-header');
   header.className = 'accordion-header';
-  header.innerHTML = `<h2>${title}</h2><button class="accordion-toggle"></button>`;
-
+  header.innerHTML = `
+  <h2>${title}</h2>
+  <button class="accordion-toggle" aria-expanded="false">
+    <span class="icon icon-resource_hub" aria-hidden="true"></span>
+  </button>
+`;
+  decorateIcons(header);
   const content = document.createElement('div');
   content.className = 'accordion-content';
 
@@ -80,9 +85,14 @@ export default async function decorate(block) {
   block.append(section);
 
   header.addEventListener('click', () => {
+    const toggleBtn = header.querySelector('.accordion-toggle');
+    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+  
+    toggleBtn.setAttribute('aria-expanded', String(!expanded));
     content.classList.toggle('open');
     header.classList.toggle('open');
   });
+  
     
   if (!USER_API || !FAVORITES_API) {
     console.error('Favorites block: Missing API endpoints');
