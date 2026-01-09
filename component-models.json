@@ -1026,6 +1026,27 @@
     ]
   },
   {
+    "id": "featured-key-workflows",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": [],
+        "label": "Block Options"
+      }
+    ]
+  },
+  {
+    "id": "featured-key-workflow",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Name"
+      }
+    ]
+  },
+  {
     "id": "featured-products",
     "fields": [
       {

@@ -1,0 +1,69 @@
+{
+  "definitions": [
+    {
+      "title": "Featured key workflows",
+      "id": "featured-key-workflows",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {              
+              "name": "Featured key workflows",
+              "model": "featured-key-workflows",
+              "filter": "featured-key-workflows"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Featured key workflow",
+      "id": "featured-key-workflow",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Featured key workflow",
+              "model": "featured-key-workflow"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+           {
+            "id": "featured-key-workflows",
+            "fields": [
+              {
+                "component": "multiselect",
+                "name": "classes",
+                "value": [],
+                "label": "Block Options"
+              
+              }
+ 
+            ]
+          },
+          {
+            "id": "featured-key-workflow",
+            "fields": [                        
+              {
+                "component": "text",
+                "name": "name",
+                "label": "Name"
+              }
+            ]
+          }
+    ],
+  "filters": [
+    {
+      "id": "featured-key-workflows",
+      "components": [
+        "featured-key-workflow"
+      ]
+    }
+  ]
+}
+
