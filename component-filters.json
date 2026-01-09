@@ -60,20 +60,13 @@
       "sciex-table",
       "chat-bot",
       "sciex-favorite",
-      "featured-key-workflows",
-      "application-cards"
+      "featured-key-workflows"
     ]
   },
   {
     "id": "accordion",
     "components": [
       "accordion-item"
-    ]
-  },
-  {
-    "id": "application-cards",
-    "components": [
-      "application-card"
     ]
   },
   {
