@@ -1048,6 +1048,11 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "Image"
+      },
+      {
+        "component": "text",
+        "name": "link",
+        "label": "link"
       }
     ]
   },
