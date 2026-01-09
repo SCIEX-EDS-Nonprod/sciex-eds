@@ -418,15 +418,30 @@
           }
         },
         {
-          "title": "Featured key workflow",
-          "id": "featured-key-workflow",
+          "title": "Workflow Item",
+          "id": "workflow-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "name": "Featured key workflow",
-                  "model": "featured-key-workflow"
+                  "name": "Workflow Item",
+                  "model": "workflow-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Item link",
+          "id": "item-link",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Item link",
+                  "model": "item-link"
                 }
               }
             }
