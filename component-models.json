@@ -1041,7 +1041,8 @@
       {
         "component": "text",
         "name": "name",
-        "label": "Name"
+        "label": "Name",
+        "multi": true
       }
     ]
   },
