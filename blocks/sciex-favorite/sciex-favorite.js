@@ -73,7 +73,7 @@ export default async function decorate(block) {
   header.innerHTML = `
   <h2>${title}</h2>
   <button class="accordion-toggle" aria-expanded="false">
-    <span class="icon icon-resource_hub" aria-hidden="true"></span>
+    <span class="icon icon-resource-hub-down" aria-hidden="true"></span>
   </button>
 `;
   decorateIcons(header);
@@ -89,8 +89,8 @@ export default async function decorate(block) {
     const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
   
     toggleBtn.setAttribute('aria-expanded', String(!expanded));
-    content.classList.toggle('open');
-    header.classList.toggle('open');
+    header.classList.toggle('open', !expanded);
+    content.classList.toggle('open', !expanded);
   });
   
     
