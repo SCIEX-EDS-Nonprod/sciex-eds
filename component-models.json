@@ -1032,12 +1032,6 @@
         "component": "text",
         "name": "title",
         "label": "Title"
-      },
-      {
-        "component": "container",
-        "name": "items",
-        "label": "Workflow Items",
-        "model": "workflow-item"
       }
     ]
   },
@@ -1054,12 +1048,6 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "Image"
-      },
-      {
-        "component": "container",
-        "name": "links",
-        "label": "Item Links",
-        "model": "item-link"
       }
     ]
   },

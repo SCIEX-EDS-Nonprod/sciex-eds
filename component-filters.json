@@ -118,7 +118,13 @@
   {
     "id": "featured-key-workflows",
     "components": [
-      "featured-key-workflows"
+      "featured-key-workflow"
+    ]
+  },
+  {
+    "id": "featured-key-workflow",
+    "components": [
+      "item-link"
     ]
   },
   {
