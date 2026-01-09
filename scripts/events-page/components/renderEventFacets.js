@@ -248,7 +248,7 @@ export default function renderEventFacets() {
     items: controller.state.values,
     onSelect: (val) => {
       const latest = controller.state.values.find(
-        v => v.value === val.value
+        (v) => v.value === val.value,
       );
       if (!latest) return;
 
@@ -259,7 +259,7 @@ export default function renderEventFacets() {
       }
 
       // Make the previous selected item idle
-      controller.state.values.forEach(v => {
+      controller.state.values.forEach((v) => {
         if (v.state === 'selected') {
           controller.toggleSelect(v);
         }
@@ -268,8 +268,7 @@ export default function renderEventFacets() {
       // make the newly clicked item to selected
       controller.toggleSelect(latest);
     },
-  })
-  );
+  }));
 
   const filterSection = createFilterSection(dropdownsConfig);
 

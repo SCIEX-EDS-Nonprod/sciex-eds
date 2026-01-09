@@ -1040,24 +1040,14 @@
     "fields": [
       {
         "component": "text",
-        "name": "name",
-        "label": "Name"
+        "name": "itemName",
+        "label": "Item Name"
       },
       {
         "component": "reference",
         "valueType": "string",
         "name": "fileReference",
         "label": "Image"
-      }
-    ]
-  },
-  {
-    "id": "item-link",
-    "fields": [
-      {
-        "component": "text",
-        "name": "link",
-        "label": "Link"
       }
     ]
   },
