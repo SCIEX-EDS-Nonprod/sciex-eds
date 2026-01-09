@@ -122,6 +122,12 @@
     ]
   },
   {
+    "id": "workflow-item",
+    "components": [
+      "item-link"
+    ]
+  },
+  {
     "id": "header",
     "components": [
       "headerItem"
