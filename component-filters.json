@@ -118,8 +118,7 @@
   {
     "id": "featured-key-workflows",
     "components": [
-      "workflow-item",
-      "cards"
+      "workflow-item"
     ]
   },
   {
