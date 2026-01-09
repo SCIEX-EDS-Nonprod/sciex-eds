@@ -59,7 +59,8 @@
       "sciex-container",
       "sciex-table",
       "chat-bot",
-      "sciex-favorite"
+      "sciex-favorite",
+      "categories"
     ]
   },
   {
@@ -85,6 +86,12 @@
     "components": [
       "image-video",
       "youtube-item"
+    ]
+  },
+  {
+    "id": "categories",
+    "components": [
+      "category"
     ]
   },
   {
