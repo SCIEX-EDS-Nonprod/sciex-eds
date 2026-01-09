@@ -1051,8 +1051,8 @@
       },
       {
         "component": "text",
-        "name": "link",
-        "label": "link"
+        "name": "itemLink",
+        "label": "Item Link"
       }
     ]
   },
