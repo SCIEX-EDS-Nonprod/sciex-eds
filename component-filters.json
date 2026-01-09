@@ -70,6 +70,12 @@
     ]
   },
   {
+    "id": "application-cards",
+    "components": [
+      "application-card"
+    ]
+  },
+  {
     "id": "atomic-media",
     "components": [
       "image-video",
