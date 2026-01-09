@@ -38,13 +38,13 @@
       "fields": [
         {
           "component": "text",
-          "name": "text",
+          "name": "myProfile",
           "value": "",
           "label": "My Profile Page Path",
           "valueType": "string"
         },{
           "component": "text",
-          "name": "text",
+          "name": "myFavourite",
           "value": "",
           "label": "My Favourite Page Path",
           "valueType": "string"
