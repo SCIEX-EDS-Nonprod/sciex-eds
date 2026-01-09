@@ -96,7 +96,8 @@
         "sciex-container",
         "sciex-table",
         "chat-bot",
-        "sciex-favorite"
+        "sciex-favorite",
+        "categories"
       ]
     }
   ]
