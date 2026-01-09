@@ -433,6 +433,21 @@
           }
         },
         {
+          "title": "Link",
+          "id": "link",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Link",
+                  "model": "link"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "featured products",
           "id": "featured-products",
           "plugins": {

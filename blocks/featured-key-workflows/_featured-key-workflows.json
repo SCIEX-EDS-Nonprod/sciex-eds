@@ -30,6 +30,21 @@
           }
         }
       }
+    },
+    {
+      "title": "Link",
+      "id": "link",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Link",
+              "model": "link"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -56,12 +71,17 @@
           "valueType": "string",
           "name": "fileReference",
           "label": "Image"
-        },        
-        {
+        }       
+        
+      ]
+    },
+     {
+      "id": "link",
+      "fields": [
+       {
           "component": "text",
           "name": "itemLink",
-          "label": "Item Link",
-          "multi": true
+          "label": "Item Link"
         }
       ]
     }
@@ -70,7 +90,8 @@
     {
       "id": "featured-key-workflows",
       "components": [
-        "workflow-item"
+        "workflow-item",
+        "link"
       ]
     }
   ]
