@@ -1048,16 +1048,12 @@
         "valueType": "string",
         "name": "fileReference",
         "label": "Image"
-      }
-    ]
-  },
-  {
-    "id": "link",
-    "fields": [
+      },
       {
         "component": "text",
         "name": "itemLink",
-        "label": "Item Link"
+        "label": "Item Link",
+        "multi": true
       }
     ]
   },
