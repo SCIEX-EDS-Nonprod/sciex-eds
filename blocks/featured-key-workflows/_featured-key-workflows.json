@@ -35,16 +35,14 @@
   "models": [
            {
             "id": "featured-key-workflows",
-            "fields": [
+             "fields": [                        
               {
-                "component": "multiselect",
-                "name": "classes",
-                "value": [],
-                "label": "Block Options"
-              
+                "component": "text",
+                "name": "title",
+                "label": "Title"
               }
- 
-            ]
+            ] 
+            
           },
           {
             "id": "featured-key-workflow",

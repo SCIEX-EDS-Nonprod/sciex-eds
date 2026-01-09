@@ -1029,10 +1029,9 @@
     "id": "featured-key-workflows",
     "fields": [
       {
-        "component": "multiselect",
-        "name": "classes",
-        "value": [],
-        "label": "Block Options"
+        "component": "text",
+        "name": "title",
+        "label": "Title"
       }
     ]
   },
