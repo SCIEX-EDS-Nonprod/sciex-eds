@@ -1605,6 +1605,7 @@ function createOverlay(nav) {
  * Processes and appends the sections to the header block
  */
 function processHtml(block, main) {
+  console.log(`Processing header HTML${block.outerHTML}`);
   const parentDiv = div({ class: 'tw' });
   const nav = document.createElement('nav');
   nav.id = 'mega-menu';
