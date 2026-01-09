@@ -287,8 +287,10 @@ function createMainHeader(section) {
     class: 'tw-list-none tw-flex tw-items-stretch tw-text-sm tw-h-full',
   });
   const headerDiv = section.querySelector('.header');
+  let myprofile = '';
+  let myFavoriteResources = '';
   Array.from(headerDiv.children).forEach((child, index) => {
-    console.log('header child', child.outerHTML);
+    console.log(`header child>>${index}>>${child.outerHTML}`);
     const picture = child.querySelector('picture');
     const anchorTag = child.querySelector('a');
 
@@ -435,11 +437,21 @@ function createMainHeader(section) {
 
     // add click event to handle mobile menu button actions
     mobileMenuToggle.addEventListener('click', handleMobileMenu);
+
+    console.log(`anchor tag text>>${anchorTag.text}`);
     if (index === 0) {
+      myprofile = anchorTag.text;
+      console.log(`myprofile link>>${myprofile}`);
+    } else if (index === 1) {
+      myFavoriteResources = anchorTag.text;
+      console.log(`myFavoriteResources link>>${myFavoriteResources}`);
+    } else if (index === 2) {
       anchorTag.text = '';
       anchorTag.className = 'tw-py-16';
       // anchorTag.target = '_blank';
-      anchorTag.appendChild(picture);
+      if (picture != null) {
+        anchorTag.appendChild(picture);
+      }
       containerDiv.appendChild(anchorTag);
       mobileMenuToggle.appendChild(mobileMenuToggleIcon);
       containerDiv.appendChild(mobileMenuToggle);
@@ -517,6 +529,7 @@ function createMainHeader(section) {
                 </defs>
               </svg>`;
               anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.href = myprofile;
               anchorElement.classList.add('myprofile-div');
             } else if (key === 'My favorite resources') {
               const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -530,6 +543,7 @@ function createMainHeader(section) {
                 </defs>
               </svg>`;
               anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.href = myFavoriteResources;
               anchorElement.classList.add('myprofile-div');
             } else if (key === 'Logout' && anchorTag.text === 'My account') {
               const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -553,7 +567,7 @@ function createMainHeader(section) {
               // anchorElement.classList.add('myprofile-div');
               const userData = getUserDetails();
               if (userData && userData.loggedIn) {
-                console.log(`User already logged in${userData.username}`);
+                console.log(`User already logged in: ${userData.username}`);
               }
             }
             // close dropdown on item click
