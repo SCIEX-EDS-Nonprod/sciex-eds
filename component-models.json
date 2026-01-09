@@ -1060,6 +1060,25 @@
     ]
   },
   {
+    "id": "header",
+    "fields": [
+      {
+        "component": "text",
+        "name": "myProfile",
+        "value": "",
+        "label": "My Profile Page Path",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "myFavourite",
+        "value": "",
+        "label": "My Favourite Page Path",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "headerItem",
     "fields": [
       {
