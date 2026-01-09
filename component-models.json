@@ -1026,47 +1026,6 @@
     ]
   },
   {
-    "id": "featured-key-news",
-    "fields": [
-      {
-        "component": "text",
-        "name": "title",
-        "label": "Title"
-      }
-    ]
-  },
-  {
-    "id": "new-item",
-    "fields": [
-      {
-        "component": "text",
-        "name": "itemName",
-        "label": "Item Name"
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "fileReference",
-        "label": "Image"
-      }
-    ]
-  },
-  {
-    "id": "item-link",
-    "fields": [
-      {
-        "component": "text",
-        "name": "label",
-        "label": "Link Label"
-      },
-      {
-        "component": "text",
-        "name": "url",
-        "label": "Link URL"
-      }
-    ]
-  },
-  {
     "id": "featured-key-workflows",
     "fields": [
       {

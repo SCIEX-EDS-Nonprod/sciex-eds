@@ -60,8 +60,7 @@
       "sciex-table",
       "chat-bot",
       "sciex-favorite",
-      "featured-key-workflows",
-      "featured-key-news"
+      "featured-key-workflows"
     ]
   },
   {
@@ -114,18 +113,6 @@
       "speaker-details",
       "events-details",
       "events-register-form"
-    ]
-  },
-  {
-    "id": "featured-key-news",
-    "components": [
-      "new-item"
-    ]
-  },
-  {
-    "id": "new-item",
-    "components": [
-      "item-link"
     ]
   },
   {
