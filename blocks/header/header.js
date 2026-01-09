@@ -288,6 +288,7 @@ function createMainHeader(section) {
   });
   const headerDiv = section.querySelector('.header');
   Array.from(headerDiv.children).forEach((child, index) => {
+    console.log('header child', child.outerHTML);
     const picture = child.querySelector('picture');
     const anchorTag = child.querySelector('a');
 
