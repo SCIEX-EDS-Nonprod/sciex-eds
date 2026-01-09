@@ -123,6 +123,12 @@
     ]
   },
   {
+    "id": "new-item",
+    "components": [
+      "item-link"
+    ]
+  },
+  {
     "id": "featured-key-workflows",
     "components": [
       "workflow-item"
