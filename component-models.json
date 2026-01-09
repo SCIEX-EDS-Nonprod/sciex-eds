@@ -1026,6 +1026,37 @@
     ]
   },
   {
+    "id": "featured-key-news",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "new-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "itemName",
+        "label": "Item Name"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "fileReference",
+        "label": "Image"
+      },
+      {
+        "component": "text",
+        "name": "itemLink",
+        "label": "Item Link"
+      }
+    ]
+  },
+  {
     "id": "featured-key-workflows",
     "fields": [
       {

@@ -402,6 +402,37 @@
           }
         },
         {
+          "title": "Featured key news",
+          "id": "featured-key-news",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Featured key news",
+                  "model": "featured-key-news",
+                  "filter": "featured-key-news"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "new Item",
+          "id": "new-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "new Item",
+                  "model": "new-item"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Featured key workflows",
           "id": "featured-key-workflows",
           "plugins": {
