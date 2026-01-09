@@ -40,6 +40,9 @@ const CATEGORY_MAP = [
   },
 ];
 
+/**
+ * Main initialization function for the Favorites accordion component.
+ *  */
 export default async function decorate(block) {
   const id = block.children[0]?.textContent?.trim() || 'my-favorites';
   const title = block.children[1]?.textContent?.trim() || 'My favorite resources';
@@ -134,8 +137,10 @@ export default async function decorate(block) {
   }
 }
 
-/* ================= Logged out ================= */
-
+/**
+ * Renders the logged-out state UI.
+ * Displays message, Login CTA, and Create Account CTA.
+ * */
 function renderLoggedOut(container, text, loginUrl, createUrl) {
   container.innerHTML = `
     <div class="favorites-logged-out">
@@ -148,8 +153,15 @@ function renderLoggedOut(container, text, loginUrl, createUrl) {
   `;
 }
 
-/* ================= Favorites ================= */
-
+/**
+ * Renders logged-in user's favorite resources grouped by category.
+ * - Buckets paths into CATEGORY_MAP categories.
+ * - Supports URL filtering through ?type= query parameter.
+ * - Creates category tiles with icons, titles, and up to 5 links per category.
+ * - Shows an empty state for categories with no saved items.
+ * - Appends a "View All Resources" button when configured.
+ * - Runs decorateIcons() to load icon assets.
+ **/
 function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
     const allowedTypes = getAllowedTypesFromURL();
     const buckets = {};
@@ -260,8 +272,11 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
     decorateIcons(container);
   }
   
-/* ================= Utils ================= */
 
+/**
+ * Converts a URL path into a readable title.
+ * Example: "/support/abc-my-page.html" → "abc my page"
+ **/
 function decodeTitleFromPath(path) {
   const last = path.split('/').pop();
   return decodeURIComponent(
@@ -269,6 +284,10 @@ function decodeTitleFromPath(path) {
   );
 }
 
+/**
+ * Reads the `type` query parameter from the URL to determine
+ * which category keys should be displayed.
+ **/
 function getAllowedTypesFromURL() {
   const params = new URLSearchParams(window.location.search);
   const typeParam = params.get('type');
@@ -281,6 +300,10 @@ function getAllowedTypesFromURL() {
     .filter(Boolean);
 }
 
+/**
+ * Converts unknown category keys into readable labels.
+ * Useful when API returns paths that don't match CATEGORY_MAP.
+ **/
 function humanizeType(type) {
     return type
       .replace(/[-_]/g, ' ')
