@@ -42,24 +42,13 @@
 
   .accordion-toggle .icon {
     transition: transform 0.3s ease;
+    display: inline-block;
   }
   
-  .accordion-header.open .icon {
+  .accordion-header.open .accordion-toggle .icon {
     transform: rotate(180deg);
   }
-    
-  .accordion-toggle::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    transition: transform 0.25s ease;
-  }
-  
-  .accordion-header.open .accordion-toggle::before {
-    transform: rotate(180deg);
-  }
+
   .accordion-content {
     max-height: 0;
     overflow: hidden;
