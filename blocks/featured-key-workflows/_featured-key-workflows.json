@@ -56,12 +56,16 @@
           "valueType": "string",
           "name": "fileReference",
           "label": "Image"
-        },        
+        },  
+         {
+          "component": "text",
+          "name": "linkText",
+          "label": "Link Text"
+        },      
         {
           "component": "text",
-          "name": "itemLink",
-          "label": "Item Link",
-          "multi": true
+          "name": "textLink",
+          "label": "Text Link"
         }
       ]
     }

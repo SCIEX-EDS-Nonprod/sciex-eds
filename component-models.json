@@ -1051,9 +1051,13 @@
       },
       {
         "component": "text",
-        "name": "itemLink",
-        "label": "Item Link",
-        "multi": true
+        "name": "linkText",
+        "label": "Link Text"
+      },
+      {
+        "component": "text",
+        "name": "textLink",
+        "label": "Text Link"
       }
     ]
   },
