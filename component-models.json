@@ -1052,7 +1052,8 @@
       {
         "component": "text",
         "name": "itemLink",
-        "label": "Item Link"
+        "label": "Item Link",
+        "multi": true
       }
     ]
   },
