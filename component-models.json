@@ -1040,24 +1040,44 @@
     "fields": [
       {
         "component": "text",
-        "name": "itemName",
-        "label": "Item Name"
+        "name": "categoryName",
+        "label": "Category Name"
       },
       {
         "component": "reference",
         "valueType": "string",
-        "name": "fileReference",
+        "name": "image",
         "label": "Image"
       },
       {
         "component": "text",
-        "name": "linkText",
-        "label": "Link Text"
+        "name": "firstlinkText",
+        "label": "First Link Text"
       },
       {
         "component": "text",
-        "name": "textLink",
-        "label": "Text Link"
+        "name": "firstLink",
+        "label": "First Link"
+      },
+      {
+        "component": "text",
+        "name": "secondlinkText",
+        "label": "Second Link Text"
+      },
+      {
+        "component": "text",
+        "name": "secondLink",
+        "label": "Second Link"
+      },
+      {
+        "component": "text",
+        "name": "thirdlinkText",
+        "label": "Third Link Text"
+      },
+      {
+        "component": "text",
+        "name": "thirdLink",
+        "label": "Third Link"
       }
     ]
   },
