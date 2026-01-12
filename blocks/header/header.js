@@ -132,7 +132,7 @@ function createGlobalSearch() {
 
   const searchBox = document.createElement('input');
   searchBox.type = 'text';
-  searchBox.placeholder = 'Search within max 200 characters';
+  searchBox.placeholder = 'Search';
   searchBox.className = 'standalone-search-box';
   searchBox.id = 'standalone-search-box';
   searchBox.maxLength = 200;
