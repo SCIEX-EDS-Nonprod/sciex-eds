@@ -562,8 +562,11 @@ function createMainHeader(section) {
               anchorElement.classList.add('myprofile-div');
               anchorElement.href = 'https://devcs.sciex.com/bin/sciex/logout';
             } else if (key === 'Already have an account?Sign In Now') {
-              anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
-              anchorElement.innerHTML = `${value}`;
+              anchorElement.id = 'signInNowLink';
+              if (anchorTag.text === 'Login') {
+                anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
+                anchorElement.innerHTML = `${value}`;
+              }
               // anchorElement.classList.add('myprofile-div');
               const userData = getUserDetails();
               if (userData && userData.loggedIn) {
@@ -1704,12 +1707,15 @@ export default async function decorate(block) {
 
   // Conditionally shwoing the login/logout links
   const userData = await getUserDetails();
+  console.log('User Data:', userData);
   if (userData && userData.loggedIn) {
     const eloquaData = {
       status: userData.loggedIn,
       email: userData.email,
       key: userData.userKey,
     };
+    console.log('Family Name:', userData.familyName);
+    console.log('Given Name:', userData.givenName);
     sessionStorage.setItem('loggedin-status', userData.loggedIn);
     sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
     // document.getElementById('view-profile').style.display = '';
@@ -1717,6 +1723,7 @@ export default async function decorate(block) {
     // document.getElementById('register').style.display = 'none';
     document.getElementById('login').style.display = 'none';
     document.getElementById('my-account').style.display = '';
+    document.getElementById('signInNowLink').innerHTML = `<span>${userData.familyName} ${userData.givenName}</span>`;
   } else {
     // document.getElementById('view-profile').style.display = 'none';
     // document.getElementById('logout').style.display = 'none';
