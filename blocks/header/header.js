@@ -1712,6 +1712,7 @@ export default async function decorate(block) {
     };
     console.log('Family Name:', userData.familyName);
     console.log('Given Name:', userData.givenName);
+    console.log('signInNowLink Element:', document.getElementById('signInNowLink'));
     sessionStorage.setItem('loggedin-status', userData.loggedIn);
     sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
     // document.getElementById('view-profile').style.display = '';
@@ -1719,7 +1720,7 @@ export default async function decorate(block) {
     // document.getElementById('register').style.display = 'none';
     document.getElementById('login').style.display = 'none';
     document.getElementById('my-account').style.display = '';
-    document.getElementById('signInNowLink').innerHTML = `<span>${userData.familyName} ${userData.givenName}</span>`;
+    document.getElementById('signInNowLink').innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
   } else {
     // document.getElementById('view-profile').style.display = 'none';
     // document.getElementById('logout').style.display = 'none';
