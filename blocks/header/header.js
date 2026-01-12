@@ -563,12 +563,15 @@ function createMainHeader(section) {
                 anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
                 anchorElement.innerHTML = `${value}`;
               } else if (anchorTag.text === 'My account') {
-                const userData = getUserDetails();
-                console.log('User Data 1 :', userData);
-                if (userData && userData.loggedIn) {
-                  console.log(`User already logged in: ${userData.username}`);
-                  anchorElement.innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
-                }
+                (async function () {
+                  const userData = await getUserDetails();
+                  console.log('User Data 123 :', userData);
+                  if (userData && userData.loggedIn) {
+                    console.log(`User already logged in: ${userData.username}`);
+                    console.log(`User already logged in: ${userData.familyName}`);
+                    anchorElement.innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
+                  }
+                }());
               }
               // anchorElement.classList.add('myprofile-div');
             }
