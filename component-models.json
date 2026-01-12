@@ -1045,39 +1045,14 @@
       },
       {
         "component": "reference",
-        "valueType": "string",
         "name": "image",
         "label": "Image"
       },
       {
-        "component": "text",
-        "name": "firstlinkText",
-        "label": "First Link Text"
-      },
-      {
-        "component": "text",
-        "name": "firstLink",
-        "label": "First Link"
-      },
-      {
-        "component": "text",
-        "name": "secondlinkText",
-        "label": "Second Link Text"
-      },
-      {
-        "component": "text",
-        "name": "secondLink",
-        "label": "Second Link"
-      },
-      {
-        "component": "text",
-        "name": "thirdlinkText",
-        "label": "Third Link Text"
-      },
-      {
-        "component": "text",
-        "name": "thirdLink",
-        "label": "Third Link"
+        "component": "richtext",
+        "valueType": "string",
+        "name": "enterTheLinks",
+        "label": "Enter the links"
       }
     ]
   },
