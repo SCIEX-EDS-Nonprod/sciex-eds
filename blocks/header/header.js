@@ -1723,7 +1723,20 @@ export default async function decorate(block) {
     // document.getElementById('register').style.display = 'none';
     document.getElementById('login').style.display = 'none';
     document.getElementById('my-account').style.display = '';
-    document.getElementById('signInNowLink').innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
+    const signInNowEl = document.getElementById('signInNowLink');
+    console.log('signInNowEl:', signInNowEl);
+    if (signInNowEl) {
+      const family = userData.familyName || '';
+      const given = userData.givenName || '';
+      const displayName = `${family} ${given}`.trim();
+      console.log('Display Name:', displayName);
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'username-span';
+      nameSpan.textContent = displayName;
+      signInNowEl.textContent = '';
+      console.log('Appending nameSpan to signInNowEl:', nameSpan);
+      signInNowEl.appendChild(nameSpan);
+    }
   } else {
     // document.getElementById('view-profile').style.display = 'none';
     // document.getElementById('logout').style.display = 'none';
