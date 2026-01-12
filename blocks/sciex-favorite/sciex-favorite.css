@@ -151,6 +151,7 @@
   .favorites-category {
     display: flex;
     padding: 24px;
+    margin-right: 12px;
     flex-direction: column;
     gap: 16px;
     flex: 1 0 0;
@@ -325,7 +326,13 @@
     .sciex-favorite-wrapper {
       padding: 12px 10px !important;
     }
-  
+    
+    .favorites-grid.single-column {
+      grid-template-columns: 1fr !important;
+      width: 100% !important;
+      margin-left: 0 !important;
+    }
+
     .sciex-favorite-wrapper .accordion-header {
       padding: 16px 10px;
     }
