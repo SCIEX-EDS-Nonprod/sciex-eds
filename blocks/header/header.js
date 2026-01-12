@@ -290,7 +290,6 @@ function createMainHeader(section) {
   let myprofile = '';
   let myFavoriteResources = '';
   Array.from(headerDiv.children).forEach((child, index) => {
-    console.log(`header child>>${index}>>${child.outerHTML}`);
     const picture = child.querySelector('picture');
     const anchorTag = child.querySelector('a');
 
@@ -438,13 +437,10 @@ function createMainHeader(section) {
     // add click event to handle mobile menu button actions
     mobileMenuToggle.addEventListener('click', handleMobileMenu);
 
-    console.log(`anchor tag text>>${anchorTag.text}`);
     if (index === 0) {
       myprofile = anchorTag.text;
-      console.log(`myprofile link>>${myprofile}`);
     } else if (index === 1) {
       myFavoriteResources = anchorTag.text;
-      console.log(`myFavoriteResources link>>${myFavoriteResources}`);
     } else if (index === 2) {
       anchorTag.text = '';
       anchorTag.className = 'tw-py-16';
