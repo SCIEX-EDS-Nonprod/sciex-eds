@@ -166,10 +166,6 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
   const allowedTypes = getAllowedTypesFromURL();
   const buckets = {};
 
-  if (allowedTypes) {
-    grid.classList.add('single-column');
-  }
-
   // Initialize known categories
   CATEGORY_MAP.forEach((c) => {
     buckets[c.key] = [];
