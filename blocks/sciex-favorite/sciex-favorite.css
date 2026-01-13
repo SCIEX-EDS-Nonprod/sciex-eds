@@ -285,6 +285,10 @@
   .favorites-view-all .btn.secondary:active {
     background-color: #ccfbf1;
   }
+
+  .favorites-grid.single-column {
+    grid-template-columns: 1fr !important;
+  }
   
   @media (max-width: 768px) {
 
@@ -326,17 +330,6 @@
     .sciex-favorite-wrapper {
       padding: 12px 10px !important;
     }
-
-    .favorites-accordion .favorites-grid.single-column {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 24px !important;
-    }
-    
-    .favorites-accordion .favorites-grid.single-column .favorites-category {
-      width: 100% !important;
-    }
-    
 
     .sciex-favorite-wrapper .accordion-header {
       padding: 16px 10px;
