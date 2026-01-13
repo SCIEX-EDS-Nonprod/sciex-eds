@@ -1,4 +1,3 @@
-import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
@@ -64,12 +63,11 @@ export default function decorate(block) {
     card.append(content);
 
     if (arrowIconHTML) {
-        const arrow = document.createElement('div');
-        arrow.className = iconHTML ? 'category-arrow-top' : 'category-arrow-bottom';
-        arrow.innerHTML = arrowIconHTML;
-        card.append(arrow);
-      }
-  
+      const arrow = document.createElement('div');
+      arrow.className = iconHTML ? 'category-arrow-top' : 'category-arrow-bottom';
+      arrow.innerHTML = arrowIconHTML;
+      card.append(arrow);
+    }
 
     grid.append(card);
   });
