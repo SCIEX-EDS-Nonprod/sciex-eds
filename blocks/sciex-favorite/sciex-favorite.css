@@ -326,11 +326,14 @@
     .sciex-favorite-wrapper {
       padding: 12px 10px !important;
     }
-    
-    .favorites-grid.single-column {
-      grid-template-columns: 1fr !important;
-      width: 100% !important;
-      margin-left: 0 !important;
+
+   .favorites-grid.single-column {
+  grid-template-columns: 1fr !important;
+  width: 100% !important;
+   }
+
+  .favorites-grid.single-column .favorites-category {
+    width: 100% !important;
     }
 
     .sciex-favorite-wrapper .accordion-header {
