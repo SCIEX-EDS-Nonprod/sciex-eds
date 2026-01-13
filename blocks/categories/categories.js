@@ -14,13 +14,12 @@ export default function decorate(block) {
   const columns = parseInt(rows[2]?.textContent.trim(), 10) || 3;
 
   if (id) categoriesContainer.id = `${id}-content`;
+  
+  const list = document.createElement('ul');
+  list.className = `categories-list columns-${columns}`;
+  categoriesContainer.append(list);
 
-  // Create grid
-  const grid = document.createElement('div');
-  grid.className = `categories-grid columns-${columns}`;
-  categoriesContainer.append(grid);
-
-  // Parse cards starting from row index 3
+  // Parse card rows starting from index 3
   rows.slice(3).forEach((row) => {
     const cells = [...row.children];
     if (cells.length < 3) return;
@@ -29,6 +28,10 @@ export default function decorate(block) {
     const headingHTML = cells[1]?.innerHTML.trim();
     const descriptionHTML = cells[2]?.innerHTML.trim();
     const linkHref = cells[3]?.textContent.trim() || '#';
+
+    // Create li
+    const li = document.createElement('li');
+    li.className = 'category-list-item';
 
     const card = document.createElement('a');
     card.className = 'category-card';
@@ -69,10 +72,11 @@ export default function decorate(block) {
       card.append(arrow);
     }
 
-    grid.append(card);
+    li.append(card);
+    list.append(li);
   });
 
   decorateIcons(categoriesContainer);
-
+  block.innerHTML = '';
   block.append(categoriesContainer);
 }

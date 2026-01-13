@@ -1,23 +1,31 @@
   .categories-wrapper {
       max-width: 1385px !important;
   }
-
-.categories-grid {
+  .categories-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
     gap: 32px;
-    padding: 15px 0px;
+    padding: 15px 0;
   }
   
-  .columns-2 {
+  /* NEW: Column support for UL */
+  .categories-list.columns-2 {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .columns-3 {
+  .categories-list.columns-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .columns-4 {
+  
+  .categories-list.columns-4 {
     grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* NEW: LI behaves like grid cell */
+  .category-list-item {
+    display: block;
   }
   
   
@@ -106,17 +114,17 @@
 
   /* Responsive Breakpoints */
   @media (max-width: 1024px) {
-    .categories-grid.columns-4 {
+    .categories-list.columns-4 {
       grid-template-columns: repeat(2, 1fr);
     }
   }
   
   @media (max-width: 768px) {
 
-    .categories-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
+    .categories-list {
+      grid-template-columns: 1fr !important;
+      gap: 20px;
+    }
 
     .categories-grid {
       grid-template-columns: 1fr !important;
