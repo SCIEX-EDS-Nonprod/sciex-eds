@@ -182,7 +182,11 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
   const grid = document.createElement('div');
   grid.className = 'favorites-grid';
 
-    // Types to render: from URL OR all categories
+  if (allowedTypes) {
+    grid.classList.add('single-column');
+  }
+
+  // Types to render: from URL OR all categories
   const typesToRender = allowedTypes || CATEGORY_MAP.map((c) => c.key);
 
   typesToRender.forEach((typeKey) => {
@@ -193,15 +197,12 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
     let paths = [];
 
     if (categoryConfig) {
-        // Known category
       title = categoryConfig.title;
       icon = categoryConfig.icon;
       paths = buckets[typeKey] || [];
     } else {
-      // Unknown category → still include titles
       title = humanizeType(typeKey);
       icon = 'empty';
-
       paths = items
         .filter((item) => item.path.includes(`/${typeKey}/`))
         .map((item) => ({ path: item.path, title: item.title }));
@@ -240,7 +241,6 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
 
       section.appendChild(ul);
     } else {
-        // Empty card
       const empty = document.createElement('div');
       empty.className = 'favorites-empty';
 
@@ -272,8 +272,7 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
   }
 
   decorateIcons(container);
-}
-  
+}  
   
 /**
  * Converts a URL path into a readable title.
