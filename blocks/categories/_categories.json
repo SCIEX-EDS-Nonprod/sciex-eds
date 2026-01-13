@@ -101,6 +101,11 @@
           "name": "description",
           "label": "Description",
           "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "cardLinkUrl",
+          "label": "Card Link URL"
         }
         ]
       }

@@ -1,6 +1,7 @@
-.categories-wrapper {
-    max-width: 1385px !important;
-}
+  .categories-wrapper {
+      max-width: 1385px !important;
+  }
+
 .categories-grid {
     display: grid;
     gap: 32px;
@@ -98,8 +99,11 @@
     bottom: 24px;
     right: 24px;
   }
-  
-  
+
+  .categories-wrapper a:hover {
+    text-decoration :none !important;
+  }
+
   /* Responsive Breakpoints */
   @media (max-width: 1024px) {
     .categories-grid.columns-4 {
