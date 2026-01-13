@@ -30,7 +30,7 @@ export default function decorate(block) {
     const descriptionHTML = cells[2]?.innerHTML.trim();
     const linkHref = cells[3]?.textContent.trim() || '#';
 
-    const card = document.createElement('div');
+    const card = document.createElement('a');
     card.className = 'category-card';
     card.href = linkHref;
 
@@ -74,7 +74,5 @@ export default function decorate(block) {
 
   decorateIcons(categoriesContainer);
 
-  // Replace block DOM
-  block.innerHTML = '';
   block.append(categoriesContainer);
 }
