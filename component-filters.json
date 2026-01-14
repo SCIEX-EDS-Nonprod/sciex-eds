@@ -61,7 +61,10 @@
       "chat-bot",
       "sciex-favorite",
       "cards",
-      "resourcehub-search"
+      "resourcehub-search",
+      "categories",
+      "featured-key-workflows"
+
     ]
   },
   {
@@ -90,6 +93,12 @@
     ]
   },
   {
+    "id": "categories",
+    "components": [
+      "category"
+    ]
+  },
+  {
     "id": "columns",
     "components": [
       "column"
@@ -114,6 +123,12 @@
       "speaker-details",
       "events-details",
       "events-register-form"
+    ]
+  },
+  {
+    "id": "featured-key-workflows",
+    "components": [
+      "workflow-item"
     ]
   },
   {
