@@ -60,7 +60,8 @@
       "sciex-table",
       "chat-bot",
       "sciex-favorite",
-      "categories"
+      "categories",
+      "featured-key-workflows"
     ]
   },
   {
@@ -119,6 +120,12 @@
       "speaker-details",
       "events-details",
       "events-register-form"
+    ]
+  },
+  {
+    "id": "featured-key-workflows",
+    "components": [
+      "workflow-item"
     ]
   },
   {

@@ -1101,6 +1101,37 @@
     ]
   },
   {
+    "id": "featured-key-workflows",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "workflow-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "categoryName",
+        "label": "Category Name"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "enterTheLinks",
+        "label": "Enter the links"
+      }
+    ]
+  },
+  {
     "id": "featured-products",
     "fields": [
       {

@@ -97,7 +97,8 @@
         "sciex-table",
         "chat-bot",
         "sciex-favorite",
-        "categories"
+        "categories",
+        "featured-key-workflows"
       ]
     }
   ]
