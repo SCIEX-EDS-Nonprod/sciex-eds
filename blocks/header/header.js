@@ -12,6 +12,22 @@ const dropdownMap = new WeakMap();
   e.preventDefault();
   login();
 } */
+/** ********
+     *
+     *
+     *
+      function to check if mobile actions can be performed
+     *
+     *
+     *
+     *  */
+function canMobileActions() {
+  const screenWidth = window.innerWidth;
+  if (screenWidth > 1024) {
+    return false;
+  }
+  return true;
+}
 async function getUserDetails() {
   try {
     const response = await fetch('/bin/sciex/currentuserdetails', {
@@ -125,10 +141,33 @@ const showSuggestions = (selectedContentType, showHistoryOnly = false) => {
     suggestionPopup.style.display = 'none';
   }
 };
+function registerDropdown(dropdown) {
+  if (!dropdown) return;
+  const btn = dropdown.querySelector('.dropbtn');
+  const content = dropdown.querySelector('.dropdown-content');
+  if (!btn || !content) return;
+  btn.setAttribute('aria-expanded', 'false');
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = content.style.display === 'block';
+    // close other dropdowns
+    this.querySelectorAll('.dropdown-content').forEach((c) => {
+      if (c !== content) c.style.display = 'none';
+    });
+    content.style.display = isOpen ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  });
+  content.addEventListener('click', (e) => e.stopPropagation());
+}
+
 function createGlobalSearch() {
   const suggestionPopup = document.getElementById('global-suggestion-popup');
   const searchContainer = document.createElement('div');
   searchContainer.className = 'standalone-search-container';
+  // hide by default on mobile; will be toggled by the search button
+  if (canMobileActions()) {
+    // searchContainer.classList.add('tw-hidden');
+  }
 
   const searchBox = document.createElement('input');
   searchBox.type = 'text';
@@ -154,7 +193,7 @@ function createGlobalSearch() {
   dropbtn.innerHTML = `All ${downArrow}`;
 
   const dropdownContent = document.createElement('div');
-  dropdownContent.className = 'dropdown-content';
+  dropdownContent.className = 'dropdown-content search-type-dropdown-content';
   dropdownContent.style.display = 'none';
 
   const menuItems = {
@@ -190,10 +229,11 @@ function createGlobalSearch() {
     const value = menuItems[key];
     const anchorElement = document.createElement('a');
     anchorElement.href = '#';
-    anchorElement.textContent = key;
+    if (key === 'All') anchorElement.className = 'drodown-content-all';
+    anchorElement.textContent = value;
     anchorElement.addEventListener('click', (event) => {
       event.preventDefault();
-      dropbtn.innerHTML = key + downArrow;
+      dropbtn.innerHTML = value + downArrow;
       dropdownContent.style.display = 'none';
       selectedContentType = value;
     });
@@ -206,13 +246,19 @@ function createGlobalSearch() {
   searchContainer.appendChild(tooltip);
   searchContainer.appendChild(dropdown);
 
+  // Register dropdown behaviour (click to toggle, click outside to close)
+  registerDropdown(dropdown);
+
   const searchBtn = document.createElement('button');
   searchBtn.className = 'global-search-btn';
-  const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5677 9.16655C15.5677 12.2961 13.0307 14.8331 9.90104 14.8331C6.77141 14.8331 4.23438 12.2961 4.23438 9.16655C4.23438 6.03702 6.77141 3.5 9.90104 3.5C13.0307 3.5 15.5677 6.03702 15.5677 9.16655ZM14.2483 14.2209C13.0811 15.2257 11.562 15.8331 9.90104 15.8331C6.21914 15.8331 3.23438 12.8484 3.23438 9.16655C3.23438 5.48471 6.21914 2.5 9.90104 2.5C13.5829 2.5 16.5677 5.48471 16.5677 9.16655C16.5677 10.8275 15.9603 12.3466 14.9554 13.5138L17.7546 16.3129L18.1081 16.6664L17.401 17.3735L17.0475 17.02L14.2483 14.2209Z" fill="white"/>
-  </svg>`;
+  const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <path d="M9.50977 2.50879C13.0322 2.68736 15.833 5.60023 15.833 9.16699L15.8242 9.50977C15.7468 11.0363 15.1548 12.4264 14.2197 13.5127L17.374 16.667L16.667 17.374L13.5127 14.2197C12.3457 15.2244 10.8278 15.8329 9.16699 15.833L8.82324 15.8242C5.41465 15.6513 2.68168 12.9183 2.50879 9.50977L2.5 9.16699C2.5 5.48516 5.48509 2.5 9.16699 2.5L9.50977 2.50879ZM9.16699 3.5C6.03736 3.5 3.5 6.03746 3.5 9.16699C3.50026 12.2963 6.03753 14.833 9.16699 14.833C12.2963 14.8328 14.8327 12.2962 14.833 9.16699C14.833 6.03757 12.2965 3.50018 9.16699 3.5Z" fill="#141414"/>
+</svg>`;
   searchBtn.innerHTML = searchIcon;
   searchContainer.appendChild(searchBtn);
+
+  // Prevent clicks inside search container from closing dropdowns
+  searchContainer.addEventListener('click', (e) => e.stopPropagation());
 
   searchBtn.addEventListener('click', (event) => {
     if (searchBox.value.trim() !== '') {
@@ -225,15 +271,16 @@ function createGlobalSearch() {
   });
 
   dropbtn.addEventListener('click', () => {
+    // e.stopPropagation();
     dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-    // event.stopPropagation();
   });
 
-  document.addEventListener('click', (event) => {
-    if (!dropdown.contains(event.target)) {
-      dropdownContent.style.display = 'none';
-    }
-  });
+  // Close any open dropdowns when clicking outside
+  /* document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-content').forEach((c) => {
+      c.style.display = 'none';
+    });
+  }); */
 
   searchBox.addEventListener('input', (event) => {
     const query = event.target.value;
@@ -303,7 +350,7 @@ function createMainHeader(section) {
      *
      *  */
     const mobileMenuToggle = document.createElement('button');
-    mobileMenuToggle.className = 'lg:tw-hidden tw-flex tw-ml-auto tw-items-center menu-close';
+    mobileMenuToggle.className = 'lg:tw-hidden tw-flex tw-items-center menu-close';
     const mobileMenuToggleIcon = document.createElement('span');
     mobileMenuToggleIcon.insertAdjacentHTML(
       'beforeend',
@@ -314,6 +361,23 @@ function createMainHeader(section) {
       '<svg id="mobileMenuCloseIcon" class="tw-hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-di-rand="1739527915887"><path d="M4 20L19.9998 4.0002" stroke="white" stroke-width="1.2"></path><path d="M4 4L19.9998 19.9998" stroke="white" stroke-width="1.2"></path></svg>',
     );
     mobileMenuToggle.id = 'toggleMobileMenu';
+
+    const mobileSearch = document.createElement('button');
+    mobileSearch.className = 'lg:tw-hidden tw-flex tw-items-center search-close tw-ml-auto tw-mr-16';
+    mobileSearch.id = 'togglemobileSearch';
+    const mobileSearchIcon = document.createElement('span');
+    mobileSearchIcon.insertAdjacentHTML(
+      'beforeend',
+      `
+      <svg id="mobileSearchOpenIcon" class="tw-text-white" width="24" height="24" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg" data-di-res-id="1cb1ec8d-d09108db" data-di-rand="1768284978909">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M18.0007 11C18.0007 14.866 14.8667 18 11.0007 18C7.13474 18 4.00073 14.866 4.00073 11C4.00073 7.13401 7.13474 4 11.0007 4C14.8667 4 18.0007 7.13401 18.0007 11ZM16.293 16.9994C14.8827 18.2445 13.0299 19 11.0007 19C6.58245 19 3.00073 15.4183 3.00073 11C3.00073 6.58172 6.58245 3 11.0007 3C15.419 3 19.0007 6.58172 19.0007 11C19.0007 13.0292 18.2452 14.882 17.0001 16.2923L20.3543 19.6464L20.7078 20L20.0007 20.7071L19.6472 20.3536L16.293 16.9994Z" fill="#ffffff"></path>
+                    </svg>`,
+    );
+    mobileSearchIcon.insertAdjacentHTML(
+      'beforeend',
+      '<svg id="mobileSearchCloseIcon" class="tw-hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-di-rand="1739527915887"><path d="M4 20L19.9998 4.0002" stroke="white" stroke-width="1.2"></path><path d="M4 4L19.9998 19.9998" stroke="white" stroke-width="1.2"></path></svg>',
+    );
+    mobileSearch.appendChild(mobileSearchIcon);
 
     /** ********
      *
@@ -433,9 +497,47 @@ function createMainHeader(section) {
         });
       }
     }
+    function handleMobileSearch() {
+      const headerWrapper = document.querySelector('.header-wrapper');
+      if (headerWrapper) {
+        headerWrapper.classList.toggle('search-open');
+      }
+      document.body.classList.toggle('search-open');
+      const mobileSearchOpenIcon = document.getElementById('mobileSearchOpenIcon');
+      const mobileSearchCloseIcon = document.getElementById('mobileSearchCloseIcon');
+      const standaloneSearchContainer = document.querySelector('.standalone-search-container');
+      if (mobileSearchOpenIcon && mobileSearchCloseIcon) {
+        if (mobileSearchOpenIcon.classList.contains('tw-hidden')) {
+          mobileSearchOpenIcon.classList.remove('tw-hidden');
+        } else {
+          mobileSearchOpenIcon.classList.add('tw-hidden');
+        }
+        if (mobileSearchCloseIcon.classList.contains('tw-hidden')) {
+          mobileSearchCloseIcon.classList.remove('tw-hidden');
+        } else {
+          mobileSearchCloseIcon.classList.add('tw-hidden');
+        }
+      }
+      if (standaloneSearchContainer) {
+        if (standaloneSearchContainer.classList.contains('tw-hidden')) {
+          standaloneSearchContainer.classList.remove('tw-hidden');
+        } else {
+          // standaloneSearchContainer.classList.add('tw-hidden');
+        }
+      }
+      /* const dropbtn = document.getElementsByClassName('dropbtn');
+       const dropdownContent = document.getElementsByClassName('dropdown-content');
+      console.log('mobile search toggled'+dropbtn);
 
+  dropbtn.addEventListener('click', () => {
+   console.log('dropdown clicked');
+  }); */
+      // dropbtn.item(0).setAttribute('aria-expanded', 'true');
+      // dropdownContent.item(0).style.display = 'block';
+    }
     // add click event to handle mobile menu button actions
     mobileMenuToggle.addEventListener('click', handleMobileMenu);
+    mobileSearch.addEventListener('click', handleMobileSearch);
 
     if (index === 0) {
       myprofile = anchorTag.text;
@@ -450,13 +552,15 @@ function createMainHeader(section) {
       }
       containerDiv.appendChild(anchorTag);
       mobileMenuToggle.appendChild(mobileMenuToggleIcon);
+      containerDiv.appendChild(mobileSearch);
       containerDiv.appendChild(mobileMenuToggle);
+
       const searchContainer = createGlobalSearch();
       containerDiv.appendChild(searchContainer);
     } else if (headerDiv.children.length !== index + 1) {
       const liTag = li({
         class:
-          'tw-ml-16 tw-flex tw-items-center hover:tw-text-white tw-transition-colors',
+          'tw-flex tw-items-center hover:tw-text-white tw-transition-colors', // tw-ml-16
       });
       if (anchorTag.text === 'Login' || anchorTag.text === 'My account') {
         // anchorTag.addEventListener('click', handleSignInClick);
@@ -474,12 +578,10 @@ function createMainHeader(section) {
         dropbtn.innerHTML = `${downArrow}`;
 
         const dropdownContent = document.createElement('div');
-        dropdownContent.className = 'dropdown-content';
-        // dropdownContent.style.display = 'none';
-        dropbtn.addEventListener('click', () => {
-          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-          // event.stopPropagation();
-        });
+        dropdownContent.className = 'dropdown-content account-dropdown-content';
+        dropdownContent.style.display = 'none';
+        // register dropdown toggle behaviour
+        registerDropdown(dropdown);
 
         const menuItems = {
           Button: 'Button',
@@ -565,10 +667,7 @@ function createMainHeader(section) {
               } else if (anchorTag.text === 'My account') {
                 (async function () {
                   const userData = await getUserDetails();
-                  console.log('User Data 123 :', userData);
                   if (userData && userData.loggedIn) {
-                    console.log(`User already logged in: ${userData.username}`);
-                    console.log(`User already logged in: ${userData.familyName}`);
                     anchorElement.innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
                   }
                 }());
@@ -582,7 +681,14 @@ function createMainHeader(section) {
           }
           dropdownContent.appendChild(anchorElement);
         });
-
+        dropbtn.addEventListener('click', () => {
+          if (dropdownContent.style.display === 'block') {
+            dropdownContent.style.display = 'none';
+          } else {
+            dropdownContent.style.display = 'block';
+          }
+          // dropdownContent.style.display = 'block';
+        });
         dropdown.appendChild(dropbtn);
         dropdown.appendChild(dropdownContent);
         // store dropdown reference keyed by anchor
@@ -753,6 +859,7 @@ function handleBackToMenu() {
      *  */
 function showBackToMenuButton() {
   const backToMenu = document.querySelector('#backToMenu');
+
   if (backToMenu) {
     backToMenu.classList.remove('tw-hidden');
   }
@@ -762,22 +869,6 @@ function showBackToMenuButton() {
   }
 }
 
-/** ********
-     *
-     *
-     *
-      function to check if mobile actions can be performed
-     *
-     *
-     *
-     *  */
-function canMobileActions() {
-  const screenWidth = window.innerWidth;
-  if (screenWidth > 1024) {
-    return false;
-  }
-  return true;
-}
 /** ********
      *
      *
@@ -1624,7 +1715,6 @@ function createOverlay(nav) {
  * Processes and appends the sections to the header block
  */
 function processHtml(block, main) {
-  console.log(`Processing header HTML${block.outerHTML}`);
   const parentDiv = div({ class: 'tw' });
   const nav = document.createElement('nav');
   nav.id = 'mega-menu';
@@ -1709,16 +1799,12 @@ export default async function decorate(block) {
 
   // Conditionally shwoing the login/logout links
   const userData = await getUserDetails();
-  console.log('User Data:', userData);
   if (userData && userData.loggedIn) {
     const eloquaData = {
       status: userData.loggedIn,
       email: userData.email,
       key: userData.userKey,
     };
-    console.log('Family Name:', userData.familyName);
-    console.log('Given Name:', userData.givenName);
-    console.log('signInNowLink Element:', document.getElementById('signInNowLink'));
     sessionStorage.setItem('loggedin-status', userData.loggedIn);
     sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
     // document.getElementById('view-profile').style.display = '';
@@ -1727,17 +1813,14 @@ export default async function decorate(block) {
     document.getElementById('login').style.display = 'none';
     document.getElementById('my-account').style.display = '';
     const signInNowEl = document.getElementById('signInNowLink');
-    console.log('signInNowEl:', signInNowEl);
     if (signInNowEl) {
       const family = userData.familyName || '';
       const given = userData.givenName || '';
       const displayName = `${family} ${given}`.trim();
-      console.log('Display Name:', displayName);
       const nameSpan = document.createElement('span');
       nameSpan.className = 'username-span';
       nameSpan.textContent = displayName;
       signInNowEl.textContent = '';
-      console.log('Appending nameSpan to signInNowEl:', nameSpan);
       signInNowEl.appendChild(nameSpan);
     }
   } else {

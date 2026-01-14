@@ -403,6 +403,10 @@ export default async function decorate(block) {
       const params = new URLSearchParams(pageUrl.search);
       query = params.get('term');
       const contentType = params.get('contentType');
+      const facetId = params.get('facetId');
+      console.log('facetId>>', facetId);
+      const value = params.get('value');
+      console.log('value>>', value);
       const { updateQuery } = loadQueryActions(searchEngine);
       const { toggleSelectFacetValue } = loadFacetSetActions(searchEngine);
       searchEngine.dispatch(updateQuery({
@@ -413,6 +417,12 @@ export default async function decorate(block) {
           facetId: 'contenttype',
           selection: { value: contentType, state: 'selected' },
         }));
+        if (facetId) {
+          searchEngine.dispatch(toggleSelectFacetValue({
+            facetId,
+            selection: { value, state: 'selected' },
+          }));
+        }
         contentTypeFacetController.showMoreValues();
       }
       const enableSiteInterceptScript = getMetadata('enablesiteinterceptscript');
