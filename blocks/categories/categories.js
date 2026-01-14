@@ -73,6 +73,6 @@ export default function decorate(block) {
   });
 
   decorateIcons(categoriesContainer);
-
+  block.innerHTML = '';
   block.append(categoriesContainer);
 }
