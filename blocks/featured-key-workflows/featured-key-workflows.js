@@ -1,4 +1,6 @@
-import { moveInstrumentation } from "../../scripts/scripts.js";
+import { } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default function decorate(block) {
   const featuredKeyWorkflowsContainer = document.createElement('div');
   featuredKeyWorkflowsContainer.className = 'featured-key-workflows-container';
@@ -6,7 +8,7 @@ export default function decorate(block) {
   const rows = [...block.children];
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
-  console.log('block', block)
+  console.log('block', block);
 
   if (headingText) {
     const heading = document.createElement('h2');
@@ -54,7 +56,7 @@ export default function decorate(block) {
     card.appendChild(linksWrapper);
     grid.appendChild(card);
   }
-  featuredKeyWorkflowsContainer.appendChild(grid)
+  featuredKeyWorkflowsContainer.appendChild(grid);
   block.innerHTML = '';
   block.appendChild(featuredKeyWorkflowsContainer);
 }
