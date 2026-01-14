@@ -132,7 +132,7 @@ function createGlobalSearch() {
 
   const searchBox = document.createElement('input');
   searchBox.type = 'text';
-  searchBox.placeholder = 'Search within max 200 characters';
+  searchBox.placeholder = 'Search';
   searchBox.className = 'standalone-search-box';
   searchBox.id = 'standalone-search-box';
   searchBox.maxLength = 200;
@@ -287,6 +287,8 @@ function createMainHeader(section) {
     class: 'tw-list-none tw-flex tw-items-stretch tw-text-sm tw-h-full',
   });
   const headerDiv = section.querySelector('.header');
+  let myprofile = '';
+  let myFavoriteResources = '';
   Array.from(headerDiv.children).forEach((child, index) => {
     const picture = child.querySelector('picture');
     const anchorTag = child.querySelector('a');
@@ -434,11 +436,18 @@ function createMainHeader(section) {
 
     // add click event to handle mobile menu button actions
     mobileMenuToggle.addEventListener('click', handleMobileMenu);
+
     if (index === 0) {
+      myprofile = anchorTag.text;
+    } else if (index === 1) {
+      myFavoriteResources = anchorTag.text;
+    } else if (index === 2) {
       anchorTag.text = '';
       anchorTag.className = 'tw-py-16';
       // anchorTag.target = '_blank';
-      anchorTag.appendChild(picture);
+      if (picture != null) {
+        anchorTag.appendChild(picture);
+      }
       containerDiv.appendChild(anchorTag);
       mobileMenuToggle.appendChild(mobileMenuToggleIcon);
       containerDiv.appendChild(mobileMenuToggle);
@@ -516,6 +525,7 @@ function createMainHeader(section) {
                 </defs>
               </svg>`;
               anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.href = myprofile;
               anchorElement.classList.add('myprofile-div');
             } else if (key === 'My favorite resources') {
               const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -529,6 +539,7 @@ function createMainHeader(section) {
                 </defs>
               </svg>`;
               anchorElement.innerHTML = `${icon} ${key}`;
+              anchorElement.href = myFavoriteResources;
               anchorElement.classList.add('myprofile-div');
             } else if (key === 'Logout' && anchorTag.text === 'My account') {
               const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -547,13 +558,22 @@ function createMainHeader(section) {
               anchorElement.classList.add('myprofile-div');
               anchorElement.href = 'https://devcs.sciex.com/bin/sciex/logout';
             } else if (key === 'Already have an account?Sign In Now') {
-              anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
-              anchorElement.innerHTML = `${value}`;
-              // anchorElement.classList.add('myprofile-div');
-              const userData = getUserDetails();
-              if (userData && userData.loggedIn) {
-                console.log(`User already logged in${userData.username}`);
+              anchorElement.id = 'signInNowLink';
+              if (anchorTag.text === 'Login') {
+                anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
+                anchorElement.innerHTML = `${value}`;
+              } else if (anchorTag.text === 'My account') {
+                (async function () {
+                  const userData = await getUserDetails();
+                  console.log('User Data 123 :', userData);
+                  if (userData && userData.loggedIn) {
+                    console.log(`User already logged in: ${userData.username}`);
+                    console.log(`User already logged in: ${userData.familyName}`);
+                    anchorElement.innerHTML = `<span class="username-span">${userData.familyName} ${userData.givenName}</span>`;
+                  }
+                }());
               }
+              // anchorElement.classList.add('myprofile-div');
             }
             // close dropdown on item click
             anchorElement.addEventListener('click', () => {
@@ -1604,6 +1624,7 @@ function createOverlay(nav) {
  * Processes and appends the sections to the header block
  */
 function processHtml(block, main) {
+  console.log(`Processing header HTML${block.outerHTML}`);
   const parentDiv = div({ class: 'tw' });
   const nav = document.createElement('nav');
   nav.id = 'mega-menu';
@@ -1688,12 +1709,16 @@ export default async function decorate(block) {
 
   // Conditionally shwoing the login/logout links
   const userData = await getUserDetails();
+  console.log('User Data:', userData);
   if (userData && userData.loggedIn) {
     const eloquaData = {
       status: userData.loggedIn,
       email: userData.email,
       key: userData.userKey,
     };
+    console.log('Family Name:', userData.familyName);
+    console.log('Given Name:', userData.givenName);
+    console.log('signInNowLink Element:', document.getElementById('signInNowLink'));
     sessionStorage.setItem('loggedin-status', userData.loggedIn);
     sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
     // document.getElementById('view-profile').style.display = '';
@@ -1701,6 +1726,20 @@ export default async function decorate(block) {
     // document.getElementById('register').style.display = 'none';
     document.getElementById('login').style.display = 'none';
     document.getElementById('my-account').style.display = '';
+    const signInNowEl = document.getElementById('signInNowLink');
+    console.log('signInNowEl:', signInNowEl);
+    if (signInNowEl) {
+      const family = userData.familyName || '';
+      const given = userData.givenName || '';
+      const displayName = `${family} ${given}`.trim();
+      console.log('Display Name:', displayName);
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'username-span';
+      nameSpan.textContent = displayName;
+      signInNowEl.textContent = '';
+      console.log('Appending nameSpan to signInNowEl:', nameSpan);
+      signInNowEl.appendChild(nameSpan);
+    }
   } else {
     // document.getElementById('view-profile').style.display = 'none';
     // document.getElementById('logout').style.display = 'none';
