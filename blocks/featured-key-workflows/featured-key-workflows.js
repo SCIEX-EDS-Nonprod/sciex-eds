@@ -12,9 +12,8 @@ export default function decorate(block) {
 
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
-
   
-  for (let i = 1; i < rows.length; i++) {
+ for (let i = 1; i < rows.length; i += 1) {
     const row = rows[i];
     const columns = row.children;
 
@@ -50,7 +49,7 @@ export default function decorate(block) {
     card.appendChild(linksWrapper);
     grid.appendChild(card);
   }
-  
+
   block.innerHTML = '';
   block.appendChild(grid);
 }
