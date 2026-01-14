@@ -1,14 +1,15 @@
-import { } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const featuredKeyWorkflowsContainer = document.createElement('div');
   featuredKeyWorkflowsContainer.className = 'featured-key-workflows-container';
+
   moveInstrumentation(block, featuredKeyWorkflowsContainer);
+
   const rows = [...block.children];
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
-  console.log('block', block);
 
   if (headingText) {
     const heading = document.createElement('h2');
@@ -29,16 +30,20 @@ export default function decorate(block) {
 
     // Icon
     const picture = columns[1].querySelector('picture');
-    const icon = document.createElement('div');
-    icon.className = 'workflow-card-icon';
-    icon.appendChild(picture);
-    card.appendChild(icon);
+    if (picture) {
+      const icon = document.createElement('div');
+      icon.className = 'workflow-card-icon';
+      icon.appendChild(picture);
+      card.appendChild(icon);
+    }
 
     // Title
     const title = columns[0].querySelector('p');
-    const h3 = document.createElement('h3');
-    h3.textContent = title.textContent;
-    card.appendChild(h3);
+    if (title) {
+      const h3 = document.createElement('h3');
+      h3.textContent = title.textContent;
+      card.appendChild(h3);
+    }
 
     // Links
     const linksWrapper = document.createElement('div');
@@ -56,7 +61,12 @@ export default function decorate(block) {
     card.appendChild(linksWrapper);
     grid.appendChild(card);
   }
+
   featuredKeyWorkflowsContainer.appendChild(grid);
+
+  // ✅ SAME AS CATEGORIES
+  decorateIcons(featuredKeyWorkflowsContainer);
+
   block.innerHTML = '';
   block.appendChild(featuredKeyWorkflowsContainer);
 }
