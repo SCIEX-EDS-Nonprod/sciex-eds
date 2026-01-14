@@ -73,7 +73,7 @@ export default function decorate(block) {
   }
 
   // Clear block and append heading + grid
-  block.innerHTML = '';
+  block.textContent = '';
   block.appendChild(headingDiv);
   block.appendChild(grid);
 }
