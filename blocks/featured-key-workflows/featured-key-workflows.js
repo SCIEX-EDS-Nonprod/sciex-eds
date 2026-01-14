@@ -1,12 +1,9 @@
+import { moveInstrumentation } from "../../scripts/scripts";
+
 export default function decorate(block) {
-  const rows = [...block.children];
-  
-
-  const grid = document.createElement('div');
-  grid.className = 'featured-key-workflows-grid';
-
- 
-
+const categoriesContainer = document.createElement('div');
+  categoriesContainer.className = 'categories-container-text';
+  moveInstrumentation(block, categoriesContainer);  
   block.innerHTML = '';
-  block.appendChild(grid);
+  block.appendChild(categoriesContainer);
 }
