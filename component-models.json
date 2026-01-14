@@ -666,6 +666,81 @@
     ]
   },
   {
+    "id": "categories",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "categoriesId",
+        "label": "Categories Id",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "arrowIcon",
+        "label": "Arrow Icon",
+        "multi": false
+      },
+      {
+        "component": "select",
+        "name": "grid",
+        "label": "Select how many categories in a row",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "4"
+          },
+          {
+            "name": "3-columns",
+            "value": "3"
+          },
+          {
+            "name": "2-columns",
+            "value": "2"
+          },
+          {
+            "name": "1-columns",
+            "value": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "category",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "icon",
+        "label": "icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "name": "cardLinkUrl",
+        "label": "Card Link URL"
+      }
+    ]
+  },
+  {
     "id": "chat-bot",
     "fields": [
       {
@@ -1022,6 +1097,37 @@
         "value": "",
         "label": "Coveo Search Engine Access Token",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "featured-key-workflows",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "workflow-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "categoryName",
+        "label": "Category Name"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "enterTheLinks",
+        "label": "Enter the links"
       }
     ]
   },
@@ -2009,20 +2115,6 @@
         "component": "aem-content",
         "name": "createAccountUrl",
         "label": "Create Account URL"
-      },
-      {
-        "component": "text",
-        "name": "userApi",
-        "value": "",
-        "label": "USER API End Point",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "favoriteResourceApiEndPoint",
-        "value": "",
-        "label": "FAVORITES Resource API Endpoint",
-        "valueType": "string"
       },
       {
         "component": "text",
