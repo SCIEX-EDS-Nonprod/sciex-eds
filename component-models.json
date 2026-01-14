@@ -1106,7 +1106,9 @@
       {
         "component": "text",
         "name": "title",
-        "label": "Title"
+        "label": "Title",
+        "valueType": "string",
+        "value": ""
       }
     ]
   },
@@ -1116,10 +1118,13 @@
       {
         "component": "text",
         "name": "categoryName",
-        "label": "Category Name"
+        "label": "Category Name",
+        "valueType": "string",
+        "value": ""
       },
       {
         "component": "reference",
+        "valueType": "string",
         "name": "image",
         "label": "Image"
       },
@@ -1127,7 +1132,8 @@
         "component": "richtext",
         "valueType": "string",
         "name": "enterTheLinks",
-        "label": "Enter the links"
+        "label": "Enter the links",
+        "value": ""
       }
     ]
   },
