@@ -1,0 +1,110 @@
+.featured-key-workflows-wrapper {
+  margin-top: 64px !important;
+  margin-bottom: 64px !important
+}
+
+.featured-key-workflows-title {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 52px;
+  margin-bottom: 40px;
+}
+
+.featured-key-workflows-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #ECECEC;
+  border-left: 1px solid #ECECEC;
+}
+
+.workflow-card {
+  padding: 30px;
+  border-right: 1px solid #ECECEC;
+  border-bottom: 1px solid #ECECEC;
+}
+
+.workflow-card h3 {
+  color: #000;
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 32px;
+  margin-bottom: 16px;
+  height: 60px;
+}
+
+.workflow-card-icon img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 24px;
+}
+
+.workflow-card-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workflow-card-link {
+  color: var(--Blue-700, #0068FA) !important;
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 24px;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+
+.workflow-card-link::after {
+  content: '';
+  display: inline-block;
+  background-image: url("/icons/right-arrow.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+@media (max-width: 1024px) {
+  .featured-key-workflows-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featured-key-workflows-wrapper {
+    margin-top: 32px !important;
+    margin-bottom: 32px !important
+  }
+}
+
+@media (max-width: 767px) {
+  .featured-key-workflows-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-key-workflows-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .workflow-card h3 {
+    font-size: 16px;
+      height: auto;
+
+  }
+
+  .workflow-card-link {
+    font-size: 12px;
+  }
+
+  .workflow-card-link::after {
+    width: 12px;
+    height: 12px;
+  }
+}
