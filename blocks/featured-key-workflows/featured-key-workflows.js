@@ -1,11 +1,8 @@
+import {} from '../../scripts/aem.js';
+import { } from '../../scripts/dom-builder.js';
+
 export default function decorate(block) {
   const rows = [...block.children];
-
-  // 🔹 Create outer container
-  const container = document.createElement('div');
-  container.className = 'featured-workflow-container';
-
-  /* ---------------- Heading ---------------- */
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
@@ -13,10 +10,9 @@ export default function decorate(block) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
     heading.textContent = headingText;
-    container.appendChild(heading);
+    block.before(heading);
   }
 
-  /* ---------------- Grid ---------------- */
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
@@ -29,20 +25,16 @@ export default function decorate(block) {
 
     // Icon
     const picture = columns[1].querySelector('picture');
-    if (picture) {
-      const icon = document.createElement('div');
-      icon.className = 'workflow-card-icon';
-      icon.appendChild(picture);
-      card.appendChild(icon);
-    }
+    const icon = document.createElement('div');
+    icon.className = 'workflow-card-icon';
+    icon.appendChild(picture);
+    card.appendChild(icon);
 
     // Title
     const title = columns[0].querySelector('p');
-    if (title) {
-      const h3 = document.createElement('h3');
-      h3.textContent = title.textContent;
-      card.appendChild(h3);
-    }
+    const h3 = document.createElement('h3');
+    h3.textContent = title.textContent;
+    card.appendChild(h3);
 
     // Links
     const linksWrapper = document.createElement('div');
@@ -61,9 +53,6 @@ export default function decorate(block) {
     grid.appendChild(card);
   }
 
-  container.appendChild(grid);
-
-  /* ---------------- Replace block ---------------- */
   block.innerHTML = '';
-  block.appendChild(container);
+  block.appendChild(grid);
 }
