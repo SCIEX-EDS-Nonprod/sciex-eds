@@ -1,4 +1,4 @@
-import { moveInstrumentation } from "../../scripts/scripts";
+import { moveInstrumentation } from "../../scripts/scripts.js";
 export default function decorate(block) {
   const featuredKeyWorkflowsContainer = document.createElement('div');
   featuredKeyWorkflowsContainer.className = 'featured-key-workflows-container';
