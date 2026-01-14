@@ -1,13 +1,11 @@
-import { decorateIcons } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
-
 export default function decorate(block) {
-  const featuredKeyWorkflowsContainer = document.createElement('div');
-  featuredKeyWorkflowsContainer.className = 'featured-key-workflows-container';
-
-  moveInstrumentation(block, featuredKeyWorkflowsContainer);
-
   const rows = [...block.children];
+
+  // 🔹 Create outer container
+  const container = document.createElement('div');
+  container.className = 'featured-workflow-container';
+
+  /* ---------------- Heading ---------------- */
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
@@ -15,9 +13,10 @@ export default function decorate(block) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
     heading.textContent = headingText;
-    block.before(heading);
+    container.appendChild(heading);
   }
 
+  /* ---------------- Grid ---------------- */
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
@@ -62,11 +61,9 @@ export default function decorate(block) {
     grid.appendChild(card);
   }
 
-  featuredKeyWorkflowsContainer.appendChild(grid);
+  container.appendChild(grid);
 
-  // ✅ SAME AS CATEGORIES
-  decorateIcons(featuredKeyWorkflowsContainer);
-
+  /* ---------------- Replace block ---------------- */
   block.innerHTML = '';
-  block.appendChild(featuredKeyWorkflowsContainer);
+  block.appendChild(container);
 }
