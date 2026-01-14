@@ -1,4 +1,4 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
+import { moveInstrumentation } from "../../scripts/scripts";
 export default function decorate(block) {
   const featuredKeyWorkflowsContainer = document.createElement('div');
   featuredKeyWorkflowsContainer.className = 'featured-key-workflows-container';
@@ -6,6 +6,7 @@ export default function decorate(block) {
   const rows = [...block.children];
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
+  console.log('block', block)
 
   if (headingText) {
     const heading = document.createElement('h2');
@@ -16,13 +17,13 @@ export default function decorate(block) {
 
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
-  
- for (let i = 1; i < rows.length; i += 1) {
+
+  for (let i = 1; i < rows.length; i += 1) {
     const row = rows[i];
     const columns = row.children;
 
     const card = document.createElement('div');
-    card.className = 'workflow-card';   
+    card.className = 'workflow-card';
 
     // Icon
     const picture = columns[1].querySelector('picture');
