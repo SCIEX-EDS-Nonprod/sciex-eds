@@ -1,15 +1,19 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Heading
+  // Create heading div inside block
+  const headingDiv = document.createElement('div');
+  headingDiv.className = 'featured-key-workflows-heading';
+
   const headingText = rows[0]?.children[0]?.children[0]?.textContent.trim();
   if (headingText) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
     heading.textContent = headingText;
-    block.before(heading);
+    headingDiv.appendChild(heading);
   }
 
+  // Grid container
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
@@ -46,16 +50,13 @@ export default function decorate(block) {
       paragraphs.forEach((p) => {
         const anchor = p.children[0];
 
-        // Link inside <p>
         if (anchor && anchor.tagName === 'A') {
           const link = document.createElement('a');
           link.href = anchor.href;
           link.textContent = anchor.textContent.trim();
           link.className = 'workflow-card-link';
           linksWrapper.appendChild(link);
-        } 
-        // Plain text
-        else {
+        } else {
           const text = p.textContent.trim();
           if (text) {
             const span = document.createElement('span');
@@ -71,7 +72,8 @@ export default function decorate(block) {
     grid.appendChild(card);
   }
 
-  // Replace block content with grid
+  // Clear block and append heading + grid
   block.innerHTML = '';
+  block.appendChild(headingDiv);
   block.appendChild(grid);
 }
