@@ -1,6 +1,6 @@
 import {} from '../../scripts/aem.js';
-import { } from '../../scripts/dom-builder.js';
-
+import {} from '../../scripts/scripts.js';
+import {} from '../../scripts/dom-builder.js';
 export default function decorate(block) {
   const rows = [...block.children];
   const headingRow = rows[0];
