@@ -1,83 +1,86 @@
+/**
+ * Decorates the featured-key-workflows block
+ * @param {HTMLElement} block - The block element
+ */
 export default function decorate(block) {
-  console.log('featured-key-workflows block:', block);
+  // Add wrapper class
+  block.classList.add('featured-key-workflows-wrapper');
 
-  const children = [...block.children];
+  // Get title from first row
+  const titleRow = block.children[0];
+  const title = titleRow?.textContent?.trim();
 
-  /* ----------------------------
-   * Wrapper
-   * ---------------------------- */
-  const wrapper = document.createElement('div');
-  wrapper.className = 'featured-key-workflows-wrapper';
+  // Create container
+  const container = document.createElement('div');
 
-  /* ----------------------------
-   * Title (first child only)
-   * ---------------------------- */
-  const titleText = children[0]
-    ?.querySelector('p')
-    ?.textContent
-    ?.trim();
-
-  if (titleText) {
-    const h2 = document.createElement('h2');
-    h2.className = 'featured-key-workflows-title';
-    h2.textContent = titleText;
-    wrapper.appendChild(h2);
+  // Add title if exists
+  if (title) {
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = title;
+    titleElement.classList.add('featured-key-workflows-title');
+    container.appendChild(titleElement);
   }
 
-  /* ----------------------------
-   * Grid
-   * ---------------------------- */
+  // Create grid for workflow cards
   const grid = document.createElement('div');
-  grid.className = 'featured-key-workflows-grid';
+  grid.classList.add('featured-key-workflows-grid');
 
-  /* ----------------------------
-   * Cards (remaining children)
-   * ---------------------------- */
-  children.slice(1).forEach((item, index) => {
-    console.log(`item ${index}`, item);
+  // Process each workflow item (skip first row which is title)
+  const rows = Array.from(block.children).slice(1);
+  rows.forEach((row) => {
+    const cells = Array.from(row.children);
+    
+    // Extract data from cells
+    const iconCell = cells[0];
+    const titleCell = cells[1];
+    const descCell = cells[2];
+    const linksCell = cells[3];
 
-    const cols = [...item.children];
-    if (cols.length < 3) return;
-
+    // Create card
     const card = document.createElement('div');
-    card.className = 'workflow-card';
+    card.classList.add('workflow-card');
 
-    /* Category name */
-    const title = cols[0].querySelector('p')?.textContent?.trim();
-    if (title) {
-      const h3 = document.createElement('h3');
-      h3.textContent = title;
-      card.appendChild(h3);
+    // Add icon
+    if (iconCell) {
+      const iconDiv = document.createElement('div');
+      iconDiv.classList.add('workflow-card-icon');
+      iconDiv.innerHTML = iconCell.innerHTML;
+      card.appendChild(iconDiv);
     }
 
-    /* Image */
-    const picture = cols[1].querySelector('picture');
-    if (picture) {
-      const icon = document.createElement('div');
-      icon.className = 'workflow-card-icon';
-      icon.appendChild(picture);
-      card.appendChild(icon);
+    // Add title
+    if (titleCell) {
+      const cardTitle = document.createElement('h3');
+      cardTitle.textContent = titleCell.textContent?.trim();
+      card.appendChild(cardTitle);
     }
 
-    /* Links */
-    const linksWrap = document.createElement('div');
-    linksWrap.className = 'workflow-card-links';
+    // Add description
+    if (descCell) {
+      const descPara = document.createElement('p');
+      descPara.textContent = descCell.textContent?.trim();
+      card.appendChild(descPara);
+    }
 
-    cols[2].querySelectorAll('a').forEach((a) => {
-      a.classList.remove('button');
-      a.classList.add('workflow-card-link');
-      linksWrap.appendChild(a);
-    });
+    // Add links
+    if (linksCell) {
+      const linksDiv = document.createElement('div');
+      linksDiv.classList.add('workflow-card-links');
+      const links = linksCell.querySelectorAll('a');
+      links.forEach((link) => {
+        const linkElement = document.createElement('a');
+        linkElement.href = link.href;
+        linkElement.textContent = link.textContent?.trim();
+        linkElement.classList.add('workflow-card-link');
+        linksDiv.appendChild(linkElement);
+      });
+      card.appendChild(linksDiv);
+    }
 
-    card.appendChild(linksWrap);
     grid.appendChild(card);
   });
 
-  wrapper.appendChild(grid);
-
-  /* ----------------------------
-   * Replace block
-   * ---------------------------- */
-  block.innerHTML = '';
-  block.appendChild(wrapper);
+  container.appendChild(grid);
+  block.textContent = '';
+  block.appendChild(container);
 }
