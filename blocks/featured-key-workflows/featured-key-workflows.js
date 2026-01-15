@@ -1,66 +1,55 @@
-import { decorateIcons } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
-
 export default function decorate(block) {
-  const workflowsContainer = document.createElement('div');
-  workflowsContainer.className = 'featured-key-workflows-container';
-  moveInstrumentation(block, workflowsContainer);
-
   const rows = [...block.children];
 
-  // Create grid for workflow cards
+  /* -------- Heading -------- */
+  const headingHTML = rows[0]?.querySelector('p')?.innerHTML;
+
+  if (headingHTML) {
+    const heading = document.createElement('h2');
+    heading.className = 'featured-key-workflows-title';
+    heading.innerHTML = headingHTML; // ✅ innerHTML
+    block.before(heading);
+  }
+
+  /* -------- Grid -------- */
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
-  workflowsContainer.append(grid);
 
-  // Parse workflow items
-  rows.forEach((row) => {
-    const cells = [...row.children];
-    if (cells.length < 2) return;
-
-    // Extract data from cells:
-    // 0: category name, 1: image, 2: links
-    const categoryNameHTML = cells[0]?.innerHTML.trim();
-    const imageHTML = cells[1]?.innerHTML.trim();
-    const linksHTML = cells[2]?.innerHTML.trim();
+  for (let i = 1; i < rows.length; i += 1) {
+    const columns = rows[i].children;
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
-    moveInstrumentation(row, card);
 
-    // ICON/IMAGE
-    if (imageHTML) {
-      const iconBox = document.createElement('div');
-      iconBox.className = 'workflow-card-icon';
-      iconBox.innerHTML = imageHTML;
-      card.append(iconBox);
-    }
+    /* Icon */
+    const icon = document.createElement('div');
+    icon.className = 'workflow-card-icon';
+    icon.innerHTML = columns[1].querySelector('picture')?.outerHTML || '';
+    card.appendChild(icon);
 
-    // CONTENT WRAPPER
-    const content = document.createElement('div');
-    content.className = 'workflow-card-content';
+    /* Title */
+    const h3 = document.createElement('h3');
+    h3.innerHTML = columns[0].querySelector('p')?.innerHTML || '';
+    card.appendChild(h3);
 
-    // TITLE
-    if (categoryNameHTML) {
-      const heading = document.createElement('h3');
-      heading.className = 'workflow-card-title';
-      heading.innerHTML = categoryNameHTML;
-      content.append(heading);
-    }
+    /* Links */
+    const linksWrapper = document.createElement('div');
+    linksWrapper.className = 'workflow-card-links';
 
-    // LINKS
-    if (linksHTML) {
-      const linksDiv = document.createElement('div');
-      linksDiv.className = 'workflow-card-links';
-      linksDiv.innerHTML = linksHTML;
-      content.append(linksDiv);
-    }
+    const links = columns[2].querySelectorAll('a');
+    links.forEach((a) => {
+      const link = document.createElement('a');
+      link.href = a.href;
+      link.className = 'workflow-card-link';
+      link.innerHTML = a.innerHTML; // ✅ innerHTML
+      linksWrapper.appendChild(link);
+    });
 
-    card.append(content);
-    grid.append(card);
-  });
+    card.appendChild(linksWrapper);
+    grid.appendChild(card);
+  }
 
-  decorateIcons(workflowsContainer);
+  /* -------- Replace block -------- */
   block.innerHTML = '';
-  block.append(workflowsContainer);
+  block.appendChild(grid);
 }
