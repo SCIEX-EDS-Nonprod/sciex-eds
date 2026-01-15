@@ -14,8 +14,6 @@ export default function decorate(block) {
   const wrapper = document.createElement('div');
   wrapper.className = 'featured-key-workflows-wrapper';
 
-  moveInstrumentation(block, wrapper);
-
   const rows = [...block.children];
   if (rows.length < 1) return;
 
@@ -102,5 +100,7 @@ export default function decorate(block) {
   });
 
   wrapper.appendChild(grid);
-  block.replaceWith(wrapper);
+  moveInstrumentation(block, wrapper);
+  block.textContent = '';
+  block.append(wrapper);
 }
