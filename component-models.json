@@ -1107,8 +1107,7 @@
         "component": "text",
         "valueType": "string",
         "name": "title",
-        "label": "Title",
-        "value": ""
+        "label": "Title"
       }
     ]
   },
@@ -1119,8 +1118,7 @@
         "component": "text",
         "valueType": "string",
         "name": "categoryName",
-        "label": "Category Name",
-        "value": ""
+        "label": "Category Name"
       },
       {
         "component": "reference",
@@ -1132,8 +1130,7 @@
         "component": "richtext",
         "valueType": "string",
         "name": "enterTheLinks",
-        "label": "Enter the links",
-        "value": ""
+        "label": "Enter the links"
       }
     ]
   },
