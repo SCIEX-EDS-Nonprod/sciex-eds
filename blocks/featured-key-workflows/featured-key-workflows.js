@@ -2,16 +2,26 @@ import { decorateIcons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-    console.log('block',block)
+  // Store original rows before any DOM manipulation
+  const rows = [...block.children];
+console.log('rowsss',rows)
+  // Extract all data from rows upfront
+  const title = rows[0]?.textContent.trim() || '';
 
+  const workflowItems = rows.slice(1).map((row) => {
+    const cells = [...row.children];
+    return {
+      row,
+      categoryName: cells[0]?.textContent.trim() || '',
+      imageCell: cells[1],
+      linksCell: cells[2],
+    };
+  });
+
+  // Now manipulate DOM
   const workflowsContainer = document.createElement('div');
   workflowsContainer.className = 'featured-key-workflows-wrapper';
   moveInstrumentation(block, workflowsContainer);
-
-  const rows = [...block.children];
-
-  // Extract title from first row
-  const title = rows[0]?.textContent.trim() || '';
 
   // Add title if exists
   if (title) {
@@ -26,17 +36,8 @@ export default function decorate(block) {
   grid.className = 'featured-key-workflows-grid';
   workflowsContainer.append(grid);
 
-  // Parse workflow items starting from row index 1
-  rows.slice(1).forEach((row) => {
-    const cells = [...row.children];
-    if (cells.length < 2) return;
-
-    // Extract data from cells:
-    // 0: category name, 1: image, 2: links
-    const categoryName = cells[0]?.textContent.trim() || '';
-    const imageCell = cells[1];
-    const linksCell = cells[2];
-
+  // Render workflow items using extracted data
+  workflowItems.forEach(({ row, categoryName, imageCell, linksCell }) => {
     const card = document.createElement('div');
     card.className = 'workflow-card';
     moveInstrumentation(row, card);
@@ -54,7 +55,7 @@ export default function decorate(block) {
 
     // TITLE
     if (categoryName) {
-      const heading = document.createElement('p');
+      const heading = document.createElement('h3');
       heading.textContent = categoryName;
       card.append(heading);
     }
@@ -70,6 +71,7 @@ export default function decorate(block) {
         linkElement.textContent = link.textContent.trim();
         linkElement.classList.add('workflow-card-link');
         linksDiv.append(linkElement);
+        console.log('aa')
       });
       card.append(linksDiv);
     }
