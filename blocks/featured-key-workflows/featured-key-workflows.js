@@ -3,13 +3,6 @@ export default function decorate(block) {
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
-  if (headingText) {
-    const heading = document.createElement('h2');
-    heading.className = 'featured-key-workflows-title';
-    heading.textContent = headingText;
-    // block.before(heading);
-  }
-
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
   
@@ -52,5 +45,11 @@ export default function decorate(block) {
 
   block.innerHTML = '';
   block.id = 'featured-key-workflows-content';
+   if (headingText) {
+    const heading = document.createElement('h2');
+    heading.className = 'featured-key-workflows-title';
+    heading.textContent = headingText;
+    block.appendChild(heading);
+  }
   block.appendChild(grid);
 }
