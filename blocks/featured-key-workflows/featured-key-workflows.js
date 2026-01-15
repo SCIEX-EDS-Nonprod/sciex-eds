@@ -20,7 +20,7 @@ export default function decorate(block) {
 
     // Extract data from cells:
     // 0: category name, 1: image, 2: links
-    const categoryName = cells[0]?.textContent.trim();
+    const categoryNameHTML = cells[0]?.innerHTML.trim();
     const imageHTML = cells[1]?.innerHTML.trim();
     const linksHTML = cells[2]?.innerHTML.trim();
 
@@ -41,10 +41,10 @@ export default function decorate(block) {
     content.className = 'workflow-card-content';
 
     // TITLE
-    if (categoryName) {
+    if (categoryNameHTML) {
       const heading = document.createElement('h3');
       heading.className = 'workflow-card-title';
-      heading.textContent = categoryName;
+      heading.innerHTML = categoryNameHTML;
       content.append(heading);
     }
 
