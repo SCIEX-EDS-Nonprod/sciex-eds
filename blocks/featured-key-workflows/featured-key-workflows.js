@@ -6,8 +6,8 @@ export default function decorate(block) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
     heading.textContent = headingText;
-  
+  const aa='hiiii'
 
   block.innerHTML = '';
-  block.append(heading)
+  block.append(aa)
 }
