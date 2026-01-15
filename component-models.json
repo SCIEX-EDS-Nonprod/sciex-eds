@@ -1107,6 +1107,13 @@
         "component": "text",
         "name": "title",
         "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "columns",
+        "label": "Columns",
+        "value": "3"
       }
     ]
   },
