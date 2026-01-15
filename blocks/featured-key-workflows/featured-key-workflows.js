@@ -1,55 +1,61 @@
+import { decorateIcons } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default function decorate(block) {
   const rows = [...block.children];
 
   /* -------- Heading -------- */
-  const headingHTML = rows[0]?.querySelector('p')?.innerHTML;
+  const headingHTML = rows[0]?.querySelector('p')?.innerHTML.trim();
 
   if (headingHTML) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
-    heading.innerHTML = headingHTML; // ✅ innerHTML
+    heading.innerHTML = headingHTML;
     block.before(heading);
   }
+
+  /* -------- Container -------- */
+  const workflowsContainer = document.createElement('div');
+  workflowsContainer.className = 'featured-key-workflows-container';
+  moveInstrumentation(block, workflowsContainer);
 
   /* -------- Grid -------- */
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
+  workflowsContainer.append(grid);
 
+  /* -------- Cards -------- */
   for (let i = 1; i < rows.length; i += 1) {
-    const columns = rows[i].children;
+    const row = rows[i];
+    const cells = [...row.children];
+    if (cells.length < 3) continue;
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
+    moveInstrumentation(row, card);
 
     /* Icon */
     const icon = document.createElement('div');
     icon.className = 'workflow-card-icon';
-    icon.innerHTML = columns[1].querySelector('picture')?.outerHTML || '';
-    card.appendChild(icon);
+    icon.innerHTML = cells[1]?.innerHTML.trim() || '';
+    card.append(icon);
 
     /* Title */
     const h3 = document.createElement('h3');
-    h3.innerHTML = columns[0].querySelector('p')?.innerHTML || '';
-    card.appendChild(h3);
+    h3.innerHTML = cells[0]?.innerHTML.trim() || '';
+    card.append(h3);
 
     /* Links */
     const linksWrapper = document.createElement('div');
     linksWrapper.className = 'workflow-card-links';
+    linksWrapper.innerHTML = cells[2]?.innerHTML.trim() || '';
+    card.append(linksWrapper);
 
-    const links = columns[2].querySelectorAll('a');
-    links.forEach((a) => {
-      const link = document.createElement('a');
-      link.href = a.href;
-      link.className = 'workflow-card-link';
-      link.innerHTML = a.innerHTML; // ✅ innerHTML
-      linksWrapper.appendChild(link);
-    });
-
-    card.appendChild(linksWrapper);
-    grid.appendChild(card);
+    grid.append(card);
   }
 
-  /* -------- Replace block -------- */
+  decorateIcons(workflowsContainer);
+
   block.innerHTML = '';
-  block.appendChild(grid);
+  block.append(workflowsContainer);
 }
