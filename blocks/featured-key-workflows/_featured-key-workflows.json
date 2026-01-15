@@ -25,11 +25,7 @@
                         "resourceType": "core/franklin/components/block/v1/block/item",
                         "template": {
                             "name": "Workflow Item",
-                            "model": "workflow-item",
-                            "filter": "workflow-item"
-                        },
-                        "output": {
-                            "attribute": "data-model"
+                            "model": "workflow-item"
                         }
                     }
                 }
@@ -44,8 +40,7 @@
                     "component": "text",
                     "valueType": "string",
                     "name": "title",
-                    "label": "Title",
-                    "value": ""
+                    "label": "Title"
                 }
             ]
         },

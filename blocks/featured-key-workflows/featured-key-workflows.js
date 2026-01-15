@@ -15,11 +15,11 @@ export default function decorate(block) {
     card.className = 'workflow-card';   
 
     // Icon
-    // const picture = columns[1].querySelector('picture');
-    // const icon = document.createElement('div');
-    // icon.className = 'workflow-card-icon';
-    // icon.appendChild(picture);
-    // card.appendChild(icon);
+    const picture = columns[1].querySelector('picture');
+    const icon = document.createElement('div');
+    icon.className = 'workflow-card-icon';
+    icon.appendChild(picture);
+    card.appendChild(icon);
 
     // Title
     const title = columns[0].querySelector('p');
