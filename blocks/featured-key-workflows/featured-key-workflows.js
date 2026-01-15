@@ -2,6 +2,8 @@ import { decorateIcons } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+    console.log('block',block)
+
   const workflowsContainer = document.createElement('div');
   workflowsContainer.className = 'featured-key-workflows-wrapper';
   moveInstrumentation(block, workflowsContainer);
@@ -52,7 +54,7 @@ export default function decorate(block) {
 
     // TITLE
     if (categoryName) {
-      const heading = document.createElement('h3');
+      const heading = document.createElement('p');
       heading.textContent = categoryName;
       card.append(heading);
     }
