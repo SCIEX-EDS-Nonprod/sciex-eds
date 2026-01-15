@@ -457,7 +457,8 @@
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Workflow Item",
-                  "model": "workflow-item"
+                  "model": "workflow-item",
+                  "filter": "featured-key-workflows"
                 }
               }
             }

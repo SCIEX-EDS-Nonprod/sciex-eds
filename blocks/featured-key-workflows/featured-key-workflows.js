@@ -1,4 +1,3 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
@@ -27,7 +26,7 @@ export default function decorate(block) {
   const rows = Array.from(block.children).slice(1);
   rows.forEach((row) => {
     const cells = Array.from(row.children);
-    
+
     if (cells.length === 0) return;
 
     // Extract data from cells based on order:
