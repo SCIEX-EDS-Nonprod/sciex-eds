@@ -1,9 +1,8 @@
 export default function decorate(block) {
+  console.log('okkkk',block)
   const rows = [...block.children];
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
-
- 
 
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
@@ -45,7 +44,7 @@ export default function decorate(block) {
     grid.appendChild(card);
   }
 
-  block.innerHTML = '';
+  // block.innerHTML = '';
    if (headingText) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
