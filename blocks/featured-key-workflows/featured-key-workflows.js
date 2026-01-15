@@ -44,7 +44,7 @@ export default function decorate(block) {
     grid.appendChild(card);
   }
 
-  // block.innerHTML = '';
+  block.innerHTML = '';
    if (headingText) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
