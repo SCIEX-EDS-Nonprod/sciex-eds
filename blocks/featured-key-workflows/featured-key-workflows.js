@@ -4,8 +4,9 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 /**
  * Initializes and decorates a featured key workflows block.
  * Expects the `block` DOM structure to contain:
- * - Row 0: Title
- * - Row 1+: Each workflow item with:
+ * - Row 0: Workflow ID
+ * - Row 1: Title
+ * - Row 2+: Each workflow item with:
  *   - Col 0: Category Name
  *   - Col 1: Image
  *   - Col 2: Links (HTML content)
@@ -14,11 +15,16 @@ export default function decorate(block) {
   const wrapper = document.createElement('div');
   wrapper.className = 'featured-key-workflows-wrapper';
 
-  const rows = [...block.children];
-  if (rows.length < 1) return;
+  moveInstrumentation(block, wrapper);
 
-  // Extract title from first row
-  const titleText = rows[0]?.querySelector('p')?.textContent?.trim() || '';
+  const rows = [...block.children];
+  if (rows.length < 2) return;
+
+  // Extract ID and title from first two rows
+  const workflowId = rows[0]?.querySelector('p')?.textContent?.trim() || '';
+  const titleText = rows[1]?.querySelector('p')?.textContent?.trim() || '';
+
+  wrapper.id = workflowId;
 
   // Build title element
   if (titleText) {
@@ -32,8 +38,8 @@ export default function decorate(block) {
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
-  // Process workflow item rows (skip the title row at index 0)
-  const itemRows = rows.slice(1);
+  // Process workflow item rows (skip the ID and title rows at index 0-1)
+  const itemRows = rows.slice(2);
 
   itemRows.forEach((row) => {
     const cols = [...row.children];
@@ -100,7 +106,7 @@ export default function decorate(block) {
   });
 
   wrapper.appendChild(grid);
-  moveInstrumentation(block, wrapper);
   block.textContent = '';
+  block.id = `${workflowId}-content`;
   block.append(wrapper);
 }

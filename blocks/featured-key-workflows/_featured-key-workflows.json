@@ -39,6 +39,13 @@
                 {
                     "component": "text",
                     "valueType": "string",
+                    "name": "workflowId",
+                    "label": "Workflow ID",
+                    "value": ""
+                },
+                {
+                    "component": "text",
+                    "valueType": "string",
                     "name": "title",
                     "label": "Title",
                     "value": ""
