@@ -1,22 +1,20 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * Decorates the featured-key-workflows block
  * @param {HTMLElement} block - The block element
  */
 export default function decorate(block) {
-  // Add wrapper class
   block.classList.add('featured-key-workflows-wrapper');
+
+  const container = document.createElement('div');
 
   // Get title from first row
   const titleRow = block.children[0];
-  const title = titleRow?.textContent?.trim();
-
-  // Create container
-  const container = document.createElement('div');
-
-  // Add title if exists
-  if (title) {
+  if (titleRow) {
     const titleElement = document.createElement('h2');
-    titleElement.textContent = title;
+    titleElement.textContent = titleRow.textContent?.trim();
     titleElement.classList.add('featured-key-workflows-title');
     container.appendChild(titleElement);
   }
@@ -30,36 +28,36 @@ export default function decorate(block) {
   rows.forEach((row) => {
     const cells = Array.from(row.children);
     
-    // Extract data from cells
-    const iconCell = cells[0];
-    const titleCell = cells[1];
-    const descCell = cells[2];
-    const linksCell = cells[3];
+    if (cells.length === 0) return;
+
+    // Extract data from cells based on order:
+    // 0: category name, 1: image, 2: links
+    const categoryName = cells[0]?.textContent?.trim();
+    const imageCell = cells[1];
+    const linksCell = cells[2];
 
     // Create card
     const card = document.createElement('div');
     card.classList.add('workflow-card');
+    moveInstrumentation(row, card);
 
-    // Add icon
-    if (iconCell) {
-      const iconDiv = document.createElement('div');
-      iconDiv.classList.add('workflow-card-icon');
-      iconDiv.innerHTML = iconCell.innerHTML;
-      card.appendChild(iconDiv);
+    // Add icon/image
+    if (imageCell) {
+      const picture = imageCell.querySelector('picture');
+      if (picture) {
+        const iconDiv = document.createElement('div');
+        iconDiv.classList.add('workflow-card-icon');
+        // Clone the picture element
+        iconDiv.appendChild(picture.cloneNode(true));
+        card.appendChild(iconDiv);
+      }
     }
 
-    // Add title
-    if (titleCell) {
+    // Add category name as title
+    if (categoryName) {
       const cardTitle = document.createElement('h3');
-      cardTitle.textContent = titleCell.textContent?.trim();
+      cardTitle.textContent = categoryName;
       card.appendChild(cardTitle);
-    }
-
-    // Add description
-    if (descCell) {
-      const descPara = document.createElement('p');
-      descPara.textContent = descCell.textContent?.trim();
-      card.appendChild(descPara);
     }
 
     // Add links
