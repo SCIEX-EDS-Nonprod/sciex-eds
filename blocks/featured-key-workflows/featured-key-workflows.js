@@ -3,18 +3,7 @@ export default function decorate(block) {
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
-  // Clear existing block content
-  block.innerHTML = '';
-
-  // Heading (append INSIDE block)
-  if (headingText) {
-    const heading = document.createElement('h2');
-    heading.className = 'featured-key-workflows-title';
-    heading.textContent = headingText;
-    block.appendChild(heading);
-  }
-
-  // Grid
+  // Create grid first
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
@@ -46,7 +35,7 @@ export default function decorate(block) {
     const linksWrapper = document.createElement('div');
     linksWrapper.className = 'workflow-card-links';
 
-    const links = columns[2]?.querySelectorAll('a') || [];
+    const links = columns[2].querySelectorAll('a');
     links.forEach((a) => {
       const link = document.createElement('a');
       link.href = a.href;
@@ -57,6 +46,17 @@ export default function decorate(block) {
 
     card.appendChild(linksWrapper);
     grid.appendChild(card);
+  }
+
+  // Clear block
+  block.innerHTML = '';
+
+  // ✅ Normal way: heading inside block
+  if (headingText) {
+    const heading = document.createElement('h2');
+    heading.className = 'featured-key-workflows-title';
+    heading.textContent = headingText;
+    block.appendChild(heading); // or block.prepend(heading)
   }
 
   block.appendChild(grid);
