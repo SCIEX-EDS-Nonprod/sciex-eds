@@ -54,10 +54,13 @@ export default function decorate(block) {
     const linksWrapper = document.createElement('div');
     linksWrapper.className = 'workflow-card-links';
 
-    const links = columns[2]?.querySelectorAll('a') || [];
+    const links = columns[2].querySelectorAll('a');
     links.forEach((a) => {
-      a.classList.add('workflow-card-link');
-      linksWrapper.appendChild(a);
+      const link = document.createElement('a');
+      link.href = a.href;
+      link.textContent = a.textContent;
+      link.className = 'workflow-card-link';
+      linksWrapper.appendChild(link);
     });
 
     card.appendChild(linksWrapper);
