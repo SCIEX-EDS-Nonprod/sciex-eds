@@ -1,106 +1,63 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
-import { createOptimizedPicture } from '../../scripts/aem.js';
-
-/**
- * Initializes and decorates a featured key workflows block.
- * Expects the `block` DOM structure to contain:
- * - Row 0: Title
- * - Row 1+: Each workflow item with:
- *   - Col 0: Category Name
- *   - Col 1: Image
- *   - Col 2: Links (HTML content)
- */
 export default function decorate(block) {
-  const wrapper = document.createElement('div');
-  wrapper.className = 'featured-key-workflows-wrapper';
-
-  // Move instrumentation markers/metadata from the original block into the new container
-  moveInstrumentation(block, wrapper);
-
   const rows = [...block.children];
-  if (rows.length < 1) return; // Must have at least title
+  const headingRow = rows[0];
+  const headingText = headingRow.querySelector('p')?.textContent;
 
-  // Hardcoded workflow ID
-  const workflowId = 'featured-key-workflows';
-  wrapper.id = workflowId;
+  // Clear existing block content
+  block.innerHTML = '';
 
-  // Extract title from first row
-  const titleText = rows[0]?.querySelector('p')?.textContent?.trim() || '';
-
-  // Build title element
-  if (titleText) {
-    const titleEl = document.createElement('h2');
-    titleEl.className = 'featured-key-workflows-title';
-    titleEl.textContent = titleText;
-    wrapper.appendChild(titleEl);
+  // Heading (append INSIDE block)
+  if (headingText) {
+    const heading = document.createElement('h2');
+    heading.className = 'featured-key-workflows-title';
+    heading.textContent = headingText;
+    block.appendChild(heading);
   }
 
-  // Build grid container
+  // Grid
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
-  // Process workflow item rows (skip the title row at index 0)
-  const itemRows = rows.slice(1);
-
-  itemRows.forEach((row) => {
-    const cols = [...row.children];
-    if (cols.length < 3) return; // Require at least category, image, links
-
-    // Extract columns
-    const categoryName = cols[0]?.querySelector('p')?.textContent?.trim() || '';
-    const imageCol = cols[1];
-    const linksCol = cols[2];
+  for (let i = 1; i < rows.length; i += 1) {
+    const row = rows[i];
+    const columns = row.children;
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
-    moveInstrumentation(row, card);
 
-    // Add category name as heading
-    if (categoryName) {
-      const heading = document.createElement('h3');
-      heading.textContent = categoryName;
-      card.appendChild(heading);
+    // Icon
+    const picture = columns[1].querySelector('picture');
+    if (picture) {
+      const icon = document.createElement('div');
+      icon.className = 'workflow-card-icon';
+      icon.appendChild(picture);
+      card.appendChild(icon);
     }
 
-    // Add image if present
-    if (imageCol) {
-      const picture = imageCol.querySelector('picture');
-      if (picture) {
-        const iconDiv = document.createElement('div');
-        iconDiv.className = 'workflow-card-icon';
-        iconDiv.appendChild(picture);
-        card.appendChild(iconDiv);
-      }
+    // Title
+    const title = columns[0].querySelector('p');
+    if (title) {
+      const h3 = document.createElement('h3');
+      h3.textContent = title.textContent;
+      card.appendChild(h3);
     }
 
-    // Add links container
-    if (linksCol) {
-      const linksDiv = document.createElement('div');
-      linksDiv.className = 'workflow-card-links';
+    // Links
+    const linksWrapper = document.createElement('div');
+    linksWrapper.className = 'workflow-card-links';
 
-      // Process all links in the links column
-      const links = linksCol.querySelectorAll('a');
-      links.forEach((link) => {
-        const linkEl = document.createElement('a');
-        linkEl.className = 'workflow-card-link';
-        linkEl.href = link.href;
-        linkEl.textContent = link.textContent.trim();
-        linkEl.target = link.target || '_self';
-        linksDiv.appendChild(linkEl);
-      });
+    const links = columns[2]?.querySelectorAll('a') || [];
+    links.forEach((a) => {
+      const link = document.createElement('a');
+      link.href = a.href;
+      link.textContent = a.textContent;
+      link.className = 'workflow-card-link';
+      linksWrapper.appendChild(link);
+    });
 
-      if (linksDiv.children.length > 0) {
-        card.appendChild(linksDiv);
-      }
-    }
-
+    card.appendChild(linksWrapper);
     grid.appendChild(card);
-  });
+  }
 
-  wrapper.appendChild(grid);
-
-  // Replace original block with the new workflow structure
-  block.textContent = '';
-  block.id = `${workflowId}-content`;
-  block.append(wrapper);
+  block.appendChild(grid);
 }
