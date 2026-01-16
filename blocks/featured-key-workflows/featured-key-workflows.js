@@ -4,15 +4,13 @@ export default function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
 
-  const headingRow = rows[0];
-  const headingText = headingRow.querySelector('p')?.textContent;
-
-  // Create container
+  // 🔑 Create container & move block instrumentation
   const container = document.createElement('div');
   container.className = 'featured-key-workflows-container';
   moveInstrumentation(block, container);
 
-  // Heading
+  // Heading (row 0)
+  const headingText = rows[0]?.querySelector('p')?.textContent?.trim();
   if (headingText) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
@@ -24,22 +22,22 @@ export default function decorate(block) {
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
-  // Start from index 1 → workflow-item rows
-  for (let i = 1; i < rows.length; i += 1) {
-    const row = rows[i];
-    const columns = row.children;
+  // workflow-item rows start from index 1
+  rows.slice(1).forEach((row) => {
+    const columns = [...row.children];
+    if (columns.length < 3) return;
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
 
-    // 🔑 Preserve item instrumentation
+    // 🔑 Move ITEM instrumentation (this is what you were missing)
     moveInstrumentation(row, card);
 
-    // Category Name
-    const title = columns[0]?.querySelector('p');
+    // Category name
+    const title = columns[0]?.querySelector('p')?.textContent?.trim();
     if (title) {
       const h3 = document.createElement('h3');
-      h3.textContent = title.textContent;
+      h3.textContent = title;
       card.appendChild(h3);
     }
 
@@ -64,10 +62,11 @@ export default function decorate(block) {
 
     card.appendChild(linksWrapper);
     grid.appendChild(card);
-  }
+  });
 
   container.appendChild(grid);
 
-  // Replace block safely
-  block.replaceWith(container);
+  // ✅ SAME AS ACCORDION
+  block.textContent = '';
+  block.append(container);
 }
