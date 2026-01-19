@@ -937,7 +937,7 @@ function hideAllActiveDivs() {
 
 function createMegaMenuTopNav(section) {
   const parentDiv = document.createElement('div');
-  parentDiv.className = 'tw-hidden megamenu-wrapper lg:tw-flex tw-w-full tw-bg-white tw-relative tw-z-[101] '; // tw-z-[100]
+  parentDiv.className = 'tw-hidden megamenu-wrapper lg:tw-flex tw-w-full tw-bg-white tw-relative '; // tw-z-[100]
   const container = document.createElement('div');
   container.className = 'tw-container ';
 
@@ -1691,7 +1691,7 @@ function createMegaMenuThirdLevel(child) {
 function createOverlay(nav) {
   const overlayDiv = div({
     class:
-      'tw-hidden lg:tw-block tw-fixed tw-inset-0 tw-bg-black tw-opacity-60 tw-z-50',
+      'tw-hidden lg:tw-block tw-fixed tw-inset-0 tw-bg-black tw-opacity-60 tw-z--1',
   });
   overlayDiv.id = 'menu-overlay';
   overlayDiv.style.display = 'none';
