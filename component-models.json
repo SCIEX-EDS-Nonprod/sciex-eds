@@ -1702,6 +1702,23 @@
     ]
   },
   {
+    "id": "resourcehub-search",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "value": "",
+        "name": "id"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text"
+      }
+    ]
+  },
+  {
     "id": "resources-grid",
     "fields": [
       {
