@@ -431,13 +431,17 @@ button.active {
         max-width: 8in
     }
 }
-
+@media (min-width:1190px) {
+    .tw-container {        
+        gap: 50px !important ;
+    }
+}
 @media (min-width:1024px) {
     .tw-container {
         max-width: 64pc;
         padding-left: 1pc;
         padding-right: 1pc;
-        gap: 10px;
+        gap: 30px;
     }
 }
 
