@@ -444,7 +444,7 @@ button.active {
 @media (min-width:1280px) {
     .tw-container {
         max-width: 90pc;
-        padding: 0 64px !important;
+        /* padding: 0 64px !important; */
         margin: auto;
     }
 }
