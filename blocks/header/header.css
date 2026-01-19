@@ -42,10 +42,10 @@ header nav ul li picture:hover {
     align-items: center;
     background: #fff;
     /*border-radius: 5px;*/
-    gap: 8px;
+    /* gap: 8px; */
     padding-right: 10px;
     height: 40px;
-    width: 524px;
+    max-width: 524px;
     position: relative;
 
 
@@ -361,6 +361,7 @@ text-underline-position: from-font;
     padding-right: 0px !important;
     align-items: center;
     min-height: 60px;
+    justify-content: space-between;
 }
 .topbar-menu{
     color: var(--White-0, #FFF);
@@ -373,8 +374,8 @@ text-underline-position: from-font;
     letter-spacing: 0.08px;
 }
 #shop{
-    margin-left: 1.5pc;
-    margin-right: 3pc !important;
+    margin-left: 5px;
+    margin-right: 5px !important;
 }
 .account-dropdown-content {
         margin-left: -57px !important;
@@ -467,7 +468,7 @@ text-underline-position: from-font;
     }
     .megamenu-wrapper .topbar-menu {
         padding: 20px 24px 24px 24px;
-        margin: 0 auto;
+        top: 24%;
     }
     .megamenu-wrapper .topbar-menu ul li {
         flex: 1;
@@ -717,10 +718,7 @@ text-underline-position: from-font;
         display: none;
     }*/
 
-    .mobile-header .topbar-menu {
-        margin-top: 190px;
-    }
-
+   
    /* .standalone-search-container {
         display: none;
     }*/

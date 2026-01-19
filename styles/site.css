@@ -437,7 +437,7 @@ button.active {
         max-width: 64pc;
         padding-left: 1pc;
         padding-right: 1pc;
-        gap: 50px;
+        gap: 10px;
     }
 }
 
