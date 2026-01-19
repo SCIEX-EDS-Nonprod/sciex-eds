@@ -932,11 +932,12 @@ function hideAllActiveDivs() {
   }
   document.getElementById('menu-button').style.display = 'none';
   document.getElementById('menu-overlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 function createMegaMenuTopNav(section) {
   const parentDiv = document.createElement('div');
-  parentDiv.className = 'tw-hidden megamenu-wrapper lg:tw-flex tw-w-full tw-bg-white tw-relative '; // tw-z-[100]
+  parentDiv.className = 'tw-hidden megamenu-wrapper lg:tw-flex tw-w-full tw-bg-white tw-relative tw-z-[101] '; // tw-z-[100]
   const container = document.createElement('div');
   container.className = 'tw-container ';
 
@@ -1050,6 +1051,7 @@ function createMegaMenuTopNav(section) {
             // showing ovelay and button
             overlayDiv.style.display = '';
             buttoniv.style.display = '';
+            document.body.style.overflow = 'hidden';
           } else {
             hideAllActiveDivs();
           }
@@ -1116,6 +1118,7 @@ function createMegaMenuTopNav(section) {
           // showing ovelay and button
           overlayDiv.style.display = '';
           buttoniv.style.display = '';
+          document.body.style.overflow = 'hidden';
         } else {
           hideAllActiveDivs();
         }
@@ -1784,6 +1787,22 @@ export default async function decorate(block) {
     processHtml(block, main);
   }
   decorateIcons(block);
+    
+  // Track the previous viewport state
+  let wasMobile = canMobileActions();
+  
+  // Handle viewport resize - refresh page when crossing mobile/desktop threshold
+  window.addEventListener('resize', () => {
+    const isMobileNow = canMobileActions();
+    
+    // Check if viewport crossed the mobile/desktop threshold (1024px)
+    if (wasMobile !== isMobileNow) {
+      wasMobile = isMobileNow;
+      // Refresh the page when switching between mobile and desktop
+      window.location.reload();
+    }
+  });
+  
   /* if (document.getElementById('logout')) {
     document.getElementById('logout').addEventListener('click', () => {
       const redirectUrl = encodeURIComponent(window.location.href);

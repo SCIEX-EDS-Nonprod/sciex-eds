@@ -360,7 +360,7 @@ text-underline-position: from-font;
     padding-left: 47px !important;
     padding-right: 0px !important;
     align-items: center;
-    height: 64px;
+    min-height: 60px;
 }
 .topbar-menu{
     color: var(--White-0, #FFF);
@@ -404,8 +404,10 @@ text-underline-position: from-font;
     .megamenu-wrapper {
         padding-top: 24px;
         height: 100%;
-        padding-top: 84px;
+        /* padding-top: 84px; */
         padding-bottom: 180px;
+        top: 64px;
+        position: absolute !important;
     }
     .submenu-container ul li {
         margin-bottom: 0;
