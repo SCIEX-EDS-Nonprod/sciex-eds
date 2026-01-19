@@ -560,7 +560,7 @@ function createMainHeader(section) {
     } else if (headerDiv.children.length !== index + 1) {
       const liTag = li({
         class:
-          'tw-flex tw-items-center hover:tw-text-white tw-transition-colors', // tw-ml-16
+          'tw-flex tw-items-center tw-transition-colors', // tw-ml-16
       });
       if (anchorTag.text === 'Login' || anchorTag.text === 'My account') {
         // anchorTag.addEventListener('click', handleSignInClick);
