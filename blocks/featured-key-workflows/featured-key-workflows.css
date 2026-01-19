@@ -1,6 +1,7 @@
 .featured-key-workflows-wrapper {
   margin-top: 64px !important;
-  margin-bottom: 64px !important
+  margin-bottom: 64px !important;
+  max-width : 1440px !important;
 }
 
 .featured-key-workflows-title {
