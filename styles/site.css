@@ -1048,6 +1048,9 @@ nav a[aria-label="Go to Sciex homepage"] {
 .tw .tw-z-50 {
     z-index: 50
 }
+.tw .tw-z--1 {
+    z-index: -1
+}
 
 .tw .tw-z-\[100\] {
     z-index: 100
