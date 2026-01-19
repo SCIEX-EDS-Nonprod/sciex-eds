@@ -1,7 +1,9 @@
 header nav ul li picture {
     filter: invert(0.6);
 }
-
+html {
+  scrollbar-gutter: stable;
+}
 /* Change styles when hovered */
 header nav ul li picture:hover {
     filter: invert(1);
@@ -262,7 +264,7 @@ box-shadow: -2px 3px 18.4px 0 rgba(19, 19, 19, 0.15);
 }
 #request-a-quote{
     display: flex;
-padding: 20px 32px;
+padding: 0px 12px;
 align-items: center;
 background: var(--Grey-50, #F5F5F5);
 color: var(--Blue-700, #0068FA);
@@ -360,7 +362,7 @@ text-underline-position: from-font;
     padding-left: 47px !important;
     padding-right: 0px !important;
     align-items: center;
-    min-height: 60px;
+    min-height: 64px;
     justify-content: space-between;
 }
 .topbar-menu{
@@ -372,13 +374,31 @@ text-underline-position: from-font;
     font-weight: 330;
     line-height: 24px; /* 150% */
     letter-spacing: 0.08px;
+    height: 71px;
 }
-#shop{
-    margin-left: 5px;
-    margin-right: 5px !important;
+
+ 
+@media (min-width:1190px) {
+    #shop {
+        margin-left: 1.5pc !important;
+        margin-right: 3pc !important;
+    }
 }
 .account-dropdown-content {
         margin-left: -57px !important;
+}
+
+.header-link{
+    padding:0px 12px;
+}
+@media (min-width:1190px) {
+    #request-a-quote {
+        padding: 20px 32px;
+    }
+    .header-link{
+    padding:20px 32px;
+}
+
 }
 /***   Mobile Css  */
 @media (max-width: 1023.9px) {
@@ -468,7 +488,7 @@ text-underline-position: from-font;
     }
     .megamenu-wrapper .topbar-menu {
         padding: 20px 24px 24px 24px;
-        top: 37%;
+        top: 180px;
     }
     .megamenu-wrapper .topbar-menu ul li {
         flex: 1;
@@ -587,10 +607,6 @@ text-underline-position: from-font;
     margin-left: 0 !important;
 }
 
-    #shop{
-        margin-left: 0pc;
-        margin-right: 0pc !important;
-    }
     .standalone-search-container {
         width: 100%;
     }
@@ -667,6 +683,10 @@ text-underline-position: from-font;
     .submenu-content div.tw-pr-48 {
         padding-right: 1pc !important;
     }
+       #shop {
+    margin-left: 10px;
+    margin-right: 20px;
+}
     .submenu-container .tw-flex.tw-flex-wrap.tw-h-fit {
         width: 100%;
     }
