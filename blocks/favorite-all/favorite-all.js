@@ -1,4 +1,4 @@
-import initializeSerachInterface from '../../scripts/common-components/favoriteResourceUi.js';
+import initializeSerachInterface from '../../scripts/common-components/renderUI.js';
 import { resourceLibrarySearchEngine } from '../../scripts/favorite-all/favorite-allDocEngine.js';
 import renderCommonSearchBox from '../../scripts/common-components/commonRenderSearchBox.js';
 import {
