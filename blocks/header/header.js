@@ -545,7 +545,7 @@ function createMainHeader(section) {
       myFavoriteResources = anchorTag.text;
     } else if (index === 2) {
       anchorTag.text = '';
-      anchorTag.className = 'tw-py-16';
+      anchorTag.className = '';
       // anchorTag.target = '_blank';
       if (picture != null) {
         anchorTag.appendChild(picture);
