@@ -116,7 +116,7 @@ const data=[
     "title": "Account security best practices",    
   }
 ]
-console.log('oooooooooooo',favoriteResultsList)
+console.log('aaaaaaaa',favoriteResultsList)
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
@@ -125,7 +125,7 @@ console.log('oooooooooooo',favoriteResultsList)
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-      renderCommonSearchResultList(resourceLibraryResultClick,data);
+      renderCommonSearchResultList(resourceLibraryResultClick,favoriteResultsList);
           //   renderCommonSearchResultList(resourceLibraryResultsList, resourceLibraryResultClick);
 
       renderCommonQuerySummary(resourceLibraryQuerySummary);
