@@ -4,7 +4,6 @@ import renderCommonSearchBox from '../../scripts/common-components/commonRenderS
 import {
   resourceLibrarySearchBoxController,
   resourceLibrarySortController,
-  resourceLibraryResultsList,
   resourceLibraryResultClick,
   resourceLibraryQuerySummary,
   resourceLibraryPaginationController,
@@ -13,11 +12,11 @@ import {
   favoriteResultsList,
 } from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
-import renderCommonSearchResultList from '../../scripts/common-components/commonSearchResultList.js';
 import renderCommonQuerySummary from '../../scripts/common-components/commonQuerySummary.js';
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
 import { renderCommonFacet } from '../../scripts/common-components/commonFacets.js';
 import renderCommonFacetBreadcurm from '../../scripts/common-components/commonFacetBreadcurm.js';
+import renderfavoriteSearchResultList from '../../scripts/common-components/favoriteSearchResultList.js';
 
 async function readBlockProperties(block) {
   // Create no results section
@@ -108,15 +107,6 @@ export default async function decorate(block) {
     'standardsandreagentscategories-facet',
     'language-facet',
   ];
-const data=[
-  {
-    "title": "How to reset your password",    
-  },
-  {
-    "title": "Account security best practices",    
-  }
-]
-console.log('aaaaaaaa',favoriteResultsList)
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
@@ -125,9 +115,7 @@ console.log('aaaaaaaa',favoriteResultsList)
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-      renderCommonSearchResultList(resourceLibraryResultClick,favoriteResultsList);
-          //   renderCommonSearchResultList(resourceLibraryResultsList, resourceLibraryResultClick);
-
+      renderfavoriteSearchResultList(resourceLibraryResultClick,favoriteResultsList);
       renderCommonQuerySummary(resourceLibraryQuerySummary);
       renderCommonPagination(resourceLibraryPaginationController);
       renderCommonFacet(allFacetController, facetsId, desiredOrder);

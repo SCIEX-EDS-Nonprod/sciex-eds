@@ -29,7 +29,6 @@ export const resourceLibrarySearchEngine = buildSearchEngine({
   },
 });
 export const favoriteSearchEngine = async () => {
-  console.log('cccccccccccccccccccc')
   try {
     const response = await fetch(
       "https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/get-favorite-content"
@@ -38,7 +37,6 @@ export const favoriteSearchEngine = async () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     const data = await response.json();
     console.log('datasss',data);
     return data;
@@ -46,5 +44,4 @@ export const favoriteSearchEngine = async () => {
     console.error("Fetch error:", error);
   }
 };
-favoriteSearchEngine()
 export default { resourceLibrarySearchEngine, favoriteSearchEngine };

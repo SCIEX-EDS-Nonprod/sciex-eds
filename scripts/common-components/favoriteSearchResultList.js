@@ -1,16 +1,10 @@
 /* eslint-disable */
-import { i18n } from '../../scripts/translation.js';
+import { i18n } from '../translation.js';
 
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-/**
- * Render common search result list using DATA ARRAY
- * @param {Object|null} customerDocResultsList - kept for compatibility
- * @param {Function} customerDocResultClick - click handler
- * @param {Array} data - results array
- */
-const renderCommonSearchResultList = (  
+const renderfavoriteSearchResultList = (
   customerDocResultClick,
   data
 ) => {
@@ -52,7 +46,7 @@ const renderCommonSearchResultList = (
     const facets = document.getElementById('facets');
     if (facets) {
       facets.classList.remove('tw-hidden');
-    }
+    } 
 
     if (sortElement) sortElement.removeAttribute('style');
     if (noResultsElement) noResultsElement.style.display = 'none';
@@ -69,12 +63,11 @@ const renderCommonSearchResultList = (
       const resultMarkup = `
         <div class="item-details"> 
           <h3>${result?.title || ''}</h3>
-          <div class="description">${descriptionHtml}</div>
-          ${
-            result?.raw?.ogimage
-              ? `<img src="${result.raw.ogimage}" alt="ogimage" width="200" height="200">`
-              : ''
-          }
+          <div class="description">Address the need for complete sequence coverage, comprehensive determination of PTMs and reliable high-throughput assays with LC/MS solutions designed specifically to address the challenges of peptide mapping at all stages of the therapeutic development pipeline.</div>
+          ${result?.raw?.ogimage
+          ? `<img src="${result.raw.ogimage}" alt="ogimage" width="200" height="200">`
+          : ''
+        }
         </div>
         <a class="view-details-btn" target="_blank" href="${result?.printableUri || '#'}">
           ${strings.view}
@@ -134,4 +127,4 @@ const renderCommonSearchResultList = (
   }
 };
 
-export default renderCommonSearchResultList;
+export default renderfavoriteSearchResultList;
