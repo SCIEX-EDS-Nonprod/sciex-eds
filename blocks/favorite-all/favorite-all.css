@@ -1,6 +1,7 @@
 .favourite-all-wrapper {
     margin-top: 0 !important;
     padding: 0 24px !important;
+    max-width: 90pc !important;
 }
 
 /* General Styles */

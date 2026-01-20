@@ -14,7 +14,7 @@ import {
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
 import renderCommonQuerySummary from '../../scripts/common-components/commonQuerySummary.js';
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
-import { renderCommonFacet } from '../../scripts/common-components/commonFacets.js';
+import { renderCommonFacet } from '../../scripts/common-components/favorite-all-facets.js';
 import renderCommonFacetBreadcurm from '../../scripts/common-components/commonFacetBreadcurm.js';
 import renderfavoriteSearchResultList from '../../scripts/common-components/favoriteSearchResultList.js';
 
