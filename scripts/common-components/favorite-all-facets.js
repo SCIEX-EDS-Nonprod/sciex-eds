@@ -185,7 +185,7 @@ function renderFacet(facetElementId, facetController, headerText) {
           <input type="checkbox" id="${value.value}" ${
   value.state === 'selected' ? 'checked' : ''
 } class="tw-accent-blue-500 tw-w-4 tw-h-4">
-          <label for="${value.value}"></label>
+          <label for="${value.value}">${value.value}</label>
         `;
 
       facetItem.querySelector('input').addEventListener('change', () => {
