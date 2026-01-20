@@ -111,12 +111,12 @@ export default async function decorate(block) {
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
-    await initializeSerachInterface(block, 'favorite-all-search');
+    await initializeSerachInterface(block, 'favorite-all');
     renderCommonSearchBox(resourceLibrarySearchBoxController);
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-      renderCommonSearchResultList(resourceLibraryResultsList, resourceLibraryResultClick);
+    //   renderCommonSearchResultList(resourceLibraryResultsList, resourceLibraryResultClick);
       renderCommonQuerySummary(resourceLibraryQuerySummary);
       renderCommonPagination(resourceLibraryPaginationController);
       renderCommonFacet(allFacetController, facetsId, desiredOrder);

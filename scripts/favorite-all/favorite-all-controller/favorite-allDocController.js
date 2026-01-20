@@ -10,9 +10,9 @@ import {
     buildBreadcrumbManager,
     buildContext
   } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
-  import { resourceLibrarySearchEngine, coveoSearchEngine, resultsFetcher }  from '../favorite-allDocEngine.js';
+  import { resourceLibrarySearchEngine }  from '../favorite-allDocEngine.js';
   
-  export const resourceLibrarySearchBoxController = buildSearchBox(coveoSearchEngine, {
+  export const resourceLibrarySearchBoxController = buildSearchBox(resourceLibrarySearchEngine, {
     options: {
       numberOfSuggestions: 5,
       highlightOptions: {
@@ -28,35 +28,36 @@ import {
     },
   });
   
-  export const resourceLibraryResultsList = {
-    results: () => resultsFetcher.getResults(),
-    isLoading: () => false,
-  };
+  export const resourceLibraryResultsList = buildResultList(resourceLibrarySearchEngine, {
+    options: {
+      fieldsToInclude: ['description', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse'],
+    },
+  });
   
-  export function resourceLibraryResultClick(result) {
-    console.log('Result clicked:', result);
-    if (result.path) {
-      window.location.href = result.path;
-    }
+  export  function resourceLibraryResultClick(results) {
+    const interactiveResult = buildInteractiveResult(resourceLibrarySearchEngine, {
+      options: {result : results}
+    })
+    interactiveResult.select();
   }
   
   // sorting controller
-  export const resourceLibrarySortController = buildSort(coveoSearchEngine, {
+  export const resourceLibrarySortController = buildSort(resourceLibrarySearchEngine, {
     initialState: {
       criterion: { by: 'relevancy' },
     },
   });
   
   // query summary controller
-  export const resourceLibraryQuerySummary = buildQuerySummary(coveoSearchEngine);
+  export const resourceLibraryQuerySummary = buildQuerySummary(resourceLibrarySearchEngine);
   
   // pagination controller
-  export const resourceLibraryPaginationController = buildPager(coveoSearchEngine);
+  export const resourceLibraryPaginationController = buildPager(resourceLibrarySearchEngine);
   
-  export const resourceLibraryFacetBreadcrumb = buildBreadcrumbManager(coveoSearchEngine)
+  export const resourceLibraryFacetBreadcrumb = buildBreadcrumbManager(resourceLibrarySearchEngine)
   
   // Context variable controller
-  const context = buildContext(coveoSearchEngine)
+  const context = buildContext(resourceLibrarySearchEngine)
   context.add('host', window.location.origin);
   let lang = document.documentElement.lang
   context.add('locale', lang || 'en-US');
@@ -77,7 +78,7 @@ import {
     ];
     const controllerMap = new Map();
     facetsId.forEach((item) => {
-     const controller = buildFacet(coveoSearchEngine, {
+     const controller = buildFacet(resourceLibrarySearchEngine, {
       options: { 
         numberOfValues: 5,
         field: item,

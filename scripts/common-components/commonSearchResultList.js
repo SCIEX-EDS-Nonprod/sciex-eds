@@ -73,7 +73,7 @@ const renderCommonSearchResultList = (customerDocResultsList, customerDocResultC
     : ''
 }
         </div>
-        <a class="view-details-btn" target="_blank" href="${result.printableUri}">${strings.view}</a>
+        <a class="view-details-btn" target="_blank" href="${result.printableUri}">${strings.view}k</a>
       `;
 
       resultItem.innerHTML = resultMarkup;
