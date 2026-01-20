@@ -1,4 +1,4 @@
-import initializeSerachInterface from '../../scripts/common-components/renderUI.js';
+import initializeSerachInterface from '../../scripts/common-components/favoriteResourceUi.js';
 import { resourceLibrarySearchEngine } from '../../scripts/favorite-all/favorite-allDocEngine.js';
 import renderCommonSearchBox from '../../scripts/common-components/commonRenderSearchBox.js';
 import {
@@ -85,15 +85,7 @@ export default async function decorate(block) {
   document.body.appendChild(suggestionPopupDiv);
 
   const facetsId = {
-    assettypes: 'Asset type',
-    applications: 'Applications',
-    massspectrometerscategories: 'Mass spectrometry',
-    capillaryelectrophoresiscategories: 'Capillary electrophoresis',
-    hplcandceproductscategories: 'Liquid chromoatography',
-    integratedsolutionscategories: 'Integrated solutions',
-    softwarecategories: 'Software',
-    standardsandreagentscategories: 'Standards and Reagents',
-    language: 'Language',
+    assettypes: 'Asset type'
   };
 
   const desiredOrder = [
@@ -117,7 +109,7 @@ export default async function decorate(block) {
     resourceLibrarySearchEngine.subscribe(() => {
       renderfavoriteSearchResultList(resourceLibraryResultClick,favoriteResultsList);
       renderCommonQuerySummary(resourceLibraryQuerySummary);
-      renderCommonPagination(resourceLibraryPaginationController);
+     // renderCommonPagination(resourceLibraryPaginationController);
       renderCommonFacet(allFacetController, facetsId, desiredOrder);
       renderCommonFacetBreadcurm(resourceLibraryFacetBreadcrumb);
     });
