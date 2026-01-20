@@ -31,7 +31,7 @@ export const resourceLibrarySearchEngine = buildSearchEngine({
 export const fav = async () => {
   try {
     const response = await fetch(
-      "https://devcs.sciex.com/bin/sciex/get-favorite-content"
+      "https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/get-favorite-content"
     );
 
     if (!response.ok) {
@@ -39,7 +39,7 @@ export const fav = async () => {
     }
 
     const data = await response.json();
-    console.log('datas',data);
+    console.log('datasss',data);
     return data;
   } catch (error) {
     console.error("Fetch error:", error);
