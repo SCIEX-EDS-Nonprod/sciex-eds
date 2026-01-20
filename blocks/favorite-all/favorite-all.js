@@ -10,6 +10,7 @@ import {
   resourceLibraryPaginationController,
   allFacetController,
   resourceLibraryFacetBreadcrumb,
+  favoriteResultsList,
 } from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
 import renderCommonSearchResultList from '../../scripts/common-components/commonSearchResultList.js';
@@ -107,7 +108,15 @@ export default async function decorate(block) {
     'standardsandreagentscategories-facet',
     'language-facet',
   ];
-
+const data=[
+  {
+    "title": "How to reset your password",    
+  },
+  {
+    "title": "Account security best practices",    
+  }
+]
+console.log('oooooooooooo',favoriteResultsList)
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
@@ -116,7 +125,9 @@ export default async function decorate(block) {
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-    //   renderCommonSearchResultList(resourceLibraryResultsList, resourceLibraryResultClick);
+      renderCommonSearchResultList(resourceLibraryResultClick,data);
+          //   renderCommonSearchResultList(resourceLibraryResultsList, resourceLibraryResultClick);
+
       renderCommonQuerySummary(resourceLibraryQuerySummary);
       renderCommonPagination(resourceLibraryPaginationController);
       renderCommonFacet(allFacetController, facetsId, desiredOrder);

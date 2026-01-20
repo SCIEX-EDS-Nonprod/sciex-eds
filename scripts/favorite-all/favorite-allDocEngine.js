@@ -28,7 +28,8 @@ export const resourceLibrarySearchEngine = buildSearchEngine({
     },
   },
 });
-export const fav = async () => {
+export const favoriteSearchEngine = async () => {
+  console.log('cccccccccccccccccccc')
   try {
     const response = await fetch(
       "https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/get-favorite-content"
@@ -45,5 +46,5 @@ export const fav = async () => {
     console.error("Fetch error:", error);
   }
 };
-fav()
-export default { resourceLibrarySearchEngine, fav };
+favoriteSearchEngine()
+export default { resourceLibrarySearchEngine, favoriteSearchEngine };

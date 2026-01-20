@@ -10,7 +10,7 @@ import {
     buildBreadcrumbManager,
     buildContext
   } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
-  import { resourceLibrarySearchEngine }  from '../favorite-allDocEngine.js';
+  import { favoriteSearchEngine, resourceLibrarySearchEngine }  from '../favorite-allDocEngine.js';
   
   export const resourceLibrarySearchBoxController = buildSearchBox(resourceLibrarySearchEngine, {
     options: {
@@ -33,6 +33,10 @@ import {
       fieldsToInclude: ['description', 'duration', 'levelcategories', 'coursetypecategories', 'isnewcourse'],
     },
   });
+export const favoriteResultsList = await favoriteSearchEngine();
+
+
+  
   
   export  function resourceLibraryResultClick(results) {
     const interactiveResult = buildInteractiveResult(resourceLibrarySearchEngine, {
