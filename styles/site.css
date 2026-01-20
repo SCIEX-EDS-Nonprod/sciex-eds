@@ -431,20 +431,24 @@ button.active {
         max-width: 8in
     }
 }
-
+@media (min-width:1190px) {
+    .tw-container {        
+        gap: 50px !important ;
+    }
+}
 @media (min-width:1024px) {
     .tw-container {
         max-width: 64pc;
         padding-left: 1pc;
         padding-right: 1pc;
-        gap: 50px;
+        gap: 30px;
     }
 }
 
 @media (min-width:1280px) {
     .tw-container {
         max-width: 90pc;
-        padding: 0 64px !important;
+        /* padding: 0 64px !important; */
         margin: auto;
     }
 }
@@ -1047,6 +1051,9 @@ nav a[aria-label="Go to Sciex homepage"] {
 
 .tw .tw-z-50 {
     z-index: 50
+}
+.tw .tw-z--1 {
+    z-index: -1
 }
 
 .tw .tw-z-\[100\] {
