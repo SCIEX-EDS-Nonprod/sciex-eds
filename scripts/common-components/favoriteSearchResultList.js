@@ -87,19 +87,24 @@ const renderfavoriteSearchResultList = (
       resultItem.innerHTML = resultMarkup;
       const favIcon = resultItem.querySelector('.favorite-icon');
 
-favIcon.addEventListener('click', async () => {
-  try {
-    console.log('kkkk', result?.path);
+      favIcon.addEventListener('click', async () => {
+        try {
+          console.log('kkkk', result?.path);
 
-    const response = await removeFavoriteSearchEngine(result?.path);
-console.log('response',response)
-    if (response?.message === 'The operation went successfully') {
-      await favoriteSearchEngine();
-    }
-  } catch (error) {
-    console.error('API error:', error);
-  }
-});
+          const response = await removeFavoriteSearchEngine(result?.path);
+          console.log('response', response)
+          if (response?.message === 'The operation went successfully') {
+            const updatedData = await favoriteSearchEngine();
+
+            console.log('updatedData', updatedData);
+
+            // ⬇️ Re-render with new data
+            renderfavoriteSearchResultList(customerDocResultClick, updatedData);
+          }
+        } catch (error) {
+          console.error('API error:', error);
+        }
+      });
 
 
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
