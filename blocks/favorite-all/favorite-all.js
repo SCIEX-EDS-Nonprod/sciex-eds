@@ -99,6 +99,63 @@ export default async function decorate(block) {
     'standardsandreagentscategories-facet',
     'language-facet',
   ];
+  const datass=[
+    {
+        "path": "/tech-notes/biopharma/improved-lc-mrm-workflow-for-quantification-of-glucagonlike-pept",
+        "id": "aE5Ou0000000On7KAE",
+        "title": "Improved LC-MRM workflow for quantification of glucagonlike peptide-1 analogues"
+    },
+    {
+        "path": "/Hidden/sciexhow/Ultra-sensitive-analytical-methodology-for-the-quantification-of-11-nor-9-carboxy-THC-THC-COOH-in-oral-fluid",
+        "id": "aE5Ou0000000OWzKAM",
+        "title": "Ultra-sensitive analytical methodology for the quantification of 11-nor-9-carboxy-THC (THC-COOH) in oral fluid"
+    },
+    {
+        "path": "/Hidden/sciexhow/5-4-azidomethyl-1-1-biphenyl-2yl-1H-tetrazole-AZBT-quantification",
+        "id": "aE5Ou0000000OVNKA2",
+        "title": "5-(4?-(azidomethyl)-[1,1?-biphenyl]-2yl)-1H-tetrazole (AZBT) quantification"
+    },
+    {
+        "path": "/tech-notes/life-science-research/lipidomics/high-throughput-targeted-lipidomics-analysis-of-dihydroceramide-",
+        "id": "aE5Ou0000000OTlKAM",
+        "title": "High-throughput targeted lipidomics analysis of dihydroceramide desaturase-1 (DES1) knockout mice"
+    },
+    {
+        "path": "/tech-notes/biopharma/streamlined-identification-and-quantitation-of-impurities-of-the",
+        "id": "aE5Ou0000000OS9KAM",
+        "title": "Streamlined identification and quantitation of impurities of the ionizable lipid ALC-0315 for rapid and confident vendor-to-vendor raw material assessment to ensure mRNA-LNP product quality"
+    },
+    {
+        "path": "/tech-notes/biopharma/structural-characterization-of-the-cationic-lipid-nanoparticle-c",
+        "id": "aE5Ou0000000OQXKA2",
+        "title": "Structural characterization of the cationic lipid nanoparticle component, ALC-0315, and its impurities using electronactivated dissociation (EAD)-based MS/MS fragmentation"
+    },
+    {
+        "path": "/support/knowledge-base-articles/why-do-i-get-no-hit-with-precursor-mass-tolerance-set-to-0-01-da-when-searching-sciex-libraries-in-sciex-os-software_en_us",
+        "id": "aE5Ou0000000OOvKAM",
+        "title": "Why Don't I get Hits when the Precursor Mass Tolerance Is Set to 0.01 Da when Searching SCIEX Libraries?"
+    },
+    {
+        "path": "/support/knowledge-base-articles/why-do-i-get-no-hit-with-precursor-mass-tolerance-set-to-0-01-da-when-searching-sciex-libraries-in-sciex-os-software_ja",
+        "id": "aE5Ou0000000ONJKA2",
+        "title": "SCIEX???????????Precursor Mass Tolerance?0.01 Da?????????????????????"
+    },
+    {
+        "path": "/support/knowledge-base-articles/change-cad-gas-settings-from-simplified-low-medium-high-to-operator-0-12-in-analyst-software_en_us",
+        "id": "aE5Ou0000000OLhKAM",
+        "title": "Change CAD Gas Settings from Simplified (Low, Medium, High) to Operator (0-12) in Analyst  Software"
+    },
+    {
+        "path": "/support/knowledge-base-articles/an-if-statement-of-calculated-concentration-less-than-zero-does-not-work-for-concentrations-0-or-n-a-in-a-report-template_en_us",
+        "id": "aE5Ou0000000OK5KAM",
+        "title": "Reporter 3.2: How To Report Calculated Concentrations of \"<0\" or \"N/A\""
+    },
+    {
+        "path": "/support/knowledge-base-articles/discoveryquant-quicktune-dp-0-dp-scan-problem-1443624856293_en_us",
+        "id": "aE5Ou0000000Nr3KAE",
+        "title": "DiscoveryQuant Quicktune DP  0 DP Scan Problem"
+    }
+]
   // Initialize course catalog components
   try {
     await readBlockProperties(block);

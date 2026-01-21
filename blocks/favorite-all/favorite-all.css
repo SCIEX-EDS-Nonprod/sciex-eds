@@ -10,6 +10,20 @@
     max-width: 90pc !important;
 }
 
+.favorite-icon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 32px;
+
+}
+
 .favourite-all {
     margin: 0 auto !important;
     max-width: 90pc !important;
@@ -27,7 +41,8 @@
     font-size: 16px !important;
     font-style: normal !important;
     font-weight: 530 !important;
-    line-height: 24px !important; /* 150% */
+    line-height: 24px !important;
+    /* 150% */
     letter-spacing: 0.08px !important;
 }
 
@@ -37,7 +52,8 @@
     font-size: 16px !important;
     font-style: normal !important;
     font-weight: 530 !important;
-    line-height: 24px !important; /* 150% */
+    line-height: 24px !important;
+    /* 150% */
     letter-spacing: 0.08px !important;
 }
 
@@ -51,7 +67,7 @@
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 1024px) { 
+@media (max-width: 1024px) {
     .favourite-all {
         margin-top: 0 !important;
         padding: 0 24px !important;
@@ -71,6 +87,7 @@
 }
 
 @media (min-width: 640px) {
+
     .favourite-all,
     #coveo-life-sciences div,
     .favourite-all #facets,
@@ -81,6 +98,7 @@
 }
 
 @media (min-width: 768px) {
+
     .favourite-all,
     #coveo-life-sciences div,
     .favourite-all #facets,
@@ -91,6 +109,7 @@
 }
 
 @media (min-width: 1024px) {
+
     .favourite-all,
     .favourite-all #facets,
     #mobile-filter-header,
@@ -102,6 +121,7 @@
 }
 
 @media (min-width: 1280px) {
+
     .favourite-all,
     #mobile-filter-header,
     #mobile-filter-footer {
@@ -114,6 +134,7 @@
 }
 
 @media (min-width: 1440px) {
+
     .favourite-all,
     #coveo-life-sciences div,
     .favourite-all #facets,
@@ -124,6 +145,7 @@
 }
 
 @media (min-width: 1536px) {
+
     .favourite-all,
     .favourite-all #facets,
     #mobile-filter-header,
