@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { removeFavoriteSearchEngine } from '../favorite-all/favorite-allDocEngine.js';
 import { i18n } from '../translation.js';
 
 const lang = document.documentElement.lang || 'en';

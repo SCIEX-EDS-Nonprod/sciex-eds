@@ -45,6 +45,7 @@ export const favoriteSearchEngine = async () => {
   }
 };
 export const removeFavoriteSearchEngine = async (url) => {
+  console.log('called',url)
   try {
     const response = await fetch(
       `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${url}&operation=remove`
