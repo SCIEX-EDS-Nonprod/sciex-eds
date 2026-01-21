@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { removeFavoriteSearchEngine } from '../favorite-all/favorite-allDocEngine.js';
+import { favoriteSearchEngine, removeFavoriteSearchEngine } from '../favorite-all/favorite-allDocEngine.js';
 import { i18n } from '../translation.js';
 
 const lang = document.documentElement.lang || 'en';
@@ -47,7 +47,7 @@ const renderfavoriteSearchResultList = (
     const facets = document.getElementById('facets');
     if (facets) {
       facets.classList.remove('tw-hidden');
-    } 
+    }
 
     if (sortElement) sortElement.removeAttribute('style');
     if (noResultsElement) noResultsElement.style.display = 'none';
@@ -85,11 +85,24 @@ const renderfavoriteSearchResultList = (
       `;
 
       resultItem.innerHTML = resultMarkup;
-   const favIcon = resultItem.querySelector('.favorite-icon');
-      favIcon.addEventListener('click', () => {
-        console.log('kkkk',result?.path)
-        removeFavoriteSearchEngine(result?.path)
+      const favIcon = resultItem.querySelector('.favorite-icon');
+
+      favIcon.addEventListener('click', async () => {
+        try {
+          console.log('kkkk', result?.path);
+
+          const response = await removeFavoriteSearchEngine(result?.path);
+
+          // check success condition (adjust based on your API response)
+          if (response?.success) {
+            console.log('calling favv')
+            await favoriteSearchEngine();
+          }
+        } catch (error) {
+          console.error('Error while updating favorite:', error);
+        }
       });
+
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
       if (viewDetailsBtn) {
         viewDetailsBtn.addEventListener('click', () => {
