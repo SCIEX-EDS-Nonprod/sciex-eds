@@ -74,13 +74,7 @@ const renderfavoriteSearchResultList = (
 
       const resultMarkup = `
         <div class="item-details"> 
-          <h3>${result?.title || ''}</h3>
-
-          ${
-            result.assetType
-              ? `<span class="asset-type">${result.assetType}</span>`
-              : ''
-          }
+          <h3>${result?.title || ''}</h3>       
 
           <div class="description">
             ${descriptionHtml}
