@@ -84,22 +84,8 @@ export default async function decorate(block) {
   suggestionPopupDiv.id = 'suggestion-popup';
   document.body.appendChild(suggestionPopupDiv);
 
-  const facetsId = {
-    assettypes: 'Asset type'
-  };
-
-  const desiredOrder = [
-    'assettypes-facet',
-    'applications-facet',
-    'massspectrometerscategories-facet',
-    'capillaryelectrophoresiscategories-facet',
-    'hplcandceproductscategories-facet',
-    'integratedsolutionscategories-facet',
-    'softwarecategories-facet',
-    'standardsandreagentscategories-facet',
-    'language-facet',
-  ];
- const data=[
+  // Extract unique assetTypes from data array
+  const data=[
   {
     "assetType": "Knowledge base article",
     "pageData": [
@@ -259,6 +245,10 @@ export default async function decorate(block) {
     }
   }
 ]
+  // Get unique assetTypes from data array
+  const assetTypes = [...new Set(favoriteResultsList.map(item => item.assetType))];
+  let selectedAssetTypes = [];
+
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
@@ -267,10 +257,44 @@ export default async function decorate(block) {
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-      renderfavoriteSearchResultList(resourceLibraryResultClick,favoriteResultsList);
-      renderCommonQuerySummary(resourceLibraryQuerySummary);
-     // renderCommonPagination(resourceLibraryPaginationController);
-      renderCommonFacet(allFacetController, facetsId, desiredOrder);
+      // Filter data based on selected assetTypes (multiple)
+      const filteredData = selectedAssetTypes.length > 0
+        ? favoriteResultsList.filter(item => selectedAssetTypes.includes(item.assetType))
+        : favoriteResultsList;
+      
+      // Flatten the filtered data for display
+      const flattenedData = filteredData.flatMap((group) =>
+        Array.isArray(group.pageData)
+          ? group.pageData.map((item) => ({
+              ...item,
+              assetType: group.assetType,
+            }))
+          : []
+      );
+      
+      renderfavoriteSearchResultList(resourceLibraryResultClick, filteredData);
+      renderCommonQuerySummary(flattenedData);
+      renderCommonPagination(flattenedData);
+      renderCommonFacet(assetTypes, favoriteResultsList, (selected) => {
+        selectedAssetTypes = selected;
+        const newFilteredData = selected.length > 0 
+          ? favoriteResultsList.filter(item => selected.includes(item.assetType)) 
+          : favoriteResultsList;
+        
+        // Flatten the new filtered data
+        const newFlattenedData = newFilteredData.flatMap((group) =>
+          Array.isArray(group.pageData)
+            ? group.pageData.map((item) => ({
+                ...item,
+                assetType: group.assetType,
+              }))
+            : []
+        );
+        
+        renderfavoriteSearchResultList(resourceLibraryResultClick, newFilteredData);
+        renderCommonQuerySummary(newFlattenedData);
+        renderCommonPagination(newFlattenedData);
+      });
       renderCommonFacetBreadcurm(resourceLibraryFacetBreadcrumb);
     });
   } catch (error) {

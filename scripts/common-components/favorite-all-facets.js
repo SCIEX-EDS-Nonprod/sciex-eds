@@ -352,22 +352,101 @@ function renderSearchFacets(facetController, facetItemsContainer, facetElement, 
   return isSearch;
 }
 
-export function renderCommonFacet(allFacetController, facetsId, desiredOrder ) {
-  const facetController = allFacetController;
-
-  for (const item in facetsId) {
-    const val = facetController.get(item);
-    if (val.state.values.length === 0) {
-      const elementToRemove = document.querySelector(`#${val.state.facetId}-facet`);
-      if (elementToRemove) {
-        elementToRemove.remove();
-      }
+export function renderCommonFacet(assetTypes, data, onAssetTypeClick) {
+  // Create or get facets container
+  let facetsContainer = document.querySelector('#facets');
+  if (!facetsContainer) {
+    facetsContainer = document.createElement('div');
+    facetsContainer.id = 'facets';
+    facetsContainer.className = 'facets-container';
+    
+    // Try to insert at the beginning of results section
+    const resultsSection = document.querySelector('.search-result-section');
+    if (resultsSection) {
+      resultsSection.insertBefore(facetsContainer, resultsSection.firstChild);
+    } else {
+      // Fallback: append to body
+      document.body.appendChild(facetsContainer);
     }
-    if (val.state.values.length) {
-      createFacetRender(val, item, facetsId[item]);
-    }
+  } else {
+    // Clear existing content
+    facetsContainer.innerHTML = '';
   }
-  orderFacetChildren('facets', desiredOrder);
+  
+  // Create Asset Type facet section
+  const assetTypeFacetDiv = document.createElement('div');
+  assetTypeFacetDiv.id = 'assettypes-facet';
+  assetTypeFacetDiv.className = 'facet';
+  
+  const facetHeader = document.createElement('h3');
+  facetHeader.className = 'facet-header';
+  facetHeader.style.cursor = 'pointer';
+  facetHeader.setAttribute('aria-expanded', 'true');
+  
+  const headerSpan = document.createElement('span');
+  headerSpan.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 11L8 5L14 11" stroke="#0068FA"/></svg>';
+  
+  const headerText = document.createElement('span');
+  headerText.textContent = 'Asset Type';
+  facetHeader.appendChild(headerText);
+  facetHeader.appendChild(headerSpan);
+  
+  const facetItemsContainer = document.createElement('div');
+  facetItemsContainer.className = 'facet-items';
+  facetItemsContainer.style.display = 'flex';
+  facetItemsContainer.style.flexDirection = 'column';
+  facetItemsContainer.style.gap = '8px';
+  
+  // Create checkbox items for each assetType
+  assetTypes.forEach(assetType => {
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'facet-item';
+    itemDiv.style.display = 'flex';
+    itemDiv.style.alignItems = 'center';
+    
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `asset-type-${assetType.replace(/\s+/g, '-').toLowerCase()}`;
+    checkbox.value = assetType;
+    checkbox.className = 'facet-checkbox';
+    checkbox.style.marginRight = '8px';
+    
+    const label = document.createElement('label');
+    label.htmlFor = checkbox.id;
+    label.textContent = assetType;
+    label.style.cursor = 'pointer';
+    label.style.margin = '0';
+    
+    checkbox.addEventListener('change', () => {
+      // Get all checked checkboxes
+      const checkedBoxes = Array.from(facetItemsContainer.querySelectorAll('input[type="checkbox"]:checked'));
+      const selectedAssets = checkedBoxes.map(cb => cb.value);
+      
+      // Pass array of selected assetTypes to callback
+      if (onAssetTypeClick) {
+        onAssetTypeClick(selectedAssets);
+      }
+    });
+    
+    itemDiv.appendChild(checkbox);
+    itemDiv.appendChild(label);
+    facetItemsContainer.appendChild(itemDiv);
+  });
+  
+  // Handle facet header toggle
+  facetHeader.addEventListener('click', () => {
+    const isVisible = facetItemsContainer.style.display === 'none' || facetItemsContainer.style.display === '';
+    facetItemsContainer.style.display = isVisible ? 'flex' : 'none';
+    headerSpan.innerHTML = isVisible
+      ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 11L8 5L14 11" stroke="#0068FA"/></svg>'
+      : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 5L8 11L2 5" stroke="#0068FA"/></svg>';
+    facetHeader.setAttribute('aria-expanded', isVisible);
+  });
+  
+  assetTypeFacetDiv.appendChild(facetHeader);
+  assetTypeFacetDiv.appendChild(facetItemsContainer);
+  
+  facetsContainer.appendChild(assetTypeFacetDiv);
 }
 
 export const handleMobileFilters = () => {
