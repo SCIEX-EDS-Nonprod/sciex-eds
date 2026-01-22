@@ -1,36 +1,22 @@
-.favourite-all-wrapper {
+.favorite-all-wrapper {
     margin-top: 0 !important;
     padding: 0 24px !important;
-    max-width: 90pc !important;
 }
 
 /* General Styles */
 
-.favourite-all {
+
+.favorite-all-wrapper {
     max-width: 90pc !important;
 }
 
-.favorite-icon {
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-}
-
-.action-section {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    gap: 32px;
-
-}
-
-.favourite-all {
+.favorite-all-wrapper {
     margin: 0 auto !important;
     max-width: 90pc !important;
     padding: 0 64px !important;
 }
 
-.favourite-all {
+.favorite-all-wrapper {
     margin: 0 auto !important;
     max-width: 90pc !important;
 }
@@ -66,14 +52,29 @@
     letter-spacing: 0.08px;
 }
 
+
+.favorite-icon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 32px;
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
-    .favourite-all {
+
+    .favorite-all-wrapper {
         margin-top: 0 !important;
         padding: 0 24px !important;
     }
 
-    .favourite-all #facets {
+    .favorite-all-wrapper #facets {
         display: none;
         position: absolute;
         top: 124px;
@@ -84,34 +85,50 @@
         background: rgb(255, 255, 255);
         z-index: 123;
     }
+      .action-section{
+        gap: 20px;
+    }
+    .favorite-icon {
+        width: 24px ;
+        height: 24px ;
+    }
+    
 }
-
+@media (max-width: 768px){
+   .action-section {
+        width: 100%;
+        gap: 15px;
+        align-items: start
+    }
+}
 @media (min-width: 640px) {
 
-    .favourite-all,
+    .favorite-all-wrapper,
     #coveo-life-sciences div,
-    .favourite-all #facets,
+    .favorite-all-wrapper #facets,
     #mobile-filter-header,
     #mobile-filter-footer {
         max-width: 40pc !important;
     }
+  
 }
 
 @media (min-width: 768px) {
 
-    .favourite-all,
+    .favorite-all-wrapper,
     #coveo-life-sciences div,
-    .favourite-all #facets,
+    .favorite-all-wrapper #facets,
     #mobile-filter-header,
     #mobile-filter-footer {
         max-width: 8in !important;
     }
+   
 }
 
 @media (min-width: 1024px) {
 
-    .favourite-all,
-    .favourite-all #facets,
+    .favorite-all-wrapper,
+    .favorite-all-wrapper #facets,
     #mobile-filter-header,
     #mobile-filter-footer {
         max-width: 64pc !important;
@@ -122,22 +139,22 @@
 
 @media (min-width: 1280px) {
 
-    .favourite-all,
+    .favorite-all-wrapper,
     #mobile-filter-header,
     #mobile-filter-footer {
         max-width: 90pc !important;
     }
 
-    .favourite-all #facets {
+    .favorite-all-wrapper #facets {
         width: 30%;
     }
 }
 
 @media (min-width: 1440px) {
 
-    .favourite-all,
+    .favorite-all-wrapper,
     #coveo-life-sciences div,
-    .favourite-all #facets,
+    .favorite-all-wrapper #facets,
     #mobile-filter-header,
     #mobile-filter-footer {
         max-width: 90pc !important;
@@ -146,8 +163,8 @@
 
 @media (min-width: 1536px) {
 
-    .favourite-all,
-    .favourite-all #facets,
+    .favorite-all-wrapper,
+    .favorite-all-wrapper #facets,
     #mobile-filter-header,
     #mobile-filter-footer {
         max-width: 96pc !important;
