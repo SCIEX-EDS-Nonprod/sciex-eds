@@ -423,8 +423,13 @@ export default async function decorate(block) {
             selection: { value, state: 'selected' },
           }));
         }
-        contentTypeFacetController.showMoreValues();
-      }
+      }/* else{
+         searchEngine.dispatch(toggleSelectFacetValue({
+          facetId: 'contenttype',
+          selection: { value: 'Applications', state: 'idle' },
+        }));
+      } */
+      contentTypeFacetController.showMoreValues();
       const enableSiteInterceptScript = getMetadata('enablesiteinterceptscript');
       if (enableSiteInterceptScript && enableSiteInterceptScript === 'true') {
         setSearchSurveyCookie();
