@@ -545,7 +545,7 @@ function createMainHeader(section) {
       myFavoriteResources = anchorTag.text;
     } else if (index === 2) {
       anchorTag.text = '';
-      anchorTag.className = 'tw-py-16';
+      anchorTag.className = '';
       // anchorTag.target = '_blank';
       if (picture != null) {
         anchorTag.appendChild(picture);
@@ -560,7 +560,7 @@ function createMainHeader(section) {
     } else if (headerDiv.children.length !== index + 1) {
       const liTag = li({
         class:
-          'tw-flex tw-items-center hover:tw-text-white tw-transition-colors', // tw-ml-16
+          'tw-flex tw-items-center tw-transition-colors', // tw-ml-16
       });
       if (anchorTag.text === 'Login' || anchorTag.text === 'My account') {
         // anchorTag.addEventListener('click', handleSignInClick);
@@ -716,7 +716,7 @@ function createMainHeader(section) {
       ulTag.append(liTag);
     } else {
       const liTag = li({ class: '' });// tw-ml-32
-      anchorTag.className = 'tw-text-mobBase md:tw-text-base tw-flex tw-items-center tw-whitespace-nowrap focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-blue-700 tw-rounded tw-border tw-py-12 tw-px-16 md:tw-px-20 active:tw-bg-blue-900 tw-border-blue-700 tw-text-white tw-bg-gradient-to-r tw-bg-blue-700 tw-from-blue-800 tw-via-blue-800 tw-to-blue-800 tw-bg-bottom tw-bg-no-repeat tw-bg-[length:100%_0px] hover:tw-bg-[length:100%_100%] tw-transition-all tw-h-full tw-rounded-none lg:tw-px-32';
+      anchorTag.className = 'header-link tw-text-mobBase md:tw-text-base tw-flex tw-items-center tw-whitespace-nowrap focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-blue-700 tw-rounded tw-border tw-py-12  active:tw-bg-blue-900 tw-border-blue-700 tw-text-white tw-bg-gradient-to-r tw-bg-blue-700 tw-from-blue-800 tw-via-blue-800 tw-to-blue-800 tw-bg-bottom tw-bg-no-repeat tw-bg-[length:100%_0px] hover:tw-bg-[length:100%_100%] tw-transition-all tw-h-full tw-rounded-none';
       anchorTag.target = '_blank';
       const buttondiv = div(
         { class: 'tw-flex tw-items-center tw-justify-between' },
@@ -932,6 +932,7 @@ function hideAllActiveDivs() {
   }
   document.getElementById('menu-button').style.display = 'none';
   document.getElementById('menu-overlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 function createMegaMenuTopNav(section) {
@@ -1050,6 +1051,7 @@ function createMegaMenuTopNav(section) {
             // showing ovelay and button
             overlayDiv.style.display = '';
             buttoniv.style.display = '';
+            document.body.style.overflow = 'hidden';
           } else {
             hideAllActiveDivs();
           }
@@ -1116,6 +1118,7 @@ function createMegaMenuTopNav(section) {
           // showing ovelay and button
           overlayDiv.style.display = '';
           buttoniv.style.display = '';
+          document.body.style.overflow = 'hidden';
         } else {
           hideAllActiveDivs();
         }
@@ -1688,7 +1691,7 @@ function createMegaMenuThirdLevel(child) {
 function createOverlay(nav) {
   const overlayDiv = div({
     class:
-      'tw-hidden lg:tw-block tw-fixed tw-inset-0 tw-bg-black tw-opacity-60 tw-z-50',
+      'tw-hidden lg:tw-block tw-fixed tw-inset-0 tw-bg-black tw-opacity-60 tw-z--1',
   });
   overlayDiv.id = 'menu-overlay';
   overlayDiv.style.display = 'none';
@@ -1784,6 +1787,22 @@ export default async function decorate(block) {
     processHtml(block, main);
   }
   decorateIcons(block);
+    
+  // Track the previous viewport state
+  let wasMobile = canMobileActions();
+  
+  // Handle viewport resize - refresh page when crossing mobile/desktop threshold
+  window.addEventListener('resize', () => {
+    const isMobileNow = canMobileActions();
+    
+    // Check if viewport crossed the mobile/desktop threshold (1024px)
+    if (wasMobile !== isMobileNow) {
+      wasMobile = isMobileNow;
+      // Refresh the page when switching between mobile and desktop
+      window.location.reload();
+    }
+  });
+  
   /* if (document.getElementById('logout')) {
     document.getElementById('logout').addEventListener('click', () => {
       const redirectUrl = encodeURIComponent(window.location.href);
