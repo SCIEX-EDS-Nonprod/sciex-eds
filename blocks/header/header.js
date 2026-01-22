@@ -1787,14 +1787,14 @@ export default async function decorate(block) {
     processHtml(block, main);
   }
   decorateIcons(block);
-    
+
   // Track the previous viewport state
   let wasMobile = canMobileActions();
-  
+
   // Handle viewport resize - refresh page when crossing mobile/desktop threshold
   window.addEventListener('resize', () => {
     const isMobileNow = canMobileActions();
-    
+
     // Check if viewport crossed the mobile/desktop threshold (1024px)
     if (wasMobile !== isMobileNow) {
       wasMobile = isMobileNow;
@@ -1802,7 +1802,7 @@ export default async function decorate(block) {
       window.location.reload();
     }
   });
-  
+
   /* if (document.getElementById('logout')) {
     document.getElementById('logout').addEventListener('click', () => {
       const redirectUrl = encodeURIComponent(window.location.href);
