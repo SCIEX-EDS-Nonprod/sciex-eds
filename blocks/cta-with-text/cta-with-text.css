@@ -1,0 +1,107 @@
+/* ========== Base Layout ========== */
+
+.support-cta-block {
+  width: 100%;
+}
+
+.support-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ========== Typography ========== */
+
+.support-cta-title {
+  color: #000;
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 40px; /* 125% */
+  margin: 0;
+}
+
+.support-cta-desc {
+  color: var(--Gray-3, #828282);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 26px; /* 144.444% */
+  letter-spacing: 0.045px;
+  margin: 8px 0 0;
+}
+
+/* ========== Variations ========== */
+
+/* Banner */
+
+.support-cta--banner .support-cta-inner {
+  padding: 16px 24px;
+  gap: 24px;
+  background: #fff;
+}
+
+/* Card */
+
+.support-cta--card .support-cta-inner {
+  padding: 32px;
+  gap: 32px;
+  background: var(--Grey-50, #F5F5F5);
+}
+
+.support-cta--card .support-cta-title {
+  color: var(--Grey-900, #141414);
+}
+
+/* ========== Button Base ========== */
+
+.support-cta-button {
+  display: flex;
+  padding: 10px 16px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 14px;
+  font-weight: 330;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Button Types */
+
+.support-cta-button--primary {
+  background: var(--Blue-700, #0068FA);
+  color: #fff;
+  border: none;
+}
+
+.support-cta-button--secondary {
+  background: transparent;
+  color: var(--Blue-700, #0068FA);
+  border: 1px solid var(--Blue-700, #0068FA);
+}
+
+.support-cta-button--link {
+  background: transparent;
+  color: var(--Blue-700, #0068FA);
+  border: none;
+  padding: 0;
+}
+
+/* ========== Alignment Modifiers ========== */
+
+.support-cta--align-left .support-cta-inner {
+  flex-direction: row-reverse;
+}
+
+.support-cta--align-bottom .support-cta-inner {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* =========*
