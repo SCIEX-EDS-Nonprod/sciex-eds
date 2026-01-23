@@ -172,11 +172,11 @@ export default async function decorate(block) {
 
   const menuItems = {
     All: 'All',
-    'knowledge base article': 'Resource library',
-    'Self paced learning': 'All',
-    'Instructor led traning': 'All',
-    'Tech notes': 'Resource library',
-    'Regulatory docs': 'Regulatory documents',
+    'Knowledge base article': 'Resource library',
+    'Self-paced learning': 'All',
+    'Instructor led training': 'All',
+    'Technical notes': 'Resource library',
+    'Regulatory documents': 'Regulatory documents',
     'User guides': 'Customer documents',
   };
   let selectedContentType = 'All';
