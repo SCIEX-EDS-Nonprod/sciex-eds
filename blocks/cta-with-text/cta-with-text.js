@@ -1,26 +1,27 @@
 import { } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  const {
-    heading,
-    description,
-    variation,
-    alignment,
-    type,
-    text: buttonText,
-    link,
-    showSvg,
-    target,
-  } = block.dataset;
-
   // Debug once if needed
   // console.log('CTA dataset:', block.dataset);
 
   // Clear any server-rendered markup
-  block.innerHTML = '';
+  // block.innerHTML = '';
+  const child = block.children;
 
+  const heading = child[0]?.textContent.trim();
+  const description = child[1]?.textContent.trim();
+  const variation = 'card'; // child[2]?.textContent.trim();
+  const alignment = child[3]?.textContent.trim();
+  const type = child[4]?.textContent.trim();
+  const buttonText = child[5]?.textContent.trim();
+  const link = child[6]?.textContent.trim();
+  const showSvg = child[5]?.textContent.trim();
+  const target = child[6]?.textContent.trim();
+  console.log('heading:', heading);
+  console.log('description:', description);
+  console.log('variation:', variation);
   // Root
-  const section = document.createElement('section');
+  const section = document.createElement('div');
   section.classList.add('support-cta-block');
 
   // Variation (default = banner)
@@ -118,5 +119,7 @@ export default function decorate(block) {
   }
 
   section.appendChild(inner);
+  console.log('section:', section);
+  // block.innerHTML = '';
   block.appendChild(section);
 }
