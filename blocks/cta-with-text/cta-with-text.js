@@ -1,41 +1,45 @@
 import { } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  // Debug once if needed
-  // console.log('CTA dataset:', block.dataset);
-
-  // Clear any server-rendered markup
-  // block.innerHTML = '';
   const child = block.children;
 
+  // --- Map fields from model order ---
   const heading = child[0]?.textContent.trim();
   const description = child[1]?.textContent.trim();
-  const variation = 'card'; // child[2]?.textContent.trim();
-  const alignment = child[3]?.textContent.trim();
-  const type = child[4]?.textContent.trim();
-  const buttonText = child[5]?.textContent.trim();
-  const link = child[6]?.textContent.trim();
-  const showSvg = child[5]?.textContent.trim();
-  const target = child[6]?.textContent.trim();
-  console.log('heading:', heading);
-  console.log('description:', description);
-  console.log('variation:', variation);
+  const variation = child[2]?.textContent.trim(); // card | banner
+  const alignment = child[3]?.textContent.trim(); // left | right | bottom
+
+  const primaryText = child[4]?.textContent.trim();
+  const primaryLink = child[6]?.textContent.trim();
+  const primaryTarget = child[7]?.textContent.trim();
+
+  const secondaryText = child[8]?.textContent.trim();
+  const secondaryLink = child[10]?.textContent.trim();
+  const secondaryTarget = child[11]?.textContent.trim();
+
+  const linkText = child[12]?.textContent.trim();
+  const linkUrl = child[14]?.textContent.trim();
+  const linkTarget = child[15]?.textContent.trim();
+
+  // Clear original author markup
+  block.innerHTML = '';
+
   // Root
   const section = document.createElement('div');
   section.classList.add('support-cta-block');
 
-  // Variation (default = banner)
+  // Variation
   if (variation === 'card') {
     section.classList.add('support-cta--card');
   } else {
     section.classList.add('support-cta--banner');
   }
 
-  // Alignment (left | right | bottom)
+  // Alignment
   if (alignment) {
     section.classList.add(`support-cta--align-${alignment}`);
   } else {
-    section.classList.add('support-cta--align-right'); // safe default
+    section.classList.add('support-cta--align-right');
   }
 
   // Inner wrapper
@@ -64,62 +68,68 @@ export default function decorate(block) {
   const actionWrap = document.createElement('div');
   actionWrap.className = 'support-cta-action';
 
-  const buttonEl = document.createElement('a');
-  buttonEl.classList.add('support-cta-button');
+  // --- Primary Button ---
+  if (primaryText && primaryLink) {
+    const primaryBtn = document.createElement('a');
+    primaryBtn.className = 'support-cta-button support-cta-button--primary';
+    primaryBtn.textContent = primaryText;
+    primaryBtn.href = primaryLink;
 
-  // Button type (primary | secondary | link)
-  if (type) {
-    buttonEl.classList.add(`support-cta-button--${type}`);
-  } else {
-    buttonEl.classList.add('support-cta-button--secondary'); // default like banner view
-  }
-
-  buttonEl.textContent = buttonText || 'Request support';
-
-  // Link
-  if (link) {
-    buttonEl.href = link;
-  } else {
-    buttonEl.href = '#';
-  }
-
-  // Target
-  if (target) {
-    buttonEl.target = target;
-    if (target === '_blank') {
-      buttonEl.rel = 'noopener noreferrer';
+    if (primaryTarget) {
+      primaryBtn.target = primaryTarget;
+      if (primaryTarget === '_blank') {
+        primaryBtn.rel = 'noopener noreferrer';
+      }
     }
+
+    actionWrap.appendChild(primaryBtn);
   }
 
-  // Optional icon
-  if (showSvg === 'true') {
-    const iconSpan = document.createElement('span');
-    iconSpan.className = 'support-cta-icon';
-    iconSpan.setAttribute('aria-hidden', 'true');
+  // --- Secondary Button ---
+  if (secondaryText && secondaryLink) {
+    const secondaryBtn = document.createElement('a');
+    secondaryBtn.className = 'support-cta-button support-cta-button--secondary';
+    secondaryBtn.textContent = secondaryText;
+    secondaryBtn.href = secondaryLink;
 
-    // Replace with real SVG later if needed
-    iconSpan.innerHTML = '→';
+    if (secondaryTarget) {
+      secondaryBtn.target = secondaryTarget;
+      if (secondaryTarget === '_blank') {
+        secondaryBtn.rel = 'noopener noreferrer';
+      }
+    }
 
-    buttonEl.appendChild(iconSpan);
+    actionWrap.appendChild(secondaryBtn);
   }
 
-  actionWrap.appendChild(buttonEl);
+  // --- Text Link CTA ---
+  if (linkText && linkUrl) {
+    const linkEl = document.createElement('a');
+    linkEl.className = 'support-cta-link';
+    linkEl.textContent = linkText;
+    linkEl.href = linkUrl;
+
+    if (linkTarget) {
+      linkEl.target = linkTarget;
+      if (linkTarget === '_blank') {
+        linkEl.rel = 'noopener noreferrer';
+      }
+    }
+
+    actionWrap.appendChild(linkEl);
+  }
 
   // Assemble based on alignment
-  if (alignment === 'bottom') {
-    inner.appendChild(textWrap);
-    inner.appendChild(actionWrap);
-  } else if (alignment === 'left') {
+  if (alignment === 'left') {
     inner.appendChild(actionWrap);
     inner.appendChild(textWrap);
   } else {
-    // right (default)
+    // right & bottom default order
     inner.appendChild(textWrap);
     inner.appendChild(actionWrap);
   }
 
   section.appendChild(inner);
-  console.log('section:', section);
-  // block.innerHTML = '';
+  block.textContent = '';
   block.appendChild(section);
 }

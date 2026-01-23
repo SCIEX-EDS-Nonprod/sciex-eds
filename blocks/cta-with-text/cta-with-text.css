@@ -77,6 +77,21 @@
   background: var(--Blue-700, #0068FA);
   color: #fff;
   border: none;
+  display: flex;
+    padding: 10px 16px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+background: var(--Blue-700, #0068FA);
+color: var(--White-0, #FFF) !important;
+
+/* Desktop/text-base/bolder */
+font-family: "Geogrotesque Sharp VF";
+font-size: 16px;
+font-style: normal;
+font-weight: 530;
+line-height: 24px; /* 150% */
+letter-spacing: 0.08px;
 }
 
 .support-cta-button--secondary {
@@ -105,3 +120,52 @@
 }
 
 /* =========*
+
+/* ========== Action Row Layout ========== */
+
+.support-cta-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;              /* space between primary, secondary, link */
+  flex-wrap: wrap;      /* allows wrap on small screens */
+}
+
+/* Optional: keep link visually aligned with buttons */
+.support-cta-link {
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 14px;
+  font-weight: 330;
+  color: var(--Blue-700, #0068FA);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.support-cta-link:hover {
+  text-decoration: underline;
+}
+/* ========== Button Alignment Based on Author Selection ========== */
+
+/* Right aligned (default banner style) */
+.support-cta--align-right .support-cta-action {
+  justify-content: flex-end;
+}
+
+/* Left aligned */
+.support-cta--align-left .support-cta-action {
+  justify-content: flex-start;
+}
+
+/* Bottom alignment (buttons under text, left aligned) */
+.support-cta--align-bottom .support-cta-action {
+  justify-content: flex-start;
+}
+
+/* Always keep buttons in a row */
+.support-cta-action {
+  display: flex;
+  flex-direction: row;   
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
