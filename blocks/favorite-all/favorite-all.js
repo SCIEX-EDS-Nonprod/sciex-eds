@@ -166,7 +166,7 @@ export default async function decorate(block) {
     resourceLibrarySearchEngine.subscribe(() => {
       renderfavoriteSearchResultList(resourceLibraryResultClick,favoriteResultsList);
       renderCommonQuerySummary(resourceLibraryQuerySummary);
-     // renderCommonPagination(resourceLibraryPaginationController);
+      renderCommonPagination(resourceLibraryPaginationController);
       renderCommonFacet(allFacetController, facetsId, desiredOrder);
       renderCommonFacetBreadcurm(resourceLibraryFacetBreadcrumb);
     });
