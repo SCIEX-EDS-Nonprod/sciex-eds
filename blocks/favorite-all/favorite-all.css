@@ -4,7 +4,9 @@
 }
 
 /* General Styles */
-
+.coveo-search-component,.search-term-validation{
+    display: none !important;
+}
 
 .favorite-all-wrapper {
     max-width: 90pc !important;
