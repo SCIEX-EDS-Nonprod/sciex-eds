@@ -94,7 +94,7 @@ function createToggleButtons(facetItemsContainer, facetController) {
   }
 }
 
-function renderFacet(facetElementId, facetController, headerText) {
+function renderFacet(facetElementId, facetController, headerText,favoriteResultsList,toggleAssetType) {
   const { facetId } = facetController.state;
 
   const facetElement = document.getElementById(facetElementId);
@@ -175,8 +175,8 @@ function renderFacet(facetElementId, facetController, headerText) {
     }
   }
   if (!isSearch) {
-    values.forEach((value) => {
-      if (facetId === 'applications' && value.value === 'Application') {
+    favoriteResultsList.forEach((value) => {
+      if (facetId === 'applications' && value === 'Application') {
         return;
       }
       const facetItem = document.createElement('div');
@@ -195,7 +195,7 @@ function renderFacet(facetElementId, facetController, headerText) {
           focusElement ? focusElement.value = '' : '';
           sessionStorage.removeItem('focusedElement');
         }
-        facetController.toggleSelect(value);
+        toggleAssetType(value)
       });
 
       facetItemsContainer.appendChild(facetItem);
@@ -297,7 +297,7 @@ function orderContentTypeFacets(facetId, facetItemsContainer) {
   }
 }
 
-function createFacetRender(facetController, facetElementId, headerText) {
+function createFacetRender(facetController, facetElementId, headerText, favoriteResultsList,toggleAssetType) {
   let isValues = false;
   const { values } = facetController.state;
   if (values.length > 0) {
@@ -309,7 +309,7 @@ function createFacetRender(facetController, facetElementId, headerText) {
     ele.remove();
   }
   createFacetDiv(facetElementId);
-  renderFacet(id, facetController, headerText);
+  renderFacet(id, facetController, headerText, favoriteResultsList,toggleAssetType);
 }
 
 function createFacetDiv(id) {
@@ -352,7 +352,7 @@ function renderSearchFacets(facetController, facetItemsContainer, facetElement, 
   return isSearch;
 }
 
-export function renderCommonFacet(allFacetController, facetsId, desiredOrder ) {
+export function renderCommonFacet(allFacetController, facetsId, desiredOrder, favoriteResultsList,toggleAssetType) {
   const facetController = allFacetController;
 
   for (const item in facetsId) {
@@ -364,7 +364,7 @@ export function renderCommonFacet(allFacetController, facetsId, desiredOrder ) {
       }
     }
     if (val.state.values.length) {
-      createFacetRender(val, item, facetsId[item]);
+      createFacetRender(val, item, facetsId[item], favoriteResultsList,toggleAssetType);
     }
   }
   orderFacetChildren('facets', desiredOrder);
