@@ -99,63 +99,167 @@ export default async function decorate(block) {
     'standardsandreagentscategories-facet',
     'language-facet',
   ];
-  const datass=[
-    {
-        "path": "/tech-notes/biopharma/improved-lc-mrm-workflow-for-quantification-of-glucagonlike-pept",
-        "id": "aE5Ou0000000On7KAE",
-        "title": "Improved LC-MRM workflow for quantification of glucagonlike peptide-1 analogues"
-    },
-    {
-        "path": "/Hidden/sciexhow/Ultra-sensitive-analytical-methodology-for-the-quantification-of-11-nor-9-carboxy-THC-THC-COOH-in-oral-fluid",
-        "id": "aE5Ou0000000OWzKAM",
-        "title": "Ultra-sensitive analytical methodology for the quantification of 11-nor-9-carboxy-THC (THC-COOH) in oral fluid"
-    },
-    {
-        "path": "/Hidden/sciexhow/5-4-azidomethyl-1-1-biphenyl-2yl-1H-tetrazole-AZBT-quantification",
-        "id": "aE5Ou0000000OVNKA2",
-        "title": "5-(4?-(azidomethyl)-[1,1?-biphenyl]-2yl)-1H-tetrazole (AZBT) quantification"
-    },
-    {
-        "path": "/tech-notes/life-science-research/lipidomics/high-throughput-targeted-lipidomics-analysis-of-dihydroceramide-",
-        "id": "aE5Ou0000000OTlKAM",
-        "title": "High-throughput targeted lipidomics analysis of dihydroceramide desaturase-1 (DES1) knockout mice"
-    },
-    {
-        "path": "/tech-notes/biopharma/streamlined-identification-and-quantitation-of-impurities-of-the",
-        "id": "aE5Ou0000000OS9KAM",
-        "title": "Streamlined identification and quantitation of impurities of the ionizable lipid ALC-0315 for rapid and confident vendor-to-vendor raw material assessment to ensure mRNA-LNP product quality"
-    },
-    {
-        "path": "/tech-notes/biopharma/structural-characterization-of-the-cationic-lipid-nanoparticle-c",
-        "id": "aE5Ou0000000OQXKA2",
-        "title": "Structural characterization of the cationic lipid nanoparticle component, ALC-0315, and its impurities using electronactivated dissociation (EAD)-based MS/MS fragmentation"
-    },
-    {
-        "path": "/support/knowledge-base-articles/why-do-i-get-no-hit-with-precursor-mass-tolerance-set-to-0-01-da-when-searching-sciex-libraries-in-sciex-os-software_en_us",
-        "id": "aE5Ou0000000OOvKAM",
-        "title": "Why Don't I get Hits when the Precursor Mass Tolerance Is Set to 0.01 Da when Searching SCIEX Libraries?"
-    },
-    {
-        "path": "/support/knowledge-base-articles/why-do-i-get-no-hit-with-precursor-mass-tolerance-set-to-0-01-da-when-searching-sciex-libraries-in-sciex-os-software_ja",
-        "id": "aE5Ou0000000ONJKA2",
-        "title": "SCIEX???????????Precursor Mass Tolerance?0.01 Da?????????????????????"
-    },
-    {
-        "path": "/support/knowledge-base-articles/change-cad-gas-settings-from-simplified-low-medium-high-to-operator-0-12-in-analyst-software_en_us",
-        "id": "aE5Ou0000000OLhKAM",
-        "title": "Change CAD Gas Settings from Simplified (Low, Medium, High) to Operator (0-12) in Analyst  Software"
-    },
-    {
-        "path": "/support/knowledge-base-articles/an-if-statement-of-calculated-concentration-less-than-zero-does-not-work-for-concentrations-0-or-n-a-in-a-report-template_en_us",
-        "id": "aE5Ou0000000OK5KAM",
-        "title": "Reporter 3.2: How To Report Calculated Concentrations of \"<0\" or \"N/A\""
-    },
-    {
+   const data=[
+  {
+    "assetType": "Knowledge base article",
+    "pageData": [
+      {
         "path": "/support/knowledge-base-articles/discoveryquant-quicktune-dp-0-dp-scan-problem-1443624856293_en_us",
         "id": "aE5Ou0000000Nr3KAE",
-        "title": "DiscoveryQuant Quicktune DP  0 DP Scan Problem"
+        "title": "DiscoveryQuant Quicktune DP  0 DP Scan Problem",
+        "description": "Using DiscoveryQuant 2.1.3 Quick Tune will set the DP value to 0 and then Fine Tune will fail as it has an invalid DP value.  The temporary Q3 MI scan method for the quicktune will show the MH ion with 2 DP scans both at 200v though this voltage may vary."
+      }
+    ],
+    "tags": {
+      "market-vertical": [
+        "Pharma CRO"
+      ],
+      "software": [
+        "DiscoveryQuant software"
+      ],
+      "language": [
+        "English"
+      ],
+      "assetType": [
+        "Knowledge base article"
+      ]
     }
+  },
+  {
+    "assetType": "SCIEX How",
+    "pageData": [
+      {
+        "path": "/Hidden/sciexhow/LC-MS-MS-Rapid-Quantitation-and-Screening-Method-for-222-Pesticide-Residues-in-Tea",
+        "id": "aE5Ou0000000OvBKAU",
+        "title": "LC-MS/MS Rapid Quantitation and Screening Method for 222 Pesticide Residues in Tea",
+        "description": "China is the world’s home of tea and is the first country in the world to discover, cultivate, make and drink tea. However, driven by profit, the tea crisis is becoming increasingly important. This is mainly highlighted by the “poisoning” of tea quality. This application note focuses on the problem of pesticide residues in tea. On the SCIEX Triple Quad 3500 System, a rapid screening method of 222 pesticides has been established to provide a simple and quick solution to the problem of pesticide residues in tea."
+      },
+      {
+        "path": "/Hidden/sciexhow/Ultra-sensitive-analytical-methodology-for-the-quantification-of-11-nor-9-carboxy-THC-THC-COOH-in-oral-fluid",
+        "id": "aE5Ou0000000OtZKAU",
+        "title": "Ultra-sensitive analytical methodology for the quantification of 11-nor-9-carboxy-THC (THC-COOH) in oral fluid",
+        "description": "In recent years, oral fluid has gained considerable attention as a quicker and less invasive means of monitoring cannabis use. More specifically, the use of this matrix for drug testing benefits from ease of sampling, observed collection and difficulty of sample adulteration. Here we demonstrate the key advantages of the SCIEX Triple Quad 7500 System – QTRAP Ready for sensitive detection of THC-COOH in oral fluid."
+      },
+      {
+        "path": "/Hidden/sciexhow/5-4-azidomethyl-1-1-biphenyl-2yl-1H-tetrazole-AZBT-quantification",
+        "id": "aE5Ou0000000OrxKAE",
+        "title": "5-(4’-(azidomethyl)-[1,1’-biphenyl]-2yl)-1H-tetrazole (AZBT) quantification",
+        "description": "5-(4’-(azidomethyl)-[1,1’-biphenyl]-2yl)-1H-tetrazole (AZBT) is a known impurity found in sartan medications and there is some concern that AZBT could act as a mutagen. Here, an assay has been developed for the sensitive detection of the AZBT impurity in an irbesartan drug substance and a candesartan drug product using the QTRAP 4500 system. Excellent sensitivity was achieved with lower limits of quantification of 0.5 ng/mL which is well below the threshold of toxicological concern (TTC) for these drugs. With a total run time of 8 minutes, this robust method provides require sensitivity, linearity and recovery for assessing levels in APIs and drug products."
+      }
+    ],
+    "tags": {
+      "application": [
+        "Food and beverage testing",
+        "Forensic testing",
+        "Pharma"
+      ],
+      "language": [
+        "English",
+        "English",
+        "English"
+      ],
+      "mass-spec": [
+        "Triple Quad 3500",
+        "Triple Quad 7500",
+        "Triple Quad 4500"
+      ],
+      "assetType": [
+        "SCIEX How",
+        "SCIEX How",
+        "SCIEX How"
+      ]
+    }
+  },
+  {
+    "assetType": "Webinar",
+    "pageData": [
+      {
+        "path": "/events/virtual-2020-global-cesi-ms-symposium",
+        "id": "aE5Ou0000000P1dKAE",
+        "title": "Innovations in proteomics discovery and small molecule/quant",
+        "description": ""
+      },
+      {
+        "path": "/events/determination-of-empty-full-ratio",
+        "id": "aE5Ou0000000P01KAE",
+        "title": "Determination of empty full ratio",
+        "description": ""
+      },
+      {
+        "path": "/events/scanning-swath-acquisition-proteomics-done-fast-and-what-to-do-with-it",
+        "id": "aE5Ou0000000OwnKAE",
+        "title": "Scanning SWATH® Acquisition: Proteomics done fast - and what to do with it",
+        "description": ""
+      },
+      {
+        "path": "/events/asmsreboot",
+        "id": "aE5Ou0000000OyPKAU",
+        "title": "ASMSreboot",
+        "description": ""
+      }
+    ],
+    "tags": {
+      "software": [
+        "SWATH Acquisition",
+        "SWATH Acquisition"
+      ],
+      "application": [
+        "Biomedical and omics research",
+        "Biomedical and omics research",
+        "Biomedical and omics research",
+        "Biomedical and omics research"
+      ],
+      "year": [
+        "2020"
+      ],
+      "language": [
+        "English",
+        "English",
+        "English",
+        "English"
+      ],
+      "events": [
+        "Webinar",
+        "Webinar",
+        "Webinar",
+        "Webinar",
+        "Online"
+      ],
+      "assetType": [
+        "Webinar",
+        "Webinar",
+        "Webinar",
+        "Webinar"
+      ]
+    }
+  },
+  {
+    "assetType": "Technote",
+    "pageData": [
+      {
+        "path": "/tech-notes/biopharma/structural-characterization-of-the-cationic-lipid-nanoparticle-c",
+        "id": "aE5Ou0000000OQXKA2",
+        "title": "Structural characterization of the cationic lipid nanoparticle component, ALC-0315, and its impurities using electronactivated dissociation (EAD)-based MS/MS fragmentation",
+        "description": ""
+      }
+    ],
+    "tags": {
+      "market-vertical": [
+        "Biopharma"
+      ],
+      "language": [
+        "English"
+      ],
+      "mass-spec": [
+        "ZenoTOF 7600 system"
+      ],
+      "assetType": [
+        "Technote"
+      ]
+    }
+  }
 ]
+ 
   // Initialize course catalog components
   try {
     await readBlockProperties(block);
