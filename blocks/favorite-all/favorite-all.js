@@ -5,18 +5,16 @@ import {
   resourceLibrarySearchBoxController,
   resourceLibrarySortController,
   resourceLibraryResultClick,
-  resourceLibraryQuerySummary,
   resourceLibraryPaginationController,
   allFacetController,
-  resourceLibraryFacetBreadcrumb,
   favoriteResultsList,
 } from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
-import renderCommonQuerySummary from '../../scripts/common-components/commonQuerySummary.js';
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
 import { renderCommonFacet } from '../../scripts/common-components/favorite-all-facets.js';
-import renderCommonFacetBreadcurm from '../../scripts/common-components/commonFacetBreadcurm.js';
 import renderfavoriteSearchResultList from '../../scripts/common-components/favoriteSearchResultList.js';
+import renderFavoriteQuerySummary from '../../scripts/common-components/favoriteQuerySummary.js';
+import renderFavoriteFacetBreadcrumb from '../../scripts/common-components/favoriteFacetBreadcrumb.js';
 
 async function readBlockProperties(block) {
   // Create no results section
@@ -275,6 +273,8 @@ export default async function decorate(block) {
       }
     });
     renderfavoriteSearchResultList(resourceLibraryResultClick, data);
+    renderFavoriteQuerySummary(data);
+    renderFavoriteFacetBreadcrumb(data);
   }
 
   // Initialize course catalog components
@@ -285,10 +285,10 @@ export default async function decorate(block) {
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-      renderfavoriteSearchResultList(resourceLibraryResultClick,favoriteResultsList);
-      renderCommonQuerySummary(resourceLibraryQuerySummary);
-      renderCommonFacet(allFacetController, facetsId, desiredOrder,favoriteResultsList, toggleAssetType);
-      renderCommonFacetBreadcurm(resourceLibraryFacetBreadcrumb);
+      renderfavoriteSearchResultList(resourceLibraryResultClick,data);
+      renderFavoriteQuerySummary(data);
+      renderCommonFacet(allFacetController, facetsId, desiredOrder,data, toggleAssetType);
+      renderFavoriteFacetBreadcrumb(data);
     });
   } catch (error) {
     resourceLibrarySearchEngine.executeFirstSearch();
