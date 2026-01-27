@@ -104,47 +104,7 @@
     margin-bottom: 6px;
   }
   
-  /* Related products container */
-  .related-products {
-    margin-top: 4px;
-  }
-  
-  /* "Related products :" label */
-  .related-products-label {
-    color: #000;
-    font-family: "Geogrotesque Sharp VF";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 530;
-    line-height: 24px;
-    letter-spacing: 0.08px;
-    margin-right: 6px;
-  }
-  
-  /* Product links */
-  .related-product-link {
-    color: var(--Blue-700, #0068FA);
-    font-family: "Geogrotesque Sharp VF";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 330;
-    line-height: 24px;
-    letter-spacing: 0.08px;
-  
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
-  }
-  
-  /* Pipe separator */
-  .related-separator {
-    margin: 0 6px;
-    color: #000;
-  }
-      
+    
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
 

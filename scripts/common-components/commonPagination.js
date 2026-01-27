@@ -12,17 +12,19 @@ const renderCommonPagination = (dataOrController, itemsPerPage = 10) => {
     // New data array approach
     totalItems = dataOrController.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
-    
+
     // For now, just show pages 1-5 or all pages if less than 5
     const pagesToShow = Math.min(5, totalPages);
     currentPages = Array.from({ length: pagesToShow }, (_, i) => i + 1);
-    
+
     hasPreviousPage = false; // Pagination functionality not implemented yet
     hasNextPage = totalPages > pagesToShow;
     currentPage = 1;
   } else {
     // Legacy controller approach
-    const { currentPages: pages, hasNextPage: hasNext, hasPreviousPage: hasPrev, currentPage: page } = dataOrController.state;
+    const {
+      currentPages: pages, hasNextPage: hasNext, hasPreviousPage: hasPrev, currentPage: page,
+    } = dataOrController.state;
     currentPages = pages;
     hasNextPage = hasNext;
     hasPreviousPage = hasPrev;
