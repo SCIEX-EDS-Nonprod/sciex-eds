@@ -265,16 +265,17 @@ export default async function decorate(block) {
 
   // const assetTypes = data.map(item => item.value);
 
-  
+
   function toggleAssetType(value) {
-    data.forEach(item => {
+    favoriteResultsList.forEach(item => {
       if (item.value === value.value) {
         item.state = item.state === "selected" ? "idle" : "selected";
       }
     });
-    renderfavoriteSearchResultList(resourceLibraryResultClick, data);
-    renderFavoriteQuerySummary(data);
-    renderFavoriteFacetBreadcrumb(data);
+    renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
+    renderFavoriteQuerySummary(favoriteResultsList);
+    renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType);
+    renderCommonFacet(favoriteResultsList, toggleAssetType);
   }
 
   // Initialize course catalog components
@@ -285,10 +286,10 @@ export default async function decorate(block) {
     renderCommonSorting(resourceLibrarySortController);
     resourceLibrarySearchEngine.executeFirstSearch();
     resourceLibrarySearchEngine.subscribe(() => {
-      renderfavoriteSearchResultList(resourceLibraryResultClick,data);
-      renderFavoriteQuerySummary(data);
-      renderCommonFacet(allFacetController, facetsId, desiredOrder,data, toggleAssetType);
-      renderFavoriteFacetBreadcrumb(data);
+      renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
+      renderFavoriteQuerySummary(favoriteResultsList);
+      renderCommonFacet(favoriteResultsList, toggleAssetType);
+      renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType);
     });
   } catch (error) {
     resourceLibrarySearchEngine.executeFirstSearch();
