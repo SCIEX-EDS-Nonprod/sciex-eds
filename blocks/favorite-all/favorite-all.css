@@ -93,6 +93,41 @@
     gap: 32px;
 }
 
+.favorite-all-wrapper .related-products {
+    margin-top: 8px;
+  }
+
+.favorite-all-wrapper .related-products strong {
+    color: #000;
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+  }
+  
+  .favorite-all-wrapper .related-product-link {
+    color: var(--Blue-700, #0068FA);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+  
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+  
+  .favorite-all-wrapper .related-product-link:hover {
+    opacity: 0.85;
+  }
+  
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
 

@@ -72,6 +72,24 @@ const renderfavoriteSearchResultList = (
 
       const descriptionHtml = result?.description || '';
 
+      const relatedProducts = Array.isArray(result?.relatedProducts)
+      ? result.relatedProducts.filter(Boolean)
+      : [];
+
+    const relatedProductsHtml = relatedProducts.length
+      ? `
+        <div class="related-products">
+          <strong>Related products :</strong>
+          ${relatedProducts.map((p, i) => `
+            <a href="/search?q=${encodeURIComponent(p)}" class="related-product-link">
+              ${p}
+            </a>${i < relatedProducts.length - 1 ? ' | ' : ''}
+          `).join('')}
+        </div>
+      `
+      : '';
+
+
       const resultMarkup = `
         <div class="item-details"> 
           <h3>${result?.title || ''}</h3>       
@@ -80,6 +98,8 @@ const renderfavoriteSearchResultList = (
             ${descriptionHtml}
           </div>
         </div>
+
+        ${relatedProductsHtml}
 
         <div class="action-section">
           <span class="favorite-icon" aria-label="Favorite">
