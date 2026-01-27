@@ -21,11 +21,18 @@
         "id": "favorite-all",
         "fields": [
           {
-            "component": "richtext",
-            "valueType": "string",
-            "name": "unified-search-text",
+            "component": "text",
+            "name": "title",
             "value": "",
-            "label": "Sciex Unified Search text"
+            "label": "Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "description",
+            "value": "",
+            "label": "Description",
+            "valueType": "string"
           },
           {
             "component": "reference",
