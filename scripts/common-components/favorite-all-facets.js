@@ -358,21 +358,21 @@ export function renderCommonFacet(data, toggleAssetType) {
 
   // Clear existing facets
   facetsElement.innerHTML = '';
+  const facetDiv = document.createElement('div');
+  facetDiv.id = `assetType-facet`;
+  facetDiv.className = 'facet-group';
 
-  // Create facet items from data
-  data.forEach((item) => {
-    const facetDiv = document.createElement('div');
-    facetDiv.id = `${item.assetType}-facet`;
-    facetDiv.className = 'facet-group';
-
-    const facetHeader = document.createElement('h3');
-    facetHeader.className = 'facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1';
-    facetHeader.innerHTML = `${item.assetType}
+  const facetHeader = document.createElement('h3');
+  facetHeader.className = 'facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1';
+  facetHeader.innerHTML = `Asset Type
       <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
     </svg></span>`;
-    
-    facetDiv.appendChild(facetHeader);
+
+  facetDiv.appendChild(facetHeader);
+  // Create facet items from data
+  data.forEach((item) => {
+
 
     const facetItemsContainer = document.createElement('div');
     facetItemsContainer.className = 'facet-items-container';
