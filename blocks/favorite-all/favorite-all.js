@@ -282,7 +282,7 @@ export default async function decorate(block) {
       
       renderfavoriteSearchResultList(resourceLibraryResultClick, filteredData);
       renderCommonQuerySummary(flattenedData);
-      renderCommonPagination(flattenedData);
+      //renderCommonPagination(flattenedData);
       renderCommonFacet(assetTypes, favoriteResultsList, (selected) => {
         selectedAssetTypes = selected;
         const newFilteredData = selected.length > 0 
