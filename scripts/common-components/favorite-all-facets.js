@@ -362,12 +362,12 @@ export function renderCommonFacet(data, toggleAssetType) {
   // Create facet items from data
   data.forEach((item) => {
     const facetDiv = document.createElement('div');
-    facetDiv.id = `${item.value}-facet`;
+    facetDiv.id = `${item.assetType}-facet`;
     facetDiv.className = 'facet-group';
 
     const facetHeader = document.createElement('h3');
     facetHeader.className = 'facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1';
-    facetHeader.innerHTML = `${item.value}
+    facetHeader.innerHTML = `${item.assetType}
       <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
     </svg></span>`;
@@ -381,10 +381,10 @@ export function renderCommonFacet(data, toggleAssetType) {
     const facetItem = document.createElement('div');
     facetItem.className = 'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
     facetItem.innerHTML = `
-      <input type="checkbox" id="${item.value}" ${
+      <input type="checkbox" id="${item.assetType}" ${
         item.state === 'selected' ? 'checked' : ''
       } class="tw-accent-blue-500 tw-w-4 tw-h-4">
-      <label for="${item.value}">${item.value}</label>
+      <label for="${item.assetType}">${item.assetType}</label>      
     `;
 
     facetItem.querySelector('input').addEventListener('change', () => {

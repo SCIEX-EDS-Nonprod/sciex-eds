@@ -6,8 +6,7 @@ import {
   resourceLibrarySortController,
   resourceLibraryResultClick,
   resourceLibraryPaginationController,
-  allFacetController,
-  favoriteResultsList,
+  allFacetController
 } from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
 import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
@@ -97,170 +96,196 @@ export default async function decorate(block) {
     'standardsandreagentscategories-facet',
     'language-facet',
   ];
-  const data = [
-    {
-      "value": "Knowledge base article",
-      "state": 'idle',
-      "pageData": [
-        {
-          "path": "/support/knowledge-base-articles/discoveryquant-quicktune-dp-0-dp-scan-problem-1443624856293_en_us",
-          "id": "aE5Ou0000000Nr3KAE",
-          "title": "DiscoveryQuant Quicktune DP  0 DP Scan Problem",
-          "description": "Using DiscoveryQuant 2.1.3 Quick Tune will set the DP value to 0 and then Fine Tune will fail as it has an invalid DP value.  The temporary Q3 MI scan method for the quicktune will show the MH ion with 2 DP scans both at 200v though this voltage may vary."
-        }
-      ],
-      "tags": {
-        "market-vertical": [
-          "Pharma CRO"
-        ],
-        "software": [
-          "DiscoveryQuant software"
-        ],
-        "language": [
-          "English"
-        ],
-        "assetType": [
-          "Knowledge base article"
+ const favoriteResultsList=[
+  {
+    "assetType": "Knowledge base article",
+    "state":"idle",
+    "pageData": [
+      {
+        "path": "/support/knowledge-base-articles/change-cad-gas-settings-from-simplified-low-medium-high-to-operator-0-12-in-analyst-software_en_us",
+        "id": "aE5Ou0000000P6TKAU",
+        "title": "Change CAD Gas Settings from Simplified (Low, Medium, High) to Operator (0-12) in Analyst® Software",
+        "description": "The default setting of CAD gas in Analyst® software is “Simplified” and only allows to adjust CAD gas in three steps (low, medium, high). Switching to “Operator” allows to use values from 0 to 12 which enables a more efficient optimization of this parameter for MS/MS and LIT experiments.",
+        "relatedProducts": ["analyst", "knowledge-base-articles"]
+      },
+      {
+        "path": "/support/knowledge-base-articles/an-if-statement-of-calculated-concentration-less-than-zero-does-not-work-for-concentrations-0-or-n-a-in-a-report-template_en_us",
+        "id": "aE5Ou0000000P4rKAE",
+        "title": "Reporter 3.2: How To Report Calculated Concentrations of \"<0\" or \"N/A\"",
+        "description": "If a MultiQuant™ or Analyst® software results table contains values of \"<0\" and \"N/A\" for some calculated concentration values, these text values must be converted to a numerical zero value first using an Excel query. These calculated concentration values cannot be filtered into a Reporter Template Suite 3.2 results template using an if statement that selects for calculated concentration values that are less than or equal to zero.",
+        "relatedProducts": ["english", "software", "knowledge-base-articles"]
+      },
+      {
+        "path": "/support/knowledge-base-articles/discoveryquant-quicktune-dp-0-dp-scan-problem-1443624856293_en_us",
+        "id": "aE5Ou0000000Nr3KAE",
+        "title": "DiscoveryQuant Quicktune DP 0 DP Scan Problem",
+        "description": "Using DiscoveryQuant 2.1.3 Quick Tune will set the DP value to 0 and then Fine Tune will fail as it has an invalid DP value.",
+        "relatedProducts": ["pharma-cro", "discoveryquant", "knowledge-base-articles", "english"]
+      }
+    ],
+    "tags": [
+      {
+        "key": "market-vertical",
+        "value": [
+          { "key": "Pharma CRO", "value": ["aE5Ou0000000Nr3KAE"] }
+        ]
+      },
+      {
+        "key": "software",
+        "value": [
+          { "key": "Analyst software", "value": ["aE5Ou0000000P6TKAU"] },
+          { "key": "DiscoveryQuant software", "value": ["aE5Ou0000000Nr3KAE"] }
+        ]
+      },
+      {
+        "key": "language",
+        "value": [
+          { "key": "English", "value": ["aE5Ou0000000P4rKAE", "aE5Ou0000000Nr3KAE"] }
+        ]
+      },
+      {
+        "key": "products",
+        "value": [
+          { "key": "Software", "value": ["aE5Ou0000000P4rKAE"] }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          {
+            "key": "Knowledge base article",
+            "value": [
+              "aE5Ou0000000P6TKAU",
+              "aE5Ou0000000P4rKAE",
+              "aE5Ou0000000Nr3KAE"
+            ]
+          }
         ]
       }
-    },
-    {
-      "value": "SCIEX How",
-      "state": 'idle',
-      "pageData": [
-        {
-          "path": "/Hidden/sciexhow/LC-MS-MS-Rapid-Quantitation-and-Screening-Method-for-222-Pesticide-Residues-in-Tea",
-          "id": "aE5Ou0000000OvBKAU",
-          "title": "LC-MS/MS Rapid Quantitation and Screening Method for 222 Pesticide Residues in Tea",
-          "description": "China is the world’s home of tea and is the first country in the world to discover, cultivate, make and drink tea. However, driven by profit, the tea crisis is becoming increasingly important. This is mainly highlighted by the “poisoning” of tea quality. This application note focuses on the problem of pesticide residues in tea. On the SCIEX Triple Quad 3500 System, a rapid screening method of 222 pesticides has been established to provide a simple and quick solution to the problem of pesticide residues in tea."
-        },
-        {
-          "path": "/Hidden/sciexhow/Ultra-sensitive-analytical-methodology-for-the-quantification-of-11-nor-9-carboxy-THC-THC-COOH-in-oral-fluid",
-          "id": "aE5Ou0000000OtZKAU",
-          "title": "Ultra-sensitive analytical methodology for the quantification of 11-nor-9-carboxy-THC (THC-COOH) in oral fluid",
-          "description": "In recent years, oral fluid has gained considerable attention as a quicker and less invasive means of monitoring cannabis use. More specifically, the use of this matrix for drug testing benefits from ease of sampling, observed collection and difficulty of sample adulteration. Here we demonstrate the key advantages of the SCIEX Triple Quad 7500 System – QTRAP Ready for sensitive detection of THC-COOH in oral fluid."
-        },
-        {
-          "path": "/Hidden/sciexhow/5-4-azidomethyl-1-1-biphenyl-2yl-1H-tetrazole-AZBT-quantification",
-          "id": "aE5Ou0000000OrxKAE",
-          "title": "5-(4’-(azidomethyl)-[1,1’-biphenyl]-2yl)-1H-tetrazole (AZBT) quantification",
-          "description": "5-(4’-(azidomethyl)-[1,1’-biphenyl]-2yl)-1H-tetrazole (AZBT) is a known impurity found in sartan medications and there is some concern that AZBT could act as a mutagen. Here, an assay has been developed for the sensitive detection of the AZBT impurity in an irbesartan drug substance and a candesartan drug product using the QTRAP 4500 system. Excellent sensitivity was achieved with lower limits of quantification of 0.5 ng/mL which is well below the threshold of toxicological concern (TTC) for these drugs. With a total run time of 8 minutes, this robust method provides require sensitivity, linearity and recovery for assessing levels in APIs and drug products."
-        }
-      ],
-      "tags": {
-        "application": [
-          "Food and beverage testing",
-          "Forensic testing",
-          "Pharma"
-        ],
-        "language": [
-          "English",
-          "English",
-          "English"
-        ],
-        "mass-spec": [
-          "Triple Quad 3500",
-          "Triple Quad 7500",
-          "Triple Quad 4500"
-        ],
-        "assetType": [
-          "SCIEX How",
-          "SCIEX How",
-          "SCIEX How"
+    ]
+  },
+ 
+  {
+    "assetType": "SCIEX How",
+        "state":"idle",
+    "pageData": [
+      {
+        "path": "/Hidden/sciexhow/Analysis-Method-for-51-Pesticides-in-Vegetables-and-Fruit1",
+        "id": "aE5Ou0000000P4sKAE",
+        "title": "Analysis Method for 51 Pesticides in Vegetables and Fruit",
+        "description": "To ensure public health and safety, many government agencies establish routine monitoring systems for pesticide residues.",
+        "relatedProducts": ["sciexhow", "triple-quad-3500", "food-bev", "english"]
+      }
+    ],
+    "tags": [
+      {
+        "key": "application",
+        "value": [
+          { "key": "Food and beverage testing", "value": ["aE5Ou0000000P4sKAE"] }
+        ]
+      },
+      {
+        "key": "language",
+        "value": [
+          { "key": "English", "value": ["aE5Ou0000000P4sKAE"] }
+        ]
+      },
+      {
+        "key": "mass-spec",
+        "value": [
+          { "key": "Triple Quad 3500", "value": ["aE5Ou0000000P4sKAE"] }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          { "key": "SCIEX How", "value": ["aE5Ou0000000P4sKAE"] }
         ]
       }
-    },
-    {
-      "value": "Webinar",
-      "state": 'idle',
-      "pageData": [
-        {
-          "path": "/events/virtual-2020-global-cesi-ms-symposium",
-          "id": "aE5Ou0000000P1dKAE",
-          "title": "Innovations in proteomics discovery and small molecule/quant",
-          "description": ""
-        },
-        {
-          "path": "/events/determination-of-empty-full-ratio",
-          "id": "aE5Ou0000000P01KAE",
-          "title": "Determination of empty full ratio",
-          "description": ""
-        },
-        {
-          "path": "/events/scanning-swath-acquisition-proteomics-done-fast-and-what-to-do-with-it",
-          "id": "aE5Ou0000000OwnKAE",
-          "title": "Scanning SWATH® Acquisition: Proteomics done fast - and what to do with it",
-          "description": ""
-        },
-        {
-          "path": "/events/asmsreboot",
-          "id": "aE5Ou0000000OyPKAU",
-          "title": "ASMSreboot",
-          "description": ""
-        }
-      ],
-      "tags": {
-        "software": [
-          "SWATH Acquisition",
-          "SWATH Acquisition"
-        ],
-        "application": [
-          "Biomedical and omics research",
-          "Biomedical and omics research",
-          "Biomedical and omics research",
-          "Biomedical and omics research"
-        ],
-        "year": [
-          "2020"
-        ],
-        "language": [
-          "English",
-          "English",
-          "English",
-          "English"
-        ],
-        "events": [
-          "Webinar",
-          "Webinar",
-          "Webinar",
-          "Webinar",
-          "Online"
-        ],
-        "assetType": [
-          "Webinar",
-          "Webinar",
-          "Webinar",
-          "Webinar"
+    ]
+  },
+ 
+  {
+    "assetType": "Webinar",
+     "state":"idle",
+    "pageData": [
+      {
+        "path": "/events/no-pressure-hplc",
+        "id": "aE5Ou0000000PT3KAM",
+        "title": "No Pressure HPLC",
+        "description": "",
+        "relatedProducts": ["webinar", "life-science-research", "english"]
+      }
+    ],
+    "tags": [
+      {
+        "key": "application",
+        "value": [
+          { "key": "Biomedical and omics research", "value": ["aE5Ou0000000PT3KAM"] }
+        ]
+      },
+      {
+        "key": "language",
+        "value": [
+          { "key": "English", "value": ["aE5Ou0000000PT3KAM"] }
+        ]
+      },
+      {
+        "key": "events",
+        "value": [
+          { "key": "Webinar", "value": ["aE5Ou0000000PT3KAM"] }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          { "key": "Webinar", "value": ["aE5Ou0000000PT3KAM"] }
         ]
       }
-    },
-    {
-      value: "Technote",
-      "state": 'idle',
-      "pageData": [
-        {
-          "path": "/tech-notes/biopharma/structural-characterization-of-the-cationic-lipid-nanoparticle-c",
-          "id": "aE5Ou0000000OQXKA2",
-          "title": "Structural characterization of the cationic lipid nanoparticle component, ALC-0315, and its impurities using electronactivated dissociation (EAD)-based MS/MS fragmentation",
-          "description": ""
-        }
-      ],
-      "tags": {
-        "market-vertical": [
-          "Biopharma"
-        ],
-        "language": [
-          "English"
-        ],
-        "mass-spec": [
-          "ZenoTOF 7600 system"
-        ],
-        "assetType": [
-          "Technote"
+    ]
+  },
+ 
+  {
+    "assetType": "Technote",
+    "state":"idle",
+    "pageData": [
+      {
+        "path": "/tech-notes/pharma/discovery/confident-identification-of-phase-1-metabolites-using-electron-a",
+        "id": "aE5Ou0000000PRRKA2",
+        "title": "Confident identification of phase 1 metabolites using electron-activated dissociation (EAD)",
+        "description": "",
+        "relatedProducts": ["technotes", "pharma-cro", "zenotof7600", "exionlc", "english"]
+      }
+    ],
+    "tags": [
+      {
+        "key": "market-vertical",
+        "value": [
+          { "key": "Pharma CRO", "value": ["aE5Ou0000000PRRKA2"] }
+        ]
+      },
+      {
+        "key": "mass-spec",
+        "value": [
+          { "key": "ZenoTOF 7600 system", "value": ["aE5Ou0000000PRRKA2"] }
+        ]
+      },
+      {
+        "key": "language",
+        "value": [
+          { "key": "English", "value": ["aE5Ou0000000PRRKA2"] }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          { "key": "Technote", "value": ["aE5Ou0000000PRRKA2"] }
         ]
       }
-    }
-  ]
+    ]
+  }
+]
+
 
 
   // const assetTypes = data.map(item => item.value);
@@ -268,7 +293,7 @@ export default async function decorate(block) {
 
   function toggleAssetType(value) {
     favoriteResultsList.forEach(item => {
-      if (item.value === value.value) {
+      if (item.assetType === value.assetType) {
         item.state = item.state === "selected" ? "idle" : "selected";
       }
     });

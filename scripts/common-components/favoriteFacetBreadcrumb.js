@@ -15,7 +15,7 @@ function canMobileActions() {
   return true;
 }
 
-const renderFavoriteFacetBreadcrumb = (data) => {
+const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
   const facetBreadcrumbElement = document.getElementById('facet-readcrumb');
   facetBreadcrumbElement.innerHTML = '';
 
@@ -104,13 +104,13 @@ const renderFavoriteFacetBreadcrumb = (data) => {
         renderFavoriteFacetBreadcrumb(data);
         renderfavoriteSearchResultList(resourceLibraryResultClick, data);
         renderFavoriteQuerySummary(data);
-        // renderCommonFacet(allFacetController, facetsId, desiredOrder, data, toggleAssetType);
+        renderCommonFacet(data, toggleAssetType);
       });
 
       const gridItem1 = document.createElement('div');
       gridItem1.classList.add('grid-item');
       const box1 = document.createElement('div');
-      box1.textContent = `${strings.assetType} : ${item.value}`;
+      box1.textContent = `${strings.assetType} : ${item.assetType}`;
       gridItem1.appendChild(box1);
 
       const gridItem2 = document.createElement('div');
@@ -173,6 +173,7 @@ const renderFavoriteFacetBreadcrumb = (data) => {
     renderFavoriteFacetBreadcrumb(data);
     renderfavoriteSearchResultList(resourceLibraryResultClick, data);
     renderFavoriteQuerySummary(data);
+    renderCommonFacet(data,toggleAssetType)
   });
 
   // Check if any items are selected
@@ -191,7 +192,10 @@ const renderFavoriteFacetBreadcrumb = (data) => {
       data.forEach((item) => {
         item.state = 'idle';
       });
-      renderFavoriteFacetBreadcrumb(data);
+        renderFavoriteFacetBreadcrumb(data);
+        renderfavoriteSearchResultList(resourceLibraryResultClick, data);
+        renderFavoriteQuerySummary(data);
+        renderCommonFacet(data, toggleAssetType);
     });
   }
 
