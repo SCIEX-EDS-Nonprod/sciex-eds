@@ -9,13 +9,23 @@
     gap: 15px; 
 }
 
-.favorite-all-wrapper .banner-title {
+#coveo-life-sciences .banner-title {
     color: var(--Grey-900, #141414);
     font-family: "Geogrotesque Sharp VF";
     font-size: 40px;
     font-style: normal;
     font-weight: 370;
     line-height: 64px;
+}
+
+#coveo-life-sciences .favorite-banner-description {
+    color: var(--Gray-3, #828282);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 26px; /* 144.444% */
+    letter-spacing: 0.045px;
 }
 
 /* General Styles */

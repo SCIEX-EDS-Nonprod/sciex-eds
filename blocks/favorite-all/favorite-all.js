@@ -53,7 +53,7 @@ async function readBlockProperties(block) {
         }
         case 2: {
           description = section.querySelector('div');
-          description.className = 'banner-description';
+          description.className = 'favorite-banner-description';
           lifeSciencesDiv.appendChild(description);
           block.appendChild(lifeSciencesDiv);
           break;
