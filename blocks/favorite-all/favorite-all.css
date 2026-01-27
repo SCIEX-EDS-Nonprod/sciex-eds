@@ -3,6 +3,21 @@
     padding: 0 24px !important;
 }
 
+.favorite-all-wrapper #coveo-life-sciences {
+    align-items: flex-start;  
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.favorite-all-wrapper .banner-title {
+    color: var(--Grey-900, #141414);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 370;
+    line-height: 64px;
+}
+
 /* General Styles */
 .coveo-search-component,.search-term-validation{
     display: none !important;
