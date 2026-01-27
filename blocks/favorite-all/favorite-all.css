@@ -92,24 +92,6 @@
     align-items: end;
     gap: 32px;
 }
-
-.related-products {
-    margin-top: 8px;
-    font-size: 14px;
-  }
-  
-  .related-products strong {
-    font-weight: 600;
-  }
-  
-  .related-product-link {
-    color: #0a66c2;
-    text-decoration: none;
-  }
-  
-  .related-product-link:hover {
-    text-decoration: underline;
-  }
     
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
