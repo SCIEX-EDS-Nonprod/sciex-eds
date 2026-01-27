@@ -358,33 +358,54 @@ export function renderCommonFacet(data, toggleAssetType) {
 
   // Clear existing facets
   facetsElement.innerHTML = '';
+
   const facetDiv = document.createElement('div');
-  facetDiv.id = `assetType-facet`;
+  facetDiv.id = 'assetType-facet';
   facetDiv.className = 'facet-group';
 
+  // ===== HEADER =====
   const facetHeader = document.createElement('h3');
-  facetHeader.className = 'facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1';
-  facetHeader.innerHTML = `Asset Type
-      <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  facetHeader.className =
+    'facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1 tw-flex tw-justify-between tw-items-center';
+  facetHeader.style.cursor = 'pointer';
+  facetHeader.setAttribute('aria-expanded', 'true');
+
+  const headerText = document.createElement('span');
+  headerText.textContent = 'Asset Type';
+
+  const headerIcon = document.createElement('span');
+  headerIcon.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
-    </svg></span>`;
+    </svg>
+  `;
 
-  facetDiv.appendChild(facetHeader);
-  // Create facet items from data
+  facetHeader.appendChild(headerText);
+  facetHeader.appendChild(headerIcon);
+
+  // ===== ITEMS CONTAINER =====
+  const facetItemsContainer = document.createElement('div');
+  facetItemsContainer.className = 'facet-items-container';
+  facetItemsContainer.style.display = 'flex';
+  facetItemsContainer.style.flexDirection = 'column';
+  facetItemsContainer.style.gap = '6px';
+
+  // ===== CREATE CHECKBOX ITEMS =====
   data.forEach((item) => {
-
-
-    const facetItemsContainer = document.createElement('div');
-    facetItemsContainer.className = 'facet-items-container';
-
-    // Create checkbox for each item
     const facetItem = document.createElement('div');
-    facetItem.className = 'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
+    facetItem.className =
+      'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
+
     facetItem.innerHTML = `
-      <input type="checkbox" id="${item.assetType}" ${
-        item.state === 'selected' ? 'checked' : ''
-      } class="tw-accent-blue-500 tw-w-4 tw-h-4">
-      <label for="${item.assetType}">${item.assetType}</label>      
+      <input
+        type="checkbox"
+        id="${item.assetType}"
+        ${item.state === 'selected' ? 'checked' : ''}
+        class="tw-accent-blue-500 tw-w-4 tw-h-4"
+      />
+      <label for="${item.assetType}" class="tw-cursor-pointer">
+        ${item.assetType}
+      </label>
     `;
 
     facetItem.querySelector('input').addEventListener('change', () => {
@@ -392,10 +413,35 @@ export function renderCommonFacet(data, toggleAssetType) {
     });
 
     facetItemsContainer.appendChild(facetItem);
-    facetDiv.appendChild(facetItemsContainer);
-    facetsElement.appendChild(facetDiv);
   });
+
+  // ===== HEADER CLICK TOGGLE =====
+  facetHeader.addEventListener('click', () => {
+    const isOpen = facetItemsContainer.style.display !== 'none';
+
+    facetItemsContainer.style.display = isOpen ? 'none' : 'flex';
+
+    headerIcon.innerHTML = isOpen
+      ? `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M14 5L8 11L2 5" stroke="#0068FA"/>
+        </svg>
+      `
+      : `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
+        </svg>
+      `;
+
+    facetHeader.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // ===== APPEND =====
+  facetDiv.appendChild(facetHeader);
+  facetDiv.appendChild(facetItemsContainer);
+  facetsElement.appendChild(facetDiv);
 }
+
 
 export const handleMobileFilters = () => {
   const facets = document.querySelector('#facets');
