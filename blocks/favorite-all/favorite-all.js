@@ -13,7 +13,7 @@ import {
 } from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
 import renderCommonSorting from '../../scripts/common-components/commonSorting.js';
 import renderCommonQuerySummary from '../../scripts/common-components/commonQuerySummary.js';
-import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
+//import renderCommonPagination from '../../scripts/common-components/commonPagination.js';
 import { renderCommonFacet } from '../../scripts/common-components/favorite-all-facets.js';
 import renderCommonFacetBreadcurm from '../../scripts/common-components/commonFacetBreadcurm.js';
 import renderfavoriteSearchResultList from '../../scripts/common-components/favoriteSearchResultList.js';
@@ -301,7 +301,7 @@ export default async function decorate(block) {
         
         renderfavoriteSearchResultList(resourceLibraryResultClick, newFilteredData);
         renderCommonQuerySummary(newFlattenedData);
-        renderCommonPagination(newFlattenedData);
+        //renderCommonPagination(newFlattenedData);
       });
       renderCommonFacetBreadcurm(resourceLibraryFacetBreadcrumb);
     });
