@@ -1,5 +1,10 @@
 /* ========== Base Layout ========== */
 
+.cta-with-text-wrapper {
+  max-width: 1440px !important;
+  padding: 10px 30px !important;
+}
+
 .support-cta-block {
   width: 100%;
 }
@@ -7,7 +12,6 @@
 .support-cta-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 /* ========== Typography ========== */
@@ -38,8 +42,10 @@
 /* Banner */
 
 .support-cta--banner .support-cta-inner {
+  max-width: 860px;     
+  margin: 0 auto;    
   padding: 16px 24px;
-  gap: 24px;
+  gap: 32px;
   background: #fff;
 }
 
@@ -168,4 +174,61 @@ letter-spacing: 0.08px;
   gap: 16px;
   flex-wrap: wrap;
 }
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  .cta-with-text-wrapper {
+    padding: 10px 16px !important;
+  }
+
+  .support-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .support-cta--banner .support-cta-inner {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .support-cta-title {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .support-cta-desc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .support-cta-action {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .support-cta-button,
+  .support-cta-link {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .support-cta--align-left .support-cta-inner,
+  .support-cta--align-right .support-cta-inner,
+  .support-cta--align-bottom .support-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-cta--align-right .support-cta-action,
+  .support-cta--align-left .support-cta-action,
+  .support-cta--align-bottom .support-cta-action {
+    justify-content: flex-start;
+  }
+}
+
 
