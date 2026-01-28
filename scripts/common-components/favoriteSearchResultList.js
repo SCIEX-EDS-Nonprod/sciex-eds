@@ -1,5 +1,8 @@
 /* eslint-disable */
-import { favoriteSearchEngine, removeFavoriteSearchEngine } from '../favorite-all/favorite-allDocEngine.js';
+import {
+  favoriteSearchEngine,
+  removeFavoriteSearchEngine
+} from '../favorite-all/favorite-allDocEngine.js';
 import { i18n } from '../translation.js';
 
 const lang = document.documentElement.lang || 'en';
@@ -20,65 +23,68 @@ const renderfavoriteSearchResultList = (
   const resultsElement = document.getElementById('coveo-results');
   const resultsLoading = document.getElementById('coveo-results-loading');
   const noResultsElement = document.getElementById('coveo-no-results');
-  const sortElement = document.getElementById('sort');
-  const querySortElement = document.getElementsByClassName('query-sort-section')[0];
-  const querySortSection = document.querySelector('.query-sort-section');
 
   resultsElement.innerHTML = '';
 
-  // Show loader
+  // ========================
+  // SHOW LOADER
+  // ========================
   if (resultsLoading) {
     resultsLoading.classList.remove('tw-hidden');
   }
 
   // ========================
-  // 🔹 NEW JSON MAPPING
+  // MAP RESULTS FROM JSON
   // ========================
   const results = Array.isArray(data)
-    ? data.flatMap((group) =>
+    ? data.flatMap(group =>
         Array.isArray(group.pageData)
-          ? group.pageData.map((item) => ({
+          ? group.pageData.map(item => ({
               ...item,
-              assetType: group.assetType,
+              assetType: group.assetType // ✅ FIXED
             }))
           : []
       )
     : [];
 
-  let sortedResults = results;
+  // ========================
+  // GET SELECTED ASSET TYPES
+  // ========================
+  const selectedAssetTypes = data
+    .filter(item => item.state === 'selected')
+    .map(item => item.assetType); // ✅ FIXED
+
+  let filteredResults = results;
+
+  // ========================
+  // APPLY FILTER
+  // ========================
+  if (selectedAssetTypes.length > 0) {
+    filteredResults = results.filter(result =>
+      selectedAssetTypes.includes(result.assetType)
+    );
+  }
 
   // ========================
   // RESULTS FOUND
   // ========================
-  if (sortedResults.length > 0) {
-    // Hide loader
+  if (filteredResults.length > 0) {
     if (resultsLoading) {
       resultsLoading.classList.add('tw-hidden');
     }
 
-    const facets = document.getElementById('facets');
-    if (facets) {
-      facets.classList.remove('tw-hidden');
+    if (noResultsElement) {
+      noResultsElement.style.display = 'none';
     }
 
-    if (sortElement) sortElement.removeAttribute('style');
-    if (noResultsElement) noResultsElement.style.display = 'none';
-    if (querySortElement) querySortElement.style.display = '';
-    if (querySortSection) querySortSection.removeAttribute('style');
-
-    sortedResults.forEach((result) => {
+    filteredResults.forEach(result => {
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
 
-      const descriptionHtml = result?.description || '';
-      
-      const resultMarkup = `
-        <div class="item-details"> 
-          <h3>${result?.title || ''}</h3>       
-
-          <div class="description">
-            ${descriptionHtml}
-          </div>
+      resultItem.innerHTML = `
+        <div class="item-details">
+          <h3>${result.title || ''}</h3>
+          <div class="description">${result.description || ''}</div>
         </div>
 
         <div class="action-section">
@@ -96,42 +102,41 @@ const renderfavoriteSearchResultList = (
           <a
             class="view-details-btn"
             target="_blank"
-            href="${result?.path || '#'}"
+            href="${result.path || '#'}"
           >
             ${strings.view}
           </a>
         </div>
       `;
 
-      resultItem.innerHTML = resultMarkup;
-      const favIcon = resultItem.querySelector('.favorite-icon');
-
-      favIcon.addEventListener('click', async () => {
-        try {
-          console.log('kkkk', result?.path);
-
-          const response = await removeFavoriteSearchEngine(result?.path);
-          console.log('response', response)
-          if (response?.message === 'The operation went successfully') {
-            const updatedData = await favoriteSearchEngine();
-
-            console.log('updatedData', updatedData);
-
-            // ⬇️ Re-render with new data
-            renderfavoriteSearchResultList(customerDocResultClick, updatedData);
+      // ========================
+      // REMOVE FAVORITE
+      // ========================
+      resultItem
+        .querySelector('.favorite-icon')
+        ?.addEventListener('click', async () => {
+          try {
+            const response = await removeFavoriteSearchEngine(result.path);
+            if (response?.message === 'The operation went successfully') {
+              const updatedData = await favoriteSearchEngine();
+              renderfavoriteSearchResultList(
+                customerDocResultClick,
+                updatedData
+              );
+            }
+          } catch (e) {
+            console.error(e);
           }
-        } catch (error) {
-          console.error('API error:', error);
-        }
-      });
+        });
 
-
-      const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
-      if (viewDetailsBtn) {
-        viewDetailsBtn.addEventListener('click', () => {
+      // ========================
+      // CLICK TRACKING
+      // ========================
+      resultItem
+        .querySelector('.view-details-btn')
+        ?.addEventListener('click', () => {
           customerDocResultClick?.(result);
         });
-      }
 
       resultsElement.appendChild(resultItem);
     });
@@ -145,35 +150,9 @@ const renderfavoriteSearchResultList = (
       resultsLoading.classList.add('tw-hidden');
     }
 
-    const facets = document.getElementById('facets');
-    if (facets) {
-      facets.classList.add('tw-hidden');
+    if (noResultsElement) {
+      noResultsElement.style.display = '';
     }
-
-    const divElement = document.getElementById('noresults-text1');
-    const inputText = document.getElementById('coveo-query')?.value || '';
-
-    if (divElement && inputText.trim() !== '') {
-      const { text1 } = divElement.dataset;
-      divElement.innerText = `${text1} "${inputText}"`;
-    }
-
-    if (noResultsElement) noResultsElement.style.display = '';
-    if (querySortElement) querySortElement.style.display = 'none';
-    if (querySortSection) {
-      querySortSection.style.setProperty('display', 'none', 'important');
-    }
-  }
-
-  // ========================
-  // SEARCH WRAPPER WIDTH
-  // ========================
-  const searchWrapper = document.querySelector('.search-wrapper');
-  if (searchWrapper) {
-    searchWrapper.style.width =
-      noResultsElement && noResultsElement.style.display === 'none'
-        ? 'auto'
-        : 'fit-content';
   }
 };
 
