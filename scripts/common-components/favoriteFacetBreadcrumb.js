@@ -101,7 +101,7 @@ const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
       gridContainer.classList.add('facet-breadcrumb');
       gridContainer.addEventListener('click', () => {
         item.state = 'idle';
-        renderFavoriteFacetBreadcrumb(data);
+        renderFavoriteFacetBreadcrumb(data,toggleAssetType);
         renderfavoriteSearchResultList(resourceLibraryResultClick, data);
         renderFavoriteQuerySummary(data);
         renderCommonFacet(data, toggleAssetType);
@@ -170,7 +170,7 @@ const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
       item.state = 'idle';
     });
     console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data)
-    renderFavoriteFacetBreadcrumb(data);
+    renderFavoriteFacetBreadcrumb(data,toggleAssetType);
     renderfavoriteSearchResultList(resourceLibraryResultClick, data);
     renderFavoriteQuerySummary(data);
     renderCommonFacet(data,toggleAssetType)
@@ -192,7 +192,7 @@ const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
       data.forEach((item) => {
         item.state = 'idle';
       });
-        renderFavoriteFacetBreadcrumb(data);
+        renderFavoriteFacetBreadcrumb(data,toggleAssetType);
         renderfavoriteSearchResultList(resourceLibraryResultClick, data);
         renderFavoriteQuerySummary(data);
         renderCommonFacet(data, toggleAssetType);
