@@ -31,50 +31,70 @@ async function readBlockProperties(block) {
   lifeSciencesDiv.id = 'coveo-life-sciences';
   const path = window.location.pathname;
   const resp = await fetch(`${path}.plain.html`);
-  if (resp.ok) {
-    const html = await resp.text();
-    const main = document.createElement('main');
-    main.innerHTML = html;
-    const sections = Array.from(main.querySelector('.favorite-all').children);
-    block.textContent = '';
+  if (!resp.ok) return;
 
-    let description;
-    sections.forEach((section, index) => {
-      switch (index + 1) {
-        case 1: {
-          description = section.querySelector('div');
-          description.className = 'banner-description';
-          lifeSciencesDiv.appendChild(description);
+  const html = await resp.text();
+  const main = document.createElement('main');
+  main.innerHTML = html;
+  const sections = Array.from(main.querySelector('.favorite-all')?.children || []);
+  block.textContent = '';
+
+  let title, description;
+  sections.forEach((section, index) => {
+    switch (index + 1) {
+      case 1: {
+        // Banner title
+        title = section.querySelector('div');
+        if (title) {
+          title.className = 'banner-title';
+          lifeSciencesDiv.appendChild(title);
           block.appendChild(lifeSciencesDiv);
-          break;
         }
-        case 2: {
-          const picture = main.querySelector('picture');
-          if (picture) {
-            coveoNoResultsDiv.appendChild(picture);
-          }
-          break;
+        break;
+      }
+      case 2: {
+        // Banner description
+        description = section.querySelector('div');
+        if (description) {
+          description.className = 'favorite-banner-description';
+          lifeSciencesDiv.appendChild(description);
+          // block already has lifeSciencesDiv
         }
-        case 3: {
-          const noResultsText1 = section.querySelector('div');
+        break;
+      }
+      case 3: {
+        // Picture for no results
+        const picture = main.querySelector('picture');
+        if (picture) {
+          coveoNoResultsDiv.appendChild(picture);
+        }
+        break;
+      }
+      case 4: {
+        // No results text1
+        const noResultsText1 = section.querySelector('div');
+        if (noResultsText1) {
           noResultsText1.id = 'noresults-text1';
-          noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
+          noResultsText1.dataset.text1 = noResultsText1.textContent;
           coveoNoResultsDiv.appendChild(noResultsText1);
-          break;
         }
-        case 4: {
-          const noResultsText2 = section.querySelector('div');
+        break;
+      }
+      case 5: {
+        // No results text2
+        const noResultsText2 = section.querySelector('div');
+        if (noResultsText2) {
           noResultsText2.classList.add('noresults-text2');
           coveoNoResultsDiv.appendChild(noResultsText2);
-          break;
         }
-        default: {
-          break;
-        }
+        break;
       }
-    });
-  }
+      default:
+        break;
+    }
+  });
 }
+
 
 export default async function decorate(block) {
   // Create suggestion popup div
