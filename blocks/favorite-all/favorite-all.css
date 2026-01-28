@@ -140,17 +140,6 @@
         align-items: start
     }
 }
-@media (min-width: 640px) {
-
-    .favorite-all-wrapper,
-    #coveo-life-sciences div,
-    .favorite-all-wrapper #facets,
-    #mobile-filter-header,
-    #mobile-filter-footer {
-        max-width: 40pc !important;
-    }
-  
-}
 
 @media (min-width: 1024px) {
 
