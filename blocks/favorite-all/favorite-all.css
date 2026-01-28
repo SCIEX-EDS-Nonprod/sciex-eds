@@ -152,18 +152,6 @@
   
 }
 
-@media (min-width: 768px) {
-
-    .favorite-all-wrapper,
-    #coveo-life-sciences div,
-    .favorite-all-wrapper #facets,
-    #mobile-filter-header,
-    #mobile-filter-footer {
-        max-width: 8in !important;
-    }
-   
-}
-
 @media (min-width: 1024px) {
 
     .favorite-all-wrapper,
