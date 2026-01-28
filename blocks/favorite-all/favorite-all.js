@@ -40,29 +40,36 @@ async function readBlockProperties(block) {
 
     let description;
     sections.forEach((section, index) => {
-      switch (index + 1) {
+       switch (index + 1) {
         case 1: {
-          description = section.querySelector('div');
-          description.className = 'banner-description';
-          lifeSciencesDiv.appendChild(description);
+          title = section.querySelector('div');
+          title.className = 'banner-title';
+          lifeSciencesDiv.appendChild(title);
           block.appendChild(lifeSciencesDiv);
           break;
         }
         case 2: {
+          description = section.querySelector('div');
+          description.className = 'favorite-banner-description';
+          lifeSciencesDiv.appendChild(description);
+          block.appendChild(lifeSciencesDiv);
+          break;
+        }
+        case 3: {
           const picture = main.querySelector('picture');
           if (picture) {
             coveoNoResultsDiv.appendChild(picture);
           }
           break;
         }
-        case 3: {
+        case 4: {
           const noResultsText1 = section.querySelector('div');
           noResultsText1.id = 'noresults-text1';
           noResultsText1.setAttribute('data-text1', noResultsText1.textContent);
           coveoNoResultsDiv.appendChild(noResultsText1);
           break;
         }
-        case 4: {
+        case 5: {
           const noResultsText2 = section.querySelector('div');
           noResultsText2.classList.add('noresults-text2');
           coveoNoResultsDiv.appendChild(noResultsText2);
