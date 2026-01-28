@@ -3,35 +3,8 @@
     padding: 0 24px !important;
 }
 
-.favorite-all-wrapper #coveo-life-sciences {
-    align-items: flex-start;  
-    flex-direction: column;
-    gap: 15px; 
-}
-
-#coveo-life-sciences .banner-title {
-    color: var(--Grey-900, #141414);
-    font-family: "Geogrotesque Sharp VF";
-    font-size: 40px;
-    font-style: normal;
-    font-weight: 370;
-    line-height: 64px;
-}
-
-#coveo-life-sciences .favorite-banner-description {
-    color: var(--Gray-3, #828282);
-    font-family: "Geogrotesque Sharp VF";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 330;
-    line-height: 26px; /* 144.444% */
-    letter-spacing: 0.045px;
-}
-
 /* General Styles */
-.coveo-search-component,.search-term-validation{
-    display: none !important;
-}
+
 
 .favorite-all-wrapper {
     max-width: 90pc !important;
@@ -93,18 +66,6 @@
     gap: 32px;
 }
 
-/* Stack title, description, related products vertically */
-.result-item .item-details {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Space below description */
-  .result-item .description {
-    margin-bottom: 6px;
-  }
-  
-    
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
 
@@ -131,7 +92,7 @@
         width: 24px ;
         height: 24px ;
     }
-    
+
 }
 @media (max-width: 768px){
    .action-section {
