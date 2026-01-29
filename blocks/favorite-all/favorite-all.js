@@ -122,17 +122,77 @@ export default async function decorate(block) {
   // const assetTypes = data.map(item => item.value);
 
 
-  function toggleAssetType(value) {
-    favoriteResultsList.forEach(item => {
-      if (item.assetType === value.assetType) {
-        item.state = item.state === "selected" ? "idle" : "selected";
-      }
-    });
-    renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
-    renderFavoriteQuerySummary(favoriteResultsList);
-    renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType);
-    renderCommonFacet(favoriteResultsList, toggleAssetType);
+function toggleTag(asset, tagKey, tagItem) {
+  // initialize state safely
+  if (!tagItem.state) {
+    tagItem.state = 'idle';
   }
+
+  tagItem.state =
+    tagItem.state === 'selected' ? 'idle' : 'selected';
+
+  renderfavoriteSearchResultList(
+    resourceLibraryResultClick,
+    favoriteResultsList
+  );
+
+  renderFavoriteQuerySummary(favoriteResultsList);
+
+  renderCommonFacet(
+    favoriteResultsList,
+    toggleAssetType,
+    toggleTag
+  );
+
+  renderFavoriteFacetBreadcrumb(
+    favoriteResultsList,
+    toggleAssetType,
+    toggleTag
+  );
+}
+
+ function toggleAssetType(value) {
+  favoriteResultsList.forEach(item => {
+    if (item.assetType === value.assetType) {
+      const wasSelected = item.state === 'selected';
+
+      // toggle asset type
+      item.state = wasSelected ? 'idle' : 'selected';
+
+      // ✅ IF UNSELECTED → RESET ALL TAGS
+      if (wasSelected && Array.isArray(item.tags)) {
+        item.tags.forEach(tagGroup => {
+          tagGroup.value?.forEach(tagItem => {
+            tagItem.state = 'idle';
+          });
+        });
+      }
+    }
+  });
+
+  renderfavoriteSearchResultList(
+    resourceLibraryResultClick,
+    favoriteResultsList
+  );
+
+  renderFavoriteQuerySummary(favoriteResultsList);
+
+  renderFavoriteFacetBreadcrumb(
+    favoriteResultsList,
+    toggleAssetType,
+    toggleTag
+  );
+
+  renderCommonFacet(
+    favoriteResultsList,
+    toggleAssetType,
+    toggleTag
+  );
+}
+
+
+
+
 
   // Initialize course catalog components
   try {
@@ -144,8 +204,8 @@ export default async function decorate(block) {
     resourceLibrarySearchEngine.subscribe(() => {
       renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
       renderFavoriteQuerySummary(favoriteResultsList);
-      renderCommonFacet(favoriteResultsList, toggleAssetType);
-      renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType);
+      renderCommonFacet(favoriteResultsList, toggleAssetType,toggleTag);
+      renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType,toggleTag);
     });
   } catch (error) {
     resourceLibrarySearchEngine.executeFirstSearch();

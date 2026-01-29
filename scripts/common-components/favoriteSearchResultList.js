@@ -4,6 +4,7 @@ import {
   removeFavoriteSearchEngine
 } from '../favorite-all/favorite-allDocEngine.js';
 import { i18n } from '../translation.js';
+import renderFavoriteQuerySummary from './favoriteQuerySummary.js';
 
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
@@ -12,8 +13,7 @@ const renderfavoriteSearchResultList = (
   customerDocResultClick,
   data
 ) => {
-  console.log('Rendered Data:', data);
-
+  console.log('rendereddataaa', data)
   const noResults = document.getElementById('coveo-no-results');
   const target = document.querySelector('.search-result-section');
   if (noResults && target) {
@@ -29,39 +29,55 @@ const renderfavoriteSearchResultList = (
   // ========================
   // SHOW LOADER
   // ========================
-  if (resultsLoading) {
-    resultsLoading.classList.remove('tw-hidden');
-  }
+  resultsLoading?.classList.remove('tw-hidden');
 
   // ========================
-  // MAP RESULTS FROM JSON
+  // FLATTEN RESULTS
   // ========================
-  const results = Array.isArray(data)
+  const allResults = Array.isArray(data)
     ? data.flatMap(group =>
-        Array.isArray(group.pageData)
-          ? group.pageData.map(item => ({
-              ...item,
-              assetType: group.assetType // ✅ FIXED
-            }))
-          : []
-      )
+      group.pageData?.map(item => ({
+        ...item,
+        assetType: group.assetType
+      })) || []
+    )
     : [];
 
   // ========================
-  // GET SELECTED ASSET TYPES
+  // SELECTED ASSET TYPES
   // ========================
   const selectedAssetTypes = data
-    .filter(item => item.state === 'selected')
-    .map(item => item.assetType); // ✅ FIXED
+    .filter(a => a.state === 'selected')
+    .map(a => a.assetType);
 
-  let filteredResults = results;
+  let filteredResults = allResults;
 
   // ========================
-  // APPLY FILTER
+  // FILTER BY ASSET TYPE
   // ========================
   if (selectedAssetTypes.length > 0) {
-    filteredResults = results.filter(result =>
-      selectedAssetTypes.includes(result.assetType)
+    filteredResults = filteredResults.filter(item =>
+      selectedAssetTypes.includes(item.assetType)
+    );
+  }
+
+  // ========================
+  // COLLECT SELECTED TAG IDS
+  // ========================
+  const selectedTagIds = data.flatMap(asset =>
+    asset.tags?.flatMap(tag =>
+      tag.value
+        ?.filter(v => v.state === 'selected')
+        .flatMap(v => v.value)
+    ) || []
+  );
+
+  // ========================
+  // FILTER BY TAG IDS
+  // ========================
+  if (selectedTagIds.length > 0) {
+    filteredResults = filteredResults.filter(item =>
+      selectedTagIds.includes(item.id)
     );
   }
 
@@ -69,13 +85,8 @@ const renderfavoriteSearchResultList = (
   // RESULTS FOUND
   // ========================
   if (filteredResults.length > 0) {
-    if (resultsLoading) {
-      resultsLoading.classList.add('tw-hidden');
-    }
-
-    if (noResultsElement) {
-      noResultsElement.style.display = 'none';
-    }
+    resultsLoading?.classList.add('tw-hidden');
+    noResultsElement.style.display = 'none';
 
     filteredResults.forEach(result => {
       const resultItem = document.createElement('div');
@@ -132,16 +143,33 @@ const renderfavoriteSearchResultList = (
           try {
             const response = await removeFavoriteSearchEngine(result.path);
             if (response?.message === 'The operation went successfully') {
-              const updatedData = await favoriteSearchEngine();
+
+              // ✅ remove from existing data
+              data.forEach(asset => {
+                if (Array.isArray(asset.pageData)) {
+                  asset.pageData = asset.pageData.filter(
+                    item => item.path !== result.path
+                  );
+                }
+              });
+
+              // ✅ remove empty assetTypes automatically
+              const cleanedData = data.filter(
+                asset => asset.pageData && asset.pageData.length > 0
+              );
+
               renderfavoriteSearchResultList(
                 customerDocResultClick,
-                updatedData
+                cleanedData
               );
+
+              renderFavoriteQuerySummary(cleanedData);
             }
           } catch (e) {
             console.error(e);
           }
         });
+
 
       // ========================
       // CLICK TRACKING
@@ -160,13 +188,8 @@ const renderfavoriteSearchResultList = (
   // NO RESULTS
   // ========================
   else {
-    if (resultsLoading) {
-      resultsLoading.classList.add('tw-hidden');
-    }
-
-    if (noResultsElement) {
-      noResultsElement.style.display = '';
-    }
+    resultsLoading?.classList.add('tw-hidden');
+    noResultsElement.style.display = '';
   }
 };
 
