@@ -81,10 +81,24 @@ const renderfavoriteSearchResultList = (
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
 
+      const relatedProductsHtml = Array.isArray(result.relatedProducts)
+          ? result.relatedProducts
+              .filter(Boolean)
+              .map(product => `<a href="#" class="related-product-link">${product}</a>`)
+              .join(' <span class="pipe-separator">|</span> ')
+          : '';
+
       resultItem.innerHTML = `
         <div class="item-details">
           <h3>${result.title || ''}</h3>
           <div class="description">${result.description || ''}</div>
+          <div class="related-products">
+            ${
+              relatedProductsHtml
+                ? `<strong>Related Products :</strong> ${relatedProductsHtml}`
+                : ''
+            }
+          </div>
         </div>
 
         <div class="action-section">

@@ -185,8 +185,38 @@
     gap: 32px;
  
 }
- 
- 
+.related-products {
+    margin-top: 6px;
+  }
+  
+  .result-item .related-products .related-product-link {
+    color: var(--Blue-700, #0068FA);
+    font-family: "Geogrotesque Sharp VF";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 330;
+    line-height: 24px; /* 150% */
+    letter-spacing: 0.08px;
+    width: auto !important;
+    padding: 0 !important;
+    color: var(--Blue-700, #0068FA) !important;
+    background: none !important;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+  }
+  
+  .related-product-link:hover {
+    opacity: 0.85;
+  }
+  
+  .pipe-separator {
+    margin: 0 6px;
+    color: #666;
+  }
  
 /* Stack title, description, related products vertically */
  
