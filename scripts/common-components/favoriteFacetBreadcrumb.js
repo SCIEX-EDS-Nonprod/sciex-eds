@@ -15,7 +15,7 @@ function canMobileActions() {
   return true;
 }
 
-const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
+const renderFavoriteFacetBreadcrumb = (data,toggleAssetType,toggleTag) => {
   const facetBreadcrumbElement = document.getElementById('facet-readcrumb');
   facetBreadcrumbElement.innerHTML = '';
 
@@ -101,10 +101,10 @@ const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
       gridContainer.classList.add('facet-breadcrumb');
       gridContainer.addEventListener('click', () => {
         item.state = 'idle';
-        renderFavoriteFacetBreadcrumb(data,toggleAssetType);
+        renderFavoriteFacetBreadcrumb(data,toggleAssetType,toggleTag);
         renderfavoriteSearchResultList(resourceLibraryResultClick, data);
         renderFavoriteQuerySummary(data);
-        renderCommonFacet(data, toggleAssetType);
+        renderCommonFacet(data, toggleAssetType,toggleTag);
       });
 
       const gridItem1 = document.createElement('div');
@@ -170,10 +170,10 @@ const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
       item.state = 'idle';
     });
     console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data)
-    renderFavoriteFacetBreadcrumb(data,toggleAssetType);
+    renderFavoriteFacetBreadcrumb(data,toggleAssetType,toggleTag);
     renderfavoriteSearchResultList(resourceLibraryResultClick, data);
     renderFavoriteQuerySummary(data);
-    renderCommonFacet(data,toggleAssetType)
+    renderCommonFacet(data,toggleAssetType,toggleTag)
   });
 
   // Check if any items are selected
@@ -192,10 +192,10 @@ const renderFavoriteFacetBreadcrumb = (data,toggleAssetType) => {
       data.forEach((item) => {
         item.state = 'idle';
       });
-        renderFavoriteFacetBreadcrumb(data,toggleAssetType);
+        renderFavoriteFacetBreadcrumb(data,toggleAssetType,toggleTag);
         renderfavoriteSearchResultList(resourceLibraryResultClick, data);
         renderFavoriteQuerySummary(data);
-        renderCommonFacet(data, toggleAssetType);
+        renderCommonFacet(data, toggleAssetType,toggleTag);
     });
   }
 
