@@ -25,6 +25,11 @@
   padding: 30px;
   border-right: 1px solid #ECECEC;
   border-bottom: 1px solid #ECECEC;
+  transition: background-color 0.3s ease;
+}
+
+.workflow-card:hover {
+  background-color: #ececec;
 }
 
 .workflow-card h3 {
