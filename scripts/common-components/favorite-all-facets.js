@@ -384,9 +384,48 @@ export function renderCommonFacet(
     </svg>
   `;
 
-  // =========================
-  // REUSABLE FACET CREATOR
-  // =========================
+  /* =========================
+     SELECTED ASSETS
+  ========================= */
+  const selectedAssets = data.filter(a => a.state === 'selected');
+
+  /* =========================
+     COLLECT SELECTED TAGS
+  ========================= */
+  const selectedTags = [];
+
+  data.forEach(asset => {
+    asset.tags?.forEach(group => {
+      group.value?.forEach(v => {
+        if (v.state === 'selected') {
+          selectedTags.push({
+            groupKey: group.key,
+            itemKey: v.key
+          });
+        }
+      });
+    });
+  });
+
+  /* =========================
+     FILTER ASSET TYPES
+     (KEY FIX)
+  ========================= */
+  const allowedAssets =
+    selectedTags.length === 0
+      ? data
+      : data.filter(asset =>
+          selectedTags.every(sel =>
+            asset.tags?.some(group =>
+              group.key === sel.groupKey &&
+              group.value?.some(v => v.key === sel.itemKey)
+            )
+          )
+        );
+
+  /* =========================
+     FACET CREATOR
+  ========================= */
   function createFacet(title, itemsContainer) {
     const block = document.createElement('div');
     block.className = 'facet-block';
@@ -411,23 +450,21 @@ export function renderCommonFacet(
 
     header.addEventListener('click', () => {
       const isOpen = itemsContainer.style.display !== 'none';
-
       itemsContainer.style.display = isOpen ? 'none' : 'flex';
       icon.innerHTML = isOpen ? closeIcon : openIcon;
     });
 
     block.appendChild(header);
     block.appendChild(itemsContainer);
-
     return block;
   }
 
-  // =========================
-  // ASSET TYPE FACET
-  // =========================
+  /* =========================
+     ASSET TYPE FACET
+  ========================= */
   const assetItems = document.createElement('div');
 
-  data.forEach(asset => {
+  allowedAssets.forEach(asset => {
     const label = document.createElement('label');
     label.className = 'facet-item';
 
@@ -441,7 +478,6 @@ export function renderCommonFacet(
 
     label.appendChild(input);
     label.append(asset.assetType);
-
     assetItems.appendChild(label);
   });
 
@@ -449,45 +485,80 @@ export function renderCommonFacet(
     createFacet('Asset type', assetItems)
   );
 
-  // =========================
-  // TAG FACETS (DYNAMIC)
-  // =========================
-  const selectedAssets = data.filter(
-    a => a.state === 'selected'
-  );
+  /* =========================
+     TAG FACETS
+     (only if asset selected)
+  ========================= */
+  if (selectedAssets.length === 0) return;
+
+  /* =========================
+     BUILD COMMON TAG MAP
+  ========================= */
+  const tagGroupMap = {};
 
   selectedAssets.forEach(asset => {
-    asset.tags?.forEach(tagGroup => {
-      const tagItems = document.createElement('div');
+    asset.tags?.forEach(group => {
+      if (!tagGroupMap[group.key]) {
+        tagGroupMap[group.key] = {};
+      }
 
-      tagGroup.value.forEach(tagItem => {
-        if (!tagItem.state) tagItem.state = 'idle';
+      group.value?.forEach(item => {
+        if (!tagGroupMap[group.key][item.key]) {
+          tagGroupMap[group.key][item.key] = [];
+        }
 
-        const label = document.createElement('label');
-        label.className = 'facet-item';
-
-        const input = document.createElement('input');
-        input.type = 'checkbox';
-        input.checked = tagItem.state === 'selected';
-
-        input.addEventListener('change', () => {
-          toggleTag(asset, tagGroup.key, tagItem);
-        });
-
-        label.appendChild(input);
-        label.append(tagItem.key);
-
-        tagItems.appendChild(label);
+        tagGroupMap[group.key][item.key].push(item);
       });
-
-      facetsContainer.appendChild(
-        createFacet(tagGroup.key, tagItems)
-      );
     });
   });
+
+  const selectedAssetCount = selectedAssets.length;
+
+  /* =========================
+     RENDER TAG FACETS
+  ========================= */
+  Object.entries(tagGroupMap).forEach(([groupKey, items]) => {
+    const commonItems = Object.entries(items).filter(
+      ([, list]) => list.length === selectedAssetCount
+    );
+
+    if (commonItems.length === 0) return;
+
+    const tagItemsContainer = document.createElement('div');
+
+    commonItems.forEach(([itemKey, itemRefs]) => {
+      const tagRef = itemRefs[0];
+      if (!tagRef.state) tagRef.state = 'idle';
+
+      const label = document.createElement('label');
+      label.className = 'facet-item';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = tagRef.state === 'selected';
+
+      input.addEventListener('change', () => {
+  selectedAssets.forEach(asset => {
+    const group = asset.tags?.find(g => g.key === groupKey);
+    const tagItem = group?.value?.find(v => v.key === itemKey);
+
+    if (tagItem) {
+      toggleTag(asset, groupKey, tagItem);
+    }
+  });
+});
+
+
+      label.appendChild(input);
+      label.append(itemKey);
+      tagItemsContainer.appendChild(label);
+    });
+
+    facetsContainer.appendChild(
+      createFacet(groupKey, tagItemsContainer)
+    );
+  });
 }
-
-
 
 
 

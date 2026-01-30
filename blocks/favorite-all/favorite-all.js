@@ -151,43 +151,48 @@ function toggleTag(asset, tagKey, tagItem) {
   );
 }
 
- function toggleAssetType(value) {
-  favoriteResultsList.forEach(item => {
-    if (item.assetType === value.assetType) {
-      const wasSelected = item.state === 'selected';
 
-      // toggle asset type
-      item.state = wasSelected ? 'idle' : 'selected';
+function toggleAssetType(value) {
+  const wasSelected = value.state === 'selected';
 
-      // ✅ IF UNSELECTED → RESET ALL TAGS
-      if (wasSelected && Array.isArray(item.tags)) {
-        item.tags.forEach(tagGroup => {
-          tagGroup.value?.forEach(tagItem => {
-            tagItem.state = 'idle';
+  value.state = wasSelected ? 'idle' : 'selected';
+
+  // 🔥 KEY FIX:
+  // when selecting a new assetType,
+  // apply already selected tags to it
+  if (!wasSelected) {
+    favoriteResultsList.forEach(asset => {
+      if (asset !== value) {
+        asset.tags?.forEach(group => {
+          group.value?.forEach(tag => {
+            if (tag.state === 'selected') {
+              // copy this selection to new asset
+              const targetGroup = value.tags?.find(g => g.key === group.key);
+              const targetTag = targetGroup?.value?.find(v => v.key === tag.key);
+
+              if (targetTag) {
+                targetTag.state = 'selected';
+              }
+            }
           });
         });
       }
-    }
-  });
+    });
+  }
 
-  renderfavoriteSearchResultList(
-    resourceLibraryResultClick,
-    favoriteResultsList
-  );
+  // when unselecting assetType → clear its tags
+  if (wasSelected) {
+    value.tags?.forEach(group => {
+      group.value?.forEach(tag => {
+        tag.state = 'idle';
+      });
+    });
+  }
 
+  renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
   renderFavoriteQuerySummary(favoriteResultsList);
-
-  renderFavoriteFacetBreadcrumb(
-    favoriteResultsList,
-    toggleAssetType,
-    toggleTag
-  );
-
-  renderCommonFacet(
-    favoriteResultsList,
-    toggleAssetType,
-    toggleTag
-  );
+  renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType, toggleTag);
+  renderCommonFacet(favoriteResultsList, toggleAssetType, toggleTag);
 }
 
 
