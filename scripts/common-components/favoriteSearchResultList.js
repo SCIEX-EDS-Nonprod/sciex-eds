@@ -95,7 +95,7 @@ const renderfavoriteSearchResultList = (
       const relatedProductsHtml = Array.isArray(result.relatedProducts)
           ? result.relatedProducts
               .filter(Boolean)
-              .map(product => `<a href="#" class="related-product-link">${product}</a>`)
+              .map(product => `<a href=${product.href} class="related-product-link">${product.title}</a>`)
               .join(' <span class="pipe-separator">|</span> ')
           : '';
 
