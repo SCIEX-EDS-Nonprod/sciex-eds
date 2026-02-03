@@ -2851,13 +2851,6 @@
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "imageAltText",
-        "label": "Image Alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
         "name": "text1",
         "value": "",
         "label": "No results text1",
