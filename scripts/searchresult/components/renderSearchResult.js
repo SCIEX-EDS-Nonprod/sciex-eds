@@ -7,6 +7,27 @@ import { i18n } from '../../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
+export const addToFavorite = async (url) => {
+  try {
+    const response = await fetch(
+      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
+      {
+        method: 'POST', // better than GET for actions
+        credentials: 'include', // needed if auth cookies required
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    throw error;
+  }
+};
+
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
 
@@ -117,33 +138,32 @@ const renderSearchResults = () => {
         </div>
         `;
 
-        const favIcon = resultItem.querySelector('.favorite-icon');
+      const favIcon = resultItem.querySelector('.favorite-icon');
 
-        favIcon.addEventListener('click', async (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        
-          const pageUrl = result.printableUri; // URL you want to send
-        
-          try {
-            // Optimistic UI update
-            favIcon.classList.toggle('favorited');
-        
-            const response = await addToFavorite(encodeURIComponent(pageUrl));
-        
-            console.log('Favorite API response:', response);
-        
-            // Optional: revert UI if API fails logically
-            if (!response || response.success === false) {
-              favIcon.classList.toggle('favorited'); // revert
-            }
-        
-          } catch (error) {
-            console.error('Failed to add favorite:', error);
-            favIcon.classList.toggle('favorited'); // revert on error
+      favIcon.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const pageUrl = result.printableUri; // URL you want to send
+
+        try {
+          // Optimistic UI update
+          favIcon.classList.toggle('favorited');
+
+          const response = await addToFavorite(encodeURIComponent(pageUrl));
+
+          console.log('Favorite API response:', response);
+
+          // Optional: revert UI if API fails logically
+          if (!response || response.success === false) {
+            favIcon.classList.toggle('favorited'); // revert
           }
-        });
-      
+        } catch (error) {
+          console.error('Failed to add favorite:', error);
+          favIcon.classList.toggle('favorited'); // revert on error
+        }
+      });
+
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
       viewDetailsBtn.addEventListener('click', () => {
         handleResultClick(result);
@@ -195,28 +215,5 @@ const renderSearchResults = () => {
     searchWrapper.style.width = 'fit-content';
   }
 };
-
-export const addToFavorite = async (url) => {
-  try {
-    const response = await fetch(
-      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
-      {
-        method: 'POST', // better than GET for actions
-        credentials: 'include', // needed if auth cookies required
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
-
-  } catch (error) {
-    console.error('Fetch error:', error);
-    throw error;
-  }
-};
-
 
 export default renderSearchResults;
