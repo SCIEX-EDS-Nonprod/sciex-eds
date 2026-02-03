@@ -18,7 +18,7 @@ function createElement(tag, options = {}) {
   return el;
 }
 
-async function initializeSerachInterface(block, blockName) {
+async function initializefavoriteSearchInterface(block, blockName) {
   // Create main container div
   const courseCatalogDiv = createElement('div', { classList: ['tw', blockName, 'tw-bg-white'] });
 
@@ -174,4 +174,4 @@ async function initializeSerachInterface(block, blockName) {
   block.append(courseCatalogDiv);
 }
 
-export default initializeSerachInterface;
+export default initializefavoriteSearchInterface;

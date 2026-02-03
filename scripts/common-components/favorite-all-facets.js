@@ -224,7 +224,7 @@ export function renderCommonFacet(
         selectedAssets.forEach(asset => {
           const group = asset.tags?.find(g => g.key === groupKey);
           group?.value?.forEach(tag => {
-            if (tag.state === 'selected') toggleTag(asset, groupKey, tag);
+            if (tag.state === 'selected') toggleTag(tag);
           });
         });
         facetSearchState[groupKey] = '';
@@ -254,7 +254,7 @@ export function renderCommonFacet(
           selectedAssets.forEach(asset => {
             const g = asset.tags?.find(gr => gr.key === groupKey);
             const t = g?.value?.find(v => v.key === key);
-            if (t) toggleTag(asset, groupKey, t);
+            if (t) toggleTag(t);
           });
         };
 

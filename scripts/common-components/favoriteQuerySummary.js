@@ -3,90 +3,76 @@ import { i18n } from '../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-const renderFavoriteQuerySummary = (data) => {
-  const querySummaryElement = document.getElementById('query-summary');
-  const mobileFilterResultBtn = document.getElementById(
-    'mobile-filter-footer-results'
-  );
+const renderFavoriteQuerySummary = (data = []) => {
+  const querySummaryEl = document.getElementById('query-summary');
+  const mobileResultBtn = document.getElementById('mobile-filter-footer-results');
 
-  querySummaryElement.innerHTML = '';
+  if (!querySummaryEl || !mobileResultBtn) return;
 
-  /* ======================================================
-     FLATTEN ALL RESULTS
-  ====================================================== */
-
-  const allResults = Array.isArray(data)
-    ? data.flatMap(asset =>
-        asset.pageData?.map(item => ({
-          ...item,
-          assetType: asset.assetType
-        })) || []
-      )
-    : [];
+  querySummaryEl.textContent = '';
 
   /* ======================================================
-     SELECTED ASSET TYPES
+     COLLECT STATE IN ONE PASS
   ====================================================== */
 
-  const selectedAssetTypes = data
-    .filter(a => a.state === 'selected')
-    .map(a => a.assetType);
+  const selectedAssetTypes = new Set();
+  const selectedTagIds = new Set();
+  const allResults = [];
 
-  /* ======================================================
-     SELECTED TAG IDS
-  ====================================================== */
+  data.forEach(asset => {
+    if (asset.state === 'selected') {
+      selectedAssetTypes.add(asset.assetType);
+    }
 
-  const selectedTagIds = data.flatMap(asset =>
-    asset.tags?.flatMap(tagGroup =>
-      tagGroup.value
-        ?.filter(v => v.state === 'selected')
-        .flatMap(v => v.value)
-    ) || []
-  );
-
-  /* ======================================================
-     APPLY SAME FILTER LOGIC
-  ====================================================== */
-
-  let filteredResults = allResults;
-
-  if (selectedAssetTypes.length > 0) {
-    filteredResults = filteredResults.filter(item =>
-      selectedAssetTypes.includes(item.assetType)
+    asset.tags?.forEach(group =>
+      group.value?.forEach(tag => {
+        if (tag.state === 'selected') {
+          tag.value?.forEach(id => selectedTagIds.add(id));
+        }
+      })
     );
-  }
 
-  if (selectedTagIds.length > 0) {
-    filteredResults = filteredResults.filter(item =>
-      selectedTagIds.includes(item.id)
-    );
-  }
+    console.log('okok',selectedAssetTypes,selectedTagIds)
 
+
+    asset.pageData?.forEach(item => {
+      allResults.push({ ...item, assetType: asset.assetType });
+    });
+  });
+
+  console.log('allll',allResults)
   /* ======================================================
-     RESULT COUNT
+     FILTER RESULTS
   ====================================================== */
 
-  const displayCount =
-    selectedAssetTypes.length > 0 || selectedTagIds.length > 0
-      ? filteredResults.length
-      : allResults.length;
+  const hasAssetFilter = selectedAssetTypes.size > 0;
+  const hasTagFilter = selectedTagIds.size > 0;
+
+  const filteredResults =
+    hasAssetFilter || hasTagFilter
+      ? allResults.filter(item =>
+          (!hasAssetFilter || selectedAssetTypes.has(item.assetType)) &&
+          (!hasTagFilter || selectedTagIds.has(item.id))
+        )
+      : allResults;
+
+  const resultCount = filteredResults.length;
 
   /* ======================================================
      RENDER
   ====================================================== */
 
+  mobileResultBtn.textContent = `Results (${resultCount})`;
+
   const resultItem = document.createElement('div');
-
-  mobileFilterResultBtn.innerHTML = `Results (${displayCount})`;
-
   resultItem.innerHTML = `
     ${strings.result}
-    <span>1 - ${displayCount}</span>
+    <span>1 - ${resultCount}</span>
     ${strings.of}
-    <span>${displayCount}</span>
+    <span>${resultCount}</span>
   `;
 
-  querySummaryElement.appendChild(resultItem);
+  querySummaryEl.appendChild(resultItem);
 };
 
 export default renderFavoriteQuerySummary;
