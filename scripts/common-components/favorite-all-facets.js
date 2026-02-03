@@ -352,95 +352,214 @@ function renderSearchFacets(facetController, facetItemsContainer, facetElement, 
   return isSearch;
 }
 
-export function renderCommonFacet(data, toggleAssetType) {
-  const facetsElement = document.getElementById('facets');
-  if (!facetsElement) return;
+export function renderCommonFacet(
+  data,
+  toggleAssetType,
+  toggleTag
+) {
+  let facetsContainer = document.querySelector('#facets');
 
-  // Clear existing facets
-  facetsElement.innerHTML = '';
+  if (!facetsContainer) {
+    facetsContainer = document.createElement('div');
+    facetsContainer.id = 'facets';
+    document.body.appendChild(facetsContainer);
+  }
 
-  const facetDiv = document.createElement('div');
-  facetDiv.id = 'assetType-facet';
-  facetDiv.className = 'facet-group';
+  facetsContainer.innerHTML = '';
 
-  // ===== HEADER =====
-  const facetHeader = document.createElement('h3');
-  facetHeader.className =
-    'facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1 tw-flex tw-justify-between tw-items-center';
-  facetHeader.style.cursor = 'pointer';
-  facetHeader.setAttribute('aria-expanded', 'true');
-
-  const headerText = document.createElement('span');
-  headerText.textContent = 'Asset Type';
-
-  const headerIcon = document.createElement('span');
-  headerIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  // =========================
+  // SVG ICONS
+  // =========================
+  const openIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+      viewBox="0 0 16 16" fill="none">
       <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
     </svg>
   `;
 
-  facetHeader.appendChild(headerText);
-  facetHeader.appendChild(headerIcon);
+  const closeIcon = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+      viewBox="0 0 16 16" fill="none">
+      <path d="M14 5L8 11L2 5" stroke="#0068FA"/>
+    </svg>
+  `;
 
-  // ===== ITEMS CONTAINER =====
-  const facetItemsContainer = document.createElement('div');
-  facetItemsContainer.className = 'facet-items-container';
-  facetItemsContainer.style.display = 'flex';
-  facetItemsContainer.style.flexDirection = 'column';
-  facetItemsContainer.style.gap = '6px';
+  /* =========================
+     SELECTED ASSETS
+  ========================= */
+  const selectedAssets = data.filter(a => a.state === 'selected');
 
-  // ===== CREATE CHECKBOX ITEMS =====
-  data.forEach((item) => {
-    const facetItem = document.createElement('div');
-    facetItem.className =
-      'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
+  /* =========================
+     COLLECT SELECTED TAGS
+  ========================= */
+  const selectedTags = [];
 
-    facetItem.innerHTML = `
-      <input
-        type="checkbox"
-        id="${item.assetType}"
-        ${item.state === 'selected' ? 'checked' : ''}
-        class="tw-accent-blue-500 tw-w-4 tw-h-4"
-      />
-      <label for="${item.assetType}" class="tw-cursor-pointer">
-        ${item.assetType}
-      </label>
-    `;
+  data.forEach(asset => {
+    asset.tags?.forEach(group => {
+      group.value?.forEach(v => {
+        if (v.state === 'selected') {
+          selectedTags.push({
+            groupKey: group.key,
+            itemKey: v.key
+          });
+        }
+      });
+    });
+  });
 
-    facetItem.querySelector('input').addEventListener('change', () => {
-      toggleAssetType(item);
+  /* =========================
+     FILTER ASSET TYPES
+     (KEY FIX)
+  ========================= */
+  const allowedAssets =
+    selectedTags.length === 0
+      ? data
+      : data.filter(asset =>
+          selectedTags.every(sel =>
+            asset.tags?.some(group =>
+              group.key === sel.groupKey &&
+              group.value?.some(v => v.key === sel.itemKey)
+            )
+          )
+        );
+
+  /* =========================
+     FACET CREATOR
+  ========================= */
+  function createFacet(title, itemsContainer) {
+    const block = document.createElement('div');
+    block.className = 'facet-block';
+
+    const header = document.createElement('div');
+    header.className =
+      'facet-header tw-flex tw-justify-between tw-items-center';
+    header.style.cursor = 'pointer';
+
+    const text = document.createElement('span');
+    text.textContent = title;
+
+    const icon = document.createElement('span');
+    icon.innerHTML = openIcon;
+
+    header.appendChild(text);
+    header.appendChild(icon);
+
+    itemsContainer.style.display = 'flex';
+    itemsContainer.style.flexDirection = 'column';
+    itemsContainer.style.gap = '6px';
+
+    header.addEventListener('click', () => {
+      const isOpen = itemsContainer.style.display !== 'none';
+      itemsContainer.style.display = isOpen ? 'none' : 'flex';
+      icon.innerHTML = isOpen ? closeIcon : openIcon;
     });
 
-    facetItemsContainer.appendChild(facetItem);
+    block.appendChild(header);
+    block.appendChild(itemsContainer);
+    return block;
+  }
+
+  /* =========================
+     ASSET TYPE FACET
+  ========================= */
+  const assetItems = document.createElement('div');
+
+  allowedAssets.forEach(asset => {
+    const label = document.createElement('label');
+    label.className = 'facet-item';
+
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = asset.state === 'selected';
+
+    input.addEventListener('change', () => {
+      toggleAssetType(asset);
+    });
+
+    label.appendChild(input);
+    label.append(asset.assetType);
+    assetItems.appendChild(label);
   });
 
-  // ===== HEADER CLICK TOGGLE =====
-  facetHeader.addEventListener('click', () => {
-    const isOpen = facetItemsContainer.style.display !== 'none';
+  facetsContainer.appendChild(
+    createFacet('Asset type', assetItems)
+  );
 
-    facetItemsContainer.style.display = isOpen ? 'none' : 'flex';
+  /* =========================
+     TAG FACETS
+     (only if asset selected)
+  ========================= */
+  if (selectedAssets.length === 0) return;
 
-    headerIcon.innerHTML = isOpen
-      ? `
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M14 5L8 11L2 5" stroke="#0068FA"/>
-        </svg>
-      `
-      : `
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
-        </svg>
-      `;
+  /* =========================
+     BUILD COMMON TAG MAP
+  ========================= */
+  const tagGroupMap = {};
 
-    facetHeader.setAttribute('aria-expanded', String(!isOpen));
+  selectedAssets.forEach(asset => {
+    asset.tags?.forEach(group => {
+      if (!tagGroupMap[group.key]) {
+        tagGroupMap[group.key] = {};
+      }
+
+      group.value?.forEach(item => {
+        if (!tagGroupMap[group.key][item.key]) {
+          tagGroupMap[group.key][item.key] = [];
+        }
+
+        tagGroupMap[group.key][item.key].push(item);
+      });
+    });
   });
 
-  // ===== APPEND =====
-  facetDiv.appendChild(facetHeader);
-  facetDiv.appendChild(facetItemsContainer);
-  facetsElement.appendChild(facetDiv);
+  const selectedAssetCount = selectedAssets.length;
+
+  /* =========================
+     RENDER TAG FACETS
+  ========================= */
+  Object.entries(tagGroupMap).forEach(([groupKey, items]) => {
+    const commonItems = Object.entries(items).filter(
+      ([, list]) => list.length === selectedAssetCount
+    );
+
+    if (commonItems.length === 0) return;
+
+    const tagItemsContainer = document.createElement('div');
+
+    commonItems.forEach(([itemKey, itemRefs]) => {
+      const tagRef = itemRefs[0];
+      if (!tagRef.state) tagRef.state = 'idle';
+
+      const label = document.createElement('label');
+      label.className = 'facet-item';
+
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = tagRef.state === 'selected';
+
+      input.addEventListener('change', () => {
+  selectedAssets.forEach(asset => {
+    const group = asset.tags?.find(g => g.key === groupKey);
+    const tagItem = group?.value?.find(v => v.key === itemKey);
+
+    if (tagItem) {
+      toggleTag(asset, groupKey, tagItem);
+    }
+  });
+});
+
+
+      label.appendChild(input);
+      label.append(itemKey);
+      tagItemsContainer.appendChild(label);
+    });
+
+    facetsContainer.appendChild(
+      createFacet(groupKey, tagItemsContainer)
+    );
+  });
 }
+
 
 
 export const handleMobileFilters = () => {

@@ -5,28 +5,87 @@ const strings = i18n[lang] || i18n.en;
 
 const renderFavoriteQuerySummary = (data) => {
   const querySummaryElement = document.getElementById('query-summary');
-  const mobileFilterResultBtn = document.getElementById('mobile-filter-footer-results');
+  const mobileFilterResultBtn = document.getElementById(
+    'mobile-filter-footer-results'
+  );
+
   querySummaryElement.innerHTML = '';
+
+  /* ======================================================
+     FLATTEN ALL RESULTS
+  ====================================================== */
+
+  const allResults = Array.isArray(data)
+    ? data.flatMap(asset =>
+        asset.pageData?.map(item => ({
+          ...item,
+          assetType: asset.assetType
+        })) || []
+      )
+    : [];
+
+  /* ======================================================
+     SELECTED ASSET TYPES
+  ====================================================== */
+
+  const selectedAssetTypes = data
+    .filter(a => a.state === 'selected')
+    .map(a => a.assetType);
+
+  /* ======================================================
+     SELECTED TAG IDS
+  ====================================================== */
+
+  const selectedTagIds = data.flatMap(asset =>
+    asset.tags?.flatMap(tagGroup =>
+      tagGroup.value
+        ?.filter(v => v.state === 'selected')
+        .flatMap(v => v.value)
+    ) || []
+  );
+
+  /* ======================================================
+     APPLY SAME FILTER LOGIC
+  ====================================================== */
+
+  let filteredResults = allResults;
+
+  if (selectedAssetTypes.length > 0) {
+    filteredResults = filteredResults.filter(item =>
+      selectedAssetTypes.includes(item.assetType)
+    );
+  }
+
+  if (selectedTagIds.length > 0) {
+    filteredResults = filteredResults.filter(item =>
+      selectedTagIds.includes(item.id)
+    );
+  }
+
+  /* ======================================================
+     RESULT COUNT
+  ====================================================== */
+
+  const displayCount =
+    selectedAssetTypes.length > 0 || selectedTagIds.length > 0
+      ? filteredResults.length
+      : allResults.length;
+
+  /* ======================================================
+     RENDER
+  ====================================================== */
+
   const resultItem = document.createElement('div');
-  
-  // Calculate total results across all items
-  const totalResults = data.reduce((acc, item) => acc + (item.pageData?.length || 0), 0);
-  
-  // Calculate selected results - only from items with state === 'selected'
-  const selectedResults = data.reduce((acc, item) => {
-    if (item.state === 'selected') {
-      return acc + (item.pageData?.length || 0);
-    }
-    return acc;
-  }, 0);
-  
-  // Determine which count to display
-  const hasSelected = data.some(item => item.state === 'selected');
-  const displayCount = hasSelected ? selectedResults : totalResults;
-  
+
   mobileFilterResultBtn.innerHTML = `Results (${displayCount})`;
-  resultItem.innerHTML = `${strings.result} <span>1 - ${displayCount}</span> ${strings.of} <span>${displayCount}</span>`;
-  
+
+  resultItem.innerHTML = `
+    ${strings.result}
+    <span>1 - ${displayCount}</span>
+    ${strings.of}
+    <span>${displayCount}</span>
+  `;
+
   querySummaryElement.appendChild(resultItem);
 };
 

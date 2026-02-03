@@ -122,17 +122,82 @@ export default async function decorate(block) {
   // const assetTypes = data.map(item => item.value);
 
 
-  function toggleAssetType(value) {
-    favoriteResultsList.forEach(item => {
-      if (item.assetType === value.assetType) {
-        item.state = item.state === "selected" ? "idle" : "selected";
+function toggleTag(asset, tagKey, tagItem) {
+  // initialize state safely
+  if (!tagItem.state) {
+    tagItem.state = 'idle';
+  }
+
+  tagItem.state =
+    tagItem.state === 'selected' ? 'idle' : 'selected';
+
+  renderfavoriteSearchResultList(
+    resourceLibraryResultClick,
+    favoriteResultsList
+  );
+
+  renderFavoriteQuerySummary(favoriteResultsList);
+
+  renderCommonFacet(
+    favoriteResultsList,
+    toggleAssetType,
+    toggleTag
+  );
+
+  renderFavoriteFacetBreadcrumb(
+    favoriteResultsList,
+    toggleAssetType,
+    toggleTag
+  );
+}
+
+
+function toggleAssetType(value) {
+  const wasSelected = value.state === 'selected';
+
+  value.state = wasSelected ? 'idle' : 'selected';
+
+  // 🔥 KEY FIX:
+  // when selecting a new assetType,
+  // apply already selected tags to it
+  if (!wasSelected) {
+    favoriteResultsList.forEach(asset => {
+      if (asset !== value) {
+        asset.tags?.forEach(group => {
+          group.value?.forEach(tag => {
+            if (tag.state === 'selected') {
+              // copy this selection to new asset
+              const targetGroup = value.tags?.find(g => g.key === group.key);
+              const targetTag = targetGroup?.value?.find(v => v.key === tag.key);
+
+              if (targetTag) {
+                targetTag.state = 'selected';
+              }
+            }
+          });
+        });
       }
     });
-    renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
-    renderFavoriteQuerySummary(favoriteResultsList);
-    renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType);
-    renderCommonFacet(favoriteResultsList, toggleAssetType);
   }
+
+  // when unselecting assetType → clear its tags
+  if (wasSelected) {
+    value.tags?.forEach(group => {
+      group.value?.forEach(tag => {
+        tag.state = 'idle';
+      });
+    });
+  }
+
+  renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
+  renderFavoriteQuerySummary(favoriteResultsList);
+  renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType, toggleTag);
+  renderCommonFacet(favoriteResultsList, toggleAssetType, toggleTag);
+}
+
+
+
+
 
   // Initialize course catalog components
   try {
@@ -144,8 +209,8 @@ export default async function decorate(block) {
     resourceLibrarySearchEngine.subscribe(() => {
       renderfavoriteSearchResultList(resourceLibraryResultClick, favoriteResultsList);
       renderFavoriteQuerySummary(favoriteResultsList);
-      renderCommonFacet(favoriteResultsList, toggleAssetType);
-      renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType);
+      renderCommonFacet(favoriteResultsList, toggleAssetType,toggleTag);
+      renderFavoriteFacetBreadcrumb(favoriteResultsList, toggleAssetType,toggleTag);
     });
   } catch (error) {
     resourceLibrarySearchEngine.executeFirstSearch();
