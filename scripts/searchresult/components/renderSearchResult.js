@@ -10,21 +10,52 @@ const strings = i18n[lang] || i18n.en;
 export const addToFavorite = async (url) => {
   try {
     const response = await fetch(
-      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
+      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
       {
-        method: 'POST', // better than GET for actions
-        credentials: 'include', // needed if auth cookies required
+        method: 'POST',
+        credentials: 'include',
+      },
+    );
+
+    // If server responded but with error status
+    if (!response.ok) {
+      console.error(`Favorite API failed with status ${response.status}`);
+      return { success: false };
+    }
+
+    // Backend doesn't return JSON, just consume body safely
+    await response.text();
+
+    return { success: true };
+
+  } catch (error) {
+    // Network failure / request blocked / server unreachable
+    console.error('Fetch error:', error);
+    return { success: false };
+  }
+};
+
+export const removeToFavorite = async (url) => {
+  try {
+    const response = await fetch(
+      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=remove`,
+      {
+        method: 'POST',
+        credentials: 'include',
       },
     );
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.error(`Remove favorite failed: ${response.status}`);
+      return { success: false };
     }
 
-    return await response.json();
+    await response.text(); // consume safely
+    return { success: true };
+
   } catch (error) {
     console.error('Fetch error:', error);
-    throw error;
+    return { success: false };
   }
 };
 
@@ -143,27 +174,36 @@ const renderSearchResults = () => {
       favIcon.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        const pageUrl = result.printableUri; // URL you want to send
-
-        try {
+      
+        const pageUrl = result.printableUri;
+        const isFavorited = favIcon.classList.contains('favorited');
+      
+        // ===== UNFAVORITE FLOW =====
+        if (isFavorited) {
           // Optimistic UI update
-          favIcon.classList.toggle('favorited');
-
-          const response = await addToFavorite(encodeURIComponent(pageUrl));
-
-          console.log('Favorite API response:', response);
-
-          // Optional: revert UI if API fails logically
-          if (!response || response.success === false) {
-            favIcon.classList.toggle('favorited'); // revert
+          favIcon.classList.remove('favorited');
+      
+          const response = await removeToFavorite(pageUrl);
+      
+          // Revert if API failed
+          if (!response.success) {
+            favIcon.classList.add('favorited');
           }
-        } catch (error) {
-          console.error('Failed to add favorite:', error);
-          favIcon.classList.toggle('favorited'); // revert on error
+      
+          return;
+        }
+      
+        // ===== FAVORITE FLOW =====
+        favIcon.classList.add('favorited');
+      
+        const response = await addToFavorite(pageUrl);
+      
+        // Revert if API failed
+        if (!response.success) {
+          favIcon.classList.remove('favorited');
         }
       });
-
+      
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
       viewDetailsBtn.addEventListener('click', () => {
         handleResultClick(result);
