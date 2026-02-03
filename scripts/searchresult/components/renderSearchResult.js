@@ -17,20 +17,10 @@ export const addToFavorite = async (url) => {
       },
     );
 
-    // If server responded but with error status
-    if (!response.ok) {
-      console.error(`Favorite API failed with status ${response.status}`);
-      return { success: false };
-    }
-
-    // Backend doesn't return JSON, just consume body safely
-    await response.text();
-
-    return { success: true };
+    return { success: response.ok };
 
   } catch (error) {
-    // Network failure / request blocked / server unreachable
-    console.error('Fetch error:', error);
+    console.error('Fetch error (add favorite):', error);
     return { success: false };
   }
 };
@@ -45,16 +35,10 @@ export const removeToFavorite = async (url) => {
       },
     );
 
-    if (!response.ok) {
-      console.error(`Remove favorite failed: ${response.status}`);
-      return { success: false };
-    }
-
-    await response.text(); // consume safely
-    return { success: true };
+    return { success: response.ok };
 
   } catch (error) {
-    console.error('Fetch error:', error);
+    console.error('Fetch error (remove favorite):', error);
     return { success: false };
   }
 };
