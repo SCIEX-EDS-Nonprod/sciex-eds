@@ -4,354 +4,61 @@ import { i18n } from '../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-function facetAccordion(values, facetElement, facetItemsContainer, facetId) {
-  if (values.length !== 0) {
-    facetElement.appendChild(facetItemsContainer);
+/* =========================
+   🔑 PERSISTED STATE
+========================= */
+const facetSearchState = {};
+const facetVisibleCountState = {};
 
-    const facetHeader = facetElement.querySelector('.facet-header');
-    facetHeader.setAttribute('aria-expanded', 'false');
-    facetHeader.addEventListener('click', () => {
-      const isVisible = facetItemsContainer.style.display === 'none';
-      const icon = facetHeader.querySelector('span');
-      facetItemsContainer.style.display = isVisible ? 'flex' : 'none';
-      const { parentElement } = facetItemsContainer;
-      const inputElement = Array.from(parentElement.children).find((child) => child.tagName.toLowerCase() === 'input');
-      if (inputElement) {
-        if (inputElement.style.display === 'none') {
-          inputElement.style.display = 'block';
-        } else {
-          inputElement.style.display = 'none';
-        }
-      }
-      icon.innerHTML = isVisible
-        ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 11L8 5L14 11" stroke="#0068FA"/></svg>'
-        : '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 5L8 11L2 5" stroke="#0068FA"/></svg>';
+/* =========================
+   CREATE TOGGLE BUTTONS
+========================= */
+function createToggleButtons({
+  container,
+  totalCount,
+  visibleCount,
+  onShowMore,
+  onShowLess
+}) {
+  container.querySelectorAll('.facet-toggle-buttons').forEach(b => b.remove());
 
-      facetHeader.setAttribute('aria-expanded', !isVisible);
-    });
+  const buttonContainer = document.createElement('div');
+  buttonContainer.classList.add('facet-toggle-buttons');
 
-    if (facetId === 'isnewcourse') {
-      const h3Tag = facetElement.querySelector('h3.facet-header');
-      if (h3Tag) {
-        h3Tag.remove();
-      }
-    }
-  } else {
-    facetElement.innerHTML = '';
-  }
+  const showMoreBtn = document.createElement('button');
+  showMoreBtn.classList.add('show-more-btn');
+  showMoreBtn.textContent = strings.showMore;
+  showMoreBtn.innerHTML += `
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M0 6L12 6" stroke="#0068FA"/>
+        <path d="M6 0L6 12" stroke="#0068FA"/>
+      </svg>
+    </span>
+  `;
+  showMoreBtn.onclick = onShowMore;
+  showMoreBtn.style.display = visibleCount < totalCount ? 'flex' : 'none';
+
+  const showLessBtn = document.createElement('button');
+  showLessBtn.classList.add('show-less-btn');
+  showLessBtn.textContent = strings.showLess;
+  showLessBtn.innerHTML += `
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M0 6L12 6" stroke="#0068FA"/>
+      </svg>
+    </span>
+  `;
+  showLessBtn.onclick = onShowLess;
+  showLessBtn.style.display = visibleCount > 5 ? 'flex' : 'none';
+
+  buttonContainer.append(showMoreBtn, showLessBtn);
+  container.appendChild(buttonContainer);
 }
 
-function createToggleButtons(facetItemsContainer, facetController) {
-  const buttonContainer = document.createElement('div'); // Container for buttons
-  buttonContainer.classList.add('facet-toggle-buttons'); // Optional class for styling
-
-  const buttons = {
-    showMore: createButton(strings.showMore, 'show-more-btn', () => toggleValues(true)),
-    showLess: createButton(strings.showLess, 'show-less-btn', () => toggleValues(false)),
-  };
-
-  function createButton(text, className, onClick) {
-    const button = document.createElement('button');
-    button.textContent = text;
-    button.classList.add(className);
-    button.addEventListener('click', onClick);
-    const icon = document.createElement('span');
-    const svg = className === 'show-more-btn'
-      ? '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/><path d="M6 0L6 12" stroke="#0068FA"/></svg>'
-      : ' <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
-    icon.innerHTML = svg;
-    button.appendChild(icon);
-    return button;
-  }
-
-  function toggleValues(isShowMore) {
-    // Toggle the visibility of the buttons
-    buttons.showMore.style.display = isShowMore ? 'none' : 'inline';
-    buttons.showLess.style.display = isShowMore ? 'inline' : 'none';
-    isShowMore
-      ? facetController.showMoreValues()
-      : facetController.showLessValues();
-  }
-
-  // Append buttons to the container
-  buttonContainer.appendChild(buttons.showMore);
-  buttonContainer.appendChild(buttons.showLess);
-
-  // Add the container to the facetItemsContainer
-  facetItemsContainer.appendChild(buttonContainer);
-
-  // Initially hide/show the buttons based on the controller's state
-  if (facetController.state.canShowMoreValues) {
-    buttons.showMore.style.display = 'flex';
-  } else {
-    buttons.showMore.style.display = 'none';
-  }
-
-  if (facetController.state.canShowLessValues) {
-    buttons.showLess.style.display = 'flex';
-  } else {
-    buttons.showLess.style.display = 'none';
-  }
-}
-
-function renderFacet(facetElementId, facetController, headerText,favoriteResultsList,toggleAssetType) {
-  const { facetId } = facetController.state;
-
-  const facetElement = document.getElementById(facetElementId);
-
-  let facetInputElement = null;
-  if (facetId == 'massspectrometerscategories' || facetId == 'softwarecategories' || facetId == 'language' || facetId == 'instrumentfamily') {
-    const element = document.getElementById(`${facetId}-input`);
-    facetInputElement = element;
-  }
-
-  facetElement.innerHTML = `<h3 class="facet-header tw-text-gray-800 tw-text-lg tw-mb-2 tw-pb-1">${headerText}
-    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
-  </svg></span>
-    </h3>`;
-
-  const { values } = facetController.state;
-  let facetItemsContainer = facetElement.querySelector('.facet-items-container');
-  if (facetItemsContainer != null) {
-    facetItemsContainer.remove();
-  }
-  facetItemsContainer = document.createElement('div');
-  facetItemsContainer.className = 'facet-items-container';
-  if (values.length) {
-    facetElement.style.borderBottom = '1px solid #ececec';
-  }
-  let isSearch = false;
-  if (facetId == 'massspectrometerscategories' || facetId == 'softwarecategories' || facetId == 'language' || facetId == 'instrumentfamily') {
-    clearFacetFilter(facetElement, facetController);
-    const facetInput = document.createElement('input');
-    facetInput.type = 'text';
-    facetInput.id = `${facetId}-input`;
-    facetInput.maxLength = 200;
-    facetInput.classList.add(
-      'tw-border',
-      'tw-p-2',
-      'tw-rounded-lg',
-      'tw-mt-2',
-      'facet-search-box',
-    );
-    facetInput.placeholder = 'Search';
-
-    facetInput.addEventListener('input', (event) => {
-      const query = event.target.value.toLowerCase();
-      if (query.length > 0) {
-        sessionStorage.setItem('focusedElement', `${facetId}-input`);
-        facetController.facetSearch.updateText(query);
-        facetController.facetSearch.search();
-      } else {
-        isSearch = false;
-        sessionStorage.removeItem('focusedElement');
-        const searchresult = facetController.state.values;
-        const itemContainer = facetElement.querySelector('.facet-items-container');
-        itemContainer.innerHTML = '';
-        isSearch = renderSearchFacets(facetController, itemContainer, facetElement, searchresult);
-      }
-    });
-
-    if (facetInputElement == null) {
-      facetElement.appendChild(facetInput);
-    } else {
-      facetElement.appendChild(facetInputElement);
-      const focusedElementId = sessionStorage.getItem('focusedElement');
-      const focusElement = document.getElementById(focusedElementId);
-      if (focusedElementId) {
-        setTimeout(() => {
-          const currentScrollPosition = window.scrollY;
-          focusElement.focus();
-          window.scrollTo(0, currentScrollPosition);
-        }, 0);
-      }
-      let searchresult = facetController.state.facetSearch.values;
-      if (facetInputElement.value.trim() === '') {
-        searchresult = facetController.state.values;
-      }
-      facetItemsContainer.innerHTML = '';
-      isSearch = renderSearchFacets(facetController, facetItemsContainer, facetElement, searchresult);
-    }
-  }
-  if (!isSearch) {
-    favoriteResultsList.forEach((value) => {
-      if (facetId === 'applications' && value === 'Application') {
-        return;
-      }
-      const facetItem = document.createElement('div');
-      facetItem.className = 'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
-      facetItem.innerHTML = `
-          <input type="checkbox" id="${value.value}" ${
-  value.state === 'selected' ? 'checked' : ''
-} class="tw-accent-blue-500 tw-w-4 tw-h-4">
-          <label for="${value.value}">${value.value}</label>
-        `;
-
-      facetItem.querySelector('input').addEventListener('change', () => {
-        const focusedElementId = sessionStorage.getItem('focusedElement');
-        if (focusedElementId) {
-          const focusElement = document.getElementById(focusedElementId);
-          focusElement ? focusElement.value = '' : '';
-          sessionStorage.removeItem('focusedElement');
-        }
-        toggleAssetType(value)
-      });
-
-      facetItemsContainer.appendChild(facetItem);
-    });
-
-    clearFacetFilter(facetElement, facetController);
-    orderContentTypeFacets(facetId, facetItemsContainer);
-    createToggleButtons(facetItemsContainer, facetController);
-    facetAccordion(values, facetElement, facetItemsContainer, facetId);
-  }
-}
-
-function orderFacetChildren(facetElementId, desiredOrder) {
-  const facetElement = document.getElementById(facetElementId);
-  const facetChildren = Array.from(facetElement.children);
-
-  facetChildren.sort((a, b) => {
-    const indexA = desiredOrder.indexOf(a.id);
-    const indexB = desiredOrder.indexOf(b.id);
-    return indexA - indexB;
-  });
-
-  facetChildren.forEach((child) => {
-    facetElement.appendChild(child);
-  });
-}
-
-function clearFacetFilter(facetElement, facetController) {
-  const hasClearBtn = facetElement.querySelector('.clear-filter-btn');
-  if (!hasClearBtn) {
-    const clearButtonContainer = document.createElement('div');
-    clearButtonContainer.className = 'clear-filter-btn';
-    const clearButton = document.createElement('button');
-    clearButton.style.marginLeft = '0';
-    clearButton.style.marginRight = '10px';
-    clearButton.textContent = 'Clear Filter';
-
-    const clearIcon = document.createElement('span');
-    clearIcon.innerHTML = '&#10005;';
-    clearIcon.style.cursor = 'pointer';
-
-    clearButtonContainer.appendChild(clearButton);
-    clearButtonContainer.appendChild(clearIcon);
-
-    const isSelected = facetController.state.values.some((value) => value.state === 'selected');
-    if (isSelected) {
-      facetElement.appendChild(clearButtonContainer);
-      clearButtonContainer.addEventListener('click', () => {
-        const focusedElementId = sessionStorage.getItem('focusedElement');
-        if (focusedElementId) {
-          const focusElement = document.getElementById(focusedElementId);
-          focusElement.value = '';
-          sessionStorage.removeItem('focusedElement');
-        }
-        facetController.deselectAll();
-      });
-    }
-  }
-}
-
-function orderContentTypeFacets(facetId, facetItemsContainer) {
-  if (facetId == 'contenttype') {
-    const desiredOrder = [
-      strings.productsAndServices,
-      strings.applications,
-      strings.regulatoryDocs,
-      strings.customerDocs,
-      strings.resourceLibrary,
-      strings.training,
-    ];
-
-    const facetContainer = facetItemsContainer;
-
-    const facetItems = facetContainer.querySelectorAll('.facet-item');
-
-    const facetItemsArray = Array.from(facetItems).map((item) => {
-      const label = item.querySelector('label').innerText.replace(/\s\(\d+\)$/, '');
-      return { label, item };
-    });
-
-    facetItemsArray.sort((a, b) => {
-      const aIndex = desiredOrder.indexOf(a.label);
-      const bIndex = desiredOrder.indexOf(b.label);
-      if (aIndex === -1 && bIndex === -1) {
-        return 0;
-      }
-      if (aIndex === -1) {
-        return 1;
-      }
-      if (bIndex === -1) {
-        return -1;
-      }
-      return aIndex - bIndex;
-    });
-
-    facetItemsArray.forEach((facet) => {
-      facetContainer.appendChild(facet.item);
-    });
-  }
-}
-
-function createFacetRender(facetController, facetElementId, headerText, favoriteResultsList,toggleAssetType) {
-  let isValues = false;
-  const { values } = facetController.state;
-  if (values.length > 0) {
-    isValues = true;
-  }
-  const id = `${facetElementId}-facet`;
-  const ele = document.getElementById(id);
-  if (ele !== null && !isValues) {
-    ele.remove();
-  }
-  createFacetDiv(facetElementId);
-  renderFacet(id, facetController, headerText, favoriteResultsList,toggleAssetType);
-}
-
-function createFacetDiv(id) {
-  const ele = document.getElementById(`${id}-facet`);
-  const facetsElement = document.getElementById('facets');
-  if (ele == null) {
-    const mainFacetDiv = document.createElement('div');
-    mainFacetDiv.id = `${id}-facet`;
-    facetsElement.appendChild(mainFacetDiv);
-  }
-}
-
-function renderSearchFacets(facetController, facetItemsContainer, facetElement, searchresult) {
-  let isSearch = false;
-  if (Array.isArray(searchresult) && searchresult.length > 0) {
-    searchresult.forEach((value) => {
-      const displayText = value.displayValue || value.value;
-      const displaycount = value.count || value.numberOfResults;
-      const item = document.createElement('div');
-      item.className = 'facet-item tw-flex tw-items-center tw-gap-2 tw-py-1';
-      item.innerHTML = `
-          <input type="checkbox" id="${displayText}" ${
-  value.state === 'selected' ? 'checked' : ''
-} class="tw-accent-blue-500 tw-w-4 tw-h-4">
-          <label for="${displayText}">${displayText} (${
-  displaycount
-})</label>
-        `;
-      item.querySelector('input').addEventListener('change', () => {
-        facetController.toggleSelect(value);
-      });
-      facetItemsContainer.appendChild(item);
-    });
-    isSearch = true;
-    facetAccordion(searchresult, facetElement, facetItemsContainer);
-    createToggleButtons(facetItemsContainer, facetController);
-  } else {
-    isSearch = false;
-  }
-  return isSearch;
-}
-
+/* =========================
+   MAIN RENDER
+========================= */
 export function renderCommonFacet(
   data,
   toggleAssetType,
@@ -367,72 +74,24 @@ export function renderCommonFacet(
 
   facetsContainer.innerHTML = '';
 
-  // =========================
-  // SVG ICONS
-  // =========================
   const openIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-      viewBox="0 0 16 16" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
     </svg>
   `;
 
   const closeIcon = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-      viewBox="0 0 16 16" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M14 5L8 11L2 5" stroke="#0068FA"/>
     </svg>
   `;
 
-  /* =========================
-     SELECTED ASSETS
-  ========================= */
-  const selectedAssets = data.filter(a => a.state === 'selected');
-
-  /* =========================
-     COLLECT SELECTED TAGS
-  ========================= */
-  const selectedTags = [];
-
-  data.forEach(asset => {
-    asset.tags?.forEach(group => {
-      group.value?.forEach(v => {
-        if (v.state === 'selected') {
-          selectedTags.push({
-            groupKey: group.key,
-            itemKey: v.key
-          });
-        }
-      });
-    });
-  });
-
-  /* =========================
-     FILTER ASSET TYPES
-     (KEY FIX)
-  ========================= */
-  const allowedAssets =
-    selectedTags.length === 0
-      ? data
-      : data.filter(asset =>
-          selectedTags.every(sel =>
-            asset.tags?.some(group =>
-              group.key === sel.groupKey &&
-              group.value?.some(v => v.key === sel.itemKey)
-            )
-          )
-        );
-
-  /* =========================
-     FACET CREATOR
-  ========================= */
   function createFacet(title, itemsContainer) {
     const block = document.createElement('div');
     block.className = 'facet-block';
 
     const header = document.createElement('div');
-    header.className =
-      'facet-header tw-flex tw-justify-between tw-items-center';
+    header.className = 'facet-header tw-flex tw-justify-between tw-items-center';
     header.style.cursor = 'pointer';
 
     const text = document.createElement('span');
@@ -441,21 +100,15 @@ export function renderCommonFacet(
     const icon = document.createElement('span');
     icon.innerHTML = openIcon;
 
-    header.appendChild(text);
-    header.appendChild(icon);
+    header.append(text, icon);
 
-    itemsContainer.style.display = 'flex';
-    itemsContainer.style.flexDirection = 'column';
-    itemsContainer.style.gap = '6px';
+    header.onclick = () => {
+      const open = itemsContainer.style.display !== 'none';
+      itemsContainer.style.display = open ? 'none' : 'flex';
+      icon.innerHTML = open ? closeIcon : openIcon;
+    };
 
-    header.addEventListener('click', () => {
-      const isOpen = itemsContainer.style.display !== 'none';
-      itemsContainer.style.display = isOpen ? 'none' : 'flex';
-      icon.innerHTML = isOpen ? closeIcon : openIcon;
-    });
-
-    block.appendChild(header);
-    block.appendChild(itemsContainer);
+    block.append(header, itemsContainer);
     return block;
   }
 
@@ -463,141 +116,170 @@ export function renderCommonFacet(
      ASSET TYPE FACET
   ========================= */
   const assetItems = document.createElement('div');
+  assetItems.style.display = 'flex';
+  assetItems.style.flexDirection = 'column';
+  assetItems.style.gap = '6px';
 
-  allowedAssets.forEach(asset => {
+  const hasAssetClear = data.some(a => a.state === 'selected');
+
+  if (hasAssetClear) {
+    const clearButtonContainer = document.createElement('div');
+    clearButtonContainer.className = 'clear-filter-btn';
+
+    const clearButton = document.createElement('button');
+    clearButton.style.marginLeft = '0';
+    clearButton.style.marginRight = '10px';
+    clearButton.textContent = 'Clear Filter';
+
+    const clearIcon = document.createElement('span');
+    clearIcon.innerHTML = '&#10005;';
+    clearIcon.style.cursor = 'pointer';
+
+    clearButton.onclick = clearIcon.onclick = () => {
+      data.forEach(asset => {
+        if (asset.state === 'selected') {
+          toggleAssetType(asset);
+        }
+        asset.tags?.forEach(group =>
+          group.value?.forEach(tag => (tag.state = 'idle'))
+        );
+      });
+
+      Object.keys(facetSearchState).forEach(k => (facetSearchState[k] = ''));
+      Object.keys(facetVisibleCountState).forEach(k => (facetVisibleCountState[k] = 5));
+    };
+
+    clearButtonContainer.append(clearButton, clearIcon);
+    assetItems.appendChild(clearButtonContainer);
+  }
+
+  data.forEach(asset => {
     const label = document.createElement('label');
     label.className = 'facet-item';
 
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.checked = asset.state === 'selected';
+    input.onchange = () => toggleAssetType(asset);
 
-    input.addEventListener('change', () => {
-      toggleAssetType(asset);
-    });
-
-    label.appendChild(input);
-    label.append(asset.assetType);
+    label.append(input, asset.assetType);
     assetItems.appendChild(label);
   });
 
-  facetsContainer.appendChild(
-    createFacet('Asset type', assetItems)
-  );
+  facetsContainer.appendChild(createFacet('Asset type', assetItems));
 
   /* =========================
-     TAG FACETS
-     (only if asset selected)
+     TAG FACETS (UNCHANGED LOGIC)
   ========================= */
-  if (selectedAssets.length === 0) return;
+  const selectedAssets = data.filter(a => a.state === 'selected');
+  if (!selectedAssets.length) return;
 
-  /* =========================
-     BUILD COMMON TAG MAP
-  ========================= */
   const tagGroupMap = {};
-
   selectedAssets.forEach(asset => {
     asset.tags?.forEach(group => {
-      if (!tagGroupMap[group.key]) {
-        tagGroupMap[group.key] = {};
-      }
-
+      tagGroupMap[group.key] ??= {};
       group.value?.forEach(item => {
-        if (!tagGroupMap[group.key][item.key]) {
-          tagGroupMap[group.key][item.key] = [];
-        }
-
+        tagGroupMap[group.key][item.key] ??= [];
         tagGroupMap[group.key][item.key].push(item);
       });
     });
   });
 
-  const selectedAssetCount = selectedAssets.length;
+  const selectedCount = selectedAssets.length;
 
-  /* =========================
-     RENDER TAG FACETS
-  ========================= */
   Object.entries(tagGroupMap).forEach(([groupKey, items]) => {
     const commonItems = Object.entries(items).filter(
-      ([, list]) => list.length === selectedAssetCount
+      ([, list]) => list.length === selectedCount
     );
-
-    if (commonItems.length === 0) return;
+    if (!commonItems.length) return;
 
     const tagItemsContainer = document.createElement('div');
+    tagItemsContainer.style.display = 'flex';
+    tagItemsContainer.style.flexDirection = 'column';
+    tagItemsContainer.style.gap = '6px';
 
-    commonItems.forEach(([itemKey, itemRefs]) => {
-      const tagRef = itemRefs[0];
-      if (!tagRef.state) tagRef.state = 'idle';
+    let visibleCount = facetVisibleCountState[groupKey] || 5;
+    let searchTerm = facetSearchState[groupKey] || '';
 
-      const label = document.createElement('label');
-      label.className = 'facet-item';
-
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.checked = tagRef.state === 'selected';
-
-      input.addEventListener('change', () => {
-  selectedAssets.forEach(asset => {
-    const group = asset.tags?.find(g => g.key === groupKey);
-    const tagItem = group?.value?.find(v => v.key === itemKey);
-
-    if (tagItem) {
-      toggleTag(asset, groupKey, tagItem);
-    }
-  });
-});
-
-
-      label.appendChild(input);
-      label.append(itemKey);
-      tagItemsContainer.appendChild(label);
-    });
-
-    facetsContainer.appendChild(
-      createFacet(groupKey, tagItemsContainer)
+    const hasClearBtn = selectedAssets.some(asset =>
+      asset.tags?.some(
+        g => g.key === groupKey && g.value?.some(v => v.state === 'selected')
+      )
     );
+
+    if (hasClearBtn) {
+      const clearButtonContainer = document.createElement('div');
+      clearButtonContainer.className = 'clear-filter-btn';
+
+      const clearButton = document.createElement('button');
+      clearButton.style.marginLeft = '0';
+      clearButton.style.marginRight = '10px';
+      clearButton.textContent = 'Clear Filter';
+
+      const clearIcon = document.createElement('span');
+      clearIcon.innerHTML = '&#10005;';
+      clearIcon.style.cursor = 'pointer';
+
+      clearButton.onclick = clearIcon.onclick = () => {
+        selectedAssets.forEach(asset => {
+          const group = asset.tags?.find(g => g.key === groupKey);
+          group?.value?.forEach(tag => {
+            if (tag.state === 'selected') toggleTag(asset, groupKey, tag);
+          });
+        });
+        facetSearchState[groupKey] = '';
+        facetVisibleCountState[groupKey] = 5;
+      };
+
+      clearButtonContainer.append(clearButton, clearIcon);
+      tagItemsContainer.appendChild(clearButtonContainer);
+    }
+
+    function renderTags() {
+      tagItemsContainer.querySelectorAll('.facet-item').forEach(e => e.remove());
+
+      const filtered = commonItems.filter(([k]) =>
+        k.toLowerCase().includes(searchTerm)
+      );
+
+      filtered.slice(0, visibleCount).forEach(([key, refs]) => {
+        const ref = refs[0];
+        const label = document.createElement('label');
+        label.className = 'facet-item';
+
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.checked = ref.state === 'selected';
+        input.onchange = () => {
+          selectedAssets.forEach(asset => {
+            const g = asset.tags?.find(gr => gr.key === groupKey);
+            const t = g?.value?.find(v => v.key === key);
+            if (t) toggleTag(asset, groupKey, t);
+          });
+        };
+
+        label.append(input, key);
+        tagItemsContainer.appendChild(label);
+      });
+
+      createToggleButtons({
+        container: tagItemsContainer,
+        totalCount: filtered.length,
+        visibleCount,
+        onShowMore: () => {
+          visibleCount += 5;
+          facetVisibleCountState[groupKey] = visibleCount;
+          renderTags();
+        },
+        onShowLess: () => {
+          visibleCount = Math.max(5, visibleCount - 5);
+          facetVisibleCountState[groupKey] = visibleCount;
+          renderTags();
+        }
+      });
+    }
+
+    renderTags();
+    facetsContainer.appendChild(createFacet(groupKey, tagItemsContainer));
   });
 }
-
-
-
-export const handleMobileFilters = () => {
-  const facets = document.querySelector('#facets');
-  const mobileFilterHeader = document.querySelector('#mobile-filter-header');
-  const mobileFilterFooter = document.querySelector('#mobile-filter-footer');
-  const resultSection = document.getElementById('coveo-results');
-  const footerWrapper = document.querySelector('.footer-wrapper');
-  const body = document.querySelector('.generic-page-template');
-  if (facets) {
-    facets.style.display = facets.style.display === '' || facets.style.display === 'none'
-      ? 'block'
-      : 'none';
-  }
-  if (mobileFilterHeader) {
-    if (mobileFilterHeader.classList.contains('tw-hidden')) {
-      if (body) {
-        body.classList.add('body-no-scroll');
-      }
-      mobileFilterHeader.classList.remove('tw-hidden');
-      resultSection.style.display = 'none';
-      footerWrapper.style.display = 'none';
-    } else {
-      if (body && body.classList.contains('body-no-scroll')) {
-        body.classList.remove('body-no-scroll');
-      }
-      mobileFilterHeader.classList.add('tw-hidden');
-      resultSection.style.display = 'block';
-      footerWrapper.style.display = 'block';
-    }
-  }
-  if (mobileFilterFooter) {
-    if (mobileFilterFooter.classList.contains('tw-hidden')) {
-      mobileFilterFooter.style.display = 'flex';
-      mobileFilterFooter.classList.remove('tw-hidden');
-    } else {
-      mobileFilterFooter.style.display = 'none';
-      mobileFilterFooter.classList.add('tw-hidden');
-    }
-  }
-};
