@@ -286,16 +286,33 @@ async function readBlockProperties(block) {
     "tags": [
       {
         "key": "Type",
-        "value": [
-          {
-            "key": "Webinar",
-            "value": [
-              "aE5Ou0000000P86KAE",
-              "aE5Ou0000000P1dKAE",
-              "aE5Ou0000000OwnKAE"
-            ]
-          }
-        ]
+        
+  "value": [
+    { "key": "Webinar_1", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_2", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_3", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_4", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_5", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_6", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_7", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_8", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_9", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_10", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+
+    { "key": "Webinar_11", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_12", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_13", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_14", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_15", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_16", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_17", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_18", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_19", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] },
+    { "key": "Webinar_20", "value": ["aE5Ou0000000P86KAE", "aE5Ou0000000P1dKAE", "aE5Ou0000000OwnKAE"] }
+  ]
+
+
+     
       },
       {
         "key": "Language",
