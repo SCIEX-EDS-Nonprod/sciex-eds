@@ -113,6 +113,37 @@ export function renderCommonFacet(
   }
 
   /* =========================
+     🔑 ALLOWED ASSET LOGIC (ADDED)
+  ========================= */
+
+  const selectedTags = [];
+
+  data.forEach(asset => {
+    asset.tags?.forEach(group => {
+      group.value?.forEach(tag => {
+        if (tag.state === 'selected') {
+          selectedTags.push({
+            groupKey: group.key,
+            key: tag.key
+          });
+        }
+      });
+    });
+  });
+
+  const allowedAssets =
+    selectedTags.length === 0
+      ? data
+      : data.filter(asset =>
+          selectedTags.every(sel =>
+            asset.tags?.some(group =>
+              group.key === sel.groupKey &&
+              group.value?.some(v => v.key === sel.key)
+            )
+          )
+        );
+
+  /* =========================
      ASSET TYPE FACET
   ========================= */
   const assetItems = document.createElement('div');
@@ -120,7 +151,7 @@ export function renderCommonFacet(
   assetItems.style.flexDirection = 'column';
   assetItems.style.gap = '6px';
 
-  const hasAssetClear = data.some(a => a.state === 'selected');
+  const hasAssetClear = allowedAssets.some(a => a.state === 'selected');
 
   if (hasAssetClear) {
     const clearButtonContainer = document.createElement('div');
@@ -153,7 +184,8 @@ export function renderCommonFacet(
     assetItems.appendChild(clearButtonContainer);
   }
 
-  data.forEach(asset => {
+  /* 🔑 ONLY CHANGE: data → allowedAssets */
+  allowedAssets.forEach(asset => {
     const label = document.createElement('label');
     label.className = 'facet-item';
 
