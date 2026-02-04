@@ -7,42 +7,6 @@ import { i18n } from '../../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-export const addToFavorite = async (url) => {
-  try {
-    const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
-      {
-        method: 'POST',
-        credentials: 'include',
-      },
-    );
-
-    return { success: response.ok };
-
-  } catch (error) {
-    console.error('Fetch error (add favorite):', error);
-    return { success: false };
-  }
-};
-
-export const removeToFavorite = async (url) => {
-  try {
-    const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=remove`,
-      {
-        method: 'POST',
-        credentials: 'include',
-      },
-    );
-
-    return { success: response.ok };
-
-  } catch (error) {
-    console.error('Fetch error (remove favorite):', error);
-    return { success: false };
-  }
-};
-
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
 
@@ -154,40 +118,11 @@ const renderSearchResults = () => {
         `;
 
       const favIcon = resultItem.querySelector('.favorite-icon');
-
-      favIcon.addEventListener('click', async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      
-        const pageUrl = result.printableUri;
-        const isFavorited = favIcon.classList.contains('favorited');
-      
-        // ===== UNFAVORITE FLOW =====
-        if (isFavorited) {
-          // Optimistic UI update
-          favIcon.classList.remove('favorited');
-      
-          const response = await removeToFavorite(pageUrl);
-      
-          // Revert if API failed
-          if (!response.success) {
-            favIcon.classList.add('favorited');
-          }
-      
-          return;
-        }
-      
-        // ===== FAVORITE FLOW =====
-        favIcon.classList.add('favorited');
-      
-        const response = await addToFavorite(pageUrl);
-      
-        // Revert if API failed
-        if (!response.success) {
-          favIcon.classList.remove('favorited');
-        }
+      favIcon.addEventListener('click', () => {
+        favIcon.classList.toggle('favorited');
       });
-      
+
+
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
       viewDetailsBtn.addEventListener('click', () => {
         handleResultClick(result);
