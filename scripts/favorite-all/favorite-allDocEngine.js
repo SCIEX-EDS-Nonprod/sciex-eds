@@ -47,6 +47,7 @@ export const favoriteSearchEngine = async () => {
 export const removeFavoriteSearchEngine = async (url) => {
   console.log('called',url)
   try {
+    const url='https://devcs.sciex.com/content/dam/SCIEX/pdf/customer-docs/user-guide/pa-800-plus-system-administration-guide-es.pdf'
     const response = await fetch(
       `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${url}&operation=add`
     );
