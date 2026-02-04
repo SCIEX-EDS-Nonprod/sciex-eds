@@ -233,6 +233,34 @@ export function renderCommonFacet(
     let visibleCount = facetVisibleCountState[groupKey] || 5;
     let searchTerm = facetSearchState[groupKey] || '';
 
+    /* 🔍 SEARCH BOX ADDED */
+if (commonItems.length > 10) {
+
+    const facetId = `facet-${groupKey}`;
+    const facetInput = document.createElement('input');
+    facetInput.type = 'text';
+    facetInput.id = `${facetId}-input`;
+    facetInput.maxLength = 200;
+    facetInput.classList.add(
+      'tw-border',
+      'tw-p-2',
+      'tw-rounded-lg',
+      'tw-mt-2',
+      'facet-search-box'
+    );
+    facetInput.placeholder = 'Search';
+    facetInput.value = searchTerm;
+
+    facetInput.addEventListener('input', (event) => {
+      searchTerm = event.target.value.toLowerCase();
+      facetSearchState[groupKey] = searchTerm;
+      // visibleCount = 10;
+      facetVisibleCountState[groupKey] = visibleCount;
+      renderTags();
+    });
+
+    tagItemsContainer.appendChild(facetInput);
+  }
     const hasClearBtn = selectedAssets.some(asset =>
       asset.tags?.some(
         g => g.key === groupKey && g.value?.some(v => v.state === 'selected')
