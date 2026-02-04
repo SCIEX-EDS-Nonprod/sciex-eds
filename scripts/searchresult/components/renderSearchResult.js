@@ -8,16 +8,20 @@ const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
 export const addToFavorite = async (url) => {
+  console.log('kkkkkkkkkkkkkkkkk',url,'klkllllllllllllll')
   try {
-    const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
-      {
-        method: 'POST',
-        credentials: 'include',
-      },
-    );
+  
 
-    return { success: response.ok };
+    const response = await fetch(
+      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${url}&operation=add`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log('datasss',data);
+    return data;
+
 
   } catch (error) {
     console.error('Fetch error (add favorite):', error);
@@ -25,23 +29,7 @@ export const addToFavorite = async (url) => {
   }
 };
 
-export const removeToFavorite = async (url) => {
-  try {
-    const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=remove`,
-      {
-        method: 'POST',
-        credentials: 'include',
-      },
-    );
 
-    return { success: response.ok };
-
-  } catch (error) {
-    console.error('Fetch error (remove favorite):', error);
-    return { success: false };
-  }
-};
 
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
@@ -149,17 +137,17 @@ const renderSearchResults = () => {
                   </span> 
                   <img src="/icons/share.svg" alt="Share" class="share-icon" />
               </div>
-              <a class="view-details-btn" target="_blank" href="${result.printableUri}">${strings.view}</a>
+              <a class="view-details-btn" target="_blank" href="${result.PrintableUri}">${strings.view}jjjjjjjjj</a>
         </div>
         `;
 
       const favIcon = resultItem.querySelector('.favorite-icon');
+        const pageUrl = result.PrintableUri;
 
       favIcon.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
       
-        const pageUrl = result.printableUri;
         const isFavorited = favIcon.classList.contains('favorited');
       
         // ===== UNFAVORITE FLOW =====
@@ -180,7 +168,7 @@ const renderSearchResults = () => {
         // ===== FAVORITE FLOW =====
         favIcon.classList.add('favorited');
       
-        const response = await addToFavorite(pageUrl);
+        const response = await addToFavorite(result.PrintableUri);
       
         // Revert if API failed
         if (!response.success) {
