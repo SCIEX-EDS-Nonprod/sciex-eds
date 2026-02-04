@@ -28,10 +28,6 @@
   transition: background-color 0.3s ease;
 }
 
-.workflow-card:hover {
-  background-color: #ececec;
-}
-
 .workflow-card h3 {
   color: #000;
   font-family: "Geogrotesque Sharp VF";
@@ -54,16 +50,17 @@
   flex-direction: column;
   gap: 10px;
 }
-
 .workflow-card-link {
   color: var(--Blue-700, #0068FA) !important;
-  font-family: "Geogrotesque Sharp VF";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 530;
-  line-height: 24px;
-  text-decoration: underline !important;
+  text-decoration-line: underline !important;
+  text-decoration-color: currentColor;   /* visible initially */
+  text-decoration-thickness: 1px;
   text-underline-offset: 4px;
+  transition: text-decoration-color 0.25s ease; /* animate only underline */
+}
+
+.workflow-card-link:hover {
+  text-decoration-color: transparent;    /* smoothly hides underline */
 }
 
 .workflow-card-link::after {
@@ -76,6 +73,11 @@
   height: 16px;
   margin-left: 8px;
   vertical-align: middle;
+  transition: transform 0.25s ease;
+}
+
+.workflow-card-link:hover::after {
+  transform: translateX(4px);
 }
 
 @media (max-width: 1024px) {
