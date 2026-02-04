@@ -1,236 +1,233 @@
-import { resourceLibraryResultClick } from '../favorite-all/favorite-all-controller/favorite-allDocController.js';
 import { i18n } from '../translation.js';
-import { renderCommonFacet } from './favorite-all-facets.js';
-import renderFavoriteQuerySummary from './favoriteQuerySummary.js';
-import renderfavoriteSearchResultList from './favoriteSearchResultList.js';
 
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-// Detect mobile
-function canMobileActions() {
-  return window.innerWidth <= 767;
+const isMobile = () => window.innerWidth <= 767;
+
+/* ======================================================
+   HELPERS
+====================================================== */
+
+function resetAllSelections(data) {
+  data.forEach(asset => {
+    asset.state = 'idle';
+    asset.tags?.forEach(group =>
+      group.value?.forEach(tag => (tag.state = 'idle'))
+    );
+  });
 }
 
-const renderFavoriteFacetBreadcrumb = (data, toggleAssetType, toggleTag) => {
-  const facetBreadcrumbElement = document.getElementById('facet-readcrumb');
-  facetBreadcrumbElement.innerHTML = '';
+function hasAnySelection(data) {
+  return (
+    data.some(a => a.state === 'selected') ||
+    data.some(a =>
+      a.tags?.some(g => g.value?.some(t => t.state === 'selected'))
+    )
+  );
+}
 
-  const breadcrumbContainer = document.createElement('div');
-  breadcrumbContainer.classList.add('facet-breadcrumb-container');
+function createBreadcrumbItem(label, onClear) {
+  const container = document.createElement('div');
+  container.className = 'facet-breadcrumb';
 
-  /* ======================================================
-     FILTER COUNT WRAPPER FOR MOBILE
-  ====================================================== */
-  const filterCountWrapper = document.createElement('div');
-  filterCountWrapper.id = 'filter-count-wrapper';
-  filterCountWrapper.classList.add('tw-hidden');
+  container.addEventListener('click', onClear);
 
-  const filterCountShowLessButton = document.createElement('div');
-  filterCountShowLessButton.id = 'filter-count-show-less';
-  filterCountShowLessButton.classList.add('tw-hidden', 'tw-flex');
-  const showLessSvg =
-    '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
-  filterCountShowLessButton.innerHTML = `${showLessSvg} Show Less`;
+  const text = document.createElement('div');
+  text.className = 'grid-item';
+  text.textContent = label;
 
-  // Show filters
-  filterCountWrapper.addEventListener('click', function () {
-    const filters = breadcrumbContainer.querySelectorAll('.facet-breadcrumb');
-    filters.forEach(f => f.classList.remove('tw-hidden'));
+  const iconWrap = document.createElement('div');
+  iconWrap.className = 'grid-item';
 
-    if (filterCountShowLessButton.classList.contains('tw-hidden')) {
-      filterCountShowLessButton.classList.remove('tw-hidden');
-    }
+  const icon = document.createElement('span');
+  icon.innerHTML = '&#10005;';
+  icon.style.cursor = 'pointer';
 
-    this.style.display = 'none';
-    breadcrumbContainer.style.marginTop = '0px';
-    facetBreadcrumbElement.style.marginBottom = '30px';
+  iconWrap.appendChild(icon);
+  container.append(text, iconWrap);
 
-    const clearAllBtn = breadcrumbContainer.querySelector('button');
-    if (clearAllBtn) clearAllBtn.style.bottom = '-20px';
-  });
+  return container;
+}
 
-  // Hide filters (Show Less)
-  filterCountShowLessButton.addEventListener('click', function () {
-    const filters = breadcrumbContainer.querySelectorAll('.facet-breadcrumb');
-    filters.forEach(f => f.classList.add('tw-hidden'));
-    this.classList.add('tw-hidden');
+/* ======================================================
+   MAIN RENDER
+====================================================== */
 
-    filterCountWrapper.style.display = 'block';
-    breadcrumbContainer.style.marginTop = '20px';
-    facetBreadcrumbElement.style.marginBottom = '0px';
+const renderFavoriteFacetBreadcrumb = (data, toggleAssetType, toggleTag, renderUi) => {
+  const root = document.getElementById('facet-readcrumb');
+  root.innerHTML = '';
 
-    const clearAllBtn = breadcrumbContainer.querySelector('button');
-    if (clearAllBtn) {
-      clearAllBtn.style.marginTop = '-100px';
-      clearAllBtn.style.bottom = 'auto';
-    }
-  });
+  if (!hasAnySelection(data)) {
+    root.style.display = 'none';
+    return;
+  }
 
-  facetBreadcrumbElement.appendChild(filterCountWrapper);
-  facetBreadcrumbElement.appendChild(filterCountShowLessButton);
+  root.style.display = 'block';
 
-  /* ======================================================
+  const container = document.createElement('div');
+  container.className = 'facet-breadcrumb-container';
+
+  /* =========================
      ASSET TYPE BREADCRUMBS
-  ====================================================== */
+  ========================= */
   data.forEach(asset => {
-    if (asset.state === 'selected') {
-      const gridContainer = document.createElement('div');
-      gridContainer.classList.add('facet-breadcrumb');
+    if (asset.state !== 'selected') return;
 
-      gridContainer.addEventListener('click', () => {
+    const breadcrumb = createBreadcrumbItem(
+      `${strings.assetType} : ${asset.assetType}`,
+      () => {
         asset.state = 'idle';
-        asset.tags?.forEach(group => group.value?.forEach(tag => tag.state = 'idle'));
+        asset.tags?.forEach(g =>
+          g.value?.forEach(t => (t.state = 'idle'))
+        );
+        renderUi();
+      }
+    );
 
-        renderFavoriteFacetBreadcrumb(data, toggleAssetType, toggleTag);
-        renderfavoriteSearchResultList(resourceLibraryResultClick, data);
-        renderFavoriteQuerySummary(data);
-        renderCommonFacet(data, toggleAssetType, toggleTag);
-      });
-
-      const gridItem1 = document.createElement('div');
-      gridItem1.classList.add('grid-item');
-      const box1 = document.createElement('div');
-      box1.textContent = `${strings.assetType} : ${asset.assetType}`;
-      gridItem1.appendChild(box1);
-
-      const gridItem2 = document.createElement('div');
-      gridItem2.classList.add('grid-item');
-      const clearIcon = document.createElement('span');
-      clearIcon.innerHTML = '&#10005;';
-      clearIcon.style.cursor = 'pointer';
-      gridItem2.appendChild(clearIcon);
-
-      gridContainer.appendChild(gridItem1);
-      gridContainer.appendChild(gridItem2);
-      breadcrumbContainer.appendChild(gridContainer);
-    }
+    container.appendChild(breadcrumb);
   });
 
-  /* ======================================================
+  /* =========================
      TAG BREADCRUMBS (DEDUPED)
-  ====================================================== */
-  const uniqueSelectedTags = {};
+  ========================= */
+  const selectedTags = new Map();
+
   data.forEach(asset => {
     asset.tags?.forEach(group => {
       group.value?.forEach(tag => {
         if (tag.state === 'selected') {
-          const key = `${group.key}__${tag.key}`;
-          uniqueSelectedTags[key] = { groupKey: group.key, itemKey: tag.key };
+          selectedTags.set(
+            `${group.key}__${tag.key}`,
+            { groupKey: group.key, tagKey: tag.key }
+          );
         }
       });
     });
   });
 
-  Object.values(uniqueSelectedTags).forEach(({ groupKey, itemKey }) => {
-    const gridContainer = document.createElement('div');
-    gridContainer.classList.add('facet-breadcrumb');
-
-    gridContainer.addEventListener('click', () => {
-      data.forEach(asset => {
-        if (asset.state === 'selected') {
+  selectedTags.forEach(({ groupKey, tagKey }) => {
+    const breadcrumb = createBreadcrumbItem(
+      `${groupKey} : ${tagKey}`,
+      () => {
+        data.forEach(asset => {
           const group = asset.tags?.find(g => g.key === groupKey);
-          const tag = group?.value?.find(v => v.key === itemKey);
+          const tag = group?.value?.find(v => v.key === tagKey);
           if (tag) tag.state = 'idle';
-        }
-      });
+        });
+        renderUi();
+      }
+    );
 
-      renderFavoriteFacetBreadcrumb(data, toggleAssetType, toggleTag);
-      renderfavoriteSearchResultList(resourceLibraryResultClick, data);
-      renderFavoriteQuerySummary(data);
-      renderCommonFacet(data, toggleAssetType, toggleTag);
-    });
-
-    const gridItem1 = document.createElement('div');
-    gridItem1.classList.add('grid-item');
-    const box1 = document.createElement('div');
-    box1.textContent = `${groupKey} : ${itemKey}`;
-    gridItem1.appendChild(box1);
-
-    const gridItem2 = document.createElement('div');
-    gridItem2.classList.add('grid-item');
-    const clearIcon = document.createElement('span');
-    clearIcon.innerHTML = '&#10005;';
-    clearIcon.style.cursor = 'pointer';
-    gridItem2.appendChild(clearIcon);
-
-    gridContainer.appendChild(gridItem1);
-    gridContainer.appendChild(gridItem2);
-
-    breadcrumbContainer.appendChild(gridContainer);
+    container.appendChild(breadcrumb);
   });
 
-  /* ======================================================
-     MOBILE FILTER COUNT LOGIC
-  ====================================================== */
-  if (canMobileActions()) {
-    const filtersCount = breadcrumbContainer.querySelectorAll('.facet-breadcrumb');
-    if (filtersCount.length > 1 && filterCountWrapper) {
-      filterCountWrapper.classList.remove('tw-hidden');
-      filterCountWrapper.innerHTML = `<span>Filters: +${filtersCount.length}</span>`;
-      filtersCount.forEach(f => f.classList.add('tw-hidden'));
-    }
-  }
+  /* =========================
+     MOBILE FILTER COUNT
+  ========================= */
+  /* =========================
+   MOBILE FILTER COUNT + SHOW LESS
+========================= */
+/* =========================
+   MOBILE FILTER COUNT + SHOW LESS (WITH STYLES)
+========================= */
+if (isMobile()) {
+  const filters = container.querySelectorAll('.facet-breadcrumb');
 
-  /* ======================================================
+  if (filters.length > 1) {
+    const showMore = document.createElement('div');
+    showMore.id = 'filter-count-wrapper';
+    showMore.innerHTML = `<span>Filters: +${filters.length}</span>`;
+
+    const showLess = document.createElement('div');
+    showLess.id = 'filter-count-show-less';
+    showLess.classList.add('tw-hidden', 'tw-flex');
+    showLess.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+        viewBox="0 0 12 12" fill="none">
+        <path d="M0 6L12 6" stroke="#0068FA"/>
+      </svg>
+      Show Less
+    `;
+
+    // Initial state
+    filters.forEach(f => f.classList.add('tw-hidden'));
+
+    // SHOW MORE
+    showMore.addEventListener('click', () => {
+      filters.forEach(f => f.classList.remove('tw-hidden'));
+
+      showMore.style.display = 'none';
+      showLess.classList.remove('tw-hidden');
+
+      container.style.marginTop = '0px';
+      root.style.marginBottom = '30px';
+
+      const clearBtn = container.querySelector('button');
+      if (clearBtn) clearBtn.style.bottom = '-20px';
+    });
+
+    // SHOW LESS
+    showLess.addEventListener('click', () => {
+      filters.forEach(f => f.classList.add('tw-hidden'));
+
+      showLess.classList.add('tw-hidden');
+      showMore.style.display = 'block';
+
+      container.style.marginTop = '20px';
+      root.style.marginBottom = '0px';
+
+      const clearBtn = container.querySelector('button');
+      if (clearBtn) {
+        clearBtn.style.marginTop = '-100px';
+        clearBtn.style.bottom = 'auto';
+      }
+    });
+
+    root.prepend(showMore);
+    root.prepend(showLess);
+  }
+}
+
+
+
+  /* =========================
      CLEAR ALL BUTTON
-  ====================================================== */
-  const clearAllBtn = document.createElement('button');
-  clearAllBtn.textContent = 'Clear All';
-  clearAllBtn.style.marginRight = '0';
-  clearAllBtn.style.marginLeft = 'auto';
-  clearAllBtn.style.color = 'var(--Blue-700, #0068FA)';
-  clearAllBtn.style.fontSize = '16px';
-  clearAllBtn.style.fontStyle = 'normal';
-  clearAllBtn.style.fontWeight = '530';
-  clearAllBtn.style.lineHeight = '24px';
-  clearAllBtn.style.letterSpacing = '0.08px';
+  ========================= */
+ const clearAll = document.createElement('button');
+  clearAll.textContent = 'Clear All';
+  clearAll.className = 'facet-clear-all';
+  clearAll.textContent = 'Clear All';
+  clearAll.style.marginRight = '0';
+  clearAll.style.marginLeft = 'auto';
+  clearAll.style.color = 'var(--Blue-700, #0068FA)';
+  clearAll.style.fontSize = '16px';
+  clearAll.style.fontStyle = 'normal';
+  clearAll.style.fontWeight = '530';
+  clearAll.style.lineHeight = '24px';
+  clearAll.style.letterSpacing = '0.08px';
 
-  clearAllBtn.addEventListener('click', () => {
-    data.forEach(asset => {
-      asset.state = 'idle';
-      asset.tags?.forEach(group => group.value?.forEach(tag => tag.state = 'idle'));
-    });
-
-    renderFavoriteFacetBreadcrumb(data, toggleAssetType, toggleTag);
-    renderfavoriteSearchResultList(resourceLibraryResultClick, data);
-    renderFavoriteQuerySummary(data);
-    renderCommonFacet(data, toggleAssetType, toggleTag);
+  clearAll.addEventListener('click', () => {
+    resetAllSelections(data);
+    renderUi();
   });
 
-  /* ======================================================
-     SHOW / HIDE CONTAINER
-  ====================================================== */
-  const hasSelected =
-    data.some(a => a.state === 'selected') ||
-    data.some(a => a.tags?.some(g => g.value?.some(v => v.state === 'selected')));
+  container.appendChild(clearAll);
+  root.appendChild(container);
 
-  if (hasSelected) {
-    breadcrumbContainer.appendChild(clearAllBtn);
-    facetBreadcrumbElement.style.display = 'block';
-  } else {
-    facetBreadcrumbElement.style.display = 'none';
-  }
-
-  /* ======================================================
+  /* =========================
      MOBILE FOOTER CLEAR ALL
-  ====================================================== */
-  const mobileFilterClearAll = document.getElementById('mobile-filter-footer-clear-all');
-  if (mobileFilterClearAll) {
-    mobileFilterClearAll.addEventListener('click', () => {
-      data.forEach(asset => {
-        asset.state = 'idle';
-        asset.tags?.forEach(group => group.value?.forEach(tag => tag.state = 'idle'));
-      });
+  ========================= */
+  const mobileClear = document.getElementById(
+    'mobile-filter-footer-clear-all'
+  );
 
-      renderFavoriteFacetBreadcrumb(data, toggleAssetType, toggleTag);
-      renderfavoriteSearchResultList(resourceLibraryResultClick, data);
-      renderFavoriteQuerySummary(data);
-      renderCommonFacet(data, toggleAssetType, toggleTag);
-    });
+  if (mobileClear) {
+    mobileClear.onclick = () => {
+      resetAllSelections(data);
+      renderUi();
+    };
   }
-
-  facetBreadcrumbElement.appendChild(breadcrumbContainer);
 };
 
 export default renderFavoriteFacetBreadcrumb;

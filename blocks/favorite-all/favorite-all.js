@@ -611,7 +611,8 @@ async function renderUi() {
   renderFavoriteFacetBreadcrumb(
     favoriteResultsList,
     toggleAssetType,
-    toggleTag
+    toggleTag,
+    renderUi
   );
 }
 
