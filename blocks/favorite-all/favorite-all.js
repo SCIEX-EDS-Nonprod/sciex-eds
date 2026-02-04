@@ -121,7 +121,396 @@ export default async function decorate(block) {
 
   // const assetTypes = data.map(item => item.value);
 
-
+ const favoriteResultsList =[
+  {
+    "assetType": "SCIEX How",
+    "pageData": [
+      {
+        "path": "/Hidden/sciexhow/LC-MS-MS-Rapid-Quantitation-and-Screening-Method-for-222-Pesticide-Residues-in-Tea",
+        "id": "aE5Ou0000000OvBKAU",
+        "title": "LC-MS/MS Rapid Quantitation and Screening Method for 222 Pesticide Residues in Tea",
+        "created": "2021-07-12",
+        "description": "China is the world’s home of tea and is the first country in the world to discover, cultivate, make and drink tea. However, driven by profit, the tea crisis is becoming increasingly important. This is mainly highlighted by the “poisoning” of tea quality. This application note focuses on the problem of pesticide residues in tea. On the SCIEX Triple Quad 3500 System, a rapid screening method of 222 pesticides has been established to provide a simple and quick solution to the problem of pesticide residues in tea.",
+        "relatedProducts": [
+          {
+            "title": "Triple Quad 3500",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/triple-quad-systems/triple-quad-3500-system"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "key": "Triple Quad systems",
+        "value": [
+          {
+            "key": "Triple Quad 3500",
+            "value": [
+              "aE5Ou0000000OvBKAU"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Language",
+        "value": [
+          {
+            "key": "English",
+            "value": [
+              "aE5Ou0000000OvBKAU"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Application",
+        "value": [
+          {
+            "key": "Food and beverage testing",
+            "value": [
+              "aE5Ou0000000OvBKAU"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          {
+            "key": "SCIEX How",
+            "value": [
+              "aE5Ou0000000OvBKAU"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "assetType": "Webinar",
+    "pageData": [
+      {
+        "path": "/events/determination-of-empty-full-ratio",
+        "id": "aE5Ou0000000P86KAE",
+        "title": "Determination of empty full ratio",
+        "created": "2020-12-09",
+        "description": "",
+        "relatedProducts": []
+      },
+      {
+        "path": "/events/virtual-2020-global-cesi-ms-symposium",
+        "id": "aE5Ou0000000P1dKAE",
+        "title": "Innovations in proteomics discovery and small molecule/quant",
+        "created": "2020-12-09",
+        "description": "",
+        "relatedProducts": []
+      },
+      {
+        "path": "/events/scanning-swath-acquisition-proteomics-done-fast-and-what-to-do-with-it",
+        "id": "aE5Ou0000000OwnKAE",
+        "title": "Scanning SWATH® Acquisition: Proteomics done fast - and what to do with it",
+        "created": "2020-12-09",
+        "description": "",
+        "relatedProducts": []
+      }
+    ],
+    "tags": [
+      {
+        "key": "Type",
+        "value": [
+          {
+            "key": "Webinar",
+            "value": [
+              "aE5Ou0000000P86KAE",
+              "aE5Ou0000000P1dKAE",
+              "aE5Ou0000000OwnKAE"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Language",
+        "value": [
+          {
+            "key": "English",
+            "value": [
+              "aE5Ou0000000P86KAE",
+              "aE5Ou0000000P1dKAE",
+              "aE5Ou0000000OwnKAE"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Software",
+        "value": [
+          {
+            "key": "SWATH Acquisition",
+            "value": [
+              "aE5Ou0000000P86KAE",
+              "aE5Ou0000000OwnKAE"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Application",
+        "value": [
+          {
+            "key": "Biomedical and omics research",
+            "value": [
+              "aE5Ou0000000P86KAE",
+              "aE5Ou0000000P1dKAE",
+              "aE5Ou0000000OwnKAE"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          {
+            "key": "Webinar",
+            "value": [
+              "aE5Ou0000000P86KAE",
+              "aE5Ou0000000P1dKAE",
+              "aE5Ou0000000OwnKAE"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "assetType": "Technote",
+    "pageData": [
+      {
+        "path": "/tech-notes/pharma/bioanalysis-pk/low-ng-ml-quantitation-of-glucagon-like-peptide-1--glp-1--analog",
+        "id": "aE5Ou0000000PPpKAM",
+        "title": "Low-ng/mL quantitation of glucagon-like peptide-1 (GLP-1) analog in rat plasma",
+        "created": "2023-11-30",
+        "description": "",
+        "relatedProducts": [
+          {
+            "title": "Triple Quad 7500",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/triple-quad-systems/triple-quad-7500-system"
+          }
+        ]
+      },
+      {
+        "path": "/tech-notes/biopharma/improved-lc-mrm-workflow-for-quantification-of-glucagonlike-pept",
+        "id": "aE5Ou0000000PODKA2",
+        "title": "Improved LC-MRM workflow for quantification of glucagonlike peptide-1 analogues",
+        "created": "2021-11-17",
+        "description": "",
+        "relatedProducts": [
+          {
+            "title": "Triple Quad 7500",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/triple-quad-systems/triple-quad-7500-system"
+          }
+        ]
+      },
+      {
+        "path": "/tech-notes/life-science-research/lipidomics/high-throughput-targeted-lipidomics-analysis-of-dihydroceramide-",
+        "id": "aE5Ou0000000PMbKAM",
+        "title": "High-throughput targeted lipidomics analysis of dihydroceramide desaturase-1 (DES1) knockout mice",
+        "created": "2021-01-05",
+        "description": "Previously a targeted lipid profiling method was developed for quantifying a many lipid molecular species (~1500) in a single run. To determine the performance of the method in biological matrices, a short feasibility study was done here using LC-MSM on the QTRAP 6500+ system. Using well characterized DES1 knockout mouse model, the expected changes in ceramides and dihydroceramides were observed. Many lipid classes were not found to be changing (17 classes) relative to the control.",
+        "relatedProducts": [
+          {
+            "title": "Triple Quad 7500",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/triple-quad-systems/triple-quad-7500-system"
+          },
+          {
+            "title": "Triple Quad 6500+",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/triple-quad-systems/triple-quad-6500plus-system"
+          },
+          {
+            "title": "QTRAP 6500+",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/qtrap-systems/qtrap-6500plus-system"
+          },
+          {
+            "title": "QTRAP systems",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/qtrap-systems"
+          }
+        ]
+      },
+      {
+        "path": "/tech-notes/biopharma/streamlined-identification-and-quantitation-of-impurities-of-the",
+        "id": "aE5Ou0000000PKzKAM",
+        "title": "Streamlined identification and quantitation of impurities of the ionizable lipid ALC-0315 for rapid and confident vendor-to-vendor raw material assessment to ensure mRNA-LNP product quality",
+        "created": "2023-11-30",
+        "description": "",
+        "relatedProducts": [
+          {
+            "title": "ZenoTOF 7600",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/qtof-systems/zenotof-7600-system"
+          }
+        ]
+      },
+      {
+        "path": "/tech-notes/biopharma/structural-characterization-of-the-cationic-lipid-nanoparticle-c",
+        "id": "aE5Ou0000000OQXKA2",
+        "title": "Structural characterization of the cationic lipid nanoparticle component, ALC-0315, and its impurities using electronactivated dissociation (EAD)-based MS/MS fragmentation",
+        "created": "2023-11-30",
+        "description": "",
+        "relatedProducts": [
+          {
+            "title": "ZenoTOF 7600 system",
+            "href": "/content/SCIEX/na/us/en/products/mass-spectrometers/qtof-systems/zenotof-7600-system"
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "key": "QTRAP systems",
+        "value": [
+          {
+            "key": "QTRAP 6500+",
+            "value": [
+              "aE5Ou0000000PMbKAM"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Triple Quad systems",
+        "value": [
+          {
+            "key": "Triple Quad 7500",
+            "value": [
+              "aE5Ou0000000PPpKAM",
+              "aE5Ou0000000PODKA2",
+              "aE5Ou0000000PMbKAM"
+            ]
+          },
+          {
+            "key": "Triple Quad 6500+",
+            "value": [
+              "aE5Ou0000000PMbKAM"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Language",
+        "value": [
+          {
+            "key": "English",
+            "value": [
+              "aE5Ou0000000PPpKAM",
+              "aE5Ou0000000PODKA2",
+              "aE5Ou0000000PMbKAM",
+              "aE5Ou0000000PKzKAM",
+              "aE5Ou0000000OQXKA2"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "QTOF systems",
+        "value": [
+          {
+            "key": "ZenoTOF 7600",
+            "value": [
+              "aE5Ou0000000PKzKAM"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Liquid chromatography",
+        "value": [
+          {
+            "key": "ExionLC",
+            "value": [
+              "aE5Ou0000000PODKA2"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Mass spectrometry",
+        "value": [
+          {
+            "key": "QTRAP systems",
+            "value": [
+              "aE5Ou0000000PMbKAM"
+            ]
+          },
+          {
+            "key": "ZenoTOF 7600 system",
+            "value": [
+              "aE5Ou0000000OQXKA2"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Application",
+        "value": [
+          {
+            "key": "Biomedical and omics research",
+            "value": [
+              "aE5Ou0000000PMbKAM"
+            ]
+          },
+          {
+            "key": "Biopharma",
+            "value": [
+              "aE5Ou0000000PODKA2"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Market Vertical",
+        "value": [
+          {
+            "key": "Pharma CRO",
+            "value": [
+              "aE5Ou0000000PPpKAM"
+            ]
+          },
+          {
+            "key": "Biopharma",
+            "value": [
+              "aE5Ou0000000PKzKAM",
+              "aE5Ou0000000OQXKA2"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "Instrument family",
+        "value": [
+          {
+            "key": "ExionLC 2.0",
+            "value": [
+              "aE5Ou0000000PPpKAM"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "assetType",
+        "value": [
+          {
+            "key": "Technote",
+            "value": [
+              "aE5Ou0000000PPpKAM",
+              "aE5Ou0000000PODKA2",
+              "aE5Ou0000000PMbKAM",
+              "aE5Ou0000000PKzKAM",
+              "aE5Ou0000000OQXKA2"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
 function toggleTag(asset, tagKey, tagItem) {
   // initialize state safely
   if (!tagItem.state) {
