@@ -661,7 +661,7 @@ export default async function decorate(block) {
   try {
     await readBlockProperties(block);
     await initializefavoriteSearchInterface(block, 'favorite-all');
-    // renderCommonSorting(resourceLibrarySortController);
+    renderCommonSorting(resourceLibrarySortController);
     renderUi();
   } catch (err) {
     // fail silently (current behavior preserved)
