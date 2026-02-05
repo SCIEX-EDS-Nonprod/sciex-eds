@@ -7,47 +7,42 @@ import { i18n } from '../../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-export const addToFavorite = async (url) => {
+const callFavoriteAPI = async (params, method = 'POST') => {
   try {
     const response = await fetch('/bin/sciex/favoritecontent', {
-      method: 'POST',
+      method,
       credentials: 'include',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams({
-        url,
-        operation: 'add',
-      }),
+      body: new URLSearchParams(params),
     });
 
-    return { success: response.ok };
+    const text = await response.text(); // servlet returns plain text JSON string
+    let data = {};
+    try { data = JSON.parse(text); } catch (e) {}
+
+    return {
+      success: response.ok,
+      status: response.status,
+      data,
+    };
   } catch (error) {
-    console.error('Fetch error (add favorite):', error);
-    return { success: false };
+    console.error('Favorite API error:', error);
+    return { success: false, status: 0 };
   }
 };
 
-export const removeToFavorite = async (url) => {
-  try {
-    const response = await fetch('/bin/sciex/favoritecontent', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        url,
-        operation: 'remove',
-      }),
-    });
+export const addToFavorite = (url) =>
+  callFavoriteAPI({ url, operation: 'add' }, 'POST');
 
-    return { success: response.ok };
-  } catch (error) {
-    console.error('Fetch error (remove favorite):', error);
-    return { success: false };
-  }
-};
+/**
+ * IMPORTANT:
+ * Servlet REMOVE flow is doDelete(), so we must use DELETE
+ */
+export const removeToFavorite = (url) =>
+  callFavoriteAPI({ url, operation: 'remove' }, 'DELETE');
+
 
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
@@ -164,36 +159,40 @@ const renderSearchResults = () => {
       favIcon.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
-
+      
+        if (favIcon.classList.contains('is-loading')) return;
+        favIcon.classList.add('is-loading');
+      
         const pageUrl = result.printableUri;
         const isFavorited = favIcon.classList.contains('favorited');
-
-        // ===== UNFAVORITE FLOW =====
-        if (isFavorited) {
-          // Optimistic UI update
-          favIcon.classList.remove('favorited');
-
-          const response = await removeToFavorite(pageUrl);
-
-          // Revert if API failed
-          if (!response.success) {
+      
+        try {
+          if (isFavorited) {
+            // Optimistic remove
+            favIcon.classList.remove('favorited');
+      
+            const res = await removeToFavorite(pageUrl);
+      
+            if (!res.success) {
+              console.warn('Remove favorite failed:', res.status);
+              favIcon.classList.add('favorited'); // rollback
+            }
+          } else {
+            // Optimistic add
             favIcon.classList.add('favorited');
+      
+            const res = await addToFavorite(pageUrl);
+      
+            if (!res.success) {
+              console.warn('Add favorite failed:', res.status);
+              favIcon.classList.remove('favorited'); // rollback
+            }
           }
-
-          return;
-        }
-
-        // ===== FAVORITE FLOW =====
-        favIcon.classList.add('favorited');
-
-        const response = await addToFavorite(pageUrl);
-
-        // Revert if API failed
-        if (!response.success) {
-          favIcon.classList.remove('favorited');
+        } finally {
+          favIcon.classList.remove('is-loading');
         }
       });
-
+    
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
       viewDetailsBtn.addEventListener('click', () => {
         handleResultClick(result);
