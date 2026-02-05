@@ -20,7 +20,9 @@ const callFavoriteAPI = async (params, method = 'POST') => {
 
     const text = await response.text(); // servlet returns plain text JSON string
     let data = {};
-    try { data = JSON.parse(text); } catch (e) {}
+    try { data = JSON.parse(text); } catch (e) {
+      console.error('Invalid JSON:', e);
+    }
 
     return {
       success: response.ok,
@@ -33,16 +35,13 @@ const callFavoriteAPI = async (params, method = 'POST') => {
   }
 };
 
-export const addToFavorite = (url) =>
-  callFavoriteAPI({ url, operation: 'add' }, 'POST');
+export const addToFavorite = (url) => callFavoriteAPI({ url, operation: 'add' }, 'POST');
 
 /**
  * IMPORTANT:
  * Servlet REMOVE flow is doDelete(), so we must use DELETE
  */
-export const removeToFavorite = (url) =>
-  callFavoriteAPI({ url, operation: 'remove' }, 'DELETE');
-
+export const removeToFavorite = (url) => callFavoriteAPI({ url, operation: 'remove' }, 'DELETE');
 
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
@@ -159,20 +158,20 @@ const renderSearchResults = () => {
       favIcon.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
-      
+
         if (favIcon.classList.contains('is-loading')) return;
         favIcon.classList.add('is-loading');
-      
+
         const pageUrl = result.printableUri;
         const isFavorited = favIcon.classList.contains('favorited');
-      
+
         try {
           if (isFavorited) {
             // Optimistic remove
             favIcon.classList.remove('favorited');
-      
+
             const res = await removeToFavorite(pageUrl);
-      
+
             if (!res.success) {
               console.warn('Remove favorite failed:', res.status);
               favIcon.classList.add('favorited'); // rollback
@@ -180,9 +179,9 @@ const renderSearchResults = () => {
           } else {
             // Optimistic add
             favIcon.classList.add('favorited');
-      
+
             const res = await addToFavorite(pageUrl);
-      
+
             if (!res.success) {
               console.warn('Add favorite failed:', res.status);
               favIcon.classList.remove('favorited'); // rollback
@@ -192,7 +191,7 @@ const renderSearchResults = () => {
           favIcon.classList.remove('is-loading');
         }
       });
-    
+
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
       viewDetailsBtn.addEventListener('click', () => {
         handleResultClick(result);
