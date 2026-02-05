@@ -9,13 +9,17 @@ const strings = i18n[lang] || i18n.en;
 
 export const addToFavorite = async (url) => {
   try {
-    const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=add`,
-      {
-        method: 'POST',
-        credentials: 'include',
+    const response = await fetch('/bin/sciex/favoritecontent', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-    );
+      body: new URLSearchParams({
+        url,
+        operation: 'add',
+      }),
+    });
 
     return { success: response.ok };
   } catch (error) {
@@ -26,13 +30,17 @@ export const addToFavorite = async (url) => {
 
 export const removeToFavorite = async (url) => {
   try {
-    const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=remove`,
-      {
-        method: 'POST',
-        credentials: 'include',
+    const response = await fetch('/bin/sciex/favoritecontent', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-    );
+      body: new URLSearchParams({
+        url,
+        operation: 'remove',
+      }),
+    });
 
     return { success: response.ok };
   } catch (error) {
