@@ -7,21 +7,22 @@ import { i18n } from '../../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-const callFavoriteAPI = async (params, method = 'POST') => {
+const callFavoriteAPI = async (params) => {
   try {
-    const response = await fetch('/bin/sciex/favoritecontent', {
-      method,
+    const query = new URLSearchParams(params).toString();
+
+    const response = await fetch(`/bin/sciex/favoritecontent?${query}`, {
+      method: 'GET',              // ✅ Backend expects GET
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(params),
     });
 
-    const text = await response.text(); // servlet returns plain text JSON string
+    const text = await response.text(); // servlet returns JSON string
     let data = {};
-    try { data = JSON.parse(text); } catch (e) {
-      console.error('Invalid JSON:', e);
+
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      console.error('Invalid JSON from favorite API:', text);
     }
 
     return {
@@ -31,18 +32,22 @@ const callFavoriteAPI = async (params, method = 'POST') => {
     };
   } catch (error) {
     console.error('Favorite API error:', error);
-    return { success: false, status: 0 };
+    return { success: false, status: 0, data: null };
   }
 };
 
-export const addToFavorite = (url) => callFavoriteAPI({ url, operation: 'add' }, 'POST');
+export const addToFavorite = (url) =>
+  callFavoriteAPI({
+    operation: 'add',
+    url,
+  });
 
-/**
- * IMPORTANT:
- * Servlet REMOVE flow is doDelete(), so we must use DELETE
- */
-export const removeToFavorite = (url) => callFavoriteAPI({ url, operation: 'remove' }, 'DELETE');
-
+  export const removeToFavorite = (url) =>
+    callFavoriteAPI({
+      operation: 'remove',
+      url,
+    });
+  
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
 
