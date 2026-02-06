@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { decorateIcons } from '../../scripts/aem.js';
+import { renderLoggedOut } from '../../scripts/favorite-all/favorite-all-controller/sortiingUtils.js';
 
 const CATEGORY_MAP = [
   {
@@ -135,22 +136,6 @@ export default async function decorate(block) {
   } catch (e) {
     console.error('Favorites block error', e);
   }
-}
-
-/**
- * Renders the logged-out state UI.
- * Displays message, Login CTA, and Create Account CTA.
- * */
-function renderLoggedOut(container, text, loginUrl, createUrl) {
-  container.innerHTML = `
-    <div class="favorites-logged-out">
-      <p>${text}</p>
-      <div class="cta-row">
-        <a class="btn secondary" href="${loginUrl}">Login</a>
-        <a class="btn primary" href="${createUrl}">Create an account</a>
-      </div>
-    </div>
-  `;
 }
 
 /**

@@ -13,6 +13,22 @@ export const createSortHandler = (sortController) => ({
   },
 });
 
+/**
+ * Renders the logged-out state UI.
+ * Displays message, Login CTA, and Create Account CTA.
+ * */
+export function renderLoggedOut(container, text, loginUrl, createUrl) {
+  container.innerHTML = `
+    <div class="favorites-logged-out">
+      <p>${text}</p>
+      <div class="cta-row">
+        <a class="btn secondary" href="${loginUrl}">Login</a>
+        <a class="btn primary" href="${createUrl}">Create an account</a>
+      </div>
+    </div>
+  `;
+}
+
 export const renderSortingDropdown = ({
   containerId,
   sortOptions,
