@@ -7,7 +7,33 @@ import renderfavoriteSearchResultList from '../../scripts/common-components/favo
 import renderFavoriteQuerySummary from '../../scripts/common-components/favoriteQuerySummary.js';
 import renderFavoriteFacetBreadcrumb from '../../scripts/common-components/favoriteFacetBreadcrumb.js';
 import initializefavoriteSearchInterface from '../../scripts/common-components/favoriteResourceUi.js';
+import { renderLoggedOut } from '../../scripts/favorite-all/favorite-all-controller/sortiingUtils.js';
 
+const USER_API = '/bin/sciex/currentuserdetails';
+
+const LOGIN_URL = '/login';
+const CREATE_ACCOUNT_URL = '/register';
+
+const LOGOUT_TEXT =
+  'Please log in or create an account to view and manage your favorites.';
+
+
+  async function checkLoginStatus() {
+    try {
+      const userResp = await fetch(USER_API, { credentials: 'include' });
+  
+      if (!userResp.ok) {
+        throw new Error(`User API failed: ${userResp.status}`);
+      }
+  
+      const user = await userResp.json();
+      return user?.loggedIn === true;
+    } catch (e) {
+      console.warn('Favorites block: treating user as logged out', e);
+      return false;
+    }
+  }
+  
 /* ======================================================
    BLOCK CONTENT (banner + no results)
 ====================================================== */
@@ -75,33 +101,24 @@ async function readBlockProperties(block) {
   });
 }
 
-const data = await getFavoriteResultsList();
-
-
-const favoriteResultsList = data.map(item => ({
-  ...item,
-  tags: item.tags.filter(tag => tag.key !== "assetType")
-}));
-
-
 
 /* ======================================================
    RENDER HELPERS
 ====================================================== */
 async function renderUi() {
-  renderfavoriteSearchResultList(
-    favoriteResultsList
-  );
-  renderCommonFacet(favoriteResultsList, toggleAssetType, toggleTag);
+  const list = window.favoriteResultsList || [];
 
-  renderFavoriteQuerySummary(favoriteResultsList);
+  renderfavoriteSearchResultList(list);
+  renderCommonFacet(list, toggleAssetType, toggleTag);
+  renderFavoriteQuerySummary(list);
   renderFavoriteFacetBreadcrumb(
-    favoriteResultsList,
+    list,
     toggleAssetType,
     toggleTag,
     renderUi
   );
 }
+
 
 /* ======================================================
    TOGGLE HANDLERS
@@ -158,16 +175,37 @@ export function showResourceHubButton(block) {
 /* ======================================================
    DECORATE
 ====================================================== */
-export default async function decorate(block) { 
-
+export default async function decorate(block) {
   try {
     await readBlockProperties(block);
-    await initializefavoriteSearchInterface(block, 'favorite-all');
-        showResourceHubButton(block);
 
+    const isLoggedIn = await checkLoginStatus();
+
+    if (!isLoggedIn) {
+      renderLoggedOut(
+        block,
+        LOGOUT_TEXT,
+        LOGIN_URL,
+        CREATE_ACCOUNT_URL
+      );
+      return; // ⛔ stop execution
+    }
+
+    // ✅ Logged-in flow continues
+    await initializefavoriteSearchInterface(block, 'favorite-all');
+    showResourceHubButton(block);
+
+    const data = await getFavoriteResultsList();
+
+    const favoriteResultsList = data.map(item => ({
+      ...item,
+      tags: item.tags.filter(tag => tag.key !== 'assetType')
+    }));
+
+    window.favoriteResultsList = favoriteResultsList;
     renderUi();
+
   } catch (err) {
-    // fail silently (current behavior preserved)
     console.error(err);
   }
 }
