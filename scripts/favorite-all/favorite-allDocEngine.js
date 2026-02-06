@@ -1,0 +1,35 @@
+export const getfavoriteAllData = async () => {
+  try {
+    const response = await fetch(
+      'https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/get-favorite-content',
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log('datasss', data);
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+};
+export const removeFavoriteSearchEngine = async (url) => {
+  try {
+    const response = await fetch(
+      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${url}&operation=remove`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log('datasss', data);
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
+};
+export default { getfavoriteAllData, removeFavoriteSearchEngine };

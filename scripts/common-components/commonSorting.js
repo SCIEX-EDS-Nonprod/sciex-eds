@@ -1,5 +1,5 @@
 // renderCourseCatalogSorting.js
-import { renderSortingDropdown } from './sortiingUtils.js';
+import { renderSortingDropdown } from '../favorite-all/favorite-all-controller/sortiingUtils.js';
 import { i18n } from '../translation.js';
 
 const lang = document.documentElement.lang || 'en';
