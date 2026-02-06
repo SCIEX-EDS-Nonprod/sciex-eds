@@ -7,47 +7,44 @@ import { i18n } from '../../translation.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
-export const addToFavorite = async (url) => {
+const callFavoriteAPI = async (params) => {
   try {
-    const response = await fetch('/bin/sciex/favoritecontent', {
-      method: 'POST',
+    const query = new URLSearchParams(params).toString();
+
+    const response = await fetch(`/bin/sciex/favoritecontent?${query}`, {
+      method: 'GET', // ✅ Backend expects GET
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        url,
-        operation: 'add',
-      }),
     });
 
-    return { success: response.ok };
+    const text = await response.text(); // servlet returns JSON string
+    let data = {};
+
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      console.error('Invalid JSON from favorite API:', text);
+    }
+
+    return {
+      success: response.ok,
+      status: response.status,
+      data,
+    };
   } catch (error) {
-    console.error('Fetch error (add favorite):', error);
-    return { success: false };
+    console.error('Favorite API error:', error);
+    return { success: false, status: 0, data: null };
   }
 };
 
-export const removeToFavorite = async (url) => {
-  try {
-    const response = await fetch('/bin/sciex/favoritecontent', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        url,
-        operation: 'remove',
-      }),
-    });
+export const addToFavorite = (url) => callFavoriteAPI({
+  operation: 'add',
+  url,
+});
 
-    return { success: response.ok };
-  } catch (error) {
-    console.error('Fetch error (remove favorite):', error);
-    return { success: false };
-  }
-};
+export const removeToFavorite = (url) => callFavoriteAPI({
+  operation: 'remove',
+  url,
+});
 
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
@@ -129,7 +126,7 @@ const renderSearchResults = () => {
           <div class="item-details"> 
             ${result.raw.isnewcourse || result.raw.coursetypecategories
     ? `<div class="tag-container">
-                ${result.raw.coursetypecategories.toString() === 'Premium online' ? '<span class="tag premium">Premium</span>' : ''}
+                ${result.raw.coursetypecategories?.toString() === 'Premium online' ? '<span class="tag premium">Premium</span>' : ''}
                 ${result.raw.isnewcourse ? '<span class="tag new">New</span>' : ''}
               </div> ` : ''
 }
@@ -165,32 +162,36 @@ const renderSearchResults = () => {
         e.preventDefault();
         e.stopPropagation();
 
+        if (favIcon.classList.contains('is-loading')) return;
+        favIcon.classList.add('is-loading');
+
         const pageUrl = result.printableUri;
         const isFavorited = favIcon.classList.contains('favorited');
 
-        // ===== UNFAVORITE FLOW =====
-        if (isFavorited) {
-          // Optimistic UI update
-          favIcon.classList.remove('favorited');
+        try {
+          if (isFavorited) {
+            // Optimistic remove
+            favIcon.classList.remove('favorited');
 
-          const response = await removeToFavorite(pageUrl);
+            const res = await removeToFavorite(pageUrl);
 
-          // Revert if API failed
-          if (!response.success) {
+            if (!res.success) {
+              console.warn('Remove favorite failed:', res.status);
+              favIcon.classList.add('favorited'); // rollback
+            }
+          } else {
+            // Optimistic add
             favIcon.classList.add('favorited');
+
+            const res = await addToFavorite(pageUrl);
+
+            if (!res.success) {
+              console.warn('Add favorite failed:', res.status);
+              favIcon.classList.remove('favorited'); // rollback
+            }
           }
-
-          return;
-        }
-
-        // ===== FAVORITE FLOW =====
-        favIcon.classList.add('favorited');
-
-        const response = await addToFavorite(pageUrl);
-
-        // Revert if API failed
-        if (!response.success) {
-          favIcon.classList.remove('favorited');
+        } finally {
+          favIcon.classList.remove('is-loading');
         }
       });
 
