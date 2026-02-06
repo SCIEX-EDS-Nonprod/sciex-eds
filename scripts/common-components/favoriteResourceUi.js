@@ -76,15 +76,6 @@ async function initializefavoriteSearchInterface(block, blockName) {
   const searchTermValue = createElement('div', { classList: ['search-term-value'], id: 'searchTermValue' });
   searchTermDiv.append(searchTermLabel, searchTermValue);
 
-  // Search input
-  const searchInput = createElement('input', {
-    type: 'text',
-    id: 'coveo-query',
-    placeholder: strings.search,
-    maxLength: 200,
-    classList: ['search-box', 'tw-w-full', 'tw-py-3', 'tw-px-4', 'tw-border', 'tw-border-gray-300', 'tw-rounded-md'],
-  });
-
   // Search validation
   const searchTermValidation = createElement('div', { classList: ['search-term-validation'], id: 'searchTermValidation' });
   const validationText = createElement('div', { classList: ['search-validation-text'], id: 'validationText', text: strings.limitText });
@@ -95,28 +86,9 @@ async function initializefavoriteSearchInterface(block, blockName) {
   searchTermValidation.appendChild(validationError);
   searchTermValidation.appendChild(validationCount);
 
-  // Clear search input icon
-  const clearSearchInput = createElement('span', {
-    id: 'clear-search',
-    className: 'clear-search',
-    html: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 13L3.0001 3.0001" stroke="#141414"/><path d="M13 3L3.0001 12.9999" stroke="#141414"/></svg>',
-  });
-
-  // Search icon
-  const searchIcon = createElement('span', {
-    id: 'search-icon',
-    className: 'search-icon',
-    html: '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0065 7.33324C12.0065 9.7264 10.0664 11.6665 7.67318 11.6665C5.27993 11.6665 3.33984 9.7264 3.33984 7.33324C3.33984 4.94007 5.27993 3 7.67318 3C10.0664 3 12.0065 4.94007 12.0065 7.33324ZM11.0743 11.4414C10.1512 12.2066 8.96589 12.6665 7.67318 12.6665C4.72766 12.6665 2.33984 10.2787 2.33984 7.33324C2.33984 4.38777 4.72766 2 7.67318 2C10.6187 2 13.0065 4.38777 13.0065 7.33324C13.0065 8.62593 12.5466 9.81119 11.7815 10.7343L14.0267 12.9796L14.3803 13.3331L13.6732 14.0402L13.3196 13.6867L11.0743 11.4414Z" fill="#707070"/></svg>',
-  });
-
-  // Append search input to search container
-  const coveoSearchComponentDiv = createElement('div', {
-    classList: ['coveo-search-component', 'tw-flex', 'tw-gap-2'],
-    append: [searchIcon, searchInput, clearSearchInput],
-  });
-
   // Create query sort section div
   const querySortSectionDiv = createElement('div', {
+    id: 'query-sort-section',
     classList: ['query-sort-section', 'tw-flex', 'tw-justify-between', 'tw-items-center'],
   });
 

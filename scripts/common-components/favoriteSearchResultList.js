@@ -1,6 +1,5 @@
 /* eslint-disable */
 import {
-  favoriteSearchEngine,
   removeFavoriteSearchEngine
 } from '../favorite-all/favorite-allDocEngine.js';
 import { i18n } from '../translation.js';
@@ -9,13 +8,91 @@ import renderFavoriteQuerySummary from './favoriteQuerySummary.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
+/* ======================================================
+   SORT STATE
+====================================================== */
+let currentSortType = 'relevancy';
+
+/* ======================================================
+   SORT HELPER
+====================================================== */
+function sortResults(results) {
+
+  if (currentSortType === 'title') {
+    return [...results].sort((a, b) =>
+      (a.title || '').localeCompare(b.title || '')
+    );
+  }
+
+  if (currentSortType === 'newest') {
+    return [...results].sort(
+      (a, b) => new Date(b.created) - new Date(a.created)
+    );
+  }
+
+  return results; // relevancy
+}
+
+/* ======================================================
+   SORT DROPDOWN
+====================================================== */
+function renderSortingDropdown(rerenderCallback) {
+
+  const container = document.getElementById('sort');
+ 
+
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  const label = document.createElement('div');
+  label.className = 'sort-by-label';
+  label.innerHTML = `${strings.sortBy || 'Sort By'}:`;
+
+  const select = document.createElement('select');
+  select.id = 'sort-element';
+  select.className =
+    'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm';
+
+  const options = [
+    { label: strings.relevancy || 'Relevance', value: 'relevancy' },
+    { label: strings.title || 'Title', value: 'title' },
+    { label: strings.newest || 'Newest', value: 'newest' },
+  ];
+
+  options.forEach(opt => {
+    const option = document.createElement('option');
+    option.value = opt.value;
+    option.textContent = opt.label;
+    select.appendChild(option);
+  });
+
+  select.value = currentSortType;
+
+  select.addEventListener('change', e => {
+    currentSortType = e.target.value;
+    rerenderCallback?.();
+  });
+
+  container.appendChild(label);
+  container.appendChild(select);
+}
+
+
+/* ======================================================
+   MAIN RENDER FUNCTION
+====================================================== */
 const renderfavoriteSearchResultList = (
-  customerDocResultClick,
   data
 ) => {
-  console.log('rendereddataaa', data)
+console.log('renderuiii',data)
+  renderSortingDropdown(() =>
+    renderfavoriteSearchResultList(data)
+  );
+
   const noResults = document.getElementById('coveo-no-results');
   const target = document.querySelector('.search-result-section');
+
   if (noResults && target) {
     target.appendChild(noResults);
   }
@@ -25,6 +102,7 @@ const renderfavoriteSearchResultList = (
   const noResultsElement = document.getElementById('coveo-no-results');
 
   resultsElement.innerHTML = '';
+
 
   // ========================
   // SHOW LOADER
@@ -72,32 +150,38 @@ const renderfavoriteSearchResultList = (
     ) || []
   );
 
-  // ========================
-  // FILTER BY TAG IDS
-  // ========================
   if (selectedTagIds.length > 0) {
     filteredResults = filteredResults.filter(item =>
       selectedTagIds.includes(item.id)
     );
   }
 
-  // ========================
-  // RESULTS FOUND
-  // ========================
+  /* ========================
+     APPLY SORTING
+  ======================== */
+  filteredResults = sortResults(filteredResults);
+
+  /* ========================
+     RENDER RESULTS
+  ======================== */
   if (filteredResults.length > 0) {
+
     resultsLoading?.classList.add('tw-hidden');
     noResultsElement.style.display = 'none';
 
     filteredResults.forEach(result => {
+
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
 
       const relatedProductsHtml = Array.isArray(result.relatedProducts)
-          ? result.relatedProducts
-              .filter(Boolean)
-              .map(product => `<a href=${product.href} class="related-product-link">${product.title}</a>`)
-              .join(' <span class="pipe-separator">|</span> ')
-          : '';
+        ? result.relatedProducts
+            .filter(Boolean)
+            .map(product =>
+              `<a href=${product.href} class="related-product-link">${product.title}</a>`
+            )
+            .join(' <span class="pipe-separator">|</span> ')
+        : '';
 
       resultItem.innerHTML = `
         <div class="item-details">
@@ -106,7 +190,7 @@ const renderfavoriteSearchResultList = (
           <div class="related-products">
             ${
               relatedProductsHtml
-                ? `<strong>Related Products :</strong> ${relatedProductsHtml}`
+                ? `<p class="related-products-label">Related Products :</p> ${relatedProductsHtml}`
                 : ''
             }
           </div>
@@ -129,22 +213,23 @@ const renderfavoriteSearchResultList = (
             target="_blank"
             href="${result.path || '#'}"
           >
-            ${strings.view}
+            ${strings.view} details
           </a>
         </div>
       `;
 
-      // ========================
-      // REMOVE FAVORITE
-      // ========================
+      /* ========================
+         REMOVE FAVORITE
+      ======================== */
       resultItem
         .querySelector('.favorite-icon')
         ?.addEventListener('click', async () => {
+
           try {
             const response = await removeFavoriteSearchEngine(result.path);
+
             if (response?.message === 'The operation went successfully') {
 
-              // ✅ remove from existing data
               data.forEach(asset => {
                 if (Array.isArray(asset.pageData)) {
                   asset.pageData = asset.pageData.filter(
@@ -153,41 +238,28 @@ const renderfavoriteSearchResultList = (
                 }
               });
 
-              // ✅ remove empty assetTypes automatically
               const cleanedData = data.filter(
                 asset => asset.pageData && asset.pageData.length > 0
               );
 
               renderfavoriteSearchResultList(
-                customerDocResultClick,
                 cleanedData
               );
 
               renderFavoriteQuerySummary(cleanedData);
             }
+
           } catch (e) {
             console.error(e);
           }
         });
 
-
-      // ========================
-      // CLICK TRACKING
-      // ========================
-      resultItem
-        .querySelector('.view-details-btn')
-        ?.addEventListener('click', () => {
-          customerDocResultClick?.(result);
-        });
+      
 
       resultsElement.appendChild(resultItem);
     });
-  }
 
-  // ========================
-  // NO RESULTS
-  // ========================
-  else {
+  } else {
     resultsLoading?.classList.add('tw-hidden');
     noResultsElement.style.display = '';
   }

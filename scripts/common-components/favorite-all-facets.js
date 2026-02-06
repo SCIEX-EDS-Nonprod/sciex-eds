@@ -135,13 +135,13 @@ export function renderCommonFacet(
     selectedTags.length === 0
       ? data
       : data.filter(asset =>
-          selectedTags.every(sel =>
-            asset.tags?.some(group =>
-              group.key === sel.groupKey &&
-              group.value?.some(v => v.key === sel.key)
-            )
+        selectedTags.every(sel =>
+          asset.tags?.some(group =>
+            group.key === sel.groupKey &&
+            group.value?.some(v => v.key === sel.key)
           )
-        );
+        )
+      );
 
   /* =========================
      ASSET TYPE FACET
@@ -149,7 +149,7 @@ export function renderCommonFacet(
   const assetItems = document.createElement('div');
   assetItems.style.display = 'flex';
   assetItems.style.flexDirection = 'column';
-  assetItems.style.gap = '6px';
+  assetItems.style.gap = '14px';
 
   const hasAssetClear = allowedAssets.some(a => a.state === 'selected');
 
@@ -193,12 +193,13 @@ export function renderCommonFacet(
     input.type = 'checkbox';
     input.checked = asset.state === 'selected';
     input.onchange = () => toggleAssetType(asset);
-
-    label.append(input, asset.assetType);
+    const text = document.createElement('span');
+    text.textContent = asset.assetType;
+    label.append(input, text);
     assetItems.appendChild(label);
   });
 
-  facetsContainer.appendChild(createFacet('Asset type', assetItems));
+  facetsContainer.appendChild(createFacet('Type', assetItems));
 
   /* =========================
      TAG FACETS (UNCHANGED LOGIC)
@@ -228,7 +229,7 @@ export function renderCommonFacet(
     const tagItemsContainer = document.createElement('div');
     tagItemsContainer.style.display = 'flex';
     tagItemsContainer.style.flexDirection = 'column';
-    tagItemsContainer.style.gap = '6px';
+    tagItemsContainer.style.gap = '14px';
 
     let visibleCount = facetVisibleCountState[groupKey] || 5;
     let searchTerm = facetSearchState[groupKey] || '';
@@ -236,31 +237,51 @@ export function renderCommonFacet(
     /* 🔍 SEARCH BOX ADDED */
 if (commonItems.length > 10) {
 
-    const facetId = `facet-${groupKey}`;
-    const facetInput = document.createElement('input');
-    facetInput.type = 'text';
-    facetInput.id = `${facetId}-input`;
-    facetInput.maxLength = 200;
-    facetInput.classList.add(
-      'tw-border',
-      'tw-p-2',
-      'tw-rounded-lg',
-      'tw-mt-2',
-      'facet-search-box'
-    );
-    facetInput.placeholder = 'Search';
-    facetInput.value = searchTerm;
+  const facetId = `facet-${groupKey}`;
 
-    facetInput.addEventListener('input', (event) => {
-      searchTerm = event.target.value.toLowerCase();
-      facetSearchState[groupKey] = searchTerm;
-      // visibleCount = 10;
-      facetVisibleCountState[groupKey] = visibleCount;
-      renderTags();
-    });
+  const searchWrapper = document.createElement('div');
+  searchWrapper.classList.add(
+    'facet-search-box',
+    'tw-border',
+    'tw-p-2',
+    'tw-rounded-lg',
+    'tw-mt-2',
+    'tw-flex',
+    'tw-items-center',
+    'tw-gap-2'
+  );
 
-    tagItemsContainer.appendChild(facetInput);
-  }
+  // Search Icon
+  const searchIcon = document.createElement('img');
+  searchIcon.src = '/icons/search-input.svg';
+  searchIcon.alt = 'Search';
+  searchIcon.style.width = '16px';
+  searchIcon.style.height = '16px';
+
+  // Input
+  const facetInput = document.createElement('input');
+  facetInput.type = 'text';
+  facetInput.id = `${facetId}-input`;
+  facetInput.maxLength = 200;
+  facetInput.placeholder = 'Search';
+  facetInput.value = searchTerm;
+
+  facetInput.style.border = 'none';
+  facetInput.style.outline = 'none';
+
+  facetInput.addEventListener('input', (event) => {
+    searchTerm = event.target.value.toLowerCase();
+    facetSearchState[groupKey] = searchTerm;
+    facetVisibleCountState[groupKey] = visibleCount;
+    renderTags();
+  });
+
+  searchWrapper.appendChild(searchIcon);
+  searchWrapper.appendChild(facetInput);
+  tagItemsContainer.appendChild(searchWrapper);
+}
+
+
     const hasClearBtn = selectedAssets.some(asset =>
       asset.tags?.some(
         g => g.key === groupKey && g.value?.some(v => v.state === 'selected')
@@ -318,7 +339,9 @@ if (commonItems.length > 10) {
           });
         };
 
-        label.append(input, key);
+        const text = document.createElement('span');
+        text.textContent = key;
+        label.append(input, text);
         tagItemsContainer.appendChild(label);
       });
 

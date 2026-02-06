@@ -10,20 +10,21 @@ const isMobile = () => window.innerWidth <= 767;
 ====================================================== */
 
 function resetAllSelections(data) {
-  data.forEach(asset => {
+  data.forEach((asset) => {
     asset.state = 'idle';
-    asset.tags?.forEach(group =>
-      group.value?.forEach(tag => (tag.state = 'idle'))
-    );
+
+    asset.tags?.forEach((group) => {
+      group.value?.forEach((tag) => {
+        tag.state = 'idle';
+      });
+    });
   });
 }
 
 function hasAnySelection(data) {
   return (
-    data.some(a => a.state === 'selected') ||
-    data.some(a =>
-      a.tags?.some(g => g.value?.some(t => t.state === 'selected'))
-    )
+    data.some((a) => a.state === 'selected')
+    || data.some((a) => a.tags?.some((g) => g.value?.some((t) => t.state === 'selected')))
   );
 }
 
@@ -71,18 +72,22 @@ const renderFavoriteFacetBreadcrumb = (data, toggleAssetType, toggleTag, renderU
   /* =========================
      ASSET TYPE BREADCRUMBS
   ========================= */
-  data.forEach(asset => {
+  data.forEach((asset) => {
     if (asset.state !== 'selected') return;
 
     const breadcrumb = createBreadcrumbItem(
       `${strings.assetType} : ${asset.assetType}`,
       () => {
         asset.state = 'idle';
-        asset.tags?.forEach(g =>
-          g.value?.forEach(t => (t.state = 'idle'))
-        );
+
+        asset.tags?.forEach((group) => {
+          group.value?.forEach((tag) => {
+            tag.state = 'idle';
+          });
+        });
+
         renderUi();
-      }
+      },
     );
 
     container.appendChild(breadcrumb);
@@ -93,13 +98,13 @@ const renderFavoriteFacetBreadcrumb = (data, toggleAssetType, toggleTag, renderU
   ========================= */
   const selectedTags = new Map();
 
-  data.forEach(asset => {
-    asset.tags?.forEach(group => {
-      group.value?.forEach(tag => {
+  data.forEach((asset) => {
+    asset.tags?.forEach((group) => {
+      group.value?.forEach((tag) => {
         if (tag.state === 'selected') {
           selectedTags.set(
             `${group.key}__${tag.key}`,
-            { groupKey: group.key, tagKey: tag.key }
+            { groupKey: group.key, tagKey: tag.key },
           );
         }
       });
@@ -110,13 +115,13 @@ const renderFavoriteFacetBreadcrumb = (data, toggleAssetType, toggleTag, renderU
     const breadcrumb = createBreadcrumbItem(
       `${groupKey} : ${tagKey}`,
       () => {
-        data.forEach(asset => {
-          const group = asset.tags?.find(g => g.key === groupKey);
-          const tag = group?.value?.find(v => v.key === tagKey);
+        data.forEach((asset) => {
+          const group = asset.tags?.find((g) => g.key === groupKey);
+          const tag = group?.value?.find((v) => v.key === tagKey);
           if (tag) tag.state = 'idle';
         });
         renderUi();
-      }
+      },
     );
 
     container.appendChild(breadcrumb);
@@ -128,21 +133,21 @@ const renderFavoriteFacetBreadcrumb = (data, toggleAssetType, toggleTag, renderU
   /* =========================
    MOBILE FILTER COUNT + SHOW LESS
 ========================= */
-/* =========================
+  /* =========================
    MOBILE FILTER COUNT + SHOW LESS (WITH STYLES)
 ========================= */
-if (isMobile()) {
-  const filters = container.querySelectorAll('.facet-breadcrumb');
+  if (isMobile()) {
+    const filters = container.querySelectorAll('.facet-breadcrumb');
 
-  if (filters.length > 1) {
-    const showMore = document.createElement('div');
-    showMore.id = 'filter-count-wrapper';
-    showMore.innerHTML = `<span>Filters: +${filters.length}</span>`;
+    if (filters.length > 1) {
+      const showMore = document.createElement('div');
+      showMore.id = 'filter-count-wrapper';
+      showMore.innerHTML = `<span>Filters: +${filters.length}</span>`;
 
-    const showLess = document.createElement('div');
-    showLess.id = 'filter-count-show-less';
-    showLess.classList.add('tw-hidden', 'tw-flex');
-    showLess.innerHTML = `
+      const showLess = document.createElement('div');
+      showLess.id = 'filter-count-show-less';
+      showLess.classList.add('tw-hidden', 'tw-flex');
+      showLess.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
         viewBox="0 0 12 12" fill="none">
         <path d="M0 6L12 6" stroke="#0068FA"/>
@@ -150,51 +155,49 @@ if (isMobile()) {
       Show Less
     `;
 
-    // Initial state
-    filters.forEach(f => f.classList.add('tw-hidden'));
+      // Initial state
+      filters.forEach((f) => f.classList.add('tw-hidden'));
 
-    // SHOW MORE
-    showMore.addEventListener('click', () => {
-      filters.forEach(f => f.classList.remove('tw-hidden'));
+      // SHOW MORE
+      showMore.addEventListener('click', () => {
+        filters.forEach((f) => f.classList.remove('tw-hidden'));
 
-      showMore.style.display = 'none';
-      showLess.classList.remove('tw-hidden');
+        showMore.style.display = 'none';
+        showLess.classList.remove('tw-hidden');
 
-      container.style.marginTop = '0px';
-      root.style.marginBottom = '30px';
+        container.style.marginTop = '0px';
+        root.style.marginBottom = '30px';
 
-      const clearBtn = container.querySelector('button');
-      if (clearBtn) clearBtn.style.bottom = '-20px';
-    });
+        const clearBtn = container.querySelector('button');
+        if (clearBtn) clearBtn.style.bottom = '-20px';
+      });
 
-    // SHOW LESS
-    showLess.addEventListener('click', () => {
-      filters.forEach(f => f.classList.add('tw-hidden'));
+      // SHOW LESS
+      showLess.addEventListener('click', () => {
+        filters.forEach((f) => f.classList.add('tw-hidden'));
 
-      showLess.classList.add('tw-hidden');
-      showMore.style.display = 'block';
+        showLess.classList.add('tw-hidden');
+        showMore.style.display = 'block';
 
-      container.style.marginTop = '20px';
-      root.style.marginBottom = '0px';
+        container.style.marginTop = '20px';
+        root.style.marginBottom = '0px';
 
-      const clearBtn = container.querySelector('button');
-      if (clearBtn) {
-        clearBtn.style.marginTop = '-100px';
-        clearBtn.style.bottom = 'auto';
-      }
-    });
+        const clearBtn = container.querySelector('button');
+        if (clearBtn) {
+          clearBtn.style.marginTop = '-100px';
+          clearBtn.style.bottom = 'auto';
+        }
+      });
 
-    root.prepend(showMore);
-    root.prepend(showLess);
+      root.prepend(showMore);
+      root.prepend(showLess);
+    }
   }
-}
-
-
 
   /* =========================
      CLEAR ALL BUTTON
   ========================= */
- const clearAll = document.createElement('button');
+  const clearAll = document.createElement('button');
   clearAll.textContent = 'Clear All';
   clearAll.className = 'facet-clear-all';
   clearAll.textContent = 'Clear All';
@@ -219,7 +222,7 @@ if (isMobile()) {
      MOBILE FOOTER CLEAR ALL
   ========================= */
   const mobileClear = document.getElementById(
-    'mobile-filter-footer-clear-all'
+    'mobile-filter-footer-clear-all',
   );
 
   if (mobileClear) {

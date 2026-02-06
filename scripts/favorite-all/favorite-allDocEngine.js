@@ -1,64 +1,35 @@
-/* eslint-disable */
-import { buildSearchEngine } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
-
-let accessToken = '';
-let organizationId = '';
-
-let mainDiv = document.querySelector('main');
-const sections = mainDiv.querySelector('.favorite-all').children;
-Array.from(sections).forEach((section, index) => {
-  const iteration = index + 1;
-  if(iteration === 5){
-    organizationId = section.querySelector('div').innerText;
-  } else if(iteration === 6){
-    accessToken = section.querySelector('div').innerText;
-  }
-});
-
-export const resourceLibrarySearchEngine = buildSearchEngine({
-  configuration: {
-    organizationId: organizationId,
-    accessToken: accessToken,
-    search: {
-      searchHub: 'SCIEXResourceLibraryListing',
-    },
-    analytics: {
-      analyticsMode: 'next',
-      trackingId: 'sciex_us'
-    },
-  },
-});
-export const favoriteSearchEngine = async () => {
+export const getfavoriteAllData = async () => {
   try {
     const response = await fetch(
-      "https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/get-favorite-content"
+      'https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/get-favorite-content',
     );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log('datasss',data);
+    console.log('datasss', data);
     return data;
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error('Fetch error:', error);
+    return null;
   }
 };
 export const removeFavoriteSearchEngine = async (url) => {
-  console.log('called',url)
   try {
     const response = await fetch(
-      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${url}&operation=remove`
+      `https://author-p93412-e854706.adobeaemcloud.com/bin/sciex/favoritecontent?url=${url}&operation=remove`,
     );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    console.log('datasss',data);
+    console.log('datasss', data);
     return data;
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error('Fetch error:', error);
+    return null;
   }
 };
-export default { resourceLibrarySearchEngine, favoriteSearchEngine ,removeFavoriteSearchEngine};
+export default { getfavoriteAllData, removeFavoriteSearchEngine };
