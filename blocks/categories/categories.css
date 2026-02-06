@@ -70,13 +70,12 @@
     align-items: flex-start;
     flex: 1 0 0;
     position: relative;
-    background: var(--Grey-50, #F5F5F5);
     transition: background-color 0.3s ease; /* smooth hover animation */
   }
   
   /* HOVER STATE */
   .category-card:hover {
-    background-color: #ececec;
+  background-color: #ececec;
   }
 
   .category-arrow-top {

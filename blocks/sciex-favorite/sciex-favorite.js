@@ -56,7 +56,7 @@ export default async function decorate(block) {
     block.children[4]?.textContent?.trim() || '/create-account';
 
   const USER_API = '/bin/sciex/currentuserdetails';
-  const FAVORITES_API = '/bin/sciex/get-favorite-content';
+  const FAVORITES_API = '/bin/sciex/favorite-all-content';
     
   const viewAllUrlText = block.children[5]?.textContent?.trim() || "View all resources";
 
