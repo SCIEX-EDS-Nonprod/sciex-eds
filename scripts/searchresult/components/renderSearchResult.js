@@ -12,7 +12,7 @@ const callFavoriteAPI = async (params) => {
     const query = new URLSearchParams(params).toString();
 
     const response = await fetch(`/bin/sciex/favoritecontent?${query}`, {
-      method: 'GET',              // ✅ Backend expects GET
+      method: 'GET', // ✅ Backend expects GET
       credentials: 'include',
     });
 
@@ -36,18 +36,16 @@ const callFavoriteAPI = async (params) => {
   }
 };
 
-export const addToFavorite = (url) =>
-  callFavoriteAPI({
-    operation: 'add',
-    url,
-  });
+export const addToFavorite = (url) => callFavoriteAPI({
+  operation: 'add',
+  url,
+});
 
-  export const removeToFavorite = (url) =>
-    callFavoriteAPI({
-      operation: 'remove',
-      url,
-    });
-  
+export const removeToFavorite = (url) => callFavoriteAPI({
+  operation: 'remove',
+  url,
+});
+
 const renderSearchResults = () => {
   const resultsElement = document.getElementById('coveo-results');
 
@@ -128,7 +126,7 @@ const renderSearchResults = () => {
           <div class="item-details"> 
             ${result.raw.isnewcourse || result.raw.coursetypecategories
     ? `<div class="tag-container">
-                ${result.raw.coursetypecategories.toString() === 'Premium online' ? '<span class="tag premium">Premium</span>' : ''}
+                ${result.raw.coursetypecategories?.toString() === 'Premium online' ? '<span class="tag premium">Premium</span>' : ''}
                 ${result.raw.isnewcourse ? '<span class="tag new">New</span>' : ''}
               </div> ` : ''
 }
