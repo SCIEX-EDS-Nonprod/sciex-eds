@@ -8,6 +8,8 @@ import renderFavoriteQuerySummary from './favoriteQuerySummary.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
+const MAX_RESULTS = 10;
+
 /* ======================================================
    SORT STATE
 ====================================================== */
@@ -162,15 +164,18 @@ console.log('renderuiii',data)
   filteredResults = sortResults(filteredResults);
 
   /* ========================
+     LIMIT TO 10 RESULTS
+  ======================== */
+  const visibleResults = filteredResults.slice(0, MAX_RESULTS);
+
+  /* ========================
      RENDER RESULTS
   ======================== */
-  if (filteredResults.length > 0) {
-
+  if (visibleResults.length > 0) {
     resultsLoading?.classList.add('tw-hidden');
     noResultsElement.style.display = 'none';
 
-    filteredResults.forEach(result => {
-
+    visibleResults.forEach(result => {
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
 
@@ -242,23 +247,16 @@ console.log('renderuiii',data)
                 asset => asset.pageData && asset.pageData.length > 0
               );
 
-              renderfavoriteSearchResultList(
-                cleanedData
-              );
-
+              renderfavoriteSearchResultList(cleanedData);
               renderFavoriteQuerySummary(cleanedData);
             }
-
           } catch (e) {
             console.error(e);
           }
         });
 
-      
-
       resultsElement.appendChild(resultItem);
     });
-
   } else {
     resultsLoading?.classList.add('tw-hidden');
     noResultsElement.style.display = '';

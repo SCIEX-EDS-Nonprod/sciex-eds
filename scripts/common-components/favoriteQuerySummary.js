@@ -2,11 +2,13 @@ import { i18n } from '../translation.js';
 
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
+
+const MAX_RESULTS = 10;
+
 function hasAnySelection(data) {
-  return (
-    data.some((a) => a.state === 'selected')
-  );
+  return data.some((a) => a.state === 'selected');
 }
+
 const renderFavoriteQuerySummary = (data = []) => {
   const querySummaryEl = document.getElementById('query-summary');
   const mobileResultBtn = document.getElementById('mobile-filter-footer-results');
@@ -33,11 +35,8 @@ const renderFavoriteQuerySummary = (data = []) => {
   querySummaryEl.textContent = '';
 
   /* ======================================================
-     COLLECT STATE IN ONE PASS
+     COLLECT STATE
   ====================================================== */
-  if (document.getElementById('filter-count-wrapper')) {
-    console.log('kkkkkkkkkkkkkkkkfilter-count-wrapperfilter-count-wrapperfilter-count-wrapperfilter-count-wrapper');
-  }
 
   const selectedAssetTypes = new Set();
   const selectedTagIds = new Set();
@@ -48,20 +47,19 @@ const renderFavoriteQuerySummary = (data = []) => {
       selectedAssetTypes.add(asset.assetType);
     }
 
-    asset.tags?.forEach((group) => group.value?.forEach((tag) => {
-      if (tag.state === 'selected') {
-        tag.value?.forEach((id) => selectedTagIds.add(id));
-      }
-    }));
-
-    console.log('okok', selectedAssetTypes, selectedTagIds);
+    asset.tags?.forEach((group) =>
+      group.value?.forEach((tag) => {
+        if (tag.state === 'selected') {
+          tag.value?.forEach((id) => selectedTagIds.add(id));
+        }
+      })
+    );
 
     asset.pageData?.forEach((item) => {
       allResults.push({ ...item, assetType: asset.assetType });
     });
   });
 
-  console.log('allll', allResults);
   /* ======================================================
      FILTER RESULTS
   ====================================================== */
@@ -69,25 +67,30 @@ const renderFavoriteQuerySummary = (data = []) => {
   const hasAssetFilter = selectedAssetTypes.size > 0;
   const hasTagFilter = selectedTagIds.size > 0;
 
-  const filteredResults = hasAssetFilter || hasTagFilter
-    ? allResults.filter((item) => (!hasAssetFilter || selectedAssetTypes.has(item.assetType))
-        && (!hasTagFilter || selectedTagIds.has(item.id)))
-    : allResults;
+  const filteredResults =
+    hasAssetFilter || hasTagFilter
+      ? allResults.filter(
+          (item) =>
+            (!hasAssetFilter || selectedAssetTypes.has(item.assetType)) &&
+            (!hasTagFilter || selectedTagIds.has(item.id))
+        )
+      : allResults;
 
-  const resultCount = filteredResults.length;
+  const totalResultCount = filteredResults.length;
+  const displayResultCount = Math.min(totalResultCount, MAX_RESULTS);
 
   /* ======================================================
      RENDER
   ====================================================== */
 
-  mobileResultBtn.textContent = `Results (${resultCount})`;
+  mobileResultBtn.textContent = `Results (${displayResultCount})`;
 
   const resultItem = document.createElement('div');
   resultItem.innerHTML = `
     ${strings.result}
-    <span>1 - ${resultCount}</span>
+    <span>1 - ${displayResultCount}</span>
     ${strings.of}
-    <span>${resultCount}</span>
+    <span>${totalResultCount}</span>
   `;
 
   querySummaryEl.appendChild(resultItem);
