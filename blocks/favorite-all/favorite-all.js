@@ -75,10 +75,13 @@ async function readBlockProperties(block) {
   });
 }
 
-const favoriteResultsList = await getFavoriteResultsList();
+const data = await getFavoriteResultsList();
 
 
-
+const favoriteResultsList = data.map(item => ({
+  ...item,
+  tags: item.tags.filter(tag => tag.key !== "assetType")
+}));
 
 
 
