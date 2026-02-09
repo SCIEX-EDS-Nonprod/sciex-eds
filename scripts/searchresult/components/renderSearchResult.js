@@ -160,6 +160,9 @@ const renderSearchResults = () => {
         </div>
         `;
 
+      //Paste the share icon above line 157   
+      // <img src="/icons/share.svg" alt="Share" class="share-icon" />
+
       const favIcon = resultItem.querySelector('.favorite-icon');
 
       if (isFavorite) {
