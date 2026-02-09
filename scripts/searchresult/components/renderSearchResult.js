@@ -7,7 +7,7 @@ import getFavoriteResultsList from '../../favorite-all/favorite-all-controller/f
 
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
-const favoriteResultsList = await getFavoriteResultsList();
+let favoriteResultsList = await getFavoriteResultsList();
 console.log('favoriteResultsList',favoriteResultsList)
 const callFavoriteAPI = async (params) => {
   try {
