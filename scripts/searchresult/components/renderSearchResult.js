@@ -8,7 +8,7 @@ import getFavoriteResultsList from '../../favorite-all/favorite-all-controller/f
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 const favoriteResultsList = await getFavoriteResultsList();
-
+console.log('favoriteResultsList',favoriteResultsList)
 const callFavoriteAPI = async (params) => {
   try {
     const query = new URLSearchParams(params).toString();
@@ -91,7 +91,10 @@ const renderSearchResults = () => {
     sortedResults.forEach((result) => {
       let isFavorite = false
       if (favoriteResultsList.some(fav => fav.pageData.some(page => page.title === result.title))) {
+        console.log('yess',result.title)
         isFavorite = true
+      }else{
+        console.log('nooo', result.title)
       }
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
