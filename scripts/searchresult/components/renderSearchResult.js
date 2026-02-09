@@ -88,10 +88,10 @@ const renderSearchResults = () => {
       querySortSection.removeAttribute('style');
     }
     sortedResults.forEach((result) => {
-      let isFavorite = false
-      if (favoriteResultsList.some(fav => fav.pageData.some(page =>page.path === result.printableUri))) {
-        isFavorite = true
-      }
+      const isFavorite = favoriteResultsList.some((fav) => fav.pageData.some(
+        (page) => page.path === result.printableUri,
+      ));
+
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
       const partNumber = result.raw.productpartnumber ? `${strings.partNumber} : ${result.raw.productpartnumber} | ` : '';
@@ -161,7 +161,7 @@ const renderSearchResults = () => {
         `;
 
       const favIcon = resultItem.querySelector('.favorite-icon');
-      
+
       if (isFavorite) {
         favIcon.classList.add('favorited');
       }
@@ -185,8 +185,8 @@ const renderSearchResults = () => {
             if (!res.success) {
               console.warn('Remove favorite failed:', res.status);
               favIcon.classList.add('favorited'); // rollback
-            }else{
-             favoriteResultsList = await getFavoriteResultsList();
+            } else {
+              favoriteResultsList = await getFavoriteResultsList();
             }
           } else {
             // Optimistic add
@@ -197,7 +197,7 @@ const renderSearchResults = () => {
             if (!res.success) {
               console.warn('Add favorite failed:', res.status);
               favIcon.classList.remove('favorited'); // rollback
-            }else{
+            } else {
               favoriteResultsList = await getFavoriteResultsList();
             }
           }
