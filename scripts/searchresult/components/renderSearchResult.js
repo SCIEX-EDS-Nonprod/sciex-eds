@@ -3,10 +3,11 @@ import {
   handleResultClick,
 } from '../controller/controllers.js';
 import { i18n } from '../../translation.js';
+import getFavoriteResultsList from '../../favorite-all/favorite-all-controller/favorite-allDocController.js';
 
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
-
+let favoriteResultsList = await getFavoriteResultsList();
 const callFavoriteAPI = async (params) => {
   try {
     const query = new URLSearchParams(params).toString();
@@ -87,6 +88,10 @@ const renderSearchResults = () => {
       querySortSection.removeAttribute('style');
     }
     sortedResults.forEach((result) => {
+      const isFavorite = favoriteResultsList.some((fav) => fav.pageData.some(
+        (page) => page.path === result.printableUri,
+      ));
+
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
       const partNumber = result.raw.productpartnumber ? `${strings.partNumber} : ${result.raw.productpartnumber} | ` : '';
@@ -150,14 +155,19 @@ const renderSearchResults = () => {
                           stroke-linecap="round" stroke-linejoin="round"/>
                      </svg>
                   </span> 
-                  <img src="/icons/share.svg" alt="Share" class="share-icon" />
               </div>
               <a class="view-details-btn" target="_blank" href="${result.printableUri}">${strings.view}</a>
         </div>
         `;
 
+      // Paste the share icon above line 157
+      // <img src="/icons/share.svg" alt="Share" class="share-icon" />
+
       const favIcon = resultItem.querySelector('.favorite-icon');
 
+      if (isFavorite) {
+        favIcon.classList.add('favorited');
+      }
       favIcon.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -178,6 +188,8 @@ const renderSearchResults = () => {
             if (!res.success) {
               console.warn('Remove favorite failed:', res.status);
               favIcon.classList.add('favorited'); // rollback
+            } else {
+              favoriteResultsList = await getFavoriteResultsList();
             }
           } else {
             // Optimistic add
@@ -188,6 +200,8 @@ const renderSearchResults = () => {
             if (!res.success) {
               console.warn('Add favorite failed:', res.status);
               favIcon.classList.remove('favorited'); // rollback
+            } else {
+              favoriteResultsList = await getFavoriteResultsList();
             }
           }
         } finally {

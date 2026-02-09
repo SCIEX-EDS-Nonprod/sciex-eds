@@ -759,6 +759,9 @@
         width: 24px;
         height: 24px;
     }
+    .item-icons {
+        justify-content: start;
+    }
 }
 
 @media (max-width: 768px) {
