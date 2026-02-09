@@ -30,13 +30,13 @@ const CATEGORY_MAP = [
     key: 'regulatory',
     title: 'Regulatory documents',
     icon: 'regulatory',
-    match: (p) => p.includes('/regulatory'),
+    match: (p) => p.includes('/regulatory-docs/'),
   },
   {
     key: 'user-guides',
     title: 'User guides',
     icon: 'user-guides',
-    match: (p) => p.includes('/user-guide'),
+    match: (p) => p.includes('/customer-docs/'),
   },
 ];
 
