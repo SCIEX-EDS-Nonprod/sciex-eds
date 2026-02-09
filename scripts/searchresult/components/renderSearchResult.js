@@ -89,7 +89,7 @@ const renderSearchResults = () => {
     }
     sortedResults.forEach((result) => {
       let isFavorite = false
-      if (favoriteResultsList.some(fav => fav.pageData.some(page => page.title === result.title && page.path === result.printableUri))) {
+      if (favoriteResultsList.some(fav => fav.pageData.some(page =>page.path === result.printableUri))) {
         isFavorite = true
       }
       const regulatoryInfo = document.createElement('div');
