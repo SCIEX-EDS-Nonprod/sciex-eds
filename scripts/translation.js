@@ -32,6 +32,7 @@ export const i18n = {
     trainingTopic: 'Training topic',
     techniques: 'Techniques',
     trainingType: 'Training type',
+    trainingCourseType: 'Training course type',
     level: 'Level',
     certificateType: 'Certificate type',
     newCourses: 'New courses',

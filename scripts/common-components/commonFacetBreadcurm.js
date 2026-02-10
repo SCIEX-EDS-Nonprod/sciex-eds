@@ -105,6 +105,7 @@ const renderCommonFacetBreadcurm = (facetBreadcrumbsController) => {
     techniquescategories: strings.techniques,
     trainingtopiccategories: strings.trainingTopic,
     trainingtypecategories: strings.trainingType,
+    trainingcoursetype: strings.trainingCourseType,
     assettypes: strings.assetType,
     instrumentfamily: strings.instrumentFamily,
     languagecountry: strings.languageCountry,
