@@ -69,6 +69,7 @@ function createFacetController() {
     'trainingtopiccategories',
     'techniquescategories',
     'trainingtypecategories',
+    'trainingcoursetype',
     'levelcategories',
     'certificatetypecategories',
     'massspectrometerscategories',

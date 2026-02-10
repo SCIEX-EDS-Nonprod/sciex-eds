@@ -8,7 +8,6 @@ const strings = i18n[lang] || i18n.en;
 function facetAccordion(values, facetElement, facetItemsContainer) {
   if (values.length !== 0) {
     facetElement.appendChild(facetItemsContainer);
-
     const facetHeader = facetElement.querySelector(".facet-header");
     facetHeader.setAttribute("aria-expanded", "false");
 
@@ -378,6 +377,7 @@ function orderFacetBasedOnSelection(selectedValue) {
       'trainingtopiccategories-facet',
       'techniquescategories-facet',
       'trainingtypecategories-facet',
+      'trainingcoursetype-facet',
       'levelcategories-facet',
       'certificatetypecategories-facet',
       'language-facet',
@@ -496,6 +496,7 @@ export function callCreateFacet() {
     'techniquescategories': strings.techniques,
     'trainingtopiccategories': strings.trainingTopic,
     'trainingtypecategories': strings.trainingType,
+    'trainingcoursetype': strings.trainingCourseType,
     'assettypes': strings.assetType,
     'languagecountry': strings.languageCountry,
     'year': strings.year,
