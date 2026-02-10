@@ -231,7 +231,9 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = path;
-
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        
         a.textContent =
           (title && title.trim()) || decodeTitleFromPath(path);
 
