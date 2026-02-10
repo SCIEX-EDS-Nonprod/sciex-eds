@@ -115,10 +115,10 @@ const renderSearchResults = () => {
     }
     sortedResults.forEach((result) => {
       const isFavorite = isUserLoggedIn
-  ? favoriteResultsList.some((fav) =>
-      fav.pageData.some((page) => page.path === result.printableUri)
-    )
-  : false;
+        ? favoriteResultsList.some((fav) => fav.pageData.some(
+          (page) => page.path === result.printableUri,
+        ))
+        : false;
 
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
@@ -212,22 +212,22 @@ const renderSearchResults = () => {
         if (isFavorite) {
           favIcon.classList.add('favorited');
         }
-      
+
         favIcon.addEventListener('click', async (e) => {
           e.preventDefault();
           e.stopPropagation();
-      
+
           if (favIcon.classList.contains('is-loading')) return;
           favIcon.classList.add('is-loading');
-      
+
           const pageUrl = result.printableUri;
           const isFavorited = favIcon.classList.contains('favorited');
-      
+
           try {
             if (isFavorited) {
               favIcon.classList.remove('favorited');
               const res = await removeToFavorite(pageUrl);
-      
+
               if (!res.success) {
                 favIcon.classList.add('favorited');
               } else {
@@ -236,7 +236,7 @@ const renderSearchResults = () => {
             } else {
               favIcon.classList.add('favorited');
               const res = await addToFavorite(pageUrl);
-      
+
               if (!res.success) {
                 favIcon.classList.remove('favorited');
               } else {
