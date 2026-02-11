@@ -106,11 +106,13 @@ async function readBlockProperties(block) {
    RENDER HELPERS
 ====================================================== */
 async function renderUi() {
-  const list = window.favoriteResultsList || [];
+  let list = window.favoriteResultsList || [];
 const hasPageData = list.some(item => item.pageData?.length > 0);
+  const noResultsElement = document.getElementById('coveo-no-results');
 
   if (!hasPageData) {
     list = [];
+     noResultsElement.style.display = 'block';
   }
   renderfavoriteSearchResultList(list,renderUi);
   renderCommonFacet(list, toggleAssetType, toggleTag);
