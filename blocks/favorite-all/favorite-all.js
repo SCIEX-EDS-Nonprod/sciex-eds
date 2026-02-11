@@ -108,7 +108,7 @@ async function readBlockProperties(block) {
 async function renderUi() {
   const list = window.favoriteResultsList || [];
 
-  renderfavoriteSearchResultList(list);
+  renderfavoriteSearchResultList(list,renderUi);
   renderCommonFacet(list, toggleAssetType, toggleTag);
   renderFavoriteQuerySummary(list);
   renderFavoriteFacetBreadcrumb(

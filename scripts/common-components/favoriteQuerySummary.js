@@ -88,7 +88,7 @@ const renderFavoriteQuerySummary = (data = []) => {
   const resultItem = document.createElement('div');
   resultItem.innerHTML = `
     ${strings.result}
-    <span>1 - ${displayResultCount}</span>
+   <span>${displayResultCount === 0 ? 0 : 1} - ${displayResultCount}</span>
     ${strings.of}
     <span>${totalResultCount}</span>
   `;

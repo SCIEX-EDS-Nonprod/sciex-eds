@@ -85,11 +85,12 @@ function renderSortingDropdown(rerenderCallback) {
    MAIN RENDER FUNCTION
 ====================================================== */
 const renderfavoriteSearchResultList = (
-  data
+  data,
+  renderUi
 ) => {
 console.log('renderuiii',data)
   renderSortingDropdown(() =>
-    renderfavoriteSearchResultList(data)
+    renderfavoriteSearchResultList(data,renderUi)
   );
 
   const noResults = document.getElementById('coveo-no-results');
@@ -242,13 +243,8 @@ console.log('renderuiii',data)
                   );
                 }
               });
+              renderUi()           
 
-              const cleanedData = data.filter(
-                asset => asset.pageData && asset.pageData.length > 0
-              );
-
-              renderfavoriteSearchResultList(cleanedData);
-              renderFavoriteQuerySummary(cleanedData);
             }
           } catch (e) {
             console.error(e);
