@@ -75,9 +75,8 @@ export function renderCommonFacet(
   facetsContainer.innerHTML = '';
   const facetId=document.getElementById('facets')
   const querySortSection = document.getElementById('query-sort-section');
-  const hasPageResults = data?.some(item => item.pageData?.length > 0);
 
-  if (!data?.length || !hasPageResults) {
+  if (!data || data.length === 0) {
     if (facetId) {
       facetId.style.display = 'none';
     }

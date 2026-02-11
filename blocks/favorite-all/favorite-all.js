@@ -107,7 +107,11 @@ async function readBlockProperties(block) {
 ====================================================== */
 async function renderUi() {
   const list = window.favoriteResultsList || [];
+const hasPageData = list.some(item => item.pageData?.length > 0);
 
+  if (!hasPageData) {
+    list = [];
+  }
   renderfavoriteSearchResultList(list,renderUi);
   renderCommonFacet(list, toggleAssetType, toggleTag);
   renderFavoriteQuerySummary(list);
