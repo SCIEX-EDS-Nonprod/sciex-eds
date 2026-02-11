@@ -73,7 +73,16 @@ export function renderCommonFacet(
   }
 
   facetsContainer.innerHTML = '';
+  const facetId=document.getElementById('facets')
+  const querySortSection = document.getElementById('query-sort-section');
 
+  if (!data || data.length === 0) {
+    if (facetId) {
+      facetId.style.display = 'none';
+    }
+    querySortSection.classList.add("removeFilter");
+    return;
+  }
   const openIcon = `
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M2 11L8 5L14 11" stroke="#0068FA"/>
