@@ -10,7 +10,13 @@ const strings = i18n[lang] || i18n.en;
 let favoriteResultsList = [];
 
 const USER_API = '/bin/sciex/currentuserdetails';
-
+const favIconAllowedTags = [
+  "knowledge-base-articles",
+  "tech-notes",
+  "regulatory-docs",
+  "user-guide",
+  "training"
+];
 async function checkLoginStatus() {
   try {
     const userResp = await fetch(USER_API, { credentials: 'include' });
@@ -119,6 +125,8 @@ const renderSearchResults = () => {
           (page) => page.path === result.printableUri,
         ))
         : false;
+       const urlSplit = result.printableUri.split("/");
+       const isItemAllowed = urlSplit.some(segment => favIconAllowedTags.includes(segment));
 
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
@@ -176,7 +184,7 @@ const renderSearchResults = () => {
 }
         </div>
         <div class="action-section">
-  ${isUserLoggedIn ? `
+  ${isUserLoggedIn && isItemAllowed ? `
     <div class="item-icons">
           <span class="favorite-icon" aria-label="Favorite">
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 22">
