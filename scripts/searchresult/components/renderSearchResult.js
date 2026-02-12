@@ -35,7 +35,18 @@ async function checkLoginStatus() {
   }
 }
 
-// check once
+const getCleanPrintableUri = (uri) => {
+  try {
+    const decodedUri = uri.replace(/&amp;/gi, '&');
+
+    const url = new URL(decodedUri, window.location.origin);
+    url.searchParams.delete('course');
+    return url.origin + url.pathname + url.search + url.hash;
+  } catch (e) {
+    return uri.split('?')[0];
+  }
+};
+
 const isUserLoggedIn = await checkLoginStatus();
 
 if (isUserLoggedIn) {
@@ -162,6 +173,9 @@ const renderSearchResults = () => {
 
       const rating = result?.raw?.rating ?? 0;
       Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
+      const cleanPrintableUri = result.printableUri?.startsWith('https://training.sciex.com')
+      ? getCleanPrintableUri(result.printableUri)
+      : result.printableUri;
 
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
@@ -197,7 +211,7 @@ const renderSearchResults = () => {
     </div>
   ` : ''}
   <a class="view-details-btn" target="_blank"
-     href="${result.printableUri}">
+     href="${cleanPrintableUri}">
      ${strings.view}
   </a>
 </div>
@@ -208,13 +222,12 @@ const renderSearchResults = () => {
       // <img src="/icons/share.svg" alt="Share" class="share-icon" />
 
       const favIcon = resultItem.querySelector('.favorite-icon');
-
       if (isUserLoggedIn && favIcon) {
       
         if (isFavorite) {
           favIcon.classList.add('favorited');
         }
-
+        
         favIcon.addEventListener('click', async (e) => {
           e.preventDefault();
           e.stopPropagation();
