@@ -14,9 +14,10 @@ const favIconAllowedTags = [
   "knowledge-base-articles",
   "tech-notes",
   "regulatory-docs",
-  "user-guide",
   "training",
-  "training.sciex.com"
+  "training.sciex.com",
+  "customer-docs",
+  "eula"
 ];
 async function checkLoginStatus() {
   try {
@@ -185,7 +186,7 @@ const renderSearchResults = () => {
 }
         </div>
         <div class="action-section">
-  ${isUserLoggedIn && isItemAllowed ? `
+  ${!isUserLoggedIn && isItemAllowed ? `
     <div class="item-icons">
           <span class="favorite-icon" aria-label="Favorite">
                     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 22">
