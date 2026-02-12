@@ -212,7 +212,6 @@ const renderSearchResults = () => {
       // <img src="/icons/share.svg" alt="Share" class="share-icon" />
 
       const favIcon = resultItem.querySelector('.favorite-icon');
-      console.log('Toggling favorite for:', result);
       if (isUserLoggedIn && favIcon) {
       
         if (isFavorite) {
