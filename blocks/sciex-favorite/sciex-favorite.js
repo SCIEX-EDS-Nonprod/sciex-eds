@@ -12,13 +12,13 @@ const CATEGORY_MAP = [
     key: 'self-paced',
     title: 'Self paced learning',
     icon: 'self-paced',
-    match: (p) => p.includes('/sciexhow/') || p.includes('/Hidden/sciexhow/'),
+    match: (p) => p?.startsWith('https://training.sciex.com'),
   },
   {
     key: 'instructor',
     title: 'Instructor led training',
     icon: 'instructor',
-    match: (p) => p.includes('/instructor'),
+    match: (p) => p.includes('/support/training'),
   },
   {
     key: 'tech-notes',
