@@ -3,8 +3,9 @@ import {
   removeFavoriteSearchEngine
 } from '../favorite-all/favorite-allDocEngine.js';
 import { i18n } from '../translation.js';
-import renderFavoriteQuerySummary from './favoriteQuerySummary.js';
-
+import renderFavoritePagination, {
+  getCurrentPage
+} from './favoritePagination.js';
 const lang = document.documentElement.lang || 'en';
 const strings = i18n[lang] || i18n.en;
 
@@ -167,7 +168,11 @@ console.log('renderuiii',data)
   /* ========================
      LIMIT TO 10 RESULTS
   ======================== */
-  const visibleResults = filteredResults.slice(0, MAX_RESULTS);
+  const currentPage = getCurrentPage();
+const startIndex = (currentPage - 1) * MAX_RESULTS;
+const endIndex = startIndex + MAX_RESULTS;
+const visibleResults = filteredResults.slice(startIndex, endIndex);
+renderFavoritePagination(filteredResults.length,renderUi,data);
 
   /* ========================
      RENDER RESULTS
@@ -184,7 +189,7 @@ console.log('renderuiii',data)
         ? result.relatedProducts
             .filter(Boolean)
             .map(product =>
-              `<a href=${product.href} class="related-product-link">${product.title}</a>`
+              `<a href=${product.href || '#'} class="related-product-link">${product.title}</a>`
             )
             .join(' <span class="pipe-separator">|</span> ')
         : '';
