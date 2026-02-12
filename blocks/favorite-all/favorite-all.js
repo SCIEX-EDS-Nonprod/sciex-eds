@@ -109,11 +109,9 @@ async function readBlockProperties(block) {
 async function renderUi() {
   let list = window.favoriteResultsList || [];
 const hasPageData = list.some(item => item.pageData?.length > 0);
-  const noResultsElement = document.getElementById('coveo-no-results');
 
   if (!hasPageData) {
     list = [];
-     noResultsElement.style.display = 'block';
   }
   resetPagination();
   renderfavoriteSearchResultList(list,renderUi);
