@@ -125,7 +125,6 @@ const renderSearchResults = () => {
       querySortSection.removeAttribute('style');
     }
     sortedResults.forEach((result) => {
-      console.log('Rendering results raw.coursetypecategories:', result.raw.coursetypecategories);
       const isFavorite = isUserLoggedIn
         ? favoriteResultsList.some((fav) => fav.pageData.some(
           (page) => page.path === result.printableUri,
