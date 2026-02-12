@@ -28,10 +28,10 @@
 .favorites-logged-out {
     background: var(--White-0, #FFF);
     margin-top: 24px;
-    margin-left: 50px;
+    /* margin-left: 50px; */
     border-radius: 6px;
     display: flex;
-    width: 1320px;
+    width: 100%;
     padding: 28px 0px;
     flex-direction: column;
     justify-content: center;
@@ -503,6 +503,12 @@
 
     .resource-hub-button {
         margin: 20px auto;
+    }
+    .favorites-logged-out .cta-row{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center
     }
 
 }
