@@ -8,6 +8,7 @@ import renderFavoriteQuerySummary from '../../scripts/common-components/favorite
 import renderFavoriteFacetBreadcrumb from '../../scripts/common-components/favoriteFacetBreadcrumb.js';
 import initializefavoriteSearchInterface from '../../scripts/common-components/favoriteResourceUi.js';
 import { renderLoggedOut } from '../../scripts/favorite-all/favorite-all-controller/sortiingUtils.js';
+import { resetPagination } from '../../scripts/common-components/favoritePagination.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
 
@@ -108,12 +109,11 @@ async function readBlockProperties(block) {
 async function renderUi() {
   let list = window.favoriteResultsList || [];
 const hasPageData = list.some(item => item.pageData?.length > 0);
-  const noResultsElement = document.getElementById('coveo-no-results');
 
   if (!hasPageData) {
     list = [];
-     noResultsElement.style.display = 'block';
   }
+  resetPagination();
   renderfavoriteSearchResultList(list,renderUi);
   renderCommonFacet(list, toggleAssetType, toggleTag);
   renderFavoriteQuerySummary(list);
@@ -141,7 +141,7 @@ function toggleAssetType(asset) {
 
   if (!wasSelected) {
     // apply already-selected tags to newly selected asset
-    favoriteResultsList.forEach(a => {
+    window.favoriteResultsList.forEach(a => {
       if (a === asset) return;
 
       a.tags?.forEach(group => {

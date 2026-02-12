@@ -14,9 +14,10 @@ const favIconAllowedTags = [
   "knowledge-base-articles",
   "tech-notes",
   "regulatory-docs",
-  "user-guide",
   "training",
-  "training.sciex.com"
+  "training.sciex.com",
+  "customer-docs",
+  "eula"
 ];
 async function checkLoginStatus() {
   try {
