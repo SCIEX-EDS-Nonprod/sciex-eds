@@ -1,4 +1,3 @@
-import renderfavoriteSearchResultList from './favoriteSearchResultList.js';
 /* ======================================================
    PAGINATION STATE
 ====================================================== */
@@ -6,12 +5,21 @@ let currentPage = 1;
 const RESULTS_PER_PAGE = 10;
 
 /* ======================================================
-   RENDER FAVORITE PAGINATION (DATA-BASED)
+   PAGE CHANGE HANDLER
+====================================================== */
+const handlePageChange = (page, data, renderUi, renderList) => {
+  currentPage = page;
+  renderList(data, renderUi);
+};
+
+/* ======================================================
+   RENDER FAVORITE PAGINATION
 ====================================================== */
 const renderFavoritePagination = (
   totalResults,
   renderUi,
-  data
+  data,
+  renderfavoriteSearchResultList,
 ) => {
   const paginationElement = document.getElementById('pagination');
   if (!paginationElement) return;
@@ -20,7 +28,6 @@ const renderFavoritePagination = (
 
   const totalPages = Math.ceil(totalResults / RESULTS_PER_PAGE);
 
-  // Reset page if out of range
   if (currentPage > totalPages) {
     currentPage = 1;
   }
@@ -36,7 +43,7 @@ const renderFavoritePagination = (
 
 
     prevButton.onclick = () => {
-      currentPage--;
+      currentPage -= 1;
       renderfavoriteSearchResultList(data,renderUi)
     };
 
@@ -46,18 +53,18 @@ const renderFavoritePagination = (
   /* ========================
      PAGE NUMBERS
   ======================== */
-  for (let page = 1; page <= totalPages; page++) {
+  for (let page = 1; page <= totalPages; page += 1) {
     const pageButton = document.createElement('button');
-    pageButton.className =
-      'tw-w-10 tw-h-10 tw-bg-transparent tw-border tw-border-gray-300 tw-rounded-lg tw-text-black tw-p-2';
 
     pageButton.innerText = page;
     pageButton.disabled = page === currentPage;
 
-    pageButton.onclick = () => {
-    currentPage = page;
-    renderfavoriteSearchResultList(data,renderUi)
-    };
+    pageButton.onclick = () => handlePageChange(
+      page,
+      data,
+      renderUi,
+      renderfavoriteSearchResultList,
+    );
 
     paginationElement.appendChild(pageButton);
   }
@@ -71,8 +78,8 @@ const renderFavoritePagination = (
 
 
     nextButton.onclick = () => {
-    currentPage++;
-    renderfavoriteSearchResultList(data,renderUi)
+      currentPage += 1;
+      renderfavoriteSearchResultList(data, renderUi);
     };
 
     paginationElement.appendChild(nextButton);
@@ -84,11 +91,7 @@ const renderFavoritePagination = (
 ====================================================== */
 export const getCurrentPage = () => currentPage;
 
-/* ======================================================
-   RESET PAGE (WHEN FILTER CHANGES)
-====================================================== */
 export const resetPagination = () => {
-  
   currentPage = 1;
 };
 

@@ -172,7 +172,7 @@ console.log('renderuiii',data)
 const startIndex = (currentPage - 1) * MAX_RESULTS;
 const endIndex = startIndex + MAX_RESULTS;
 const visibleResults = filteredResults.slice(startIndex, endIndex);
-renderFavoritePagination(filteredResults.length,renderUi,data);
+renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSearchResultList);
 
   /* ========================
      RENDER RESULTS
