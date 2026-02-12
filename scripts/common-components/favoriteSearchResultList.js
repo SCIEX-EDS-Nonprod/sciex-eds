@@ -180,14 +180,14 @@ console.log('renderuiii',data)
       resultItem.className = 'result-item';
 
       const relatedProductsHtml = Array.isArray(result.relatedProducts)
-        ? result.relatedProducts
-            .filter(Boolean)
-            .map(product =>
-              `<a href=${product.href} class="related-product-link">${product.title}</a>`
-            )
-            .join(' <span class="pipe-separator">|</span> ')
-        : '';
-
+      ? result.relatedProducts
+          .filter(product => product?.href && product?.title)
+          .map(product =>
+            `<a href="${product.href}" class="related-product-link">${product.title}</a>`
+          )
+          .join(' <span class="pipe-separator">|</span> ')
+      : '';
+    
       resultItem.innerHTML = `
         <div class="item-details">
           <h3>${result.title || ''}</h3>
