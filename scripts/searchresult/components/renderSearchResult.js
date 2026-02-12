@@ -164,7 +164,9 @@ const renderSearchResults = () => {
 
       const rating = result?.raw?.rating ?? 0;
       Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
-      const cleanPrintableUri = getCleanPrintableUri(result.printableUri);
+      const cleanPrintableUri = result.printableUri?.startsWith('https://training.sciex.com')
+      ? getCleanPrintableUri(result.printableUri)
+      : result.printableUri;
 
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
