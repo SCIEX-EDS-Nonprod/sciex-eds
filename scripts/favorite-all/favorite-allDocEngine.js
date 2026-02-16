@@ -18,7 +18,7 @@ export const getfavoriteAllData = async () => {
 export const removeFavoriteSearchEngine = async (url) => {
   try {
     const response = await fetch(
-      `/bin/sciex/favoritecontent?url=${url}&operation=remove`,
+      `/bin/sciex/favoritecontent?url=${encodeURIComponent(url)}&operation=remove`,
     );
 
     if (!response.ok) {
