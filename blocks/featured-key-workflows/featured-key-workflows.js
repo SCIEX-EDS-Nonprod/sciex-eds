@@ -14,7 +14,7 @@ export default function decorate(block) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
     heading.textContent = headingText;
-    block.before(heading);
+    workflowContainer.appendChild(heading);
   }
 
   const grid = document.createElement('div');
@@ -56,8 +56,9 @@ export default function decorate(block) {
     card.appendChild(linksWrapper);
     grid.appendChild(card);
   }
+  workflowContainer.appendChild(grid);
 
   block.innerHTML = '';
-  block.appendChild(grid);
+  block.append(workflowContainer);
 }
 
