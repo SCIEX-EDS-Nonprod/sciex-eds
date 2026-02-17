@@ -9,18 +9,6 @@ const CATEGORY_MAP = [
     match: (p) => p.includes('/support/knowledge-base-articles/'),
   },
   {
-    key: 'self-paced',
-    title: 'Self paced learning',
-    icon: 'self-paced',
-    match: (p) => p?.startsWith('https://training.sciex.com'),
-  },
-  {
-    key: 'instructor',
-    title: 'Instructor led training',
-    icon: 'instructor',
-    match: (p) => p.includes('/support/training'),
-  },
-  {
     key: 'tech-notes',
     title: 'Tech notes',
     icon: 'tech-notes',
@@ -39,6 +27,29 @@ const CATEGORY_MAP = [
     match: (p) => p.includes('/customer-docs/'),
   },
 ];
+
+function getTrainingTypeFromUrl(path) {
+  try {
+    const urlObj = new URL(path, window.location.origin);
+    const courseType = urlObj.searchParams.get('courseType');
+
+    if (!courseType) return null;
+
+    const normalized = courseType.trim().toLowerCase();
+
+    if (normalized.includes('self') && normalized.includes('paced')) {
+      return 'self-paced';
+    }
+
+    if (normalized.includes('instructor') && normalized.includes('led')) {
+      return 'instructor';
+    }
+  } catch (e) {
+    console.warn('Invalid training URL:', path);
+  }
+
+  return null;
+}
 
 /**
  * Main initialization function for the Favorites accordion component.
@@ -166,19 +177,32 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
   const allowedTypes = getAllowedTypesFromURL();
   const buckets = {};
 
-  // Initialize known categories
-  CATEGORY_MAP.forEach((c) => {
-    buckets[c.key] = [];
-  });
+ // Initialize known categories
+CATEGORY_MAP.forEach((c) => {
+  buckets[c.key] = [];
+});
+
+// Initialize training categories explicitly
+buckets['self-paced'] = [];
+buckets['instructor'] = [];
 
   // Bucket full objects instead of just path strings
   items.forEach(({ path, title }) => {
+    // First check if it's training
+    const trainingType = getTrainingTypeFromUrl(path);
+    
+    if (trainingType && buckets[trainingType]) {
+      buckets[trainingType].push({ path, title });
+      return;
+    }
+  
+    // Otherwise use normal category matching
     const category = CATEGORY_MAP.find((c) => c.match(path));
     if (category) {
       buckets[category.key].push({ path, title });
     }
   });
-
+  
   const grid = document.createElement('div');
   grid.className = 'favorites-grid';
 
@@ -186,28 +210,34 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText) {
     grid.classList.add('single-column');
   }
 
-  // Types to render: from URL OR all categories
-  const typesToRender = allowedTypes || CATEGORY_MAP.map((c) => c.key);
-
+  const allTypes = [
+    ...CATEGORY_MAP.map((c) => c.key),
+    'self-paced',
+    'instructor',
+  ];
+  
+  const typesToRender = allowedTypes || allTypes;
+  
   typesToRender.forEach((typeKey) => {
     const categoryConfig = CATEGORY_MAP.find((c) => c.key === typeKey);
 
     let title;
     let icon;
-    let paths = [];
+    let paths = buckets[typeKey] || [];
 
     if (categoryConfig) {
       title = categoryConfig.title;
       icon = categoryConfig.icon;
-      paths = buckets[typeKey] || [];
+    }else if (typeKey === 'self-paced') {
+      title = 'Self-Paced Learning';
+      icon = 'self-paced';
+    } else if (typeKey === 'instructor') {
+      title = 'Instructor-Led Training';
+      icon = 'instructor';
     } else {
       title = humanizeType(typeKey);
       icon = 'empty';
-      paths = items
-        .filter((item) => item.path.includes(`/${typeKey}/`))
-        .map((item) => ({ path: item.path, title: item.title }));
     }
-
     const section = document.createElement('section');
     section.className = 'favorites-category';
 
