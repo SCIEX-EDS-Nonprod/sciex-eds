@@ -20,28 +20,30 @@ export default function decorate(block) {
     const card = document.createElement('div');
     card.className = 'workflow-card';
 
-    // Icon
-    const picture = columns[1].querySelector('picture');
-    const icon = document.createElement('div');
-    icon.className = 'workflow-card-icon';
-    icon.appendChild(picture);
-    card.appendChild(icon);
+    // Icon (safe access)
+    const picture = columns[1]?.querySelector('picture');
+    if (picture) {
+      const icon = document.createElement('div');
+      icon.className = 'workflow-card-icon';
+      icon.appendChild(picture);
+      card.appendChild(icon);
+    }
 
-    // Title
-    const title = columns[0].querySelector('p');
+    // Title (safe access)
+    const titleText = columns[0]?.querySelector('p')?.textContent?.trim() || '';
     const h3 = document.createElement('h3');
-    h3.textContent = title.textContent;
+    h3.textContent = titleText;
     card.appendChild(h3);
 
-    // Links
+    // Links (safe access)
     const linksWrapper = document.createElement('div');
     linksWrapper.className = 'workflow-card-links';
 
-    const links = columns[2].querySelectorAll('a');
-    links.forEach((a) => {
+    const links = columns[2]?.querySelectorAll('a') || [];
+    Array.from(links).forEach((a) => {
       const link = document.createElement('a');
-      link.href = a.href;
-      link.textContent = a.textContent;
+      link.href = a.href || '#';
+      link.textContent = a.textContent || '';
       link.className = 'workflow-card-link';
       linksWrapper.appendChild(link);
     });

@@ -1324,8 +1324,10 @@
     "fields": [
       {
         "component": "text",
+        "valueType": "string",
         "name": "title",
-        "label": "Title"
+        "label": "Title",
+        "value": ""
       }
     ]
   },
@@ -1334,13 +1336,17 @@
     "fields": [
       {
         "component": "text",
+        "valueType": "string",
         "name": "categoryName",
-        "label": "Category Name"
+        "label": "Category Name",
+        "value": ""
       },
       {
         "component": "reference",
+        "valueType": "string",
         "name": "image",
-        "label": "Image"
+        "label": "Image",
+        "multi": false
       },
       {
         "component": "richtext",
