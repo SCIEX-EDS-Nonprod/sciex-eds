@@ -25,7 +25,6 @@ export default function decorate(block) {
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
-    moveInstrumentation(row, card);
 
     // Icon
     const picture = columns[1].querySelector('picture');
@@ -54,6 +53,7 @@ export default function decorate(block) {
     });
 
     card.appendChild(linksWrapper);
+    moveInstrumentation(row, card);
     grid.appendChild(card);
   }
   workflowContainer.appendChild(grid);
