@@ -40,22 +40,19 @@
           "component": "text",
           "valueType": "string",
           "name": "workflowId",
-          "label": "Workflow ID",
-          "value": ""
+          "label": "Workflow ID"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "title",
-          "label": "Heading",
-          "value": ""
+          "label": "Heading"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "description",
-          "label": "Description",
-          "value": ""
+          "label": "Description"
         }
       ]
     },
@@ -66,8 +63,7 @@
           "component": "text",
           "valueType": "string",
           "name": "categoryName",
-          "label": "Category Name",
-          "value": ""
+          "label": "Category Name"
         },
         {
           "component": "reference",
@@ -78,15 +74,13 @@
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Image Alt Text",
-          "value": ""
+          "label": "Image Alt Text"
         },
         {
           "component": "richtext",
           "valueType": "string",
           "name": "links",
-          "label": "Workflow Links",
-          "value": ""
+          "label": "Workflow Links"
         }
       ]
     }
