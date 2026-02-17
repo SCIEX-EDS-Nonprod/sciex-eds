@@ -12,7 +12,11 @@ export default function decorate(block) {
   if (!rows.length) return;
 
   // ---- Heading (Row 0) ----
-  const headingText = rows[0]?.querySelector('p')?.textContent?.trim() || '';
+    const workflowId = rows[0]?.querySelector('p')?.textContent?.trim() || '';
+
+  const headingText = rows[1]?.querySelector('p')?.textContent?.trim() || '';
+  workflowContainer.id = workflowId;
+
 
   if (headingText) {
     const headingEl = document.createElement('h2');
