@@ -25,6 +25,7 @@ export default function decorate(block) {
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
+    moveInstrumentation(row, card);
 
     // Icon
     const picture = columns[1].querySelector('picture');
