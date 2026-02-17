@@ -1325,20 +1325,8 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "workflowId",
-        "label": "Workflow ID"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
         "name": "title",
-        "label": "Heading"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "description",
-        "label": "Description"
+        "label": "Title"
       }
     ]
   },
