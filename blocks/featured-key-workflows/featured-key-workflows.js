@@ -2,6 +2,11 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
+   const workflowContainer = document.createElement('div');
+  workflowContainer.className = 'workflow-container-block';
+
+  // Move instrumentation metadata
+  moveInstrumentation(block, workflowContainer);
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
@@ -14,7 +19,6 @@ export default function decorate(block) {
 
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
-  moveInstrumentation(block, grid);
   for (let i = 1; i < rows.length; i += 1) {
     const row = rows[i];
     const columns = row.children;
