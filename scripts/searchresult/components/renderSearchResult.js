@@ -41,6 +41,7 @@ const getCleanPrintableUri = (uri) => {
 
     const url = new URL(decodedUri, window.location.origin);
     url.searchParams.delete('course');
+    url.searchParams.delete('courseType');
     return url.origin + url.pathname + url.search + url.hash;
   } catch (e) {
     return uri.split('?')[0];
