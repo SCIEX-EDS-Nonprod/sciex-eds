@@ -1,82 +1,100 @@
 {
-    "definitions": [
-        {
-            "title": "Featured key workflows",
-            "id": "featured-key-workflows",
-            "plugins": {
-                "xwalk": {
-                    "page": {
-                        "resourceType": "core/franklin/components/block/v1/block",
-                        "template": {
-                            "name": "Featured key workflows",
-                            "model": "featured-key-workflows",
-                            "filter": "featured-key-workflows"
-                        }
-                    }
-                }
+  "definitions": [
+    {
+      "title": "Featured Key Workflows",
+      "id": "featured-key-workflows",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Featured Key Workflows",
+              "model": "featured-key-workflows",
+              "filter": "featured-key-workflows"
             }
+          }
+        }
+      }
+    },
+    {
+      "title": "Workflow Item",
+      "id": "workflow-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Workflow Item",
+              "model": "workflow-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "featured-key-workflows",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "workflowId",
+          "label": "Workflow ID",
+          "value": ""
         },
         {
-            "title": "Workflow Item",
-            "id": "workflow-item",
-            "plugins": {
-                "xwalk": {
-                    "page": {
-                        "resourceType": "core/franklin/components/block/v1/block/item",
-                        "template": {
-                            "name": "Workflow Item",
-                            "model": "workflow-item"
-                        }
-                    }
-                }
-            }
-        }
-    ],
-    "models": [
-        {
-            "id": "featured-key-workflows",
-            "fields": [
-                {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "title",
-                    "label": "Title",
-                    "value": ""
-                }
-            ]
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "label": "Heading",
+          "value": ""
         },
         {
-            "id": "workflow-item",
-            "fields": [
-                {
-                    "component": "text",
-                    "valueType": "string",
-                    "name": "categoryName",
-                    "label": "Category Name",
-                    "value": ""
-                },
-                {
-                    "component": "reference",
-                    "valueType": "string",
-                    "name": "image",
-                    "label": "Image",
-                    "multi": false
-                },
-                {
-                    "component": "richtext",
-                    "valueType": "string",
-                    "name": "enterTheLinks",
-                    "label": "Enter the links"
-                }
-            ]
+          "component": "text",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "value": ""
         }
-    ],
-    "filters": [
+      ]
+    },
+    {
+      "id": "workflow-item",
+      "fields": [
         {
-            "id": "featured-key-workflows",
-            "components": [
-                "workflow-item"
-            ]
+          "component": "text",
+          "valueType": "string",
+          "name": "categoryName",
+          "label": "Category Name",
+          "value": ""
+        },
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Image"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "links",
+          "label": "Workflow Links",
+          "value": ""
         }
-    ]
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "featured-key-workflows",
+      "components": ["workflow-item"]
+    }
+  ]
 }
