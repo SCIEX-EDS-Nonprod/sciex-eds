@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 
-import   getFavoriteResultsList from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
+import getFavoriteResultsList from '../../scripts/favorite-all/favorite-all-controller/favorite-allDocController.js';
 import { renderCommonFacet } from '../../scripts/common-components/favorite-all-facets.js';
 import renderfavoriteSearchResultList from '../../scripts/common-components/favoriteSearchResultList.js';
 import renderFavoriteQuerySummary from '../../scripts/common-components/favoriteQuerySummary.js';
@@ -203,10 +203,41 @@ export default async function decorate(block) {
 
     const data = await getFavoriteResultsList();
 
-    const favoriteResultsList = data.map(item => ({
-      ...item,
-      tags: item.tags.filter(tag => tag.key !== 'assetType')
-    }));
+    const favoriteResultsList = data.map(item => {
+      // 1️⃣ Find Asset Type tag using normalized key
+      const assetTypeTag = item.tags.find(tag => {
+        const normalizedKey = tag.key.replace(/\s+/g, '').toLowerCase(); // remove spaces, lowercase
+        return normalizedKey === 'assettype';
+      });
+
+      console.log('Asset Type Tag:', assetTypeTag);
+
+      const assetTypeIds = assetTypeTag
+        ? assetTypeTag.value.flatMap(v => v.value)
+        : [];
+      console.log('Asset Type IDs:', assetTypeIds);
+
+      // 2️⃣ Collect IDs from all other tags
+      const otherTagIds = item.tags
+        .filter(tag => {
+          const normalizedKey = tag.key.replace(/\s+/g, '').toLowerCase();
+          return normalizedKey !== 'assettype';
+        })
+        .flatMap(tag => tag.value.flatMap(v => v.value));
+
+      const otherTagIdSet = new Set(otherTagIds);
+
+      // 3️⃣ Remove pageData only if ID exists ONLY in Asset Type
+      const filteredPageData = item.pageData.filter(page =>
+        !assetTypeIds.includes(page.id) || otherTagIdSet.has(page.id)
+      );
+
+      return {
+        ...item,
+        pageData: filteredPageData,
+        tags: item.tags.filter(tag => tag.key.replace(/\s+/g, '').toLowerCase() !== 'assettype')
+      };
+    });
 
     window.favoriteResultsList = favoriteResultsList;
     renderUi();
