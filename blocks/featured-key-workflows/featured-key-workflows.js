@@ -2,16 +2,22 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 import { decorateIcons } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  const workflowContainer = document.createElement('div');
-  workflowContainer.className = 'workflow-container-block';
+  // Prevent double decoration
+  if (block.classList.contains('workflow-decorated')) return;
+  block.classList.add('workflow-decorated');
 
-  // Move instrumentation metadata
-  moveInstrumentation(block, workflowContainer);
+  const isAuthoring = window.location.search.includes('edit') ||
+                      window.location.search.includes('wcmmode');
 
   const rows = [...block.children];
   if (!rows.length) return;
 
-  // ---- Heading (Row 0) ----
+  const workflowContainer = document.createElement('div');
+  workflowContainer.className = 'workflow-container-block';
+
+  moveInstrumentation(block, workflowContainer);
+
+  // ---- Heading ----
   const headingText = rows[0]?.querySelector('p')?.textContent?.trim() || '';
 
   if (headingText) {
@@ -21,7 +27,7 @@ export default function decorate(block) {
     workflowContainer.appendChild(headingEl);
   }
 
-  // ---- Grid Wrapper ----
+  // ---- Grid ----
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
 
@@ -29,25 +35,24 @@ export default function decorate(block) {
 
   itemRows.forEach((row) => {
     const columns = [...row.children];
-    if (columns.length < 3) return; // Require category, image, links
+    if (columns.length < 3) return;
 
     const card = document.createElement('div');
     card.className = 'workflow-card';
 
     moveInstrumentation(row, card);
 
-    // ---- Title ----
+    // Title
     const titleText =
       columns[0]?.querySelector('p')?.textContent?.trim() || '';
 
     if (titleText) {
       const titleEl = document.createElement('h3');
-      titleEl.className = 'workflow-card-title';
       titleEl.textContent = titleText;
       card.appendChild(titleEl);
     }
 
-    // ---- Image/Icon ----
+    // Image
     const picture = columns[1]?.querySelector('picture');
     if (picture) {
       const iconWrapper = document.createElement('div');
@@ -56,7 +61,7 @@ export default function decorate(block) {
       card.appendChild(iconWrapper);
     }
 
-    // ---- Links ----
+    // Links
     const linksWrapper = document.createElement('div');
     linksWrapper.className = 'workflow-card-links';
 
@@ -66,12 +71,7 @@ export default function decorate(block) {
       linkEl.href = a.href;
       linkEl.textContent = a.textContent;
       linkEl.className = 'workflow-card-link';
-
-      // Preserve target if exists
-      if (a.target) {
-        linkEl.target = a.target;
-      }
-
+      if (a.target) linkEl.target = a.target;
       linksWrapper.appendChild(linkEl);
     });
 
@@ -86,7 +86,10 @@ export default function decorate(block) {
 
   decorateIcons(workflowContainer);
 
-  // Replace original block content
-  block.textContent = '';
-  block.append(workflowContainer);
+  // 🔥 KEY FIX:
+  // During authoring → do not destroy original structure
+  if (!isAuthoring) {
+    block.textContent = '';
+    block.append(workflowContainer);
+  }
 }
