@@ -2,7 +2,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
-   const workflowContainer = document.createElement('div');
+  const workflowContainer = document.createElement('div');
   workflowContainer.className = 'workflow-container-block';
 
   moveInstrumentation(block, workflowContainer);

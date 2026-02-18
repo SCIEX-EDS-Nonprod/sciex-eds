@@ -1348,7 +1348,8 @@
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Image Alt Text"
+        "label": "Image Alt Text",
+        "value": "workflow image"
       },
       {
         "component": "richtext",
