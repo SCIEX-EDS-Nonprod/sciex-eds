@@ -53,7 +53,7 @@ export default function decorate(block) {
 
     card.appendChild(linksWrapper);
     grid.appendChild(card);
-    // moveInstrumentation(row, card);
+    moveInstrumentation(row, card);
   }
   workflowContainer.appendChild(grid);
   block.innerHTML = '';
