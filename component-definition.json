@@ -587,6 +587,21 @@
           }
         },
         {
+          "title": "Hero Contact Image",
+          "id": "hero-contact-image",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Hero Contact Image",
+                  "model": "hero-contact-image"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Hero New",
           "id": "hero-new",
           "plugins": {

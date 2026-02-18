@@ -65,7 +65,8 @@
       "categories",
       "featured-key-workflows",
       "cta-with-text",
-      "favorite-all"
+      "favorite-all",
+      "hero-contact"
     ]
   },
   {
@@ -136,6 +137,12 @@
     "id": "header",
     "components": [
       "headerItem"
+    ]
+  },
+  {
+    "id": "hero-contact",
+    "components": [
+      "hero-contact-image"
     ]
   },
   {
