@@ -35,7 +35,17 @@ function sortResults(results) {
 
   return results; // relevancy
 }
+ const getCleanPrintableUri = (uri) => {
+  try {
+    const decodedUri = uri.replace(/&amp;/gi, '&');
 
+    const url = new URL(decodedUri, window.location.origin);
+    url.searchParams.delete('course');
+    return url.origin + url.pathname + url.search + url.hash;
+  } catch (e) {
+    return uri.split('?')[0];
+  }
+};
 /* ======================================================
    SORT DROPDOWN
 ====================================================== */
@@ -183,8 +193,10 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
 
     visibleResults.forEach(result => {
       const resultItem = document.createElement('div');
-      resultItem.className = 'result-item';
-
+      resultItem.className = 'result-item';     
+      const cleanPrintableUri = result.path?.startsWith('https://training.sciex.com')
+      ? getCleanPrintableUri(result?.path)
+      : result.path;
       const relatedProductsHtml = Array.isArray(result.relatedProducts)
       ? result.relatedProducts
           .filter(product => product?.href && product?.title)
@@ -222,7 +234,7 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
           <a
             class="view-details-btn"
             target="_blank"
-            href="${result.path || '#'}"
+            href="${cleanPrintableUri || '#'}"
           >
             ${strings.view} details
           </a>
