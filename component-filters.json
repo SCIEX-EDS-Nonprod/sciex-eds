@@ -139,12 +139,6 @@
     ]
   },
   {
-    "id": "featured-key-workflows",
-    "components": [
-      "workflow-item"
-    ]
-  },
-  {
     "id": "hero-small",
     "components": [
       "hero-image",

@@ -1493,46 +1493,6 @@
     ]
   },
   {
-    "id": "featured-key-workflows",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Title"
-      }
-    ]
-  },
-  {
-    "id": "workflow-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "categoryName",
-        "label": "Category Name"
-      },
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Image"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image Alt Text",
-        "value": "workflow image"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "enterTheLinks",
-        "label": "Enter the links"
-      }
-    ]
-  },
-  {
     "id": "hero-small",
     "fields": [
       {
