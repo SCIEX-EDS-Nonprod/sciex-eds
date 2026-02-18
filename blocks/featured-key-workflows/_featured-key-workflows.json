@@ -67,8 +67,8 @@
                 {
                     "component": "richtext",
                     "valueType": "string",
-                    "name": "links",
-                    "label": "Workflow Links"
+                    "name": "enterTheLinks",
+                    "label": "Enter the links"
                 }
             ]
         }
