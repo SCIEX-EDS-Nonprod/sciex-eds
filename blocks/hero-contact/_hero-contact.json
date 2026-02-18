@@ -15,22 +15,8 @@
           }
         }
       }
-    },
-    {
-      "title": "Hero Contact Image",
-      "id": "hero-contact-image",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "Hero Contact Image",
-              "model": "hero-contact-image"
-            }
-          }
-        }
-      }
     }
+    
   ],
   "models": [
     {
@@ -91,29 +77,9 @@
           ]
         }
       ]
-    },
-    {
-      "id": "hero-contact-image",
-      "fields": [
-        {
-          "component": "reference",
-          "name": "image",
-          "label": "Hero Image",
-          "multi": false
-        },
-        {
-          "component": "text",
-          "name": "imageAlt",
-          "label": "Image Alt Text",
-          "value": ""
-        }
-      ]
     }
   ],
   "filters": [
-    {
-      "id": "hero-contact",
-      "components": ["hero-contact-image"]
-    }
+    
   ]
 }

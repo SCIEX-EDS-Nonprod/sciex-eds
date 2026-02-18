@@ -1564,23 +1564,6 @@
     ]
   },
   {
-    "id": "hero-contact-image",
-    "fields": [
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Hero Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Image Alt Text",
-        "value": ""
-      }
-    ]
-  },
-  {
     "id": "hero-small",
     "fields": [
       {
