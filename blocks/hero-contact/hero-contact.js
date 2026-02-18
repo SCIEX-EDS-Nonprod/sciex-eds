@@ -6,15 +6,22 @@ export default function decorate(block) {
   const container = document.createElement('div');
   container.className = 'hero-contact-container';
 
+  // Move block level instrumentation
   moveInstrumentation(block, container);
 
   /* ---------------- IMAGE ---------------- */
-  const picture = rows[1]?.querySelector('picture');
+  const imageRow = rows[1];
+  const picture = imageRow?.querySelector('picture');
 
   if (picture) {
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'hero-contact-image';
+
     imageWrapper.appendChild(picture);
+
+    // Move instrumentation from image row
+    moveInstrumentation(imageRow, imageWrapper);
+
     container.appendChild(imageWrapper);
   }
 
@@ -25,20 +32,30 @@ export default function decorate(block) {
   const content = document.createElement('div');
   content.className = 'hero-contact-content';
 
-  // Heading
-  const heading = rows[0]?.querySelector('p')?.textContent?.trim();
+  /* -------- HEADING -------- */
+  const headingRow = rows[0];
+  const heading = headingRow?.querySelector('p')?.textContent?.trim();
+
   if (heading) {
     const h2 = document.createElement('h2');
     h2.textContent = heading;
+
+    moveInstrumentation(headingRow, h2);
+
     content.appendChild(h2);
   }
 
-  // Description
-  const description = rows[2]?.querySelector('p')?.textContent?.trim();
+  /* -------- DESCRIPTION -------- */
+  const descRow = rows[2];
+  const description = descRow?.querySelector('p')?.textContent?.trim();
+
   if (description) {
     const p = document.createElement('p');
     p.className = 'hero-contact-description';
     p.textContent = description;
+
+    moveInstrumentation(descRow, p);
+
     content.appendChild(p);
   }
 
@@ -47,8 +64,11 @@ export default function decorate(block) {
   btnWrapper.className = 'hero-contact-buttons';
 
   /* ===== PRIMARY BUTTON ===== */
-  const primaryText = rows[3]?.querySelector('p')?.textContent?.trim();
-  const primaryLinkElement = rows[4]?.querySelector('a');
+  const primaryTextRow = rows[3];
+  const primaryLinkRow = rows[4];
+
+  const primaryText = primaryTextRow?.querySelector('p')?.textContent?.trim();
+  const primaryLinkElement = primaryLinkRow?.querySelector('a');
 
   if (primaryText && primaryLinkElement) {
     const primaryBtn = document.createElement('a');
@@ -61,12 +81,19 @@ export default function decorate(block) {
       primaryBtn.rel = 'noopener noreferrer';
     }
 
+    // Move instrumentation from BOTH rows
+    moveInstrumentation(primaryTextRow, primaryBtn);
+    moveInstrumentation(primaryLinkRow, primaryBtn);
+
     btnWrapper.appendChild(primaryBtn);
   }
 
   /* ===== SECONDARY BUTTON ===== */
-  const secondaryText = rows[6]?.querySelector('p')?.textContent?.trim();
-  const secondaryLinkElement = rows[7]?.querySelector('a');
+  const secondaryTextRow = rows[6];
+  const secondaryLinkRow = rows[7];
+
+  const secondaryText = secondaryTextRow?.querySelector('p')?.textContent?.trim();
+  const secondaryLinkElement = secondaryLinkRow?.querySelector('a');
 
   if (secondaryText && secondaryLinkElement) {
     const secondaryBtn = document.createElement('a');
@@ -79,11 +106,16 @@ export default function decorate(block) {
       secondaryBtn.rel = 'noopener noreferrer';
     }
 
+    // Move instrumentation from BOTH rows
+    moveInstrumentation(secondaryTextRow, secondaryBtn);
+    moveInstrumentation(secondaryLinkRow, secondaryBtn);
+
     btnWrapper.appendChild(secondaryBtn);
   }
 
   content.appendChild(btnWrapper);
   overlay.appendChild(content);
+
   container.appendChild(overlay);
 
   block.innerHTML = '';
