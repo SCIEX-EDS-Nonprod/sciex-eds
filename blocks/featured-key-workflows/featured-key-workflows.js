@@ -55,8 +55,8 @@ export default function decorate(block) {
     grid.appendChild(card);
     // moveInstrumentation(row, card);
   }
-  // workflowContainer.appendChild(grid);
+  workflowContainer.appendChild(grid);
   block.innerHTML = '';
-  block.append(grid);
+  block.append(workflowContainer);
 }
 
