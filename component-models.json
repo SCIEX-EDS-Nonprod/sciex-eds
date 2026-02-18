@@ -1493,7 +1493,7 @@
     ]
   },
   {
-    "id": "contact-hero",
+    "id": "hero-contact",
     "fields": [
       {
         "component": "text",
@@ -1564,7 +1564,7 @@
     ]
   },
   {
-    "id": "contact-hero-image",
+    "id": "hero-contact-image",
     "fields": [
       {
         "component": "reference",

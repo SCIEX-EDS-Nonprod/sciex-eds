@@ -4,12 +4,12 @@ export default function decorate(block) {
   const rows = [...block.children];
 
   const container = document.createElement('div');
-  container.className = 'contact-hero-container';
+  container.className = 'hero-contact-container';
 
   moveInstrumentation(block, container);
 
   const content = document.createElement('div');
-  content.className = 'contact-hero-content';
+  content.className = 'hero-contact-content';
 
   // Heading
   const heading = rows[0]?.querySelector('p');
@@ -23,14 +23,14 @@ export default function decorate(block) {
   const desc = rows[1]?.querySelector('p');
   if (desc) {
     const p = document.createElement('p');
-    p.className = 'contact-hero-description';
+    p.className = 'hero-contact-description';
     p.textContent = desc.textContent;
     content.appendChild(p);
   }
 
   // Buttons wrapper
   const btnWrapper = document.createElement('div');
-  btnWrapper.className = 'contact-hero-buttons';
+  btnWrapper.className = 'hero-contact-buttons';
 
   // Primary button
   const primaryLink = rows[2]?.querySelector('a');
@@ -51,7 +51,7 @@ export default function decorate(block) {
   // Image
   const picture = block.querySelector('picture');
   const imageWrapper = document.createElement('div');
-  imageWrapper.className = 'contact-hero-image';
+  imageWrapper.className = 'hero-contact-image';
 
   if (picture) {
     imageWrapper.appendChild(picture);

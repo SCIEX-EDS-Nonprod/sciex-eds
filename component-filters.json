@@ -139,9 +139,9 @@
     ]
   },
   {
-    "id": "contact-hero",
+    "id": "hero-contact",
     "components": [
-      "contact-hero-image"
+      "hero-contact-image"
     ]
   },
   {
