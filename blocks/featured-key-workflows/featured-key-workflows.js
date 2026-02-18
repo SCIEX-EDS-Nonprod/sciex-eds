@@ -5,7 +5,6 @@ export default function decorate(block) {
    const workflowContainer = document.createElement('div');
   workflowContainer.className = 'workflow-container-block';
 
-  // Move instrumentation metadata
   moveInstrumentation(block, workflowContainer);
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
@@ -53,12 +52,11 @@ export default function decorate(block) {
     });
 
     card.appendChild(linksWrapper);
-    moveInstrumentation(row, card);
     grid.appendChild(card);
+    // moveInstrumentation(row, card);
   }
-  workflowContainer.appendChild(grid);
-
+  // workflowContainer.appendChild(grid);
   block.innerHTML = '';
-  block.append(workflowContainer);
+  block.append(grid);
 }
 
