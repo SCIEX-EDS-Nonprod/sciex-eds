@@ -1504,6 +1504,17 @@
     ]
   },
   {
+    "id": "hero-new",
+    "fields": [
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Heading",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "hero-small",
     "fields": [
       {
