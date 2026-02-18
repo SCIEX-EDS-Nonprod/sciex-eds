@@ -1,10 +1,11 @@
-import { } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
   const workflowContainer = document.createElement('div');
   workflowContainer.className = 'workflow-container-block';
 
+  moveInstrumentation(block, workflowContainer);
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
@@ -52,6 +53,7 @@ export default function decorate(block) {
 
     card.appendChild(linksWrapper);
     grid.appendChild(card);
+    moveInstrumentation(row, card);
   }
   workflowContainer.appendChild(grid);
   block.innerHTML = '';
