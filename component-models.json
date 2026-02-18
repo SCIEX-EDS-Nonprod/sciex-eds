@@ -1502,6 +1502,18 @@
         "value": ""
       },
       {
+        "component": "reference",
+        "name": "image",
+        "label": "Hero Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
         "component": "text",
         "name": "description",
         "label": "Description",
@@ -1560,34 +1572,6 @@
             "value": "_blank"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "hero-contact-image",
-    "fields": [
-      {
-        "component": "reference",
-        "name": "image",
-        "label": "Hero Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "name": "imageAlt",
-        "label": "Image Alt Text",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "hero-new",
-    "fields": [
-      {
-        "component": "text",
-        "name": "heading",
-        "label": "Heading",
-        "value": ""
       }
     ]
   },

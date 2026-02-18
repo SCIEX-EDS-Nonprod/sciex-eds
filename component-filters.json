@@ -140,12 +140,6 @@
     ]
   },
   {
-    "id": "hero-contact",
-    "components": [
-      "hero-contact-image"
-    ]
-  },
-  {
     "id": "hero-small",
     "components": [
       "hero-image",
