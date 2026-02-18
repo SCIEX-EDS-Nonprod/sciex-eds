@@ -17,15 +17,19 @@
 .featured-key-workflows-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid #ECECEC;
   border-left: 1px solid #ECECEC;
 }
 
 .workflow-card {
   padding: 30px;
+  border-top: none;
   border-right: 1px solid #ECECEC;
   border-bottom: 1px solid #ECECEC;
   transition: background-color 0.3s ease;
+}
+
+.workflow-card:nth-child(-n+3) {
+  border-top: 1px solid #ECECEC;
 }
 
 .workflow-card h3 {
@@ -84,6 +88,12 @@
   .featured-key-workflows-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+   .workflow-card:nth-child(-n+3) {
+    border-top: none;
+  }
+  .workflow-card:nth-child(-n+2) {
+    border-top: 1px solid #ECECEC ;
+  }
 
   .featured-key-workflows-wrapper {
     margin-top: 32px !important;
@@ -94,6 +104,12 @@
 @media (max-width: 767px) {
   .featured-key-workflows-grid {
     grid-template-columns: 1fr;
+  }
+   .workflow-card:nth-child(-n+2) {
+    border-top: none;
+  }
+  .workflow-card:nth-child(-n+1) {
+     border-top: 1px solid #ECECEC;
   }
 
   .featured-key-workflows-title {

@@ -1,5 +1,11 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default function decorate(block) {
   const rows = [...block.children];
+  const workflowContainer = document.createElement('div');
+  workflowContainer.className = 'workflow-container-block';
+
+  moveInstrumentation(block, workflowContainer);
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
 
@@ -7,12 +13,11 @@ export default function decorate(block) {
     const heading = document.createElement('h2');
     heading.className = 'featured-key-workflows-title';
     heading.textContent = headingText;
-    block.before(heading);
+    workflowContainer.appendChild(heading);
   }
 
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
-
   for (let i = 1; i < rows.length; i += 1) {
     const row = rows[i];
     const columns = row.children;
@@ -48,8 +53,10 @@ export default function decorate(block) {
 
     card.appendChild(linksWrapper);
     grid.appendChild(card);
+    moveInstrumentation(row, card);
   }
-
+  workflowContainer.appendChild(grid);
   block.innerHTML = '';
-  block.appendChild(grid);
+  block.append(workflowContainer);
 }
+
