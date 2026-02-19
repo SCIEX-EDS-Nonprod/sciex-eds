@@ -12,8 +12,8 @@ import { resetPagination } from '../../scripts/common-components/favoritePaginat
 
 const USER_API = '/bin/sciex/currentuserdetails';
 
-const LOGIN_URL = '/login';
-const CREATE_ACCOUNT_URL = '/register';
+const LOGIN_URL = '/bin/sciex/login';
+const CREATE_ACCOUNT_URL = '/support/create-account';
 
 const LOGOUT_TEXT =
   'Please log in or create an account to view and manage your favorites.';
