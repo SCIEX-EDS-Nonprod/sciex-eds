@@ -88,12 +88,10 @@
           "value": ""
         },
         {
-"component": "hidden",
+          "component": "text",
           "name": "buttonText",
           "label": "Primary Button Text",
-          "value": "vva",
-          "visible":false
-          
+          "value": ""
         },
         {
           "component": "aem-content",
@@ -204,7 +202,7 @@
           "valueType": "boolean",
           "value": false,
           "description": "Enabling this option will show the hero contact design."
-
+          
         }
       ]
     },

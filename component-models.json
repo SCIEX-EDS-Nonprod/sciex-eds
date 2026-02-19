@@ -1600,11 +1600,10 @@
         "value": ""
       },
       {
-        "component": "hidden",
+        "component": "text",
         "name": "buttonText",
         "label": "Primary Button Text",
-        "value": "vva",
-        "visible": false
+        "value": ""
       },
       {
         "component": "aem-content",
