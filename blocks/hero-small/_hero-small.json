@@ -88,10 +88,10 @@
           "value": ""
         },
         {
-          "component": "text",
+"component": "hidden",
           "name": "buttonText",
           "label": "Primary Button Text",
-          "value": "vv",
+          "value": "vva",
           "visible":false
           
         },
