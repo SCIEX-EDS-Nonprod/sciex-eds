@@ -44,24 +44,38 @@ function preserveOriginalAuthoring(block) {
 }
 
 function buildHeroContent(data) {
-  const content = document.createElement('div');
-  content.className = 'hero-content';
 
-  // Tagline + badge
+  // Helper to apply correct class
+  const applyClass = (baseClass) =>{
+     const isContactHero =
+      data.mediaDivChildren[1]
+        ?.querySelector('p')
+        ?.textContent
+        ?.trim() === 'true';
+    return isContactHero ? `contact-${baseClass}` : baseClass;
+  }
+
+    
+
+  const content = document.createElement('div');
+  content.className = applyClass('hero-content');
+
+  // Tagline + Badge
   if (data.tagline) {
     const taglineWrap = document.createElement('div');
-    taglineWrap.className = 'hero-tagline-wrap';
+    taglineWrap.className = applyClass('hero-tagline-wrap');
 
     if (data.badgePicture) {
       const badgeWrap = document.createElement('div');
-      badgeWrap.className = 'hero-badge';
+      badgeWrap.className = applyClass('hero-badge');
       badgeWrap.append(data.badgePicture);
       taglineWrap.append(badgeWrap);
     }
 
     const tagline = document.createElement('p');
-    tagline.className = 'hero-tagline';
+    tagline.className = applyClass('hero-tagline');
     tagline.textContent = data.tagline;
+
     taglineWrap.append(tagline);
     content.append(taglineWrap);
   }
@@ -69,7 +83,7 @@ function buildHeroContent(data) {
   // Heading
   if (data.heading) {
     const heading = document.createElement('h2');
-    heading.className = 'hero-heading-hero';
+    heading.className = applyClass('hero-heading-hero');
     heading.textContent = data.heading;
     content.append(heading);
   }
@@ -77,7 +91,7 @@ function buildHeroContent(data) {
   // Description
   if (data.description) {
     const desc = document.createElement('p');
-    desc.className = 'hero-description';
+    desc.className = applyClass('hero-description');
     desc.textContent = data.description;
     content.append(desc);
   }
@@ -85,18 +99,24 @@ function buildHeroContent(data) {
   // Buttons
   if (data.buttonDataList.length) {
     const buttons = document.createElement('div');
-    buttons.className = 'hero-buttons';
+    buttons.className = applyClass('hero-buttons');
 
-    const buttonClasses = ['button primary', 'button secondary', 'button link'];
+    const buttonClasses = [
+      'button primary',
+      'button secondary',
+      'button link',
+    ];
 
     data.buttonDataList.forEach((btn, index) => {
       const buttonEl = document.createElement('a');
       buttonEl.href = btn.link;
       buttonEl.target = btn.target;
-      buttonEl.className = buttonClasses[index] || 'button link';
+      buttonEl.className =
+        buttonClasses[index] || 'button link';
 
       const labelSpan = document.createElement('span');
       labelSpan.textContent = btn.label;
+
       buttonEl.append(labelSpan);
       buttonEl.append(span({ class: 'icon icon-arrow' }));
 
@@ -109,6 +129,7 @@ function buildHeroContent(data) {
 
   return content;
 }
+
 
 function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent) {
   if (data.colourPicture) {
@@ -149,12 +170,24 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
     heroWrapper.append(heroContent);
   } else if (data.mainPicture) {
     const imgSrc = data.mainPicture.querySelector('img')?.src;
+    const isContactHero =
+      data.mediaDivChildren[1]
+        ?.querySelector('p')
+        ?.textContent
+        ?.trim() === 'true';
+
     if (imgSrc) {
-      heroContainer.style.backgroundImage = `url('${imgSrc}')`;
-      heroContainer.classList.add('hero-has-bg');
+      if (isContactHero) {
+        heroContainer.classList.add('contact-hero-has-bg');
+      } else {
+        heroContainer.style.backgroundImage = `url('${imgSrc}')`;
+        heroContainer.classList.add('hero-has-bg');
+      }
     }
+
     heroWrapper.append(heroContent);
-  } else {
+  }
+ else {
     heroWrapper.append(heroContent);
   }
 }
