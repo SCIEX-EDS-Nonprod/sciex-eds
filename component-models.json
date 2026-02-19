@@ -1712,10 +1712,10 @@
         "valueType": "string",
         "name": "imageAltText",
         "label": "Alt text",
-        "value": "aa"
+        "value": "aab"
       },
       {
-        "component": "checkbox",
+        "component": "boolean",
         "name": "isHeroContact",
         "label": "Enable Hero Contact",
         "valueType": "boolean",
