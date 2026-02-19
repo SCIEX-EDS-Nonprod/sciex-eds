@@ -68,7 +68,7 @@ export default function decorate(block) {
       arrow.innerHTML = arrowIconHTML;
       card.append(arrow);
     }
-
+    moveInstrumentation(row, card);
     grid.append(card);
   });
 
