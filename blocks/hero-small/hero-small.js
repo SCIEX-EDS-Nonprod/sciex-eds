@@ -4,7 +4,7 @@ import { decorateIcons } from '../../scripts/aem.js';
 function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
   const clonedCells = cells.map((cell) => cell.cloneNode(true));
-
+console.log("clonedCells12",clonedCells)
   const data = {
     heading: clonedCells[1]?.innerText.trim(),
     description: clonedCells[2]?.innerText.trim(),

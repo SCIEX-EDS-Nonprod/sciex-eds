@@ -1708,13 +1708,6 @@
         "multi": false
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAltText",
-        "label": "Alt text",
-        "value": "aab"
-      },
-      {
         "component": "boolean",
         "name": "isHeroContact",
         "label": "Enable Hero Contact",
