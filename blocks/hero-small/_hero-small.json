@@ -269,7 +269,12 @@
     {
       "id": "contact-hero",
       "fields": [
-        { "component": "reference", "name": "image", "label": "Background Image" }
+        { 
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Background Image"
+        }
       ]
     }
   ],

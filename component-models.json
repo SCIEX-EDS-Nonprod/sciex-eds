@@ -1768,6 +1768,7 @@
     "fields": [
       {
         "component": "reference",
+        "valueType": "string",
         "name": "image",
         "label": "Background Image"
       }
