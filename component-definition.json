@@ -647,6 +647,21 @@
           }
         },
         {
+          "title": "Contact Hero",
+          "id": "contact-hero",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "contact-hero",
+                  "model": "contact-hero"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Icon Card",
           "id": "icon-card",
           "plugins": {

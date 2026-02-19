@@ -60,6 +60,21 @@
           }
         }
       }
+    },
+    {
+      "title": "Contact Hero",
+      "id": "contact-hero",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "contact-hero",
+              "model": "contact-hero"
+            }
+          }
+        }
+      }
     }
   ],
   "models": [
@@ -99,12 +114,12 @@
             "label": "primary Button Url",
             "value": ""
           },
-          {
-            "component": "radio-group",
+        {
+          "component": "radio-group",
             "label": "option To Select primary button url",
             "name": "OpentionToSelectPrimary",
             "valueType": "string",
-            "options": [
+          "options": [
               {
                 "name": "Open In Same Tab",
                 "value": "_self"
@@ -167,7 +182,7 @@
                 "name": "Open In New Tab",
                 "value": "_blank"
               }
-            ]
+          ]
           },
         {
           "component": "text",
@@ -250,6 +265,12 @@
           "multi": false
         }
       ]
+    },
+    {
+      "id": "contact-hero",
+      "fields": [
+        { "component": "reference", "name": "image", "label": "Background Image" }
+      ]
     }
   ],
   "filters": [
@@ -258,7 +279,8 @@
       "components": [
         "hero-image",
         "colour",
-        "video"
+        "video",
+        "contact-hero"
       ]
     }
   ]

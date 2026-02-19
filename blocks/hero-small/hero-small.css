@@ -3,6 +3,61 @@
   margin: 0 !important;
   padding: 0px !important;
 }
+/* CONTACT VARIANT */
+.hero-small-wrapper .hero-contact-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-small-wrapper .hero-contact-image img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+.hero-small-wrapper .hero-contact-overlay {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 75%;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-small-wrapper .hero-contact-content h2 {
+  font-size: 42px;
+  font-weight: 600;
+  color: #222;
+}
+
+.hero-small-wrapper .hero-contact-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.hero-small-wrapper .hero-contact-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.hero-small-wrapper .primary-btn {
+  background-color: #005eb8;
+  color: #fff;
+  padding: 12px 26px;
+  border-radius: 4px;
+}
+
+.hero-small-wrapper .secondary-btn {
+  border: 1px solid #005eb8;
+  color: #005eb8;
+  padding: 12px 26px;
+  border-radius: 4px;
+  background: transparent;
+}
 
 
 .hero-small-wrapper .herosmallclass {
