@@ -60,130 +60,115 @@
           }
         }
       }
-    },
-    {
-      "title": "Contact Hero",
-      "id": "contact-hero",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "name": "contact-hero",
-              "model": "contact-hero"
-            }
-          }
-        }
-      }
     }
   ],
   "models": [
     {
       "id": "hero-small",
       "fields": [
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "heroSmallId",
-            "label": "Hero Small Id",
-            "value": ""
-          },
-          {
-              "component": "text",
-              "valueType": "string",
-              "name": "heading",
-              "label": "Heading",
-              "value": ""
-          },
-          {
-            "component": "text",
-            "valueType": "string",
-            "name": "description",
-            "label": "Description",
-            "value": ""
-          },
-          {
-            "component": "text",
-            "name": "buttonText",
-            "label": "Primary Button Text",
-            "value": ""
-          },
-          {
-            "component": "aem-content",
-            "name": "buttonUrl",
-            "label": "primary Button Url",
-            "value": ""
-          },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "heroSmallId",
+          "label": "Hero Small Id",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "heading",
+          "label": "Heading",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "name": "buttonText",
+          "label": "Primary Button Text",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "buttonUrl",
+          "label": "primary Button Url",
+          "value": ""
+        },
         {
           "component": "radio-group",
-            "label": "option To Select primary button url",
-            "name": "OpentionToSelectPrimary",
-            "valueType": "string",
+          "label": "option To Select primary button url",
+          "name": "OpentionToSelectPrimary",
+          "valueType": "string",
           "options": [
-              {
-                "name": "Open In Same Tab",
-                "value": "_self"
-              },
-              {
-                "name": "Open In New Tab",
-                "value": "_blank"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "name": "buttonTextSecondary",
-            "label": "Secondary Button Text",
-            "value": ""
-          },
-          {
-            "component": "aem-content",
-            "name": "secondaryButtonUrl",
-            "label": "Secondary Button Url"
-          },
-          {
-            "component": "radio-group",
-            "label": "option To Select Secondary button url",
-            "name": "OpentionToSelectSecondary",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Open In Same Tab",
-                "value": "_self"
-              },
-              {
-                "name": "Open In New Tab",
-                "value": "_blank"
-              }
-            ]
-          },
-          {
-            "component": "text",
-            "name": "textLinkLabel",
-            "label": "Text link label",
-            "value": ""
-          },
-          {
-            "component": "aem-content",
-            "name": "textLinkUrl",
-            "label": "Text link label Url"
-          },
-          {
-            "component": "radio-group",
-            "label": "option To Select text Link url",
-            "name": "OpentionToSelectTextLink",
-            "valueType": "string",
-            "options": [
-              {
-                "name": "Open In Same Tab",
-                "value": "_self"
-              },
-              {
-                "name": "Open In New Tab",
-                "value": "_blank"
-              }
+            {
+              "name": "Open In Same Tab",
+              "value": "_self"
+            },
+            {
+              "name": "Open In New Tab",
+              "value": "_blank"
+            }
           ]
-          },
+        },
+        {
+          "component": "text",
+          "name": "buttonTextSecondary",
+          "label": "Secondary Button Text",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "secondaryButtonUrl",
+          "label": "Secondary Button Url"
+        },
+        {
+          "component": "radio-group",
+          "label": "option To Select Secondary button url",
+          "name": "OpentionToSelectSecondary",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Open In Same Tab",
+              "value": "_self"
+            },
+            {
+              "name": "Open In New Tab",
+              "value": "_blank"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "textLinkLabel",
+          "label": "Text link label",
+          "value": ""
+        },
+        {
+          "component": "aem-content",
+          "name": "textLinkUrl",
+          "label": "Text link label Url"
+        },
+        {
+          "component": "radio-group",
+          "label": "option To Select text Link url",
+          "name": "OpentionToSelectTextLink",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Open In Same Tab",
+              "value": "_self"
+            },
+            {
+              "name": "Open In New Tab",
+              "value": "_blank"
+            }
+          ]
+        },
         {
           "component": "text",
           "valueType": "string",
@@ -198,7 +183,6 @@
           "label": "Caption Icon",
           "multi": false
         }
-
       ]
     },
     {
@@ -217,6 +201,14 @@
           "name": "imageAltText",
           "label": "Alt text",
           "value": ""
+        },
+        {
+          "component": "checkbox",
+          "name": "isHeroContact",
+          "label": "Enable Hero Contact",
+          "valueType": "boolean",
+          "value": false,
+          "description": "Enabling this option will show the hero contact design."
         }
       ]
     },
@@ -236,7 +228,8 @@
           "name": "colourimagealt",
           "label": "Colour Image Alt",
           "value": ""
-        },{
+        },
+        {
           "component": "select",
           "name": "backgroundColour",
           "label": "Background Colour",
@@ -265,17 +258,6 @@
           "multi": false
         }
       ]
-    },
-    {
-      "id": "contact-hero",
-      "fields": [
-        { 
-          "component": "reference",
-          "valueType": "string",
-          "name": "image",
-          "label": "Background Image"
-        }
-      ]
     }
   ],
   "filters": [
@@ -284,8 +266,7 @@
       "components": [
         "hero-image",
         "colour",
-        "video",
-        "contact-hero"
+        "video"
       ]
     }
   ]

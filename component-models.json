@@ -1713,6 +1713,14 @@
         "name": "imageAltText",
         "label": "Alt text",
         "value": ""
+      },
+      {
+        "component": "checkbox",
+        "name": "isHeroContact",
+        "label": "Enable Hero Contact",
+        "valueType": "boolean",
+        "value": false,
+        "description": "Enabling this option will show the hero contact design."
       }
     ]
   },
@@ -1760,17 +1768,6 @@
         "name": "video",
         "label": "video",
         "multi": false
-      }
-    ]
-  },
-  {
-    "id": "contact-hero",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Background Image"
       }
     ]
   },

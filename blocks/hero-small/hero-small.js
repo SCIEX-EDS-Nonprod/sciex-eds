@@ -171,6 +171,7 @@ export default function decorate(block) {
   heroWrapper.className = 'hero-wrapper';
 
   const heroContent = buildHeroContent(data);
+  console.log('dataaaaaaaaaaa',data)
   applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent);
 
   heroContainer.append(heroWrapper);

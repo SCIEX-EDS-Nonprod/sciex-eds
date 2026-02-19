@@ -144,8 +144,7 @@
     "components": [
       "hero-image",
       "colour",
-      "video",
-      "contact-hero"
+      "video"
     ]
   },
   {
