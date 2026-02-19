@@ -200,7 +200,7 @@
           "valueType": "string",
           "name": "imageAltText",
           "label": "Alt text",
-          "value": ""
+          "value": "aa"
         },
         {
           "component": "checkbox",
