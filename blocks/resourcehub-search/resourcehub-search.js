@@ -261,16 +261,11 @@ export default async function decorate(block) {
     event.stopPropagation();
   });
 
-  document.addEventListener('click', () => {
-    content.style.display = 'none';
-    btn.setAttribute('aria-expanded', 'false');
-  });
-
   document.addEventListener('click', (event) => {
     const suggestionPopup = document.getElementById('resourcehub-search-suggestion');
-  
+
     if (!suggestionPopup || suggestionPopup.style.display !== 'block') return;
-  
+
     if (!searchContainer.contains(event.target)) {
       suggestionPopup.style.display = 'none';
     }
