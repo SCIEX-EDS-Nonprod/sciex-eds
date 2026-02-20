@@ -19,22 +19,22 @@ const LOGOUT_TEXT =
   'Please log in or create an account to view and manage your favorites.';
 
 
-  async function checkLoginStatus() {
-    try {
-      const userResp = await fetch(USER_API, { credentials: 'include' });
-  
-      if (!userResp.ok) {
-        throw new Error(`User API failed: ${userResp.status}`);
-      }
-  
-      const user = await userResp.json();
-      return user?.loggedIn === true;
-    } catch (e) {
-      console.warn('Favorites block: treating user as logged out', e);
-      return false;
+async function checkLoginStatus() {
+  try {
+    const userResp = await fetch(USER_API, { credentials: 'include' });
+
+    if (!userResp.ok) {
+      throw new Error(`User API failed: ${userResp.status}`);
     }
+
+    const user = await userResp.json();
+    return user?.loggedIn === true;
+  } catch (e) {
+    console.warn('Favorites block: treating user as logged out', e);
+    return false;
   }
-  
+}
+
 /* ======================================================
    BLOCK CONTENT (banner + no results)
 ====================================================== */
@@ -108,7 +108,7 @@ async function readBlockProperties(block) {
 ====================================================== */
 async function renderUi() {
   let list = window.favoriteResultsList || [];
-const hasPageData = list.some(item => item.pageData?.length > 0);
+  const hasPageData = list.some(item => item.pageData?.length > 0);
 
   if (!hasPageData) {
     list = [];
@@ -169,8 +169,8 @@ export function showResourceHubButton(block) {
   resourceHubButton.className = 'resource-hub-button';
   resourceHubButton.textContent = 'Back to resource hub';
   resourceHubButton.style.cursor = 'pointer';
-   resourceHubButton.href = '#'; 
-   resourceHubButton.innerHTML = `
+  resourceHubButton.href = '#';
+  resourceHubButton.innerHTML = `
     <span>Back to resource hub</span>
     <img src="/icons/right-arrow.svg" alt="arrow" />
   `;
@@ -183,7 +183,7 @@ export function showResourceHubButton(block) {
 ====================================================== */
 export default async function decorate(block) {
   try {
-    await readBlockProperties(block);
+    await readBlockProperties(block);   
 
     const isLoggedIn = await checkLoginStatus();
 
@@ -201,43 +201,50 @@ export default async function decorate(block) {
     await initializefavoriteSearchInterface(block, 'favorite-all');
     showResourceHubButton(block);
 
-    const data = await getFavoriteResultsList();
+     const data = await getFavoriteResultsList();
+     
+      const allowedAssetTypes = ['User guide', 'Regulatory documents'];
 
-    const favoriteResultsList = data.map(item => {
-      // 1️⃣ Find Asset Type tag using normalized key
-      const assetTypeTag = item.tags.find(tag => {
-        const normalizedKey = tag.key.replace(/\s+/g, '').toLowerCase(); // remove spaces, lowercase
-        return normalizedKey === 'assettype';
+      const favoriteResultsList = data.map(item => {
+        const normalize = (str) =>
+          str.replace(/\s+/g, '').toLowerCase();
+
+        const isAllowedType = allowedAssetTypes.includes(item.assetType);
+
+        // 1️⃣ Find Asset Type tag
+        const assetTypeTag = item.tags.find(tag =>
+          normalize(tag.key) === 'assettype'
+        );
+
+        const assetTypeIds = assetTypeTag
+          ? assetTypeTag.value.flatMap(v => v.value)
+          : [];
+
+        const otherTagIds = item.tags
+          .filter(tag => normalize(tag.key) !== 'assettype')
+          .flatMap(tag => tag.value.flatMap(v => v.value));
+
+        const otherTagIdSet = new Set(otherTagIds);
+
+        // 2️⃣ Apply filteredPageData ONLY for NOT allowed types
+        const filteredPageData = isAllowedType
+          ? item.pageData
+          : item.pageData.filter(page =>
+              !assetTypeIds.includes(page.id) || otherTagIdSet.has(page.id)
+            );
+
+        // 3️⃣ Keep Asset Type tag ONLY for allowed types
+        const filteredTags = item.tags.filter(tag => {
+          if (normalize(tag.key) !== 'assettype') return true;
+          return isAllowedType;
+        });
+
+        return {
+          ...item,
+          pageData: filteredPageData,
+          tags: filteredTags
+        };
       });
-
-      console.log('Asset Type Tag:', assetTypeTag);
-
-      const assetTypeIds = assetTypeTag
-        ? assetTypeTag.value.flatMap(v => v.value)
-        : [];
-      console.log('Asset Type IDs:', assetTypeIds);
-
-      // 2️⃣ Collect IDs from all other tags
-      const otherTagIds = item.tags
-        .filter(tag => {
-          const normalizedKey = tag.key.replace(/\s+/g, '').toLowerCase();
-          return normalizedKey !== 'assettype';
-        })
-        .flatMap(tag => tag.value.flatMap(v => v.value));
-
-      const otherTagIdSet = new Set(otherTagIds);
-
-      // 3️⃣ Remove pageData only if ID exists ONLY in Asset Type
-      const filteredPageData = item.pageData.filter(page =>
-        !assetTypeIds.includes(page.id) || otherTagIdSet.has(page.id)
-      );
-
-      return {
-        ...item,
-        pageData: filteredPageData,
-        tags: item.tags.filter(tag => tag.key.replace(/\s+/g, '').toLowerCase() !== 'assettype')
-      };
-    });
 
     window.favoriteResultsList = favoriteResultsList;
     renderUi();
