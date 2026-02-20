@@ -109,16 +109,22 @@ function registerDropdown(dropdown) {
   const content = dropdown.querySelector('.dropdown-content');
   if (!btn || !content) return;
   btn.setAttribute('aria-expanded', 'false');
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = content.style.display === 'block';
-    this.querySelectorAll('.dropdown-content').forEach((c) => {
-      if (c !== content) c.style.display = 'none';
+    document.querySelectorAll('.dropdown-content').forEach((c) => {
+      c.style.display = 'none';
     });
 
+    // Toggle current one
     content.style.display = isOpen ? 'none' : 'block';
     btn.setAttribute('aria-expanded', String(!isOpen));
   });
   content.addEventListener('click', (e) => e.stopPropagation());
+  document.addEventListener('click', () => {
+    content.style.display = 'none';
+    btn.setAttribute('aria-expanded', 'false');
+  });
 }
 export default async function decorate(block) {
   block.className = 'resourcehub-search-block';
@@ -245,9 +251,6 @@ export default async function decorate(block) {
   searchBtn.innerHTML = searchIcon;
   searchContainer.appendChild(searchBtn);
 
-  // Prevent clicks inside search container from closing dropdowns
-  searchContainer.addEventListener('click', (e) => e.stopPropagation());
-
   searchBtn.addEventListener('click', (event) => {
     if (searchBox.value.trim() !== '') {
       standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${searchBox.value}&contentType=${selectedContentType}${queryString}`);
@@ -258,16 +261,21 @@ export default async function decorate(block) {
     event.stopPropagation();
   });
 
-  // Duplicate click handler removed — behaviour handled by registerDropdown
-  dropbtn.addEventListener('click', () => {
-    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+  document.addEventListener('click', (event) => {
+    const suggestionPopup = document.getElementById('resourcehub-search-suggestion');
+
+    if (!suggestionPopup || suggestionPopup.style.display !== 'block') return;
+
+    if (!searchContainer.contains(event.target)) {
+      suggestionPopup.style.display = 'none';
+    }
   });
 
-  // Close any open dropdowns when clicking outside
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.dropdown-content').forEach((c) => {
-      c.style.display = 'none';
-    });
+  dropbtn.addEventListener('click', () => {
+    const suggestionPopup = document.getElementById('resourcehub-search-suggestion');
+    if (suggestionPopup) {
+      suggestionPopup.style.display = 'none';
+    }
   });
 
   searchBox.addEventListener('input', (event) => {
