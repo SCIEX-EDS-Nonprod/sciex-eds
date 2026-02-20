@@ -4,7 +4,17 @@ import { decorateIcons } from '../../scripts/aem.js';
 function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
   const clonedCells = cells.map((cell) => cell.cloneNode(true));
-  console.log("clonedCells12", clonedCells)
+
+  const mediaDivChildren =
+    clonedCells[14]?.querySelectorAll(':scope > div') || [];
+
+  // ✅ SINGLE SOURCE OF TRUTH
+  const isContactHero =
+    mediaDivChildren[1]
+      ?.querySelector('p')
+      ?.textContent
+      ?.trim() === 'true';
+
   const data = {
     heading: clonedCells[1]?.innerText.trim(),
     description: clonedCells[2]?.innerText.trim(),
@@ -12,8 +22,9 @@ function extractBlockData(block) {
     badgePicture: clonedCells[13]?.querySelector('picture'),
     mainPicture: clonedCells[14]?.querySelector('picture'),
     videoAnchor: clonedCells[14]?.querySelector('.button-container a'),
-    mediaDivChildren: clonedCells[14]?.querySelectorAll(':scope > div') || [],
+    mediaDivChildren,
     buttonDataList: [],
+    isContactHero,
   };
 
   // Extract button data
@@ -25,7 +36,7 @@ function extractBlockData(block) {
   }
 
   // Detect colourPic (3 div children pattern)
-  if (data.mediaDivChildren.length === 3) {
+  if (mediaDivChildren.length === 3) {
     data.colourPicture = clonedCells[14]?.querySelector('picture');
     data.colourPictureBg = clonedCells[14]?.querySelector('.button-container a');
   }
@@ -44,18 +55,8 @@ function preserveOriginalAuthoring(block) {
 }
 
 function buildHeroContent(data) {
-
-  // Helper to apply correct class
-  const applyClass = (baseClass) => {
-    const isContactHero =
-      data.mediaDivChildren[1]
-        ?.querySelector('p')
-        ?.textContent
-        ?.trim() === 'true';
-    return isContactHero ? `contact-${baseClass}` : baseClass;
-  }
-
-
+  const applyClass = (baseClass) =>
+    data.isContactHero ? `contact-${baseClass}` : baseClass;
 
   const content = document.createElement('div');
   content.className = applyClass('hero-content');
@@ -75,7 +76,6 @@ function buildHeroContent(data) {
     const tagline = document.createElement('p');
     tagline.className = applyClass('hero-tagline');
     tagline.textContent = data.tagline;
-
     taglineWrap.append(tagline);
     content.append(taglineWrap);
   }
@@ -101,33 +101,21 @@ function buildHeroContent(data) {
     const buttons = document.createElement('div');
     buttons.className = applyClass('hero-buttons');
 
-    const buttonClasses = [
-      'button primary',
-      'button secondary',
-      'button link',
-    ];
-const isContactHero =
-      data.mediaDivChildren[1]
-        ?.querySelector('p')
-        ?.textContent
-        ?.trim() === 'true';
+    const buttonClasses = ['button primary', 'button secondary', 'button link'];
+
     data.buttonDataList.forEach((btn, index) => {
       const buttonEl = document.createElement('a');
       buttonEl.href = btn.link;
       buttonEl.target = btn.target;
-      buttonEl.className =
-        buttonClasses[index] || 'button link';
+      buttonEl.className = buttonClasses[index] || 'button link';
 
       const labelSpan = document.createElement('span');
       labelSpan.textContent = btn.label;
-
       buttonEl.append(labelSpan);
-      if(isContactHero && index===1){
-      buttonEl.append(span({ class: 'icon icon-arrow-blue'}));
-
-      }else{
-              buttonEl.append(span({ class: 'icon icon-arrow' }));
-
+      if (data.isContactHero && index === 1) {
+        buttonEl.append(span({ class: 'icon icon-arrow-blue' }));
+      } else {
+        buttonEl.append(span({ class: 'icon icon-arrow' }));
       }
 
       buttons.append(buttonEl);
@@ -139,7 +127,6 @@ const isContactHero =
 
   return content;
 }
-
 
 function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent) {
   if (data.colourPicture) {
@@ -180,14 +167,8 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
     heroWrapper.append(heroContent);
   } else if (data.mainPicture) {
     const imgSrc = data.mainPicture.querySelector('img')?.src;
-    const isContactHero =
-      data.mediaDivChildren[1]
-        ?.querySelector('p')
-        ?.textContent
-        ?.trim() === 'true';
-
     if (imgSrc) {
-      if (isContactHero) {
+      if (data.isContactHero) {
         heroContainer.classList.add('contact-hero-img-bg');
         const img = document.createElement('img');
         img.src = imgSrc;
@@ -199,11 +180,8 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
         heroContainer.classList.add('hero-has-bg');
       }
     }
-
-
     heroWrapper.append(heroContent);
-  }
-  else {
+  } else {
     heroWrapper.append(heroContent);
   }
 }
@@ -216,17 +194,10 @@ export default function decorate(block) {
   const heroContainer = document.createElement('div');
 
   const heroWrapper = document.createElement('div');
-  const isContactHero =
-      data.mediaDivChildren[1]
-        ?.querySelector('p')
-        ?.textContent
-        ?.trim() === 'true';
-      heroWrapper.className = isContactHero ? 'contact-hero-wrapper' : 'hero-wrapper';
-      heroContainer.classList.add(isContactHero ? 'contact-hero-container' : 'herosmallclass');
-
+  heroWrapper.className = data.isContactHero ? 'contact-hero-wrapper' : 'hero-wrapper';
+  heroContainer.classList.add(data.isContactHero ? 'contact-hero-container' : 'herosmallclass');
 
   const heroContent = buildHeroContent(data);
-  console.log('dataaaaaaaaaaa', data)
   applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent);
 
   heroContainer.append(heroWrapper);
