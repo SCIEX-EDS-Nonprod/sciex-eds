@@ -270,6 +270,23 @@ export default async function decorate(block) {
     });
   });
 
+  document.addEventListener('click', (event) => {
+    const suggestionPopup = document.getElementById('resourcehub-search-suggestion');
+  
+    if (!suggestionPopup || suggestionPopup.style.display !== 'block') return;
+  
+    if (!searchContainer.contains(event.target)) {
+      suggestionPopup.style.display = 'none';
+    }
+  });
+
+  dropdown.addEventListener('click', () => {
+    const suggestionPopup = document.getElementById('resourcehub-search-suggestion');
+    if (suggestionPopup) {
+      suggestionPopup.style.display = 'none';
+    }
+  });
+
   searchBox.addEventListener('input', (event) => {
     const query = event.target.value;
     if (query.length > 0) {

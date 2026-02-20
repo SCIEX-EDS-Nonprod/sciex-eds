@@ -109,7 +109,7 @@
         },
         {
           "component": "radio-group",
-          "label": "Option to Select Text Link Target",
+          "label": "Option to Select Card Link Target",
           "name": "optionToSelectTextLink",
           "valueType": "string",
           "options": [
