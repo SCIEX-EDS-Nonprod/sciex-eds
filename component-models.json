@@ -737,6 +737,22 @@
         "component": "aem-content",
         "name": "cardLinkUrl",
         "label": "Card Link URL"
+      },
+      {
+        "component": "radio-group",
+        "label": "Option to Select Text Link Target",
+        "name": "optionToSelectTextLink",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open In Same Tab",
+            "value": "_self"
+          },
+          {
+            "name": "Open In New Tab",
+            "value": "_blank"
+          }
+        ]
       }
     ]
   },

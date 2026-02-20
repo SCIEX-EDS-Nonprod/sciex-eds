@@ -29,10 +29,12 @@ export default function decorate(block) {
     const headingHTML = cells[1]?.innerHTML.trim();
     const descriptionHTML = cells[2]?.innerHTML.trim();
     const linkHref = cells[3]?.textContent.trim() || '#';
+    const targetUrl = cells[4]?.textContent.trim() || '_blank';
 
     const card = document.createElement('a');
     card.className = 'category-card';
     card.href = linkHref;
+    card.target = targetUrl;
 
     // ICON
     if (iconHTML) {
