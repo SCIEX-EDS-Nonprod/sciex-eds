@@ -172,10 +172,10 @@ export default async function decorate(block) {
 
   const menuItems = {
     All: 'All',
-    'Knowledge base article': 'Resource library',
-    'Self-paced learning': 'All',
-    'Instructor led training': 'All',
-    'Technical notes': 'Resource library',
+    'Knowledge base articles': 'Knowledge base articles',
+    'Self-paced learning': 'Training',
+    'Instructor led training': 'Training',
+    'Technical notes': 'Technical Notes',
     'Regulatory documents': 'Regulatory documents',
     'User guides': 'Customer documents',
   };
@@ -201,11 +201,11 @@ export default async function decorate(block) {
       dropdownContent.style.display = 'none';
       selectedContentType = value;
       selectedfacet = key;
-      if (key === 'knowledge base article') {
-        queryString = `&facetId=assettypes&value=${selectedfacet}`;
-      } else if (key === 'Tech notes') {
-        queryString = '&facetId=assettypes&value=Technote';
-      } else if (key === 'self paced learning' || key === 'Instructor led traning' || key === 'Regulatory docs' || key === 'User guides') {
+      if (key === 'Knowledge base articles' || key === 'Technical notes' || key === 'Regulatory documents') {
+        queryString = `&facetId=assetype&value=${selectedfacet}`;
+      } else if (key === 'User guides') {
+        queryString = `&facetId=assetype&value=${selectedContentType}`;
+      } else if (key === 'self paced learning' || key === 'Instructor led traning') {
         queryString = '';
       } else {
         queryString = '';
