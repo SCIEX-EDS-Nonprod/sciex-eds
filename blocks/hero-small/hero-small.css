@@ -9,7 +9,6 @@
   font-size: 52px;
   font-style: normal;
   font-weight: 270;
-  line-height: 64px;
 }
 .contact-hero-description{
   color: var(--Grey-900, #141414);
@@ -518,6 +517,9 @@ letter-spacing: 0.08px;
 
   .hero-small-wrapper .hero-side-image img {
     max-width: 90%;
+  }
+  .contact-hero-heading-hero{
+    font-size: 32px;
   }
 }
 
