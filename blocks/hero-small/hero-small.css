@@ -101,116 +101,6 @@ letter-spacing: 0.08px;
   display: flex !important;
 }
 
-/* contact hero css */
-@media (max-width: 768px) {
-
-  .contact-hero-buttons {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .contact-hero-content {
-    padding: 20px;
-    top: 22%;
-    gap: 16px;
-    width: 100%;
-  }
-
-  .contact-hero-heading-hero {
-    font-size: 32px;
-    line-height: normal;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .hero-small-wrapper .herosmallclass {
   width: 100%;
   padding: 100px 40px;
@@ -475,6 +365,24 @@ letter-spacing: 0.08px;
 
   .hero-small-wrapper .hero-buttons {
     justify-content: flex-start;
+  }
+
+  /* contact hero css */
+  .contact-hero-buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-hero-content {
+    padding: 20px;
+    top: 22%;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .contact-hero-heading-hero {
+    font-size: 32px;
+    line-height: normal;
   }
 
 }
