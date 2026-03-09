@@ -90,10 +90,14 @@
   align-items: center;
 }
 
+.icon-card-image picture{
+  width: 100%;
+}
+
 .image-type .icon-card-image img {
   max-width: 100%;
-  height: 165px;
-  width: 192px;
+  height: 144px;
+  width: 100%;
 }
 
 .image-type .icon-card-content {
@@ -266,8 +270,8 @@ line-height: normal;
 
 .icon-card-brand {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 10px;
+  left: 10px;
   border-radius: 4px;
   background: var(--Grey-50, #F5F5F5);
   color: #000;
@@ -280,12 +284,13 @@ line-height: normal;
 
 /* ✅ Responsive adjustments */
 @media (max-width: 768px) {
-  .icon-card-brand {
-    top: 6px;
-    left: 45px;
+  .icon-card-brand {    
     font-size: 11px;
     padding: 3px 6px;
   }
+  .image-type .icon-card-image img {
+  height: 257px;
+}
 
   .icon-card-wrapper {
     margin: 0px !important;
