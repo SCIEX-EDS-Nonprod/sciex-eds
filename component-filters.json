@@ -68,6 +68,7 @@
       "favorite-all",
       "contact-information",
       "sciex-headquarters",
+      "myblock",
       "block"
     ]
   },
@@ -91,6 +92,12 @@
   },
   {
     "id": "block",
+    "components": [
+      "section"
+    ]
+  },
+  {
+    "id": "myblock",
     "components": [
       "section"
     ]
