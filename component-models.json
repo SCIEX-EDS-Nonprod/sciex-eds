@@ -248,6 +248,17 @@
     ]
   },
   {
+    "id": "myblock",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
     "id": "section",
     "fields": [
       {

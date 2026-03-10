@@ -15,6 +15,9 @@
         },
         {
           "...": "./_button.json#/definitions"
+        },
+        {
+          "...": "./_myblock.json#/definitions"
         }
       ]
     },
