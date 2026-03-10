@@ -2,7 +2,9 @@
   {
     "id": "main",
     "components": [
-      "section"
+      "section",
+      "myblock",
+      "block"
     ]
   },
   {
@@ -67,9 +69,8 @@
       "cta-with-text",
       "favorite-all",
       "contact-information",
-      "sciex-headquarters",
-      "myblock",
-      "block"
+      "sciex-headquarters"
+      
     ]
   },
   {
