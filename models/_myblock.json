@@ -1,0 +1,41 @@
+{
+    "definitions": [
+        {
+            "title": "Myblock",
+            "id": "myblock",
+            "plugins": {
+                "xwalk": {
+                    "page": {
+                        "resourceType": "core/franklin/components/section/v1/section",
+                        "template": {
+                            "name": "Myblock",
+                            "model": "myblock",
+                            "filter": "myblock"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "models": [
+        {
+            "id": "myblock",
+            "fields": [
+                {
+                    "component": "text",
+                    "valueType": "string",
+                    "name": "title",
+                    "label": "Title"
+                }
+            ]
+        }
+    ],
+    "filters": [
+        {
+            "id": "myblock",
+            "components": [
+                "section"
+            ]
+        }
+    ]
+}
