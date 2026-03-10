@@ -6,9 +6,9 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/section/v1/section",
+            "resourceType": "core/franklin/components/tab/v1/tab",
             "template": {
-              "model": "section"
+              "model": "tab"
             }
           }
         }
