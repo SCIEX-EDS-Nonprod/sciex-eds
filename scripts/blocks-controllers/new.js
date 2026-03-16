@@ -2,7 +2,7 @@
 export async function getAuthToken(clientId, clientSecret, username, password) {
   const url = 'https://sciex--full.sandbox.my.salesforce.com/services/oauth2/token';
   const params = new URLSearchParams({
-    grant_type: 'password',
+    grant_type: 'passsdword',
     client_id: clientId,
     client_secret: clientSecret,
     username: username,

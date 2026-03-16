@@ -9,10 +9,10 @@ export default async function decorate(block) {
   const data = await getPartnersData();
 // In your test code
 const token = await getAuthToken(
-  '3MVG9ubHzknLRFWPHRJt5W5qxszl7QS5kbG1eLTJvFLJGLTlY8iqIVXErYPOA1sl2my164CFdLjz4mbO9H6R6',
-  '9414F36F88CCB4BC263EBC00840ED56C677DC0F8EBBE6CA7CA9CC3282A9A7B50',
-  'sciexwebintegration@sciex.com.full',
-  'vhiNUbnE95CxP4UaV0JukY3Vj4kh8sTrqFjjHLgLrvpE'
+  'aaaaaaaa',
+  'bbbbbbbbb',
+  'cccccccc@sciex.com.full',
+  'dddddd'
 );
 console.log('Auth Token1:', token);
   // Inject full UI structure into block
