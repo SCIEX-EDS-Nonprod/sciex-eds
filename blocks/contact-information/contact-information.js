@@ -14,7 +14,7 @@ const token = await getAuthToken(
   'sciexwebintegration@sciex.com.full',
   'vhiNUbnE95CxP4UaV0JukY3Vj4kh8sTrqFjjHLgLrvpE'
 );
-console.log('Auth Token:', token);
+console.log('Auth Token1:', token);
   // Inject full UI structure into block
   block.innerHTML = `
     <div class="contact-wrapper">
