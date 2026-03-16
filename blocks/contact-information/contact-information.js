@@ -1,5 +1,5 @@
 import getPartnersData from "../../scripts/blocks-controllers/partner-controller.js";
-
+import {getAuthToken} from "../../scripts/blocks-controllers/new.js";
 export default async function decorate(block) {
 
   // Get heading text from block through author
@@ -7,7 +7,14 @@ export default async function decorate(block) {
 
   // Fetch data from controller (regions → countries → companies)
   const data = await getPartnersData();
-
+// In your test code
+const token = await getAuthToken(
+  '3MVG9ubHzknLRFWPHRJt5W5qxszl7QS5kbG1eLTJvFLJGLTlY8iqIVXErYPOA1sl2my164CFdLjz4mbO9H6R6',
+  '9414F36F88CCB4BC263EBC00840ED56C677DC0F8EBBE6CA7CA9CC3282A9A7B50',
+  'sciexwebintegration@sciex.com.full',
+  'vhiNUbnE95CxP4UaV0JukY3Vj4kh8sTrqFjjHLgLrvpE'
+);
+console.log('Auth Token:', token);
   // Inject full UI structure into block
   block.innerHTML = `
     <div class="contact-wrapper">
