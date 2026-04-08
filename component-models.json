@@ -944,6 +944,18 @@
     ]
   },
   {
+    "id": "course-catalog",
+    "fields": [
+      {
+        "component": "text",
+        "name": "id",
+        "value": "",
+        "label": "Id",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "coursecatalog",
     "fields": [
       {
