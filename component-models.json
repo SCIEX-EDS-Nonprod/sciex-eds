@@ -944,7 +944,7 @@
     ]
   },
   {
-    "id": "course-catalog",
+    "id": "course-catalog-detail",
     "fields": [
       {
         "component": "text",
