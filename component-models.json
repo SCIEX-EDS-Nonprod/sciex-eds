@@ -965,7 +965,7 @@
         "valueType": "string"
       },
       {
-        "component": "block",
+        "component": "object",
         "name": "followOnCourses",
         "label": "Follow On Courses",
         "fields": [
