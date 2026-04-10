@@ -1,35 +1,84 @@
 {
-    "definitions": [
-      {
-        "title": "Course Catalog Detail",
-        "id": "course-catalog-detail",
-        "plugins": {
-          "xwalk": {
-            "page": {
-              "resourceType": "core/franklin/components/block/v1/block",
-              "template": {
-                "name": "Course Catalog Detail",
-                "model": "course-catalog-detail"
-              }
+  "definitions": [
+    {
+      "title": "Course Catalog Detail",
+      "id": "course-catalog-detail",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Course Catalog Detail",
+              "model": "course-catalog-detail"
             }
           }
         }
       }
-    ],
-    "models": [
-      {
-        "id": "course-catalog-detail",
-        "fields": [
-          {
-            "component": "text",
-            "name": "id",
-            "value": "",
-            "label": "Id",
-            "valueType": "string"
-          }
-        ]
-      }
-    ],
-    "filters": []
-  }
-  
+    }
+  ],
+  "models": [
+    {
+      "id": "course-catalog-detail",
+      "fields": [
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Course Title",
+          "valueType": "string"
+        },
+        {
+          "component": "number",
+          "name": "rating",
+          "label": "Rating",
+          "valueType": "number"
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "label": "Overview / Description",
+          "valueType": "string"
+        },
+        {
+          "component": "block",
+          "name": "followOnCourses",
+          "label": "Follow On Courses",
+          "fields": [
+            {
+              "component": "text",
+              "name": "code",
+              "label": "Course Code",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "info",
+              "label": "Course Info",
+              "valueType": "string"
+            }
+          ]
+        },
+
+        {
+          "component": "block",
+          "name": "resources",
+          "label": "Related Resources",
+          "fields": [
+            {
+              "component": "text",
+              "name": "title",
+              "label": "Title",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "link",
+              "label": "Link",
+              "valueType": "string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
