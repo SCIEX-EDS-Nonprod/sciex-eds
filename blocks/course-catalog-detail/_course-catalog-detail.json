@@ -22,61 +22,16 @@
       "fields": [
         {
           "component": "text",
-          "name": "title",
-          "label": "Course Title",
+          "name": "id",
+          "label": "ID",
           "valueType": "string"
-        },
-        {
-          "component": "number",
-          "name": "rating",
-          "label": "Rating",
-          "valueType": "number"
-        },
+        },       
         {
           "component": "richtext",
-          "name": "text",
-          "label": "Overview / Description",
+          "name": "description",
+          "label": "Description",
           "valueType": "string"
-        },
-        {
-          "component": "object",
-          "name": "followOnCourses",
-          "label": "Follow On Courses",
-          "fields": [
-            {
-              "component": "text",
-              "name": "code",
-              "label": "Course Code",
-              "valueType": "string"
-            },
-            {
-              "component": "text",
-              "name": "info",
-              "label": "Course Info",
-              "valueType": "string"
-            }
-          ]
-        },
-
-        {
-          "component": "block",
-          "name": "resources",
-          "label": "Related Resources",
-          "fields": [
-            {
-              "component": "text",
-              "name": "title",
-              "label": "Title",
-              "valueType": "string"
-            },
-            {
-              "component": "text",
-              "name": "link",
-              "label": "Link",
-              "valueType": "string"
-            }
-          ]
-        }
+        }       
       ]
     }
   ],
