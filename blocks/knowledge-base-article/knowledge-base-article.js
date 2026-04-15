@@ -1,50 +1,81 @@
-import { } from '../../scripts/aem.js';
+import '../../scripts/aem.js';
 
 export default function decorate(block) {
-  let blockId = 'sciex-text';
-  let alignment = 'text-left';
-  let content;
   const children = Array.from(block.children);
-  const [first, second, third] = children;
-  if (children.length === 3) {
-    blockId = first?.textContent?.trim() || 'sciex-text';
-    alignment = second?.textContent?.trim() || 'text-left';
-    content = third;
-  } else if (children.length === 2) {
-    const maybeAlignment = first?.textContent?.trim();
-    if (maybeAlignment === 'text-left' || maybeAlignment === 'text-right' || maybeAlignment === 'text-center') {
-      alignment = maybeAlignment;
-    } else {
-      blockId = first?.textContent?.trim() || 'sciex-text';
-    }
-    content = second;
-  } else if (children.length === 1) {
-    const singleChild = first;
-    const text = singleChild?.textContent?.trim();
-    if (singleChild.querySelector('h3')) {
-      content = singleChild;
-    } else if (['text-left', 'text-right', 'text-center'].includes(text)) {
-      alignment = text;
-    } else if (
-      singleChild.querySelectorAll('*').length === 1
-      && singleChild.querySelector('p')
-    ) {
-      blockId = text || 'sciex-text';
-    } else {
-      content = singleChild;
-    }
-  }
+  const versionId = children[0];
+  const body = children[5];
+  const title = children[8];
+  const createdDate = children[10];
+  const tagNames = children[13];
+
+  const blockId = versionId?.textContent?.trim() || 'knowledge-base-article';
+
+  // Main container
+  const container = document.createElement('div');
+  container.className = 'kba-container';
+
+  // Parse rich HTML body safely
+  const bodyWrapper = document.createElement('div');
+  bodyWrapper.innerHTML = body?.innerHTML || '';
+  const bodyText = bodyWrapper.querySelector('p')?.textContent || '';
+  // =========================
+  // Header
+  // =========================
+  const header = document.createElement('div');
+  header.className = 'kba-header';
+
+  const heading = document.createElement('h2');
+  heading.textContent = title?.textContent || '';
+
+  const statusWrapper = document.createElement('div');
+
+  const published = document.createElement('span');
+  published.className = 'status';
+  published.textContent = `Published Date : ${
+    createdDate?.textContent || ''
+  }`;
+
+  const rating = document.createElement('span');
+  rating.className = 'status';
+  rating.textContent = ' | Rating: ';
+
+  statusWrapper.append(published, rating);
+  header.append(heading, statusWrapper);
+
+  // =========================
+  // Body
+  // =========================
+  const bodyContent = document.createElement('div');
+  bodyContent.className = 'kba-body-content';
+
+  const bodyDiv = document.createElement('div');
+  bodyDiv.className = 'kba-body';
+  bodyDiv.innerHTML = bodyWrapper.innerHTML;
+
+  bodyContent.append(bodyDiv);
+
+  // =========================
+  // Details section
+  // =========================
+  const details = document.createElement('div');
+  details.className = 'kba-section';
+
+  const detailsHeading = document.createElement('h3');
+  detailsHeading.className = 'kba-details';
+  detailsHeading.textContent = 'Details';
+  const detailsRelatedText = document.createElement('p');
+  detailsRelatedText.textContent = `Related to : ${tagNames?.textContent || ''}`;
+
+  const detailsText = document.createElement('p');
+  detailsText.textContent = `Note : ${bodyText || ''}`;
+
+  details.append(detailsHeading, detailsRelatedText, detailsText);
+
+  container.append(header, bodyContent, details);
+
+  block.textContent = '';
+  block.append(container);
 
   block.id = `${blockId}-content`;
-  block.className = 'sciex-text';
-  //  block.parentElement.classList.add('tabs-container-wrapper');
-  if (content) {
-    if (alignment) {
-      content.className = alignment;
-    } else {
-      content.className = 'text-left';
-    }
-    block.textContent = '';
-    block.append(content);
-  }
+  block.className = 'knowledge-base-article';
 }
