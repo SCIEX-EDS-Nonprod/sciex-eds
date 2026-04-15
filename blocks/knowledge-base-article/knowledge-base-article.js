@@ -1,29 +1,14 @@
-import {} from '../../scripts/aem.js';
+import '../../scripts/aem.js';
 
 export default function decorate(block) {
-  console.log('Decorating knowledge-base-article block:', block.outerHTML);
-
   const children = Array.from(block.children);
+  const versionId = children[0];
+  const body = children[5];
+  const title = children[8];
+  const createdDate = children[10];
+  const tagNames = children[13];
 
-  const [
-    versionId,
-    knowledgeArticleId,
-    articleId,
-    urlName,
-    summary,
-    body,
-    publishStatus,
-    syncStatus,
-     title,
-    language,
-    createdDate,
-    entitledContent,
-    articleType,
-    tagNames
-  ] = children;
-
-  const blockId =
-    versionId?.textContent?.trim() || 'knowledge-base-article';
+  const blockId = versionId?.textContent?.trim() || 'knowledge-base-article';
 
   // Main container
   const container = document.createElement('div');
@@ -32,7 +17,7 @@ export default function decorate(block) {
   // Parse rich HTML body safely
   const bodyWrapper = document.createElement('div');
   bodyWrapper.innerHTML = body?.innerHTML || '';
-let bodyText = bodyWrapper.querySelector('p')?.textContent || '';
+  const bodyText = bodyWrapper.querySelector('p')?.textContent || '';
   // =========================
   // Header
   // =========================
@@ -78,11 +63,11 @@ let bodyText = bodyWrapper.querySelector('p')?.textContent || '';
   const detailsHeading = document.createElement('h3');
   detailsHeading.className = 'kba-details';
   detailsHeading.textContent = 'Details';
-   const detailsRelatedText = document.createElement('p');
-  detailsRelatedText.textContent = 'Related to : ' + (tagNames?.textContent || '');
+  const detailsRelatedText = document.createElement('p');
+  detailsRelatedText.textContent = `Related to : ${tagNames?.textContent || ''}`;
 
   const detailsText = document.createElement('p');
-  detailsText.textContent = 'Note : ' + (bodyText || '');
+  detailsText.textContent = `Note : ${bodyText || ''}`;
 
   details.append(detailsHeading, detailsRelatedText, detailsText);
 
