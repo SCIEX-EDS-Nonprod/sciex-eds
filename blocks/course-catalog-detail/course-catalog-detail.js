@@ -1,8 +1,8 @@
 export default function decorate(block) {
   const children = Array.from(block.children);
-  if (children.length < 2) return;
-
-  const contentEl = children[1];
+  if (children.length < 5) return;
+console.log('Decorating course catalog detail block');
+  const contentEl = children[4];
   const content = contentEl?.textContent?.trim();
 
   const container = document.createElement('div');

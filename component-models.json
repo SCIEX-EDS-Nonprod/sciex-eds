@@ -948,8 +948,26 @@
     "fields": [
       {
         "component": "text",
-        "name": "id",
-        "label": "ID",
+        "name": "courseId",
+        "label": "Course ID",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseName",
+        "label": "Course Name",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseUrl",
+        "label": "Course URL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseRating",
+        "label": "Course Rating",
         "valueType": "string"
       },
       {
