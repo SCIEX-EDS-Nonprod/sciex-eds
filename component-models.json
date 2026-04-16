@@ -2423,13 +2423,6 @@
         "valueType": "string"
       },
       {
-        "component": "aem-tag",
-        "valueType": "string",
-        "name": "cq:tags",
-        "label": "AEM Tag Picker",
-        "value": ""
-      },
-      {
         "component": "text",
         "name": "tagNames",
         "label": "Tag Names",
