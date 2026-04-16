@@ -22,25 +22,25 @@
       "fields": [
         {
           "component": "text",
-          "name": "courseId",
-          "label": "Course ID",
+          "name": "catalogID",
+          "label": "Catalog ID",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "courseName",
+          "name": "title",
           "label": "Course Name",
           "valueType": "string"
         },
         {
           "component": "text",
-          "name": "courseUrl",
+          "name": "url",
           "label": "Course URL",
           "valueType": "string"
         }, 
         {
           "component": "text",
-          "name": "courseRating",
+          "name": "rating",
           "label": "Course Rating",
           "valueType": "string"
         }, 
