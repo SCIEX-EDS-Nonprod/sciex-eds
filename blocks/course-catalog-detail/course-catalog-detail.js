@@ -1,13 +1,29 @@
 export default function decorate(block) {
   const children = Array.from(block.children);
   if (children.length < 5) return;
-console.log('Decorating course catalog detail block');
-  const contentEl = children[4];
-  const content = contentEl?.textContent?.trim();
+  const courseId = children[0]?.textContent?.trim();
+  const courseName = children[1]?.textContent?.trim();
+  const courseUrl = children[2]?.textContent?.trim();
+  const courseRating = children[3]?.textContent?.trim();
+  const description = children[4]?.textContent?.trim();
+  const duration = children[5]?.textContent?.trim();
+  const region = children[6]?.textContent?.trim();
+  const language = children[7]?.textContent?.trim();
+  const courseType = children[8]?.textContent?.trim();
+  const courseLevel = children[9]?.textContent?.trim();
+  const cost = children[10]?.textContent?.trim();
 
+    // ===== TITLE + RATING CONTAINER =====
+  const courseHeaderContainer = document.createElement('div');
+  courseHeaderContainer.className = 'course-header-container';
+
+  courseHeaderContainer.innerHTML = `
+    <h1 class="course-name">${courseName}</h1>
+    <div class="rating">${courseRating}</div>
+  `;
   const container = document.createElement('div');
-  container.classList.add('course-catalog-detail-container');
-  container.innerHTML = content;
+  container.classList.add('description-container');
+  container.innerHTML = description;
 
   // Find "Follow on courses" section
   const items = container.querySelectorAll('li');
@@ -56,5 +72,5 @@ console.log('Decorating course catalog detail block');
   });
 
   block.textContent = '';
-  block.append(container);
+  block.append(courseHeaderContainer,container);
 }
