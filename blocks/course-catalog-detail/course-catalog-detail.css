@@ -1,0 +1,31 @@
+.course-catalog-detail-container>ul{
+display: flex;
+flex-direction: column;
+gap: 53px;
+}
+.course-catalog-detail-container>ul > li{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+ ul{
+    list-style: disc;
+    /* margin-left: 20px; */
+}
+
+.course-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  vertical-align: top;
+}
+
+.course-table td:first-child {
+  font-weight: bold;
+  white-space: nowrap;
+  width: 180px;
+}
