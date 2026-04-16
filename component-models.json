@@ -955,7 +955,7 @@
       {
         "component": "text",
         "name": "title",
-        "label": "Course Name",
+        "label": "Course Title",
         "valueType": "string"
       },
       {

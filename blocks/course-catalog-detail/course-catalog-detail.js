@@ -2,7 +2,7 @@ export default function decorate(block) {
   const children = Array.from(block.children);
   if (children.length < 5) return;
   const courseId = children[0]?.textContent?.trim();
-  const courseName = children[1]?.textContent?.trim();
+  const courseTitle = children[1]?.textContent?.trim();
   const courseUrl = children[2]?.textContent?.trim();
   const courseRating = children[3]?.textContent?.trim();
   const description = children[4]?.textContent?.trim();
@@ -18,7 +18,7 @@ export default function decorate(block) {
   courseHeaderContainer.className = 'course-header-container';
 
   courseHeaderContainer.innerHTML = `
-    <h1 class="course-name">${courseName}</h1>
+    <h1 class="course-name">${courseTitle}</h1>
     <div class="rating">${courseRating}</div>
   `;
   const container = document.createElement('div');
