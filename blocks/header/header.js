@@ -199,14 +199,14 @@ function createGlobalSearch() {
   const menuItems = {
     All: 'All',
     "Applications":"Applications",
-    "Customer documents":"Customer documents",
     "eCommerce":"eCommerce",
     "Knowledge base articles":"Knowledge base articles",
     "Products and services":"Products and services",
     "Regulatory documents":"Regulatory documents",
     "SCIEX How":"SCIEX How",
     "Technical Notes":"Technical Notes",
-    "Training":"Training"
+    "Training":"Training",
+    "User guides":"User guides",
   };
 
   let selectedContentType = 'All';

@@ -107,7 +107,13 @@
           "name": "articleType",
           "label": "Article Type",
           "valueType": "string"
-        }
+        },
+        {
+          "component": "text",
+          "name": "tagNames",
+          "label": "Tag Names",
+          "valueType": "string"
+         }
       ]
     }
   ],
