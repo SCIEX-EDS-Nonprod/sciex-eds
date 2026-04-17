@@ -19,7 +19,7 @@ export default function decorate(block) {
 
   const grid = document.createElement('div');
   grid.className = 'featured-key-workflows-grid';
-  for (let i = 1; i < rows.length; i += 1) {
+  for (let i = 2; i < rows.length; i += 1) {
     const row = rows[i];
     const columns = row.children;
 
