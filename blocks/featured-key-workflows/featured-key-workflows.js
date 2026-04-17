@@ -38,6 +38,9 @@ export default function decorate(block) {
     h3.textContent = title.textContent;
     card.appendChild(h3);
 
+     //check link to open link in New Tab
+    const openInNewTab =columns[3]?.textContent?.trim().toLowerCase() === 'true';
+
     // Links
     const linksWrapper = document.createElement('div');
     linksWrapper.className = 'workflow-card-links';
@@ -48,6 +51,13 @@ export default function decorate(block) {
       link.href = a.href;
       link.textContent = a.textContent;
       link.className = 'workflow-card-link';
+
+      // ✅ Apply target if enabled
+      if (!openInNewTab) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+
       linksWrapper.appendChild(link);
     });
 

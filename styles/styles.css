@@ -1363,7 +1363,9 @@ main .section.highlight {
   .sciex-border-wrapper,
   .fragment-item > div > div,
   .container-grid-2,
-  .course-catalog-detail-wrapper
+  .course-catalog-detail-wrapper,
+  .categories-wrapper,
+  .featured-key-workflows-wrapper
   {
     max-width: 90pc !important;
     /* padding: 0 55px !important; */
