@@ -53,7 +53,7 @@ export default function decorate(block) {
       link.className = 'workflow-card-link';
 
       // ✅ Apply target if enabled
-      if (!openInNewTab) {
+      if (openInNewTab) {
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
       }
