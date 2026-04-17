@@ -944,6 +944,71 @@
     ]
   },
   {
+    "id": "course-catalog-detail",
+    "fields": [
+      {
+        "component": "text",
+        "name": "catalogID",
+        "label": "Catalog ID",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Course Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "url",
+        "label": "Course URL",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "rating",
+        "label": "Course Rating",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "duration",
+        "label": "Duration",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "region",
+        "label": "Region",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "language",
+        "label": "Language",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseType",
+        "label": "Course Type",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "courseLevel",
+        "label": "Course Level",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "coursecatalog",
     "fields": [
       {
