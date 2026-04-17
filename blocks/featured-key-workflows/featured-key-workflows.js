@@ -8,6 +8,7 @@ export default function decorate(block) {
   moveInstrumentation(block, workflowContainer);
   const headingRow = rows[0];
   const headingText = headingRow.querySelector('p')?.textContent;
+  const linkTarget = rows[1]?.textContent?.trim() || '_self';
 
   if (headingText) {
     const heading = document.createElement('h2');
@@ -48,6 +49,11 @@ export default function decorate(block) {
       link.href = a.href;
       link.textContent = a.textContent;
       link.className = 'workflow-card-link';
+       link.target = linkTarget;
+
+       if (linkTarget === '_blank') {
+         link.rel = 'noopener noreferrer';
+       }
       linksWrapper.appendChild(link);
     });
 
