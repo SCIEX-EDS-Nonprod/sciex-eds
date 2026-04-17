@@ -1,3 +1,5 @@
+import { span } from '../../scripts/dom-builder.js';
+import { decorateIcons } from '../../scripts/aem.js';
 export default function decorate(block) {
   const children = Array.from(block.children);
   if (children.length < 10) return;
@@ -12,6 +14,35 @@ export default function decorate(block) {
   const courseType = children[8]?.textContent?.trim();
   const courseLevel = children[9]?.textContent?.trim();
   console.log(courseId);
+
+  // Convert "78.5%" → 3.9 (out of 5)
+  let numericRating = 0;
+
+  if (courseRating) {
+    const percent = parseFloat(courseRating.replace('%', '').trim());
+    numericRating = ((percent / 100) * 5).toFixed(1);
+  } 
+
+  const starsContainer = document.createElement('div');
+  starsContainer.className = 'stars-container';
+
+const ratingValue = Math.round(parseFloat(numericRating));
+
+for (let i = 1; i <= 5; i += 1) {
+  const star = document.createElement('p');
+  star.className = 'star';
+
+  const fillColor = i <= ratingValue ? '#F2C94C' : '#E0E0E0';
+
+  star.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+      <path d="M11.4141 0L14.1082 8.2918H22.8267L15.7733 13.4164L18.4675 21.7082L11.4141 16.5836L4.36064 21.7082L7.05481 13.4164L0.00138474 8.2918H8.71989L11.4141 0Z" fill="${fillColor}"/>
+    </svg>
+  `;
+
+  starsContainer.appendChild(star);
+}
+
   const courseHeaderContainer = document.createElement('div');
   courseHeaderContainer.className = 'course-header-container';
 
@@ -19,7 +50,7 @@ export default function decorate(block) {
   <div class="course-header-row">
     <div class="course-header-left">
       <h1 class="course-name">${courseTitle}</h1>
-      <div class="rating">Rating: ${courseRating}</div>
+      <div class="rating">Rating:</div>
     </div>
 
    <div class="course-header-social">
@@ -43,7 +74,10 @@ export default function decorate(block) {
 
   <div class="course-header-border"></div>
 `;
+  const ratingDiv = courseHeaderContainer.querySelector('.rating');
 
+  // Add stars
+  ratingDiv.appendChild(starsContainer);
   const descriptionContainer = document.createElement('div');
   descriptionContainer.classList.add('description-container');
   descriptionContainer.innerHTML = description;
@@ -152,11 +186,32 @@ export default function decorate(block) {
     <span class="course-detail-value">${courseLevel}</span>
   </div>
   </div>
-  <div class="course-action-row">
-   <a href=${courseUrl} target="_blank" class="btn primary">Take course</a>
-   <a href="/my-learning-hub" target="_blank" class="btn secondary">Request a quote</a>
-  </div> 
+  <div class="course-action-row"></div> 
 `;
+  const actionRow = courseDetailsContainer.querySelector('.course-action-row');
+
+  // --- Primary button ---
+  const takeCourseBtn = document.createElement('a');
+  takeCourseBtn.href = courseUrl;
+  takeCourseBtn.target = '_blank';
+  takeCourseBtn.className = 'btn primary';
+  takeCourseBtn.textContent = 'Take course';
+
+  // icon (your required pattern)
+  takeCourseBtn.append(span({ class: 'icon icon-arrow' }));
+
+  // --- Secondary button ---
+  const quoteBtn = document.createElement('a');
+  quoteBtn.href = '/my-learning-hub';
+  quoteBtn.target = '_blank';
+  quoteBtn.className = 'btn secondary';
+  quoteBtn.textContent = 'Request a quote';
+
+  // icon
+  quoteBtn.append(span({ class: 'icon icon-arrow-blue' }));
+  // append buttons
+  actionRow.append(takeCourseBtn, quoteBtn);
+  decorateIcons(actionRow)
 
   // ===== MAIN LAYOUT WRAPPER =====
   const layout = document.createElement('div');
