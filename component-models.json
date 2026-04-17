@@ -1005,12 +1005,6 @@
         "name": "courseLevel",
         "label": "Course Level",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "cost",
-        "label": "Cost",
-        "valueType": "string"
       }
     ]
   },

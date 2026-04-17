@@ -11,7 +11,6 @@ export default function decorate(block) {
   const language = children[7]?.textContent?.trim();
   const courseType = children[8]?.textContent?.trim();
   const courseLevel = children[9]?.textContent?.trim();
-  const cost = children[10]?.textContent?.trim();
 
   const courseHeaderContainer = document.createElement('div');
   courseHeaderContainer.className = 'course-header-container';
@@ -106,7 +105,7 @@ export default function decorate(block) {
 
   <div class="course-detail-row">
     <span class="course-detail-key">Cost:</span>
-    <span class="course-detail-value">${cost}</span>
+    <span class="course-detail-value">$500</span>
   </div>
 
   <div class="course-detail-row">
