@@ -136,17 +136,27 @@
   gap: 12px;
 }
 
+ul {
+  list-style: disc;
+}
+.description-container ul ul li {
+  margin-left: 20px;
+}
+
 .course-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-ul {
-  list-style: disc;
-}
-.description-container ul ul li {
-  margin-left: 20px;
+.course-table th {
+  background: #f0f0f0;
+  text-align: left;
+  padding: 10px;
+  font-weight: 600;
+  border: 1px solid #ddd; 
+  color: #000;
+
 }
 
 .course-table td {
@@ -155,8 +165,3 @@ ul {
   vertical-align: top;
 }
 
-.course-table td:first-child {
-  font-weight: bold;
-  white-space: nowrap;
-  width: 180px;
-}

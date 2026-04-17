@@ -57,43 +57,62 @@ export default function decorate(block) {
     if (strong && strong.textContent.includes('Follow on courses')) {
       const ul = li.querySelector('ul');
 
-      if (ul) {
-        const table = document.createElement('table');
-        table.classList.add('course-table');
+    if (ul) {
+      const table = document.createElement('table');
+      table.classList.add('course-table');
 
-        Array.from(ul.children).forEach((childLi) => {
-          const tr = document.createElement('tr');
+      // ===== HEADER ROW =====
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
 
-          const temp = document.createElement('div');
-          temp.innerHTML = childLi.innerHTML;
+      const th1 = document.createElement('th');
+      th1.textContent = 'No';
 
-          let fullText = temp.textContent
-            .replace(/\u00A0/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim();
+      const th2 = document.createElement('th');
+      th2.textContent = 'Course info';
 
-          const firstSpaceIndex = fullText.indexOf(' ');
-          const code = fullText.slice(0, firstSpaceIndex).trim();
+      headerRow.append(th1, th2);
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
 
-          let descHTML = temp.innerHTML.slice(firstSpaceIndex)
-            .replace(/&nbsp;/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim();
+      // ===== BODY =====
+      const tbody = document.createElement('tbody');
 
-          const td1 = document.createElement('td');
-          td1.textContent = code;
+      Array.from(ul.children).forEach((childLi) => {
+        const tr = document.createElement('tr');
 
-          const td2 = document.createElement('td');
-          td2.innerHTML = descHTML;
+        const temp = document.createElement('div');
+        temp.innerHTML = childLi.innerHTML;
 
-          tr.append(td1, td2);
-          table.appendChild(tr);
-        });
+        let fullText = temp.textContent
+          .replace(/\u00A0/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
 
-        li.replaceChild(table, ul);
-      }
+        const firstSpaceIndex = fullText.indexOf(' ');
+        const code = fullText.slice(0, firstSpaceIndex).trim();
+
+        let descHTML = temp.innerHTML.slice(firstSpaceIndex)
+          .replace(/&nbsp;/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        const td1 = document.createElement('td');
+        td1.textContent = code;
+
+        const td2 = document.createElement('td');
+        td2.innerHTML = descHTML;
+
+        tr.append(td1, td2);
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+
+      li.replaceChild(table, ul);
     }
-  });
+  }
+});
 
   // ===== RIGHT (COURSE DETAILS) =====
   const courseDetailsContainer = document.createElement('div');
