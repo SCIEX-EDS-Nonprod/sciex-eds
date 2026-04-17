@@ -1632,6 +1632,13 @@
         "valueType": "string",
         "name": "enterTheLinks",
         "label": "Enter the links"
+      },
+      {
+        "component": "boolean",
+        "name": "openLinkInNewTab",
+        "label": "Open link in new tab",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },
