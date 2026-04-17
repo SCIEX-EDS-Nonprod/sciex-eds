@@ -11,7 +11,7 @@ export default function decorate(block) {
   const language = children[7]?.textContent?.trim();
   const courseType = children[8]?.textContent?.trim();
   const courseLevel = children[9]?.textContent?.trim();
-
+  console.log(courseId);
   const courseHeaderContainer = document.createElement('div');
   courseHeaderContainer.className = 'course-header-container';
 
@@ -153,8 +153,8 @@ export default function decorate(block) {
   </div>
   </div>
   <div class="course-action-row">
-   <a href="/take-course" class="btn primary">Take course</a>
-   <a href="/my-learning-hub" class="btn secondary">Request a quote</a>
+   <a href=${courseUrl} target="_blank" class="btn primary">Take course</a>
+   <a href="/my-learning-hub" target="_blank" class="btn secondary">Request a quote</a>
   </div> 
 `;
 
