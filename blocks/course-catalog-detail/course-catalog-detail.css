@@ -1,3 +1,129 @@
+.course-catalog-detail-main-layout {
+  margin-top: 24px;
+}
+
+.course-header-row {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.course-header-border {
+  border-bottom: 1px solid var(--Grey-100, #ECECEC);
+}
+
+.course-header-social {
+  padding-top: 22px;
+}
+
+.course-name {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 370;
+  line-height: 64px;
+}
+
+.rating {
+  color: var(--Grey-400, #8A8A8A);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+  margin-top: 16px;
+}
+
+.course-layout {
+  display: grid;
+  grid-template-columns: 2.3fr 1fr;
+  gap: 50px;
+  margin-top: 32px;
+}
+
+.course-details-container {
+  padding: 30px;
+  border-radius: 6px;
+  background: var(--Grey-50, #F5F5F5);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: fit-content;
+}
+
+.course-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.course-action-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.course-details-title {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 24px;
+  letter-spacing: 0.12px;
+}
+
+.course-detail-row {
+  display: flex;
+}
+
+.course-detail-key {
+  min-width: 109.605px;
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+}
+
+.course-detail-value {
+  color: var(--Grey-900, #141414);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 530;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+}
+
+.description-container li>strong {
+  color: #000;
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 32px;
+  margin-bottom: 8px;
+}
+
+/* Overview text */
+.description-container li {
+  color: var(--Grey-600, #5B5B5B);
+  font-family: "Geogrotesque Sharp VF";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 330;
+  line-height: 24px;
+  letter-spacing: 0.08px;
+}
+
+
 .description-container>ul {
   display: flex;
   flex-direction: column;
@@ -18,7 +144,9 @@
 
 ul {
   list-style: disc;
-  /* margin-left: 20px; */
+}
+.description-container ul ul li {
+  margin-left: 20px;
 }
 
 .course-table td {
