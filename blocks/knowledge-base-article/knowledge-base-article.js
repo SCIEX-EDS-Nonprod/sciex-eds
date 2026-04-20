@@ -1,12 +1,14 @@
 import '../../scripts/aem.js';
 
 export default function decorate(block) {
+  console.log('Decorating Knowledge Base Article block>'+ block.outerHTML);
   const children = Array.from(block.children);
+  console.log('KBA children :>> ', children);
   const versionId = children[0];
   const body = children[6];
   const title = children[4];
   const createdDate = children[10];
-  const tagNames = children[14];
+  const tagNames = children[13];
 
   const blockId = versionId?.textContent?.trim() || 'knowledge-base-article';
 
@@ -76,9 +78,9 @@ export default function decorate(block) {
   const statusWrapper = document.createElement('div');
   statusWrapper.className = 'status-wrapper';
 
-  const published = document.createElement('span');
+  /*const published = document.createElement('span');
   published.className = 'status';
-  published.textContent = `Published Date : ${createdDate?.textContent || ''}`;
+  published.textContent = `Published Date : ${createdDate?.textContent || ''}`;*/
 
   // =========================
   // Rating UI
@@ -105,7 +107,7 @@ export default function decorate(block) {
 
   ratingWrapper.append(ratingLabel, starsContainer);
 
-  statusWrapper.append(published, ratingWrapper);
+  statusWrapper.append( ratingWrapper);
 
   // FINAL: append title row + status
   header.append(titleRow, statusWrapper);
