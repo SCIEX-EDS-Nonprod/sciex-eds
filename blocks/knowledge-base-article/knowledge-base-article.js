@@ -7,7 +7,6 @@ export default function decorate(block) {
   const versionId = children[0];
   const body = children[6];
   const title = children[4];
-  const createdDate = children[10];
   const tagNames = children[13];
 
   const blockId = versionId?.textContent?.trim() || 'knowledge-base-article';
