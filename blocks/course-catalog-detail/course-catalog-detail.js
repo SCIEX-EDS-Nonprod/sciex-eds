@@ -13,7 +13,8 @@ export default function decorate(block) {
   const language = children[7]?.textContent?.trim();
   const courseType = children[8]?.textContent?.trim();
   const courseLevel = children[9]?.textContent?.trim();
-  console.log('id',courseId);
+  const relatedResources = children[10]?.textContent?.trim();
+  console.log('id',courseId,relatedResources);
 
   // Convert "78.5%" → 3.9 (out of 5)
   let numericRating = 0;
