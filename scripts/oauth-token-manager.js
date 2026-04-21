@@ -7,15 +7,21 @@ const TOKEN_CACHE_KEY = 'salesforce_oauth_token';
 const TOKEN_EXPIRY_KEY = 'salesforce_oauth_token_expiry';
 
 /**
- * Get OAuth credentials from environment variables
+ * Get OAuth credentials from environment variables or fallback sources
  */
 function getOAuthConfig() {
+  // Try to get from import.meta.env (Vite)
+  const env = typeof import.meta !== 'undefined' ? import.meta.env : {};
+  
+  // Fallback to window object or stored config
+  const storedConfig = window.__SALESFORCE_CONFIG__ || {};
+
   return {
-    tokenUrl: import.meta.env.VITE_SALESFORCE_TOKEN_URL,
-    clientId: import.meta.env.VITE_SALESFORCE_CLIENT_ID,
-    clientSecret: import.meta.env.VITE_SALESFORCE_CLIENT_SECRET,
-    username: import.meta.env.VITE_SALESFORCE_USERNAME,
-    password: import.meta.env.VITE_SALESFORCE_PASSWORD,
+    tokenUrl: env.VITE_SALESFORCE_TOKEN_URL || storedConfig.tokenUrl || 'https://sciex--full.sandbox.my.salesforce.com/services/oauth2/token',
+    clientId: env.VITE_SALESFORCE_CLIENT_ID || storedConfig.clientId,
+    clientSecret: env.VITE_SALESFORCE_CLIENT_SECRET || storedConfig.clientSecret,
+    username: env.VITE_SALESFORCE_USERNAME || storedConfig.username || 'sciexwebintegration@sciex.com.full',
+    password: env.VITE_SALESFORCE_PASSWORD || storedConfig.password,
   };
 }
 
@@ -46,15 +52,29 @@ async function fetchOAuthToken() {
   try {
     const config = getOAuthConfig();
 
-    console.log('OAuth Config:', {
-      tokenUrl: config.tokenUrl,
+    console.log('OAuth Config Check:', {
+      tokenUrl: config.tokenUrl ? 'Present' : 'Missing',
       clientId: config.clientId ? 'Present' : 'Missing',
       clientSecret: config.clientSecret ? 'Present' : 'Missing',
-      username: config.username || 'Missing',
+      username: config.username ? 'Present' : 'Missing',
+      password: config.password ? 'Present' : 'Missing',
     });
 
-    if (!config.tokenUrl || !config.clientId || !config.clientSecret) {
-      throw new Error('Missing OAuth configuration in environment variables');
+    // Validate required credentials
+    const missingFields = [];
+    if (!config.clientId) missingFields.push('clientId');
+    if (!config.clientSecret) missingFields.push('clientSecret');
+    if (!config.password) missingFields.push('password');
+
+    if (missingFields.length > 0) {
+      throw new Error(
+        `Missing OAuth configuration: ${missingFields.join(', ')}. `
+        + 'Ensure .env file is loaded or call initializeSalesforceConfig() with credentials.'
+      );
+    }
+
+    if (!config.tokenUrl) {
+      throw new Error('Missing VITE_SALESFORCE_TOKEN_URL configuration');
     }
 
     const params = new URLSearchParams({
@@ -125,4 +145,47 @@ export async function getSalesforceAuthToken() {
   }
 }
 
-export default { getSalesforceAuthToken };
+/**
+ * Initialize Salesforce OAuth config at runtime
+ * Call this if environment variables are not available
+ * @param {Object} config - Configuration object
+ * @param {string} config.clientId - Salesforce OAuth Client ID
+ * @param {string} config.clientSecret - Salesforce OAuth Client Secret
+ * @param {string} config.username - Salesforce username
+ * @param {string} config.password - Salesforce password
+ * @param {string} [config.tokenUrl] - OAuth token endpoint URL
+ */
+export function initializeSalesforceConfig(config) {
+  if (!config.clientId || !config.clientSecret || !config.password) {
+    throw new Error('Config must include clientId, clientSecret, and password');
+  }
+  
+  window.__SALESFORCE_CONFIG__ = {
+    tokenUrl: config.tokenUrl || 'https://sciex--full.sandbox.my.salesforce.com/services/oauth2/token',
+    clientId: config.clientId,
+    clientSecret: config.clientSecret,
+    username: config.username || 'sciexwebintegration@sciex.com.full',
+    password: config.password,
+  };
+  
+  console.log('Salesforce OAuth config initialized');
+}
+
+/**
+ * Clear cached token (useful for logout)
+ */
+export function clearSalesforceToken() {
+  try {
+    sessionStorage.removeItem(TOKEN_CACHE_KEY);
+    sessionStorage.removeItem(TOKEN_EXPIRY_KEY);
+    console.log('Salesforce token cache cleared');
+  } catch (error) {
+    console.error('Error clearing token cache:', error);
+  }
+}
+
+export default { 
+  getSalesforceAuthToken,
+  initializeSalesforceConfig,
+  clearSalesforceToken,
+};
