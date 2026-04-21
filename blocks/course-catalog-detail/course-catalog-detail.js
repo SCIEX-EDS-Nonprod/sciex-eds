@@ -63,7 +63,8 @@ export default async function decorate(block) {
       const userEmail = user.email;
       const baseUrl = window.location.origin;
       const restServices = '/bin/sciex'; // Assuming this is the path, adjust if needed
-      const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
+      // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
+      const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
 
       try {
         const response = await fetch(endpoint, {
