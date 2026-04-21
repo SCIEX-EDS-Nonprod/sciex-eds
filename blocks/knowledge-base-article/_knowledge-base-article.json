@@ -113,6 +113,17 @@
           "name": "tagNames",
           "label": "Tag Names",
           "valueType": "string"
+         },{
+          "component": "number",
+          "name": "voteAvg",
+          "label": "Average Vote",
+          "valueType": "number"
+         },
+         {
+          "component": "checkbox",
+          "name": "currentUserHasVoted",
+          "label": "Current User Has Voted",
+          "valueType": "boolean"
          }
       ]
     }
