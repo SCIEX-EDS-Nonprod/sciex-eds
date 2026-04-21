@@ -66,11 +66,10 @@ export default async function decorate(block) {
       // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
       const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=a5G2I00000096RfUAI`;
       const token = courseId;
-
+console.log('Fetching available course sessions with endpoint:', token);
       try {
         const response = await fetch(endpoint, {
           method: 'GET',
-          credentials: 'include',
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`
