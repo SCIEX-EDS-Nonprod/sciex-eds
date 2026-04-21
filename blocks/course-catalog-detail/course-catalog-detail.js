@@ -1,6 +1,5 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
-import { getSalesforceAuthToken } from '../../scripts/oauth-token-manager.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
 
@@ -63,64 +62,24 @@ export default async function decorate(block) {
     if (user && user.email && courseId) {
       const userEmail = user.email;
       const baseUrl = 'https://sciex--full.sandbox.my.salesforce.com';
-      const restServices = '/services/apexrest/';
+      const restServices = '/services/apexrest/'; // Assuming this is the path, adjust if needed
+      // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
       const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
 
-      console.log('=== Available Course Sessions Request ===');
-      console.log('Endpoint:', endpoint);
-      console.log('User Email:', userEmail);
-      console.log('Course ID:', courseId);
-
       try {
-        console.log('Fetching OAuth token...');
-        const authToken = await getSalesforceAuthToken();
-        console.log('Auth Token obtained:', authToken ? 'Success' : 'Failed');
-
-        const headers = {
-          Accept: 'application/json',
-          Authorization: `Bearer ${authToken}`,
-        };
-
-        console.log('Request headers:', {
-          Accept: headers.Accept,
-          Authorization: headers.Authorization ? 'Bearer token added' : 'No auth',
-        });
-
         const response = await fetch(endpoint, {
           method: 'GET',
-          headers,
+          credentials: 'include',
+          headers: {
+            Accept: 'application/json',
+          },
         });
-
-        console.log('Response Status:', response.status);
-        console.log('Response Status Text:', response.statusText);
-        console.log('Response Headers:', {
-          contentType: response.headers.get('content-type'),
-          referrerPolicy: response.headers.get('referrer-policy'),
-        });
-
         const data = await response.json();
         console.log('Available course sessions response:', data);
-
-        if (!response.ok) {
-          console.error('API Error - Status:', response.status, 'Data:', data);
-        }
       } catch (error) {
         console.error('Error fetching available course sessions:', error);
-        console.error('Error details:', {
-          message: error.message,
-          stack: error.stack,
-          name: error.name,
-        });
       }
-    } else {
-      console.log('Missing requirements for API call:', {
-        hasUser: !!user,
-        hasEmail: !!user?.email,
-        hasCourseId: !!courseId,
-      });
     }
-  } else {
-    console.log('User not logged in - skipping API call');
   }
 
   // Convert "78.5%" → 3.9 (out of 5)
