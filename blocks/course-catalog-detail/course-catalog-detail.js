@@ -65,6 +65,7 @@ export default async function decorate(block) {
       const restServices = '/services/apexrest/'; // Assuming this is the path, adjust if needed
       // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
       const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
+      const token = courseId;
 
       try {
         const response = await fetch(endpoint, {
@@ -72,6 +73,7 @@ export default async function decorate(block) {
           credentials: 'include',
           headers: {
             Accept: 'application/json',
+            Authorization: `Bearer ${token}`
           },
         });
         const data = await response.json();
