@@ -150,7 +150,6 @@ export default function decorate(block) {
     }
   });
 
-
   const relatedContainer = document.createElement('div');
   relatedContainer.classList.add('related-container');
 
@@ -164,9 +163,9 @@ export default function decorate(block) {
   if (relatedResources) {
     relatedContainer.appendChild(heading);
 
-    const items = relatedResources.split(',');
+    const relatedResourcesItems = relatedResources.split(',');
 
-    items.forEach(item => {
+    relatedResourcesItems.forEach((item) => {
       const [label, url] = item.split(':');
 
       if (label && url) {
@@ -192,8 +191,6 @@ export default function decorate(block) {
   relatedContainer.appendChild(exploreBtn);
 
   descriptionContainer.appendChild(relatedContainer);
-
-
 
   // ===== RIGHT (COURSE DETAILS) =====
   const courseDetailsContainer = document.createElement('div');
