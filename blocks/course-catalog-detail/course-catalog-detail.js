@@ -61,10 +61,10 @@ export default async function decorate(block) {
     const user = await getUserDetails();
     if (user && user.email && courseId) {
       const userEmail = user.email;
-      const baseUrl = window.location.origin;
-      const restServices = '/bin/sciex'; // Assuming this is the path, adjust if needed
+      const baseUrl = 'https://sciex--full.sandbox.my.salesforce.com';
+      const restServices = '/services/apexrest/'; // Assuming this is the path, adjust if needed
       // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
-      const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
+      const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
 
       try {
         const response = await fetch(endpoint, {
