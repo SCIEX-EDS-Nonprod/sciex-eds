@@ -1,5 +1,4 @@
 import '../../scripts/aem.js';
-// import { addToFavorite, removeToFavorite } from '../../scripts/searchresult/components/renderSearchResult.js';
 
 async function checkLoginStatus() {
   try {
@@ -114,7 +113,6 @@ export default function decorate(block) {
       path.setAttribute('stroke', '#e60023');
       console.log('Adding to favorites :>> ', fullUrl);
       callFavoriteAPI('add', fullUrl);
-      console.log('Added to favorites :>> ', addToFavorite(fullUrl));
     }
   });
 
@@ -213,15 +211,15 @@ export default function decorate(block) {
   const voteStars = articleStarsRow.querySelectorAll('.votestar');
 
   voteStars.forEach((star, index) => {
-    let ratingValue = index + 1;
-    //ratingValue =currentUserScore;  
+    const ratingValue = index + 1;
+    // ratingValue =currentUserScore;
     console.log('Initial ratingValue :>> ', ratingValue);
     star.addEventListener('mouseenter', () => {
       updateArticleStars(ratingValue);
     });
-    async function getArticle(articleId) {
-      const res = await fetch(`/bin/sciex/knowledge?articleId=${articleId}`);
-      return await res.json();
+    async function getArticle(kbaarticleId) {
+      const res = await fetch(`/bin/sciex/knowledge?articleId=${kbaarticleId}`);
+      return res.json();
     }
     star.addEventListener('click', () => {
       savedArticleRating = ratingValue;
@@ -229,10 +227,9 @@ export default function decorate(block) {
       getArticle(articleId);
     });
   });
- updateArticleStars(currentUserScore);
+  updateArticleStars(currentUserScore);
   articleStarsRow.addEventListener('mouseleave', () => {
     updateArticleStars(savedArticleRating);
-    
   });
 
   articleRatingBar.append(articleRatingText, articleStarsRow);
@@ -266,9 +263,9 @@ export default function decorate(block) {
   detailsText.innerHTML = '<span class="kba-note">Note : </span><span class="kba-text">For research use only. Not for use in diagnostic procedures.</span>';
 
   details.append(detailsHeading, detailsRelatedText, detailsText);
-  /* if (!isUserLoggedIn) {
-  articleRatingBar.style.display = 'none';
-} */
+  if (!isUserLoggedIn) {
+    articleRatingBar.style.display = 'none';
+  }
   container.append(header, articleRatingBar, bodyContent, details);
 
   block.textContent = '';
