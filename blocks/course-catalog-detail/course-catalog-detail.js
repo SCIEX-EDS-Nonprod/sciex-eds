@@ -150,6 +150,51 @@ export default function decorate(block) {
     }
   });
 
+
+  const relatedContainer = document.createElement('div');
+  relatedContainer.classList.add('related-container');
+
+  // Heading
+  const heading = document.createElement('h4');
+  heading.className = 'related-title';
+  heading.textContent = 'Related resources';
+  const linksWrapper = document.createElement('div');
+  linksWrapper.classList.add('related-links');
+
+  if (relatedResources) {
+    relatedContainer.appendChild(heading);
+
+    const items = relatedResources.split(',');
+
+    items.forEach(item => {
+      const [label, url] = item.split(':');
+
+      if (label && url) {
+        const link = document.createElement('a');
+        link.href = url.trim();
+        link.textContent = label.trim();
+
+        linksWrapper.appendChild(link);
+      }
+    });
+  }
+  relatedContainer.appendChild(linksWrapper);
+  const exploreBtn = document.createElement('a');
+  exploreBtn.href = '/explore-more-courses';
+  exploreBtn.target = '_blank';
+  exploreBtn.className = 'btn secondary related-explore-btn';
+  exploreBtn.textContent = 'Explore more courses';
+
+  // icon
+  exploreBtn.append(span({ class: 'icon icon-arrow-blue' }));
+  // append buttons
+  decorateIcons(exploreBtn);
+  relatedContainer.appendChild(exploreBtn);
+
+  descriptionContainer.appendChild(relatedContainer);
+
+
+
   // ===== RIGHT (COURSE DETAILS) =====
   const courseDetailsContainer = document.createElement('div');
   courseDetailsContainer.className = 'course-details-container';
