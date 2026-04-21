@@ -1,7 +1,45 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 
-export default function decorate(block) {
+const USER_API = '/bin/sciex/currentuserdetails';
+
+async function checkLoginStatus() {
+  try {
+    const userResp = await fetch(USER_API, { credentials: 'include' });
+
+    if (!userResp.ok) {
+      throw new Error(`User API failed: ${userResp.status}`);
+    }
+
+    const user = await userResp.json();
+    return user?.loggedIn === true;
+  } catch (e) {
+    console.warn('Course catalog detail: treating user as logged out', e);
+    return false;
+  }
+}
+
+async function getUserDetails() {
+  try {
+    const response = await fetch(USER_API, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    return null;
+  }
+}
+
+
+
+export default async function decorate(block) {
   const children = Array.from(block.children);
   if (children.length < 10) return;
   const courseId = children[0]?.textContent?.trim();
@@ -16,6 +54,32 @@ export default function decorate(block) {
   const courseLevel = children[9]?.textContent?.trim();
   const relatedResources = children[10]?.textContent?.trim();
   console.log('id', courseId, relatedResources);
+
+  // Check login status and fetch available course sessions if logged in
+  const isLoggedIn = await checkLoginStatus();
+  if (isLoggedIn) {
+    const user = await getUserDetails();
+    if (user && user.email && courseId) {
+      const userEmail = user.email;
+      const baseUrl = window.location.origin;
+      const restServices = '/bin/sciex'; // Assuming this is the path, adjust if needed
+      const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+        const data = await response.json();
+        console.log('Available course sessions response:', data);
+      } catch (error) {
+        console.error('Error fetching available course sessions:', error);
+      }
+    }
+  }
 
   // Convert "78.5%" → 3.9 (out of 5)
   let numericRating = 0;
