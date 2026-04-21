@@ -1,50 +1,8 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
-import { getSalesforceAuthToken, initializeSalesforceConfig } from '../../scripts/oauth-token-manager.js';
+import { getSalesforceAuthToken } from '../../scripts/oauth-token-manager.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
-
-// Salesforce OAuth credentials - from environment or fallback
-// These should be set via .env file in Vite or injected at runtime
-const SALESFORCE_CONFIG = {
-  clientId: 'VITE_SALESFORCE_CLIENT_ID',
-  clientSecret: 'VITE_SALESFORCE_CLIENT_SECRET',
-  username: 'sciexwebintegration@sciex.com.full',
-  password: 'VITE_SALESFORCE_PASSWORD',
-};
-
-/**
- * Initialize Salesforce OAuth if not already initialized
- */
-function ensureSalesforceConfigInitialized() {
-  try {
-    // Check if already initialized
-    if (window.__SALESFORCE_CONFIG__) {
-      return true;
-    }
-
-    // Try to get from environment variables (Vite)
-    const env = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {};
-    
-    if (env.VITE_SALESFORCE_CLIENT_ID && env.VITE_SALESFORCE_CLIENT_SECRET && env.VITE_SALESFORCE_PASSWORD) {
-      console.log('Initializing Salesforce config from environment variables');
-      initializeSalesforceConfig({
-        clientId: env.VITE_SALESFORCE_CLIENT_ID,
-        clientSecret: env.VITE_SALESFORCE_CLIENT_SECRET,
-        username: env.VITE_SALESFORCE_USERNAME || 'sciexwebintegration@sciex.com.full',
-        password: env.VITE_SALESFORCE_PASSWORD,
-        tokenUrl: env.VITE_SALESFORCE_TOKEN_URL,
-      });
-      return true;
-    }
-
-    console.warn('Salesforce OAuth config not initialized. Please ensure .env file is loaded or call initializeSalesforceConfig()');
-    return false;
-  } catch (error) {
-    console.error('Error initializing Salesforce config:', error);
-    return false;
-  }
-}
 
 async function checkLoginStatus() {
   try {
@@ -114,15 +72,6 @@ export default async function decorate(block) {
       console.log('Course ID:', courseId);
 
       try {
-        console.log('Ensuring Salesforce config is initialized...');
-        const configReady = ensureSalesforceConfigInitialized();
-        
-        if (!configReady) {
-          console.warn('Salesforce config not available - cannot fetch OAuth token');
-          console.warn('Please ensure environment variables are set or Salesforce config is initialized');
-          return;
-        }
-
         console.log('Fetching OAuth token...');
         const authToken = await getSalesforceAuthToken();
         console.log('Auth Token obtained:', authToken ? 'Success' : 'Failed');
