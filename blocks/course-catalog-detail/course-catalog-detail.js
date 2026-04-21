@@ -64,7 +64,7 @@ export default async function decorate(block) {
       const baseUrl = 'https://sciex--full.sandbox.my.salesforce.com';
       const restServices = '/services/apexrest/'; // Assuming this is the path, adjust if needed
       // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
-      const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
+      const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=a5G2I00000096RfUAI`;
       const token = courseId;
 
       try {
