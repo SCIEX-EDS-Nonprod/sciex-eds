@@ -48,7 +48,7 @@ export default function decorate(block) {
   const tagNames = children[13];
   const voteAvg = children[14] || 0;
   // const currentUserHasVoted = children[15]?.textContent === 'true';
-  const currentUserScore = children[16] || 0;
+  const currentUserScore = children[16]?.textContent || 0;
   console.log('currentUserScore :>> ', currentUserScore);
 
   const blockId = versionId?.textContent?.trim() || 'knowledge-base-article';
@@ -181,6 +181,7 @@ export default function decorate(block) {
   let savedArticleRating = 0;
 
   function updateArticleStars(count) {
+    console.log('Updating stars to :>> ', count);
     const articleStars = articleStarsRow.querySelectorAll('.votestar');
     articleStars.forEach((star, index) => {
       const path = star.querySelector('path');
@@ -207,20 +208,20 @@ export default function decorate(block) {
 
     articleStarsRow.appendChild(articleStarItem);
   }
-
+  async function getArticle(kbaarticleId) {
+    const res = await fetch(`/bin/sciex/knowledge?articleId=${kbaarticleId}`);
+    return res.json();
+  }
   const voteStars = articleStarsRow.querySelectorAll('.votestar');
 
   voteStars.forEach((star, index) => {
     const ratingValue = index + 1;
     // ratingValue =currentUserScore;
-    console.log('Initial ratingValue :>> ', ratingValue);
+    // console.log('Initial ratingValue :>> ', ratingValue);
     star.addEventListener('mouseenter', () => {
       updateArticleStars(ratingValue);
     });
-    async function getArticle(kbaarticleId) {
-      const res = await fetch(`/bin/sciex/knowledge?articleId=${kbaarticleId}`);
-      return res.json();
-    }
+
     star.addEventListener('click', () => {
       savedArticleRating = ratingValue;
       updateArticleStars(savedArticleRating);
@@ -264,7 +265,7 @@ export default function decorate(block) {
 
   details.append(detailsHeading, detailsRelatedText, detailsText);
   if (!isUserLoggedIn) {
-    articleRatingBar.style.display = 'none';
+   articleRatingBar.style.display = 'none';
   }
   container.append(header, articleRatingBar, bodyContent, details);
 
