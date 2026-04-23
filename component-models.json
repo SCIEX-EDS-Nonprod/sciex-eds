@@ -1013,7 +1013,7 @@
         "valueType": "string"
       },
       {
-        "component": "text",
+        "component": "boolean",
         "name": "isfree",
         "label": "Is Free",
         "valueType": "boolean"

@@ -54,6 +54,7 @@ export default async function decorate(block) {
   const courseLevel = children[9]?.textContent?.trim();
   const relatedResources = children[10]?.textContent?.trim();
   const isFree = children[11]?.textContent?.trim();
+  console.log('freeeeeeeeeeeee', isFree);
   console.log('id', courseId, relatedResources, isFree);
 
   // Check login status and fetch available course sessions if logged in
@@ -297,6 +298,18 @@ export default async function decorate(block) {
   </div>
   <div class="course-action-row"></div> 
 `;
+  // Determine cost display based on login status and free status
+  let costDisplay = '$500';
+  if (!isLoggedIn) {
+    costDisplay = (isFree === 'true' || isFree === true) ? 'Free' : 'Login for price';
+  }
+
+  // Update cost display in the course details
+  const costValueSpan = courseDetailsContainer.querySelector('.course-detail-value');
+  if (costValueSpan) {
+    costValueSpan.textContent = costDisplay;
+  }
+
   const actionRow = courseDetailsContainer.querySelector('.course-action-row');
 
   // --- Primary button ---
