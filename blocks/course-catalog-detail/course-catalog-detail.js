@@ -46,14 +46,15 @@ export default async function decorate(block) {
   const courseTitle = children[1]?.textContent?.trim();
   const courseUrl = children[2]?.textContent?.trim();
   const courseRating = children[3]?.textContent?.trim();
-  const description = children[4]?.textContent?.trim();
+  const description = children[4]?.innerHTML?.trim();
   const duration = children[5]?.textContent?.trim();
   const region = children[6]?.textContent?.trim();
   const language = children[7]?.textContent?.trim();
   const courseType = children[8]?.textContent?.trim();
   const courseLevel = children[9]?.textContent?.trim();
   const relatedResources = children[10]?.textContent?.trim();
-  console.log('id', courseId, relatedResources);
+  const isFree = children[11]?.textContent?.trim();
+  console.log('id', courseId, relatedResources, isFree);
 
   // Check login status and fetch available course sessions if logged in
   const isLoggedIn = await checkLoginStatus();

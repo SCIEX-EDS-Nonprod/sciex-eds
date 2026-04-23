@@ -85,6 +85,12 @@
           "name": "relatedResources",
           "label": "Related Resources",
           "valueType": "string"
+        },
+         {
+          "component": "text",
+          "name": "isfree",
+          "label": "Is Free",
+          "valueType": "boolean"
         }
       ]
     }
