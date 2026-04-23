@@ -142,6 +142,15 @@
   letter-spacing: 0.08px;
 }
 
+.cost-not-logged-in {
+  color: var(--Blue-700, #0068FA) !important;
+}
+.cost-login-link {
+  text-decoration: none !important;  
+}
+
+
+
 .description-container div li p>strong {
   color: #000;
   font-family: "Geogrotesque Sharp VF";

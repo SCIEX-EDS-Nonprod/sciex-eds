@@ -1,5 +1,6 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
+import { getCourseCatalogData } from '../../scripts/blocks-controllers/course-catalog-controller.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
 
@@ -299,15 +300,33 @@ export default async function decorate(block) {
   <div class="course-action-row"></div> 
 `;
   // Determine cost display based on login status and free status
-  let costDisplay = '$500';
-  if (!isLoggedIn) {
-    costDisplay = (isFree === 'true' || isFree === true) ? 'Free' : 'Login for price';
+  let costDisplay = '';
+  let costClassName = '';
+
+  if (isLoggedIn && userEmail && courseId) {
+    // Fetch cost from API if logged in
+    const catalogData = await getCourseCatalogData(userEmail, courseId);
+    if (catalogData && catalogData.cost && catalogData.cost.PriceBookEntry) {
+      const unitPrice = catalogData.cost.PriceBookEntry.UnitPrice;
+      costDisplay = `$${unitPrice}`;
+    }
+  } else {
+    // Not logged in - show Free or Login for price
+    costDisplay = isFree === 'true' ? 'Free' : 'Login for price';
+    costClassName = 'cost-not-logged-in';
   }
 
   // Update cost display in the course details
   const costValueSpan = courseDetailsContainer.querySelector('.course-detail-value');
   if (costValueSpan) {
-    costValueSpan.textContent = costDisplay;
+    if (costDisplay === 'Login for price') {
+      costValueSpan.innerHTML = `<a href="https://devcs.sciex.com/bin/sciex/login" class="cost-login-link">${costDisplay}</a>`;
+    } else {
+      costValueSpan.textContent = costDisplay;
+    }
+    if (costClassName) {
+      costValueSpan.classList.add(costClassName);
+    }
   }
 
   const actionRow = courseDetailsContainer.querySelector('.course-action-row');
