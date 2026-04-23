@@ -1,13 +1,55 @@
 import '../../scripts/aem.js';
 
+async function checkLoginStatus() {
+  try {
+    const USER_API = '/bin/sciex/currentuserdetails';
+    const userResp = await fetch(USER_API, { credentials: 'include' });
+
+    if (!userResp.ok) {
+      throw new Error(`User API failed: ${userResp.status}`);
+    }
+
+    const user = await userResp.json();
+    return user?.loggedIn === true;
+  } catch (e) {
+    console.warn('Treating user as logged out', e);
+    return false;
+  }
+}
+const isUserLoggedIn = await checkLoginStatus();
+const callFavoriteAPI = async (operation, url) => {
+  try {
+    const query = new URLSearchParams({ operation, url }).toString();
+
+    const res = await fetch(`/bin/sciex/favoritecontent?${query}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    const text = await res.text();
+
+    return {
+      success: res.ok,
+      data: text ? JSON.parse(text) : null,
+    };
+  } catch (e) {
+    console.error('Favorite API error:', e);
+    return { success: false };
+  }
+};
 export default function decorate(block) {
-  console.log('Decorating Knowledge Base Article block>'+ block.outerHTML);
+  console.log(`Decorating Knowledge Base Article block>${block.outerHTML}`);
   const children = Array.from(block.children);
   console.log('KBA children :>> ', children);
   const versionId = children[0];
+  const articleId = children[1]?.textContent?.trim() || '';
   const body = children[6];
   const title = children[4];
   const tagNames = children[13];
+  const voteAvg = children[14] || 0;
+  // const currentUserHasVoted = children[15]?.textContent === 'true';
+  const currentUserScore = children[16]?.textContent || 0;
+  console.log('currentUserScore :>> ', currentUserScore);
 
   const blockId = versionId?.textContent?.trim() || 'knowledge-base-article';
 
@@ -18,7 +60,7 @@ export default function decorate(block) {
   // Parse rich HTML body safely
   const bodyWrapper = document.createElement('div');
   bodyWrapper.innerHTML = body?.innerHTML || '';
-  const bodyText = bodyWrapper.querySelector('p')?.textContent || '';
+  // const bodyText = bodyWrapper.querySelector('p')?.textContent || '';
 
   // =========================
   // Header
@@ -58,14 +100,19 @@ export default function decorate(block) {
   favoriteIcon.addEventListener('click', () => {
     const path = favoriteIcon.querySelector('path');
     const isRed = path.getAttribute('fill') === '#e60023';
+    const fullUrl = window.location.href;
+    console.log(fullUrl);
 
     if (isRed) {
       path.setAttribute('fill', '#ffffff');
       path.setAttribute('stroke', '#333333');
       path.setAttribute('stroke-width', '1.5');
+      callFavoriteAPI('remove', fullUrl);
     } else {
       path.setAttribute('fill', '#e60023');
       path.setAttribute('stroke', '#e60023');
+      console.log('Adding to favorites :>> ', fullUrl);
+      callFavoriteAPI('add', fullUrl);
     }
   });
 
@@ -77,9 +124,9 @@ export default function decorate(block) {
   const statusWrapper = document.createElement('div');
   statusWrapper.className = 'status-wrapper';
 
-  /*const published = document.createElement('span');
+  /* const published = document.createElement('span');
   published.className = 'status';
-  published.textContent = `Published Date : ${createdDate?.textContent || ''}`;*/
+  published.textContent = `Published Date : ${createdDate?.textContent || ''}`; */
 
   // =========================
   // Rating UI
@@ -89,7 +136,7 @@ export default function decorate(block) {
 
   const ratingLabel = document.createElement('span');
   ratingLabel.className = 'rating-label';
-  ratingLabel.textContent = 'Rate the article';
+  ratingLabel.textContent = 'Rating';
 
   const starsContainer = document.createElement('div');
   starsContainer.className = 'stars-container';
@@ -101,12 +148,19 @@ export default function decorate(block) {
   <path d="M11.4141 0L14.1082 8.2918H22.8267L15.7733 13.4164L18.4675 21.7082L11.4141 16.5836L4.36064 21.7082L7.05481 13.4164L0.00138474 8.2918H8.71989L11.4141 0Z" fill="#F2C94C"/>
 </svg>`;
     star.dataset.value = i;
+    console.log('voteAvg :>> ', voteAvg.textContent);
+    const path = star.querySelector('path');
+    if (voteAvg && i <= voteAvg.textContent) {
+      path.setAttribute('fill', '#F2C94C');
+    } else {
+      path.setAttribute('fill', '#8A8A8A');
+    }
     starsContainer.appendChild(star);
   }
 
   ratingWrapper.append(ratingLabel, starsContainer);
 
-  statusWrapper.append( ratingWrapper);
+  statusWrapper.append(ratingWrapper);
 
   // FINAL: append title row + status
   header.append(titleRow, statusWrapper);
@@ -127,10 +181,10 @@ export default function decorate(block) {
   let savedArticleRating = 0;
 
   function updateArticleStars(count) {
+    console.log('Updating stars to :>> ', count);
     const articleStars = articleStarsRow.querySelectorAll('.votestar');
     articleStars.forEach((star, index) => {
       const path = star.querySelector('path');
-
       if (!path) return;
 
       if (index < count) {
@@ -154,12 +208,16 @@ export default function decorate(block) {
 
     articleStarsRow.appendChild(articleStarItem);
   }
-
+  async function getArticle(kbaarticleId) {
+    const res = await fetch(`/bin/sciex/knowledge?articleId=${kbaarticleId}`);
+    return res.json();
+  }
   const voteStars = articleStarsRow.querySelectorAll('.votestar');
 
   voteStars.forEach((star, index) => {
     const ratingValue = index + 1;
-
+    // ratingValue =currentUserScore;
+    // console.log('Initial ratingValue :>> ', ratingValue);
     star.addEventListener('mouseenter', () => {
       updateArticleStars(ratingValue);
     });
@@ -167,9 +225,10 @@ export default function decorate(block) {
     star.addEventListener('click', () => {
       savedArticleRating = ratingValue;
       updateArticleStars(savedArticleRating);
+      getArticle(articleId);
     });
   });
-
+  updateArticleStars(currentUserScore);
   articleStarsRow.addEventListener('mouseleave', () => {
     updateArticleStars(savedArticleRating);
   });
@@ -202,10 +261,12 @@ export default function decorate(block) {
   detailsRelatedText.innerHTML = `<span class="kba-note">Related to : </span><span class="kba-tag">${tagNames?.textContent || ''}</span>  `;
 
   const detailsText = document.createElement('p');
-  detailsText.innerHTML = `<span class="kba-note">Note : </span><span class="kba-text">${bodyText || ''}</span>`;
+  detailsText.innerHTML = '<span class="kba-note">Note : </span><span class="kba-text">For research use only. Not for use in diagnostic procedures.</span>';
 
   details.append(detailsHeading, detailsRelatedText, detailsText);
-
+  if (!isUserLoggedIn) {
+   articleRatingBar.style.display = 'none';
+  }
   container.append(header, articleRatingBar, bodyContent, details);
 
   block.textContent = '';

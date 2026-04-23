@@ -2522,7 +2522,14 @@
         "component": "checkbox",
         "name": "currentUserHasVoted",
         "label": "Current User Has Voted",
-        "valueType": "boolean"
+        "valueType": "boolean",
+        "value": false
+      },
+      {
+        "component": "number",
+        "name": "currentUserScore",
+        "label": "Current User Score",
+        "valueType": "number"
       }
     ]
   },
