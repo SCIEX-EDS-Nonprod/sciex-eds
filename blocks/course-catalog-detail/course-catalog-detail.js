@@ -20,26 +20,6 @@ async function checkLoginStatus() {
   }
 }
 
-async function getUserDetails() {
-  try {
-    const response = await fetch(USER_API, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    return null;
-  }
-}
-
-
-
 export default async function decorate(block) {
   const children = Array.from(block.children);
   if (children.length < 10) return;
@@ -60,29 +40,7 @@ export default async function decorate(block) {
 
   // Check login status and fetch available course sessions if logged in
   const [isLoggedIn, userEmail] = await checkLoginStatus();
-  if (isLoggedIn) {
-    if (userEmail && courseId) {
-      const baseUrl = 'https://sciex--full.sandbox.my.salesforce.com';
-      const restServices = '/services/apexrest/'; // Assuming this is the path, adjust if needed
-      // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
-      const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=a5G2I00000096RfUAI`;
-      const token = courseId;
-      console.log('Fetching available course sessions with endpoint:', token);
-      try {
-        const response = await fetch(endpoint, {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`
-          },
-        });
-        const data = await response.json();
-        console.log('Available course sessions response:', data);
-      } catch (error) {
-        console.error('Error fetching available course sessions:', error);
-      }
-    }
-  }
+
 
   // Convert "78.5%" → 3.9 (out of 5)
   let numericRating = 0;
