@@ -28,6 +28,10 @@
 }
 
 .rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
   color: var(--Grey-400, #8A8A8A);
   font-family: "Geogrotesque Sharp VF";
   font-size: 16px;
@@ -38,12 +42,7 @@
   margin-top: 16px;
 }
 
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
+
 
 .stars-container {
   display: flex;
@@ -143,7 +142,16 @@
   letter-spacing: 0.08px;
 }
 
-.description-container li>strong {
+.cost-not-logged-in {
+  color: var(--Blue-700, #0068FA) !important;
+}
+.cost-login-link {
+  text-decoration: none !important;  
+}
+
+
+
+.description-container div li p>strong {
   color: #000;
   font-family: "Geogrotesque Sharp VF";
   font-size: 24px;
@@ -154,7 +162,7 @@
 }
 
 /* Overview text */
-.description-container li {
+.description-container div li {
   color: var(--Grey-600, #5B5B5B);
   font-family: "Geogrotesque Sharp VF";
   font-size: 16px;
@@ -165,22 +173,22 @@
 }
 
 
-.description-container>ul {
+.description-container div>ul {
   display: flex;
   flex-direction: column;
   gap: 53px;
 }
 
-.description-container>ul>li {
+.description-container div>ul>li p {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.description-container ul {
+.description-container div ul li  ul {
   list-style: disc;
 }
-.description-container ul ul li {
+.description-container div ul ul li {
   margin-left: 20px;
 }
 
@@ -209,4 +217,28 @@
 .course-table th:first-child,
 .course-table td:first-child {
   width: 140px;
+}
+
+.related-container{
+  margin-top: 53px;
+}
+.related-title {
+ color: var(--Neutrals-900, #141414);
+font-family: "Geogrotesque Sharp VF";
+font-size: 24px;
+font-style: normal;
+font-weight: 330;
+line-height: 32px; 
+margin-bottom: 20px;
+}
+.related-links{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: underline;
+  text-decoration-color: #3b63fb;
+}
+.related-explore-btn{
+  margin-top: 53px !important;
+  margin: auto;
 }

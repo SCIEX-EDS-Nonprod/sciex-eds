@@ -1,19 +1,62 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
-export default function decorate(block) {
+import  getCourseCatalogData  from '../../scripts/blocks-controllers/course-catalog-controller.js';
+
+const USER_API = '/bin/sciex/currentuserdetails';
+
+async function checkLoginStatus() {
+  try {
+    const userResp = await fetch(USER_API, { credentials: 'include' });
+
+    if (!userResp.ok) {
+      throw new Error(`User API failed: ${userResp.status}`);
+    }
+
+    const user = await userResp.json();
+    return [user?.loggedIn === true, user?.email];
+  } catch (e) {
+    console.warn('Course catalog detail: treating user as logged out', e);
+    return [false, null];
+  }
+}
+
+export default async function decorate(block) {
   const children = Array.from(block.children);
   if (children.length < 10) return;
   const courseId = children[0]?.textContent?.trim();
   const courseTitle = children[1]?.textContent?.trim();
   const courseUrl = children[2]?.textContent?.trim();
   const courseRating = children[3]?.textContent?.trim();
-  const description = children[4]?.textContent?.trim();
+  const description = children[4]?.innerHTML?.trim();
   const duration = children[5]?.textContent?.trim();
   const region = children[6]?.textContent?.trim();
   const language = children[7]?.textContent?.trim();
   const courseType = children[8]?.textContent?.trim();
   const courseLevel = children[9]?.textContent?.trim();
-  console.log(courseId);
+  const relatedResources = children[10]?.textContent?.trim();
+  const isFree = children[11]?.textContent?.trim();
+  console.log('freeeeeeeeeeeee', isFree);
+  console.log('id', courseId, relatedResources, isFree);
+
+  // Check login status and fetch available course sessions if logged in
+  const [isLoggedIn, userEmail] = await checkLoginStatus();
+
+  // Determine cost display based on login status and free status
+  let costDisplay = '';
+  let costClassName = '';
+
+  if (isLoggedIn && userEmail && courseId) {
+    // Fetch cost from API if logged in
+    const catalogData = await getCourseCatalogData(userEmail, courseId);
+    if (catalogData && catalogData.cost && catalogData.cost.PriceBookEntry) {
+      const unitPrice = catalogData.cost.PriceBookEntry.UnitPrice;
+      costDisplay = `$${unitPrice}`;
+    }
+  } else {
+    // Not logged in - show Free or Login for price
+    costDisplay = isFree === 'true' ? 'Free' : 'Login for price';
+    costClassName = 'cost-not-logged-in';
+  }
 
   // Convert "78.5%" → 3.9 (out of 5)
   let numericRating = 0;
@@ -21,27 +64,27 @@ export default function decorate(block) {
   if (courseRating) {
     const percent = parseFloat(courseRating.replace('%', '').trim());
     numericRating = ((percent / 100) * 5).toFixed(1);
-  } 
+  }
 
   const starsContainer = document.createElement('div');
   starsContainer.className = 'stars-container';
 
-const ratingValue = Math.round(parseFloat(numericRating));
+  const ratingValue = Math.round(parseFloat(numericRating));
 
-for (let i = 1; i <= 5; i += 1) {
-  const star = document.createElement('p');
-  star.className = 'star';
+  for (let i = 1; i <= 5; i += 1) {
+    const star = document.createElement('p');
+    star.className = 'star';
 
-  const fillColor = i <= ratingValue ? '#F2C94C' : '#E0E0E0';
+    const fillColor = i <= ratingValue ? '#F2C94C' : '#E0E0E0';
 
-  star.innerHTML = `
+    star.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
       <path d="M11.4141 0L14.1082 8.2918H22.8267L15.7733 13.4164L18.4675 21.7082L11.4141 16.5836L4.36064 21.7082L7.05481 13.4164L0.00138474 8.2918H8.71989L11.4141 0Z" fill="${fillColor}"/>
     </svg>
   `;
 
-  starsContainer.appendChild(star);
-}
+    starsContainer.appendChild(star);
+  }
 
   const courseHeaderContainer = document.createElement('div');
   courseHeaderContainer.className = 'course-header-container';
@@ -91,62 +134,104 @@ for (let i = 1; i <= 5; i += 1) {
     if (strong && strong.textContent.includes('Follow on courses')) {
       const ul = li.querySelector('ul');
 
-    if (ul) {
-      const table = document.createElement('table');
-      table.classList.add('course-table');
+      if (ul) {
+        const table = document.createElement('table');
+        table.classList.add('course-table');
 
-      // ===== HEADER ROW =====
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
+        // ===== HEADER ROW =====
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
 
-      const th1 = document.createElement('th');
-      th1.textContent = 'No';
+        const th1 = document.createElement('th');
+        th1.textContent = 'No';
 
-      const th2 = document.createElement('th');
-      th2.textContent = 'Course info';
+        const th2 = document.createElement('th');
+        th2.textContent = 'Course info';
 
-      headerRow.append(th1, th2);
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
+        headerRow.append(th1, th2);
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
 
-      // ===== BODY =====
-      const tbody = document.createElement('tbody');
+        // ===== BODY =====
+        const tbody = document.createElement('tbody');
 
-      Array.from(ul.children).forEach((childLi) => {
-        const tr = document.createElement('tr');
+        Array.from(ul.children).forEach((childLi) => {
+          const tr = document.createElement('tr');
 
-        const temp = document.createElement('div');
-        temp.innerHTML = childLi.innerHTML;
+          const temp = document.createElement('div');
+          temp.innerHTML = childLi.innerHTML;
 
-        let fullText = temp.textContent
-          .replace(/\u00A0/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
+          const fullText = temp.textContent
+            .replace(/\u00A0/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
 
-        const firstSpaceIndex = fullText.indexOf(' ');
-        const code = fullText.slice(0, firstSpaceIndex).trim();
+          const firstSpaceIndex = fullText.indexOf(' ');
+          const code = fullText.slice(0, firstSpaceIndex).trim();
 
-        let descHTML = temp.innerHTML.slice(firstSpaceIndex)
-          .replace(/&nbsp;/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
+          const descHTML = temp.innerHTML.slice(firstSpaceIndex)
+            .replace(/&nbsp;/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
 
-        const td1 = document.createElement('td');
-        td1.textContent = code;
+          const td1 = document.createElement('td');
+          td1.textContent = code;
 
-        const td2 = document.createElement('td');
-        td2.innerHTML = descHTML;
+          const td2 = document.createElement('td');
+          td2.innerHTML = descHTML;
 
-        tr.append(td1, td2);
-        tbody.appendChild(tr);
-      });
+          tr.append(td1, td2);
+          tbody.appendChild(tr);
+        });
 
-      table.appendChild(tbody);
+        table.appendChild(tbody);
 
-      li.replaceChild(table, ul);
+        li.replaceChild(table, ul);
+      }
     }
+  });
+
+  const relatedContainer = document.createElement('div');
+  relatedContainer.classList.add('related-container');
+
+  // Heading
+  const heading = document.createElement('h4');
+  heading.className = 'related-title';
+  heading.textContent = 'Related resources';
+  const linksWrapper = document.createElement('div');
+  linksWrapper.classList.add('related-links');
+
+  if (relatedResources) {
+    relatedContainer.appendChild(heading);
+
+    const relatedResourcesItems = relatedResources.split(',');
+
+    relatedResourcesItems.forEach((item) => {
+      const [label, url] = item.split(':');
+
+      if (label && url) {
+        const link = document.createElement('a');
+        link.href = url.trim();
+        link.textContent = label.trim();
+
+        linksWrapper.appendChild(link);
+      }
+    });
   }
-});
+  relatedContainer.appendChild(linksWrapper);
+  const exploreBtn = document.createElement('a');
+  exploreBtn.href = '/explore-more-courses';
+  exploreBtn.target = '_blank';
+  exploreBtn.className = 'btn secondary related-explore-btn';
+  exploreBtn.textContent = 'Explore more courses';
+
+  // icon
+  exploreBtn.append(span({ class: 'icon icon-arrow-blue' }));
+  // append buttons
+  decorateIcons(exploreBtn);
+  relatedContainer.appendChild(exploreBtn);
+
+  descriptionContainer.appendChild(relatedContainer);
 
   // ===== RIGHT (COURSE DETAILS) =====
   const courseDetailsContainer = document.createElement('div');
@@ -158,7 +243,7 @@ for (let i = 1; i <= 5; i += 1) {
 
   <div class="course-detail-row">
     <span class="course-detail-key">Cost:</span>
-    <span class="course-detail-value">$500</span>
+    <span class="course-detail-value"></span>
   </div>
 
   <div class="course-detail-row">
@@ -188,6 +273,19 @@ for (let i = 1; i <= 5; i += 1) {
   </div>
   <div class="course-action-row"></div> 
 `;
+  // Update cost display in the course details
+  const costValueSpan = courseDetailsContainer.querySelector('.course-detail-value');
+  if (costValueSpan) {
+    if (costDisplay === 'Login for price') {
+      costValueSpan.innerHTML = `<a href="https://devcs.sciex.com/bin/sciex/login" class="cost-login-link">${costDisplay}</a>`;
+    } else {
+      costValueSpan.textContent = costDisplay;
+    }
+    if (costClassName) {
+      costValueSpan.classList.add(costClassName);
+    }
+  }
+
   const actionRow = courseDetailsContainer.querySelector('.course-action-row');
 
   // --- Primary button ---
@@ -211,7 +309,7 @@ for (let i = 1; i <= 5; i += 1) {
   quoteBtn.append(span({ class: 'icon icon-arrow-blue' }));
   // append buttons
   actionRow.append(takeCourseBtn, quoteBtn);
-  decorateIcons(actionRow)
+  decorateIcons(actionRow);
 
   // ===== MAIN LAYOUT WRAPPER =====
   const layout = document.createElement('div');

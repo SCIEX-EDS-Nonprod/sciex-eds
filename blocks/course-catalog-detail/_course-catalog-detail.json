@@ -79,6 +79,18 @@
           "name": "courseLevel",
           "label": "Course Level",
           "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "relatedResources",
+          "label": "Related Resources",
+          "valueType": "string"
+        },
+         {
+          "component": "boolean",
+          "name": "isfree",
+          "label": "Is Free",
+          "valueType": "boolean"
         }
       ]
     }
