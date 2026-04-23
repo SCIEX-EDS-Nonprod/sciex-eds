@@ -12,10 +12,10 @@ async function checkLoginStatus() {
     }
 
     const user = await userResp.json();
-    return user?.loggedIn === true;
+    return [user?.loggedIn === true, user?.email];
   } catch (e) {
     console.warn('Course catalog detail: treating user as logged out', e);
-    return false;
+    return [false, null];
   }
 }
 
@@ -57,17 +57,15 @@ export default async function decorate(block) {
   console.log('id', courseId, relatedResources, isFree);
 
   // Check login status and fetch available course sessions if logged in
-  const isLoggedIn = await checkLoginStatus();
+  const [isLoggedIn, userEmail] = await checkLoginStatus();
   if (isLoggedIn) {
-    const user = await getUserDetails();
-    if (user && user.email && courseId) {
-      const userEmail = user.email;
+    if (userEmail && courseId) {
       const baseUrl = 'https://sciex--full.sandbox.my.salesforce.com';
       const restServices = '/services/apexrest/'; // Assuming this is the path, adjust if needed
       // const endpoint = `${baseUrl}${restServices}/sciexnow/v1/lmscourse/${encodeURIComponent(userEmail)}/availablecoursesessions?courseId=${encodeURIComponent(courseId)}`;
       const endpoint = `${baseUrl}${restServices}sciexnow/v1/lmscourse/carlos.valencia@sfgov.org/availablecoursesessions?courseId=a5G2I00000096RfUAI`;
       const token = courseId;
-console.log('Fetching available course sessions with endpoint:', token);
+      console.log('Fetching available course sessions with endpoint:', token);
       try {
         const response = await fetch(endpoint, {
           method: 'GET',
