@@ -41,6 +41,22 @@ export default async function decorate(block) {
   // Check login status and fetch available course sessions if logged in
   const [isLoggedIn, userEmail] = await checkLoginStatus();
 
+  // Determine cost display based on login status and free status
+  let costDisplay = '';
+  let costClassName = '';
+
+  if (isLoggedIn && userEmail && courseId) {
+    // Fetch cost from API if logged in
+    const catalogData = await getCourseCatalogData(userEmail, courseId);
+    if (catalogData && catalogData.cost && catalogData.cost.PriceBookEntry) {
+      const unitPrice = catalogData.cost.PriceBookEntry.UnitPrice;
+      costDisplay = `$${unitPrice}`;
+    }
+  } else {
+    // Not logged in - show Free or Login for price
+    costDisplay = isFree === 'true' ? 'Free' : 'Login for price';
+    costClassName = 'cost-not-logged-in';
+  }
 
   // Convert "78.5%" → 3.9 (out of 5)
   let numericRating = 0;
@@ -227,7 +243,7 @@ export default async function decorate(block) {
 
   <div class="course-detail-row">
     <span class="course-detail-key">Cost:</span>
-    <span class="course-detail-value">$500</span>
+    <span class="course-detail-value"></span>
   </div>
 
   <div class="course-detail-row">
@@ -257,23 +273,6 @@ export default async function decorate(block) {
   </div>
   <div class="course-action-row"></div> 
 `;
-  // Determine cost display based on login status and free status
-  let costDisplay = '';
-  let costClassName = '';
-
-  if (isLoggedIn && userEmail && courseId) {
-    // Fetch cost from API if logged in
-    const catalogData = await getCourseCatalogData(userEmail, courseId);
-    if (catalogData && catalogData.cost && catalogData.cost.PriceBookEntry) {
-      const unitPrice = catalogData.cost.PriceBookEntry.UnitPrice;
-      costDisplay = `$${unitPrice}`;
-    }
-  } else {
-    // Not logged in - show Free or Login for price
-    costDisplay = isFree === 'true' ? 'Free' : 'Login for price';
-    costClassName = 'cost-not-logged-in';
-  }
-
   // Update cost display in the course details
   const costValueSpan = courseDetailsContainer.querySelector('.course-detail-value');
   if (costValueSpan) {
