@@ -74,7 +74,7 @@ export default  async function getCourseCatalogData(email, courseId) {
       },
       buyNow: "https://sciex--full.sandbox.my.salesforce.com",
       Enrollment_URL: "/services/apexrest/enrollment"
-    }
+    };
   } catch (error) {
     console.error('Mock error:', error);
     return null;
