@@ -1,6 +1,6 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
-import { getCourseCatalogData } from '../../scripts/blocks-controllers/course-catalog-controller.js';
+import  getCourseCatalogData  from '../../scripts/blocks-controllers/course-catalog-controller.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
 
