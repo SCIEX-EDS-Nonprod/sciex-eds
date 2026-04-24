@@ -901,6 +901,58 @@
     ]
   },
   {
+    "id": "category-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "card_image",
+        "label": "Card Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category_title",
+        "value": "",
+        "label": "Category Title"
+      },
+      {
+        "component": "aem-content",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cta_label",
+        "value": "Browse Products →",
+        "label": "CTA Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cta_link",
+        "value": "#",
+        "label": "CTA Link"
+      },
+      {
+        "component": "boolean",
+        "name": "cta_link_target",
+        "valueType": "boolean",
+        "value": false,
+        "label": "Open CTA link in new tab?"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "bg_color",
+        "value": "#FFFFFF",
+        "label": "Background Color"
+      }
+    ]
+  },
+  {
     "id": "chat-bot",
     "fields": [
       {
