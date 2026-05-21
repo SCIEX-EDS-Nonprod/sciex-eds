@@ -8,6 +8,7 @@ import {
 } from '../../scripts/favorite-all/favorite-allDocEngine.js';
 
 const USER_API = '/bin/sciex/currentuserdetails';
+console.log('Course catalog detail');
 
 /**
  * Fetches current user login status, email, and country code from API
