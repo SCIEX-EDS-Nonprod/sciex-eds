@@ -809,7 +809,7 @@ async function sectionBackgroundColor(element) {
 /**
  * Loads the WalkMe script.
  */
-function loadWalkMe() {
+async function loadWalkMe() {
   const walkme = document.createElement('script');
   walkme.type = 'text/javascript';
   walkme.async = true;
