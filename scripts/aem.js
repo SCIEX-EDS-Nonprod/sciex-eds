@@ -807,18 +807,27 @@ async function sectionBackgroundColor(element) {
 }
 
 /**
- * Loads the WalkMe script.
+ * Loads the WalkMe script if enabled via metadata.
+ * Set 'walkme-enabled' metadata to 'true' to enable WalkMe on a page.
  */
 function loadWalkMe() {
-  const walkme = document.createElement('script');
-  walkme.type = 'text/javascript';
-  walkme.async = true;
-  // Production
-  walkme.src = 'https://cdn.walkme.com/users/1e111ec60eee4eb8859b4147fa4ea483/walkme_1e111ec60eee4eb8859b4147fa4ea483_https.js';
-  const s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(walkme, s);
-  // eslint-disable-next-line no-underscore-dangle
-  window._walkmeConfig = { smartLoad: true };
+  const walkmeEnabled = getMetadata('walkme-enabled');
+  if (walkmeEnabled && walkmeEnabled.toLowerCase() === 'true') {
+    const walkmeId = getMetadata('walkme-id');
+    if (!walkmeId) {
+      // eslint-disable-next-line no-console
+      console.warn('WalkMe enabled but walkme-id metadata is missing');
+      return;
+    }
+    const walkme = document.createElement('script');
+    walkme.type = 'text/javascript';
+    walkme.async = true;
+    walkme.src = `https://cdn.walkme.com/users/${walkmeId}/walkme_${walkmeId}_https.js`;
+    const s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(walkme, s);
+    // eslint-disable-next-line no-underscore-dangle
+    window._walkmeConfig = { smartLoad: true };
+  }
 }
 
 init();

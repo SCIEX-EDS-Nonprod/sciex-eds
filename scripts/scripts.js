@@ -210,7 +210,13 @@ async function loadLazy(doc) {
 function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
-  loadWalkMe();
+  try {
+    loadWalkMe();
+    
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.debug('WalkMe loading skipped or failed', error);
+  }
   // load anything that can be postponed to the latest here
 }
 
