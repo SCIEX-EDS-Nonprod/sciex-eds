@@ -30,6 +30,7 @@ function canMobileActions() {
 }
 async function getUserDetails() {
   try {
+    // Fetch user details from the server
     const response = await fetch('/bin/sciex/currentuserdetails', {
       method: 'GET',
       credentials: 'include',
