@@ -2,6 +2,7 @@ import {
   div, span, ul, li, a, p,
 } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
+import {fetchPlaceholders} from '../../scripts/aem.js'
 import { standaloneSearchBoxController } from '../../scripts/header-search/headerSearchController.js';
 // import { login } from '../../scripts/auth.js';
 
@@ -585,7 +586,7 @@ function createMainHeader(section) {
         class:
           'tw-flex tw-items-center tw-transition-colors', // tw-ml-16
       });
-      if (anchorTag.text === 'Login' || anchorTag.text === 'My account') {
+      if (anchorTag.text === placeholders.login || anchorTag.text === 'My account') {
         // anchorTag.addEventListener('click', handleSignInClick);
         // anchorTag.href = 'https://devcs.sciex.com/bin/sciex/login';
       // }else if (anchorTag.text === 'My account'){
@@ -625,7 +626,7 @@ function createMainHeader(section) {
         Object.keys(menuItems).forEach((key) => {
           const value = menuItems[key];
           let anchorElement = document.createElement('a');
-          if (key === 'Button' && anchorTag.text === 'Login') {
+          if (key === 'Button' && anchorTag.text === placeholders.login) {
             anchorElement = document.createElement('div');
             anchorElement.innerHTML = '<a href="/support/create-account"><button class=" create-account-btn">Create an account</button></a>';
           } else {
@@ -677,7 +678,7 @@ function createMainHeader(section) {
               anchorElement.href = 'https://devcs.sciex.com/bin/sciex/logout';
             } else if (key === 'Already have an account?Sign In Now') {
               anchorElement.id = 'signInNowLink';
-              if (anchorTag.text === 'Login') {
+              if (anchorTag.text === placeholders.login) {
                 anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
                 anchorElement.innerHTML = `${value}`;
               } else if (anchorTag.text === 'My account') {
@@ -1770,7 +1771,7 @@ function processHtml(block, main) {
 export default async function decorate(block) {
   // Fetch user details first (only once)
   await getUserDetails(); 
-
+  const placeholders = await fetchPlaceholders();
   // load nav as fragment
   const { lang } = document.documentElement;
   let path = '/nav.plain.html';
