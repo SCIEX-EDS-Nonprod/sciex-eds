@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
 // eslint-disable-next-line
 import { loadQueryActions, loadFacetSetActions } from 'https://static.cloud.coveo.com/headless/v3/headless.esm.js';
 import { searchEngine } from '../../scripts/searchresult/engine.js';
@@ -13,7 +13,6 @@ import renderQuerySummary from '../../scripts/searchresult/components/querySumma
 import renderSorting from '../../scripts/searchresult/components/sorting.js';
 import { renderFacetBreadcurm, handleClearMobileFilters } from '../../scripts/searchresult/components/facetBreadcrumb.js';
 import { contentTypeFacetController } from '../../scripts/searchresult/controller/controllers.js';
-import { i18n } from '../../scripts/translation.js';
 import { setSearchSurveyCookie, qualtricsFeedback } from '../../scripts/scripts.js';
 import updateSearchFacetBanners from '../../scripts/searchresult/components/facetBanners.js';
 
@@ -26,9 +25,8 @@ function callBanners() {
 }
 
 export default async function decorate(block) {
-  const lang = document.documentElement.lang || 'en';
-  const strings = i18n[lang] || i18n.en;
-
+  const strings = await fetchPlaceholders();
+ 
   // Create main container div
   const searchResultDiv = document.createElement('div');
   searchResultDiv.classList.add('tw', 'search-result', 'tw-bg-white');
@@ -94,7 +92,7 @@ export default async function decorate(block) {
   );
   // mobile filter clear Button
   const mobileFilterFooterClearButton = document.createElement('button');
-  mobileFilterFooterClearButton.textContent = strings.clearAll;
+  mobileFilterFooterClearButton.textContent = strings?.clearAll;
   mobileFilterFooterClearButton.id = 'mobile-filter-footer-clear-all';
   mobileFilterFooterClearButton.addEventListener('click', handleClearMobileFilters);
 
@@ -213,9 +211,9 @@ export default async function decorate(block) {
 
   const searchTermValidation = createElement('div', 'search-term-validation', 'searchTermValidation');
 
-  const validationText = createElement('div', 'search-validation-text', 'validationText', strings.limitText);
+  const validationText = createElement('div', 'search-validation-text', 'validationText', strings?.limitText);
   const validationCount = createElement('div', 'search-validation-count', 'validationCount');
-  const validationError = createElement('div', 'search-validation-error', 'validationError', strings.validationText);
+  const validationError = createElement('div', 'search-validation-error', 'validationError', strings?.validationText);
 
   searchTermValidation.appendChild(validationText);
   searchTermValidation.appendChild(validationError);
@@ -225,7 +223,7 @@ export default async function decorate(block) {
   const searchInput = document.createElement('input');
   searchInput.type = 'text';
   searchInput.id = 'coveo-query';
-  searchInput.placeholder = strings.search;
+  searchInput.placeholder = strings?.search;
   searchInput.maxLength = 200;
   searchInput.classList.add(
     'search-box',
@@ -312,7 +310,7 @@ export default async function decorate(block) {
   const coveoResultsLoading = document.createElement('div');
   coveoResultsLoading.id = 'coveo-results-loading';
   coveoResultsLoading.className = 'result-loading-section tw-text-center tw-text-2xl';
-  coveoResultsLoading.textContent = strings.loading;
+  coveoResultsLoading.textContent = strings?.loading;
 
   // Create results section div
   const coveoNoResultsDiv = document.createElement('div');

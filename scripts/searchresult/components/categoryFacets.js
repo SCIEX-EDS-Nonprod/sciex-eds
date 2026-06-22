@@ -1,9 +1,9 @@
 /* eslint-disable */
 import {contentTypeFacetController, allFacetController, facetBreadcrumb, languageFacetController } from "../controller/controllers.js";
-import { i18n } from "../../translation.js";
+import { fetchPlaceholders } from "../../aem.js";
 
 const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
+const strings = await fetchPlaceholders();
 
 function facetAccordion(values, facetElement, facetItemsContainer) {
   if (values.length !== 0) {
@@ -40,10 +40,10 @@ function createToggleButtons(facetItemsContainer, facetController) {
   buttonContainer.classList.add("facet-toggle-buttons"); // Optional class for styling
 
   const buttons = {
-    showMore: createButton(strings.showMore, "show-more-btn", () =>
+    showMore: createButton(strings?.showMore, "show-more-btn", () =>
       toggleValues(true)
     ),
-    showLess: createButton(strings.showLess, "show-less-btn", () =>
+    showLess: createButton(strings?.showLess, "show-less-btn", () =>
       toggleValues(false)
     ),
   };
@@ -131,7 +131,7 @@ function renderFacet(facetElementId, facetController, headerText) {
     facetInputElement.type = 'text';
     facetInputElement.id = facetId + '-input';
     facetInputElement.classList.add('tw-border', 'tw-p-2', 'tw-rounded-lg', 'tw-mt-2', 'facet-search-box');
-    facetInputElement.placeholder = strings.search;
+    facetInputElement.placeholder = strings?.search;
     facetInputElement.value = previousInputValue;
 
     facetInputElement.addEventListener('input', function (event) {
@@ -248,7 +248,7 @@ function clearFacetFilter(facetElement,facetController){
     const clearButton = document.createElement('button');
     clearButton.style.marginLeft = '0';
     clearButton.style.marginRight = '10px';
-    clearButton.textContent = strings.clearFilter;
+    clearButton.textContent = strings?.clearFilter;
   
     const clearIcon = document.createElement('span');
     clearIcon.innerHTML = '&#10005;';
@@ -486,43 +486,43 @@ function createFacetDiv(id) {
 }
 
 export function callCreateFacet() {
-  createFacetRender(contentTypeFacetController, "contenttype", strings.contentType);
+  createFacetRender(contentTypeFacetController, "contenttype", strings?.contentType);
 
   let lang = document.documentElement.lang;
 
   if (lang === 'ja' || lang === 'zh-cn') {
-    createFacetRender(languageFacetController, "language", strings.language);
+    createFacetRender(languageFacetController, "language", strings?.language);
   }
   const facetController = allFacetController;
 
   const facetsId = {
-    'coursetypecategories': strings.courseType,
-    'certificatetypecategories': strings.certificateType,
-    'capillaryelectrophoresiscategories': strings.capillaryElectrophoresis,
-    'hplcandceproductscategories': strings.liquidChromatography,
-    'integratedsolutionscategories': strings.integratedSolutions,
-    'levelcategories': strings.level,
-    'massspectrometerscategories': strings.massSpectrometry,
-    'softwarecategories': strings.software,
-    'standardsandreagentscategories': strings.standardsAndReagentKits,
-    'techniquescategories': strings.techniques,
-    'trainingtopiccategories': strings.trainingTopic,
-    'trainingtypecategories': strings.trainingType,
-    'trainingcoursetype': strings.trainingCourseType,
-    'categories': strings.categories,
-    'subcategories': strings.subcategories,
-    'assettypes': strings.assetType,
-    'languagecountry': strings.languageCountry,
-    'year': strings.year,
-    'region': strings.trainingLocation,
-    'applications': strings.applications,
-    'technicaldocuments': strings.technicalDocuments,
-    'instrumentfamily': strings.instrumentFamily,
-    'productcategories': strings.products
+    'coursetypecategories': strings?.courseType,
+    'certificatetypecategories': strings?.certificateType,
+    'capillaryelectrophoresiscategories': strings?.capillaryElectrophoresis,
+    'hplcandceproductscategories': strings?.liquidChromatography,
+    'integratedsolutionscategories': strings?.integratedSolutions,
+    'levelcategories': strings?.level,
+    'massspectrometerscategories': strings?.massSpectrometry,
+    'softwarecategories': strings?.software,
+    'standardsandreagentscategories': strings?.standardsAndReagentKits,
+    'techniquescategories': strings?.techniques,
+    'trainingtopiccategories': strings?.trainingTopic,
+    'trainingtypecategories': strings?.trainingType,
+    'trainingcoursetype': strings?.trainingCourseType,
+    'categories': strings?.categories,
+    'subcategories': strings?.subcategories,
+    'assettypes': strings?.assetType,
+    'languagecountry': strings?.languageCountry,
+    'year': strings?.year,
+    'region': strings?.trainingLocation,
+    'applications': strings?.applications,
+    'technicaldocuments': strings?.technicalDocuments,
+    'instrumentfamily': strings?.instrumentFamily,
+    'productcategories': strings?.products
   };
 
   if (lang !== 'ja' && lang !== 'zh-cn') {
-    facetsId['language'] = strings.language;
+    facetsId['language'] = strings?.language;
   }
 
   for (let item in facetsId) {

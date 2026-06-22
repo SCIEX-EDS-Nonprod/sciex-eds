@@ -1,8 +1,7 @@
 // sorting-utils.js
-import { i18n } from '../../translation.js';
+import { fetchPlaceholders } from '../../aem.js';
 
-const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
+const strings = await fetchPlaceholders();
 
 export const createSortHandler = (sortController) => ({
   sortBy: (criterion) => {
@@ -20,10 +19,10 @@ export const createSortHandler = (sortController) => ({
 export function renderLoggedOut(container, text, loginUrl, createUrl) {
   container.innerHTML = `
     <div class="favorites-logged-out">
-      <p>${text}</p>
+      <p>${strings?.favoriteAllLogoutText || text}</p>
       <div class="cta-row">
-        <a class="btn secondary" href="${loginUrl}">Login</a>
-        <a class="btn primary" href="${createUrl}">Create an account</a>
+        <a class="btn secondary" href="${loginUrl}">${strings?.login}</a>
+        <a class="btn primary" href="${createUrl}">${strings?.createAnAccount}</a>
       </div>
     </div>
   `;
