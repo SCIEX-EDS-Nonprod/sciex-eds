@@ -2,11 +2,10 @@ import {
   headlessResultsList,
   handleResultClick,
 } from '../controller/controllers.js';
-import { i18n } from '../../translation.js';
 import getFavoriteResultsList from '../../favorite-all/favorite-all-controller/favorite-allDocController.js';
+import { fetchPlaceholders } from '../../aem.js';
 
-const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
+const strings = await fetchPlaceholders();
 let favoriteResultsList = [];
 
 const favIconAllowedTags = [
@@ -137,9 +136,9 @@ const renderSearchResults = () => {
 
       const regulatoryInfo = document.createElement('div');
       regulatoryInfo.className = 'regulatory-info';
-      const partNumber = result.raw.productpartnumber ? `${strings.partNumber} : ${result.raw.productpartnumber} | ` : '';
-      const lotNumber = result.raw.lotnumber ? `${strings.lotNumber} : ${result.raw.lotnumber} | ` : '';
-      const componentLotNumber = result.raw.kitpartnumber ? `${strings.kitNumber} : ${result.raw.kitpartnumber} ` : '';
+      const partNumber = result.raw.productpartnumber ? `${strings?.partNumber} : ${result.raw.productpartnumber} | ` : '';
+      const lotNumber = result.raw.lotnumber ? `${strings?.lotNumber} : ${result.raw.lotnumber} | ` : '';
+      const componentLotNumber = result.raw.kitpartnumber ? `${strings?.kitNumber} : ${result.raw.kitpartnumber} ` : '';
 
       regulatoryInfo.innerHTML = `${partNumber}  ${lotNumber}  ${componentLotNumber}`;
 
@@ -200,7 +199,7 @@ const renderSearchResults = () => {
   ` : ''}
   <a class="view-details-btn" target="_blank"
      href="${cleanPrintableUri}">
-     ${strings.view}
+     ${strings?.view}
   </a>
 </div>
 
@@ -221,7 +220,7 @@ const renderSearchResults = () => {
         const showMoreBtn = document.createElement('button');
         showMoreBtn.className = 'show-more-btn-des';
 
-        const showMoreText = '<span class="show-more-text">Read More</span>';
+        const showMoreText = `<span class="show-more-text">${strings?.readMore}</span>`;
         showMoreBtn.innerHTML = showMoreText;
         showMoreBtn.style.display = 'none';
 
@@ -250,9 +249,9 @@ const renderSearchResults = () => {
           descriptionElement.style.maxHeight = isExpanded ? '3em' : 'none';
           descriptionElement.style.webkitLineClamp = isExpanded ? '3' : 'none';
           showMoreBtn.innerHTML = isExpanded
-            ? `<span class="show-more-text">Read More</span>${showMoreIcon}`
+            ? `<span class="show-more-text">${strings?.readMore}</span>${showMoreIcon}`
             : `
-              <span class="show-more-text">Read Less</span>
+              <span class="show-more-text">${strings?.readLess}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="21" viewBox="0 0 16 21" fill="none">
                 <path d="M2 8L14 8" stroke="#0068FA"/>
               </svg>
