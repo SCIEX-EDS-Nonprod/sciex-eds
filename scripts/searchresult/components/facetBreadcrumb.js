@@ -29,7 +29,7 @@ export const renderFacetBreadcurm = () => {
   filterCountShowLessButton.classList.add('tw-hidden', 'tw-flex');
   filterCountShowLessButton.id = 'filter-count-show-less';
   const showLessSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M0 6L12 6" stroke="#0068FA"/></svg>';
-  filterCountShowLessButton.innerHTML = `${showLessSvg} ${strings.showLess}`;
+  filterCountShowLessButton.innerHTML = `${showLessSvg} ${strings?.showLess}`;
 
   // add click event to show filters list and show less
   filterCountWrapper.addEventListener('click', function showfilters() {
@@ -92,29 +92,29 @@ export const renderFacetBreadcurm = () => {
   facetBreadcrumbElement.appendChild(filterCountShowLessButton);
 
   const facetsId = {
-    coursetypecategories: strings.courseType,
-    certificatetypecategories: strings.certificateType,
-    capillaryelectrophoresiscategories: strings.capillaryElectrophoresis,
-    hplcandceproductscategories: strings.liquidChromatography,
-    integratedsolutionscategories: strings.integratedSolutions,
-    levelcategories: strings.level,
-    massspectrometerscategories: strings.massSpectrometry,
-    softwarecategories: strings.software,
-    standardsandreagentscategories: strings.standardsAndReagentKits,
-    techniquescategories: strings.techniques,
-    trainingtopiccategories: strings.trainingTopic,
-    trainingtypecategories: strings.trainingType,
-    trainingcoursetype: strings.trainingCourseType,
-    categories: strings.categories,
-    subcategories: strings.subcategories,
-    assettypes: strings.assetType,
-    instrumentfamily: strings.instrumentFamily,
-    languagecountry: strings.languageCountry,
-    language: strings.language,
-    year: strings.year,
-    region: strings.trainingLocation,
-    applications: strings.applications,
-    technicaldocuments: strings.technicalDocuments,
+    coursetypecategories: strings?.courseType,
+    certificatetypecategories: strings?.certificateType,
+    capillaryelectrophoresiscategories: strings?.capillaryElectrophoresis,
+    hplcandceproductscategories: strings?.liquidChromatography,
+    integratedsolutionscategories: strings?.integratedSolutions,
+    levelcategories: strings?.level,
+    massspectrometerscategories: strings?.massSpectrometry,
+    softwarecategories: strings?.software,
+    standardsandreagentscategories: strings?.standardsAndReagentKits,
+    techniquescategories: strings?.techniques,
+    trainingtopiccategories: strings?.trainingTopic,
+    trainingtypecategories: strings?.trainingType,
+    trainingcoursetype: strings?.trainingCourseType,
+    categories: strings?.categories,
+    subcategories: strings?.subcategories,
+    assettypes: strings?.assetType,
+    instrumentfamily: strings?.instrumentFamily,
+    languagecountry: strings?.languageCountry,
+    language: strings?.language,
+    year: strings?.year,
+    region: strings?.trainingLocation,
+    applications: strings?.applications,
+    technicaldocuments: strings?.technicalDocuments,
     productcategories: 'Product',
   };
 
@@ -122,7 +122,7 @@ export const renderFacetBreadcurm = () => {
     value.values.forEach((item) => {
       let fieldName;
       if (value.field === 'contenttype') {
-        fieldName = strings.contentType;
+        fieldName = strings?.contentType;
       } else {
         fieldName = facetsId[value.field];
       }
@@ -187,7 +187,7 @@ export const renderFacetBreadcurm = () => {
   const button = document.createElement('button');
   button.style.marginRight = '0';
   button.style.marginLeft = 'auto';
-  button.textContent = strings.clearAll;
+  button.textContent = strings?.clearAll;
   button.style.color = 'var(--Blue-700, #0068FA)';
   // button.style.fontFamily = '"Geogrotesque"';
   button.style.fontSize = '16px';
