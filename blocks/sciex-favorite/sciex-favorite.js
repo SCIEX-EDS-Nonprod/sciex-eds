@@ -10,36 +10,36 @@ export default async function decorate(block) {
   const CATEGORY_MAP = [
     {
       key: 'knowledge',
-      title: placeholders.knowledgeBaseArticles || 'Knowledge base articles',
+      title: placeholders?.knowledgeBaseArticles || 'Knowledge base articles',
       icon: 'knowledge',
       match: (p) => p.includes('/resource-hub/knowledge-base-articles/'),
     },
     {
       key: 'tech-notes',
-      title: placeholders.technicalNotes || 'Technical notes',
+      title: placeholders?.technicalNotes || 'Technical notes',
       icon: 'tech-notes',
       match: (p) => p.includes('/tech-notes/'),
     },
     {
       key: 'regulatory',
-      title: placeholders.regulatoryDocuments || 'Regulatory documents',
+      title: placeholders?.regulatoryDocuments || 'Regulatory documents',
       icon: 'regulatory',
       match: (p) => p.includes('/regulatory-docs/'),
     },
     {
       key: 'user-guides',
-      title: placeholders.userGuides || 'User guides',
+      title: placeholders?.userGuides || 'User guides',
       icon: 'user-guides',
       match: (p) => p.includes('/customer-docs/'),
     },
   ];
 
   const id = block.children[0]?.textContent?.trim() || 'my-favorites';
-  const title = block.children[1]?.textContent?.trim() || placeholders.myFavoriteResources || 'My favorite resources';
+  const title = block.children[1]?.textContent?.trim() || placeholders?.myFavoriteResources || 'My favorite resources';
 
   const logoutText =
     block.children[2]?.textContent?.trim() ||
-    placeholders.favoritesLoggedOutMessage ||
+    placeholders?.favoritesLoggedOutMessage ||
     'Save your go-to articles and access them anytime. Sign in to keep your favorites in one place.';
 
   const loginUrl = block.children[3]?.textContent?.trim() || '/login';
@@ -48,7 +48,7 @@ export default async function decorate(block) {
 
   const FAVORITES_API = '/bin/sciex/favorite-all-content';
 
-  const viewAllUrlText = block.children[5]?.textContent?.trim() || placeholders.viewAllResources || "View all resources";
+  const viewAllUrlText = block.children[5]?.textContent?.trim() || placeholders?.viewAllResources || "View all resources";
 
   const viewAllUrl = block.children[6]?.textContent?.trim() || '#';
 
@@ -126,8 +126,8 @@ export default async function decorate(block) {
  * Displays message, Login CTA, and Create Account CTA.
  * */
 function renderLoggedOut(container, text, loginUrl, createUrl, placeholders = {}) {
-  const loginLabel = placeholders.login || 'Login';
-  const createAccountLabel = placeholders.createAnAccount || 'Create an account';
+  const loginLabel = placeholders?.login || 'Login';
+  const createAccountLabel = placeholders?.createAnAccount || 'Create an account';
 
   container.innerHTML = `
     <div class="favorites-logged-out">
@@ -212,10 +212,10 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText, CATEGORY_
       title = categoryConfig.title;
       icon = categoryConfig.icon;
     } else if (typeKey === 'self-paced') {
-      title = placeholders.selfpacedLearning || 'Self-paced learning';
+      title = placeholders?.selfpacedLearning || 'Self-paced learning';
       icon = 'self-paced';
     } else if (typeKey === 'instructor') {
-      title = placeholders.instructorLedTraining || 'Instructor led training';
+      title = placeholders?.instructorLedTraining || 'Instructor led training';
       icon = 'instructor';
     } else {
       title = humanizeType(typeKey);
@@ -262,7 +262,7 @@ function renderFavorites(container, items, viewAllUrl, viewAllUrlText, CATEGORY_
       emptyIcon.setAttribute('aria-hidden', 'true');
 
       const emptyText = document.createElement('p');
-      const noSavedTemplate = placeholders.noItemsSaved || 'No {category} saved';
+      const noSavedTemplate = placeholders?.noItemsSaved || 'No {category} saved';
       emptyText.textContent = noSavedTemplate.replace('{category}', title.toLowerCase());
 
       empty.append(emptyIcon, emptyText);
