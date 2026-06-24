@@ -1,7 +1,17 @@
+import { fetchPlaceholders } from '../../scripts/aem.js';
 import { createElement } from '../../scripts/scripts.js';
 
 // Cache for page titles to avoid refetching the same URL multiple times
 const pageTitleCache = new Map();
+const placeholders = await fetchPlaceholders();
+
+  const toCamelCase = (str) => {
+    return (
+      str
+        .toLowerCase()
+        .replace(/[^a-z0-9]+(.)/g, (_, char) => char.toUpperCase())
+    );
+  };
 
 /**
  * Fetches and returns the <title> text from the given URL.
@@ -121,7 +131,8 @@ const createLink = (breadcrumbItem) => {
         <path d="M3.33398 13V5.66667L8.00065 2L12.6673 5.66667V13H9.33398V8.66667H6.66732V13H3.33398Z" stroke="#707070"/>
       </svg>`;
   } else {
-    linkEl.innerText = breadcrumbItem.name;
+    const name=placeholders?.[toCamelCase(breadcrumbItem.name)] || breadcrumbItem.name;
+    linkEl.innerText = name;
   }
 
   linkEl.classList.add('breadcrumb-link');
@@ -152,8 +163,10 @@ export default async function decorate(block) {
   const breadcrumbHtmlParts = [homeLink.outerHTML];
 
   const currentPathname = window.location.pathname;
-  const showFullBreadcrumb = currentPathname.includes(
-    '/resource-hub/knowledge-base-articles',
+  console.log('Current Pathname:', currentPathname);
+  const showFullBreadcrumb =
+  /^\/(?:[a-z]{2}-[a-z]{2}\/)?resource-hub\/knowledge-base-articles\/.+/i.test(
+    currentPathname,
   );
   const ancestorPaths = showFullBreadcrumb
     ? await getAllPathsExceptCurrent(currentPathname)
@@ -165,17 +178,18 @@ export default async function decorate(block) {
 
   const currentPageTitle = document.querySelector('title')?.innerText || 'Current Page';
 
-  // If current page is "Favorite All", show "Resource Hub" first, then "Favorite All"
-  if (currentPageTitle === 'My favorite') {
+  const resourceHubTitles=['Knowledge base articles','Self-paced learning','Instructor led training','Technical notes','Regulatory documents','My favorite','SCIEX How','User guides'];
+  if (resourceHubTitles.includes(currentPageTitle)) {
     const resourceHubEl = document.createElement('a');
     resourceHubEl.href = '/resource-hub';
-    resourceHubEl.innerText = 'Resource hub';
+    resourceHubEl.innerText = placeholders?.resourceHub || 'Resource hub';
     resourceHubEl.classList.add('breadcrumb-resource-link');
     breadcrumbHtmlParts.push(resourceHubEl.outerHTML);
   }
 
   const currentPageEl = document.createElement('span');
-  currentPageEl.innerText = currentPageTitle;
+  const placeholderKey = toCamelCase(currentPageTitle);
+  currentPageEl.innerText = placeholders?.[placeholderKey] || currentPageTitle;
   currentPageEl.style.fontWeight = 'bold';
   currentPageEl.style.color = 'black';
   currentPageEl.setAttribute('aria-current', 'page');
