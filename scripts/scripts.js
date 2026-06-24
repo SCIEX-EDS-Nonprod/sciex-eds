@@ -117,6 +117,43 @@ function buildAutoBlocks() {
   }
 }
 
+async function getUserDetails() {
+  try {
+    const response = await fetch('/bin/sciex/currentuserdetails', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const userDetails = await response.json();
+    window.dataLayer = window.dataLayer || [];
+    localStorage.setItem('auth0Id', userDetails.auth0Id);
+
+    const existingUser = window.dataLayer.find((item) => item.user);
+
+    if (existingUser) {
+      existingUser.user.auth0Id = userDetails.auth0Id;
+      existingUser.user.company = 'SCIEX';
+    } else {
+      window.dataLayer.push({
+        user: {
+          auth0Id: userDetails.auth0Id,
+          company: 'SCIEX',
+        },
+      });
+    }
+    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+    return userDetails;
+  } catch (error) {
+    localStorage.setItem('userDetails', JSON.stringify({}));
+    return null;
+  }
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -129,6 +166,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  getUserDetails()
 }
 const TEMPLATE_LIST = [
   'course-catalog-template',
