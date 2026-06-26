@@ -5,6 +5,7 @@ import { createElement } from '../../scripts/scripts.js';
 const pageTitleCache = new Map();
 const placeholders = await fetchPlaceholders();
 
+//To camelCase function to convert string to camel case for placeholder matching
   const toCamelCase = (str) => {
     return (
       str
