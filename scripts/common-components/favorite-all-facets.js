@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { fetchPlaceholders } from '../aem.js';
 
 const placeholders = await fetchPlaceholders();
