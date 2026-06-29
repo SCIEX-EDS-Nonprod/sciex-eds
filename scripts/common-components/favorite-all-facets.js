@@ -1,8 +1,7 @@
 /* eslint-disable */
-import { i18n } from '../translation.js';
+import { fetchPlaceholders } from '../aem.js';
 
-const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
+const placeholders = await fetchPlaceholders();
 
 /* =========================
    🔑 PERSISTED STATE
@@ -10,6 +9,13 @@ const strings = i18n[lang] || i18n.en;
 const facetSearchState = {};
 const facetVisibleCountState = {};
 
+const toCamelCase = (str) => {
+    return (
+      str
+        .toLowerCase()
+        .replace(/[^a-z0-9]+(.)/g, (_, char) => char.toUpperCase())
+    );
+  };
 /* =========================
    CREATE TOGGLE BUTTONS
 ========================= */
@@ -27,7 +33,7 @@ function createToggleButtons({
 
   const showMoreBtn = document.createElement('button');
   showMoreBtn.classList.add('show-more-btn');
-  showMoreBtn.textContent = strings.showMore;
+  showMoreBtn.textContent = placeholders?.showMore;
   showMoreBtn.innerHTML += `
     <span>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -41,7 +47,7 @@ function createToggleButtons({
 
   const showLessBtn = document.createElement('button');
   showLessBtn.classList.add('show-less-btn');
-  showLessBtn.textContent = strings.showLess;
+  showLessBtn.textContent = placeholders?.showLess;
   showLessBtn.innerHTML += `
     <span>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -80,7 +86,7 @@ export function renderCommonFacet(
     if (facetId) {
       facetId.style.display = 'none';
     }
-    querySortSection.classList.add("removeFilter");
+    querySortSection?.classList.add("removeFilter");
     return;
   }
   const openIcon = `
@@ -108,8 +114,8 @@ export function renderCommonFacet(
 
     const icon = document.createElement('span');
     icon.innerHTML = openIcon;
-
-    header.append(text, icon);
+    const camelCaseText=toCamelCase(text?.textContent)
+    header.append(placeholders?.[camelCaseText] || text, icon);
 
     header.onclick = () => {
       const open = itemsContainer.style.display !== 'none';
@@ -169,7 +175,7 @@ export function renderCommonFacet(
     const clearButton = document.createElement('button');
     clearButton.style.marginLeft = '0';
     clearButton.style.marginRight = '10px';
-    clearButton.textContent = 'Clear Filter';
+    clearButton.textContent = placeholders?.clearFilter || 'Clear Filter';
 
     const clearIcon = document.createElement('span');
     clearIcon.innerHTML = '&#10005;';
@@ -208,7 +214,7 @@ export function renderCommonFacet(
     assetItems.appendChild(label);
   });
 
-  facetsContainer.appendChild(createFacet('Type', assetItems));
+  facetsContainer.appendChild(createFacet(placeholders?.type || 'Type', assetItems));
 
   /* =========================
      TAG FACETS (UNCHANGED LOGIC)
@@ -272,7 +278,7 @@ if (commonItems.length > 10) {
   facetInput.type = 'text';
   facetInput.id = `${facetId}-input`;
   facetInput.maxLength = 200;
-  facetInput.placeholder = 'Search';
+  facetInput.placeholder = placeholders?.search || 'Search';
   facetInput.value = searchTerm;
 
   facetInput.style.border = 'none';
@@ -304,7 +310,7 @@ if (commonItems.length > 10) {
       const clearButton = document.createElement('button');
       clearButton.style.marginLeft = '0';
       clearButton.style.marginRight = '10px';
-      clearButton.textContent = 'Clear Filter';
+      clearButton.textContent = placeholders?.clearFilter || 'Clear Filter';
 
       const clearIcon = document.createElement('span');
       clearIcon.innerHTML = '&#10005;';

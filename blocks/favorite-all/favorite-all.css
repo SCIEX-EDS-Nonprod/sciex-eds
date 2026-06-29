@@ -139,7 +139,7 @@
 }
 
 .result-item a {
-    width: 111px !important;
+    width: fit-content !important;
     white-space: nowrap;
 
 }
