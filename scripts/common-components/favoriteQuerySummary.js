@@ -1,9 +1,8 @@
-import { i18n } from '../translation.js';
+import { fetchPlaceholders } from '../aem.js';
 
-const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
 
 const MAX_RESULTS = 10;
+const placeholders = await fetchPlaceholders();
 
 function hasAnySelection(data) {
   return data.some((a) => a.state === 'selected');
@@ -79,13 +78,13 @@ const renderFavoriteQuerySummary = (data = []) => {
      RENDER
   ====================================================== */
 
-  mobileResultBtn.textContent = `Results (${displayResultCount})`;
+  mobileResultBtn.textContent = `${placeholders?.result} (${displayResultCount})`;
 
   const resultItem = document.createElement('div');
   resultItem.innerHTML = `
-    ${strings.result}
+    ${placeholders?.result}
    <span>${displayResultCount === 0 ? 0 : 1} - ${displayResultCount}</span>
-    ${strings.of}
+    ${placeholders?.of}
     <span>${totalResultCount}</span>
   `;
 

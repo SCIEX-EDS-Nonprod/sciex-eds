@@ -1,13 +1,11 @@
-/* eslint-disable */
+import { fetchPlaceholders } from '../aem.js';
 import {
   removeFavoriteSearchEngine
 } from '../favorite-all/favorite-allDocEngine.js';
-import { i18n } from '../translation.js';
 import renderFavoritePagination, {
   getCurrentPage
 } from './favoritePagination.js';
-const lang = document.documentElement.lang || 'en';
-const strings = i18n[lang] || i18n.en;
+const placeholders = await fetchPlaceholders();
 
 const MAX_RESULTS = 10;
 
@@ -61,7 +59,7 @@ function renderSortingDropdown(rerenderCallback) {
 
   const label = document.createElement('div');
   label.className = 'sort-by-label';
-  label.innerHTML = `${strings.sortBy || 'Sort By'}:`;
+  label.innerHTML = `${placeholders?.sortBy || 'Sort By'}:`;
 
   const select = document.createElement('select');
   select.id = 'sort-element';
@@ -69,9 +67,9 @@ function renderSortingDropdown(rerenderCallback) {
     'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm';
 
   const options = [
-    { label: strings.relevancy || 'Relevance', value: 'relevancy' },
-    { label: strings.title || 'Title', value: 'title' },
-    { label: strings.newest || 'Newest', value: 'newest' },
+    { label: placeholders?.relevancy || 'Relevance', value: 'relevancy' },
+    { label: placeholders?.title || 'Title', value: 'title' },
+    { label: placeholders?.newest || 'Newest', value: 'newest' },
   ];
 
   options.forEach(opt => {
@@ -210,7 +208,9 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
       resultItem.innerHTML = `
         <div class="item-details">
           <h3>${result.title || ''}</h3>
-          <div class="description">${result.description || ''}</div>
+          <div class='description-container'>
+              <div class="description">${result.description || ''}</div>
+          </div>
           <div class="related-products">
             ${
               relatedProductsHtml
@@ -232,11 +232,64 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
             target="_blank"
             href="${cleanPrintableUri || '#'}"
           >
-            ${strings.view} details
+            ${placeholders?.view} details
           </a>
         </div>
       `;
 
+      const descriptionElement = resultItem.querySelector('.description');
+      const descriptionContainer = resultItem.querySelector('.description-container');
+
+      if (descriptionElement) {
+        descriptionElement.style.maxHeight = '3em';
+        descriptionElement.style.overflow = 'hidden';
+        descriptionElement.style.textOverflow = 'ellipsis';
+        descriptionElement.style.display = '-webkit-box';
+        descriptionElement.style.webkitBoxOrient = 'vertical';
+
+        const showMoreBtn = document.createElement('button');
+        showMoreBtn.className = 'show-more-btn-des';
+
+        const showMoreText = `<span class="show-more-text">${placeholders?.readMore}</span>`;
+        showMoreBtn.innerHTML = showMoreText;
+        showMoreBtn.style.display = 'none';
+
+        const showMoreIcon = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8L14 8" stroke="#0068FA"/>
+            <path d="M8 2L8 14" stroke="#0068FA"/>
+          </svg>
+        `;
+        showMoreBtn.innerHTML += showMoreIcon;
+
+        const checkOverflow = () => {
+          if (descriptionElement.scrollHeight > descriptionElement.clientHeight) {
+            showMoreBtn.style.display = 'inline-flex';
+          }
+        };
+
+        const resizeObserver = new ResizeObserver(() => {
+          checkOverflow();
+        });
+        resizeObserver.observe(descriptionElement);
+
+        checkOverflow();
+        showMoreBtn.addEventListener('click', () => {
+          const isExpanded = descriptionElement.style.maxHeight === 'none';
+          descriptionElement.style.maxHeight = isExpanded ? '3em' : 'none';
+          descriptionElement.style.webkitLineClamp = isExpanded ? '3' : 'none';
+          showMoreBtn.innerHTML = isExpanded
+            ? `<span class="show-more-text">${placeholders?.readMore}</span>${showMoreIcon}`
+            : `
+              <span class="show-more-text">${placeholders?.readLess}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="21" viewBox="0 0 16 21" fill="none">
+                <path d="M2 8L14 8" stroke="#0068FA"/>
+              </svg>
+            `;
+        });
+
+        descriptionContainer.appendChild(showMoreBtn);
+      }
 
       /* ========================
          REMOVE FAVORITE
