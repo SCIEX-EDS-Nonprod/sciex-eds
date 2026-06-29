@@ -1,7 +1,7 @@
 import { facetBreadcrumb } from '../controller/controllers.js';
 import { fetchPlaceholders } from '../../aem.js';
 
-const strings = await fetchPlaceholders()
+const strings = await fetchPlaceholders();
 
 function canMobileActions() {
   const screenWidth = window.innerWidth;

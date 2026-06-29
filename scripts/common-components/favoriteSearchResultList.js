@@ -1,10 +1,11 @@
 import { fetchPlaceholders } from '../aem.js';
 import {
-  removeFavoriteSearchEngine
+  removeFavoriteSearchEngine,
 } from '../favorite-all/favorite-allDocEngine.js';
 import renderFavoritePagination, {
-  getCurrentPage
+  getCurrentPage,
 } from './favoritePagination.js';
+
 const placeholders = await fetchPlaceholders();
 
 const MAX_RESULTS = 10;
@@ -18,22 +19,19 @@ let currentSortType = 'relevancy';
    SORT HELPER
 ====================================================== */
 function sortResults(results) {
-
   if (currentSortType === 'title') {
-    return [...results].sort((a, b) =>
-      (a.title || '').localeCompare(b.title || '')
-    );
+    return [...results].sort((a, b) => (a.title || '').localeCompare(b.title || ''));
   }
 
   if (currentSortType === 'newest') {
     return [...results].sort(
-      (a, b) => new Date(b.created) - new Date(a.created)
+      (a, b) => new Date(b.created) - new Date(a.created),
     );
   }
 
   return results; // relevancy
 }
- const getCleanPrintableUri = (uri) => {
+const getCleanPrintableUri = (uri) => {
   try {
     const decodedUri = uri.replace(/&amp;/gi, '&');
 
@@ -49,9 +47,7 @@ function sortResults(results) {
    SORT DROPDOWN
 ====================================================== */
 function renderSortingDropdown(rerenderCallback) {
-
   const container = document.getElementById('sort');
- 
 
   if (!container) return;
 
@@ -63,8 +59,7 @@ function renderSortingDropdown(rerenderCallback) {
 
   const select = document.createElement('select');
   select.id = 'sort-element';
-  select.className =
-    'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm';
+  select.className = 'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm';
 
   const options = [
     { label: placeholders?.relevancy || 'Relevance', value: 'relevancy' },
@@ -72,7 +67,7 @@ function renderSortingDropdown(rerenderCallback) {
     { label: placeholders?.newest || 'Newest', value: 'newest' },
   ];
 
-  options.forEach(opt => {
+  options.forEach((opt) => {
     const option = document.createElement('option');
     option.value = opt.value;
     option.textContent = opt.label;
@@ -81,7 +76,7 @@ function renderSortingDropdown(rerenderCallback) {
 
   select.value = currentSortType;
 
-  select.addEventListener('change', e => {
+  select.addEventListener('change', (e) => {
     currentSortType = e.target.value;
     rerenderCallback?.();
   });
@@ -90,18 +85,15 @@ function renderSortingDropdown(rerenderCallback) {
   container.appendChild(select);
 }
 
-
 /* ======================================================
    MAIN RENDER FUNCTION
 ====================================================== */
 const renderfavoriteSearchResultList = (
   data,
-  renderUi
+  renderUi,
 ) => {
-console.log('renderuiii',data)
-  renderSortingDropdown(() =>
-    renderfavoriteSearchResultList(data,renderUi)
-  );
+  console.log('renderuiii', data);
+  renderSortingDropdown(() => renderfavoriteSearchResultList(data, renderUi));
 
   const noResults = document.getElementById('coveo-no-results');
   const target = document.querySelector('.search-result-section');
@@ -116,7 +108,6 @@ console.log('renderuiii',data)
 
   resultsElement.innerHTML = '';
 
-
   // ========================
   // SHOW LOADER
   // ========================
@@ -126,20 +117,18 @@ console.log('renderuiii',data)
   // FLATTEN RESULTS
   // ========================
   const allResults = Array.isArray(data)
-    ? data.flatMap(group =>
-      group.pageData?.map(item => ({
-        ...item,
-        assetType: group.assetType
-      })) || []
-    )
+    ? data.flatMap((group) => group.pageData?.map((item) => ({
+      ...item,
+      assetType: group.assetType,
+    })) || [])
     : [];
 
   // ========================
   // SELECTED ASSET TYPES
   // ========================
   const selectedAssetTypes = data
-    .filter(a => a.state === 'selected')
-    .map(a => a.assetType);
+    .filter((a) => a.state === 'selected')
+    .map((a) => a.assetType);
 
   let filteredResults = allResults;
 
@@ -147,26 +136,18 @@ console.log('renderuiii',data)
   // FILTER BY ASSET TYPE
   // ========================
   if (selectedAssetTypes.length > 0) {
-    filteredResults = filteredResults.filter(item =>
-      selectedAssetTypes.includes(item.assetType)
-    );
+    filteredResults = filteredResults.filter((item) => selectedAssetTypes.includes(item.assetType));
   }
 
   // ========================
   // COLLECT SELECTED TAG IDS
   // ========================
-  const selectedTagIds = data.flatMap(asset =>
-    asset.tags?.flatMap(tag =>
-      tag.value
-        ?.filter(v => v.state === 'selected')
-        .flatMap(v => v.value)
-    ) || []
-  );
+  const selectedTagIds = data.flatMap((asset) => asset.tags?.flatMap((tag) => tag.value
+    ?.filter((v) => v.state === 'selected')
+    .flatMap((v) => v.value)) || []);
 
   if (selectedTagIds.length > 0) {
-    filteredResults = filteredResults.filter(item =>
-      selectedTagIds.includes(item.id)
-    );
+    filteredResults = filteredResults.filter((item) => selectedTagIds.includes(item.id));
   }
 
   /* ========================
@@ -178,10 +159,10 @@ console.log('renderuiii',data)
      LIMIT TO 10 RESULTS
   ======================== */
   const currentPage = getCurrentPage();
-const startIndex = (currentPage - 1) * MAX_RESULTS;
-const endIndex = startIndex + MAX_RESULTS;
-const visibleResults = filteredResults.slice(startIndex, endIndex);
-renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSearchResultList);
+  const startIndex = (currentPage - 1) * MAX_RESULTS;
+  const endIndex = startIndex + MAX_RESULTS;
+  const visibleResults = filteredResults.slice(startIndex, endIndex);
+  renderFavoritePagination(filteredResults.length, renderUi, data, renderfavoriteSearchResultList);
 
   /* ========================
      RENDER RESULTS
@@ -190,21 +171,19 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
     resultsLoading?.classList.add('tw-hidden');
     noResultsElement.style.display = 'none';
 
-    visibleResults.forEach(result => {
+    visibleResults.forEach((result) => {
       const resultItem = document.createElement('div');
-      resultItem.className = 'result-item';     
+      resultItem.className = 'result-item';
       const cleanPrintableUri = result.path?.startsWith('https://training.sciex.com')
-      ? getCleanPrintableUri(result?.path)
-      : result.path;
+        ? getCleanPrintableUri(result?.path)
+        : result.path;
       const relatedProductsHtml = Array.isArray(result.relatedProducts)
-      ? result.relatedProducts
-          .filter(product => product?.href && product?.title)
-          .map(product =>
-            `<a href="${product.href}" class="related-product-link">${product.title}</a>`
-          )
+        ? result.relatedProducts
+          .filter((product) => product?.href && product?.title)
+          .map((product) => `<a href="${product.href}" class="related-product-link">${product.title}</a>`)
           .join(' <span class="pipe-separator">|</span> ')
-      : '';
-    
+        : '';
+
       resultItem.innerHTML = `
         <div class="item-details">
           <h3>${result.title || ''}</h3>
@@ -213,10 +192,10 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
           </div>
           <div class="related-products">
             ${
-              relatedProductsHtml
-                ? `<p class="related-products-label">Related Products :</p> ${relatedProductsHtml}`
-                : ''
-            }
+  relatedProductsHtml
+    ? `<p class="related-products-label">Related Products :</p> ${relatedProductsHtml}`
+    : ''
+}
           </div>
         </div>
 
@@ -297,21 +276,18 @@ renderFavoritePagination(filteredResults.length,renderUi,data,renderfavoriteSear
       resultItem
         .querySelector('.favorite-icon')
         ?.addEventListener('click', async () => {
-
           try {
             const response = await removeFavoriteSearchEngine(result.path);
 
             if (response?.message === 'The operation went successfully') {
-
-              data.forEach(asset => {
+              data.forEach((asset) => {
                 if (Array.isArray(asset.pageData)) {
                   asset.pageData = asset.pageData.filter(
-                    item => item.path !== result.path
+                    (item) => item.path !== result.path,
                   );
                 }
               });
-              renderUi()           
-
+              renderUi();
             }
           } catch (e) {
             console.error(e);

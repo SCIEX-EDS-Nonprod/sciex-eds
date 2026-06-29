@@ -26,7 +26,7 @@ function callBanners() {
 
 export default async function decorate(block) {
   const strings = await fetchPlaceholders();
- 
+
   // Create main container div
   const searchResultDiv = document.createElement('div');
   searchResultDiv.classList.add('tw', 'search-result', 'tw-bg-white');

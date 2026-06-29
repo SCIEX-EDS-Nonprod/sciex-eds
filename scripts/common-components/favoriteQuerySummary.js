@@ -1,6 +1,5 @@
 import { fetchPlaceholders } from '../aem.js';
 
-
 const MAX_RESULTS = 10;
 const placeholders = await fetchPlaceholders();
 
