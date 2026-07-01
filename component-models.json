@@ -122,6 +122,20 @@
           {
             "component": "text",
             "valueType": "string",
+            "name": "alternate",
+            "label": "Alternate",
+            "value": "default alternate"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "hreflang",
+            "label": "Href Lang",
+            "value": "default href lang"
+          },
+          {
+            "component": "text",
+            "valueType": "string",
             "name": "Robots",
             "label": "Meta Tag: Robots",
             "value": "default Robots"
