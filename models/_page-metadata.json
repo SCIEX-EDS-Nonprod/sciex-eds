@@ -116,7 +116,7 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "hreflangTags",
+              "name": "hrefLangTags",
               "label": "Hreflang Tags",
               "value": "default href lang tags"
             },
