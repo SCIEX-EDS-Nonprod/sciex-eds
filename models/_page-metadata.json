@@ -24,8 +24,8 @@
             {
               "component": "text",
               "valueType": "string",
-              "name": "canonical",
-              "label": "Canonical",
+              "name": "canonicals",
+              "label": "Canonicals",
               "value": ""
             },
             {
