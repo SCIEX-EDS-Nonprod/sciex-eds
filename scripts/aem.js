@@ -155,11 +155,16 @@ function setup() {
 function decorateHreflangFromMetadata() {
   const currentUrl = new URL(window.location.href);
 
+  // Normalize to the .com domain regardless of the current site
+  const baseDomain = currentUrl.origin
+    .replace('.com.cn', '.com')
+    .replace('.jp', '.com');
+
   // Map each hreflang to its corresponding domain
   const supportedLangs = {
-    'en-US': currentUrl.origin,
-    'ja-JP': currentUrl.origin.replace('.com', '.jp'),
-    'zh-CN': currentUrl.origin.replace('.com', '.com.cn'),
+    'en-US': baseDomain,
+    'ja-JP': baseDomain.replace('.com', '.jp'),
+    'zh-CN': baseDomain.replace('.com', '.com.cn'),
   };
 
   Object.entries(supportedLangs).forEach(([lang, domain]) => {
@@ -171,12 +176,12 @@ function decorateHreflangFromMetadata() {
     document.head.appendChild(link);
   });
 
-  // x-default
+  // x-default always points to the .com site
   if (!document.head.querySelector('link[hreflang="x-default"]')) {
   const xDefault = document.createElement('link');
   xDefault.rel = 'alternate';
   xDefault.hreflang = 'x-default';
-  xDefault.href = `${currentUrl.origin}${currentUrl.pathname}`;
+  xDefault.href = `${baseDomain}${currentUrl.pathname}`;
 
   document.head.appendChild(xDefault);
   }
