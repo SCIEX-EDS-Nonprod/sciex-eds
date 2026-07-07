@@ -181,7 +181,7 @@ function decorateHreflangFromMetadata() {
   const xDefault = document.createElement('link');
   xDefault.rel = 'alternate';
   xDefault.hreflang = 'x-default';
-  xDefault.href = `${baseDomain}${currentUrl.pathname}`;
+  xDefault.href = `${currentUrl?.href}`;
 
   document.head.appendChild(xDefault);
   }
