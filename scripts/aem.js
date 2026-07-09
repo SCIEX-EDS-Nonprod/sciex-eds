@@ -158,8 +158,12 @@ function isCurrentPage404() {
     .querySelector('meta[property="og:title"]')
     ?.content?.trim()
     .toLowerCase();
+  const notFoundTitles = ["page not found", "404 Error"];
 
-  return title === 'page not found' || ogTitle === 'page not found';
+  return (
+    notFoundTitles.includes(title) ||
+    notFoundTitles.includes(ogTitle)
+  );
 }
 
 async function isDomainPage404(url) {
