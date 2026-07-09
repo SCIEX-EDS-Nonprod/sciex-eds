@@ -164,16 +164,13 @@ function isCurrentPage404() {
 
 async function isDomainPage404(url) {
   const response = await fetch(url);
-  if (!response.ok) {
-    return true; 
-  }
-  return false; 
+  return !response.ok;
 }
 
-async function decorateHreflangFromMetadata() { 
-
+async function decorateHreflangFromMetadata() {
+  // Skip adding hreflang for 404 pages
   if (isCurrentPage404()) {
-    return; // Skip adding hreflang for 404 pages
+    return;
   }
   const currentUrl = new URL(window.location.href);
 
@@ -189,22 +186,29 @@ async function decorateHreflangFromMetadata() {
     'zh-CN': baseDomain.replace('.com', '.com.cn'),
   };
 
-  for (const [lang, domain] of Object.entries(supportedLangs)) {
-    if (document.head.querySelector(`link[hreflang="${lang}"]`)) continue;
+  await Promise.all(
+    Object.entries(supportedLangs).map(async ([lang, domain]) => {
+      if (document.head.querySelector(`link[hreflang="${lang}"]`)) {
+        return;
+      }
 
     const hreflangUrl = `${domain}${currentUrl.pathname}`;
 
-    if (await isDomainPage404(hreflangUrl)) {
-      continue; // Skip adding hreflang for this language if the page does not exist
-    }
+      const domainPage404 = await isDomainPage404(hreflangUrl);
+
+      if (domainPage404) {
+        return;
+      }
+
     const link = document.createElement('link');
     link.rel = 'alternate';
     link.hreflang = lang;
     link.href = hreflangUrl;
     document.head.appendChild(link);
-  }
+    }),
+  );
 
-  // x-default always points to the .com site
+  // x-default always points to the current URL
   if (!document.head.querySelector('link[hreflang="x-default"]')) {
   const xDefault = document.createElement('link');
   xDefault.rel = 'alternate';
