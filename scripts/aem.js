@@ -189,18 +189,20 @@ async function decorateHreflangFromMetadata() {
     'zh-CN': baseDomain.replace('.com', '.com.cn'),
   };
 
-  Object.entries(supportedLangs).forEach(([lang, domain]) => {
-    if (document.head.querySelector(`link[hreflang="${lang}"]`)) return;
-    let hreflangUrl = `${domain}${currentUrl.pathname}`;
+  for (const [lang, domain] of Object.entries(supportedLangs)) {
+    if (document.head.querySelector(`link[hreflang="${lang}"]`)) continue;
+
+    const hreflangUrl = `${domain}${currentUrl.pathname}`;
+
     if (await isDomainPage404(hreflangUrl)) {
-        return; // Skip adding hreflang if the page does not exist on that domain
+      continue; // Skip adding hreflang for this language if the page does not exist
     }
     const link = document.createElement('link');
     link.rel = 'alternate';
     link.hreflang = lang;
     link.href = hreflangUrl;
     document.head.appendChild(link);
-  });
+  }
 
   // x-default always points to the .com site
   if (!document.head.querySelector('link[hreflang="x-default"]')) {
