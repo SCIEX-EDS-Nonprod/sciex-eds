@@ -167,8 +167,17 @@ function isCurrentPage404() {
 }
 
 async function isDomainPage404(url) {
-  const response = await fetch(url);
-  return !response.ok;
+  try {
+    const response = await fetch(url, {
+      method: 'HEAD',
+      redirect: 'follow',
+      mode: "no-cors"
+    });
+    return response.status === 404;
+  } catch (e) {
+    console.error('Fetch failed:', url, e);
+    return true;
+  }
 }
 
 async function decorateHreflangFromMetadata() {
