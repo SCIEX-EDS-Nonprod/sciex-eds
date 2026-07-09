@@ -152,7 +152,29 @@ function setup() {
   }
 }
 
-function decorateHreflangFromMetadata() {
+function isCurrentPage404() {
+  const title = document.title.trim().toLowerCase();
+  const ogTitle = document
+    .querySelector('meta[property="og:title"]')
+    ?.content?.trim()
+    .toLowerCase();
+
+  return title === 'page not found' || ogTitle === 'page not found';
+}
+
+async function isDomainPage404(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    return true; 
+  }
+  return false; 
+}
+
+function decorateHreflangFromMetadata() { 
+
+  if (isCurrentPage404()) {
+    return; // Skip adding hreflang for 404 pages
+  }
   const currentUrl = new URL(window.location.href);
 
   // Normalize to the .com domain regardless of the current site
@@ -169,10 +191,14 @@ function decorateHreflangFromMetadata() {
 
   Object.entries(supportedLangs).forEach(([lang, domain]) => {
     if (document.head.querySelector(`link[hreflang="${lang}"]`)) return;
+    let hreflangUrl = `${domain}${currentUrl.pathname}`;
+    if (isDomainPage404(hreflangUrl)) {
+        return; // Skip adding hreflang if the page does not exist on that domain
+    }
     const link = document.createElement('link');
     link.rel = 'alternate';
     link.hreflang = lang;
-    link.href = `${domain}${currentUrl.pathname}`;
+    link.href = hreflangUrl;
     document.head.appendChild(link);
   });
 
