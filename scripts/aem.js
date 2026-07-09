@@ -152,7 +152,30 @@ function setup() {
   }
 }
 
-function decorateHreflangFromMetadata() {
+function isCurrentPage404() {
+  const title = document.title.trim().toLowerCase();
+  const ogTitle = document
+    .querySelector('meta[property="og:title"]')
+    ?.content?.trim()
+    .toLowerCase();
+  const notFoundTitles = ["page not found", "404 Error"];
+
+  return (
+    notFoundTitles.includes(title) ||
+    notFoundTitles.includes(ogTitle)
+  );
+}
+
+async function isDomainPage404(url) {
+  const response = await fetch(url);
+  return !response.ok;
+}
+
+async function decorateHreflangFromMetadata() {
+  // Skip adding hreflang for 404 pages
+  if (isCurrentPage404()) {
+    return;
+  }
   const currentUrl = new URL(window.location.href);
 
   // Normalize to the .com domain regardless of the current site
@@ -167,16 +190,29 @@ function decorateHreflangFromMetadata() {
     'zh-CN': baseDomain.replace('.com', '.com.cn'),
   };
 
-  Object.entries(supportedLangs).forEach(([lang, domain]) => {
-    if (document.head.querySelector(`link[hreflang="${lang}"]`)) return;
+  await Promise.all(
+    Object.entries(supportedLangs).map(async ([lang, domain]) => {
+      if (document.head.querySelector(`link[hreflang="${lang}"]`)) {
+        return;
+      }
+
+    const hreflangUrl = `${domain}${currentUrl.pathname}`;
+
+      const domainPage404 = await isDomainPage404(hreflangUrl);
+
+      if (domainPage404) {
+        return;
+      }
+
     const link = document.createElement('link');
     link.rel = 'alternate';
     link.hreflang = lang;
-    link.href = `${domain}${currentUrl.pathname}`;
+    link.href = hreflangUrl;
     document.head.appendChild(link);
-  });
+    }),
+  );
 
-  // x-default always points to the .com site
+  // x-default always points to the current URL
   if (!document.head.querySelector('link[hreflang="x-default"]')) {
   const xDefault = document.createElement('link');
   xDefault.rel = 'alternate';
