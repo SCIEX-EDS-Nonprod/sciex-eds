@@ -170,7 +170,7 @@ async function isDomainPage404(url) {
   return false; 
 }
 
-function decorateHreflangFromMetadata() { 
+async function decorateHreflangFromMetadata() { 
 
   if (isCurrentPage404()) {
     return; // Skip adding hreflang for 404 pages
@@ -192,7 +192,7 @@ function decorateHreflangFromMetadata() {
   Object.entries(supportedLangs).forEach(([lang, domain]) => {
     if (document.head.querySelector(`link[hreflang="${lang}"]`)) return;
     let hreflangUrl = `${domain}${currentUrl.pathname}`;
-    if (isDomainPage404(hreflangUrl)) {
+    if (await isDomainPage404(hreflangUrl)) {
         return; // Skip adding hreflang if the page does not exist on that domain
     }
     const link = document.createElement('link');
