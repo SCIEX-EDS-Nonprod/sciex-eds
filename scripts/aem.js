@@ -190,7 +190,7 @@ async function decorateHreflangFromMetadata() {
   ];
 
   supportedLangs?.forEach(({ key, hreflang, domain }) => {
-    if (currentPage[key] !== "true") {
+    if (currentPage[key]?.toLowerCase() !== "true") {
       return;
     }
 
