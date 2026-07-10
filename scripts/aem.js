@@ -151,84 +151,69 @@ function setup() {
     }
   }
 }
-
-function isCurrentPage404() {
-  const title = document.title.trim().toLowerCase();
-  const ogTitle = document
-    .querySelector('meta[property="og:title"]')
-    ?.content?.trim()
-    .toLowerCase();
-  const notFoundTitles = ["page not found", "404 Error"];
-
-  return (
-    notFoundTitles.includes(title) ||
-    notFoundTitles.includes(ogTitle)
-  );
-}
-
-async function isDomainPage404(url) {
+async function getHreflang() {
   try {
-    const response = await fetch(url, {
-      method: 'HEAD',
-      redirect: 'follow',
-      mode: "no-cors"
-    });
-    return response.status === 404;
-  } catch (e) {
-    console.error('Fetch failed:', url, e);
-    return true;
+    const response = await fetch("/hreflang.json");
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch hreflang.json: ${response.status}`);
+    }
+
+    const { data } = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching hreflang.json:", error);
+    return null;
   }
 }
 
 async function decorateHreflangFromMetadata() {
-  // Skip adding hreflang for 404 pages
-  if (isCurrentPage404()) {
-    return;
-  }
+  const hreflangData = await getHreflang();
   const currentUrl = new URL(window.location.href);
 
-  // Normalize to the .com domain regardless of the current site
+  const currentPage = hreflangData?.find(
+    (item) => item.path === currentUrl.pathname
+  );
+
+  if (!currentPage) {
+    return;
+  }
+
   const baseDomain = currentUrl.origin
     .replace('.com.cn', '.com')
     .replace('.jp', '.com');
 
-  // Map each hreflang to its corresponding domain
-  const supportedLangs = {
-    'en-US': baseDomain,
-    'ja-JP': baseDomain.replace('.com', '.jp'),
-    'zh-CN': baseDomain.replace('.com', '.com.cn'),
-  };
+  const supportedLangs = [
+    { key: "EN", hreflang: "en-US", domain: baseDomain },
+    { key: "JP", hreflang: "ja-JP", domain: baseDomain.replace(".com", ".jp") },
+    { key: "CN", hreflang: "zh-CN", domain: baseDomain.replace(".com", ".com.cn") },
+  ];
 
-  await Promise.all(
-    Object.entries(supportedLangs).map(async ([lang, domain]) => {
-      if (document.head.querySelector(`link[hreflang="${lang}"]`)) {
-        return;
-      }
+  supportedLangs?.forEach(({ key, hreflang, domain }) => {
+    if (currentPage[key]?.toLowerCase() !== "true") {
+      return;
+    }
 
-    const hreflangUrl = `${domain}${currentUrl.pathname}`;
+    if (document.head.querySelector(`link[hreflang="${hreflang}"]`)) {
+      return;
+    }
 
-      const domainPage404 = await isDomainPage404(hreflangUrl);
+    const link = document.createElement("link");
+    link.rel = "alternate";
+    link.hreflang = hreflang;
+    link.href = `${domain}${currentUrl.pathname}`;
 
-      if (domainPage404) {
-        return;
-      }
-
-    const link = document.createElement('link');
-    link.rel = 'alternate';
-    link.hreflang = lang;
-    link.href = hreflangUrl;
     document.head.appendChild(link);
-    }),
-  );
+  });
 
-  // x-default always points to the current URL
+  // x-default  points to the current URL
   if (!document.head.querySelector('link[hreflang="x-default"]')) {
-  const xDefault = document.createElement('link');
-  xDefault.rel = 'alternate';
-  xDefault.hreflang = 'x-default';
-  xDefault.href = `${currentUrl?.href}`;
+    const xDefault = document.createElement('link');
+    xDefault.rel = 'alternate';
+    xDefault.hreflang = 'x-default';
+    xDefault.href = `${currentUrl?.href}`;
 
-  document.head.appendChild(xDefault);
+    document.head.appendChild(xDefault);
   }
 }
 /**
