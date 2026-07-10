@@ -170,9 +170,9 @@ async function getHreflang() {
 async function decorateHreflangFromMetadata() {
   const hreflangData = await getHreflang();
   const currentUrl = new URL(window.location.href);
-
+  const currentPath = currentUrl?.pathname.split("?")[0];
   const currentPage = hreflangData?.find(
-    (item) => item.path === currentUrl.pathname
+    (item) => item.path === currentPath
   );
 
   if (!currentPage) {
@@ -201,7 +201,7 @@ async function decorateHreflangFromMetadata() {
     const link = document.createElement("link");
     link.rel = "alternate";
     link.hreflang = hreflang;
-    link.href = `${domain}${currentUrl.pathname}`;
+    link.href = `${domain}${currentUrl?.pathname}${currentUrl?.search}`;
 
     document.head.appendChild(link);
   });
