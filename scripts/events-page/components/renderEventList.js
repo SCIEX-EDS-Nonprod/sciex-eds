@@ -107,9 +107,14 @@ function createMonthHeading(monthKey = '') {
 
 function renderGroupedEvents(groupedEvents, container) {
   Object.entries(groupedEvents)
-    .sort(([a], [b]) => new Date(`1 ${b}`) - new Date(`1 ${a}`)) // Lasted events first
+    .sort(([a], [b]) => new Date(`1 ${a}`) - new Date(`1 ${b}`)) // Upcoming events first
     .forEach(([monthKey, events]) => {
-      container.appendChild(createMonthHeading(monthKey));
+      
+      const heading = createMonthHeading(monthKey);
+      if (heading) {
+        container.appendChild(heading);
+      }
+
       events.forEach((event, idx) => {
         const card = createEventCard(event);
         if (idx === events.length - 1) {
