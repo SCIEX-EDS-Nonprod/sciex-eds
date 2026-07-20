@@ -30,7 +30,7 @@
   justify-content: center;
   gap: 16px;
   font-family: "Geogrotesque Sharp VF";
-  font-size: 30px;
+  font-size: 28px;
   font-style: normal;
 font-weight: 330;
 line-height: 30px; /* 133.333% */
@@ -50,7 +50,7 @@ overflow: hidden;
 
 .event-content h3 {
   font-family: "Geogrotesque Sharp VF";
-  font-size: 32px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 330;
   line-height: 40px;
@@ -92,7 +92,7 @@ letter-spacing: 0.07px;
 .datetime-wrapper {
   display: flex;
 gap: 16px;
-margin-top: 12px;
+/* margin-top: 12px; */
 align-items: center;
 font-size: 14px;
 }
@@ -112,7 +112,7 @@ font-size: 14px;
 }
 
 .heading-group {
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 .heading-group > *:not(:last-child) {
