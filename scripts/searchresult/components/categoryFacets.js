@@ -398,6 +398,7 @@ function orderFacetBasedOnSelection(selectedValue) {
       'integratedsolutionscategories-facet',
       'softwarecategories-facet',
       'standardsandreagentscategories-facet',
+      'diagnosticsinstrumentscategories-facet'
     ];
     orderFacetChildren('facets', desiredOrder);
   } else if (selectedValue === 'Customer documents' || selectedValue === 'User guides') {
@@ -518,7 +519,8 @@ export function callCreateFacet() {
     'applications': strings?.applications,
     'technicaldocuments': strings?.technicalDocuments,
     'instrumentfamily': strings?.instrumentFamily,
-    'productcategories': strings?.products
+    'productcategories': strings?.products,
+    'diagnosticsinstrumentscategories': strings?.diagnosticsInstruments
   };
 
   if (lang !== 'ja' && lang !== 'zh-cn') {
