@@ -168,7 +168,7 @@ const renderSearchResults = () => {
       Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
       const cleanPrintableUri = result.printableUri?.startsWith('https://training.sciex.com')
         ? getCleanPrintableUri(result.printableUri)
-        : result.printableUri.replace(/^https?:\/\/[^/]+/, '');
+        : result.printableUri;
 
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
