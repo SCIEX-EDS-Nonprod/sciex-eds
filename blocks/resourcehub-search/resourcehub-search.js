@@ -185,7 +185,7 @@ export default async function decorate(block) {
   dropdownContent.style.display = 'none';
 
   const menuItems = {
-    [placeholders.all || 'All']: 'All',
+    [placeholders.all || 'All']: 'resourcehubAll',
     [placeholders.knowledgeBaseArticles || 'Knowledge base articles']: 'Knowledge base articles',
     [placeholders.selfpacedLearning || 'Self paced learning']: 'Training',
     [placeholders.instructorLedTraining || 'Instructor led training']: 'Training',
@@ -194,9 +194,16 @@ export default async function decorate(block) {
     [placeholders.userGuides || 'User guides']: 'User guides',
   };
 
-  let selectedContentType = 'All';
+  let selectedContentType = 'resourcehubAll';
+  if (typeParam) {
+    selectedContentType = typeParam;
+  }
   let selectedfacet = '';
   let queryString = '';
+  if (typeParam === 'Self paced learning' || typeParam === 'Instructor led training') {
+    selectedContentType = 'Training';
+    queryString = `&facetId=trainingcoursetype&value=${typeParam}`;
+  }
 
   Object.keys(menuItems).forEach((key) => {
     const value = menuItems[key];
