@@ -433,7 +433,7 @@ export default async function decorate(block) {
       searchEngine.dispatch(updateQuery({
         q: query,
       }));
-      if (contentType == 'resourcehubAll') {
+      if (contentType === 'resourcehubAll') {
         resourceHubAllFacet?.forEach((facet) => {
           searchEngine.dispatch(toggleSelectFacetValue({
             facetId: 'contenttype',
