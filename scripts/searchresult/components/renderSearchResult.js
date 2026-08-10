@@ -41,6 +41,23 @@ const getCleanPrintableUri = (uri) => {
   }
 };
 
+function getRelativeUrl(url) {
+  const domains = [
+    'https://devcs.sciex.com',
+    'https://devcs.sciex.jp',
+    'https://devcs.sciex.com.cn'
+  ];
+
+  const matchedDomain = domains.find(domain => url.startsWith(domain));
+
+  if (!matchedDomain) {
+    return url;
+  }
+
+  return url.slice(matchedDomain.length) || '/';
+}
+
+
 const isUserLoggedIn = await checkLoginStatus();
 
 if (isUserLoggedIn) {
@@ -168,7 +185,7 @@ const renderSearchResults = () => {
       Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
       const cleanPrintableUri = result.printableUri?.startsWith('https://training.sciex.com')
         ? getCleanPrintableUri(result.printableUri)
-        : result.printableUri;
+        : getRelativeUrl(result.printableUri);
 
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
