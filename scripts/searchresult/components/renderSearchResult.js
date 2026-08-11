@@ -47,14 +47,14 @@ function getRelativeUrl(url) {
     'https://devcs.sciex.jp',
     'https://devcs.sciex.com.cn'
   ];
-
-  const matchedDomain = domains.find(domain => url.startsWith(domain));
+  const domain = new URL(url).origin;
+  const matchedDomain = domains.includes(domain);
 
   if (!matchedDomain) {
     return url;
   }
 
-  return url.slice(matchedDomain.length) || '/';
+  return url.slice(domain.length) || '/';
 }
 
 
