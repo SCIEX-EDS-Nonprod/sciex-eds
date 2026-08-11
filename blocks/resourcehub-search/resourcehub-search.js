@@ -198,7 +198,7 @@ export default async function decorate(block) {
   if (typeParam) {
     selectedContentType = typeParam;
   }
-  let selectedfacet = '';
+  // let selectedfacet = '';
   let queryString = '';
   if (typeParam === 'Self paced learning' || typeParam === 'Instructor led training') {
     selectedContentType = 'Training';
@@ -215,7 +215,7 @@ export default async function decorate(block) {
       dropbtn.innerHTML = key + downArrow;
       dropdownContent.style.display = 'none';
       selectedContentType = value;
-      selectedfacet = key;
+      // selectedfacet = key;
       if (key === (placeholders.selfPacedLearning || 'Self paced learning')){
         queryString = `&facetId=trainingcoursetype&value=Self paced learning`;
       }else if (key === (placeholders.instructorLedTraining || 'Instructor led training')) {
