@@ -187,7 +187,7 @@ export default async function decorate(block) {
   const menuItems = {
     [placeholders.all || 'All']: 'resourcehubAll',
     [placeholders.knowledgeBaseArticles || 'Knowledge base articles']: 'Knowledge base articles',
-    [placeholders.selfpacedLearning || 'Self paced learning']: 'Training',
+    [placeholders.selfPacedLearning || 'Self paced learning']: 'Training',
     [placeholders.instructorLedTraining || 'Instructor led training']: 'Training',
     [placeholders.technicalNotes || 'Technical notes']: 'Technical notes',
     [placeholders.regulatoryDocuments || 'Regulatory documents']: 'Regulatory documents',
@@ -198,7 +198,7 @@ export default async function decorate(block) {
   if (typeParam) {
     selectedContentType = typeParam;
   }
-  let selectedfacet = '';
+  // let selectedfacet = '';
   let queryString = '';
   if (typeParam === 'Self paced learning' || typeParam === 'Instructor led training') {
     selectedContentType = 'Training';
@@ -215,10 +215,11 @@ export default async function decorate(block) {
       dropbtn.innerHTML = key + downArrow;
       dropdownContent.style.display = 'none';
       selectedContentType = value;
-      selectedfacet = key;
-      if (key === (placeholders.selfPacedLearning || 'Self paced learning')
-        || key === (placeholders.instructorLedTraining || 'Instructor led training')) {
-        queryString = `&facetId=trainingcoursetype&value=${selectedfacet}`;
+      // selectedfacet = key;
+      if (key === (placeholders.selfPacedLearning || 'Self paced learning')){
+        queryString = `&facetId=trainingcoursetype&value=Self paced learning`;
+      }else if (key === (placeholders.instructorLedTraining || 'Instructor led training')) {
+        queryString = `&facetId=trainingcoursetype&value=Instructor led training`;
       } else {
         queryString = '';
       }
