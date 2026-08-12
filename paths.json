@@ -5,6 +5,7 @@
     "/content/sciex-eds/metadata:/metadata.json",
     "/content/sciex-eds/zh-cn/search-results:/search-results",
     "/content/sciex-eds/ja-jp/search-results:/search-results",
+    "/content/sciex-eds/search-results:/search-results",
     "/content/sciex-eds/zh-cn/support/tech-regulatory:/support/tech-regulatory",
     "/content/sciex-eds/ja-jp/support/tech-regulatory:/support/tech-regulatory",
     "/content/sciex-eds/zh-cn/support/customer-documents:/support/customer-documents",
