@@ -5,6 +5,9 @@
     /* max-width: 87pc !important; */
     width: 100%;
     position: relative;
+    background-color: white;
+    padding: 0px 64px !important;
+    max-width: 100% !important;
 }
 
 .custom-sciex-tabs {

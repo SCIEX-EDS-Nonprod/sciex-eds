@@ -135,4 +135,24 @@ function decorateButtonTabs(block) {
 
 export default function decorate(block) {
   decorateButtonTabs(block);
+
+  const tabs = document.querySelector('.sciex-tabs-wrapper');
+  const parent = document.querySelector('.section');
+  const isNavTab=document.querySelector('.tabs-nav-wrapper');
+  window.addEventListener('scroll', () => {
+    const rect = parent.getBoundingClientRect();
+
+    if (rect.bottom <= 0) {
+      tabs.style.position = 'fixed';  
+      tabs.style.top = '0';    
+      if(isNavTab){
+      tabs.style.top = '57px';
+      }
+      tabs.style.zIndex = '3';
+    } 
+    else {
+      tabs.style.position = 'sticky';
+      tabs.style.top = '0';
+    }
+  });
 }
