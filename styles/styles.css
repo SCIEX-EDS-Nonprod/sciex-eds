@@ -258,7 +258,7 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: auto;
   padding: 0 24px;
 }
@@ -1368,7 +1368,7 @@ main .section.highlight {
   .featured-key-workflows-wrapper,
   .knowledge-base-article-wrapper
   {
-    max-width: 90pc !important;
+    /* max-width: 90pc !important; */
     /* padding: 0 55px !important; */
   }
 }
@@ -1382,6 +1382,8 @@ main .section.highlight {
   .featured-products-wrapper
   .sciex-columns-wrapper {
     /* padding: 0 20px !important; */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 /* XL Display */
