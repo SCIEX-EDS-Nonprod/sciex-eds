@@ -10,6 +10,10 @@
     max-width: 100% !important;
 }
 
+[data-tabname] {
+  scroll-margin-top: 150px;
+}
+
 .custom-sciex-tabs {
     display: flex;
     justify-content: flex-start;

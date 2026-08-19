@@ -21,7 +21,10 @@ function toggleTabs(tabId, mmgTabs, tabs) {
       section.classList.add('hide-section');
     }
   });
-
+  document.querySelector(`[data-tabname="${tabId}"]`)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
   const allTabs = mmgTabs.querySelectorAll('.tab');
   allTabs.forEach((tab) => {
     if (tab.id === tabId) {
@@ -135,14 +138,12 @@ function decorateButtonTabs(block) {
 
 export default function decorate(block) {
   decorateButtonTabs(block);
-
   const tabs = document.querySelector('.sciex-tabs-wrapper');
   const parent = document.querySelector('.section');
   const isNavTab=document.querySelector('.tabs-nav-wrapper');
   window.addEventListener('scroll', () => {
     const rect = parent.getBoundingClientRect();
-
-    if (rect.bottom <= 0) {
+    if (rect.bottom <= 80) {
       tabs.style.position = 'fixed';  
       tabs.style.top = '0';    
       if(isNavTab){
