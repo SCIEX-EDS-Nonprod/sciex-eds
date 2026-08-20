@@ -276,6 +276,20 @@ main > .section > div.sciex-container-wrapper {
   margin: auto !important;
 }
 
+.tabs-container-wrapper,
+.sciex-text-wrapper {
+  padding: 16px 15px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .tabs-container-wrapper,
+  .sciex-text-wrapper {
+    padding: 15px 47px !important;
+  }
+}
+
 main > .section:first-of-type {
   margin-top: 0;
 }
@@ -1373,6 +1387,7 @@ main .section.highlight {
   }
 }
 
+
 @media (min-width: 1600px) {
   .sciex-title-wrapper,
   .button-text-wrapper,
@@ -1386,6 +1401,7 @@ main .section.highlight {
     margin-right: 0 !important;
   }
 }
+
 /* XL Display */
 .text-xlDisplay {
   font-family: 'Geogrotesque Variable', sans-serif;
