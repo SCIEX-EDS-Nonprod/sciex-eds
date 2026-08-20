@@ -577,7 +577,7 @@ function decorateSections(main) {
   });
 }
 
-const getLocale = () => {
+export const getLocale = () => {
   const override = new URLSearchParams(window.location.search).get('lang');
   if (override) return override;
 

@@ -59,7 +59,9 @@ function renderSortingDropdown(rerenderCallback) {
 
   const select = document.createElement('select');
   select.id = 'sort-element';
+  select.name = 'sort-element';
   select.className = 'tw-py-2 tw-px-3 tw-border tw-border-gray-300 tw-bg-white tw-text-sm';
+  select.setAttribute('aria-label', 'Sort By');
 
   const options = [
     { label: placeholders?.relevancy || 'Relevance', value: 'relevancy' },
