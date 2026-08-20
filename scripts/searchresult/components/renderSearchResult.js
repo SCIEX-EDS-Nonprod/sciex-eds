@@ -30,16 +30,60 @@ async function checkLoginStatus() {
 
 const getCleanPrintableUri = (uri) => {
   try {
-    const decodedUri = uri.replace(/&amp;/gi, '&');
+    const decodedUri = uri.replace(/&/gi, '&');
 
     const url = new URL(decodedUri, window.location.origin);
     url.searchParams.delete('course');
     url.searchParams.delete('courseType');
+
     return url.origin + url.pathname + url.search + url.hash;
   } catch (e) {
     return uri.split('?')[0];
   }
 };
+
+const getNavigationUrl = (uri) => {
+  try {
+    const resultUrl = new URL(uri, window.location.origin);
+
+    const getTld = (hostname) => {
+      const match = hostname.match(/\.(com|cn|jp)$/i);
+      return match?.[1]?.toLowerCase();
+    };
+
+    const currentTld = getTld(window.location.hostname);
+    const resultTld = getTld(resultUrl.hostname);
+
+    // Same TLD → keep full URL
+    if (currentTld && currentTld === resultTld) {
+      return uri;
+    }
+
+    // Different TLD → remove domain
+    return `${resultUrl.pathname}${resultUrl.search}${resultUrl.hash}`;
+  } catch (e) {
+    return uri;
+  }
+};
+
+      const getNavigationUrl = (uri) => {
+      try {
+        const resultUrl = new URL(uri, window.location.origin);
+
+        const currentTld = window.location.hostname.match(/\.(com\.cn|com|cn|jp)$/i)?.[1];
+        const resultTld = resultUrl.hostname.match(/\.(com\.cn|com|cn|jp)$/i)?.[1];
+
+        // Same TLD → keep full URL
+        if (currentTld?.toLowerCase() === resultTld?.toLowerCase()) {
+          return uri;
+        }
+
+        // Different TLD → remove domain
+        return `${resultUrl.pathname}${resultUrl.search}${resultUrl.hash}`;
+      } catch (e) {
+        return uri;
+      }
+      };
 
 const isUserLoggedIn = await checkLoginStatus();
 
@@ -156,7 +200,7 @@ const renderSearchResults = () => {
       [1, 2, 3, 4, 5].forEach((i) => {
         const star = document.createElement('span');
         star.className = 'star';
-        star.innerHTML = '&#9733;';
+        star.innerHTML = '&#9733;';_
         star.setAttribute('data-value', i);
         ratingContainer.appendChild(star);
       });
@@ -165,10 +209,14 @@ const renderSearchResults = () => {
       const stars = ratingContainer.querySelectorAll('.star');
 
       const rating = result?.raw?.rating ?? 0;
-      Array.from(stars).slice(0, rating).forEach((star) => star.classList.add('filled'));
+
+      Array.from(stars)
+        .slice(0, rating)
+        .forEach((star) => star.classList.add('filled'));
+
       const cleanPrintableUri = result.printableUri?.startsWith('https://training.sciex.com')
         ? getCleanPrintableUri(result.printableUri)
-        : result.printableUri;
+        : getNavigationUrl(result.printableUri);
 
       const resultItem = document.createElement('div');
       resultItem.className = 'result-item';
@@ -314,8 +362,12 @@ const renderSearchResults = () => {
       }
 
       const viewDetailsBtn = resultItem.querySelector('.view-details-btn');
+
       viewDetailsBtn.addEventListener('click', () => {
-        handleResultClick(result);
+        handleResultClick({
+          ...result,
+          printableUri: cleanPrintableUri,
+        });
       });
 
       const heading = resultItem.querySelector('h3');
