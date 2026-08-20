@@ -273,6 +273,7 @@ function createGlobalSearch(placeholders = {}) {
 
   const searchBtn = document.createElement('button');
   searchBtn.className = 'global-search-btn';
+  searchBtn.setAttribute('aria-label', 'SearchText');
   const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <path d="M9.50977 2.50879C13.0322 2.68736 15.833 5.60023 15.833 9.16699L15.8242 9.50977C15.7468 11.0363 15.1548 12.4264 14.2197 13.5127L17.374 16.667L16.667 17.374L13.5127 14.2197C12.3457 15.2244 10.8278 15.8329 9.16699 15.833L8.82324 15.8242C5.41465 15.6513 2.68168 12.9183 2.50879 9.50977L2.5 9.16699C2.5 5.48516 5.48509 2.5 9.16699 2.5L9.50977 2.50879ZM9.16699 3.5C6.03736 3.5 3.5 6.03746 3.5 9.16699C3.50026 12.2963 6.03753 14.833 9.16699 14.833C12.2963 14.8328 14.8327 12.2962 14.833 9.16699C14.833 6.03757 12.2965 3.50018 9.16699 3.5Z" fill="#141414"/>
 </svg>`;
@@ -596,6 +597,7 @@ function createMainHeader(section, placeholders = {}) {
 
         const dropbtn = document.createElement('button');
         dropbtn.className = 'dropbtn login-dropdown';
+        dropbtn.setAttribute('aria-label', 'dropdown-button');
         const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
         <path d="M14.7344 5L8.73437 11L2.73438 5" stroke="#FFFFFF"/>
         </svg>`;
