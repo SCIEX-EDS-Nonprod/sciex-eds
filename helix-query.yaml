@@ -41,11 +41,7 @@ indices:
         value: attribute(el, "content")
 
   search:
-    include:
-      - /search-results/**
-      - /en-us/search-results/**
-      - /zh-cn/search-results/**
-      - /ja-jp/search-results/**
+    include: []
     exclude: []
     target: /search-index.json
     properties:
