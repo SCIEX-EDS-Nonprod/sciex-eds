@@ -3246,7 +3246,7 @@
       },
       {
         "component": "select",
-        "name": "container-item_position",
+        "name": "sciex-container_position",
         "label": "Container Position [default: top]",
         "valueType": "string",
         "options": [
