@@ -3252,7 +3252,7 @@
         "valueType": "string",
         "options": [
           {
-            "name": "top",
+            "name": "center",
             "value": "justified-center"
           }
         ]
