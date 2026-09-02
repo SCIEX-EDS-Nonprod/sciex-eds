@@ -45,7 +45,7 @@
             {
                 "component": "select",
                 "name": "containerGrid",
-                "label": "Select Layout",
+                "label": "Select Layout 1",
                 "value": "",
                 "valueType": "string",
                 "options": [
