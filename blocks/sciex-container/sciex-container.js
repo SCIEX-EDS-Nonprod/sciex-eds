@@ -59,12 +59,16 @@ export default async function decorate(block) {
 
   const firstChild = block.children[0] ?? null;
   const secondChild = block.children[1] ?? null;
+  const thirdChild = block.children[2] ?? null;
+  const justifySetting = thirdChild?.textContent?.trim() || '';
+
   const links = Array.from(block.querySelectorAll('a'));
   if (links.length === 0) return;
 
   // remove config rows
   if (firstChild) firstChild.remove();
   if (secondChild) secondChild.remove();
+  if (thirdChild) thirdChild.remove();
   links.forEach((a) => a.remove());
 
   const container = document.createElement('div');
@@ -82,6 +86,9 @@ export default async function decorate(block) {
     sections.forEach((section) => {
       const wrapper = document.createElement('div');
       wrapper.classList.add('fragment-item');
+      if (justifySetting === 'justified-center') {
+        wrapper.classList.add('justified-center');
+      }
       wrapper.appendChild(section);
       container.appendChild(wrapper);
     });
