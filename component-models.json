@@ -3243,16 +3243,6 @@
             "value": "1"
           }
         ]
-      }
-    ]
-  },
-  {
-    "id": "container-item",
-    "fields": [
-      {
-        "component": "aem-content",
-        "name": "container-item_reference",
-        "label": "Reference"
       },
       {
         "component": "select",
@@ -3261,14 +3251,20 @@
         "valueType": "string",
         "options": [
           {
-            "name": "top",
-            "value": "top"
-          },
-          {
             "name": "center",
             "value": "center"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "container-item",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
       }
     ]
   },
