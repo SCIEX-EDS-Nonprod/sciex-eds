@@ -58,19 +58,7 @@
                     "value": "1"
                   }
                 ]
-            },
-            {
-            "component":"select",
-            "name":"container-item_position",
-            "label":"Container Position [default: top]",
-            "valueType":"string",
-            "options":[
-              {
-                "name":"center",
-                "value":"justified-items"
-              }
-            ]
-          }
+            }
         ]
       },
       {
