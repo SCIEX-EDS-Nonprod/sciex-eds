@@ -66,6 +66,10 @@
                 "value": "",
                 "valueType": "string",
                 "options": [
+                   {
+                    "name": "top",
+                    "value": "non-justified"
+                  },
                   {
                     "name": "center",
                     "value": "justified-center"
