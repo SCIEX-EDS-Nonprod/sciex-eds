@@ -66,8 +66,24 @@
         "fields": [
           {
             "component": "aem-content",
-            "name": "reference",
+            "name": "container-item_reference",
             "label": "Reference"
+          },
+          {
+            "component":"select",
+            "name":"container-item_position",
+            "label":"Container Position [default: top]",
+            "valueType":"string",
+            "options":[
+              {
+                "name":"top",
+                "value":"top"
+              },
+              {
+                "name":"center",
+                "value":"center"
+              }
+            ]
           }
         ]
       }
