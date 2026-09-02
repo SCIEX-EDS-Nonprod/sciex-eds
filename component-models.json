@@ -3243,6 +3243,19 @@
             "value": "1"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "containerPosition",
+        "label": "Select Content Position",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "top",
+            "value": "justified-center"
+          }
+        ]
       }
     ]
   },
