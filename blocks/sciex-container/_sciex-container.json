@@ -67,7 +67,7 @@
             "options":[
               {
                 "name":"center",
-                "value":"center"
+                "value":"justified-items"
               }
             ]
           }
