@@ -51,4 +51,11 @@
         grid-template-columns: 1fr;
     }
   }
+
+  .fragment-item.justified-center {
+  justify-content: center;
+}
   
+  .fragment-item.justified-top {
+  justify-content: flex-start;
+}
