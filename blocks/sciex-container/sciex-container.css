@@ -52,7 +52,10 @@
     }
   }
 
-  .justified-center {
-    justify-content: center;
-  }
+  .fragment-item.justified-center {
+  justify-content: center;
+}
   
+  .fragment-item.justified-top {
+  justify-content: flex-start;
+}

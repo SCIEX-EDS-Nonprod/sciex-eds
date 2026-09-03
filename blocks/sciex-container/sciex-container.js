@@ -78,21 +78,23 @@ export default async function decorate(block) {
     links.map((link) => loadFragment(link.getAttribute('href'))),
   );
 
-  fragments.forEach((fragment) => {
-    if (!fragment) return;
+fragments.forEach((fragment) => {
+  if (!fragment) return;
 
-    const sections = fragment.querySelectorAll('.section');
+  const sections = fragment.querySelectorAll('.section');
 
-    sections.forEach((section) => {
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('fragment-item');
-      if (justifySetting === 'justified-center') {
-        wrapper.classList.add('justified-center');
-      }
-      wrapper.appendChild(section);
-      container.appendChild(wrapper);
-    });
+  sections.forEach((section) => {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('fragment-item');
+
+    const isJustifiedCenter = justifySetting === 'justified-center';
+    wrapper.classList.toggle('justified-center', isJustifiedCenter);
+    wrapper.classList.toggle('justified-top', !isJustifiedCenter);
+
+    wrapper.appendChild(section);
+    container.appendChild(wrapper);
   });
+});
 
   // Append container into block FIRST, then run instrumentation
   block.appendChild(container);
