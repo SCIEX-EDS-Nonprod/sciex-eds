@@ -56,7 +56,8 @@
           "component": "text",
           "valueType": "string",
           "name": "imageAlt",
-          "label": "Image Alt Text"
+          "label": "Image Alt Text",
+          "value": "Product Image"
         },
         {
           "component": "text",
