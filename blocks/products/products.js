@@ -1,4 +1,6 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
+import { decorateIcons } from '../../scripts/aem.js';
+import { span } from '../../scripts/dom-builder.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
@@ -74,7 +76,7 @@ export default function decorate(block) {
     /*
      * Title
      */
-    const titleText = columns[2]
+    const titleText = columns[1]
       ?.querySelector('p')
       ?.textContent
       ?.trim();
@@ -90,7 +92,7 @@ export default function decorate(block) {
     /*
      * Description
      */
-    const description = columns[3];
+    const description = columns[2];
 
     if (description?.textContent?.trim()) {
       const descriptionWrapper = document.createElement('div');
@@ -105,24 +107,27 @@ export default function decorate(block) {
     /*
      * Link
      */
-    const sourceLink = columns[4]?.querySelector('a');
-    const linkText = columns[5]
+    const buttonText = columns[3]
       ?.querySelector('p')
       ?.textContent
       ?.trim();
+    const sourceLink = columns[4]?.querySelector('a');
 
     if (sourceLink) {
       const link = document.createElement('a');
 
       link.className = 'product-card-link';
       link.href = sourceLink.href;
-      link.textContent = linkText || sourceLink.textContent.trim();
+      const label = document.createElement('span');
+      label.textContent = buttonText ;
+      link.appendChild(label);
+      link.appendChild(span({ class: 'icon icon-arrow' }));
 
       /*
        * Open in new tab
        */
       const openInNewTab =
-        columns[6]
+        columns[5]
           ?.textContent
           ?.trim()
           ?.toLowerCase() === 'true';
@@ -133,6 +138,7 @@ export default function decorate(block) {
       }
 
       content.appendChild(link);
+      decorateIcons(link);
     }
 
     card.appendChild(content);
