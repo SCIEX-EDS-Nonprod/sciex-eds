@@ -35,7 +35,6 @@
   font-style: normal;
   font-weight: 530;
   line-height: 26px;
-  /* 144.444% */
   letter-spacing: 0.045px;
 }
 
@@ -46,7 +45,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  /* 150% */
   letter-spacing: 0.08px;
 }
 
@@ -80,12 +78,14 @@
   width: 220px;
   height: 160px;
   max-width: 220px;
-  /* flex-shrink: 0; */
 }
 
 @media (max-width: 768px) {
   .product-card-image {
     display: none;
+  }
+  .product-container{
+    gap: 32px;
   }
 
   .product-card-link {

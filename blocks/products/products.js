@@ -26,22 +26,8 @@ export default function decorate(block) {
     container.appendChild(heading);
   }
 
-  // Remaining rows = instrument items
+  // Product items
   const itemRows = rows.slice(1);
-
-  /*
-   * Automatically determine variation.
-   *
-   * Image exists  -> with-image
-   * No image       -> text-only
-   */
-  const hasImage = itemRows.some((row) => (
-    row.children[0]?.querySelector('picture, img')
-  ));
-
-  const variation = hasImage ? 'with-image' : 'text-only';
-
-  // container.classList.add(variation);
 
   const grid = document.createElement('div');
   grid.className = 'product-grid';
@@ -51,7 +37,7 @@ export default function decorate(block) {
 
     if (!columns.length) return;
 
-    const card = document.createElement('article');
+    const card = document.createElement('div');
     card.className = 'product-card';
 
     /*
@@ -59,7 +45,7 @@ export default function decorate(block) {
      */
     const picture = columns[0]?.querySelector('picture');
 
-    if (picture && variation === 'with-image') {
+    if (picture) {
       const imageWrapper = document.createElement('div');
       imageWrapper.className = 'product-card-image';
 
@@ -111,13 +97,13 @@ export default function decorate(block) {
       ?.querySelector('p')
       ?.textContent
       ?.trim();
-    const sourceLink = columns[4]?.querySelector('a');
-
-    if (sourceLink) {
+    const buttonLink = columns[4]?.querySelector('a');
+    
+    if (buttonLink) {
       const link = document.createElement('a');
 
       link.className = 'product-card-link';
-      link.href = sourceLink.href;
+      link.href = buttonLink.href;
       const label = document.createElement('span');
       label.textContent = buttonText ;
       link.appendChild(label);
