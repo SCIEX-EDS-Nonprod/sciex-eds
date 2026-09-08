@@ -80,3 +80,13 @@
 .button-block  .button.link:hover {
     background-color: transparent !important;
 }
+
+/* White Button */
+.button-block  .button.white {
+    background-color: #ffffff !important;
+    color: #141414 !important;
+    border: 1px solid #ccc !important;
+}
+.button-block  .button.white:hover {
+    background-color: #f0f0f0;
+}

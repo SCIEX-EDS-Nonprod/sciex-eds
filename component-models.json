@@ -3095,6 +3095,10 @@
           {
             "name": "Link",
             "value": "link"
+          },
+          {
+            "name": "White-BG",
+            "value": "white"
           }
         ]
       },
