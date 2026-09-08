@@ -73,7 +73,8 @@
       "knowledge-base-article",
       "sciex-border",
       "course-catalog-detail",
-      "search-facet-banner"
+      "search-facet-banner",
+      "products"
     ]
   },
   {
@@ -158,6 +159,12 @@
     "id": "icon-card",
     "components": [
       "icon-card-item"
+    ]
+  },
+  {
+    "id": "products",
+    "components": [
+      "product-item"
     ]
   },
   {
