@@ -165,7 +165,7 @@ export default function decorate(block) {
 
     if (
       index === 6
-      && /^[1-4]$/.test(row.textContent.trim())
+      && /^[1-6]$/.test(row.textContent.trim())
     ) {
       gridValue = row.textContent.trim();
       return;
