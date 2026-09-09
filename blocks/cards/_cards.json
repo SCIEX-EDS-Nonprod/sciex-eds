@@ -229,7 +229,7 @@
         },
         {
           "component": "boolean",
-          "name": "borderSytledCard",
+          "name": "borderStyledCard",
           "label": "Add Card Border (non-pafas-only)",
           "value": false,
           "valueType": "boolean"

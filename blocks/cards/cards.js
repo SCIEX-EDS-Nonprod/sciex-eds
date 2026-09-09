@@ -133,6 +133,7 @@ export default function decorate(block) {
   let headingFontStyle = '';
   let headingFontColor = '';
   let pfasStyle = false;
+  let borderStyledCard = false;
 
   [...block.children].forEach((row, index) => {
     if (index === 0) {
@@ -165,7 +166,7 @@ export default function decorate(block) {
 
     if (
       index === 6
-      && /^[1-6]$/.test(row.textContent.trim())
+        && /^[1-6]$/.test(row.textContent.trim())
     ) {
       gridValue = row.textContent.trim();
       return;
@@ -173,6 +174,11 @@ export default function decorate(block) {
 
     if (index === 7) {
       pfasStyle = row.textContent.trim().toLowerCase() === 'true';
+      return;
+    }
+
+    if (index === 8) {
+      borderStyledCard = row.textContent.trim().toLowerCase() === 'true';
       return;
     }
 
@@ -319,6 +325,8 @@ export default function decorate(block) {
         if (heading) {
           heading.classList.add('pfas-blue');
         }
+      } else if (borderStyledCard) {
+        li.classList.add('cards-card-border');
       }
 
       const anchor = li.querySelector('a');
