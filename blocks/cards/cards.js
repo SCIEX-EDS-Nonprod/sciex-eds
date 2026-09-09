@@ -132,8 +132,7 @@ export default function decorate(block) {
   let gridValue = '';
   let headingFontStyle = '';
   let headingFontColor = '';
-  let pfasStyle = false;
-  let borderStyledCard = false;
+  let cardVariation = 'default';
 
   [...block.children].forEach((row, index) => {
     if (index === 0) {
@@ -173,12 +172,7 @@ export default function decorate(block) {
     }
 
     if (index === 7) {
-      pfasStyle = row.textContent.trim().toLowerCase() === 'true';
-      return;
-    }
-
-    if (index === 8) {
-      borderStyledCard = row.textContent.trim().toLowerCase() === 'true';
+      cardVariation = row.textContent.trim().toLowerCase() || 'default';
       return;
     }
 
@@ -319,13 +313,13 @@ export default function decorate(block) {
       ----------------------------*/
 
       // Apply PFAS style if enabled
-      if (pfasStyle) {
+      if (cardVariation === 'pfas') {
         li.classList.add('pfas-card');
         const heading = li.querySelector('h5, h4, h3');
         if (heading) {
           heading.classList.add('pfas-blue');
         }
-      } else if (borderStyledCard) {
+      } else if (cardVariation === 'bordered') {
         li.classList.add('cards-card-border');
       }
 
@@ -334,7 +328,7 @@ export default function decorate(block) {
       if (anchor) {
         anchor.setAttribute('target', target);
 
-        if (pfasStyle) {
+        if (cardVariation === 'pfas') {
           // make it look like a button
           anchor.classList.add('cards-button');
 

@@ -750,18 +750,25 @@
         ]
       },
       {
-        "component": "boolean",
-        "name": "pfasStyle",
-        "label": "Enable Pfas Style",
-        "value": false,
-        "valueType": "boolean"
-      },
-      {
-        "component": "boolean",
-        "name": "borderStyledCard",
-        "label": "Add Card Border (non-pafas-only)",
-        "value": false,
-        "valueType": "boolean"
+        "component": "select",
+        "name": "cardVariation",
+        "label": "Select Card Variation",
+        "value": "default",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "PFAS Style",
+            "value": "pfas"
+          },
+          {
+            "name": "Bordered Style",
+            "value": "bordered"
+          }
+        ]
       }
     ]
   },
