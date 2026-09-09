@@ -80,7 +80,14 @@ export default function decorate(block) {
       iconWrap.innerHTML += iconHTML;
       card.append(iconWrap);
     }
-
+    if (typeOfCard === 'contact-type') {
+        if (brand) {
+        const brandLabel = document.createElement('div');
+        brandLabel.className = 'icon-card-brand-contact-type';
+        brandLabel.textContent = brand;
+        card.append(brandLabel);
+      }
+    }
     const contentWrap = document.createElement('div');
     contentWrap.className = 'icon-card-content';
 
