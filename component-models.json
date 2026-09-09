@@ -755,6 +755,13 @@
         "label": "Enable Pfas Style",
         "value": false,
         "valueType": "boolean"
+      },
+      {
+        "component": "boolean",
+        "name": "borderSytledCard",
+        "label": "Add Card Border (non-pafas-only)",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },
