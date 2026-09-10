@@ -725,11 +725,7 @@
         "options": [
           {
             "name": "Default",
-            "value": "4"
-          },
-          {
-            "name": "5-columns",
-            "value": "5"
+            "value": "3"
           },
           {
             "name": "4-columns",
