@@ -276,19 +276,6 @@ main > .section > div.sciex-container-wrapper {
   margin: auto !important;
 }
 
-.tabs-container-wrapper,
-.sciex-text-wrapper {
-  padding: 16px 15px !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-@media (min-width: 768px) {
-  .tabs-container-wrapper,
-  .sciex-text-wrapper {
-    padding: 15px 47px !important;
-  }
-}
 
 main > .section:first-of-type {
   margin-top: 0;
@@ -1398,8 +1385,7 @@ main .section.highlight {
   .featured-products-wrapper
   .sciex-columns-wrapper {
     /* padding: 0 20px !important; */
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    
   }
 }
 
