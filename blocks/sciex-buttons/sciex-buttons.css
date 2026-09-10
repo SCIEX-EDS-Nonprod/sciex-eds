@@ -81,6 +81,12 @@
     background-color: transparent !important;
 }
 
+.button-block > a.button > picture.inline-icon > img {
+    width: 16px !important;
+    height: 16px !important;
+    object-fit: contain !important;
+}
+
 /* White Button */
 .button-block  .button.white {
     background-color: #ffffff !important;

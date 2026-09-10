@@ -728,6 +728,14 @@
             "value": "4"
           },
           {
+            "name": "5-columns",
+            "value": "5"
+          },
+          {
+            "name": "4-columns",
+            "value": "4"
+          },
+          {
             "name": "3-columns",
             "value": "3"
           },
@@ -1885,6 +1893,30 @@
             "value": "_blank"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "fontColour",
+        "label": "Font Colour",
+        "valueType": "string",
+        "condition": {
+          "===": [
+            {
+              "var": "itsFullImage"
+            },
+            true
+          ]
+        },
+        "options": [
+          {
+            "name": "Black",
+            "value": "#000"
+          },
+          {
+            "name": "White",
+            "value": "#FFFFFF"
+          }
+        ]
       }
     ]
   },
@@ -2549,6 +2581,65 @@
         "name": "videoSrc",
         "label": "Video Source URL",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "products",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      }
+    ]
+  },
+  {
+    "id": "product-item",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": "Product Image"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Instrument Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonText",
+        "label": "Button Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonLink",
+        "label": "Button Link"
+      },
+      {
+        "component": "boolean",
+        "name": "openLinkInNewTab",
+        "label": "Open link in new tab",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },
@@ -3245,6 +3336,23 @@
           {
             "name": "1-columns",
             "value": "1"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "containerPosition",
+        "label": "Select Content Position",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "top",
+            "value": "non-justified"
+          },
+          {
+            "name": "center",
+            "value": "justified-center"
           }
         ]
       }
