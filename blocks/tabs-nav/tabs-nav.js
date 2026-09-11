@@ -115,9 +115,11 @@ export default async function decorate(block) {
       const buttonName = cells[0].textContent.trim();
       const buttonId = cells[1].textContent.trim();
       const buttonHref = cells[2].textContent.trim();
+      const buttonType = cells[3].textContent.trim();
 
       const btn = document.createElement('a');
       btn.classList.add('custom-tab-button');
+      btn.classList.add(`custom-tab-button-${buttonType}`);
       btn.textContent = buttonName;
 
       if (buttonHref) {
