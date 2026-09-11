@@ -4489,7 +4489,7 @@
       },
       {
         "component": "select",
-        "name": "variation",
+        "name": "button-variation",
         "label": "Select button variation primary or secondary",
         "valueType": "string",
         "options": [
