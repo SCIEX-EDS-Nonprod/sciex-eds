@@ -90,7 +90,6 @@
           "name": "variation",
           "label": "Select button variation primary or secondary",
           "valueType": "string",
-          "value": "secondary",
           "options": [
             {
               "name": "primary",
