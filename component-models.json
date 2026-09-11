@@ -4486,6 +4486,22 @@
         "name": "buttonHref",
         "label": "Button Link (Href)",
         "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "button-variation",
+        "label": "Select button variation primary or secondary",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "primary-btn",
+            "value": "primary"
+          },
+          {
+            "name": "secondary-btn",
+            "value": "secondary"
+          }
+        ]
       }
     ]
   },
