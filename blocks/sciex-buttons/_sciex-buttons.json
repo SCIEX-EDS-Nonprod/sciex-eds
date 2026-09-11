@@ -60,7 +60,8 @@
           "options": [
             { "name": "Primary", "value": "primary" },
             { "name": "Secondary", "value": "secondary" },
-            { "name": "Link", "value": "link" }
+            { "name": "Link", "value": "link" },
+            { "name":"White-BG", "value": "white" }
           ]
         },
         {
