@@ -4494,11 +4494,11 @@
         "valueType": "string",
         "options": [
           {
-            "name": "primary",
+            "name": "primary-btn",
             "value": "primary"
           },
           {
-            "name": "secondary",
+            "name": "secondary-btn",
             "value": "secondary"
           }
         ]
