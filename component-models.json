@@ -4492,15 +4492,15 @@
         "name": "variation",
         "label": "Select button variation primary or secondary",
         "valueType": "string",
-        "value": "primary",
+        "value": "secondary",
         "options": [
           {
-            "value": "primary",
-            "label": "Primary"
+            "name": "primary",
+            "value": "primary"
           },
           {
-            "value": "secondary",
-            "label": "Secondary"
+            "name": "secondary",
+            "value": "secondary"
           }
         ]
       }
