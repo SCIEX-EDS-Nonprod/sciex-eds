@@ -119,7 +119,9 @@ export default async function decorate(block) {
 
       const btn = document.createElement('a');
       btn.classList.add('custom-tab-button');
-      btn.classList.add(`custom-tab-button-${buttonType}`);
+      if (buttonType) {
+        btn.classList.add(`custom-tab-button-${buttonType}`);
+      }
       btn.textContent = buttonName;
 
       if (buttonHref) {
