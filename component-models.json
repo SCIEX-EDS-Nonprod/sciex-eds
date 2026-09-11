@@ -725,11 +725,7 @@
         "options": [
           {
             "name": "Default",
-            "value": "4"
-          },
-          {
-            "name": "5-columns",
-            "value": "5"
+            "value": "3"
           },
           {
             "name": "4-columns",
@@ -750,11 +746,25 @@
         ]
       },
       {
-        "component": "boolean",
-        "name": "pfasStyle",
-        "label": "Enable Pfas Style",
-        "value": false,
-        "valueType": "boolean"
+        "component": "select",
+        "name": "cardVariation",
+        "label": "Select Card Variation",
+        "value": "default",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "default"
+          },
+          {
+            "name": "PFAS Style",
+            "value": "pfas"
+          },
+          {
+            "name": "Bordered Style",
+            "value": "bordered"
+          }
+        ]
       }
     ]
   },
