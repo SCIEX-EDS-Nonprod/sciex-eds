@@ -154,7 +154,7 @@
           {
             "component": "select",
             "name":"ButtonVariant",
-            "Label":"Select Button Variant",
+            "label":"Select Button Variant",
             "valueType":"string",
             "options":[
               {
