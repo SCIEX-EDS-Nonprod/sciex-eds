@@ -1840,7 +1840,7 @@
       {
         "component": "text",
         "name": "buttonText",
-        "label": "Primary Button Text",
+        "label": "Button Text",
         "value": "",
         "condition": {
           "===": [
@@ -1854,7 +1854,7 @@
       {
         "component": "aem-content",
         "name": "buttonUrl",
-        "label": "primary Button Url",
+        "label": "Button Url",
         "value": "",
         "condition": {
           "===": [
@@ -1925,6 +1925,30 @@
           {
             "name": "White",
             "value": "#FFFFFF"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "ButtonVariant",
+        "Label": "Select Button Variant",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Blue-BG",
+            "value": "blue-bg"
+          },
+          {
+            "name": "White-BG",
+            "value": "White-bg"
+          },
+          {
+            "name": "black-BG",
+            "value": "black-bg"
+          },
+          {
+            "name": "outlined",
+            "value": "outlined"
           }
         ]
       }
