@@ -85,6 +85,7 @@ export default function decorate(block) {
   let fullWidthButtonTarget;
   let fullWidthButtonIcon;
   let fontColour;
+  let buttonVariant;
  
   if (isFullImage) {
     overlayImage = block.children[7]?.querySelector('picture');
@@ -93,6 +94,7 @@ export default function decorate(block) {
     fullWidthButtonIcon = block.children[10]?.querySelector('picture');
     fullWidthButtonTarget = block.children[11]?.textContent?.trim();
     fontColour = block.children[12]?.textContent?.trim();
+    buttonVariant = getButtonVariant(block.children[13]?.textContent?.trim());
   }
 
   /* Clear original block content before rebuilding layout */
@@ -175,7 +177,7 @@ export default function decorate(block) {
     buttonWrapper.classList.add('button-container');
 
     const button = document.createElement('a');
-    button.classList.add('button');
+    button.classList.add('button', `button-${buttonVariant}`);
     button.href = fullWidthButtonLink;
 
     if (fullWidthButtonTarget) {
@@ -190,6 +192,7 @@ export default function decorate(block) {
     if (fullWidthButtonIcon) {
       const iconWrapper = document.createElement('span');
       iconWrapper.classList.add('button-icon');
+      if (buttonVariant === 'white-bg') iconWrapper.style.filter = 'invert(1)';
 
       iconWrapper.append(fullWidthButtonIcon.cloneNode(true));
       button.append(iconWrapper);
@@ -223,4 +226,12 @@ export default function decorate(block) {
   block.id = `${containerID}-content`;
   block.parentElement.classList.add('tabs-container-wrapper');
   block.append(eventCard);
+}
+
+/* Allowed button variants from the authoring model */
+const BUTTON_VARIANTS = ['blue-bg', 'white-bg', 'black-bg', 'outlined'];
+
+function getButtonVariant(raw) {
+  const value = raw?.trim().toLowerCase();
+  return BUTTON_VARIANTS.includes(value) ? value : 'blue-bg';
 }
