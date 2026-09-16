@@ -23,6 +23,7 @@ async function checkLoginStatus() {
     const user = JSON.parse(localStorage.getItem('userDetails'));
     return user?.loggedIn === true;
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.warn('Treating user as logged out', e);
     return false;
   }
@@ -45,7 +46,7 @@ function getRelativeUrl(url) {
   const domains = [
     'https://devcs.sciex.com',
     'https://devcs.sciex.jp',
-    'https://devcs.sciex.com.cn'
+    'https://devcs.sciex.com.cn',
   ];
   const domain = new URL(url).origin;
   const matchedDomain = domains.includes(domain);
@@ -56,7 +57,6 @@ function getRelativeUrl(url) {
 
   return url.slice(domain.length) || '/';
 }
-
 
 const isUserLoggedIn = await checkLoginStatus();
 
@@ -78,6 +78,7 @@ const callFavoriteAPI = async (params) => {
     try {
       data = JSON.parse(text);
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error('Invalid JSON from favorite API:', text);
     }
 
@@ -87,6 +88,7 @@ const callFavoriteAPI = async (params) => {
       data,
     };
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Favorite API error:', error);
     return { success: false, status: 0, data: null };
   }

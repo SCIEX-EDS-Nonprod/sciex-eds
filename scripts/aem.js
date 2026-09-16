@@ -153,7 +153,7 @@ function setup() {
 }
 async function getHreflang() {
   try {
-    const response = await fetch("/hreflang.json");
+    const response = await fetch('/hreflang.json');
 
     if (!response.ok) {
       throw new Error(`Failed to fetch hreflang.json: ${response.status}`);
@@ -162,7 +162,7 @@ async function getHreflang() {
     const { data } = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching hreflang.json:", error);
+    console.error('Error fetching hreflang.json:', error);
     return null;
   }
 }
@@ -170,9 +170,9 @@ async function getHreflang() {
 async function decorateHreflangFromMetadata() {
   const hreflangData = await getHreflang();
   const currentUrl = new URL(window.location.href);
-  const currentPath = currentUrl?.pathname.split("?")[0];
+  const currentPath = currentUrl?.pathname.split('?')[0];
   const currentPage = hreflangData?.find(
-    (item) => item.path === currentPath
+    (item) => item.path === currentPath,
   );
 
   if (!currentPage) {
@@ -184,13 +184,13 @@ async function decorateHreflangFromMetadata() {
     .replace('.jp', '.com');
 
   const supportedLangs = [
-    { key: "EN", hreflang: "en-US", domain: baseDomain },
-    { key: "JP", hreflang: "ja-JP", domain: baseDomain.replace(".com", ".jp") },
-    { key: "CN", hreflang: "zh-CN", domain: baseDomain.replace(".com", ".com.cn") },
+    { key: 'EN', hreflang: 'en-US', domain: baseDomain },
+    { key: 'JP', hreflang: 'ja-JP', domain: baseDomain.replace('.com', '.jp') },
+    { key: 'CN', hreflang: 'zh-CN', domain: baseDomain.replace('.com', '.com.cn') },
   ];
 
   supportedLangs?.forEach(({ key, hreflang, domain }) => {
-    if (currentPage[key]?.toLowerCase() !== "true") {
+    if (currentPage[key]?.toLowerCase() !== 'true') {
       return;
     }
 
@@ -198,8 +198,8 @@ async function decorateHreflangFromMetadata() {
       return;
     }
 
-    const link = document.createElement("link");
-    link.rel = "alternate";
+    const link = document.createElement('link');
+    link.rel = 'alternate';
     link.hreflang = hreflang;
     link.href = `${domain}${currentUrl?.pathname}${currentUrl?.search}`;
 

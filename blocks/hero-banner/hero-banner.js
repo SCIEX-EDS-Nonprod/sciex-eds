@@ -85,7 +85,8 @@ export default function decorate(block) {
   let fullWidthButtonTarget;
   let fullWidthButtonIcon;
   let fontColour;
- 
+  let buttonVariant;
+
   if (isFullImage) {
     overlayImage = block.children[7]?.querySelector('picture');
     fullWidthButtonText = block.children[8]?.textContent?.trim();
@@ -93,6 +94,7 @@ export default function decorate(block) {
     fullWidthButtonIcon = block.children[10]?.querySelector('picture');
     fullWidthButtonTarget = block.children[11]?.textContent?.trim();
     fontColour = block.children[12]?.textContent?.trim();
+    buttonVariant = block.children[13]?.textContent?.trim().toLowerCase() || 'blue-bg';
   }
 
   /* Clear original block content before rebuilding layout */
@@ -175,7 +177,7 @@ export default function decorate(block) {
     buttonWrapper.classList.add('button-container');
 
     const button = document.createElement('a');
-    button.classList.add('button');
+    button.classList.add('button', `button-${buttonVariant}`);
     button.href = fullWidthButtonLink;
 
     if (fullWidthButtonTarget) {
@@ -190,6 +192,7 @@ export default function decorate(block) {
     if (fullWidthButtonIcon) {
       const iconWrapper = document.createElement('span');
       iconWrapper.classList.add('button-icon');
+      if (buttonVariant === 'white-bg') iconWrapper.style.filter = 'invert(1)';
 
       iconWrapper.append(fullWidthButtonIcon.cloneNode(true));
       button.append(iconWrapper);
