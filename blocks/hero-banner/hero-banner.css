@@ -192,33 +192,6 @@ font-size: 14px;
   color: #fff;
 }
 
-.event-card .button-container .button-blue-bg:hover {
-  background: #0055d4;
-}
-
-.event-card .button-container .button-white-bg:hover {
-  background: #eaeaea;
-}
-
-.event-card .button-container .button-black-bg:hover {
-  background: #2b2b2b;
-}
-
-.event-card .button-container .button-outlined:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.event-content.dark-theme * {
-  color: #fff !important;
-}
-.event-content.light-theme * {
-  color: #000 !important;
-}
-
-.event-card .button-container svg {
-  fill: #fff;
-}
-
 .event-card .button-container .button-icon,
 .event-card .button-container .button span {
 display: inline-flex;
