@@ -405,14 +405,14 @@ export default async function decorate(block) {
   const pageUrl = new URL(window.location.href);
   let query;
 
-  const resourceHubAllFacet = [    
-       'Knowledge base articles',       
-       'Technical notes',
-       'Regulatory documents',
-       'User guides',
-       'Training'
-  ]
-   
+  const resourceHubAllFacet = [
+    'Knowledge base articles',
+    'Technical notes',
+    'Regulatory documents',
+    'User guides',
+    'Training',
+  ];
+
   try {
     if (pageUrl.search) {
       const params = new URLSearchParams(pageUrl.search);
@@ -432,8 +432,8 @@ export default async function decorate(block) {
           searchEngine.dispatch(toggleSelectFacetValue({
             facetId: 'contenttype',
             selection: { value: facet, state: 'selected' },
-          }));          
-        })
+          }));
+        });
       }
       if (contentType !== 'All' && contentType !== 'resourcehubAll') {
         searchEngine.dispatch(toggleSelectFacetValue({

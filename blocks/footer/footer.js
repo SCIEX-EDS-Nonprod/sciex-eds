@@ -367,7 +367,7 @@ function processFragment(block, fragment) {
     selectedLanguage.append(addCountryFlag('kr'), listItems[0].textContent);
   } else if (listItems[0].textContent === 'Spanish') {
     selectedLanguage.append(addCountryFlag('es'), listItems[0].textContent);
-  }  else if (listItems[0].textContent === 'Chinese') {
+  } else if (listItems[0].textContent === 'Chinese') {
     selectedLanguage.append(addCountryFlag('cn'), listItems[0].textContent);
   }
 
@@ -379,7 +379,7 @@ function processFragment(block, fragment) {
     selectedLanguage.prepend(krflag);
   } else if (selectedLanguage.textContent === 'Spanish') {
     selectedLanguage.prepend(esflag);
-  }  else if (selectedLanguage.textContent === 'Chinese') {
+  } else if (selectedLanguage.textContent === 'Chinese') {
     selectedLanguage.prepend(cnflag);
   }
 
@@ -515,8 +515,7 @@ function processFragment(block, fragment) {
         selectedLanguageMobile.append(chevronDown);
         selectedLanguageMobile.append(chevronUp);
       }
-    }
-    else if (this.text === 'Chinese') {
+    } else if (this.text === 'Chinese') {
       cloneSelectedlang.prepend(addCountryFlag('cn'), cnflag);
       selectedLanguage.prepend(addCountryFlag('cn'), cnflag);
       selectedLanguage.appendChild(chevronDown);

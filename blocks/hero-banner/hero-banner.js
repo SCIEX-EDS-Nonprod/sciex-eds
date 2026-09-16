@@ -86,7 +86,7 @@ export default function decorate(block) {
   let fullWidthButtonIcon;
   let fontColour;
   let buttonVariant;
- 
+
   if (isFullImage) {
     overlayImage = block.children[7]?.querySelector('picture');
     fullWidthButtonText = block.children[8]?.textContent?.trim();

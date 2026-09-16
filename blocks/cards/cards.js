@@ -281,17 +281,17 @@ export default function decorate(block) {
             firstDiv.className = 'cards-card-image';
           }
         } else {
-            const content = div.textContent.trim();
-            if (content !== '') {
-              div.className = 'cards-card-body';
-              if (cardVariation === 'bordered') {
-                div.classList.add('cards-card-body-bordered');
-              }
-              if (divIndex === 2) {
-                div.className = 'imageLabel';
-              }
+          const content = div.textContent.trim();
+          if (content !== '') {
+            div.className = 'cards-card-body';
+            if (cardVariation === 'bordered') {
+              div.classList.add('cards-card-body-bordered');
+            }
+            if (divIndex === 2) {
+              div.className = 'imageLabel';
             }
           }
+        }
       });
 
       const imageContainer = li.querySelector('.cards-card-image');
@@ -326,41 +326,41 @@ export default function decorate(block) {
         li.classList.add('cards-card-border');
       }
 
-const anchor = li.querySelector('a');
+      const anchor = li.querySelector('a');
 
-if (anchor) {
-  anchor.setAttribute('target', target);
+      if (anchor) {
+        anchor.setAttribute('target', target);
 
-  if (cardVariation === 'pfas') {
-    // make it look like a button
-    anchor.classList.add('cards-button');
+        if (cardVariation === 'pfas') {
+          // make it look like a button
+          anchor.classList.add('cards-button');
 
-    // wrap text in span (optional but cleaner)
-    const textSpan = document.createElement('span');
-    textSpan.textContent = anchor.textContent;
-    anchor.textContent = '';
-    anchor.appendChild(textSpan);
+          // wrap text in span (optional but cleaner)
+          const textSpan = document.createElement('span');
+          textSpan.textContent = anchor.textContent;
+          anchor.textContent = '';
+          anchor.appendChild(textSpan);
 
-    // add arrow icon
-    anchor.appendChild(span({ class: 'icon icon-arrow' }));
-  } else if (cardVariation === 'bordered') {
-    // rename the button-container class to button-block
-    const buttonContainer = anchor.closest('.button-container');
-    if (buttonContainer) {
-      buttonContainer.classList.remove('button-container');
-      buttonContainer.classList.add('button-block');
-    }
+          // add arrow icon
+          anchor.appendChild(span({ class: 'icon icon-arrow' }));
+        } else if (cardVariation === 'bordered') {
+          // rename the button-container class to button-block
+          const buttonContainer = anchor.closest('.button-container');
+          if (buttonContainer) {
+            buttonContainer.classList.remove('button-container');
+            buttonContainer.classList.add('button-block');
+          }
 
-    // add secondary button style to the anchor
-    anchor.classList.add('secondary');
+          // add secondary button style to the anchor
+          anchor.classList.add('secondary');
 
-    // normal link behavior
-    anchor.appendChild(span({ class: 'icon icon-right-arrow' }));
-  } else {
-    // normal link behavior
-    anchor.appendChild(span({ class: 'icon icon-right-arrow' }));
-  }
-}
+          // normal link behavior
+          anchor.appendChild(span({ class: 'icon icon-right-arrow' }));
+        } else {
+          // normal link behavior
+          anchor.appendChild(span({ class: 'icon icon-right-arrow' }));
+        }
+      }
 
       if (videoThumbnailImg) {
         li.querySelectorAll('video').forEach((video) => {
@@ -429,7 +429,7 @@ if (anchor) {
           firstDiv.innerHTML = '';
           firstDiv.appendChild(videoWrapper);
           firstDiv.className = 'cards-card-image';
-          } else {
+        } else {
           div.className = 'cards-card-body';
           if (cardVariation === 'bordered') {
             div.classList.add('cards-card-body-bordered');

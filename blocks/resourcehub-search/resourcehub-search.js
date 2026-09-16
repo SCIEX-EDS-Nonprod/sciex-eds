@@ -216,10 +216,10 @@ export default async function decorate(block) {
       dropdownContent.style.display = 'none';
       selectedContentType = value;
       // selectedfacet = key;
-      if (key === (placeholders.selfPacedLearning || 'Self paced learning')){
-        queryString = `&facetId=trainingcoursetype&value=Self paced learning`;
-      }else if (key === (placeholders.instructorLedTraining || 'Instructor led training')) {
-        queryString = `&facetId=trainingcoursetype&value=Instructor led training`;
+      if (key === (placeholders.selfPacedLearning || 'Self paced learning')) {
+        queryString = '&facetId=trainingcoursetype&value=Self paced learning';
+      } else if (key === (placeholders.instructorLedTraining || 'Instructor led training')) {
+        queryString = '&facetId=trainingcoursetype&value=Instructor led training';
       } else {
         queryString = '';
       }

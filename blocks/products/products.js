@@ -82,8 +82,7 @@ export default function decorate(block) {
 
     if (description?.textContent?.trim()) {
       const descriptionWrapper = document.createElement('div');
-      descriptionWrapper.className =
-        'product-card-description';
+      descriptionWrapper.className = 'product-card-description';
 
       descriptionWrapper.innerHTML = description.innerHTML;
 
@@ -98,25 +97,24 @@ export default function decorate(block) {
       ?.textContent
       ?.trim();
     const buttonLink = columns[4]?.querySelector('a');
-    
+
     if (buttonLink) {
       const link = document.createElement('a');
 
       link.className = 'product-card-link';
       link.href = buttonLink.href;
       const label = document.createElement('span');
-      label.textContent = buttonText ;
+      label.textContent = buttonText;
       link.appendChild(label);
       link.appendChild(span({ class: 'icon icon-arrow' }));
 
       /*
        * Open in new tab
        */
-      const openInNewTab =
-        columns[5]
-          ?.textContent
-          ?.trim()
-          ?.toLowerCase() === 'true';
+      const openInNewTab = columns[5]
+        ?.textContent
+        ?.trim()
+        ?.toLowerCase() === 'true';
 
       if (openInNewTab) {
         link.target = '_blank';
