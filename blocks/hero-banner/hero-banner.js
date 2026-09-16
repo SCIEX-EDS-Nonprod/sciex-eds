@@ -94,8 +94,8 @@ export default function decorate(block) {
     fullWidthButtonIcon = block.children[10]?.querySelector('picture');
     fullWidthButtonTarget = block.children[11]?.textContent?.trim();
     fontColour = block.children[12]?.textContent?.trim();
-    buttonVariant = block.children[13]?.textContent?.trim().toLowerCase() || 'blue-bg'; 
-   }
+    buttonVariant = block.children[13]?.textContent?.trim().toLowerCase() || 'blue-bg';
+  }
 
   /* Clear original block content before rebuilding layout */
   block.innerHTML = '';
