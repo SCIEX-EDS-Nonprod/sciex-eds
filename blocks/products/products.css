@@ -77,7 +77,7 @@
 .product-card-image img {
   width: 220px;
   height: 160px;
-  max-width: 220px;
+  max-width: 220px !important;
 }
 
 @media (max-width: 768px) {
