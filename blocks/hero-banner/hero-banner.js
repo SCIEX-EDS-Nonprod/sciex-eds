@@ -64,14 +64,6 @@ function decorateEyebrow(eyebrowText, buttonColor, container) {
   container.append(wrapper);
 }
 
-/* Allowed button variants from the authoring model */
-const BUTTON_VARIANTS = ['blue-bg', 'white-bg', 'black-bg', 'outlined'];
-
-function getButtonVariant(raw) {
-  const value = raw?.trim().toLowerCase();
-  return BUTTON_VARIANTS.includes(value) ? value : 'blue-bg';
-}
-
 export default function decorate(block) {
   /* Extract authored content from the block */
   const bannerImg = block.querySelector('picture > img');
@@ -102,8 +94,8 @@ export default function decorate(block) {
     fullWidthButtonIcon = block.children[10]?.querySelector('picture');
     fullWidthButtonTarget = block.children[11]?.textContent?.trim();
     fontColour = block.children[12]?.textContent?.trim();
-    buttonVariant = getButtonVariant(block.children[13]?.textContent?.trim());
-  }
+    buttonVariant = block.children[13]?.textContent?.trim().toLowerCase() || 'blue-bg'; 
+   }
 
   /* Clear original block content before rebuilding layout */
   block.innerHTML = '';
