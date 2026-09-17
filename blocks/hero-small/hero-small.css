@@ -128,7 +128,7 @@
 .hero-small-wrapper .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
   color: rgba(255, 255, 255);
   position: relative;
   z-index: 2;
@@ -176,7 +176,7 @@ letter-spacing: 0.09px;
 
 .hero-small-wrapper .hero-description {
   margin-right: 20px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
   color: rgba(255, 255, 255);
   font-weight: 400;
