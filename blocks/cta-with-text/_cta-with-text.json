@@ -51,7 +51,8 @@
           "options": [
             { "name": "Left", "value": "left" },
             { "name": "Right", "value": "right" },
-            { "name": "Bottom", "value": "bottom" }
+            { "name": "Bottom", "value": "bottom" },
+            { "name": "Space-Between", "value": "space-between" }
           ]
         },
         {

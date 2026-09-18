@@ -75,6 +75,13 @@
   text-decoration: none;
   white-space: nowrap;
 }
+.support-cta-button:hover {
+  text-decoration: none;
+}
+
+.support-cta-button .icon{
+  display: inline-flex;  
+}
 
 /* Button Types */
 
@@ -113,7 +120,9 @@ letter-spacing: 0.08px;
 }
 
 /* ========== Alignment Modifiers ========== */
-
+.support-cta--align-space-between .support-cta-inner {
+  justify-content: space-between;
+}
 .support-cta--align-left .support-cta-inner {
   flex-direction: row-reverse;
 }
