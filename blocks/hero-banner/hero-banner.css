@@ -196,6 +196,7 @@ font-size: 14px;
 .event-card .button-container .button span {
 display: inline-flex;
 align-items: center;
+font-size: 16px;
 }
 
 .event-card .button-container .button-icon svg,
