@@ -7,7 +7,8 @@ export default function decorate(block) {
   const heading = child[0]?.textContent.trim();
   const description = child[1]?.textContent.trim();
   const variation = child[2]?.textContent.trim(); // card | banner
-  const alignment = child[3]?.textContent.trim(); // left | right | bottom | space-between (buttons only)
+  // left | right | bottom | space-between (buttons only)
+  const alignment = child[3]?.textContent.trim(); 
 
   const contactConfig = child[4]?.textContent.trim(); // dark,contact-middle
 
