@@ -1,4 +1,4 @@
-import { } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
 export default function decorate(block) {
   const child = block.children;
@@ -7,7 +7,7 @@ export default function decorate(block) {
   const heading = child[0]?.textContent.trim();
   const description = child[1]?.textContent.trim();
   const variation = child[2]?.textContent.trim(); // card | banner
-  const alignment = child[3]?.textContent.trim(); // left | right | center (buttons only)
+  const alignment = child[3]?.textContent.trim(); // left | right | bottom | space-between (buttons only)
 
   const contactConfig = child[4]?.textContent.trim(); // dark,contact-middle
 
@@ -123,6 +123,9 @@ export default function decorate(block) {
       }
     }
 
+    const primaryIcon = document.createElement('span');
+    primaryIcon.className = 'icon icon-arrow';
+    primaryBtn.appendChild(primaryIcon);
     actionWrap.appendChild(primaryBtn);
   }
 
@@ -140,6 +143,9 @@ export default function decorate(block) {
       }
     }
 
+    const secondaryIcon = document.createElement('span');
+    secondaryIcon.className = 'icon icon-arrow';
+    secondaryBtn.appendChild(secondaryIcon);
     actionWrap.appendChild(secondaryBtn);
   }
 
@@ -172,4 +178,5 @@ export default function decorate(block) {
 
   section.appendChild(inner);
   block.appendChild(section);
+  decorateIcons(block);
 }
