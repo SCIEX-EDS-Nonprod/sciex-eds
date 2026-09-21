@@ -262,7 +262,6 @@ function init() {
   setup();
   sampleRUM();
   document.addEventListener('DOMContentLoaded', () => {
-    getUserDetails();
     decorateHreflangFromMetadata();
   });
 }
@@ -930,6 +929,7 @@ export {
   decorateTemplateAndTheme,
   fetchPlaceholders,
   getMetadata,
+  getUserDetails,
   loadBlock,
   loadCSS,
   loadFooter,
