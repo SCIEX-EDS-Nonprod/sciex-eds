@@ -216,6 +216,44 @@ async function decorateHreflangFromMetadata() {
     document.head.appendChild(xDefault);
   }
 }
+//Fetch user details and store in localStorage and dataLayer
+async function getUserDetails() {
+  try {
+    const response = await fetch('/bin/sciex/currentuserdetails', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const userDetails = await response.json();
+    window.dataLayer = window.dataLayer || [];
+    localStorage.setItem('auth0Id', userDetails.auth0Id);
+
+    const existingUser = window.dataLayer.find((item) => item.user);
+
+    if (existingUser) {
+      existingUser.user.auth0Id = userDetails.auth0Id;
+      existingUser.user.company = 'SCIEX';
+    } else {
+      window.dataLayer.push({
+        user: {
+          auth0Id: userDetails.auth0Id,
+          company: 'SCIEX',
+        },
+      });
+    }
+    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+    return userDetails;
+  } catch (error) {
+    localStorage.removeItem('userDetails');
+    return null;
+  }
+}
+
 /**
  * Auto initializiation.
  */
@@ -223,6 +261,7 @@ async function decorateHreflangFromMetadata() {
 function init() {
   setup();
   sampleRUM();
+  getUserDetails();
   document.addEventListener('DOMContentLoaded', () => {
     decorateHreflangFromMetadata();
   });
