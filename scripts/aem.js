@@ -261,8 +261,8 @@ async function getUserDetails() {
 function init() {
   setup();
   sampleRUM();
-  getUserDetails();
   document.addEventListener('DOMContentLoaded', () => {
+    getUserDetails();
     decorateHreflangFromMetadata();
   });
 }
