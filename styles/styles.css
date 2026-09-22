@@ -1347,13 +1347,13 @@ main .section.highlight {
   .sciex-title-wrapper,
   .button-text-wrapper,
   .tabs-nav-wrapper,
-  .tabs-container-wrapper,
+  /* .tabs-container-wrapper, */
   .sciex-related-resource-wrapper,
   .featured-products-wrapper,
   .contact-information-wrapper,
   .cta-with-text-wrapper,
   .sciex-headquaters-wrapper,
-  .sciex-text-wrapper,
+  /* .sciex-text-wrapper, */
   .button-block,
   .sciex-tabs-wrapper,
   .sciex-buttons-wrapper,
@@ -1374,6 +1374,13 @@ main .section.highlight {
     /* padding: 0 55px !important; */
   }
 }
+
+.sciex-text-wrapper,
+.tabs-container-wrapper {
+  max-width: 100% !important;
+  /* padding: 0 55px !important; */
+}
+
 
 
 @media (min-width: 1600px) {
