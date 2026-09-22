@@ -12,9 +12,7 @@
     "/content/sciex-eds/nav:/nav",
     "/content/sciex-eds/ja-jp/footer:/ja-jp/footer",
     "/content/sciex-eds/zh-cn/footer:/zh-cn/footer",
-    "/content/sciex-eds/footer:/footer",
-    "/content/sciex-eds/search-results:/regulatory-documents",
-    "/content/sciex-eds/zh-cn/search-results:/regulatory"
+    "/content/sciex-eds/footer:/footer"
 
   ],
   "includes": [
