@@ -4281,13 +4281,6 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
         "name": "videoThumbnail",
         "label": "Video Thumbnail Picker",
         "multi": false
@@ -4298,6 +4291,13 @@
         "name": "videoAltText",
         "label": "Video Alt Text",
         "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
       }
     ]
   },
