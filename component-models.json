@@ -3389,6 +3389,13 @@
             "value": "justified-center"
           }
         ]
+      },
+      {
+        "component": "boolean",
+        "name": "borderLeft",
+        "label": "Enable Border Left",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },

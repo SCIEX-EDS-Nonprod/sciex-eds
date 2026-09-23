@@ -258,7 +258,7 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: auto;
   padding: 0 24px;
 }
@@ -1368,7 +1368,8 @@ main .section.highlight {
   .categories-wrapper,
   .featured-key-workflows-wrapper,
   .knowledge-base-article-wrapper,
-  .products-wrapper
+  .products-wrapper,
+  .breadcrumb-wrapper
   {
     max-width: 90pc !important;
     /* padding: 0 55px !important; */

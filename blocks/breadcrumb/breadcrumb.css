@@ -3,8 +3,9 @@ main > .breadcrumb-container {
   grid-column: 1;
 }
 
-main > .section > div {
-  padding: 15px 32px;
+.breadcrumb-wrapper{
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
 }
 
 @media (min-width: 900px) {
@@ -58,17 +59,9 @@ main > .section > div {
   color: black;
 }
 
-.breadcrumb-wrapper {
-  max-width: 90pc !important;
-  padding: 20px 64px !important;
-  margin: auto;
-}
 
 /* Wrapping behavior for smaller screens */
 @media (max-width: 767px) {
-  .breadcrumb-wrapper {
-    padding: 16px 15px !important;
-  }
 
   .breadcrumb-wrapper nav {
     justify-content: flex-start;
@@ -81,7 +74,6 @@ main > .section > div {
 
 @media (min-width: 375px) {
   .breadcrumb-wrapper {
-    padding: 16px 15px !important;
     max-width: 40pc;
   }
 }
@@ -101,24 +93,18 @@ main > .section > div {
 @media (min-width: 1024px) {
   .breadcrumb-wrapper {
     max-width: 63pc;
-    padding-left: 55px !important;
-    padding-right: 55px !important;  
   }
 }
 
 @media (min-width: 1280px) {
   .breadcrumb-wrapper {
     max-width: 79pc;
-    padding-left: 55px !important;
-    padding-right: 55px !important;
   }
 }
 
 @media (min-width: 1366px) {
   .breadcrumb-wrapper {
     max-width: 84pc;
-    padding-left: 55px !important;
-    padding-right: 55px !important;
   }
 }
 
