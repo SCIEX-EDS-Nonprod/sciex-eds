@@ -76,7 +76,7 @@ export default async function decorate(block) {
 
   const container = document.createElement('div');
   container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
-  if (showBorderLeft) {
+  if (showBorderLeft==='true') {
     container.classList.add('has-left-border');
   }
 
