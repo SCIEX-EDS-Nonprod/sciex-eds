@@ -121,7 +121,7 @@
         {
           "component": "reference",
           "valueType": "string",
-          "name": "image",
+          "name": "splitWithImage",
           "label": "Image",
           "multi": false
         }
