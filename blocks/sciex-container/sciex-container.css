@@ -34,6 +34,10 @@
     box-sizing: border-box;
 }
 
+.fragment-multi-container.has-left-border > .fragment-item:first-child {
+    border-left: 1px solid #ECECEC;
+}
+
 /* Content inside items */
 .fragment-multi-container .fragment-item * {
     max-width: 100%;
@@ -49,6 +53,10 @@
   @media (max-width: 768px) {
     .container-grid-2 {
         grid-template-columns: 1fr;
+    }
+    
+    .fragment-multi-container.has-left-border > .fragment-item:first-child {
+        border-left: none;
     }
   }
 
