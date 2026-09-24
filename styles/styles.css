@@ -267,12 +267,12 @@ main > .section > div.sciex-container-wrapper {
   padding: 0 !important;
 }
 .fragment-item > div > div{
-  max-width: 1200px !important;
+  max-width: 1280px !important;
   margin: auto !important;
   padding: 0 24px !important;
 }
 .container-grid-2{
-  max-width: 1200px !important;
+  max-width: 1280px !important;
   margin: auto !important;
 }
 
@@ -1369,7 +1369,8 @@ main .section.highlight {
   .featured-key-workflows-wrapper,
   .knowledge-base-article-wrapper,
   .products-wrapper,
-  .breadcrumb-wrapper
+  .breadcrumb-wrapper,
+  .container-grid-1
   {
     max-width: 90pc !important;
     /* padding: 0 55px !important; */
