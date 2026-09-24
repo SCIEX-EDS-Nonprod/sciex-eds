@@ -34,8 +34,8 @@
     box-sizing: border-box;
 }
 
-.fragment-multi-container.has-left-border {
-    border-left: 1px solid #ECECEC;;
+.fragment-multi-container.has-left-border > .fragment-item:first-child {
+    border-left: 1px solid #ECECEC;
 }
 
 /* Content inside items */
@@ -55,7 +55,7 @@
         grid-template-columns: 1fr;
     }
     
-    .fragment-multi-container.has-left-border {
+    .fragment-multi-container.has-left-border > .fragment-item:first-child {
         border-left: none;
     }
   }
