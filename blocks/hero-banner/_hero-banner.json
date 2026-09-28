@@ -174,6 +174,19 @@
                 "value":"outlined"
               }
             ]
+          },
+          {
+            "component": "select",
+            "name": "splitRatio",
+            "label": "Split Ratio (Content / Image)",
+            "valueType": "string",
+            "value": "40-60",
+            "options": [
+              { "name": "Content 40 / Image 60 (default)", "value": "40-60" },
+              { "name": "Content 50 / Image 50", "value": "50-50" },
+              { "name": "Content 60 / Image 40", "value": "60-40" },
+              { "name": "Content 70 / Image 30", "value": "70-30" }
+            ]
           }
         ]
       }

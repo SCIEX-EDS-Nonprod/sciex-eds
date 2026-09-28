@@ -3,6 +3,7 @@ import { decorateIcons } from '../../scripts/aem.js';
 /* List of background colors considered light */
 const LIGHT_BACKGROUNDS = ['#C6C6C6', '#FFFFFF', '#F0F0F0'];
 
+
 /* Check if provided color is a light background */
 function isLightBackground(color) {
   if (!color) return false;
@@ -77,6 +78,9 @@ export default function decorate(block) {
 
   const eyebrowText = block.children[2]?.textContent?.trim();
   const isFullImage = block.children[6]?.textContent?.trim()?.toLowerCase() === 'true';
+  const splitValue = block.children[14]?.textContent?.trim();
+  const splitClass = /^split-\d+-\d+$/.test(splitValue) ? splitValue : 'split-40-60';
+
 
   /* Variables used only in full-image layout */
   let overlayImage;
@@ -99,9 +103,9 @@ export default function decorate(block) {
 
   /* Clear original block content before rebuilding layout */
   block.innerHTML = '';
-
+  
   const eventCard = document.createElement('div');
-  eventCard.classList.add('event-card');
+  eventCard.classList.add('event-card', splitClass);
 
   if (isFullImage) {
     eventCard.classList.add('full-image-layout');
