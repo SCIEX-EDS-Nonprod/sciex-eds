@@ -100,7 +100,7 @@
         },
          {
           "component": "select",
-          "name": "Text Color",
+          "name": "textColor",
           "label": "Text Color",
           "valueType": "string",
           "options": [
