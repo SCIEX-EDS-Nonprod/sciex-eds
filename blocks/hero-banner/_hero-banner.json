@@ -175,25 +175,17 @@
               }
             ]
           },
-           {
+          {
             "component": "select",
             "name": "splitRatio",
             "label": "Split Ratio (Content / Image)",
             "valueType": "string",
-            "value": "40-60",
+            "value": "split-40-60",
             "options": [
-              { "name": "Content 40 / Image 60 (default)",
-               "value": "40-60" 
-              },
-              { "name": "Content 50 / Image 50", 
-              "value": "50-50"
-              },
-              { 
-                "name": "Content 60 / Image 40", "value": "60-40"
-              },
-              {
-                "name": "Content 70 / Image 30", "value": "70-30" 
-              }
+              { "name": "Content 40 / Image 60 (default)", "value": "split-40-60" },
+              { "name": "Content 50 / Image 50", "value": "split-50-50" },
+              { "name": "Content 60 / Image 40", "value": "split-60-40" },
+              { "name": "Content 70 / Image 30", "value": "split-70-30" }
             ]
           }
         ]
