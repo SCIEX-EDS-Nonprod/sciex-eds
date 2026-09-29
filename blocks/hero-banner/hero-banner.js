@@ -99,6 +99,12 @@ export default function decorate(block) {
   const contentSplitClass = `content-${contentPct}`;
   const imageSplitClass = `image-${imagePct}`;
 
+  /* TEMPORARY DEBUG LOG — remove once split ratio is confirmed working.
+     If this line never appears in the browser console, the deployed
+     hero-banner.js is NOT this file (deployment/cache issue). */
+  // eslint-disable-next-line no-console
+  console.log('[hero-banner v2]', { splitValue, contentSplitClass, imageSplitClass });
+
   /* Variables used only in full-image layout */
   let overlayImage;
   let fullWidthButtonText;
