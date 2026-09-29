@@ -3267,6 +3267,26 @@
             "value": "_blank"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "Text Color",
+        "label": "Text Color",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "White",
+            "value": "white"
+          },
+          {
+            "name": "Blue",
+            "value": "blue"
+          },
+          {
+            "name": "Black",
+            "value": "black"
+          }
+        ]
       }
     ]
   },
