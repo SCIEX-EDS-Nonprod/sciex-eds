@@ -79,7 +79,8 @@ export default function decorate(block) {
   const eyebrowText = block.children[2]?.textContent?.trim();
   const isFullImage = block.children[6]?.textContent?.trim()?.toLowerCase() === 'true';
   const splitValue = block.children[14]?.textContent?.trim();
-  const splitClass = /^split-\d+-\d+$/.test(splitValue) ? splitValue : 'split-40-60';
+  const isValidRatio = /^\d+-\d+$/.test(splitValue);
+  const splitClass = isValidRatio ? `split-${splitValue}` : 'split-40-60';
 
 
   /* Variables used only in full-image layout */
