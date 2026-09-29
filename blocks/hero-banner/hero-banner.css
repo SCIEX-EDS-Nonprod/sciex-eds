@@ -22,8 +22,6 @@
 
 
 .event-content {
-  box-sizing: border-box;
-  flex-shrink: 0;
   height: 100%;
   padding: 24px 24px 24px 64px;
   display: flex;
@@ -38,33 +36,15 @@ line-height: 30px; /* 133.333% */
 }
 
 .event-image {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-  background-color: #f5f5f5;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+position: relative;
+overflow: hidden;
+background-color: #f5f5f5;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
 }
-
-.content-40 { width: 40%; }
-
-.content-50 { width: 50%; }
-
-.content-60 { width: 60%; }
-
-.content-70 { width: 70%; }
-
-.image-30 { width: 30%; }
-
-.image-40 { width: 40%; }
-
-.image-50 { width: 50%; }
-
-.image-60 { width: 60%; }
 
 .event-content h3 {
   font-family: "Geogrotesque Sharp VF";
@@ -333,4 +313,31 @@ display: block;
     /* bottom: 24px; */
     max-width: 85%;
   }
+}
+
+/* ==========================================================================
+   Configurable content / image split ratio
+   - Applies to the STANDARD layout only (":not(.full-image-layout)")
+   - Applies at 769px and above only; mobile stacking above is untouched
+   - Each container gets its OWN class (content-XX / image-YY), so the
+     percentages are fully independent and simply add up to 100%
+   ========================================================================== */
+@media (min-width: 769px) {
+  .event-card:not(.full-image-layout) .event-content,
+  .event-card:not(.full-image-layout) .event-image {
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  .event-card:not(.full-image-layout) .event-content.content-40 { width: 40%; }
+  .event-card:not(.full-image-layout) .event-image.image-60     { width: 60%; }
+
+  .event-card:not(.full-image-layout) .event-content.content-50 { width: 50%; }
+  .event-card:not(.full-image-layout) .event-image.image-50     { width: 50%; }
+
+  .event-card:not(.full-image-layout) .event-content.content-60 { width: 60%; }
+  .event-card:not(.full-image-layout) .event-image.image-40     { width: 40%; }
+
+  .event-card:not(.full-image-layout) .event-content.content-70 { width: 70%; }
+  .event-card:not(.full-image-layout) .event-image.image-30     { width: 30%; }
 }

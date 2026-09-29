@@ -3,6 +3,11 @@ import { decorateIcons } from '../../scripts/aem.js';
 /* List of background colors considered light */
 const LIGHT_BACKGROUNDS = ['#C6C6C6', '#FFFFFF', '#F0F0F0'];
 
+/* Default split ratio used when nothing is authored or the value is invalid.
+   Matches the original hardcoded layout (content 40% / image 60%) so
+   already-published pages keep looking exactly as before. */
+const DEFAULT_SPLIT = { content: '40', image: '60' };
+
 /* Check if provided color is a light background */
 function isLightBackground(color) {
   if (!color) return false;
@@ -64,8 +69,18 @@ function decorateEyebrow(eyebrowText, buttonColor, container) {
   container.append(wrapper);
 }
 
+/* Parse the authored split ratio ("60-40") into { content, image } percentages.
+   Falls back to DEFAULT_SPLIT for anything missing or malformed. */
+function parseSplitRatio(rawValue) {
+  const isValid = /^\d{1,3}-\d{1,3}$/.test(rawValue || '');
+  if (!isValid) return DEFAULT_SPLIT;
+
+  const [content, image] = rawValue.split('-');
+  return { content, image };
+}
+
 export default function decorate(block) {
-  /* Extract authored content from the block */
+  /* Extract authored content from the block BEFORE clearing it */
   const bannerImg = block.querySelector('picture > img');
   const heading = block.querySelector('h1, h2, h3, h4, h5, h6');
   const description = heading?.nextElementSibling;
@@ -77,11 +92,12 @@ export default function decorate(block) {
 
   const eyebrowText = block.children[2]?.textContent?.trim();
   const isFullImage = block.children[6]?.textContent?.trim()?.toLowerCase() === 'true';
-  const authoredSplitRatio = block.children[14]?.textContent?.trim();
-  const splitRatio = ['50-50', '60-40', '40-60', '70-30'].includes(authoredSplitRatio)
-    ? authoredSplitRatio
-    : '40-60';
-  const [contentWidth, imageWidth] = splitRatio.split('-');
+
+  /* Split ratio: read now, while the authored rows still exist */
+  const splitValue = block.children[14]?.textContent?.trim();
+  const { content: contentPct, image: imagePct } = parseSplitRatio(splitValue);
+  const contentSplitClass = `content-${contentPct}`;
+  const imageSplitClass = `image-${imagePct}`;
 
   /* Variables used only in full-image layout */
   let overlayImage;
@@ -113,8 +129,7 @@ export default function decorate(block) {
   }
 
   const contentContainer = document.createElement('div');
-  contentContainer.classList.add('event-content');
-  contentContainer.classList.add(`content-${contentWidth}`);
+  contentContainer.classList.add('event-content', contentSplitClass);
 
   /* Apply theme based on background color */
   if (buttonLabel && !isFullImage) {
@@ -213,23 +228,27 @@ export default function decorate(block) {
 
   /* Image container */
   const imageContainer = document.createElement('div');
-  const overlayWrapper = document.createElement('div');
-  imageContainer.classList.add('event-image');
-  imageContainer.classList.add(`image-${imageWidth}`);
+  imageContainer.classList.add('event-image', imageSplitClass);
 
   if (bannerImg) {
     imageContainer.append(bannerImg);
   }
 
-  /* Overlay image for full-image layout */
-  if (isFullImage && overlayImage) {
-    overlayWrapper.classList.add('overlay-image');
+  /* Final card assembly: image first, then content.
+     Overlay wrapper is only created (and only added to the DOM) when
+     there is an actual overlay image, so it never sits in the flex row
+     as an empty box and can never affect the content/image split. */
+  eventCard.append(imageContainer);
 
+  if (isFullImage && overlayImage) {
+    const overlayWrapper = document.createElement('div');
+    overlayWrapper.classList.add('overlay-image');
     overlayWrapper.append(overlayImage.cloneNode(true));
+    eventCard.append(overlayWrapper);
   }
 
-  /* Final card assembly */
-  eventCard.append(imageContainer, overlayWrapper, contentContainer);
+  eventCard.append(contentContainer);
+
   block.id = `${containerID}-content`;
   block.parentElement.classList.add('tabs-container-wrapper');
   block.append(eventCard);

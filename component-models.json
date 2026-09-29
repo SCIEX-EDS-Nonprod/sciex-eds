@@ -1958,30 +1958,6 @@
       },
       {
         "component": "select",
-        "name": "ButtonVariant",
-        "label": "Select Button Variant",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Blue-BG",
-            "value": "blue-bg"
-          },
-          {
-            "name": "White-BG",
-            "value": "White-bg"
-          },
-          {
-            "name": "black-BG",
-            "value": "black-bg"
-          },
-          {
-            "name": "outlined",
-            "value": "outlined"
-          }
-        ]
-      },
-      {
-        "component": "select",
         "name": "splitRatio",
         "label": "Split Ratio (Content / Image)",
         "valueType": "string",
