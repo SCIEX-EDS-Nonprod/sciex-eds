@@ -3,7 +3,6 @@ import { decorateIcons } from '../../scripts/aem.js';
 /* List of background colors considered light */
 const LIGHT_BACKGROUNDS = ['#C6C6C6', '#FFFFFF', '#F0F0F0'];
 
-
 /* Check if provided color is a light background */
 function isLightBackground(color) {
   if (!color) return false;
@@ -78,10 +77,11 @@ export default function decorate(block) {
 
   const eyebrowText = block.children[2]?.textContent?.trim();
   const isFullImage = block.children[6]?.textContent?.trim()?.toLowerCase() === 'true';
-  const splitValue = block.children[14]?.textContent?.trim();
-  const isValidRatio = /^\d+-\d+$/.test(splitValue);
-  const splitClass = isValidRatio ? `split-${splitValue}` : 'split-40-60';
-
+  const authoredSplitRatio = block.children[14]?.textContent?.trim();
+  const splitRatio = ['50-50', '60-40', '40-60', '70-30'].includes(authoredSplitRatio)
+    ? authoredSplitRatio
+    : '40-60';
+  const [contentWidth, imageWidth] = splitRatio.split('-');
 
   /* Variables used only in full-image layout */
   let overlayImage;
@@ -104,9 +104,9 @@ export default function decorate(block) {
 
   /* Clear original block content before rebuilding layout */
   block.innerHTML = '';
-  
+
   const eventCard = document.createElement('div');
-  eventCard.classList.add('event-card', splitClass);
+  eventCard.classList.add('event-card');
 
   if (isFullImage) {
     eventCard.classList.add('full-image-layout');
@@ -114,6 +114,7 @@ export default function decorate(block) {
 
   const contentContainer = document.createElement('div');
   contentContainer.classList.add('event-content');
+  contentContainer.classList.add(`content-${contentWidth}`);
 
   /* Apply theme based on background color */
   if (buttonLabel && !isFullImage) {
@@ -214,6 +215,7 @@ export default function decorate(block) {
   const imageContainer = document.createElement('div');
   const overlayWrapper = document.createElement('div');
   imageContainer.classList.add('event-image');
+  imageContainer.classList.add(`image-${imageWidth}`);
 
   if (bannerImg) {
     imageContainer.append(bannerImg);
