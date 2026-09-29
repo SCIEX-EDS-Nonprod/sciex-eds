@@ -122,42 +122,32 @@ font-size: 14px;
 
 .event-card.full-image-layout {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   height: 318px;
   margin-bottom: 20px;
-  overflow: hidden;
 }
 
 .event-card.full-image-layout .event-image {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  background: none;
 }
 
 .event-card.full-image-layout .event-content {
-  position: relative;
-  order: 1;
-  flex: 1 1 50%;
-  min-width: 0;
+  position: absolute;
+  left: 64px;
   width: auto;
-  max-width: 40%;
-  height: auto;
-  padding: 30px 0 30px 64px;
+  max-width: 685px;
+  padding: 30px 0;
   background: none;
+  color: #fff;
   z-index: 2;
   color: #FFF;
   font-family: Geogrotesque;
   font-size: 40px;
   font-style: normal;
   font-weight: 300;
-  line-height: 50px;
+  line-height: 50px; /* 125% */    
 }
-
   .event-card.full-image-layout .event-image img {
   width: 100%;
   height: 100%;
@@ -230,27 +220,19 @@ display: block;
 }
 
 .overlay-image {
-  position: relative;
-  order: 2;
-  flex: 0 1 45%;
-  min-width: 0;
-  max-width: 622px;        
-  align-self: flex-end;
-  margin-right: 32px;
-  transform: translateY(15%);
+  position: absolute;
+  bottom: -20%;
+  right: 92px;
   z-index: 2;
-}
-
-.overlay-image picture {
-  display: block;
+  height: 100%;
 }
 
 .overlay-image img {
-  display: block;
-  width: 100%;
-  height: auto;
+  width: 420px;
   max-width: none;
+  height: 100%;
 }
+
 .event-content.light-theme {
   background-color: #C6C6C6;
   color: #000;
@@ -270,29 +252,40 @@ display: block;
 
 @media (max-width: 768px) {
 
-  .event-card.full-image-layout {
-  flex-direction: column;
-  align-items: stretch;
-  height: auto;
-  min-height: 444px;
+ /* Increase banner height only for mobile */
+ .event-card.full-image-layout {
+  height: 444px;
 }
 
-.event-card.full-image-layout .overlay-image {
-  order: 1;
-  flex: none;
+.event-card.full-image-layout .event-image {
+  height: 100%;
+  position: relative;
+}
+
+/* Overlay image centered at top inside banner */
+.overlay-image {
+  position: absolute;
+  top: 32px;
+  right: -15%;
+  left: -15%;
+  /* transform: translateX(-50%); */
+  width: 130%;
+  height: 50%;
+  z-index: 2;
+}
+
+.overlay-image img {
   width: 100%;
-  max-width: 420px;
-  margin: 32px 0 0;
-  align-self: center;
-  transform: none;
+  height: 285px;
 }
 
+/* Keep text visible below overlay */
 .event-card.full-image-layout .event-content {
-  order: 2;
-  flex: none;
-  padding: 24px;
+  left: 24px;
+  /* bottom: 24px; */
+  max-width: 85%;
+  z-index: 2;
 }
-
   .datetime-wrapper {
     display: none;
   }
@@ -322,8 +315,4 @@ display: block;
     /* bottom: 24px; */
     max-width: 85%;
   }
-}
-.event-card {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
 }
