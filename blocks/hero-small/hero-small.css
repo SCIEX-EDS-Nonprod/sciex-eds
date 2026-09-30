@@ -292,7 +292,7 @@ letter-spacing: 0.09px;
   content: "";
   position: absolute;
   inset: 0;
-  /* background: rgba(127, 125, 125, 0.35); */
+  background: rgb(0 0 0 / 20%);
   z-index: 1;
 }
 

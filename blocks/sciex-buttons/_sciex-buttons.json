@@ -97,6 +97,17 @@
             { "name": "Same Tab", "value": "_self" },
             { "name": "New Tab", "value": "_blank" }
           ]
+        },
+         {
+          "component": "select",
+          "name": "textColor",
+          "label": "Text Color",
+          "valueType": "string",
+          "options": [
+            { "name": "White", "value": "white" },
+            { "name": "Blue", "value": "blue" },
+            { "name": "Black", "value": "black" }
+          ]
         }
       ]
     }
