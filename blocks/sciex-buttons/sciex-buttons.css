@@ -81,6 +81,20 @@
     background-color: transparent !important;
 }
 
+.button-block .button.text-white {
+    color: #fff !important;
+}
+
+.button-block .button.text-black {
+    color: #141414 !important;
+}
+
+.button-block .button.text-blue {
+    /* The shared theme token uses a capitalized name. */
+    /* stylelint-disable-next-line custom-property-pattern */
+    color: var(--Blue-700, #0068fa) !important;
+}
+
 .button-block > a.button > picture.inline-icon > img {
     width: 16px !important;
     height: 16px !important;
