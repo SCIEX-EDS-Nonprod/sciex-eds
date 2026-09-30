@@ -9,6 +9,11 @@
     /* padding: 0px !important; */
 }
 
+.sciex-container.block .has-side-border {
+    border-left: 1px solid #ECECEC;
+    border-right: 1px solid #ECECEC;
+}
+
 /* Grid layouts */
 .container-grid-2 {
     display: grid;

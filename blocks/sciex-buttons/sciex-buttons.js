@@ -26,6 +26,7 @@ export default async function decorate(block) {
       showSvgRaw = 'false',
       picture,
       target = '_self',
+      textColor = '',
     ] = cells;
 
     const showSvg = showSvgRaw.toLowerCase() === 'true';
@@ -35,6 +36,10 @@ export default async function decorate(block) {
     button.target = target;
     button.className = `button ${type}`;
     button.textContent = text;
+
+    if (['white', 'black', 'blue'].includes(textColor.toLowerCase())) {
+      button.classList.add(`text-${textColor.toLowerCase()}`);
+    }
 
     if (showSvg && picture) {
       const clonedPicture = picture.cloneNode(true);

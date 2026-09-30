@@ -60,7 +60,9 @@ export default async function decorate(block) {
   const firstChild = block.children[0] ?? null;
   const secondChild = block.children[1] ?? null;
   const thirdChild = block.children[2] ?? null;
+  const fourthChild = block.children[3] ?? null;
   const justifySetting = thirdChild?.textContent?.trim() || '';
+  const enableBorder = fourthChild?.textContent?.trim() === 'true';
 
   const links = Array.from(block.querySelectorAll('a'));
   if (links.length === 0) return;
@@ -69,11 +71,14 @@ export default async function decorate(block) {
   if (firstChild) firstChild.remove();
   if (secondChild) secondChild.remove();
   if (thirdChild) thirdChild.remove();
+  if (fourthChild) fourthChild.remove();
   links.forEach((a) => a.remove());
 
   const container = document.createElement('div');
   container.classList.add('fragment-multi-container', `container-grid-${gridValueColumns}`);
-
+  if (enableBorder) {
+    container.classList.add('has-side-border');
+  }
   const fragments = await Promise.all(
     links.map((link) => loadFragment(link.getAttribute('href'))),
   );

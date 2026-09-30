@@ -120,7 +120,7 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: "Geogrotesque MD", Helvetica, Arial, sans-serif;
-  font-weight: 600;
+  font-weight: 330;
   line-height: 1.25;
   scroll-margin: 40px;
 }
@@ -258,21 +258,17 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: auto;
   padding: 0 24px;
 }
-main > .section > div.sciex-container-wrapper {
-  max-width: 100% !important;
-  padding: 0 !important;
-}
 .fragment-item > div > div{
-  max-width: 1200px !important;
+  max-width: 1280px !important;
   margin: auto !important;
   padding: 0 24px !important;
 }
 .container-grid-2{
-  max-width: 1200px !important;
+  max-width: 1280px !important;
   margin: auto !important;
 }
 
@@ -1368,9 +1364,12 @@ main .section.highlight {
   .categories-wrapper,
   .featured-key-workflows-wrapper,
   .knowledge-base-article-wrapper,
-  .products-wrapper
+  .products-wrapper,
+  .breadcrumb-wrapper,
+  .hero-wrapper 
   {
     max-width: 90pc !important;
+    margin: auto;
     /* padding: 0 55px !important; */
   }
 }
@@ -1403,7 +1402,7 @@ main .section.highlight {
   font-size: 80px;
   line-height: 96px;
   letter-spacing: -0.01em;
-  font-variation-settings: "wght" 270, "wdth" 550;
+  font-variation-settings: "wght" 330, "wdth" 550;
 }
 
 /* Alfa */
@@ -1411,7 +1410,7 @@ main .section.highlight {
   font-size: 64px;
   line-height: 80px;
   letter-spacing: 0;
-  font-variation-settings: "wght" 270, "wdth" 550;
+  font-variation-settings: "wght" 330, "wdth" 550;
 }
 
 /* Bravo */
@@ -1419,7 +1418,7 @@ main .section.highlight {
   font-size: 52px;
   line-height: 64px;
   letter-spacing: 0;
-  font-variation-settings: "wght" 270, "wdth" 550;
+  font-variation-settings: "wght" 330, "wdth" 550;
 }
 
 /* Charlie */
@@ -1440,10 +1439,10 @@ main .section.highlight {
 
 /* Echo Bolder */
 .text-echo-bolder {
-  font-size: 24px;
+  font-size: 16px;
   line-height: 32px;
   letter-spacing: 0;
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Echo */
@@ -1459,7 +1458,7 @@ main .section.highlight {
   font-size: 19px;
   line-height: 28px;
   letter-spacing: 0.0025em; /* 0.25% */
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Large */
@@ -1475,7 +1474,7 @@ main .section.highlight {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.005em; /* 0.5% */
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Base */
@@ -1491,7 +1490,7 @@ main .section.highlight {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.005em;
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Small */

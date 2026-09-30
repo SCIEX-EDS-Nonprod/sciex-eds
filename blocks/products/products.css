@@ -17,6 +17,7 @@
   padding: 24px;
   border-radius: 4px;
   background: var(--Grey-50, #F5F5F5);
+  transition: background-color 0.3s ease 0.1s;
 }
 
 .product-title {
@@ -78,6 +79,15 @@
   width: 220px;
   height: 160px;
   max-width: 220px !important;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-image img {
+  transform: scale(1.05);
+}
+
+.product-card:hover {
+  background-color: #ebebeb;
 }
 
 @media (max-width: 768px) {

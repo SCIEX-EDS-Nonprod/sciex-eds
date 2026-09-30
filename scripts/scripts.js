@@ -14,7 +14,7 @@ import {
   loadCSS,
   toClassName,
   getMetadata,
-  getUserDetails
+  getUserDetails,
 } from './aem.js';
 
 export function getCookie(name) {

@@ -146,6 +146,9 @@ export default function decorate(block) {
     if (rect.bottom <= 80) {
       tabs.style.position = 'fixed';
       tabs.style.top = '0';
+      tabs.style.left = '0';
+      tabs.style.right = '0';
+      tabs.style.margin = '0 auto';
       if (isNavTab) {
         tabs.style.top = '57px';
       }
@@ -153,6 +156,9 @@ export default function decorate(block) {
     } else {
       tabs.style.position = 'sticky';
       tabs.style.top = '0';
+      tabs.style.left = '';
+      tabs.style.right = '';
+      tabs.style.margin = '';
     }
   });
 }
