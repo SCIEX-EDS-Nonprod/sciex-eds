@@ -608,6 +608,13 @@ function decorateSections(main) {
           styles.forEach((style) => section.classList.add(style));
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
+          if (key === 'margin-top' || key === 'margin-bottom') {
+            const margin = Number.parseFloat(meta[key]);
+            if (Number.isFinite(margin)) {
+              const property = key === 'margin-top' ? 'marginTop' : 'marginBottom';
+              section.style[property] = `${margin}px`;
+            }
+          }
         }
       });
       sectionMeta.parentNode.remove();

@@ -75,6 +75,12 @@
                     "value": "justified-center"
                   }
                 ]
+            },{
+              "component": "boolean",
+              "name": "enableBorder",
+              "label": "Enable left,right border for sciex-tab",
+              "value": false,
+              "valueType": "boolean"
             }
         ]
       },

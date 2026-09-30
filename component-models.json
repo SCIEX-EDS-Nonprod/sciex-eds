@@ -295,6 +295,20 @@
             "value": "text-blue-background"
           }
         ]
+      },
+      {
+        "component": "number",
+        "name": "margin-top",
+        "label": "Margin Top",
+        "description": "Provide margin-top value in px (default value is 40px)",
+        "valueType": "string"
+      },
+      {
+        "component": "number",
+        "name": "margin-bottom",
+        "label": "Margin Bottom",
+        "description": "Provide margin-bottom value in px (default value is 40px)",
+        "valueType": "string"
       }
     ]
   },
@@ -3409,6 +3423,13 @@
             "value": "justified-center"
           }
         ]
+      },
+      {
+        "component": "boolean",
+        "name": "enableBorder",
+        "label": "Enable left,right border for sciex-tab",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },

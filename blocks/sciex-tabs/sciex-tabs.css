@@ -5,9 +5,19 @@
     /* max-width: 87pc !important; */
     width: 100%;
     position: relative;
+}
+
+.sciex-tabs-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
     background-color: white;
-    padding: 0px 64px !important;
-    max-width: 100% !important;
+    z-index: -1;
+    pointer-events: none;
 }
 
 [data-tabname] {
@@ -19,7 +29,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 1rem;
-    border-bottom: 1px solid #e6e6e6;
+    /* border-bottom: 1px solid #e6e6e6; */
     padding-bottom: 0;
     position: relative;
 }
@@ -27,6 +37,7 @@
 .custom-sciex-tabs .tab {
     background: none;
     border: none;
+    border-bottom: 1px solid #e6e6e6;
     font-size: 1.125rem;
     font-weight: 600;
     color: #000;
@@ -35,6 +46,7 @@
     position: relative;
     transition: color 0.3s ease;
     white-space: nowrap;
+    border-radius: 0;
 }
 button.tab.active{
     border-radius: 0;
@@ -43,9 +55,10 @@ button.tab.active{
 .custom-sciex-tabs .tab:hover,
 .custom-sciex-tabs .tab.active {
     color: #0068fa;
+    border-bottom: 1px solid #0068fa;
 }
 
-.custom-sciex-tabs .tab.active::after {
+/* .custom-sciex-tabs .tab.active::after {
     content: '';
     position: absolute;
     left: 10%;
@@ -56,7 +69,7 @@ button.tab.active{
     border-radius: 3px;
     transition: all 0.3s ease;
     z-index: 2;
-}
+} */
 
 .hide-section {
     display: none !important;
