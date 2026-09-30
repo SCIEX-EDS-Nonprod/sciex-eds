@@ -258,7 +258,7 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: auto;
   padding: 0 24px;
 }
@@ -267,15 +267,14 @@ main > .section > div.sciex-container-wrapper {
   padding: 0 !important;
 }
 .fragment-item > div > div{
-  max-width: 1200px !important;
+  max-width: 1280px !important;
   margin: auto !important;
   padding: 0 24px !important;
 }
-.container-grid-2{
-  max-width: 1200px !important;
+.container-grid-2,.container-grid-1{
+  max-width: 1280px !important;
   margin: auto !important;
 }
-
 
 main > .section:first-of-type {
   margin-top: 0;
@@ -1368,7 +1367,9 @@ main .section.highlight {
   .categories-wrapper,
   .featured-key-workflows-wrapper,
   .knowledge-base-article-wrapper,
-  .products-wrapper
+  .products-wrapper,
+  .breadcrumb-wrapper,
+  .container-grid-1
   {
     max-width: 90pc !important;
     /* padding: 0 55px !important; */
