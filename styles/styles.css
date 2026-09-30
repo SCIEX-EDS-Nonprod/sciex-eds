@@ -1403,7 +1403,7 @@ main .section.highlight {
   font-size: 80px;
   line-height: 96px;
   letter-spacing: -0.01em;
-  font-variation-settings: "wght" 270, "wdth" 550;
+  font-variation-settings: "wght" 330, "wdth" 550;
 }
 
 /* Alfa */
@@ -1411,7 +1411,7 @@ main .section.highlight {
   font-size: 64px;
   line-height: 80px;
   letter-spacing: 0;
-  font-variation-settings: "wght" 270, "wdth" 550;
+  font-variation-settings: "wght" 330, "wdth" 550;
 }
 
 /* Bravo */
@@ -1419,7 +1419,7 @@ main .section.highlight {
   font-size: 52px;
   line-height: 64px;
   letter-spacing: 0;
-  font-variation-settings: "wght" 270, "wdth" 550;
+  font-variation-settings: "wght" 330, "wdth" 550;
 }
 
 /* Charlie */
@@ -1443,7 +1443,7 @@ main .section.highlight {
   font-size: 16px;
   line-height: 32px;
   letter-spacing: 0;
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Echo */
@@ -1459,7 +1459,7 @@ main .section.highlight {
   font-size: 19px;
   line-height: 28px;
   letter-spacing: 0.0025em; /* 0.25% */
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Large */
@@ -1475,7 +1475,7 @@ main .section.highlight {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.005em; /* 0.5% */
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Base */
@@ -1491,7 +1491,7 @@ main .section.highlight {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.005em;
-  font-variation-settings: "wght" 530, "wdth" 550;
+  font-variation-settings: "wght" 400, "wdth" 550;
 }
 
 /* Small */
