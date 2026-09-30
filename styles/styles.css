@@ -262,7 +262,7 @@ main > .section > div {
   margin: auto;
   padding: 0 24px;
 }
-.has-side-border .fragment-item > div > div{
+.fragment-item > div > div{
   max-width: 1280px !important;
   margin: auto !important;
   padding: 0 24px !important;
@@ -281,7 +281,7 @@ main > .section:first-of-type {
   main > .section > div {
       padding: 0 32px;
   }
-  .has-side-border .fragment-item > div > div{
+  .fragment-item > div > div{
       padding: 0 32px !important;
   }
   /* main > .section > div.sciex-container-wrapper{
