@@ -1,7 +1,7 @@
 /* ========== Base Layout ========== */
 
 .cta-with-text-wrapper {
-  margin-top: 149px !important;
+  margin-top: 20px !important;
 }
 
 .support-cta-block {
@@ -51,7 +51,7 @@
 /* Card */
 
 .support-cta--card .support-cta-inner {
-  padding: 32px;
+  padding: 32px 0px;
   gap: 32px;
   background: var(--Grey-50, #F5F5F5);
 }

@@ -242,7 +242,7 @@ line-height: 26px;
 letter-spacing: 0.045px;
 }
 .resource-grid-li.pfas-style{
-background-color: white;
+/* background-color: white; */
 padding: 24px;
 }
 .resource-grid-ul.pfas-style{
