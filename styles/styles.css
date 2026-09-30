@@ -262,7 +262,7 @@ main > .section > div {
   margin: auto;
   padding: 0 24px;
 }
-.fragment-item > div > div{
+.has-side-border .fragment-item > div > div{
   max-width: 1280px !important;
   margin: auto !important;
   padding: 0 24px !important;
@@ -281,7 +281,7 @@ main > .section:first-of-type {
   main > .section > div {
       padding: 0 32px;
   }
-  .fragment-item > div > div{
+  .has-side-border .fragment-item > div > div{
       padding: 0 32px !important;
   }
   /* main > .section > div.sciex-container-wrapper{
@@ -1365,9 +1365,11 @@ main .section.highlight {
   .featured-key-workflows-wrapper,
   .knowledge-base-article-wrapper,
   .products-wrapper,
-  .breadcrumb-wrapper
+  .breadcrumb-wrapper,
+  .hero-wrapper 
   {
     max-width: 90pc !important;
+    margin: auto;
     /* padding: 0 55px !important; */
   }
 }
