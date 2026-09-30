@@ -216,7 +216,7 @@ async function decorateHreflangFromMetadata() {
     document.head.appendChild(xDefault);
   }
 }
-//Fetch user details and store in localStorage and dataLayer
+// Fetch user details and store in localStorage and dataLayer
 async function getUserDetails() {
   try {
     const response = await fetch('/bin/sciex/currentuserdetails', {

@@ -206,23 +206,42 @@ export default function decorate(block) {
   decorateIcons(contentContainer);
 
   /* Image container */
+  /* Image container */
   const imageContainer = document.createElement('div');
-  const overlayWrapper = document.createElement('div');
   imageContainer.classList.add('event-image');
 
   if (bannerImg) {
     imageContainer.append(bannerImg);
   }
 
-  /* Overlay image for full-image layout */
-  if (isFullImage && overlayImage) {
-    overlayWrapper.classList.add('overlay-image');
+  if (isFullImage) {
+  /* Background image now lives on the outer wrapper itself, so it can
+     never be clipped by padding/overflow on inner elements */
+    const wrapperEl = block.parentElement; // .hero-banner-wrapper
+    if (bannerImg) {
+      wrapperEl.classList.add('has-full-image-bg');
+      wrapperEl.style.backgroundImage = `url("${bannerImg.currentSrc || bannerImg.src}")`;
+    }
 
-    overlayWrapper.append(overlayImage.cloneNode(true));
+    const innerWrapper = document.createElement('div');
+    innerWrapper.classList.add('full-image-inner');
+
+    if (overlayImage) {
+      const overlayWrapper = document.createElement('div');
+      overlayWrapper.classList.add('overlay-image');
+      overlayWrapper.append(overlayImage.cloneNode(true));
+      innerWrapper.append(overlayWrapper);
+    }
+
+    innerWrapper.append(contentContainer);
+    eventCard.append(innerWrapper);
+  } else {
+  /* Standard layout: unchanged, real .event-image element with an <img> */
+    const imageContain = document.createElement('div');
+    imageContain.classList.add('event-image');
+    if (bannerImg) imageContain.append(bannerImg);
+    eventCard.append(imageContain, contentContainer);
   }
-
-  /* Final card assembly */
-  eventCard.append(imageContainer, overlayWrapper, contentContainer);
   block.id = `${containerID}-content`;
   block.parentElement.classList.add('tabs-container-wrapper');
   block.append(eventCard);
