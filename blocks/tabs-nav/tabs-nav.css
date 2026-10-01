@@ -51,9 +51,24 @@ html {
   top: 0;
   z-index: 1000;
   background-color: white;
-  max-width: 100% !important;
-  padding: 0 64px!important;
+  /* max-width: 100% !important; */
+  /* padding: 0 64px!important; */
   margin: auto;
+}
+
+.tabs-nav-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-color: #FFF;
+  border-bottom: 1px solid #ECECEC;
+  z-index: -1;
+  pointer-events: none;
+  
 }
 
 

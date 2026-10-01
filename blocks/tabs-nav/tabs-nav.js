@@ -210,10 +210,15 @@ export default async function decorate(block) {
     if (rect.bottom <= 0) {
       tabs.style.position = 'fixed';
       tabs.style.top = '0';
-      tabs.style.width = '100%';
+      tabs.style.left = '0';
+      tabs.style.right = '0';
+      tabs.style.margin = '0 auto';
     } else {
       tabs.style.position = 'sticky';
       tabs.style.top = '0';
+      tabs.style.left = '';
+      tabs.style.right = '';
+      tabs.style.margin = '';
     }
   });
   hideIfEmpty('.sciex-related-resource', '.related-resource-button');

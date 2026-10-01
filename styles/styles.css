@@ -262,11 +262,11 @@ main > .section > div {
   margin: auto;
   padding: 0 24px;
 }
-.fragment-item > div > div{
+/* .fragment-item > div > div{
   max-width: 1280px !important;
   margin: auto !important;
   padding: 0 24px !important;
-}
+} */
 .container-grid-2{
   max-width: 1280px !important;
   margin: auto !important;
@@ -281,9 +281,9 @@ main > .section:first-of-type {
   main > .section > div {
       padding: 0 32px;
   }
-  .fragment-item > div > div{
+  /* .fragment-item > div > div{
       padding: 0 32px !important;
-  }
+  } */
   /* main > .section > div.sciex-container-wrapper{
       padding: 0 !important;
   } */
