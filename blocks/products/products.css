@@ -86,8 +86,6 @@
 }
 
 .product-card-image img {
-  width: 220px;
-  height: 160px;
   max-width: 220px !important;
   transition: transform 0.3s ease;
 }
