@@ -135,7 +135,7 @@ font-size: 14px;
   position: relative;
   z-index: 2;
   box-sizing: border-box;
-  max-width: 1400px;
+  max-width: 90pc;
   width: 100%;
   height: 100%;
   margin-inline: auto;
@@ -162,12 +162,6 @@ font-size: 14px;
 }
 
 @media (min-width: 900px) {
-  .event-card.full-image-layout .full-image-inner {
-    padding: 0 clamp(32px, calc((100vw - 1200px) / 2 + 32px), 132px);
-  }
-}
-
-@media (width > 1440px) {
   .event-card.full-image-layout .full-image-inner {
     padding: 0 32px;
   }
@@ -329,7 +323,7 @@ display: block;
 .event-card.full-image-layout .event-content {
   order: 2;
   flex: none;
-  padding: 24px;
+  /* padding: 24px; */
 }
 
   .datetime-wrapper {
