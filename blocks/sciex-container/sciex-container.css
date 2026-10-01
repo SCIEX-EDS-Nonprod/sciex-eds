@@ -13,6 +13,10 @@
     border-left: 1px solid #ECECEC;
     border-right: 1px solid #ECECEC;
 }
+.sciex-container.block .has-side-border .fragment-item .section {
+    padding-left: 24px;
+    padding-right: 24px;
+}
 
 /* Grid layouts */
 .container-grid-2 {
