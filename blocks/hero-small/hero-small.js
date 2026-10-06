@@ -112,8 +112,6 @@ function buildHeroContent(data) {
     const buttons = document.createElement('div');
     buttons.className = applyClass('hero-buttons');
 
-    const buttonClasses = ['button primary', 'button secondary', 'button link'];
-
     data.buttonDataList.forEach((btn) => {
       const buttonEl = document.createElement('a');
       buttonEl.href = btn.link;
