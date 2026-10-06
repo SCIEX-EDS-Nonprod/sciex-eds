@@ -25,13 +25,22 @@ function extractBlockData(block) {
     isContactHero,
   };
 
-  // Extract button data
-  for (let i = 3; i < 12; i += 3) {
-    const label = clonedCells[i]?.innerText.trim();
-    const link = clonedCells[i + 1]?.querySelector('a')?.getAttribute('href');
-    const target = clonedCells[i + 2]?.innerText.trim() || '_self';
-    if (label && link) data.buttonDataList.push({ label, link, target });
+// AFTER
+const BUTTON_START_CELL = 3; // first button field in the model
+const BUTTON_VARIANTS = ['primary', 'secondary', 'link']; // same order as the JSON fields
+
+BUTTON_VARIANTS.forEach((variant, groupIndex) => {
+  const i = BUTTON_START_CELL + groupIndex * 3;
+  const label = clonedCells[i]?.textContent?.trim();
+  const link = clonedCells[i + 1]?.querySelector('a')?.getAttribute('href');
+  const target = clonedCells[i + 2]?.textContent?.trim() || '_self';
+
+  if (label && link) {
+    data.buttonDataList.push({
+      label, link, target, variant,
+    });
   }
+});
 
   // Detect colourPic (3 div children pattern)
   if (mediaDivChildren.length === 3) {
@@ -103,19 +112,16 @@ function buildHeroContent(data) {
     const buttons = document.createElement('div');
     buttons.className = applyClass('hero-buttons');
 
-    const buttonClasses = ['button primary', 'button secondary', 'button link'];
-
-    data.buttonDataList.forEach((btn, index) => {
+    data.buttonDataList.forEach((btn) => {
       const buttonEl = document.createElement('a');
       buttonEl.href = btn.link;
       buttonEl.target = btn.target;
-      buttonEl.className = buttonClasses[index] || 'button link';
-
+  buttonEl.className = `button ${btn.variant}`;
       const labelSpan = document.createElement('span');
       labelSpan.textContent = btn.label;
       buttonEl.append(labelSpan);
-      if (data.isContactHero && index === 1) {
-        buttonEl.append(span({ class: 'icon icon-arrow-blue' }));
+if (data.isContactHero && btn.variant === 'secondary') {
+      buttonEl.append(span({ class: 'icon icon-arrow-blue' }));
       } else {
         buttonEl.append(span({ class: 'icon icon-arrow' }));
       }
