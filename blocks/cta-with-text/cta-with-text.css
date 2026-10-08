@@ -137,7 +137,7 @@ letter-spacing: 0.08px;
   font-family: "Geogrotesque Sharp VF";
   font-size: 14px;
   font-weight: 330;
-  color: var(--Blue-700, #0068FA);
+  color: pink !important;
   text-decoration: none;
   white-space: nowrap;
 }
