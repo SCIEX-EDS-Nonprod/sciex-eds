@@ -1318,6 +1318,11 @@
             "value": "_blank"
           }
         ]
+      },
+      {
+        "component": "text",
+        "name": "sim",
+        "label": "Sim"
       }
     ]
   },
