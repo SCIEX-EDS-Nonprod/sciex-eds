@@ -145,7 +145,7 @@ export default function decorate(block) {
     }
 
     const secondaryIcon = document.createElement('span');
-    secondaryIcon.className = 'icon icon-arrow';
+    secondaryIcon.className = 'icon icon-arrow-blue';
     secondaryBtn.appendChild(secondaryIcon);
     actionWrap.appendChild(secondaryBtn);
   }
