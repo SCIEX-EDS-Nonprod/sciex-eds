@@ -1290,7 +1290,7 @@
       {
         "component": "text",
         "name": "linkText",
-        "label": "Link Text",
+        "label": "Link Btn Text",
         "valueType": "string"
       },
       {
