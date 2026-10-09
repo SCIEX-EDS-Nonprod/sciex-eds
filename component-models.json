@@ -1289,8 +1289,8 @@
       },
       {
         "component": "text",
-        "name": "linkButtonText",
-        "label": "Link btn Text",
+        "name": "linkText",
+        "label": "Link buttonnn Text",
         "valueType": "string"
       },
       {
