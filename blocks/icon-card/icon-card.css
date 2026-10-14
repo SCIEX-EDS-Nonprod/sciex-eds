@@ -4,15 +4,29 @@
 }
 
 .icon-card-heading {
-  font-size: 2rem;
-  font-weight: 600;
   margin-bottom: 40px;
   color: var(--Grey-900, #141414);
   font-family: "Geogrotesque Sharp VF";
-  font-size: 24px;
   font-style: normal;
+  font-size: 24px;
   font-weight: 330;
-  line-height: 52px; /* 130% */
+  line-height: 52px;
+}
+
+.icon-card-heading.text-blue {
+  color: #0068FA;
+}
+
+.icon-card-heading.text-grey {
+  color: #6B7280;
+}
+
+.icon-card-heading.text-white {
+  color: #FFF;
+}
+
+.icon-card-heading.text-black {
+  color: #000;
 }
 
 .icon-card-description {

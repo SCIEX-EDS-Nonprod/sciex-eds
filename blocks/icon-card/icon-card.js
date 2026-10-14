@@ -13,15 +13,15 @@ export default function decorate(block) {
   let description = '';
   let columns = 2;
   let typeOfCard = '';
-  let fontType = 'icon-card-title';
   let headingType = '';
+  let headingColor = '';
 
   rows.forEach((row, index) => {
     const text = row.textContent.trim();
     if (index === 0) id = text;
     else if (index === 1) heading = text;
-    else if (index === 2) fontType = text;
-    else if (index === 3) headingType = text;
+    else if (index === 2) headingType = text;
+    else if (index === 3) headingColor = text;
     else if (index === 4) description = text;
     else if (index === 5) columns = parseInt(text, 10) || 2;
     else if (index === 6) typeOfCard = text;
@@ -32,6 +32,8 @@ export default function decorate(block) {
   if (heading) {
     const h2 = document.createElement('h2');
     h2.className = 'icon-card-heading';
+    if (headingType) h2.classList.add(headingType);
+    if (headingColor) h2.classList.add(headingColor);
     h2.textContent = heading;
     iconCardContainer.append(h2);
   }
@@ -95,13 +97,6 @@ export default function decorate(block) {
       const h3 = document.createElement('h3');
       h3.className = 'icon-card-title';
       h3.innerHTML = headingHTML;
-      if (fontType) {
-        h3.classList.add(fontType);
-      }
-
-      if (headingType) {
-        h3.classList.add(headingType);
-      }
       contentWrap.append(h3);
     }
 
