@@ -482,3 +482,21 @@ letter-spacing: 0.09px;
 .hero-small-wrapper .herosmallclass:has(.hero-content-wrapper) {
   padding: 0px 40px !important;
 }
+
+.hero-small-wrapper .hero-content.hero-text-dark .hero-tagline,
+.hero-small-wrapper .hero-content.hero-text-dark .hero-heading-hero,
+.hero-small-wrapper .hero-content.hero-text-dark .hero-description,
+.hero-small-wrapper .hero-content.hero-text-dark .hero-buttons .primary,
+.hero-small-wrapper .hero-content.hero-text-dark .hero-buttons .secondary,
+.hero-small-wrapper .hero-content.hero-text-dark .hero-buttons .link {
+  color: #141414;
+}
+
+.hero-small-wrapper .hero-content.hero-text-light .hero-tagline,
+.hero-small-wrapper .hero-content.hero-text-light .hero-heading-hero,
+.hero-small-wrapper .hero-content.hero-text-light .hero-description,
+.hero-small-wrapper .hero-content.hero-text-light .hero-buttons .primary,
+.hero-small-wrapper .hero-content.hero-text-light .hero-buttons .secondary,
+.hero-small-wrapper .hero-content.hero-text-light .hero-buttons .link {
+  color: #fff;
+}
