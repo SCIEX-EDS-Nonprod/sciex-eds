@@ -129,6 +129,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  color: rgba(255, 255, 255);
   position: relative;
   z-index: 2;
   text-align: left;
@@ -145,6 +146,10 @@
   display: flex;
   flex-direction: column;
   gap:24px
+}
+
+.hero-tagline-wrap-bottom .hero-tagline{
+  /* color: rgba(255, 255, 255, 0.50); */
 }
 
 .hero-tagline{
@@ -174,6 +179,7 @@ letter-spacing: 0.09px;
   margin-right: 20px;
   font-size: 14px;
   line-height: 1.5;
+  /* color: rgba(255, 255, 255); */
   font-weight: 400;
   max-width: 41.667%;
 }
@@ -192,6 +198,7 @@ letter-spacing: 0.09px;
 
 .hero-small-wrapper .hero-buttons .primary {
   background: #0072ce;
+  color: #fff;
   display: flex;
   gap: 15px;
 }
@@ -199,6 +206,7 @@ letter-spacing: 0.09px;
 .hero-small-wrapper .hero-buttons .secondary {
   background: transparent;
   border: 2px solid #fff;
+  color: #fff;
   display: flex;
   gap: 15px;
 }
@@ -206,6 +214,7 @@ letter-spacing: 0.09px;
 .hero-small-wrapper .hero-buttons .link {
   background: none;
   border: none;
+  color: #fff;
   text-decoration: underline;
   padding: 0;
 }
@@ -217,11 +226,13 @@ letter-spacing: 0.09px;
 .hero-small-wrapper button:hover {
   background-color: #005fa3;
   border-color: #005fa3;
+  color: #fff;
 }
 
 .hero-small-wrapper a.button.secondary:hover,
 .hero-small-wrapper button.secondary:hover {
   background-color: #f8fafb;
+  color: #050505;
 }
 
 .hero-small-wrapper .herosmallclass.hero-has-bg .hero-bg-video {
@@ -246,6 +257,7 @@ letter-spacing: 0.09px;
   display: flex !important;
   gap: 15px !important;
   background: #0072ce;
+  color: #fff;
 }
 
 .hero-small-wrapper .hero-buttons .secondary {
@@ -253,17 +265,20 @@ letter-spacing: 0.09px;
   gap: 15px !important;
   background: transparent;
   border: 2px solid #fff;
+  color: #fff;
 }
 
 .hero-small-wrapper .hero-buttons .link {
   display: flex !important;
   gap: 15px !important;
+  color: #fff;
   text-decoration: underline;
 }
 
 .hero-small-wrapper a.button,
 .hero-small-wrapper button {
   background-color: var(--hero-primary-bg, #0072ce);
+  color: #fff;
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 0.6em 1.6em;
@@ -306,6 +321,7 @@ letter-spacing: 0.09px;
 .hero-small-wrapper button.secondary {
   background-color: transparent;
   border: 1px solid #f0f3f6;
+  color: #fcfafa;
 }
 
 .hero-small-wrapper a.button.link,
@@ -313,6 +329,7 @@ letter-spacing: 0.09px;
   margin-top: 27px;
   background: none;
   border: none;
+  color: rgb(243, 244, 246);
   text-decoration: underline;
   padding: 0;
 }
@@ -467,12 +484,10 @@ letter-spacing: 0.09px;
   padding: 0px 40px !important;
 }
 
-.hero-small-wrapper .hero-text-dark,
-.hero-small-wrapper .hero-text-dark .button {
-  color: #000;
+.hero-small-wrapper .hero-text-dark {
+  color: var(--Grey-900, #141414);
 }
 
-.hero-small-wrapper .hero-text-light,
-.hero-small-wrapper .hero-text-light .button {
+.hero-small-wrapper .hero-text-light {
   color: #fff;
 }
