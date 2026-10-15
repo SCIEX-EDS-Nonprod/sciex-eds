@@ -5,7 +5,13 @@ function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
   const clonedCells = cells.map((cell) => cell.cloneNode(true));
 
-  const mediaDivChildren = clonedCells[16]?.querySelectorAll(':scope > div') || [];
+  const heroTextColor = clonedCells.find((cell) => (
+    ['dark', 'light'].includes(cell.querySelector('p')?.textContent?.trim().toLowerCase())
+  ))?.querySelector('p')?.textContent?.trim().toLowerCase();
+  const mediaCell = clonedCells.find((cell) => (
+    cell.querySelectorAll(':scope > div').length > 1
+  ));
+  const mediaDivChildren = mediaCell?.querySelectorAll(':scope > div') || [];
 
   const isContactHero = mediaDivChildren[1]
     ?.querySelector('p')
@@ -18,9 +24,9 @@ function extractBlockData(block) {
     tagline: clonedCells[12]?.innerText.trim(),
     badgePicture: clonedCells[13]?.querySelector('picture'),
     captionPosition: clonedCells[14]?.querySelector('p')?.textContent?.trim() || 'top',
-    heroTextColor: clonedCells[15]?.querySelector('p')?.textContent?.trim() || 'light',
-    mainPicture: clonedCells[16]?.querySelector('picture'),
-    videoAnchor: clonedCells[16]?.querySelector('.button-container a'),
+    heroTextColor: heroTextColor === 'dark' ? 'dark' : 'light',
+    mainPicture: mediaCell?.querySelector('picture'),
+    videoAnchor: mediaCell?.querySelector('.button-container a'),
     mediaDivChildren,
     buttonDataList: [],
     isContactHero,
