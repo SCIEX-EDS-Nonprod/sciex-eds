@@ -460,6 +460,29 @@ a.active {
     text-decoration: none;
     cursor: pointer;
 }
+
+.footer-section-title,
+.selected-language,
+.footer-wrapper .close {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
+.footer-section-title {
+    text-align: left;
+    min-height: 24px;
+}
+
+.footer-wrapper .close {
+    display: inline-flex;
+    align-items: center;
+    min-width: 24px;
+    min-height: 24px;
+}
 footer {
     background-color: var(--light-color);
     font-size: var(--body-font-size-xs);
@@ -1007,7 +1030,7 @@ a.active {
         padding-bottom: 4pc;
     }
     .footer-wrapper .close {
-        display: none;
+        display: inline-flex;
     }
     .wrapper-3.black-section p {
         font-size: 13px;

@@ -168,8 +168,10 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
       const sideImage = document.createElement('div');
       sideImage.className = 'hero-side-image';
       const img = document.createElement('img');
-      img.src = imgSrc;
       copyImageMetadata(img, sourceImage);
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
+      img.src = imgSrc;
       sideImage.append(img);
 
       const wrapper = document.createElement('div');
@@ -196,18 +198,12 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
     heroWrapper.append(heroContent);
   } else if (data.mainPicture) {
     const sourceImage = data.mainPicture.querySelector('img');
-    const imgSrc = sourceImage?.currentSrc || sourceImage?.src;
-    if (imgSrc) {
-      if (data.isContactHero) {
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        copyImageMetadata(img, sourceImage);
-        img.classList.add('contact-hero-img');
-        heroContainer.appendChild(img);
-      } else {
-        heroContainer.style.backgroundImage = `url('${imgSrc}')`;
-        heroContainer.classList.add('hero-has-bg');
-      }
+    if (sourceImage) {
+      sourceImage.loading = 'eager';
+      sourceImage.fetchPriority = 'high';
+      sourceImage.classList.add(data.isContactHero ? 'contact-hero-img' : 'hero-background-img');
+      heroContainer.append(data.mainPicture);
+      if (!data.isContactHero) heroContainer.classList.add('hero-has-bg');
     }
     heroWrapper.append(heroContent);
   } else {
