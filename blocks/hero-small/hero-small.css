@@ -1,10 +1,10 @@
 .hero-small-wrapper {
   max-width: none !important;
   margin: 0 !important;
-  padding: 0px !important;
+  padding: 0 !important;
 }
 .contact-hero-heading-hero {
-  color: var(--Grey-900, #141414);
+  color: #141414;
   font-family: "Geogrotesque Sharp VF";
   font-size: 52px;
   font-style: normal;
@@ -12,7 +12,7 @@
   line-height: 64px;
 }
 .contact-hero-description{
-  color: var(--Grey-900, #141414);
+  color: #141414;
   font-family: "Geogrotesque Sharp VF";
   font-size: 16px;
   font-style: normal;
@@ -44,11 +44,10 @@
 
 .contact-hero-content {
   position: absolute;
-  /* top: 40%; */
   left: 0;
   bottom: 0;
   width: 75%;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgb(255 255 255 / 85%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,25 +73,25 @@
 /* Primary → white text */
 .contact-hero-buttons .primary {
   background: #0072ce;
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
 /* Secondary → black text */
 .contact-hero-buttons .secondary {
   border: 1px solid #0072ce !important;
-  color: #000000 !important;
+  color: #000 !important;
 }
 
 /* Hover states */
 .contact-hero-buttons .primary:hover {
   background-color: #005fa3;
   border-color: #005fa3;
-  color: #ffffff !important;
+  color: #fff !important;
 }
 
 .contact-hero-buttons .secondary:hover {
   background-color: #f8fafb;
-  color: #000000 !important;
+  color: #000 !important;
 }
 
 .contact-hero-buttons a {
@@ -101,7 +100,7 @@
 
 .hero-small-wrapper .herosmallclass {
   width: 100%;
-  padding: 32px ;
+  padding: 32px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -113,6 +112,21 @@
   background-color: #f5f5f5;
 }
 
+.hero-small-wrapper .herosmallclass > picture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-small-wrapper .herosmallclass > picture .hero-background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .hero-small-wrapper .hero-wrapper {
   display: flex;
   flex-direction: column;
@@ -122,14 +136,14 @@
   position: relative;
   z-index: 2;
   text-align: left;
-  padding: 0px 32px;
+  padding: 0 32px;
 }
 
 .hero-small-wrapper .hero-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  color: rgba(255, 255, 255);
+  color: var(--hero-text-color, #fff);
   position: relative;
   z-index: 2;
   text-align: left;
@@ -146,10 +160,6 @@
   display: flex;
   flex-direction: column;
   gap:24px
-}
-
-.hero-tagline-wrap-bottom .hero-tagline{
-  /* color: rgba(255, 255, 255, 0.50); */
 }
 
 .hero-tagline{
@@ -179,7 +189,6 @@ letter-spacing: 0.09px;
   margin-right: 20px;
   font-size: 14px;
   line-height: 1.5;
-  /* color: rgba(255, 255, 255); */
   font-weight: 400;
   max-width: 41.667%;
 }
@@ -187,6 +196,7 @@ letter-spacing: 0.09px;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .hero-small-wrapper .hero-buttons .button {
@@ -197,24 +207,26 @@ letter-spacing: 0.09px;
 }
 
 .hero-small-wrapper .hero-buttons .primary {
+  display: flex !important;
+  gap: 15px !important;
   background: #0072ce;
-  color: #fff;
-  display: flex;
-  gap: 15px;
+  color: var(--hero-text-color, #fff);
 }
 
 .hero-small-wrapper .hero-buttons .secondary {
+  display: flex !important;
+  gap: 15px !important;
   background: transparent;
   border: 2px solid #fff;
-  color: #fff;
-  display: flex;
-  gap: 15px;
+  color: var(--hero-text-color, #fff);
 }
 
 .hero-small-wrapper .hero-buttons .link {
+  display: flex !important;
+  gap: 15px !important;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--hero-text-color, #fff);
   text-decoration: underline;
   padding: 0;
 }
@@ -226,13 +238,13 @@ letter-spacing: 0.09px;
 .hero-small-wrapper button:hover {
   background-color: #005fa3;
   border-color: #005fa3;
-  color: #fff;
+  color: var(--hero-text-color, #fff);
 }
 
 .hero-small-wrapper a.button.secondary:hover,
 .hero-small-wrapper button.secondary:hover {
   background-color: #f8fafb;
-  color: #050505;
+  color: var(--hero-text-color, #fff);
 }
 
 .hero-small-wrapper .herosmallclass.hero-has-bg .hero-bg-video {
@@ -246,39 +258,10 @@ letter-spacing: 0.09px;
 }
 
 
-.hero-small-wrapper .hero-buttons .button {
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.hero-small-wrapper .hero-buttons .primary {
-  display: flex !important;
-  gap: 15px !important;
-  background: #0072ce;
-  color: #fff;
-}
-
-.hero-small-wrapper .hero-buttons .secondary {
-  display: flex !important;
-  gap: 15px !important;
-  background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-}
-
-.hero-small-wrapper .hero-buttons .link {
-  display: flex !important;
-  gap: 15px !important;
-  color: #fff;
-  text-decoration: underline;
-}
-
 .hero-small-wrapper a.button,
 .hero-small-wrapper button {
   background-color: var(--hero-primary-bg, #0072ce);
-  color: #fff;
+  color: var(--hero-text-color, #fff);
   border: 2px solid transparent;
   border-radius: 4px;
   padding: 0.6em 1.6em;
@@ -286,7 +269,7 @@ letter-spacing: 0.09px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .hero-small-wrapper .herosmallclass::before {
@@ -297,12 +280,7 @@ letter-spacing: 0.09px;
   z-index: 1;
 }
 
-.hero-small-wrapper .hero-buttons {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  width: 100%;
-} /* ✅ Responsive adjustments */
+/* Responsive adjustments */
 
 .hero-small-wrapper .icon img {
   width: 18px;
@@ -321,7 +299,7 @@ letter-spacing: 0.09px;
 .hero-small-wrapper button.secondary {
   background-color: transparent;
   border: 1px solid #f0f3f6;
-  color: #fcfafa;
+  color: var(--hero-text-color, #fff);
 }
 
 .hero-small-wrapper a.button.link,
@@ -329,7 +307,7 @@ letter-spacing: 0.09px;
   margin-top: 27px;
   background: none;
   border: none;
-  color: rgb(243, 244, 246);
+  color: var(--hero-text-color, #fff);
   text-decoration: underline;
   padding: 0;
 }
@@ -349,7 +327,7 @@ letter-spacing: 0.09px;
   }
 
   .hero-small-wrapper .hero-buttons {
-    gap: 0px;
+    gap: 0;
   }
 
   .hero-small-wrapper .hero-buttons .button {
@@ -426,7 +404,7 @@ letter-spacing: 0.09px;
 .hero-small-wrapper .hero-side-image img {
   max-width: 100%;
   height: auto;
-  margin: 30px 0px;
+  margin: 30px 0;
 }
 
 /* ==========================================================
@@ -481,13 +459,13 @@ letter-spacing: 0.09px;
 }
 
 .hero-small-wrapper .herosmallclass:has(.hero-content-wrapper) {
-  padding: 0px 40px !important;
+  padding: 0 40px !important;
 }
 
 .hero-small-wrapper .hero-text-dark {
-  color: var(--Grey-900, #141414);
+  --hero-text-color: #141414;
 }
 
 .hero-small-wrapper .hero-text-light {
-  color: #fff;
+  --hero-text-color: #fff;
 }

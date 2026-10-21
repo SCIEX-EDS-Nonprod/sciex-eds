@@ -1,29 +1,30 @@
 import { span } from '../../scripts/dom-builder.js';
 import { decorateIcons } from '../../scripts/aem.js';
 
+const BUTTON_START_CELL = 3;
+const BUTTON_VARIANTS = ['primary', 'secondary', 'link'];
+
 function extractBlockData(block) {
   const cells = [...block.querySelectorAll(':scope > div')];
-  const clonedCells = cells.map((cell) => cell.cloneNode(true));
 
-  const heroTextColor = clonedCells.find((cell) => (
+  const heroTextColor = cells.find((cell) => (
     ['dark', 'light'].includes(cell.querySelector('p')?.textContent?.trim().toLowerCase())
   ))?.querySelector('p')?.textContent?.trim().toLowerCase();
-  const mediaCell = clonedCells.find((cell) => (
+  const mediaCell = cells.find((cell) => (
     cell.querySelectorAll(':scope > div').length > 1
   ));
   const mediaDivChildren = mediaCell?.querySelectorAll(':scope > div') || [];
 
   const isContactHero = mediaDivChildren[1]
     ?.querySelector('p')
-    ?.textContent
-    ?.trim() === 'true';
+    ?.textContent?.trim() === 'true';
 
   const data = {
-    heading: clonedCells[1]?.innerText.trim(),
-    description: clonedCells[2]?.innerText.trim(),
-    tagline: clonedCells[12]?.innerText.trim(),
-    badgePicture: clonedCells[13]?.querySelector('picture'),
-    captionPosition: clonedCells[14]?.querySelector('p')?.textContent?.trim() || 'top',
+    heading: cells[1]?.textContent.trim(),
+    description: cells[2]?.textContent.trim(),
+    tagline: cells[12]?.textContent.trim(),
+    badgePicture: cells[13]?.querySelector('picture')?.cloneNode(true),
+    captionPosition: cells[14]?.querySelector('p')?.textContent?.trim() || 'top',
     heroTextColor: heroTextColor === 'dark' ? 'dark' : 'light',
     mainPicture: mediaCell?.querySelector('picture'),
     videoAnchor: mediaCell?.querySelector('.button-container a'),
@@ -32,18 +33,26 @@ function extractBlockData(block) {
     isContactHero,
   };
 
-  // Extract button data
-  for (let i = 3; i < 12; i += 3) {
-    const label = clonedCells[i]?.innerText.trim();
-    const link = clonedCells[i + 1]?.querySelector('a')?.getAttribute('href');
-    const target = clonedCells[i + 2]?.innerText.trim() || '_self';
-    if (label && link) data.buttonDataList.push({ label, link, target });
-  }
+  BUTTON_VARIANTS.forEach((variant, groupIndex) => {
+    const cellIndex = BUTTON_START_CELL + groupIndex * 3;
+    const label = cells[cellIndex]?.textContent.trim();
+    const link = cells[cellIndex + 1]?.querySelector('a')?.getAttribute('href');
+    const target = cells[cellIndex + 2]?.textContent.trim() || '_self';
+
+    if (label && link) {
+      data.buttonDataList.push({
+        label,
+        link,
+        target,
+        variant,
+      });
+    }
+  });
 
   // Detect colourPic (3 div children pattern)
   if (mediaDivChildren.length === 3) {
-    data.colourPicture = clonedCells[14]?.querySelector('picture');
-    data.colourPictureBg = clonedCells[14]?.querySelector('.button-container a');
+    data.colourPicture = mediaCell?.querySelector('picture');
+    data.colourPictureBg = mediaCell?.querySelector('.button-container a');
   }
 
   return data;
@@ -57,6 +66,15 @@ function preserveOriginalAuthoring(block) {
     originalWrapper.appendChild(block.firstChild);
   }
   block.appendChild(originalWrapper);
+}
+
+function copyImageMetadata(image, sourceImage) {
+  image.alt = sourceImage?.getAttribute('alt') || '';
+
+  ['width', 'height', 'srcset', 'sizes'].forEach((attribute) => {
+    const value = sourceImage?.getAttribute(attribute);
+    if (value) image.setAttribute(attribute, value);
+  });
 }
 
 function buildHeroContent(data) {
@@ -110,18 +128,16 @@ function buildHeroContent(data) {
     const buttons = document.createElement('div');
     buttons.className = applyClass('hero-buttons');
 
-    const buttonClasses = ['button primary', 'button secondary', 'button link'];
-
-    data.buttonDataList.forEach((btn, index) => {
+    data.buttonDataList.forEach((btn) => {
       const buttonEl = document.createElement('a');
       buttonEl.href = btn.link;
       buttonEl.target = btn.target;
-      buttonEl.className = buttonClasses[index] || 'button link';
-
+      if (btn.target === '_blank') buttonEl.rel = 'noopener noreferrer';
+      buttonEl.className = `button ${btn.variant}`;
       const labelSpan = document.createElement('span');
       labelSpan.textContent = btn.label;
       buttonEl.append(labelSpan);
-      if (data.isContactHero && index === 1) {
+      if (data.isContactHero && btn.variant === 'secondary') {
         buttonEl.append(span({ class: 'icon icon-arrow-blue' }));
       } else {
         buttonEl.append(span({ class: 'icon icon-arrow' }));
@@ -142,7 +158,8 @@ function buildHeroContent(data) {
 
 function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent) {
   if (data.colourPicture) {
-    const imgSrc = data.colourPicture.querySelector('img')?.src;
+    const sourceImage = data.colourPicture.querySelector('img');
+    const imgSrc = sourceImage?.currentSrc || sourceImage?.src;
     const bgColor = data.colourPictureBg?.textContent?.trim();
 
     if (bgColor) heroContainer.style.backgroundColor = bgColor;
@@ -151,8 +168,10 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
       const sideImage = document.createElement('div');
       sideImage.className = 'hero-side-image';
       const img = document.createElement('img');
+      copyImageMetadata(img, sourceImage);
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
       img.src = imgSrc;
-      img.alt = 'hero-side-image';
       sideImage.append(img);
 
       const wrapper = document.createElement('div');
@@ -178,18 +197,13 @@ function applyLayoutAndBackground(data, heroContainer, heroWrapper, heroContent)
     }
     heroWrapper.append(heroContent);
   } else if (data.mainPicture) {
-    const imgSrc = data.mainPicture.querySelector('img')?.src;
-    if (imgSrc) {
-      if (data.isContactHero) {
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        img.alt = 'Contact hero image';
-        img.classList.add('contact-hero-img');
-        heroContainer.appendChild(img);
-      } else {
-        heroContainer.style.backgroundImage = `url('${imgSrc}')`;
-        heroContainer.classList.add('hero-has-bg');
-      }
+    const sourceImage = data.mainPicture.querySelector('img');
+    if (sourceImage) {
+      sourceImage.loading = 'eager';
+      sourceImage.fetchPriority = 'high';
+      sourceImage.classList.add(data.isContactHero ? 'contact-hero-img' : 'hero-background-img');
+      heroContainer.append(data.mainPicture);
+      if (!data.isContactHero) heroContainer.classList.add('hero-has-bg');
     }
     heroWrapper.append(heroContent);
   } else {

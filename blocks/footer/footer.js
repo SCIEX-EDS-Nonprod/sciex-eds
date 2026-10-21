@@ -39,10 +39,11 @@ function handleMiddleSections(child, block, iteration) {
   const newContainer = document.createElement('div');
   newContainer.classList.add('image-box');
   nav.classList.add('footer-navigation');
+  nav.setAttribute('aria-label', 'Footer navigation');
 
   const sections = child.querySelectorAll('p');
 
-  sections.forEach((section) => {
+  sections.forEach((section, sectionIndex) => {
     const sectionTitle = section.textContent.trim();
     const list = section.nextElementSibling;
     const chevronDown = span({
@@ -57,14 +58,17 @@ function handleMiddleSections(child, block, iteration) {
     const sectionDiv = document.createElement('div');
     sectionDiv.classList.add('footer-section');
     if (list && list.tagName === 'UL') {
-      const titleDiv = document.createElement('div');
-      titleDiv.classList.add('footer-section-title');
-      titleDiv.textContent = sectionTitle;
-      titleDiv.appendChild(chevronDown);
-      titleDiv.appendChild(chevronUp);
+      const titleButton = document.createElement('button');
+      titleButton.type = 'button';
+      titleButton.classList.add('footer-section-title');
+      titleButton.append(sectionTitle, chevronDown, chevronUp);
 
       const ul = document.createElement('ul');
       ul.classList.add('footer-section-list');
+      ul.id = `footer-section-${iteration}-${sectionIndex}`;
+      const isExpanded = window.matchMedia('(min-width: 768px)').matches;
+      titleButton.setAttribute('aria-controls', ul.id);
+      titleButton.setAttribute('aria-expanded', String(isExpanded));
 
       list.querySelectorAll('li a').forEach((link) => {
         const li = document.createElement('li');
@@ -80,7 +84,7 @@ function handleMiddleSections(child, block, iteration) {
         ul.appendChild(li);
       });
 
-      sectionDiv.appendChild(titleDiv);
+      sectionDiv.appendChild(titleButton);
       sectionDiv.appendChild(ul);
       nav.appendChild(sectionDiv);
     } else {
@@ -90,36 +94,36 @@ function handleMiddleSections(child, block, iteration) {
         anchor.href = 'https://lifesciences.danaher.com';
         anchor.title = 'https://lifesciences.danaher.com';
         anchor.target = '_blank';
+        anchor.rel = 'noopener noreferrer';
         anchor.appendChild(paragraphWithImage.cloneNode(true));
         newContainer.appendChild(anchor);
       }
     }
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      // Remove the event listener for desktop view
-      sectionDiv.removeEventListener('click', () => {});
-    } else {
-      // Add the event listener for mobile view
-      sectionDiv.addEventListener('click', function toggleFooterSection() {
-        const footerSectionElement = document.querySelectorAll('.footer-section');
-        footerSectionElement.forEach((openElement) => {
-          if (openElement !== this) {
-            openElement.closest('div').querySelector('ul').style.display = 'none';
-          }
-        });
-        const ulElement = this.closest('div').querySelector('ul');
-        ulElement.style.display = ulElement.style.display === 'block' ? 'none' : 'block';
-        const upArrow = this.closest('div').querySelector(
-          '.footer-section-title .icon-chevron-up',
-        );
-        const downArrow = this.closest('div').querySelector(
-          '.footer-section-title .icon-chevron-down',
-        );
-        const upArrowComputedStyle = window.getComputedStyle(upArrow);
-        const upArrowDisplayStyle = upArrowComputedStyle.display;
-        const downArrowComputedStyle = window.getComputedStyle(downArrow);
-        const downArrowDisplayStyle = downArrowComputedStyle.display;
-        upArrow.style.display = upArrowDisplayStyle === 'none' ? 'block' : 'none';
-        downArrow.style.display = downArrowDisplayStyle === 'block' ? 'none' : 'block';
+    const titleButton = sectionDiv.querySelector('.footer-section-title');
+    if (titleButton) {
+      titleButton.addEventListener('click', () => {
+        if (window.matchMedia('(min-width: 768px)').matches) return;
+
+        const listElement = document.getElementById(titleButton.getAttribute('aria-controls'));
+        if (!listElement) return;
+
+        const nextExpanded = titleButton.getAttribute('aria-expanded') !== 'true';
+        listElement.style.display = nextExpanded ? 'block' : 'none';
+        titleButton.setAttribute('aria-expanded', String(nextExpanded));
+        titleButton.querySelector('.icon-chevron-down').style.display = nextExpanded ? 'none' : '';
+        titleButton.querySelector('.icon-chevron-up').style.display = nextExpanded ? '' : 'none';
+
+        if (nextExpanded) {
+          nav.querySelectorAll('.footer-section-title[aria-expanded="true"]').forEach((otherButton) => {
+            if (otherButton !== titleButton) {
+              otherButton.setAttribute('aria-expanded', 'false');
+              const otherList = document.getElementById(otherButton.getAttribute('aria-controls'));
+              if (otherList) otherList.style.display = 'none';
+              otherButton.querySelector('.icon-chevron-down').style.display = '';
+              otherButton.querySelector('.icon-chevron-up').style.display = 'none';
+            }
+          });
+        }
       });
     }
   });
@@ -227,8 +231,8 @@ function handleLogoSection(child, block, iteration) {
 
     anchor.href = linkMap[index] || '#';
     anchor.target = '_blank';
-    anchor.setAttribute('aria-label', `${altText} Link`);
-    anchor.rel = 'noreferrer';
+    anchor.setAttribute('aria-label', altText);
+    anchor.rel = 'noopener noreferrer';
     anchor.classList.add('logo-link');
 
     anchor.appendChild(img);
@@ -275,6 +279,7 @@ function createSocialLinks() {
   ];
 
   const nav = document.createElement('nav');
+  nav.setAttribute('aria-label', 'Social media');
   const ul = document.createElement('ul');
 
   socialPlatforms.forEach((platform) => {
@@ -283,6 +288,7 @@ function createSocialLinks() {
     a.href = platform.url;
     a.title = platform.name;
     a.setAttribute('aria-label', platform.name);
+    a.rel = 'noopener noreferrer';
     a.innerHTML = platform.svg;
     li.appendChild(a);
     ul.appendChild(li);
@@ -351,9 +357,15 @@ function processFragment(block, fragment) {
   const countrySelect = firstSectionContent.querySelector(
     '.default-content-wrapper',
   );
-  const ul = countrySelect.querySelector('ul');
-  const selectedLanguage = document.createElement('div');
+  const ul = countrySelect?.querySelector('ul');
+  if (!countrySelect || !ul || !ul.querySelector('li')) {
+    block.prepend(firstSectionContent);
+    return;
+  }
+  const selectedLanguage = document.createElement('button');
+  selectedLanguage.type = 'button';
   selectedLanguage.classList.add('selected-language');
+  selectedLanguage.setAttribute('aria-haspopup', 'dialog');
   const listItems = ul.getElementsByTagName('li');
   countrySelect.appendChild(selectedLanguage);
 
@@ -386,16 +398,23 @@ function processFragment(block, fragment) {
   // Modal code for language selection
   const modal = document.createElement('div');
   modal.classList.add('modal');
+  modal.id = 'footer-language-dialog';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
   const modalHeader = document.createElement('h3');
   modalHeader.textContent = 'Choose your Language:';
   modalHeader.classList.add('modal-header');
+  modalHeader.id = 'footer-language-dialog-title';
+  modal.setAttribute('aria-labelledby', modalHeader.id);
   const modalContent = document.createElement('div');
   modalContent.classList.add('modal-content');
   modal.appendChild(modalContent);
   modalContent.appendChild(modalHeader);
-  const closeCta = document.createElement('span');
+  const closeCta = document.createElement('button');
+  closeCta.type = 'button';
   closeCta.classList.add('close');
   closeCta.textContent = 'x';
+  closeCta.setAttribute('aria-label', 'x, close language selector');
   modalContent.appendChild(closeCta);
   modalContent.appendChild(ul);
 
@@ -413,48 +432,78 @@ function processFragment(block, fragment) {
   selectedLanguage.appendChild(chevronDown);
   selectedLanguage.appendChild(chevronUp);
 
-  if (canMobileActions()) {
-    setTimeout(() => {
-      const selectedLanguageMobile = document.querySelector(
-        '.wrapper-2 .selected-language',
-      );
-      if (selectedLanguageMobile) {
-        selectedLanguageMobile.append(chevronDown);
-        selectedLanguageMobile.append(chevronUp);
-      }
-    }, 1000);
-  }
   const mobileNav = document.querySelector('.footer-navigation');
   const cloneSelectedlang = selectedLanguage.cloneNode(true);
 
-  mobileNav.appendChild(cloneSelectedlang);
+  mobileNav?.appendChild(cloneSelectedlang);
 
-  closeCta.addEventListener('click', () => {
+  selectedLanguage.setAttribute('aria-controls', modal.id);
+  cloneSelectedlang.setAttribute('aria-controls', modal.id);
+  selectedLanguage.setAttribute('aria-expanded', 'false');
+  cloneSelectedlang.setAttribute('aria-expanded', 'false');
+  selectedLanguage.setAttribute('aria-label', `Select language, ${selectedLanguage.textContent}`);
+  cloneSelectedlang.setAttribute('aria-label', selectedLanguage.getAttribute('aria-label'));
+
+  const closeLanguageModal = () => {
     modal.style.display = 'none';
-  });
-
-  window.onclick = function closeModal(event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
+    selectedLanguage.setAttribute('aria-expanded', 'false');
+    cloneSelectedlang.setAttribute('aria-expanded', 'false');
+    const focusTarget = canMobileActions() && cloneSelectedlang.isConnected
+      ? cloneSelectedlang
+      : selectedLanguage;
+    focusTarget.focus();
   };
+  const openLanguageModal = () => {
+    modal.style.display = 'flex';
+    selectedLanguage.setAttribute('aria-expanded', 'true');
+    cloneSelectedlang.setAttribute('aria-expanded', 'true');
+    modalContent.querySelector('a')?.focus();
+  };
+
+  closeCta.addEventListener('click', closeLanguageModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      closeLanguageModal();
+    }
+  });
+  modal.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeLanguageModal();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      const focusableElements = [...modal.querySelectorAll('button, a[href]')];
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement?.focus();
+      }
+    }
+  });
   const optionLinks = ul.querySelectorAll('li a');
   selectedLanguage.addEventListener('click', (e) => {
     e.preventDefault();
-
-    modal.style.display = 'flex';
+    openLanguageModal();
   });
 
   cloneSelectedlang.addEventListener('click', (e) => {
     e.preventDefault();
-    modal.style.display = 'flex';
+    openLanguageModal();
   });
 
   const clickFn = function handleLanguageSelection(e) {
     e.preventDefault();
 
-    selectedLanguage.innerHTML = this.text;
-    cloneSelectedlang.innerHTML = this.text;
+    selectedLanguage.textContent = this.text;
+    cloneSelectedlang.textContent = this.text;
+    selectedLanguage.setAttribute('aria-label', `Select language, ${this.text}`);
+    cloneSelectedlang.setAttribute('aria-label', selectedLanguage.getAttribute('aria-label'));
     const activeLink = document.querySelector('li .active');
 
     if (activeLink) {
@@ -526,6 +575,7 @@ function processFragment(block, fragment) {
         selectedLanguageMobile.append(chevronUp);
       }
     }
+    closeLanguageModal();
   };
 
   for (let i = 0; i < optionLinks.length; i += 1) {
@@ -568,7 +618,12 @@ export default async function decorate(block) {
   const footerPath = footerMeta
     ? new URL(footerMeta, window.location).pathname
     : path;
-  const fragment = await loadFragment(footerPath);
+  let fragment;
+  try {
+    fragment = await loadFragment(footerPath);
+  } catch {
+    return;
+  }
   block.textContent = '';
   processFragment(block, fragment);
 }

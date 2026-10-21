@@ -29,8 +29,21 @@ function canMobileActions() {
   return true;
 }
 const HISTORY_KEY = 'searchHistory';
+function getStoredUserDetails() {
+  try {
+    return JSON.parse(localStorage.getItem('userDetails') || 'null');
+  } catch {
+    return null;
+  }
+}
+
 function getSearchHistory() {
-  return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+  try {
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY));
+    return Array.isArray(history) ? history : [];
+  } catch {
+    return [];
+  }
 }
 
 function saveQueryToLocalHistory(query) {
@@ -38,7 +51,11 @@ function saveQueryToLocalHistory(query) {
   if (!history.includes(query)) {
     history.unshift(query);
     history = history.slice(0, 5); // Keep max 5 items
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    } catch {
+      // Search remains usable when browser storage is unavailable.
+    }
   }
 }
 const showSuggestions = (selectedContentType, showHistoryOnly = false) => {
@@ -55,71 +72,88 @@ const showSuggestions = (selectedContentType, showHistoryOnly = false) => {
   const shouldShowHistory = history.length > 0;
 
   if (shouldShowSuggestions || shouldShowHistory) {
-    let html = '';
+    suggestionPopup.replaceChildren();
+    const appendHeading = (text) => {
+      const heading = document.createElement('div');
+      heading.textContent = text;
+      Object.assign(heading.style, {
+        padding: '8px',
+        fontWeight: '330',
+        fontSize: '14px',
+        color: '#8A8A8A',
+      });
+      suggestionPopup.append(heading);
+    };
+    const appendItem = (className, value, type) => {
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = className;
+      item.dataset[type === 'history' ? 'query' : 'rawValue'] = value;
+      Object.assign(item.style, {
+        padding: '8px',
+        cursor: 'pointer',
+        width: '100%',
+        border: '0',
+        background: 'transparent',
+        font: 'inherit',
+        textAlign: 'left',
+      });
+
+      const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('viewBox', '0 0 16 16');
+      icon.setAttribute('width', '16');
+      icon.setAttribute('height', '16');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.style.marginRight = '10px';
+      const pathData = type === 'history'
+        ? [
+          'M8 16C12.4107 16 16 12.4107 16 8C16 3.58934 12.4107 0 8 0C3.5893 0 0 3.58934 0 8C0 12.4107 3.58934 16 8 16ZM8 1.06665C11.824 1.06665 14.9334 4.17597 14.9334 8C14.9334 11.824 11.824 14.9334 8 14.9334C4.17597 14.9334 1.06665 11.824 1.06665 8C1.06665 4.17597 4.17602 1.06665 8 1.06665Z',
+          'M10.3335 10.5494C10.4321 10.6294 10.5494 10.6667 10.6668 10.6667C10.8241 10.6667 10.9788 10.5974 11.0828 10.4667C11.2668 10.2374 11.2294 9.90138 11.0001 9.71737L8.53345 7.74403V3.73337C8.53345 3.44003 8.29346 3.20004 8.00012 3.20004C7.70678 3.20004 7.4668 3.44003 7.4668 3.73337V8.00005C7.4668 8.16273 7.54148 8.31472 7.66679 8.41603L10.3335 10.5494Z',
+        ]
+        : [
+          'M12.0065 7.33324C12.0065 9.7264 10.0664 11.6665 7.67318 11.6665C5.27993 11.6665 3.33984 9.7264 3.33984 7.33324C3.33984 4.94007 5.27993 3 7.67318 3C10.0664 3 12.0065 4.94007 12.0065 7.33324ZM11.0743 11.4414C10.1512 12.2066 8.96589 12.6665 7.67318 12.6665C4.72766 12.6665 2.33984 10.2787 2.33984 7.33324C2.33984 4.38777 4.72766 2 7.67318 2C10.6187 2 13.0065 4.38777 13.0065 7.33324C13.0065 8.62593 12.5466 9.81119 11.7815 10.7343L14.0267 12.9796L14.3803 13.3331L13.6732 14.0402L13.3196 13.6867L11.0743 11.4414Z',
+        ];
+      pathData.forEach((data) => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('fill', '#707070');
+        path.setAttribute('d', data);
+        icon.append(path);
+      });
+      item.append(icon, document.createTextNode(value));
+      suggestionPopup.append(item);
+      return item;
+    };
 
     if (shouldShowHistory) {
-      html += '<div style="padding: 8px; font-weight: 330; font-size: 14px; color: #8A8A8A;">Search History</div>';
-      html += history
-        .map((query) => `
-          <div class="global-history-item" style="padding: 8px; cursor: pointer;" data-query="${query}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <g clip-path="url(#clip0_746_95421)">
-              <path d="M8 16C12.4107 16 16 12.4107 16 8C16 3.58934 12.4107 0 8 0C3.5893 0 0 3.58934 0 8C0 12.4107 3.58934 16 8 16ZM8 1.06665C11.824 1.06665 14.9334 4.17597 14.9334 8C14.9334 11.824 11.824 14.9334 8 14.9334C4.17597 14.9334 1.06665 11.824 1.06665 8C1.06665 4.17597 4.17602 1.06665 8 1.06665Z" fill="#707070"/>
-              <path d="M10.3335 10.5494C10.4321 10.6294 10.5494 10.6667 10.6668 10.6667C10.8241 10.6667 10.9788 10.5974 11.0828 10.4667C11.2668 10.2374 11.2294 9.90138 11.0001 9.71737L8.53345 7.74403V3.73337C8.53345 3.44003 8.29346 3.20004 8.00012 3.20004C7.70678 3.20004 7.4668 3.44003 7.4668 3.73337V8.00005C7.4668 8.16273 7.54148 8.31472 7.66679 8.41603L10.3335 10.5494Z" fill="#707070"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_746_95421">
-                <rect width="16" height="16" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg> ${query}
-          </div>`)
-        .join('');
+      appendHeading('Search History');
+      history.forEach((query) => {
+        const item = appendItem('global-history-item', query, 'history');
+        item.addEventListener('click', () => {
+          searchBox.value = query;
+          saveQueryToLocalHistory(query);
+          standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${encodeURIComponent(query)}&contentType=${encodeURIComponent(selectedContentType)}`);
+          standaloneSearchBoxController.submit();
+          suggestionPopup.style.display = 'none';
+        });
+      });
     }
 
     if (shouldShowSuggestions) {
-      html += '<div style="padding: 8px; font-weight: 330; font-size: 14px; color: #8A8A8A;">Trending Search</div>';
-      html += suggestions
-        .map((suggestion) => `
-          <div class="global-suggestion-item" style="padding: 8px; cursor: pointer;" data-raw-value="${suggestion.rawValue}">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0065 7.33324C12.0065 9.7264 10.0664 11.6665 7.67318 11.6665C5.27993 11.6665 3.33984 9.7264 3.33984 7.33324C3.33984 4.94007 5.27993 3 7.67318 3C10.0664 3 12.0065 4.94007 12.0065 7.33324ZM11.0743 11.4414C10.1512 12.2066 8.96589 12.6665 7.67318 12.6665C4.72766 12.6665 2.33984 10.2787 2.33984 7.33324C2.33984 4.38777 4.72766 2 7.67318 2C10.6187 2 13.0065 4.38777 13.0065 7.33324C13.0065 8.62593 12.5466 9.81119 11.7815 10.7343L14.0267 12.9796L14.3803 13.3331L13.6732 14.0402L13.3196 13.6867L11.0743 11.4414Z" fill="#707070"/>
-          </svg> ${suggestion.highlightedValue}
-          </div>`)
-        .join('');
-    }
-
-    suggestionPopup.innerHTML = html;
-    suggestionPopup.style.display = 'block';
-
-    // Event bindings
-    if (shouldShowSuggestions) {
-      suggestions.forEach((suggestion, index) => {
-        const item = suggestionPopup.querySelectorAll('.global-suggestion-item')[index];
+      appendHeading('Trending Search');
+      suggestions.forEach((suggestion) => {
+        const item = appendItem('global-suggestion-item', suggestion.rawValue, 'suggestion');
         item.addEventListener('click', () => {
           const { rawValue } = suggestion;
           searchBox.value = rawValue;
           saveQueryToLocalHistory(rawValue);
-          standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${rawValue}&contentType=${selectedContentType}`);
+          standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${encodeURIComponent(rawValue)}&contentType=${encodeURIComponent(selectedContentType)}`);
           standaloneSearchBoxController.selectSuggestion(rawValue);
           suggestionPopup.style.display = 'none';
         });
       });
     }
 
-    if (shouldShowHistory) {
-      const historyItems = suggestionPopup.querySelectorAll('.global-history-item');
-      historyItems.forEach((item) => {
-        item.addEventListener('click', () => {
-          const rawValue = item.getAttribute('data-query');
-          searchBox.value = rawValue;
-          saveQueryToLocalHistory(rawValue);
-          standaloneSearchBoxController.updateRedirectUrl(`/search-results?term=${rawValue}&contentType=${selectedContentType}`);
-          standaloneSearchBoxController.submit();
-          suggestionPopup.style.display = 'none';
-        });
-      });
-    }
+    suggestionPopup.style.display = 'block';
   } else {
     suggestionPopup.style.display = 'none';
   }
@@ -129,13 +163,19 @@ function registerDropdown(dropdown) {
   const btn = dropdown.querySelector('.dropbtn');
   const content = dropdown.querySelector('.dropdown-content');
   if (!btn || !content) return;
+  if (!content.id) content.id = `${dropdown.id || 'header'}-dropdown-content`;
+  btn.setAttribute('aria-controls', content.id);
   btn.setAttribute('aria-expanded', 'false');
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = content.style.display === 'block';
-    // close other dropdowns
-    this.querySelectorAll('.dropdown-content').forEach((c) => {
-      if (c !== content) c.style.display = 'none';
+    dropdown.parentElement?.querySelectorAll('.dropdown').forEach((otherDropdown) => {
+      const otherContent = otherDropdown.querySelector('.dropdown-content');
+      const otherButton = otherDropdown.querySelector('.dropbtn');
+      if (otherContent && otherContent !== content) {
+        otherContent.style.display = 'none';
+        otherButton?.setAttribute('aria-expanded', 'false');
+      }
     });
     content.style.display = isOpen ? 'none' : 'block';
     btn.setAttribute('aria-expanded', String(!isOpen));
@@ -147,6 +187,7 @@ function createGlobalSearch(placeholders = {}) {
   const suggestionPopup = document.getElementById('global-suggestion-popup');
   const searchContainer = document.createElement('div');
   searchContainer.className = 'standalone-search-container';
+  searchContainer.id = 'standalone-search-container';
   // hide by default on mobile; will be toggled by the search button
   if (canMobileActions()) {
     // searchContainer.classList.add('tw-hidden');
@@ -157,6 +198,7 @@ function createGlobalSearch(placeholders = {}) {
   searchBox.placeholder = placeholders?.search || 'Search';
   searchBox.className = 'standalone-search-box';
   searchBox.id = 'standalone-search-box';
+  searchBox.setAttribute('aria-label', placeholders?.search || 'Search');
   searchBox.maxLength = 200;
 
   const tooltip = document.createElement('div');
@@ -173,10 +215,12 @@ function createGlobalSearch(placeholders = {}) {
   const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
   <path d="M14.7344 5L8.73437 11L2.73438 5" stroke="#141414"/>
   </svg>`;
-  dropbtn.innerHTML = `${placeholders?.all || 'All'} ${downArrow}`;
+  dropbtn.textContent = placeholders?.all || 'All';
+  dropbtn.insertAdjacentHTML('beforeend', downArrow);
 
   const dropdownContent = document.createElement('div');
   dropdownContent.className = 'dropdown-content search-type-dropdown-content';
+  dropdownContent.id = 'search-type-dropdown';
   dropdownContent.style.display = 'none';
 
   const menuItems = {
@@ -219,8 +263,10 @@ function createGlobalSearch(placeholders = {}) {
     anchorElement.textContent = value;
     anchorElement.addEventListener('click', (event) => {
       event.preventDefault();
-      dropbtn.innerHTML = value + downArrow;
+      dropbtn.textContent = value;
+      dropbtn.insertAdjacentHTML('beforeend', downArrow);
       dropdownContent.style.display = 'none';
+      dropbtn.setAttribute('aria-expanded', 'false');
       selectedContentType = key;
     });
     dropdownContent.appendChild(anchorElement);
@@ -237,7 +283,7 @@ function createGlobalSearch(placeholders = {}) {
 
   const searchBtn = document.createElement('button');
   searchBtn.className = 'global-search-btn';
-  searchBtn.setAttribute('aria-label', 'SearchText');
+  searchBtn.setAttribute('aria-label', 'Search');
   const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <path d="M9.50977 2.50879C13.0322 2.68736 15.833 5.60023 15.833 9.16699L15.8242 9.50977C15.7468 11.0363 15.1548 12.4264 14.2197 13.5127L17.374 16.667L16.667 17.374L13.5127 14.2197C12.3457 15.2244 10.8278 15.8329 9.16699 15.833L8.82324 15.8242C5.41465 15.6513 2.68168 12.9183 2.50879 9.50977L2.5 9.16699C2.5 5.48516 5.48509 2.5 9.16699 2.5L9.50977 2.50879ZM9.16699 3.5C6.03736 3.5 3.5 6.03746 3.5 9.16699C3.50026 12.2963 6.03753 14.833 9.16699 14.833C12.2963 14.8328 14.8327 12.2962 14.833 9.16699C14.833 6.03757 12.2965 3.50018 9.16699 3.5Z" fill="#141414"/>
 </svg>`;
@@ -255,11 +301,6 @@ function createGlobalSearch(placeholders = {}) {
       standaloneSearchBoxController.submit();
     }
     event.stopPropagation();
-  });
-
-  dropbtn.addEventListener('click', () => {
-    // e.stopPropagation();
-    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
   });
 
   // Close any open dropdowns when clicking outside
@@ -348,10 +389,18 @@ function createMainHeader(section, placeholders = {}) {
       '<svg id="mobileMenuCloseIcon" class="tw-hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-di-rand="1739527915887"><path d="M4 20L19.9998 4.0002" stroke="white" stroke-width="1.2"></path><path d="M4 4L19.9998 19.9998" stroke="white" stroke-width="1.2"></path></svg>',
     );
     mobileMenuToggle.id = 'toggleMobileMenu';
+    mobileMenuToggle.type = 'button';
+    mobileMenuToggle.setAttribute('aria-label', 'Open navigation menu');
+    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    mobileMenuToggle.setAttribute('aria-controls', 'mega-menu-panel');
 
     const mobileSearch = document.createElement('button');
     mobileSearch.className = 'lg:tw-hidden tw-flex tw-items-center search-close tw-ml-auto tw-mr-16';
     mobileSearch.id = 'togglemobileSearch';
+    mobileSearch.type = 'button';
+    mobileSearch.setAttribute('aria-label', 'Open search');
+    mobileSearch.setAttribute('aria-expanded', 'false');
+    mobileSearch.setAttribute('aria-controls', 'standalone-search-container');
     const mobileSearchIcon = document.createElement('span');
     mobileSearchIcon.insertAdjacentHTML(
       'beforeend',
@@ -376,6 +425,9 @@ function createMainHeader(section, placeholders = {}) {
      *
      *  */
     function handleMobileMenu() {
+      const isOpening = this.classList.contains('menu-close');
+      this.setAttribute('aria-expanded', String(isOpening));
+      this.setAttribute('aria-label', isOpening ? 'Close navigation menu' : 'Open navigation menu');
       // Initialize and declare variables
       const headerWrapper = document.querySelector('.header-wrapper');
       const mobileMenuOpenIcon = document.getElementById('mobileMenuOpenIcon');
@@ -486,9 +538,12 @@ function createMainHeader(section, placeholders = {}) {
     }
     function handleMobileSearch() {
       const headerWrapper = document.querySelector('.header-wrapper');
+      const isOpening = !headerWrapper?.classList.contains('search-open');
       if (headerWrapper) {
         headerWrapper.classList.toggle('search-open');
       }
+      this.setAttribute('aria-expanded', String(isOpening));
+      this.setAttribute('aria-label', isOpening ? 'Close search' : 'Open search');
       document.body.classList.toggle('search-open');
       const mobileSearchOpenIcon = document.getElementById('mobileSearchOpenIcon');
       const mobileSearchCloseIcon = document.getElementById('mobileSearchCloseIcon');
@@ -560,8 +615,9 @@ function createMainHeader(section, placeholders = {}) {
         dropdown.className = 'dropdown ';
 
         const dropbtn = document.createElement('button');
+        dropbtn.type = 'button';
         dropbtn.className = 'dropbtn login-dropdown';
-        dropbtn.setAttribute('aria-label', 'dropdown-button');
+        dropbtn.setAttribute('aria-label', 'Account menu');
         const downArrow = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
         <path d="M14.7344 5L8.73437 11L2.73438 5" stroke="#FFFFFF"/>
         </svg>`;
@@ -569,9 +625,8 @@ function createMainHeader(section, placeholders = {}) {
 
         const dropdownContent = document.createElement('div');
         dropdownContent.className = 'dropdown-content account-dropdown-content';
+        dropdownContent.id = 'account-dropdown-content';
         dropdownContent.style.display = 'none';
-        // register dropdown toggle behaviour
-        registerDropdown(dropdown);
 
         const menuItems = {
           Button: 'Button',
@@ -593,8 +648,9 @@ function createMainHeader(section, placeholders = {}) {
           const value = menuItems[key];
           let anchorElement = document.createElement('a');
           if (key === 'Button' && (anchorTag.text === placeholders?.login || anchorTag.text === 'Login')) {
-            anchorElement = document.createElement('div');
-            anchorElement.innerHTML = `<a href="/support/create-account"><button class=" create-account-btn">${placeholders?.createAnAccount || 'Create an account'}</button></a>`;
+            anchorElement.href = '/support/create-account';
+            anchorElement.className = 'create-account-btn';
+            anchorElement.textContent = placeholders?.createAnAccount || 'Create an account';
           } else {
             anchorElement = document.createElement('a');
             anchorElement.href = '#';
@@ -648,7 +704,7 @@ function createMainHeader(section, placeholders = {}) {
                 anchorElement.href = 'https://devcs.sciex.com/bin/sciex/login';
                 anchorElement.innerHTML = `${value}`;
               } else if (anchorTag.text === 'My account') {
-                const userData = JSON.parse(localStorage.getItem('userDetails'));
+                const userData = getStoredUserDetails();
                 if (userData && userData?.loggedIn) {
                   anchorElement.innerHTML = `<span class="username-span">${userData?.familyName} ${userData?.givenName}</span>`;
                 }
@@ -658,20 +714,14 @@ function createMainHeader(section, placeholders = {}) {
             // close dropdown on item click
             anchorElement.addEventListener('click', () => {
               dropdownContent.style.display = 'none';
+              dropbtn.setAttribute('aria-expanded', 'false');
             });
           }
           dropdownContent.appendChild(anchorElement);
         });
-        liTag.addEventListener('click', () => {
-          if (dropdownContent.style.display === 'block') {
-            dropdownContent.style.display = 'none';
-          } else {
-            dropdownContent.style.display = 'block';
-          }
-          // dropdownContent.style.display = 'block';
-        });
         dropdown.appendChild(dropbtn);
         dropdown.appendChild(dropdownContent);
+        registerDropdown(dropdown);
         // store dropdown reference keyed by anchor
         dropdownMap.set(anchorTag, dropdown);
         /// ///
@@ -699,6 +749,7 @@ function createMainHeader(section, placeholders = {}) {
       const liTag = li({ class: '' });// tw-ml-32
       anchorTag.className = 'header-link tw-text-mobBase md:tw-text-base tw-flex tw-items-center tw-whitespace-nowrap focus-visible:tw-outline focus-visible:tw-outline-2 focus-visible:tw-outline-offset-2 focus-visible:tw-outline-blue-700 tw-rounded tw-border tw-py-12  active:tw-bg-blue-900 tw-border-blue-700 tw-text-white tw-bg-gradient-to-r tw-bg-blue-700 tw-from-blue-800 tw-via-blue-800 tw-to-blue-800 tw-bg-bottom tw-bg-no-repeat tw-bg-[length:100%_0px] hover:tw-bg-[length:100%_100%] tw-transition-all tw-h-full tw-rounded-none';
       anchorTag.target = '_blank';
+      anchorTag.rel = 'noopener noreferrer';
       const buttondiv = div(
         { class: 'tw-flex tw-items-center tw-justify-between' },
         span(anchorTag.text),
@@ -919,11 +970,9 @@ function hideAllActiveDivs() {
 function createMegaMenuTopNav(section) {
   const parentDiv = document.createElement('div');
   parentDiv.className = 'tw-hidden megamenu-wrapper lg:tw-flex tw-w-full tw-bg-white tw-relative tw-z-10'; // tw-z-[100]
+  parentDiv.id = 'mega-menu-panel';
   const container = document.createElement('div');
   container.className = 'tw-container ';
-
-  // const searchContainer =
-  createGlobalSearch();
 
   const border = document.createElement('div');
   border.className = 'tw-flex tw-items-center desktop-links ';
@@ -1677,6 +1726,8 @@ function createOverlay(nav) {
   overlayDiv.id = 'menu-overlay';
   overlayDiv.style.display = 'none';
   const buttondiv = document.createElement('button');
+  buttondiv.type = 'button';
+  buttondiv.setAttribute('aria-label', 'Close menu');
   buttondiv.className = 'tw-hidden lg:tw-block tw-flex tw-w-32 tw-h-32 tw-rounded-full tw-mx-auto tw-bg-gray-900/30 hover:tw-bg-gray-900/40 tw-transition tw-relative tw-z-[100] tw-mt-24 tw-cursor-pointer';
   buttondiv.id = 'menu-button';
   const chevronUp = span({
@@ -1702,6 +1753,18 @@ function processHtml(block, main, placeholders = {}) {
   const parentDiv = div({ class: 'tw' });
   const nav = document.createElement('nav');
   nav.id = 'mega-menu';
+  nav.setAttribute('aria-label', 'Main navigation');
+  nav.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+
+    const expandedControl = [...nav.querySelectorAll('[aria-expanded="true"]')].find((control) => {
+      const controlledPanel = document.getElementById(control.getAttribute('aria-controls'));
+      return control === event.target
+        || control.contains(event.target)
+        || controlledPanel?.contains(event.target);
+    });
+    expandedControl?.click();
+  });
   nav.className = 'tw tw-z-99';
   const sections = main.children;
   Array.from(sections).forEach((section, index, array) => {
@@ -1735,7 +1798,6 @@ function processHtml(block, main, placeholders = {}) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const placeholders = await fetchPlaceholders();
   // load nav as fragment
   const { lang } = document.documentElement;
   let path = '/nav.plain.html';
@@ -1746,7 +1808,10 @@ export default async function decorate(block) {
   } else if (lang === 'zh-cn') {
     path = '/zh-cn/nav.plain.html';
   }
-  const resp = await fetch(path);
+  const [placeholders, resp] = await Promise.all([
+    fetchPlaceholders().catch(() => ({})),
+    fetch(path).catch(() => null),
+  ]);
   const suggestionPopupDiv = document.createElement('div');
   suggestionPopupDiv.id = 'global-suggestion-popup';
   standaloneSearchBoxController.subscribe(() => {
@@ -1762,7 +1827,7 @@ export default async function decorate(block) {
 
   document.body.appendChild(suggestionPopupDiv);
 
-  if (resp.ok) {
+  if (resp?.ok) {
     const html = await resp.text();
     const main = document.createElement('main');
     main.innerHTML = html;
@@ -1799,7 +1864,7 @@ export default async function decorate(block) {
   // logout listener added above
 
   // Conditionally shwoing the login/logout links
-  const userData = JSON.parse(localStorage.getItem('userDetails'));
+  const userData = getStoredUserDetails();
   const locale = window.location.pathname.match(/\/(en-us|ja-jp|zh-cn)(\/|$)/)?.[1] || 'en-us';
   const loginId = locale === 'en-us'
     ? (placeholders?.login ?? 'login').toLowerCase()
@@ -1810,13 +1875,19 @@ export default async function decorate(block) {
       email: userData?.email,
       key: userData?.userKey,
     };
-    sessionStorage.setItem('loggedin-status', userData?.loggedIn);
-    sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
+    try {
+      sessionStorage.setItem('loggedin-status', userData?.loggedIn);
+      sessionStorage.setItem('eloquaData', JSON.stringify(eloquaData));
+    } catch {
+      // The header still renders when session storage is unavailable.
+    }
     // document.getElementById('view-profile').style.display = '';
     // document.getElementById('logout').style.display = '';
     // document.getElementById('register').style.display = 'none';
-    document.getElementById(loginId).style.display = 'none';
-    document.getElementById('my-account').style.display = '';
+    const loginLink = document.getElementById(loginId);
+    const accountLink = document.getElementById('my-account');
+    if (loginLink) loginLink.style.display = 'none';
+    if (accountLink) accountLink.style.display = '';
     const signInNowEl = document.getElementById('signInNowLink');
     if (signInNowEl) {
       const family = userData?.familyName || '';
@@ -1832,8 +1903,10 @@ export default async function decorate(block) {
     // document.getElementById('view-profile').style.display = 'none';
     // document.getElementById('logout').style.display = 'none';
     // document.getElementById('register').style.display = '';
-    document.getElementById(loginId).style.display = '';
-    document.getElementById('my-account').style.display = 'none';
+    const loginLink = document.getElementById(loginId);
+    const accountLink = document.getElementById('my-account');
+    if (loginLink) loginLink.style.display = '';
+    if (accountLink) accountLink.style.display = 'none';
     // document.getElementById('logout').style.display = 'none';
   }
 }
