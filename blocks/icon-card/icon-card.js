@@ -9,7 +9,7 @@ export default function decorate(block) {
 
   const rows = [...block.children];
   let id = '';
-  let heading = '';
+  let heading = null;
   let description = '';
   let columns = 2;
   let typeOfCard = '';
@@ -19,7 +19,7 @@ export default function decorate(block) {
   rows.forEach((row, index) => {
     const text = row.textContent.trim();
     if (index === 0) id = text;
-    else if (index === 1) heading = text;
+    else if (index === 1) heading = row;
     else if (index === 2) fontType = text;
     else if (index === 3) headingType = text;
     else if (index === 4) description = text;
@@ -29,11 +29,9 @@ export default function decorate(block) {
 
   if (id) iconCardContainer.id = `${id}-content`;
 
-  if (heading) {
-    const h2 = document.createElement('h2');
-    h2.className = 'icon-card-heading';
-    h2.textContent = heading;
-    iconCardContainer.append(h2);
+  if (heading?.textContent.trim()) {
+    heading.classList.add('icon-card-heading');
+    iconCardContainer.append(heading);
   }
 
   if (description) {
