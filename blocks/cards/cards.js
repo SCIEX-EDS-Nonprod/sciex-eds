@@ -140,7 +140,7 @@ export default function decorate(block) {
       return;
     }
     if (index === 1) {
-      headingText = row.innerHTML?.trim();
+      headingText = row;
       return;
     }
     if (index === 2) {
