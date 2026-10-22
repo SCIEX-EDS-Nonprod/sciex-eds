@@ -30,29 +30,7 @@
           }
         }
       }
-    },
-    {
-  "id": "product-item-title",
-  "fields": [
-    {
-      "component": "text",
-      "valueType": "string",
-      "name": "title",
-      "label": "Title"
-    },
-    {
-      "component": "select",
-      "valueType": "string",
-      "name": "titleType",
-      "label": "Title Type",
-      "value": "h2",
-      "options": [
-        { "name": "H2", "value": "h2" },
-        { "name": "H3", "value": "h3" }
-      ]
     }
-  ]
-}
   ],
   "models": [
     {
@@ -63,7 +41,24 @@
           "valueType": "string",
           "name": "title",
           "label": "Title"
-        }
+        },
+        {
+  "component": "text",
+  "valueType": "string",
+  "name": "title",
+  "label": "Instrument Title"
+},
+{
+  "component": "select",
+  "valueType": "string",
+  "name": "titleType",
+  "label": "Title Type",
+  "value": "h3",
+  "options": [
+    { "name": "H2", "value": "h2" },
+    { "name": "H3", "value": "h3" }
+  ]
+}
       ]
     },
     {
