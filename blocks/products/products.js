@@ -12,19 +12,14 @@ export default function decorate(block) {
 
   moveInstrumentation(block, container);
 
-  // First row = block title
-  const headingRow = rows[0];
-  const headingText = headingRow
-    .querySelector('p')
-    ?.textContent
-    ?.trim();
+// First row = block title
+const headingRow = rows[0];
+const heading = headingRow.querySelector('h1, h2, h3, h4, h5, h6, p');
 
-  if (headingText) {
-    const heading = document.createElement('h2');
-    heading.className = 'product-title';
-    heading.textContent = headingText;
-    container.appendChild(heading);
-  }
+if (heading?.textContent.trim()) {
+  heading.className = 'product-title';
+  container.appendChild(heading);
+}
 
   // Product items
   const itemRows = rows.slice(1);
