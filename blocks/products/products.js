@@ -12,19 +12,20 @@ export default function decorate(block) {
 
   moveInstrumentation(block, container);
 
-  // First row = block title
-  const headingRow = rows[0];
-  const headingText = headingRow
-    .querySelector('p')
-    ?.textContent
-    ?.trim();
+const headingRow = rows[0];
+const sourceEl = headingRow.querySelector('h2, h3, p');
+const headingText = sourceEl?.textContent?.trim();
 
-  if (headingText) {
-    const heading = document.createElement('h2');
-    heading.className = 'product-title';
-    heading.textContent = headingText;
-    container.appendChild(heading);
-  }
+if (headingText) {
+  // Use the authored tag if it's h2/h3, otherwise (p, old content) fall back to h2
+  const authoredTag = sourceEl.tagName.toLowerCase();
+  const tag = ['h2', 'h3'].includes(authoredTag) ? authoredTag : 'h2';
+
+  const heading = document.createElement(tag);
+  heading.className = 'product-title';
+  heading.textContent = headingText;
+  container.appendChild(heading);
+}
 
   // Product items
   const itemRows = rows.slice(1);

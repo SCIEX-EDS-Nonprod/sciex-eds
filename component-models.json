@@ -2674,7 +2674,7 @@
         "valueType": "string",
         "name": "titleType",
         "label": "Title Type",
-        "value": "h3",
+        "value": "h2",
         "options": [
           {
             "name": "H2",
