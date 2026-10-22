@@ -12,28 +12,19 @@ export default function decorate(block) {
 
   moveInstrumentation(block, container);
 
-const headingRow = rows[0];
+  // First row = block title
+  const headingRow = rows[0];
+  const headingText = headingRow
+    .querySelector('p')
+    ?.textContent
+    ?.trim();
 
-// Any heading/paragraph, otherwise fall back to the first cell/row itself
-const sourceEl = headingRow.querySelector('h1, h2, h3, h4, h5, h6, p')
-  || headingRow.firstElementChild
-  || headingRow;
-
-const headingText = sourceEl.textContent.trim();
-
-if (headingText) {
-  const authoredTag = sourceEl.tagName.toLowerCase();
-  const tag = ['h2', 'h3'].includes(authoredTag) ? authoredTag : 'h2';
-
-  const heading = document.createElement(tag);
-  heading.className = 'product-title';
-  heading.textContent = headingText;
-
-  // Keep the field editable in the Universal Editor
-  moveInstrumentation(sourceEl, heading);
-
-  container.appendChild(heading);
-}
+  if (headingText) {
+    const heading = document.createElement('h2');
+    heading.className = 'product-title';
+    heading.textContent = headingText;
+    container.appendChild(heading);
+  }
 
   // Product items
   const itemRows = rows.slice(1);
