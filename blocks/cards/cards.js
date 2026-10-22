@@ -140,7 +140,7 @@ export default function decorate(block) {
       return;
     }
     if (index === 1) {
-      headingText = row;
+      headingText = row.querySelector(':scope > div > *');
       return;
     }
     if (index === 2) {
