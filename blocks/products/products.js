@@ -13,17 +13,25 @@ export default function decorate(block) {
   moveInstrumentation(block, container);
 
 const headingRow = rows[0];
-const sourceEl = headingRow.querySelector('h2, h3, p');
-const headingText = sourceEl?.textContent?.trim();
+
+// Any heading/paragraph, otherwise fall back to the first cell/row itself
+const sourceEl = headingRow.querySelector('h1, h2, h3, h4, h5, h6, p')
+  || headingRow.firstElementChild
+  || headingRow;
+
+const headingText = sourceEl.textContent.trim();
 
 if (headingText) {
-  // Use the authored tag if it's h2/h3, otherwise (p, old content) fall back to h2
   const authoredTag = sourceEl.tagName.toLowerCase();
   const tag = ['h2', 'h3'].includes(authoredTag) ? authoredTag : 'h2';
 
   const heading = document.createElement(tag);
   heading.className = 'product-title';
   heading.textContent = headingText;
+
+  // Keep the field editable in the Universal Editor
+  moveInstrumentation(sourceEl, heading);
+
   container.appendChild(heading);
 }
 
