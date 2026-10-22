@@ -24,9 +24,8 @@
 .product-title {
   color: var(--Grey-900, #141414);
   font-family: "Geogrotesque Sharp VF";
-  font-size: 32px;
   font-style: normal;
-  font-weight: 330;
+  /* font-weight: 330; */
   line-height: 40px;
 }
 
