@@ -140,7 +140,7 @@ export default function decorate(block) {
       return;
     }
     if (index === 1) {
-      headingText = row.textContent.trim();
+      headingText = row.querySelector(':scope > div > *');
       return;
     }
     if (index === 2) {
@@ -455,9 +455,8 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  const headingEl = document.createElement('h2');
-  headingEl.textContent = headingText;
-  headingEl.className = `cards-heading ${headingFontStyle} ${headingFontColor}`.trim();
+  
+  headingText.className = `cards-heading ${headingFontStyle} ${headingFontColor}`.trim();
 
   const descriptionEl = document.createElement('p');
   descriptionEl.textContent = description;
@@ -466,7 +465,7 @@ export default function decorate(block) {
   block.textContent = '';
   block.id = `${id}-content`;
   block.parentElement.classList.add('tabs-container-wrapper');
-  block.append(headingEl);
+  block.append(headingText);
   block.append(descriptionEl);
   block.append(ul);
 }

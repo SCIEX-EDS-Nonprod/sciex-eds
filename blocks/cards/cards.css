@@ -86,7 +86,7 @@ object-fit: none;
   flex-direction: column;
 }
 
-.cards-wrapper h5 {
+/* .cards-wrapper h5 {
   color: var(--Grey-900, #141414);
   font-family: "Geogrotesque Sharp VF";
   font-size: 18px;
@@ -94,7 +94,7 @@ object-fit: none;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.045px;
-}
+} */
 
 .cards .cards-card-body {
   margin-top: 32px ;
@@ -195,10 +195,7 @@ object-fit: none;
 
 .cards .cards-heading {
   font-family: "Geogrotesque Sharp VF";
-  font-size: 40px;
   font-style: normal;
-  font-weight: 330;
-  line-height: 52px;
   margin-bottom: 32px;
 }
 
