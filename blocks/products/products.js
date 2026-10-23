@@ -12,22 +12,17 @@ export default function decorate(block) {
 
   moveInstrumentation(block, container);
 
-  const titleText = rows[0]?.textContent.trim();
-  const titleFontStyle = rows[1]?.textContent.trim();
-  const titleFontWeight = rows[2]?.textContent.trim();
+// First row = block title
+const headingRow = rows[0];
+const heading = headingRow.querySelector('h1, h2, h3, h4, h5, h6, p');
 
-  if (titleText) {
-    const title = document.createElement('h2');
-    title.className = 'product-title';
-    title.textContent = titleText;
-    if (titleFontStyle) title.classList.add(titleFontStyle);
-    if (titleFontWeight) title.style.setProperty('--product-title-font-weight', titleFontWeight);
-    moveInstrumentation(rows[0], title);
-    container.appendChild(title);
-  }
+if (heading?.textContent.trim()) {
+  heading.className = 'product-title';
+  container.appendChild(heading);
+}
 
   // Product items
-  const itemRows = rows.slice(3);
+  const itemRows = rows.slice(1);
 
   const grid = document.createElement('div');
   grid.className = 'product-grid';
