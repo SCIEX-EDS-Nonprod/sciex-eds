@@ -2266,28 +2266,28 @@
         "valueType": "string",
         "options": [
           {
-            "name": "H1",
-            "value": "h1"
+            "name": "52px",
+            "value": "52px"
           },
           {
-            "name": "H2 ",
-            "value": "h2"
+            "name": "40px",
+            "value": "40px"
           },
           {
-            "name": "H3",
-            "value": "h3"
+            "name": "32px",
+            "value": "32px"
           },
           {
-            "name": "H4",
-            "value": "h4"
+            "name": "24px",
+            "value": "24px"
           },
           {
-            "name": "H5",
-            "value": "h5"
+            "name": "18px",
+            "value": "18px"
           },
           {
-            "name": "H6",
-            "value": "h6"
+            "name": "16px",
+            "value": "16px"
           }
         ]
       },
