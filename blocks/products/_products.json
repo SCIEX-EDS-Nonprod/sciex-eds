@@ -63,13 +63,29 @@
         },
         {
           "component": "select",
+          "name": "headingFontSize",
+          "label": "Select Heading Font Size",
+          "value": "",
+          "valueType": "string",
+          "options": [
+            { "name": "Default", "value": "" },
+            { "name": "50px", "value": "50px" },
+            { "name": "40px", "value": "40px" },
+            { "name": "32px", "value": "32px" },
+            { "name": "24px", "value": "24px" },
+            { "name": "18px", "value": "18px" },
+            { "name": "16px", "value": "16px" }
+          ]
+        },
+        {
+          "component": "select",
           "name": "headingFontWeight",
           "label": "Select Heading Font Weight",
           "value": "330",
           "valueType": "string",
           "options": [
             { "name": "Default", "value": "330" },
-            { "name": "Bolder", "value": "440" }
+            { "name": "Bolder", "value": "400" }
           ]
         }
       ]
