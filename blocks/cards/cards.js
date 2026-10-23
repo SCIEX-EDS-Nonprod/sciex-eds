@@ -466,7 +466,12 @@ export default function decorate(block) {
   });
 
   headingText.className = `cards-heading ${headingFontStyle} ${headingFontColor}`.trim();
-  if (headingFontSize) headingText.style.setProperty('font-size', headingFontSize, 'important');
+  if (headingFontSize) {
+    headingText.style.setProperty('font-size', headingFontSize, 'important');
+    headingText.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+      heading.style.setProperty('font-size', headingFontSize, 'important');
+    });
+  }
 
   const descriptionEl = document.createElement('p');
   descriptionEl.textContent = description;
