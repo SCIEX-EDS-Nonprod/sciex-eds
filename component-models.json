@@ -2298,23 +2298,6 @@
       },
       {
         "component": "select",
-        "name": "headingFontWeight",
-        "label": "Select Heading Font Weight",
-        "value": "330",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Default (Normal)",
-            "value": "330"
-          },
-          {
-            "name": "Bolder",
-            "value": "400"
-          }
-        ]
-      },
-      {
-        "component": "select",
         "name": "textColor",
         "label": "Select Heading Color",
         "value": "",
