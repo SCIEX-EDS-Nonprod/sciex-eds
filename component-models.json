@@ -2266,6 +2266,10 @@
         "valueType": "string",
         "options": [
           {
+            "name": "Default",
+            "value": ""
+          },
+          {
             "name": "52px",
             "value": "52px"
           },
