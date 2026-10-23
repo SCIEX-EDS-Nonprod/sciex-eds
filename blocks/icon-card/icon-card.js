@@ -9,29 +9,36 @@ export default function decorate(block) {
 
   const rows = [...block.children];
   let id = '';
-  let heading = null;
+  let heading = '';
   let description = '';
   let columns = 2;
   let typeOfCard = '';
   let fontType = 'icon-card-title';
+  let headingFontSize = '';
   let headingType = '';
 
   rows.forEach((row, index) => {
     const text = row.textContent.trim();
     if (index === 0) id = text;
-    else if (index === 1) heading = row;
+    else if (index === 1) heading = text;
     else if (index === 2) fontType = text;
-    else if (index === 3) headingType = text;
-    else if (index === 4) description = text;
-    else if (index === 5) columns = parseInt(text, 10) || 2;
-    else if (index === 6) typeOfCard = text;
+    else if (index === 3) headingFontSize = text;
+    else if (index === 4) headingType = text;
+    else if (index === 5) description = text;
+    else if (index === 6) columns = parseInt(text, 10) || 2;
+    else if (index === 7) typeOfCard = text;
   });
 
   if (id) iconCardContainer.id = `${id}-content`;
 
-  if (heading?.textContent.trim()) {
-    heading.classList.add('icon-card-heading');
-    iconCardContainer.append(heading);
+  if (heading) {
+    const headingRow = rows[1];
+    const headingDiv = headingRow.firstElementChild;
+    headingDiv.classList.add('icon-card-heading', 'heading-font-size');
+    headingDiv.style.setProperty('--heading-font-size', headingFontSize);
+    headingDiv.setAttribute('role', 'heading');
+    headingDiv.setAttribute('aria-level', '2');
+    iconCardContainer.append(headingDiv);
   }
 
   if (description) {
@@ -45,7 +52,7 @@ export default function decorate(block) {
   gridContainer.className = `icon-card-grid columns-${columns}`;
   iconCardContainer.append(gridContainer);
 
-  rows.slice(7).forEach((row) => {
+  rows.slice(8).forEach((row) => {
     const cells = [...row.children];
     if (!cells.length) return;
 

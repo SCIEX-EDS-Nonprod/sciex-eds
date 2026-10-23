@@ -343,3 +343,18 @@ line-height: normal;
     width: 100%;
   }
 }
+
+.icon-card-container-text .heading-font-size {
+  font-size: var(--heading-font-size, inherit);
+}
+
+.icon-card-container-text .heading-font-size p {
+  font-size: inherit;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .icon-card-container-text .heading-font-size {
+    font-size: min(var(--heading-font-size), 28px);
+  }
+}
