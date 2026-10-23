@@ -2208,7 +2208,7 @@
         "value": ""
       },
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "iconCardheading",
         "label": "Icon card Heading",
@@ -2224,22 +2224,6 @@
           {
             "name": "Default",
             "value": ""
-          },
-          {
-            "name": "XL Display",
-            "value": "text-xlDisplay"
-          },
-          {
-            "name": "L Display",
-            "value": "text-lDisplay"
-          },
-          {
-            "name": "Alfa",
-            "value": "text-alfa"
-          },
-          {
-            "name": "Bravo",
-            "value": "text-bravo"
           },
           {
             "name": "Charlie",
@@ -2272,22 +2256,38 @@
           {
             "name": "Base Bolder",
             "value": "text-base-bolder"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "Heading Font Size",
+        "label": "Select Heading Font Size",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "H1",
+            "value": "h1"
           },
           {
-            "name": "Small",
-            "value": "text-sm"
+            "name": "H2 ",
+            "value": "h2"
           },
           {
-            "name": "Small Bolder",
-            "value": "text-sm-bolder"
+            "name": "H3",
+            "value": "h3"
           },
           {
-            "name": "Caption Large",
-            "value": "text-caption-lg"
+            "name": "H4",
+            "value": "h4"
           },
           {
-            "name": "Caption Small",
-            "value": "text-caption-sm"
+            "name": "H5",
+            "value": "h5"
+          },
+          {
+            "name": "H6",
+            "value": "h6"
           }
         ]
       },
