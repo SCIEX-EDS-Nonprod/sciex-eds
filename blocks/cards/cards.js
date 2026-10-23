@@ -125,6 +125,10 @@ function extractYouTubeID(url) {
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
+  const rows = [...block.children];
+  const fontSizes = ['52px', '40px', '32px', '24px', '18px', '16px'];
+  const hasFontSizeField = fontSizes.includes(rows[2]?.textContent.trim());
+  const fieldOffset = hasFontSizeField ? 1 : 0;
   let headingText = '';
   let description = '';
   let target = '_blank';
@@ -132,9 +136,10 @@ export default function decorate(block) {
   let gridValue = '';
   let headingFontStyle = '';
   let headingFontColor = '';
+  let headingFontSize = '';
   let cardVariation = 'default';
 
-  [...block.children].forEach((row, index) => {
+  rows.forEach((row, index) => {
     if (index === 0) {
       id = row.textContent.trim();
       return;
@@ -143,35 +148,40 @@ export default function decorate(block) {
       headingText = row.querySelector(':scope > div > *');
       return;
     }
-    if (index === 2) {
+    if (hasFontSizeField && index === 2) {
+      const selectedFontSize = row.textContent.trim();
+      if (fontSizes.includes(selectedFontSize)) headingFontSize = selectedFontSize;
+      return;
+    }
+    if (index === (hasFontSizeField ? 3 : 2)) {
       headingFontStyle = row.textContent.trim();
       return;
     }
-    if (index === 3) {
+    if (index === 3 + fieldOffset) {
       headingFontColor = row.textContent.trim();
       if (headingFontColor === '') {
         headingFontColor = 'text-black';
       }
       return;
     }
-    if (index === 4) {
+    if (index === 4 + fieldOffset) {
       description = row.textContent.trim();
       return;
     }
-    if (index === 5 && row.querySelector('div > div > p')) {
+    if (index === 5 + fieldOffset && row.querySelector('div > div > p')) {
       target = row.textContent.trim();
       return;
     }
 
     if (
-      index === 6
+      index === 6 + fieldOffset
         && /^[1-4]$/.test(row.textContent.trim())
     ) {
       gridValue = row.textContent.trim();
       return;
     }
 
-    if (index === 7) {
+    if (index === 7 + fieldOffset) {
       cardVariation = row.textContent.trim().toLowerCase() || 'default';
       return;
     }
@@ -455,8 +465,8 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  
   headingText.className = `cards-heading ${headingFontStyle} ${headingFontColor}`.trim();
+  if (headingFontSize) headingText.style.setProperty('font-size', headingFontSize, 'important');
 
   const descriptionEl = document.createElement('p');
   descriptionEl.textContent = description;

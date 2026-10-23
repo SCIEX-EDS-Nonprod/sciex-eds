@@ -65,6 +65,22 @@
               "label": "Heading",
               "value": ""
           },
+           {
+            "component": "select",
+            "name": "fontsize",
+            "label": "Select Heading Font Size",
+            "value": "",
+            "valueType": "string",
+            "options": [
+              { "name": "Default", "value": "" },
+              { "name": "52px", "value": "52px" },
+              { "name": "40px", "value": "40px" },
+              { "name": "32px", "value": "32px" },
+              { "name": "24px", "value": "24px" },
+              { "name": "18px", "value": "18px" },
+              { "name": "16px", "value": "16px" }
+            ]
+          },
           {
               "component": "select",
               "name": "fontStyle",
