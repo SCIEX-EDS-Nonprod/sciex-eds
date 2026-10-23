@@ -2658,10 +2658,76 @@
     "id": "products",
     "fields": [
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "title",
         "label": "Title"
+      },
+      {
+        "component": "select",
+        "name": "fontStyle",
+        "label": "Select Heading Font Style",
+        "value": "",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Bravo",
+            "value": "text-bravo"
+          },
+          {
+            "name": "Charlie",
+            "value": "text-charlie"
+          },
+          {
+            "name": "Delta",
+            "value": "text-delta"
+          },
+          {
+            "name": "Echo",
+            "value": "text-echo"
+          },
+          {
+            "name": "Echo Bolder",
+            "value": "text-echo-bolder"
+          },
+          {
+            "name": "Large",
+            "value": "text-lg"
+          },
+          {
+            "name": "Large Bolder",
+            "value": "text-lg-bolder"
+          },
+          {
+            "name": "Base",
+            "value": "text-base"
+          },
+          {
+            "name": "Base Bolder",
+            "value": "text-base-bolder"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "headingFontWeight",
+        "label": "Select Heading Font Weight",
+        "value": "330",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "330"
+          },
+          {
+            "name": "Bolder",
+            "value": "440"
+          }
+        ]
       }
     ]
   },
